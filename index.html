@@ -60,7 +60,7 @@
     .popup-grid dt{color:var(--muted);font-weight:600}
     .popup-grid dd{margin:0;overflow-wrap:anywhere}
     .popup-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .popup-actions a{text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:6px 8px;color:var(--accent);font-weight:600;font-size:12px}
+    .popup-actions a{text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:6px 8px;color:var(--accent);font-weight:600;font-size:12px}.popup-actions a.primary{background:var(--accent);border-color:var(--accent);color:#fff}
     .leaflet-tooltip{font-weight:700;border-radius:7px;padding:3px 6px}
     .empty-state{padding:28px 16px;text-align:center;color:var(--muted)}
     .mobile-list-toggle{display:none}
@@ -233,7 +233,8 @@
       ["Coordinates",state.config.show_coordinates?`${p.latitude}, ${p.longitude}`:""],["Notes",p.public_notes]
     ].filter(([,v])=>v!=="");
     const details=rows.map(([k,v])=>`<dt>${escapeHTML(k)}</dt><dd>${escapeHTML(v)}</dd>`).join("");
-    const actions=[`<a href="${directions(p)}" target="_blank" rel="noopener">Directions</a>`];
+    const currentWorks=`current-works.html?project=${encodeURIComponent(p.PK_ID)}`;
+    const actions=[`<a class="primary" href="${currentWorks}">Current works</a>`,`<a href="${directions(p)}" target="_blank" rel="noopener">Directions</a>`];
     if(p.details_url)actions.push(`<a href="${escapeHTML(p.details_url)}" target="_blank" rel="noopener">Project details</a>`);
     return `<div class="popup"><h3>${escapeHTML(p.PK_ID)} — ${escapeHTML(p.display_name)}</h3><dl class="popup-grid">${details}</dl><div class="popup-actions">${actions.join("")}</div></div>`;
   }
