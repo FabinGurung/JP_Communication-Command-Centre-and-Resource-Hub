@@ -1,9 +1,13 @@
 -- JP Ecosystem Daily Ops relational contract
--- PostgreSQL-oriented schema. JSON/JSONL remain machine-first exchange/state layers.
--- Google Sheets and web pages are downstream projections.
+-- Schema contract version: 0.2.0
+-- PostgreSQL-oriented. JSON/JSONL remain machine-first state/event layers.
+-- Google Sheets, website and Slack are downstream projections / interaction surfaces.
 
 CREATE TABLE IF NOT EXISTS ops_projects (
   project_id text PRIMARY KEY,
+  map_project_id text NOT NULL UNIQUE,
+  company_project_code text NOT NULL,
+  legacy_project_code text NOT NULL UNIQUE,
   project_slug text NOT NULL UNIQUE,
   display_name text NOT NULL,
   contractor text NOT NULL
@@ -17,8 +21,24 @@ CREATE TABLE IF NOT EXISTS ops_daily_state (
   ),
   ready_count integer NOT NULL DEFAULT 0 CHECK (ready_count >= 0),
   total_count integer NOT NULL DEFAULT 0 CHECK (total_count >= 0),
+  conflict_state text NOT NULL DEFAULT 'UNSET' CHECK (
+    conflict_state IN ('NONE','UNSET','UNRESOLVED')
+  ),
+  source_cutoff timestamptz,
   last_reconciled_at timestamptz,
-  PRIMARY KEY (project_id, ops_date)
+  PRIMARY KEY (project_id, ops_date),
+  CHECK (ready_count <= total_count)
+);
+
+CREATE TABLE IF NOT EXISTS ops_source_refs (
+  source_ref text PRIMARY KEY,
+  provider text NOT NULL,
+  provider_object_type text,
+  provider_object_id text,
+  provider_url text,
+  observed_at timestamptz,
+  content_sha256 text,
+  metadata jsonb NOT NULL DEFAULT '{}'::jsonb
 );
 
 CREATE TABLE IF NOT EXISTS ops_work_items (
@@ -34,7 +54,12 @@ CREATE TABLE IF NOT EXISTS ops_work_items (
     overall_readiness IN ('READY','READY_WITH_CONDITION','HOLD','NOT_READY','UNSET')
   ),
   blocker text,
-  responsible text
+  responsible text,
+  source_refs jsonb NOT NULL DEFAULT '[]'::jsonb,
+  conflict_state text NOT NULL DEFAULT 'UNSET' CHECK (
+    conflict_state IN ('NONE','UNSET','UNRESOLVED')
+  ),
+  last_reconciled_at timestamptz
 );
 
 CREATE TABLE IF NOT EXISTS ops_readiness_gates (
@@ -47,6 +72,11 @@ CREATE TABLE IF NOT EXISTS ops_readiness_gates (
   ),
   note text,
   responsibility text,
+  source_refs jsonb NOT NULL DEFAULT '[]'::jsonb,
+  observed_at timestamptz,
+  conflict_state text NOT NULL DEFAULT 'UNSET' CHECK (
+    conflict_state IN ('NONE','UNSET','UNRESOLVED')
+  ),
   PRIMARY KEY (work_id, gate_name)
 );
 
@@ -59,7 +89,12 @@ CREATE TABLE IF NOT EXISTS ops_materials (
   material_state text NOT NULL,
   quantity numeric,
   unit text,
-  note text
+  note text,
+  source_refs jsonb NOT NULL DEFAULT '[]'::jsonb,
+  observed_at timestamptz,
+  conflict_state text NOT NULL DEFAULT 'UNSET' CHECK (
+    conflict_state IN ('NONE','UNSET','UNRESOLVED')
+  )
 );
 
 CREATE TABLE IF NOT EXISTS ops_progress (
@@ -68,7 +103,12 @@ CREATE TABLE IF NOT EXISTS ops_progress (
   work_id text REFERENCES ops_work_items(work_id),
   ops_date date NOT NULL,
   status text NOT NULL,
-  note text
+  note text,
+  source_refs jsonb NOT NULL DEFAULT '[]'::jsonb,
+  observed_at timestamptz,
+  conflict_state text NOT NULL DEFAULT 'UNSET' CHECK (
+    conflict_state IN ('NONE','UNSET','UNRESOLVED')
+  )
 );
 
 CREATE TABLE IF NOT EXISTS ops_blockers (
@@ -79,7 +119,12 @@ CREATE TABLE IF NOT EXISTS ops_blockers (
   status text NOT NULL,
   blocker text NOT NULL,
   responsible text,
-  target_resolution_at timestamptz
+  target_resolution_at timestamptz,
+  source_refs jsonb NOT NULL DEFAULT '[]'::jsonb,
+  observed_at timestamptz,
+  conflict_state text NOT NULL DEFAULT 'UNSET' CHECK (
+    conflict_state IN ('NONE','UNSET','UNRESOLVED')
+  )
 );
 
 CREATE TABLE IF NOT EXISTS ops_lookahead (
@@ -89,7 +134,11 @@ CREATE TABLE IF NOT EXISTS ops_lookahead (
   target_date date,
   sequence_order integer,
   activity text NOT NULL,
-  condition text
+  condition text,
+  source_refs jsonb NOT NULL DEFAULT '[]'::jsonb,
+  conflict_state text NOT NULL DEFAULT 'UNSET' CHECK (
+    conflict_state IN ('NONE','UNSET','UNRESOLVED')
+  )
 );
 
 CREATE TABLE IF NOT EXISTS ops_evidence_refs (
@@ -101,7 +150,22 @@ CREATE TABLE IF NOT EXISTS ops_evidence_refs (
   evidence_type text NOT NULL,
   evidence_url text,
   observed_at timestamptz,
-  note text
+  note text,
+  source_refs jsonb NOT NULL DEFAULT '[]'::jsonb
+);
+
+CREATE TABLE IF NOT EXISTS ops_projection_status (
+  project_id text NOT NULL REFERENCES ops_projects(project_id),
+  projection_target text NOT NULL CHECK (
+    projection_target IN ('GOOGLE_SHEETS','WEBSITE','SLACK')
+  ),
+  projection_state text NOT NULL CHECK (
+    projection_state IN ('NOT_CONFIGURED','PENDING','CURRENT','STALE','ERROR')
+  ),
+  source_schema_version text NOT NULL,
+  projected_at timestamptz,
+  note text,
+  PRIMARY KEY (project_id, projection_target)
 );
 
 CREATE TABLE IF NOT EXISTS ops_events (
@@ -112,5 +176,8 @@ CREATE TABLE IF NOT EXISTS ops_events (
   work_id text REFERENCES ops_work_items(work_id),
   source_refs jsonb NOT NULL DEFAULT '[]'::jsonb,
   payload jsonb NOT NULL,
+  conflict_state text CHECK (
+    conflict_state IS NULL OR conflict_state IN ('NONE','UNSET','UNRESOLVED')
+  ),
   mutates_operational_truth boolean NOT NULL DEFAULT true
 );

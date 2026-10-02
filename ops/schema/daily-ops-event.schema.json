@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/FabinGurung/jp-ecosystem-project-map-v1/blob/feature/daily-ops-current-work/ops/schema/daily-ops-event.schema.json",
+  "title": "JP Ecosystem Daily Ops Event",
+  "type": "object",
+  "required": [
+    "event_id",
+    "occurred_at",
+    "event_type",
+    "project_id",
+    "work_id",
+    "source_refs",
+    "payload",
+    "mutates_operational_truth"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "occurred_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "project_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "work_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "payload": {
+      "type": "object"
+    },
+    "conflict_state": {
+      "enum": [
+        "NONE",
+        "UNSET",
+        "UNRESOLVED"
+      ]
+    },
+    "projection_status": {
+      "type": "object"
+    },
+    "mutates_operational_truth": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

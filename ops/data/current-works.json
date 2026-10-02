@@ -1,21 +1,37 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "authority": {
     "canonical_state": "ops/data/current-works.json",
     "event_log": "ops/events/daily-ops-events.jsonl",
     "relational_contract": "ops/schema/daily-ops-postgres.sql",
-    "projection_rule": "Google Sheets and web pages are downstream projections. They must not silently become upstream authority over this machine layer."
+    "projection_rule": "Google Sheets and web pages are downstream projections. They must not silently become upstream authority over this machine layer.",
+    "identity_rule": "Daily Ops project_id remains the stable operational identity; map_project_id is the normalized map foreign key and legacy_project_code must resolve to the same map record.",
+    "conflict_rule": "Contradictory provider evidence must remain explicitly unresolved until reconciled; never silently merge conflicting claims."
   },
   "projects": [
     {
       "project_id": "P001",
+      "map_project_id": "PRJ-000001",
+      "company_project_code": "REB-001",
+      "legacy_project_code": "P001",
       "project_slug": "14_bishal_paija",
       "display_name": "14 Bishal Paija",
       "contractor": "Rohini Engineering and Builders Pvt Ltd",
       "daily_ops": {
         "date": null,
         "overall_readiness": "UNSET",
-        "readiness_summary": { "ready": 0, "total": 0 },
+        "readiness_summary": {
+          "ready": 0,
+          "total": 0
+        },
+        "conflict_state": "UNSET",
+        "last_reconciled_at": null,
+        "source_cutoff": null,
+        "projection_status": {
+          "google_sheets": "NOT_CONFIGURED",
+          "website": "CURRENT",
+          "slack": "NOT_CONFIGURED"
+        },
         "todays_work": [],
         "materials": [],
         "progress": [],
@@ -26,13 +42,27 @@
     },
     {
       "project_id": "P002",
+      "map_project_id": "PRJ-000002",
+      "company_project_code": "FBL-001",
+      "legacy_project_code": "P002",
       "project_slug": "17_samir_man_ghubaju",
       "display_name": "17 Samir Man Ghubaju",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
         "date": null,
         "overall_readiness": "UNSET",
-        "readiness_summary": { "ready": 0, "total": 0 },
+        "readiness_summary": {
+          "ready": 0,
+          "total": 0
+        },
+        "conflict_state": "UNSET",
+        "last_reconciled_at": null,
+        "source_cutoff": null,
+        "projection_status": {
+          "google_sheets": "NOT_CONFIGURED",
+          "website": "CURRENT",
+          "slack": "NOT_CONFIGURED"
+        },
         "todays_work": [],
         "materials": [],
         "progress": [],
@@ -43,13 +73,27 @@
     },
     {
       "project_id": "P003",
+      "map_project_id": "PRJ-000003",
+      "company_project_code": "FBL-002",
+      "legacy_project_code": "P003",
       "project_slug": "13_hari_baral",
       "display_name": "13 Hari Baral",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
         "date": null,
         "overall_readiness": "UNSET",
-        "readiness_summary": { "ready": 0, "total": 0 },
+        "readiness_summary": {
+          "ready": 0,
+          "total": 0
+        },
+        "conflict_state": "UNSET",
+        "last_reconciled_at": null,
+        "source_cutoff": null,
+        "projection_status": {
+          "google_sheets": "NOT_CONFIGURED",
+          "website": "CURRENT",
+          "slack": "NOT_CONFIGURED"
+        },
         "todays_work": [],
         "materials": [],
         "progress": [],
@@ -60,13 +104,27 @@
     },
     {
       "project_id": "P004",
+      "map_project_id": "PRJ-000004",
+      "company_project_code": "FBL-003",
+      "legacy_project_code": "P004",
       "project_slug": "16_yamuna_pun_adai",
       "display_name": "16 Yamuna Pun Adai",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
         "date": null,
         "overall_readiness": "UNSET",
-        "readiness_summary": { "ready": 0, "total": 0 },
+        "readiness_summary": {
+          "ready": 0,
+          "total": 0
+        },
+        "conflict_state": "UNSET",
+        "last_reconciled_at": null,
+        "source_cutoff": null,
+        "projection_status": {
+          "google_sheets": "NOT_CONFIGURED",
+          "website": "CURRENT",
+          "slack": "NOT_CONFIGURED"
+        },
         "todays_work": [],
         "materials": [],
         "progress": [],
@@ -77,13 +135,27 @@
     },
     {
       "project_id": "P005",
+      "map_project_id": "PRJ-000005",
+      "company_project_code": "FBL-004",
+      "legacy_project_code": "P005",
       "project_slug": "30_sabitri_giri_dipti_giri",
       "display_name": "30 Sabitri Giri / Dipti Giri",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
         "date": null,
         "overall_readiness": "UNSET",
-        "readiness_summary": { "ready": 0, "total": 0 },
+        "readiness_summary": {
+          "ready": 0,
+          "total": 0
+        },
+        "conflict_state": "UNSET",
+        "last_reconciled_at": null,
+        "source_cutoff": null,
+        "projection_status": {
+          "google_sheets": "NOT_CONFIGURED",
+          "website": "CURRENT",
+          "slack": "NOT_CONFIGURED"
+        },
         "todays_work": [],
         "materials": [],
         "progress": [],
@@ -94,13 +166,27 @@
     },
     {
       "project_id": "P006",
+      "map_project_id": "PRJ-000006",
+      "company_project_code": "FBL-005",
+      "legacy_project_code": "P006",
       "project_slug": "31_sharada_adhikari",
       "display_name": "31 Sharada Adhikari",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
         "date": null,
         "overall_readiness": "UNSET",
-        "readiness_summary": { "ready": 0, "total": 0 },
+        "readiness_summary": {
+          "ready": 0,
+          "total": 0
+        },
+        "conflict_state": "UNSET",
+        "last_reconciled_at": null,
+        "source_cutoff": null,
+        "projection_status": {
+          "google_sheets": "NOT_CONFIGURED",
+          "website": "CURRENT",
+          "slack": "NOT_CONFIGURED"
+        },
         "todays_work": [],
         "materials": [],
         "progress": [],
@@ -111,13 +197,27 @@
     },
     {
       "project_id": "P007",
+      "map_project_id": "PRJ-000007",
+      "company_project_code": "FBL-006",
+      "legacy_project_code": "P007",
       "project_slug": "15_narayani_parajuli",
       "display_name": "15 Narayani Parajuli",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
         "date": null,
         "overall_readiness": "UNSET",
-        "readiness_summary": { "ready": 0, "total": 0 },
+        "readiness_summary": {
+          "ready": 0,
+          "total": 0
+        },
+        "conflict_state": "UNSET",
+        "last_reconciled_at": null,
+        "source_cutoff": null,
+        "projection_status": {
+          "google_sheets": "NOT_CONFIGURED",
+          "website": "CURRENT",
+          "slack": "NOT_CONFIGURED"
+        },
         "todays_work": [],
         "materials": [],
         "progress": [],

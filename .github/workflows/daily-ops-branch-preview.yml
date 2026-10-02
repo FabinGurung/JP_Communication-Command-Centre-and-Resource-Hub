@@ -36,6 +36,7 @@ jobs:
               Path("ops/data/current-works.json"),
               Path("ops/events/daily-ops-events.jsonl"),
               Path("ops/schema/current-works.schema.json"),
+              Path("ops/schema/daily-ops-event.schema.json"),
               Path("ops/schema/daily-ops-postgres.sql"),
           ]
           missing = [str(p) for p in required_files if not p.exists()]
@@ -44,37 +45,115 @@ jobs:
 
           state = json.loads(Path("ops/data/current-works.json").read_text(encoding="utf-8"))
           schema = json.loads(Path("ops/schema/current-works.schema.json").read_text(encoding="utf-8"))
+          event_schema = json.loads(Path("ops/schema/daily-ops-event.schema.json").read_text(encoding="utf-8"))
 
-          if state.get("schema_version") != "0.1.0":
+          if state.get("schema_version") != "0.2.0":
               raise SystemExit("Unexpected Daily Ops schema_version.")
-          if schema.get("title") != "JP Ecosystem Daily Ops Current Works":
-              raise SystemExit("Unexpected JSON schema identity.")
+          if schema.get("properties", {}).get("schema_version", {}).get("const") != "0.2.0":
+              raise SystemExit("Current-state schema does not pin version 0.2.0.")
+          if event_schema.get("title") != "JP Ecosystem Daily Ops Event":
+              raise SystemExit("Unexpected Daily Ops event schema identity.")
 
           event_lines = [
               line for line in Path("ops/events/daily-ops-events.jsonl").read_text(encoding="utf-8").splitlines()
               if line.strip()
           ]
           events = []
+          event_ids = set()
+          event_required = {
+              "event_id", "occurred_at", "event_type", "project_id",
+              "work_id", "source_refs", "payload", "mutates_operational_truth"
+          }
           for line_number, line in enumerate(event_lines, start=1):
               try:
-                  events.append(json.loads(line))
+                  event = json.loads(line)
               except json.JSONDecodeError as error:
                   raise SystemExit(f"Invalid JSONL at line {line_number}: {error}")
+              missing_keys = event_required - set(event)
+              if missing_keys:
+                  raise SystemExit(f"Event line {line_number} missing keys: {sorted(missing_keys)}")
+              if event["event_id"] in event_ids:
+                  raise SystemExit(f"Duplicate event_id: {event['event_id']}")
+              if not isinstance(event["source_refs"], list):
+                  raise SystemExit(f"Event {event['event_id']} source_refs must be a list.")
+              event_ids.add(event["event_id"])
+              events.append(event)
 
           with Path("projects.csv").open(newline="", encoding="utf-8-sig") as handle:
               project_rows = list(csv.DictReader(handle))
 
-          map_project_ids = {row.get("project_id", "").strip() for row in project_rows if row.get("project_id", "").strip()}
-          map_legacy_ids = {row.get("legacy_project_code", "").strip() for row in project_rows if row.get("legacy_project_code", "").strip()}
-          ops_ids = {project["project_id"] for project in state.get("projects", [])}
-          missing_ops_projects = ops_ids - (map_project_ids | map_legacy_ids)
-          if missing_ops_projects:
-              raise SystemExit(
-                  f"Daily Ops projects missing from map identities: {sorted(missing_ops_projects)}"
-              )
+          map_by_id = {row["project_id"].strip(): row for row in project_rows if row.get("project_id", "").strip()}
+          map_by_legacy = {row["legacy_project_code"].strip(): row for row in project_rows if row.get("legacy_project_code", "").strip()}
 
-          if len(ops_ids) != len(state.get("projects", [])):
+          ops_projects = state.get("projects", [])
+          ops_ids = [project["project_id"] for project in ops_projects]
+          if len(set(ops_ids)) != len(ops_ids):
               raise SystemExit("Duplicate Daily Ops project_id detected.")
+
+          allowed_conflicts = {"NONE", "UNSET", "UNRESOLVED"}
+          allowed_projection = {"NOT_CONFIGURED", "PENDING", "CURRENT", "STALE", "ERROR"}
+          allowed_gate = {"READY", "CONDITION", "HOLD", "NOT_READY", "UNKNOWN", "NOT_APPLICABLE"}
+          allowed_execution = {"PLAN", "NOT_STARTED", "ONGOING", "PARTIAL", "DONE", "BLOCKED", "NEEDS_INPUT", "NOTE"}
+          allowed_readiness = {"READY", "READY_WITH_CONDITION", "HOLD", "NOT_READY", "UNSET"}
+          work_ids = set()
+
+          for project in ops_projects:
+              pid = project["project_id"]
+              map_id = project["map_project_id"]
+              legacy = project["legacy_project_code"]
+              company_code = project["company_project_code"]
+
+              if legacy != pid:
+                  raise SystemExit(f"{pid}: legacy_project_code must equal stable Daily Ops project_id.")
+              map_row = map_by_id.get(map_id)
+              if not map_row:
+                  raise SystemExit(f"{pid}: map_project_id {map_id} does not exist.")
+              if map_row.get("legacy_project_code", "").strip() != legacy:
+                  raise SystemExit(f"{pid}: legacy identity does not match map record.")
+              if map_row.get("company_project_code", "").strip() != company_code:
+                  raise SystemExit(f"{pid}: company project code does not match map record.")
+              if map_by_legacy.get(legacy, {}).get("project_id", "").strip() != map_id:
+                  raise SystemExit(f"{pid}: reverse legacy lookup does not resolve to {map_id}.")
+
+              ops = project["daily_ops"]
+              summary = ops["readiness_summary"]
+              if summary["ready"] > summary["total"]:
+                  raise SystemExit(f"{pid}: ready_count exceeds total_count.")
+              if ops["overall_readiness"] not in allowed_readiness:
+                  raise SystemExit(f"{pid}: invalid overall readiness.")
+              if ops["conflict_state"] not in allowed_conflicts:
+                  raise SystemExit(f"{pid}: invalid conflict_state.")
+
+              projection = ops["projection_status"]
+              if set(projection) != {"google_sheets", "website", "slack"}:
+                  raise SystemExit(f"{pid}: projection_status targets are incomplete.")
+              bad_projection = {k: v for k, v in projection.items() if v not in allowed_projection}
+              if bad_projection:
+                  raise SystemExit(f"{pid}: invalid projection status {bad_projection}.")
+
+              for work in ops.get("todays_work", []):
+                  wid = work["work_id"]
+                  if wid in work_ids:
+                      raise SystemExit(f"Duplicate work_id: {wid}")
+                  work_ids.add(wid)
+                  if work["execution_status"] not in allowed_execution:
+                      raise SystemExit(f"{wid}: invalid execution_status.")
+                  readiness = work["readiness"]
+                  if readiness["overall"] not in allowed_readiness:
+                      raise SystemExit(f"{wid}: invalid readiness overall.")
+                  for gate_name in ("materials", "manpower", "ppe", "work_briefing", "tools", "preconditions"):
+                      gate = readiness[gate_name]
+                      if gate["status"] not in allowed_gate:
+                          raise SystemExit(f"{wid}/{gate_name}: invalid gate status.")
+                      if "source_refs" in gate and not isinstance(gate["source_refs"], list):
+                          raise SystemExit(f"{wid}/{gate_name}: source_refs must be a list.")
+
+          ops_id_set = set(ops_ids)
+          for event in events:
+              if event["project_id"] is not None and event["project_id"] not in ops_id_set:
+                  raise SystemExit(f"Event {event['event_id']} references unknown project_id.")
+              if event["work_id"] is not None and event["work_id"] not in work_ids:
+                  raise SystemExit(f"Event {event['event_id']} references unknown work_id.")
 
           map_html = Path("map.html").read_text(encoding="utf-8")
           map_js = Path("assets/js/app.js").read_text(encoding="utf-8")
@@ -99,7 +178,11 @@ jobs:
           if failed:
               raise SystemExit(f"Route validation failed: {failed}")
 
-          print(f"PASS: map={len(project_rows)} projects; daily_ops={len(ops_ids)} projects; {len(events)} JSONL event(s); routes verified.")
+          print(
+              f"PASS: schema={state['schema_version']}; map={len(project_rows)} projects; "
+              f"daily_ops={len(ops_ids)} projects; {len(events)} JSONL event(s); "
+              f"identity/provenance/projection/routes verified."
+          )
 
   deploy:
     needs: validate

@@ -3,100 +3,614 @@
   "$id": "https://github.com/FabinGurung/jp-ecosystem-project-map-v1/blob/feature/daily-ops-current-work/ops/schema/current-works.schema.json",
   "title": "JP Ecosystem Daily Ops Current Works",
   "type": "object",
-  "required": ["schema_version", "authority", "projects"],
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "authority",
+    "projects"
+  ],
   "properties": {
-    "schema_version": { "type": "string" },
+    "schema_version": {
+      "const": "0.2.0"
+    },
     "authority": {
       "type": "object",
-      "required": ["canonical_state", "event_log", "relational_contract", "projection_rule"],
+      "additionalProperties": false,
+      "required": [
+        "canonical_state",
+        "event_log",
+        "relational_contract",
+        "projection_rule",
+        "identity_rule",
+        "conflict_rule"
+      ],
       "properties": {
-        "canonical_state": { "type": "string" },
-        "event_log": { "type": "string" },
-        "relational_contract": { "type": "string" },
-        "projection_rule": { "type": "string" }
+        "canonical_state": {
+          "type": "string"
+        },
+        "event_log": {
+          "type": "string"
+        },
+        "relational_contract": {
+          "type": "string"
+        },
+        "projection_rule": {
+          "type": "string"
+        },
+        "identity_rule": {
+          "type": "string"
+        },
+        "conflict_rule": {
+          "type": "string"
+        }
       }
     },
     "projects": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["project_id", "project_slug", "display_name", "contractor", "daily_ops"],
+        "additionalProperties": false,
+        "required": [
+          "project_id",
+          "map_project_id",
+          "company_project_code",
+          "legacy_project_code",
+          "project_slug",
+          "display_name",
+          "contractor",
+          "daily_ops"
+        ],
         "properties": {
-          "project_id": { "type": "string" },
-          "project_slug": { "type": "string" },
-          "display_name": { "type": "string" },
-          "contractor": { "type": "string" },
+          "project_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "map_project_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "company_project_code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "legacy_project_code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "project_slug": {
+            "type": "string",
+            "minLength": 1
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "contractor": {
+            "type": "string",
+            "minLength": 1
+          },
           "daily_ops": {
-            "type": "object",
-            "required": ["date", "overall_readiness", "readiness_summary", "todays_work", "materials", "progress", "blockers", "lookahead", "evidence"],
-            "properties": {
-              "date": { "type": ["string", "null"] },
-              "overall_readiness": {
-                "enum": ["READY", "READY_WITH_CONDITION", "HOLD", "NOT_READY", "UNSET"]
-              },
-              "readiness_summary": {
-                "type": "object",
-                "required": ["ready", "total"],
-                "properties": {
-                  "ready": { "type": "integer", "minimum": 0 },
-                  "total": { "type": "integer", "minimum": 0 }
-                }
-              },
-              "todays_work": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "required": ["work_id", "activity", "location", "execution_status", "readiness"],
-                  "properties": {
-                    "work_id": { "type": "string" },
-                    "activity": { "type": "string" },
-                    "location": { "type": "string" },
-                    "execution_status": {
-                      "enum": ["PLAN", "NOT_STARTED", "ONGOING", "PARTIAL", "DONE", "BLOCKED", "NEEDS_INPUT", "NOTE"]
-                    },
-                    "readiness": {
-                      "type": "object",
-                      "required": ["materials", "manpower", "ppe", "work_briefing", "tools", "preconditions", "overall"],
-                      "properties": {
-                        "materials": { "$ref": "#/$defs/gate" },
-                        "manpower": { "$ref": "#/$defs/gate" },
-                        "ppe": { "$ref": "#/$defs/gate" },
-                        "work_briefing": { "$ref": "#/$defs/gate" },
-                        "tools": { "$ref": "#/$defs/gate" },
-                        "preconditions": { "$ref": "#/$defs/gate" },
-                        "overall": {
-                          "enum": ["READY", "READY_WITH_CONDITION", "HOLD", "NOT_READY", "UNSET"]
-                        }
-                      }
-                    },
-                    "blocker": { "type": ["string", "null"] },
-                    "responsible": { "type": ["string", "null"] },
-                    "source_refs": { "type": "array", "items": { "type": "string" } }
-                  }
-                }
-              },
-              "materials": { "type": "array", "items": { "type": "object" } },
-              "progress": { "type": "array", "items": { "type": "object" } },
-              "blockers": { "type": "array", "items": { "type": "object" } },
-              "lookahead": { "type": "array", "items": { "type": "object" } },
-              "evidence": { "type": "array", "items": { "type": "object" } }
-            }
+            "$ref": "#/$defs/daily_ops"
           }
         }
       }
     }
   },
   "$defs": {
+    "conflict_state": {
+      "enum": [
+        "NONE",
+        "UNSET",
+        "UNRESOLVED"
+      ]
+    },
+    "projection_state": {
+      "enum": [
+        "NOT_CONFIGURED",
+        "PENDING",
+        "CURRENT",
+        "STALE",
+        "ERROR"
+      ]
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
     "gate": {
       "type": "object",
-      "required": ["status"],
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
       "properties": {
         "status": {
-          "enum": ["READY", "CONDITION", "HOLD", "NOT_READY", "UNKNOWN", "NOT_APPLICABLE"]
+          "enum": [
+            "READY",
+            "CONDITION",
+            "HOLD",
+            "NOT_READY",
+            "UNKNOWN",
+            "NOT_APPLICABLE"
+          ]
         },
-        "note": { "type": ["string", "null"] },
-        "responsibility": { "type": ["string", "null"] },
-        "source_refs": { "type": "array", "items": { "type": "string" } }
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "responsibility": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_refs": {
+          "$ref": "#/$defs/source_refs"
+        },
+        "observed_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "conflict_state": {
+          "$ref": "#/$defs/conflict_state"
+        }
+      }
+    },
+    "work_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "work_id",
+        "activity",
+        "location",
+        "execution_status",
+        "readiness"
+      ],
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "activity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location": {
+          "type": "string"
+        },
+        "execution_status": {
+          "enum": [
+            "PLAN",
+            "NOT_STARTED",
+            "ONGOING",
+            "PARTIAL",
+            "DONE",
+            "BLOCKED",
+            "NEEDS_INPUT",
+            "NOTE"
+          ]
+        },
+        "readiness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "materials",
+            "manpower",
+            "ppe",
+            "work_briefing",
+            "tools",
+            "preconditions",
+            "overall"
+          ],
+          "properties": {
+            "materials": {
+              "$ref": "#/$defs/gate"
+            },
+            "manpower": {
+              "$ref": "#/$defs/gate"
+            },
+            "ppe": {
+              "$ref": "#/$defs/gate"
+            },
+            "work_briefing": {
+              "$ref": "#/$defs/gate"
+            },
+            "tools": {
+              "$ref": "#/$defs/gate"
+            },
+            "preconditions": {
+              "$ref": "#/$defs/gate"
+            },
+            "overall": {
+              "enum": [
+                "READY",
+                "READY_WITH_CONDITION",
+                "HOLD",
+                "NOT_READY",
+                "UNSET"
+              ]
+            }
+          }
+        },
+        "blocker": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "responsible": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_refs": {
+          "$ref": "#/$defs/source_refs"
+        },
+        "last_reconciled_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "conflict_state": {
+          "$ref": "#/$defs/conflict_state"
+        }
+      }
+    },
+    "material": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "material_event_id": {
+          "type": "string"
+        },
+        "work_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "material_name": {
+          "type": "string"
+        },
+        "material_state": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_refs": {
+          "$ref": "#/$defs/source_refs"
+        },
+        "observed_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "conflict_state": {
+          "$ref": "#/$defs/conflict_state"
+        }
+      }
+    },
+    "progress": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "progress_event_id": {
+          "type": "string"
+        },
+        "work_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_refs": {
+          "$ref": "#/$defs/source_refs"
+        },
+        "observed_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "conflict_state": {
+          "$ref": "#/$defs/conflict_state"
+        }
+      }
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "blocker_id": {
+          "type": "string"
+        },
+        "work_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "blocker": {
+          "type": "string"
+        },
+        "responsible": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "target_resolution_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_refs": {
+          "$ref": "#/$defs/source_refs"
+        },
+        "observed_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "conflict_state": {
+          "$ref": "#/$defs/conflict_state"
+        }
+      }
+    },
+    "lookahead": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "lookahead_id": {
+          "type": "string"
+        },
+        "work_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "target_date": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sequence_order": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "activity": {
+          "type": "string"
+        },
+        "condition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_refs": {
+          "$ref": "#/$defs/source_refs"
+        },
+        "conflict_state": {
+          "$ref": "#/$defs/conflict_state"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "evidence_id": {
+          "type": "string"
+        },
+        "work_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "provider": {
+          "type": "string"
+        },
+        "provider_object_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_type": {
+          "type": "string"
+        },
+        "evidence_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "observed_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_refs": {
+          "$ref": "#/$defs/source_refs"
+        }
+      }
+    },
+    "daily_ops": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date",
+        "overall_readiness",
+        "readiness_summary",
+        "conflict_state",
+        "last_reconciled_at",
+        "source_cutoff",
+        "projection_status",
+        "todays_work",
+        "materials",
+        "progress",
+        "blockers",
+        "lookahead",
+        "evidence"
+      ],
+      "properties": {
+        "date": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "overall_readiness": {
+          "enum": [
+            "READY",
+            "READY_WITH_CONDITION",
+            "HOLD",
+            "NOT_READY",
+            "UNSET"
+          ]
+        },
+        "readiness_summary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ready",
+            "total"
+          ],
+          "properties": {
+            "ready": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "total": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "conflict_state": {
+          "$ref": "#/$defs/conflict_state"
+        },
+        "last_reconciled_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_cutoff": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "projection_status": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "google_sheets",
+            "website",
+            "slack"
+          ],
+          "properties": {
+            "google_sheets": {
+              "$ref": "#/$defs/projection_state"
+            },
+            "website": {
+              "$ref": "#/$defs/projection_state"
+            },
+            "slack": {
+              "$ref": "#/$defs/projection_state"
+            }
+          }
+        },
+        "todays_work": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/work_item"
+          }
+        },
+        "materials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/material"
+          }
+        },
+        "progress": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/progress"
+          }
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/blocker"
+          }
+        },
+        "lookahead": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/lookahead"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
       }
     }
   }
