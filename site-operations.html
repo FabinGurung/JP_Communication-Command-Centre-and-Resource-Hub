@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="JP Ecosystem current works and Daily Ops project view">
+  <title>Daily Site Operations — JP Ecosystem</title>
+  <style>
+    :root{
+      --page:#f4f6f8;--panel:#fff;--text:#172033;--muted:#667085;--line:#dfe4ea;
+      --accent:#175cd3;--ready:#067647;--warn:#b54708;--danger:#b42318;--soft:#eef4ff;
+      --shadow:0 8px 24px rgba(15,23,42,.08);color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--page);color:var(--text)}
+    a{color:inherit}
+    .shell{max-width:1180px;margin:0 auto;padding:18px}
+    .page-nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.page-nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;background:#fff;padding:7px 10px;font-size:12px;font-weight:750}.page-nav a.active{background:var(--soft);border-color:#b2ccff;color:var(--accent)}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .back{display:inline-flex;text-decoration:none;border:1px solid var(--line);border-radius:10px;background:#fff;padding:9px 12px;font-weight:650}
+    .project-picker{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    select{min-height:40px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:8px 10px;color:var(--text)}
+    .hero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+    .eyebrow{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    h1{margin:5px 0 3px;font-size:clamp(24px,4vw,38px)}
+    .meta{color:var(--muted);font-size:14px}
+    .hero-row{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;flex-wrap:wrap}
+    .readiness{display:flex;align-items:center;gap:8px;font-weight:800}
+    .dot{width:11px;height:11px;border-radius:999px;background:#98a2b3}
+    .dot.READY{background:var(--ready)} .dot.READY_WITH_CONDITION{background:#f79009}
+    .dot.HOLD,.dot.NOT_READY{background:var(--danger)} .dot.UNSET{background:#98a2b3}
+    .notice{margin-top:14px;padding:11px 12px;border-radius:10px;background:#fff8e6;border:1px solid #fedf89;color:#7a2e0e;font-size:13px}
+    .grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.8fr);gap:16px;margin-top:16px}
+    .stack{display:grid;gap:16px}
+    .section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+    .section h2{font-size:17px;margin:0 0 12px}
+    .empty{padding:18px;border:1px dashed #cfd6df;border-radius:12px;color:var(--muted);background:#fbfcfd;font-size:14px}
+    .work-card{border:1px solid var(--line);border-radius:13px;padding:14px;margin-top:10px}
+    .work-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .work-title{font-weight:800}
+    .work-location{font-size:12px;color:var(--muted);margin-top:3px}
+    .status-pill{border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800;white-space:nowrap}
+    .gate-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+    .gate{display:flex;justify-content:space-between;gap:10px;padding:8px 9px;border-radius:9px;background:#f8fafc;font-size:13px}
+    .gate b{font-weight:700}
+    .gate span{color:var(--muted);text-align:right}
+    .list{display:grid;gap:9px}
+    .row{display:flex;justify-content:space-between;gap:12px;padding-bottom:9px;border-bottom:1px solid #edf0f3;font-size:14px}
+    .row:last-child{border-bottom:0;padding-bottom:0}
+    .row .value{font-weight:650;text-align:right}
+    .evidence{display:flex;gap:8px;flex-wrap:wrap}
+    .evidence a{display:inline-flex;text-decoration:none;border:1px solid var(--line);border-radius:9px;padding:7px 9px;background:#fff;font-size:12px;font-weight:650;color:var(--accent)}
+    .footer{padding:18px 2px;color:var(--muted);font-size:12px;line-height:1.5}
+    @media(max-width:820px){.grid{grid-template-columns:1fr}.gate-grid{grid-template-columns:1fr}.shell{padding:12px}.hero{padding:15px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <nav class="page-nav" aria-label="JP Ecosystem sections"><a href="index.html">Overview</a><a href="map.html">Project map</a><a class="active" href="site-operations.html">Site operations</a></nav>
+      <div class="project-picker">
+        <label for="project-select" class="eyebrow">Project</label>
+        <select id="project-select" aria-label="Choose project"></select>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-row">
+        <div>
+          <div class="eyebrow">Daily Site Operations</div>
+          <h1 id="project-name">Loading…</h1>
+          <div class="meta" id="project-meta"></div>
+        </div>
+        <div>
+          <div class="eyebrow">Overall site readiness</div>
+          <div class="readiness"><span class="dot UNSET" id="readiness-dot"></span><span id="readiness-label">UNSET</span></div>
+        </div>
+      </div>
+      <div class="notice" id="preview-notice">
+        This branch page is driven from machine-readable Daily Ops state. No unverified or dummy operational values are rendered as site facts.
+      </div>
+    </section>
+
+    <main class="grid">
+      <div class="stack">
+        <section class="section">
+          <h2>Today's work & schedule</h2>
+          <div id="work-list"></div>
+        </section>
+
+        <section class="section">
+          <h2>Progress</h2>
+          <div id="progress-list"></div>
+        </section>
+
+        <section class="section">
+          <h2>Daily log</h2>
+          <div id="daily-log-list"></div>
+        </section>
+
+        <section class="section">
+          <h2>Latest field evidence</h2>
+          <div id="evidence-list"></div>
+        </section>
+      </div>
+
+      <div class="stack">
+        <section class="section">
+          <h2>Materials</h2>
+          <div id="materials-list"></div>
+        </section>
+
+        <section class="section">
+          <h2>Open blockers</h2>
+          <div id="blockers-list"></div>
+        </section>
+
+        <section class="section">
+          <h2>Next 3 days</h2>
+          <div id="lookahead-list"></div>
+        </section>
+      </div>
+    </main>
+
+    <div class="footer">
+      This page is a downstream visualization of <code>ops/data/current-works.json</code> and <code>ops/events/daily-ops-events.jsonl</code>. The SQL contract defines relational structure; Google Sheets remains a mandatory downstream operational projection.
+    </div>
+  </div>
+
+<script>
+(() => {
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const esc=value=>String(value??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+  const params=new URLSearchParams(location.search);
+  const state={data:null,events:[],project:null};
+
+  function empty(message){return `<div class="empty">${esc(message)}</div>`}
+  function label(value){return String(value||"UNSET").replaceAll("_"," ")}
+  function icon(status){
+    return {READY:"✅",CONDITION:"⚠️",HOLD:"⛔",NOT_READY:"❌",UNKNOWN:"❓",NOT_APPLICABLE:"—"}[status]||"❓";
+  }
+
+  function setProject(projectId){
+    const project=state.data.projects.find(p=>p.project_id===projectId)||state.data.projects[0];
+    if(!project)return;
+    state.project=project;
+    const ops=project.daily_ops;
+
+    $("project-select").value=project.project_id;
+    $("project-name").textContent=project.display_name;
+    $("project-meta").textContent=`${project.project_id} · ${project.contractor} · ${ops.date||"Daily Ops date not yet admitted"}`;
+    $("readiness-label").textContent=`${label(ops.overall_readiness)} · ${ops.readiness_summary.ready}/${ops.readiness_summary.total} ready`;
+    $("readiness-dot").className=`dot ${ops.overall_readiness}`;
+
+    renderWork(ops.todays_work);
+    renderRows("materials-list",ops.materials,"No verified material status has been admitted yet.",item=>[
+      item.material||item.material_name||"Material",
+      [item.quantity,item.unit,item.state||item.status].filter(Boolean).join(" · ")||item.note||"—"
+    ]);
+    renderRows("progress-list",ops.progress,"No verified progress records have been admitted yet.",item=>[
+      item.activity||item.work||"Progress",
+      item.status||item.note||"—"
+    ]);
+    renderRows("blockers-list",ops.blockers,"No open blockers have been admitted yet.",item=>[
+      item.blocker||item.title||"Blocker",
+      item.status||item.responsible||"Open"
+    ]);
+    renderRows("lookahead-list",ops.lookahead,"No governed lookahead has been admitted yet.",item=>[
+      item.day||item.target_date||"Next",
+      item.activity||item.note||"—"
+    ]);
+    renderDailyLog(project.project_id);
+    renderEvidence(ops.evidence);
+
+    const next=new URL(location.href);
+    next.searchParams.set("project",project.project_id);
+    history.replaceState(null,"",next);
+  }
+
+  function renderWork(items){
+    const root=$("work-list");
+    if(!items.length){root.innerHTML=empty("No verified work-readiness items have been admitted yet.");return}
+    root.innerHTML=items.map(item=>{
+      const r=item.readiness||{};
+      const gates=[
+        ["Materials",r.materials],["Manpower",r.manpower],["PPE",r.ppe],
+        ["Work briefing",r.work_briefing],["Tools",r.tools],["Preconditions",r.preconditions]
+      ];
+      return `<article class="work-card">
+        <div class="work-head">
+          <div><div class="work-title">${esc(item.activity)}</div><div class="work-location">${esc(item.location||"")}</div></div>
+          <div class="status-pill">${esc(label(r.overall||"UNSET"))}</div>
+        </div>
+        <div class="gate-grid">
+          ${gates.map(([name,g])=>`<div class="gate"><b>${esc(name)}</b><span>${icon(g?.status)} ${esc(label(g?.status||"UNKNOWN"))}${g?.note?` — ${esc(g.note)}`:""}</span></div>`).join("")}
+        </div>
+        ${item.blocker?`<div class="notice"><b>Blocker:</b> ${esc(item.blocker)}</div>`:""}
+      </article>`;
+    }).join("");
+  }
+
+  function renderRows(id,items,emptyMessage,mapper){
+    const root=$(id);
+    if(!items.length){root.innerHTML=empty(emptyMessage);return}
+    root.innerHTML=`<div class="list">${items.map(item=>{
+      const [k,v]=mapper(item);
+      return `<div class="row"><span>${esc(k)}</span><span class="value">${esc(v)}</span></div>`;
+    }).join("")}</div>`;
+  }
+
+  function renderDailyLog(projectId){
+    const root=$("daily-log-list");
+    const items=state.events.filter(event=>event.project_id===projectId).sort((a,b)=>String(b.occurred_at||"").localeCompare(String(a.occurred_at||"")));
+    if(!items.length){root.innerHTML=empty("No project-specific Daily Ops events have been admitted yet.");return}
+    root.innerHTML=`<div class="list">${items.slice(0,20).map(event=>{
+      const payload=event.payload||{};
+      const title=payload.summary||payload.note||event.event_type||"Daily Ops event";
+      const when=event.occurred_at||"";
+      return `<div class="row"><span>${esc(title)}</span><span class="value">${esc(when)}</span></div>`;
+    }).join("")}</div>`;
+  }
+
+  function renderEvidence(items){
+    const root=$("evidence-list");
+    if(!items.length){root.innerHTML=empty("No field evidence references have been admitted yet.");return}
+    root.innerHTML=`<div class="evidence">${items.map(item=>{
+      const text=item.label||item.evidence_type||item.provider||"Evidence";
+      return item.url||item.evidence_url
+        ? `<a href="${esc(item.url||item.evidence_url)}" target="_blank" rel="noopener">${esc(text)}</a>`
+        : `<span class="status-pill">${esc(text)}</span>`;
+    }).join("")}</div>`;
+  }
+
+  async function load(){
+    try{
+      const bust=Date.now();
+      const [stateResponse,eventResponse]=await Promise.all([
+        fetch(`ops/data/current-works.json?v=${bust}`,{cache:"no-store"}),
+        fetch(`ops/events/daily-ops-events.jsonl?v=${bust}`,{cache:"no-store"})
+      ]);
+      if(!stateResponse.ok)throw new Error(`Could not load Daily Ops state (${stateResponse.status})`);
+      state.data=await stateResponse.json();
+      if(eventResponse.ok){
+        const raw=await eventResponse.text();
+        state.events=raw.split(/\r?\n/).filter(Boolean).map((line,index)=>{
+          try{return JSON.parse(line)}catch(error){console.warn(`Skipping invalid JSONL line ${index+1}`,error);return null}
+        }).filter(Boolean);
+      }
+
+      state.data.projects.forEach(project=>{
+        const option=document.createElement("option");
+        option.value=project.project_id;
+        option.textContent=`${project.project_id} — ${project.display_name}`;
+        $("project-select").append(option);
+      });
+
+      const requested=params.get("project");
+      setProject(requested||state.data.projects[0]?.project_id);
+    }catch(error){
+      $("project-name").textContent="Current works unavailable";
+      $("project-meta").textContent=error.message;
+      ["work-list","materials-list","progress-list","daily-log-list","blockers-list","lookahead-list","evidence-list"].forEach(id=>{
+        $(id).innerHTML=empty("Daily Ops data could not be loaded.");
+      });
+    }
+  }
+
+  $("project-select").addEventListener("change",event=>setProject(event.target.value));
+  load();
+})();
+</script>
+</body>
+</html>
