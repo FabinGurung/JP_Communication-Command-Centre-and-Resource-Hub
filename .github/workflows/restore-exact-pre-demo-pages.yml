@@ -1,0 +1,38 @@
+name: Restore exact pre-demo JP Pages
+on:
+  push:
+    branches:
+      - v1.2-site-operations-dashboard
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  restore:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact pre-demo site
+        uses: actions/checkout@v4
+        with:
+          ref: 16ca8f558e7779f9681c35656808bffccb8cbc7b
+          path: _site
+      - name: Verify exact fallback content
+        run: |
+          test -f _site/index.html
+          test ! -e _site/construction-knowledge-demo
+          test ! -e _site/.github/workflows/deploy-pages.yml
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload exact pre-demo site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy exact fallback
+        id: deployment
+        uses: actions/deploy-pages@v4
