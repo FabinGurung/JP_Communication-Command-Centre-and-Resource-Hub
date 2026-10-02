@@ -102,7 +102,7 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     environment:
-      name: daily-ops-preview
+      name: github-pages
     steps:
       - name: Check out branch
         uses: actions/checkout@v4
