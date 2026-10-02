@@ -30,7 +30,7 @@
         "projection_status": {
           "google_sheets": "CURRENT",
           "website": "CURRENT",
-          "slack": "NOT_CONFIGURED"
+          "slack": "CURRENT"
         },
         "todays_work": [],
         "materials": [],
@@ -61,7 +61,7 @@
         "projection_status": {
           "google_sheets": "CURRENT",
           "website": "CURRENT",
-          "slack": "NOT_CONFIGURED"
+          "slack": "CURRENT"
         },
         "todays_work": [],
         "materials": [],
@@ -92,7 +92,7 @@
         "projection_status": {
           "google_sheets": "CURRENT",
           "website": "CURRENT",
-          "slack": "NOT_CONFIGURED"
+          "slack": "CURRENT"
         },
         "todays_work": [],
         "materials": [],
@@ -123,7 +123,7 @@
         "projection_status": {
           "google_sheets": "NOT_CONFIGURED",
           "website": "CURRENT",
-          "slack": "NOT_CONFIGURED"
+          "slack": "CURRENT"
         },
         "todays_work": [],
         "materials": [],
@@ -154,7 +154,7 @@
         "projection_status": {
           "google_sheets": "CURRENT",
           "website": "CURRENT",
-          "slack": "NOT_CONFIGURED"
+          "slack": "CURRENT"
         },
         "todays_work": [],
         "materials": [],
@@ -185,7 +185,7 @@
         "projection_status": {
           "google_sheets": "CURRENT",
           "website": "CURRENT",
-          "slack": "NOT_CONFIGURED"
+          "slack": "CURRENT"
         },
         "todays_work": [],
         "materials": [],
@@ -216,7 +216,7 @@
         "projection_status": {
           "google_sheets": "CURRENT",
           "website": "CURRENT",
-          "slack": "NOT_CONFIGURED"
+          "slack": "CURRENT"
         },
         "todays_work": [],
         "materials": [],
