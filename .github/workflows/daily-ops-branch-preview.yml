@@ -101,6 +101,8 @@ jobs:
   deploy:
     needs: validate
     runs-on: ubuntu-latest
+    environment:
+      name: daily-ops-preview
     steps:
       - name: Check out branch
         uses: actions/checkout@v4
