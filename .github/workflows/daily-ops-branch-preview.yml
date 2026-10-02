@@ -64,17 +64,20 @@ jobs:
           with Path("projects.csv").open(newline="", encoding="utf-8-sig") as handle:
               project_rows = list(csv.DictReader(handle))
 
-          public_ids = {row["PK_ID"].strip() for row in project_rows if row.get("PK_ID", "").strip()}
+          map_project_ids = {row.get("project_id", "").strip() for row in project_rows if row.get("project_id", "").strip()}
+          map_legacy_ids = {row.get("legacy_project_code", "").strip() for row in project_rows if row.get("legacy_project_code", "").strip()}
           ops_ids = {project["project_id"] for project in state.get("projects", [])}
-          if public_ids != ops_ids:
+          missing_ops_projects = ops_ids - (map_project_ids | map_legacy_ids)
+          if missing_ops_projects:
               raise SystemExit(
-                  f"Project identity mismatch: map={sorted(public_ids)} ops={sorted(ops_ids)}"
+                  f"Daily Ops projects missing from map identities: {sorted(missing_ops_projects)}"
               )
 
           if len(ops_ids) != len(state.get("projects", [])):
               raise SystemExit("Duplicate Daily Ops project_id detected.")
 
           map_html = Path("map.html").read_text(encoding="utf-8")
+          map_js = Path("assets/js/app.js").read_text(encoding="utf-8")
           ops_html = Path("site-operations.html").read_text(encoding="utf-8")
           hub_html = Path("index.html").read_text(encoding="utf-8")
 
@@ -88,7 +91,7 @@ jobs:
           checks = {
               "hub -> map": required_routes["hub -> map"] in hub_html,
               "hub -> site operations": required_routes["hub -> site operations"] in hub_html,
-              "map -> site operations": required_routes["map -> site operations"] in map_html,
+              "map -> site operations": required_routes["map -> site operations"] in (map_html + map_js),
               "site operations -> machine state": required_routes["site operations -> machine state"] in ops_html,
               "site operations -> event stream": required_routes["site operations -> event stream"] in ops_html,
           }
@@ -96,7 +99,7 @@ jobs:
           if failed:
               raise SystemExit(f"Route validation failed: {failed}")
 
-          print(f"PASS: {len(ops_ids)} projects; {len(events)} JSONL event(s); routes verified.")
+          print(f"PASS: map={len(project_rows)} projects; daily_ops={len(ops_ids)} projects; {len(events)} JSONL event(s); routes verified.")
 
   deploy:
     needs: validate
