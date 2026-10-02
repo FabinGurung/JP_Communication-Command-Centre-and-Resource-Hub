@@ -1,0 +1,121 @@
+name: Daily Ops branch preview
+
+on:
+  push:
+    branches:
+      - feature/daily-ops-current-work
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-feature-daily-ops
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Validate machine layer and page routes
+        shell: python
+        run: |
+          import csv
+          import json
+          from pathlib import Path
+
+          required_files = [
+              Path("index.html"),
+              Path("map.html"),
+              Path("site-operations.html"),
+              Path("ops/data/current-works.json"),
+              Path("ops/events/daily-ops-events.jsonl"),
+              Path("ops/schema/current-works.schema.json"),
+              Path("ops/schema/daily-ops-postgres.sql"),
+          ]
+          missing = [str(p) for p in required_files if not p.exists()]
+          if missing:
+              raise SystemExit(f"Missing required files: {missing}")
+
+          state = json.loads(Path("ops/data/current-works.json").read_text(encoding="utf-8"))
+          schema = json.loads(Path("ops/schema/current-works.schema.json").read_text(encoding="utf-8"))
+
+          if state.get("schema_version") != "0.1.0":
+              raise SystemExit("Unexpected Daily Ops schema_version.")
+          if schema.get("title") != "JP Ecosystem Daily Ops Current Works":
+              raise SystemExit("Unexpected JSON schema identity.")
+
+          event_lines = [
+              line for line in Path("ops/events/daily-ops-events.jsonl").read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          ]
+          events = []
+          for line_number, line in enumerate(event_lines, start=1):
+              try:
+                  events.append(json.loads(line))
+              except json.JSONDecodeError as error:
+                  raise SystemExit(f"Invalid JSONL at line {line_number}: {error}")
+
+          with Path("projects.csv").open(newline="", encoding="utf-8-sig") as handle:
+              project_rows = list(csv.DictReader(handle))
+
+          public_ids = {row["PK_ID"].strip() for row in project_rows if row.get("PK_ID", "").strip()}
+          ops_ids = {project["project_id"] for project in state.get("projects", [])}
+          if public_ids != ops_ids:
+              raise SystemExit(
+                  f"Project identity mismatch: map={sorted(public_ids)} ops={sorted(ops_ids)}"
+              )
+
+          if len(ops_ids) != len(state.get("projects", [])):
+              raise SystemExit("Duplicate Daily Ops project_id detected.")
+
+          map_html = Path("map.html").read_text(encoding="utf-8")
+          ops_html = Path("site-operations.html").read_text(encoding="utf-8")
+          hub_html = Path("index.html").read_text(encoding="utf-8")
+
+          required_routes = {
+              "hub -> map": "map.html",
+              "hub -> site operations": "site-operations.html",
+              "map -> site operations": "site-operations.html?project=",
+              "site operations -> machine state": "ops/data/current-works.json",
+              "site operations -> event stream": "ops/events/daily-ops-events.jsonl",
+          }
+          checks = {
+              "hub -> map": required_routes["hub -> map"] in hub_html,
+              "hub -> site operations": required_routes["hub -> site operations"] in hub_html,
+              "map -> site operations": required_routes["map -> site operations"] in map_html,
+              "site operations -> machine state": required_routes["site operations -> machine state"] in ops_html,
+              "site operations -> event stream": required_routes["site operations -> event stream"] in ops_html,
+          }
+          failed = [name for name, ok in checks.items() if not ok]
+          if failed:
+              raise SystemExit(f"Route validation failed: {failed}")
+
+          print(f"PASS: {len(ops_ids)} projects; {len(events)} JSONL event(s); routes verified.")
+
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy branch preview to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
