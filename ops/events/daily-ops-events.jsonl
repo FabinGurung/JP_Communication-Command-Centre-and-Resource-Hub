@@ -1,0 +1,1 @@
+{"event_id":"OPS-BOOTSTRAP-0001","event_type":"SYSTEM_BOOTSTRAP","occurred_at":"2026-10-02T16:22:00+05:45","scope":"daily_ops","project_id":null,"work_id":null,"source_refs":[],"payload":{"schema_version":"0.1.0","note":"Machine-first Daily Ops scaffold created. No site operational facts were admitted by this bootstrap."},"mutates_operational_truth":false}
