@@ -1,0 +1,130 @@
+{
+  "schema_version": "0.1.0",
+  "authority": {
+    "canonical_state": "ops/data/current-works.json",
+    "event_log": "ops/events/daily-ops-events.jsonl",
+    "relational_contract": "ops/schema/daily-ops-postgres.sql",
+    "projection_rule": "Google Sheets and web pages are downstream projections. They must not silently become upstream authority over this machine layer."
+  },
+  "projects": [
+    {
+      "project_id": "P001",
+      "project_slug": "14_bishal_paija",
+      "display_name": "14 Bishal Paija",
+      "contractor": "Rohini Engineering and Builders Pvt Ltd",
+      "daily_ops": {
+        "date": null,
+        "overall_readiness": "UNSET",
+        "readiness_summary": { "ready": 0, "total": 0 },
+        "todays_work": [],
+        "materials": [],
+        "progress": [],
+        "blockers": [],
+        "lookahead": [],
+        "evidence": []
+      }
+    },
+    {
+      "project_id": "P002",
+      "project_slug": "17_samir_man_ghubaju",
+      "display_name": "17 Samir Man Ghubaju",
+      "contractor": "Fishtail Builders Pvt Ltd",
+      "daily_ops": {
+        "date": null,
+        "overall_readiness": "UNSET",
+        "readiness_summary": { "ready": 0, "total": 0 },
+        "todays_work": [],
+        "materials": [],
+        "progress": [],
+        "blockers": [],
+        "lookahead": [],
+        "evidence": []
+      }
+    },
+    {
+      "project_id": "P003",
+      "project_slug": "13_hari_baral",
+      "display_name": "13 Hari Baral",
+      "contractor": "Fishtail Builders Pvt Ltd",
+      "daily_ops": {
+        "date": null,
+        "overall_readiness": "UNSET",
+        "readiness_summary": { "ready": 0, "total": 0 },
+        "todays_work": [],
+        "materials": [],
+        "progress": [],
+        "blockers": [],
+        "lookahead": [],
+        "evidence": []
+      }
+    },
+    {
+      "project_id": "P004",
+      "project_slug": "16_yamuna_pun_adai",
+      "display_name": "16 Yamuna Pun Adai",
+      "contractor": "Fishtail Builders Pvt Ltd",
+      "daily_ops": {
+        "date": null,
+        "overall_readiness": "UNSET",
+        "readiness_summary": { "ready": 0, "total": 0 },
+        "todays_work": [],
+        "materials": [],
+        "progress": [],
+        "blockers": [],
+        "lookahead": [],
+        "evidence": []
+      }
+    },
+    {
+      "project_id": "P005",
+      "project_slug": "30_sabitri_giri_dipti_giri",
+      "display_name": "30 Sabitri Giri / Dipti Giri",
+      "contractor": "Fishtail Builders Pvt Ltd",
+      "daily_ops": {
+        "date": null,
+        "overall_readiness": "UNSET",
+        "readiness_summary": { "ready": 0, "total": 0 },
+        "todays_work": [],
+        "materials": [],
+        "progress": [],
+        "blockers": [],
+        "lookahead": [],
+        "evidence": []
+      }
+    },
+    {
+      "project_id": "P006",
+      "project_slug": "31_sharada_adhikari",
+      "display_name": "31 Sharada Adhikari",
+      "contractor": "Fishtail Builders Pvt Ltd",
+      "daily_ops": {
+        "date": null,
+        "overall_readiness": "UNSET",
+        "readiness_summary": { "ready": 0, "total": 0 },
+        "todays_work": [],
+        "materials": [],
+        "progress": [],
+        "blockers": [],
+        "lookahead": [],
+        "evidence": []
+      }
+    },
+    {
+      "project_id": "P007",
+      "project_slug": "15_narayani_parajuli",
+      "display_name": "15 Narayani Parajuli",
+      "contractor": "Fishtail Builders Pvt Ltd",
+      "daily_ops": {
+        "date": null,
+        "overall_readiness": "UNSET",
+        "readiness_summary": { "ready": 0, "total": 0 },
+        "todays_work": [],
+        "materials": [],
+        "progress": [],
+        "blockers": [],
+        "lookahead": [],
+        "evidence": []
+      }
+    }
+  ]
+}
