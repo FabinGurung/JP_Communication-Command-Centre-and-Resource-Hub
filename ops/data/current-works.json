@@ -28,7 +28,7 @@
         "last_reconciled_at": null,
         "source_cutoff": null,
         "projection_status": {
-          "google_sheets": "NOT_CONFIGURED",
+          "google_sheets": "CURRENT",
           "website": "CURRENT",
           "slack": "NOT_CONFIGURED"
         },
@@ -59,7 +59,7 @@
         "last_reconciled_at": null,
         "source_cutoff": null,
         "projection_status": {
-          "google_sheets": "NOT_CONFIGURED",
+          "google_sheets": "CURRENT",
           "website": "CURRENT",
           "slack": "NOT_CONFIGURED"
         },
@@ -90,7 +90,7 @@
         "last_reconciled_at": null,
         "source_cutoff": null,
         "projection_status": {
-          "google_sheets": "NOT_CONFIGURED",
+          "google_sheets": "CURRENT",
           "website": "CURRENT",
           "slack": "NOT_CONFIGURED"
         },
@@ -152,7 +152,7 @@
         "last_reconciled_at": null,
         "source_cutoff": null,
         "projection_status": {
-          "google_sheets": "NOT_CONFIGURED",
+          "google_sheets": "CURRENT",
           "website": "CURRENT",
           "slack": "NOT_CONFIGURED"
         },
@@ -183,7 +183,7 @@
         "last_reconciled_at": null,
         "source_cutoff": null,
         "projection_status": {
-          "google_sheets": "NOT_CONFIGURED",
+          "google_sheets": "CURRENT",
           "website": "CURRENT",
           "slack": "NOT_CONFIGURED"
         },
@@ -214,7 +214,7 @@
         "last_reconciled_at": null,
         "source_cutoff": null,
         "projection_status": {
-          "google_sheets": "NOT_CONFIGURED",
+          "google_sheets": "CURRENT",
           "website": "CURRENT",
           "slack": "NOT_CONFIGURED"
         },
