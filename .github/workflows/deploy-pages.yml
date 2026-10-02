@@ -1,0 +1,52 @@
+name: Deploy JP Pages
+
+on:
+  push:
+    branches:
+      - v1.2-site-operations-dashboard
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  validate-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate Construction Knowledge demo
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p = pathlib.Path("construction-knowledge-demo/sample-data.json")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          works = {w["key"]: w for w in data["works"]}
+          assert works["waterproofing"]["work_id"] == "WRK-000023"
+          assert works["soak-pit"]["work_id"] is None
+          assert works["soak-pit"]["identity_status"] == "IDENTITY_PENDING"
+          assert pathlib.Path("construction-knowledge-demo/index.html").exists()
+          print("Construction Knowledge demo validation: PASS")
+          PY
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
