@@ -8,11 +8,14 @@ A public, coordinate-verified project map hosted with GitHub Pages.
 
 This is the first stable data-driven version of the JP Ecosystem Project Map.
 
-Project records are maintained separately from the application:
+Project and Daily Ops truth are maintained as canonical machine-readable files, separate from the application:
 
-- `projects.csv` — project data
-- `map-config.json` — map settings, statuses, and visual configuration
-- `index.html` — map application
+- `ops/schema/daily-ops-postgres.sql` — canonical relational/relationship authority (text DDL; no live database required)
+- `projects.csv` — canonical project-master current values: IDs, lifecycle, coordinates, public project attributes
+- `ops/data/current-works.json` — canonical Daily Ops current state
+- `ops/events/daily-ops-events.jsonl` — canonical append-only Daily Ops event/history stream
+- `map-config.json` — controlled map statuses and presentation configuration
+- HTML / GitHub Pages / Google Sheets / Slack — downstream projections or interaction surfaces, never competing truth stores
 
 See [`CHANGELOG.md`](CHANGELOG.md) for version history.
 
@@ -29,25 +32,21 @@ index.html
 
 The live website no longer stores project records inside `index.html`.
 
-## Routine update
+## Where to edit
 
-For ordinary changes, edit only:
+Edit the canonical file that owns the fact. Do **not** manually maintain the same fact in HTML or Google Sheets.
 
-```text
-projects.csv
-```
+| Fact | Canonical edit location |
+| --- | --- |
+| Project identity, lifecycle/status, coordinates, public project attributes | `projects.csv` |
+| Daily work, readiness, blockers, materials, current operational state | `ops/data/current-works.json` |
+| Append-only operational/governance history | `ops/events/daily-ops-events.jsonl` |
+| Relationships, PK/FK structure and data contract | `ops/schema/daily-ops-postgres.sql` |
+| Allowed map statuses / visual configuration | `map-config.json` |
 
-Examples:
+GitHub Pages reads these canonical files and is a downstream presentation layer. Google Sheets is also a downstream projection; it is not where project-master truth should be edited.
 
-- Add a project
-- Change a status
-- Correct coordinates
-- Update contractor
-- Add progress percentages
-- Add a latest update
-- Hide a record by setting `is_public` to `FALSE`
-
-GitHub Pages republishes after the commit reaches `main`.
+During the current Daily Ops development lane, changes are made on `feature/daily-ops-current-work`, validated by GitHub Actions, and deployed by the branch-preview workflow. `main` remains untouched until an explicit governed promotion.
 
 ## Files
 
@@ -75,6 +74,7 @@ Use `YYYY-MM-DD`, for example `2026-07-23`.
 The status must exactly match a key in `map-config.json`:
 
 - Construction
+- Maintenance
 - Completed
 - Approval
 - Planned
@@ -89,15 +89,12 @@ GitHub Pages and this repository are public. Only public information belongs in 
 
 ## Safe change workflow
 
-For tiny corrections, editing `projects.csv` directly on `main` is acceptable.
-
-For larger changes:
-
-1. Create a branch.
-2. Make changes.
-3. Open a pull request.
-4. Confirm validation is green.
-5. Merge into `main`.
-6. GitHub Pages republishes automatically.
+1. Edit the owning canonical data file, not the rendered page or a downstream Sheet.
+2. Validate the project identity / PK-FK relationship against the SQL contract.
+3. Commit on the governed working branch.
+4. Require GitHub Actions validation to pass.
+5. Let Pages update from the canonical files.
+6. Project into Google Sheets only as a downstream view when that projection is configured.
+7. Promote to `main` only through an explicit governed release.
 
 GitHub Pages deployment initialized.
