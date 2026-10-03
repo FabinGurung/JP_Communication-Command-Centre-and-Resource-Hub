@@ -357,7 +357,7 @@
         "last_reconciled_at": "2026-10-03T08:08:00+05:45",
         "source_cutoff": "2026-10-03T06:32:43+05:45",
         "projection_status": {
-          "google_sheets": "PENDING",
+          "google_sheets": "CURRENT",
           "website": "CURRENT",
           "slack": "CURRENT"
         },
@@ -748,7 +748,7 @@
         "last_reconciled_at": "2026-10-03T08:08:00+05:45",
         "source_cutoff": "2026-10-03T06:32:43+05:45",
         "projection_status": {
-          "google_sheets": "PENDING",
+          "google_sheets": "CURRENT",
           "website": "CURRENT",
           "slack": "CURRENT"
         },
