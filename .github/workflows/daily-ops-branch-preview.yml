@@ -32,6 +32,8 @@ jobs:
           required_files = [
               Path("index.html"),
               Path("map.html"),
+              Path("projects.csv"),
+              Path("map-config.json"),
               Path("site-operations.html"),
               Path("site-operations/project.html"),
               Path("ops/data/current-works.json"),
@@ -47,6 +49,8 @@ jobs:
           state = json.loads(Path("ops/data/current-works.json").read_text(encoding="utf-8"))
           schema = json.loads(Path("ops/schema/current-works.schema.json").read_text(encoding="utf-8"))
           event_schema = json.loads(Path("ops/schema/daily-ops-event.schema.json").read_text(encoding="utf-8"))
+          map_config = json.loads(Path("map-config.json").read_text(encoding="utf-8"))
+          allowed_project_statuses = set(map_config.get("status_styles", {}))
 
           if state.get("schema_version") != "0.2.0":
               raise SystemExit("Unexpected Daily Ops schema_version.")
@@ -81,7 +85,39 @@ jobs:
               events.append(event)
 
           with Path("projects.csv").open(newline="", encoding="utf-8-sig") as handle:
-              project_rows = list(csv.DictReader(handle))
+              project_reader = csv.DictReader(handle)
+              project_rows = list(project_reader)
+              project_headers = set(project_reader.fieldnames or [])
+
+          required_project_headers = {
+              "project_id", "company_project_code", "legacy_project_code",
+              "project_name", "display_name", "executing_company_id",
+              "latitude", "longitude", "status", "is_public"
+          }
+          missing_project_headers = required_project_headers - project_headers
+          if missing_project_headers:
+              raise SystemExit(f"projects.csv missing headers: {sorted(missing_project_headers)}")
+
+          seen_map_ids = set()
+          seen_legacy_ids = set()
+          for line_number, row in enumerate(project_rows, start=2):
+              map_id = row.get("project_id", "").strip()
+              legacy_id = row.get("legacy_project_code", "").strip()
+              status = row.get("status", "").strip()
+              if not map_id:
+                  raise SystemExit(f"projects.csv line {line_number}: project_id is blank.")
+              if map_id in seen_map_ids:
+                  raise SystemExit(f"projects.csv line {line_number}: duplicate project_id {map_id}.")
+              seen_map_ids.add(map_id)
+              if legacy_id:
+                  if legacy_id in seen_legacy_ids:
+                      raise SystemExit(f"projects.csv line {line_number}: duplicate legacy_project_code {legacy_id}.")
+                  seen_legacy_ids.add(legacy_id)
+              if status not in allowed_project_statuses:
+                  raise SystemExit(
+                      f"projects.csv line {line_number}: unknown status {status!r}; "
+                      f"allowed={sorted(allowed_project_statuses)}"
+                  )
 
           map_by_id = {row["project_id"].strip(): row for row in project_rows if row.get("project_id", "").strip()}
           map_by_legacy = {row["legacy_project_code"].strip(): row for row in project_rows if row.get("legacy_project_code", "").strip()}
