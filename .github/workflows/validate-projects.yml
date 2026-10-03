@@ -23,7 +23,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Validate CSV and configuration
+      - name: Validate canonical project master
         shell: python
         run: |
           import csv
@@ -31,13 +31,23 @@ jobs:
           from pathlib import Path
 
           required = {
-              "PK_ID", "project_name", "display_name", "contractor",
-              "latitude", "longitude", "status", "client_name",
-              "project_manager", "site_engineer",
-              "physical_progress_percent", "financial_progress_percent",
-              "start_date", "target_completion_date", "last_updated",
-              "latest_update", "photo_url", "details_url",
-              "public_notes", "is_public",
+              "project_id",
+              "company_project_code",
+              "legacy_project_code",
+              "project_name",
+              "display_name",
+              "executing_company_id",
+              "latitude",
+              "longitude",
+              "status",
+              "physical_progress_percent",
+              "financial_progress_percent",
+              "last_updated",
+              "latest_update",
+              "photo_url",
+              "details_url",
+              "public_notes",
+              "is_public",
           }
 
           config = json.loads(Path("map-config.json").read_text(encoding="utf-8"))
@@ -54,19 +64,34 @@ jobs:
           if not rows:
               raise SystemExit("projects.csv contains no project rows.")
 
-          seen_ids = set()
+          seen_project_ids = set()
+          seen_company_codes = set()
+          seen_legacy_codes = set()
           errors = []
 
           for line_number, row in enumerate(rows, start=2):
-              project_id = (row.get("PK_ID") or "").strip()
-              if not project_id:
-                  errors.append(f"Line {line_number}: PK_ID is blank")
-              elif project_id in seen_ids:
-                  errors.append(f"Line {line_number}: duplicate PK_ID {project_id}")
-              else:
-                  seen_ids.add(project_id)
+              project_id = (row.get("project_id") or "").strip()
+              company_code = (row.get("company_project_code") or "").strip()
+              legacy_code = (row.get("legacy_project_code") or "").strip()
 
-              for field in ("project_name", "contractor", "status", "latitude", "longitude"):
+              if not project_id:
+                  errors.append(f"Line {line_number}: project_id is blank")
+              elif project_id in seen_project_ids:
+                  errors.append(f"Line {line_number}: duplicate project_id {project_id}")
+              else:
+                  seen_project_ids.add(project_id)
+
+              if company_code:
+                  if company_code in seen_company_codes:
+                      errors.append(f"Line {line_number}: duplicate company_project_code {company_code}")
+                  seen_company_codes.add(company_code)
+
+              if legacy_code:
+                  if legacy_code in seen_legacy_codes:
+                      errors.append(f"Line {line_number}: duplicate legacy_project_code {legacy_code}")
+                  seen_legacy_codes.add(legacy_code)
+
+              for field in ("project_name", "display_name", "executing_company_id", "status", "latitude", "longitude"):
                   if not (row.get(field) or "").strip():
                       errors.append(f"Line {line_number}: {field} is blank")
 
@@ -74,14 +99,14 @@ jobs:
                   latitude = float(row["latitude"])
                   if not -90 <= latitude <= 90:
                       errors.append(f"Line {line_number}: latitude outside -90..90")
-              except ValueError:
+              except (TypeError, ValueError):
                   errors.append(f"Line {line_number}: latitude is not numeric")
 
               try:
                   longitude = float(row["longitude"])
                   if not -180 <= longitude <= 180:
                       errors.append(f"Line {line_number}: longitude outside -180..180")
-              except ValueError:
+              except (TypeError, ValueError):
                   errors.append(f"Line {line_number}: longitude is not numeric")
 
               status = (row.get("status") or "").strip()
@@ -109,4 +134,7 @@ jobs:
               print("\n".join(errors))
               raise SystemExit(f"Validation failed with {len(errors)} error(s).")
 
-          print(f"Validation passed for {len(rows)} project row(s).")
+          print(
+              f"Validation passed for {len(rows)} project row(s); "
+              f"allowed lifecycle statuses={sorted(allowed_statuses)}."
+          )
