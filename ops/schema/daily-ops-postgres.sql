@@ -15,7 +15,11 @@ CREATE TABLE IF NOT EXISTS ops_projects (
   legacy_project_code text NOT NULL UNIQUE,
   project_slug text NOT NULL UNIQUE,
   display_name text NOT NULL,
-  contractor text NOT NULL
+  contractor text NOT NULL,
+  lifecycle_status text,
+  -- Project lifecycle/classification (for example Construction, Maintenance, Completed).
+  -- This is distinct from Daily Ops readiness/execution status.
+  CHECK (lifecycle_status IS NULL OR length(trim(lifecycle_status)) > 0)
 );
 
 CREATE TABLE IF NOT EXISTS ops_daily_state (
