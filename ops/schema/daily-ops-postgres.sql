@@ -3,10 +3,12 @@
 -- CANONICAL ROLE:
 --   1) This .sql TEXT FILE is the primary relationship/schema authority for Daily Ops.
 --   2) It is PostgreSQL-compatible DDL for deterministic AI/human inspection; no live PostgreSQL server is required or implied.
---   3) ops/data/current-works.json is the canonical serialized CURRENT-STATE value layer.
---   4) ops/events/daily-ops-events.jsonl is the canonical append-only EVENT/HISTORY layer.
---   5) Google Sheets, GitHub Pages and Slack are downstream projections / interaction surfaces only.
---   6) If a projection conflicts with the SQL relationship contract or canonical JSON/JSONL, reconcile the projection; do not silently promote it to truth.
+--   3) projects.csv is the canonical PROJECT-MASTER current-value layer (identity, lifecycle, location, public project attributes).
+--   4) ops/data/current-works.json is the canonical DAILY-OPS current-state value layer.
+--   5) ops/events/daily-ops-events.jsonl is the canonical append-only EVENT/HISTORY layer.
+--   6) map-config.json is the controlled-value / presentation configuration authority for the public map.
+--   7) Google Sheets, GitHub Pages and Slack are downstream projections / interaction surfaces only.
+--   8) If a projection conflicts with these canonical files, reconcile the projection; do not silently promote it to truth.
 
 CREATE TABLE IF NOT EXISTS ops_projects (
   project_id text PRIMARY KEY,
