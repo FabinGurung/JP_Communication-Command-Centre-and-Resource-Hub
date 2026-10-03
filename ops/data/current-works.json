@@ -351,23 +351,98 @@
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
-          "total": 0
+          "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-03T06:32:43+05:45",
+        "last_reconciled_at": "2026-10-03T08:08:00+05:45",
         "source_cutoff": "2026-10-03T06:32:43+05:45",
         "projection_status": {
-          "google_sheets": "NOT_CONFIGURED",
+          "google_sheets": "PENDING",
           "website": "CURRENT",
           "slack": "CURRENT"
         },
-        "todays_work": [],
+        "todays_work": [
+          {
+            "work_id": "WORK-P004-20261003-LEAKAGE",
+            "activity": "Leakage inspection / repair follow-up",
+            "location": "Exact leakage source/location pending field confirmation",
+            "execution_status": "NEEDS_INPUT",
+            "readiness": {
+              "materials": {
+                "status": "UNKNOWN",
+                "note": "Repair material need is not yet confirmed.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C13SSGULF/p1790988432056739"
+                ],
+                "observed_at": "2026-10-03T06:32:12+05:45",
+                "conflict_state": "NONE"
+              },
+              "manpower": {
+                "status": "UNKNOWN",
+                "note": "Required person/team for inspection or repair is not yet confirmed.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C13SSGULF/p1790988432056739"
+                ],
+                "observed_at": "2026-10-03T06:32:12+05:45",
+                "conflict_state": "NONE"
+              },
+              "ppe": {
+                "status": "UNKNOWN",
+                "note": null,
+                "responsibility": null,
+                "source_refs": [],
+                "observed_at": null,
+                "conflict_state": "UNSET"
+              },
+              "work_briefing": {
+                "status": "UNKNOWN",
+                "note": null,
+                "responsibility": null,
+                "source_refs": [],
+                "observed_at": null,
+                "conflict_state": "UNSET"
+              },
+              "tools": {
+                "status": "UNKNOWN",
+                "note": "Inspection/repair tools are not yet confirmed.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C13SSGULF/p1790988432056739"
+                ],
+                "observed_at": "2026-10-03T06:32:12+05:45",
+                "conflict_state": "NONE"
+              },
+              "preconditions": {
+                "status": "UNKNOWN",
+                "note": "Leakage source must be observed/identified before repair closure can be accepted.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C13SSGULF/p1790687986476779",
+                  "https://jp09.slack.com/archives/C0C13SSGULF/p1790988432056739"
+                ],
+                "observed_at": "2026-10-03T06:32:12+05:45",
+                "conflict_state": "NONE"
+              },
+              "overall": "UNSET"
+            },
+            "blocker": "Top-water leakage source and repair closure remain unresolved; do not infer the source from symptoms.",
+            "responsible": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C13SSGULF/p1790687986476779",
+              "https://jp09.slack.com/archives/C0C13SSGULF/p1790988432056739"
+            ],
+            "last_reconciled_at": "2026-10-03T08:08:00+05:45",
+            "conflict_state": "NONE"
+          }
+        ],
         "materials": [],
         "progress": [],
         "blockers": [
           {
             "blocker_id": "BLK-P004-LEAKAGE-SOURCE",
-            "work_id": null,
+            "work_id": "WORK-P004-20261003-LEAKAGE",
             "status": "NEEDS_INPUT",
             "blocker": "Top-water leakage source and repair closure remain unresolved; do not infer the source from symptoms.",
             "responsible": null,
@@ -384,7 +459,7 @@
         "evidence": [
           {
             "evidence_id": "EVID-P004-20261003-TRACKER",
-            "work_id": null,
+            "work_id": "WORK-P004-20261003-LEAKAGE",
             "provider": "SLACK",
             "provider_object_id": "1790988432.056739",
             "evidence_type": "DAILY_WORK_READINESS_TRACKER",
@@ -670,7 +745,7 @@
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-03T06:32:43+05:45",
+        "last_reconciled_at": "2026-10-03T08:08:00+05:45",
         "source_cutoff": "2026-10-03T06:32:43+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
