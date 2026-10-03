@@ -653,6 +653,211 @@
           }
         ]
       }
+    },
+    {
+      "project_id": "P020",
+      "map_project_id": "PRJ-000020",
+      "company_project_code": "FBL-019",
+      "legacy_project_code": "P020",
+      "project_slug": "kharika_paudel",
+      "display_name": "Kharika Paudel",
+      "contractor": "Fishtail Builders Pvt Ltd",
+      "daily_ops": {
+        "date": "2026-10-03",
+        "overall_readiness": "UNSET",
+        "readiness_summary": {
+          "ready": 0,
+          "total": 6
+        },
+        "conflict_state": "NONE",
+        "last_reconciled_at": "2026-10-03T06:32:43+05:45",
+        "source_cutoff": "2026-10-03T06:32:43+05:45",
+        "projection_status": {
+          "google_sheets": "PENDING",
+          "website": "CURRENT",
+          "slack": "CURRENT"
+        },
+        "todays_work": [
+          {
+            "work_id": "WORK-P020-20261003-SHUTTERING",
+            "activity": "Shuttering mobilization",
+            "location": "Site / exact work location pending field reply",
+            "execution_status": "PLAN",
+            "readiness": {
+              "materials": {
+                "status": "UNKNOWN",
+                "note": "Required shuttering consumables were listed on 2 Oct; physical availability at site is not yet confirmed.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919",
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790925005792969"
+                ],
+                "observed_at": "2026-10-02T12:55:05+05:45",
+                "conflict_state": "NONE"
+              },
+              "manpower": {
+                "status": "UNKNOWN",
+                "note": "Team arrival/manpower count requested in the 3-Oct tracker.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790988463809229"
+                ],
+                "observed_at": "2026-10-03T06:32:43+05:45",
+                "conflict_state": "NONE"
+              },
+              "ppe": {
+                "status": "UNKNOWN",
+                "note": null,
+                "responsibility": null,
+                "source_refs": [],
+                "observed_at": null,
+                "conflict_state": "UNSET"
+              },
+              "work_briefing": {
+                "status": "UNKNOWN",
+                "note": null,
+                "responsibility": null,
+                "source_refs": [],
+                "observed_at": null,
+                "conflict_state": "UNSET"
+              },
+              "tools": {
+                "status": "UNKNOWN",
+                "note": "Cutting blades and related consumables were requested; current availability is unconfirmed.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919"
+                ],
+                "observed_at": "2026-10-02T12:37:06+05:45",
+                "conflict_state": "NONE"
+              },
+              "preconditions": {
+                "status": "UNKNOWN",
+                "note": "Staircase-room brickwork and exact slab target date remain to be checked.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790988463809229"
+                ],
+                "observed_at": "2026-10-03T06:32:43+05:45",
+                "conflict_state": "NONE"
+              },
+              "overall": "UNSET"
+            },
+            "blocker": "Shuttering readiness cannot be confirmed until required consumables and team arrival are checked.",
+            "responsible": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790988463809229"
+            ],
+            "last_reconciled_at": "2026-10-03T06:32:43+05:45",
+            "conflict_state": "NONE"
+          }
+        ],
+        "materials": [
+          {
+            "material_event_id": "MAT-P020-20261002-NAILS-3IN",
+            "work_id": "WORK-P020-20261003-SHUTTERING",
+            "material_name": "3 in nails",
+            "material_state": "REQUIRED_AVAILABILITY_UNCONFIRMED",
+            "quantity": 10,
+            "unit": "kg",
+            "note": "Required for planned shuttering; arrival/stock not confirmed.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919"
+            ],
+            "observed_at": "2026-10-02T12:37:06+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "material_event_id": "MAT-P020-20261002-NAILS-25IN",
+            "work_id": "WORK-P020-20261003-SHUTTERING",
+            "material_name": "2.5 in nails",
+            "material_state": "REQUIRED_AVAILABILITY_UNCONFIRMED",
+            "quantity": 10,
+            "unit": "kg",
+            "note": "Required for planned shuttering; arrival/stock not confirmed.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919"
+            ],
+            "observed_at": "2026-10-02T12:37:06+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "material_event_id": "MAT-P020-20261002-NAILS-2IN",
+            "work_id": "WORK-P020-20261003-SHUTTERING",
+            "material_name": "2 in nails",
+            "material_state": "REQUIRED_AVAILABILITY_UNCONFIRMED",
+            "quantity": 10,
+            "unit": "kg",
+            "note": "Required for planned shuttering; arrival/stock not confirmed.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919"
+            ],
+            "observed_at": "2026-10-02T12:37:06+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "material_event_id": "MAT-P020-20261002-CUTTING",
+            "work_id": "WORK-P020-20261003-SHUTTERING",
+            "material_name": "Ply-cutting blades",
+            "material_state": "REQUIRED_AVAILABILITY_UNCONFIRMED",
+            "quantity": 4,
+            "unit": "piece",
+            "note": "Plus thread, 1.5 in dhalan kati and rebar-cutting blade packets; site availability not confirmed.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919"
+            ],
+            "observed_at": "2026-10-02T12:37:06+05:45",
+            "conflict_state": "NONE"
+          }
+        ],
+        "progress": [],
+        "blockers": [
+          {
+            "blocker_id": "BLK-P020-20261003-SHUTTERING-READINESS",
+            "work_id": "WORK-P020-20261003-SHUTTERING",
+            "status": "NEEDS_INPUT",
+            "blocker": "Required shuttering consumables and actual team mobilization remain unconfirmed.",
+            "responsible": null,
+            "target_resolution_at": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790988463809229"
+            ],
+            "observed_at": "2026-10-03T06:32:43+05:45",
+            "conflict_state": "NONE"
+          }
+        ],
+        "lookahead": [],
+        "evidence": [
+          {
+            "evidence_id": "EVID-P020-20261002-REQUIREMENTS",
+            "work_id": "WORK-P020-20261003-SHUTTERING",
+            "provider": "SLACK",
+            "provider_object_id": "1790923926.792919",
+            "evidence_type": "SHUTTERING_MATERIAL_REQUIREMENT",
+            "evidence_url": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919",
+            "observed_at": "2026-10-02T12:37:06+05:45",
+            "note": "Required shuttering consumables listed by field staff.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919"
+            ]
+          },
+          {
+            "evidence_id": "EVID-P020-20261003-TRACKER",
+            "work_id": "WORK-P020-20261003-SHUTTERING",
+            "provider": "SLACK",
+            "provider_object_id": "1790988463.809229",
+            "evidence_type": "DAILY_WORK_READINESS_TRACKER",
+            "evidence_url": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790988463809229",
+            "observed_at": "2026-10-03T06:32:43+05:45",
+            "note": "Concise 3-Oct tracker; field reply still pending.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790988463809229"
+            ]
+          }
+        ]
+      }
     }
   ]
 }
