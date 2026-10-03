@@ -33,6 +33,7 @@ jobs:
               Path("index.html"),
               Path("map.html"),
               Path("site-operations.html"),
+              Path("site-operations/project.html"),
               Path("ops/data/current-works.json"),
               Path("ops/events/daily-ops-events.jsonl"),
               Path("ops/schema/current-works.schema.json"),
@@ -158,21 +159,26 @@ jobs:
           map_html = Path("map.html").read_text(encoding="utf-8")
           map_js = Path("assets/js/app.js").read_text(encoding="utf-8")
           ops_html = Path("site-operations.html").read_text(encoding="utf-8")
+          project_ops_html = Path("site-operations/project.html").read_text(encoding="utf-8")
           hub_html = Path("index.html").read_text(encoding="utf-8")
 
           required_routes = {
               "hub -> map": "map.html",
               "hub -> site operations": "site-operations.html",
-              "map -> site operations": "site-operations.html?project=",
+              "map -> project operations": "site-operations/project.html?project=",
+              "site operations -> project detail": "site-operations/project.html?project=",
               "site operations -> machine state": "ops/data/current-works.json",
               "site operations -> event stream": "ops/events/daily-ops-events.jsonl",
+              "project detail -> machine state": "../ops/data/current-works.json",
           }
           checks = {
               "hub -> map": required_routes["hub -> map"] in hub_html,
               "hub -> site operations": required_routes["hub -> site operations"] in hub_html,
-              "map -> site operations": required_routes["map -> site operations"] in (map_html + map_js),
+              "map -> project operations": required_routes["map -> project operations"] in (map_html + map_js),
+              "site operations -> project detail": required_routes["site operations -> project detail"] in ops_html,
               "site operations -> machine state": required_routes["site operations -> machine state"] in ops_html,
               "site operations -> event stream": required_routes["site operations -> event stream"] in ops_html,
+              "project detail -> machine state": required_routes["project detail -> machine state"] in project_ops_html,
           }
           failed = [name for name, ok in checks.items() if not ok]
           if failed:
