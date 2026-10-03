@@ -41,6 +41,7 @@ jobs:
               Path("ops/schema/current-works.schema.json"),
               Path("ops/schema/daily-ops-event.schema.json"),
               Path("ops/schema/daily-ops-postgres.sql"),
+              Path("ops/CANONICAL_DATA_AUTHORITY.md"),
           ]
           missing = [str(p) for p in required_files if not p.exists()]
           if missing:
