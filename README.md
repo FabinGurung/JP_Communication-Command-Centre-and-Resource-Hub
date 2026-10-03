@@ -17,7 +17,7 @@ Project and Daily Ops truth are maintained as canonical machine-readable files, 
 - `map-config.json` — controlled map statuses and presentation configuration
 - HTML / GitHub Pages / Google Sheets / Slack — downstream projections or interaction surfaces, never competing truth stores
 
-See [`CHANGELOG.md`](CHANGELOG.md) for version history.
+See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for the source-of-truth and downstream-projection rules, and [`CHANGELOG.md`](CHANGELOG.md) for version history.
 
 
 ## Live architecture
