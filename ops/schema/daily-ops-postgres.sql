@@ -1,7 +1,12 @@
--- JP Ecosystem Daily Ops relational contract
+-- JP Ecosystem Daily Ops canonical relational contract
 -- Schema contract version: 0.2.0
--- PostgreSQL-oriented. JSON/JSONL remain machine-first state/event layers.
--- Google Sheets, website and Slack are downstream projections / interaction surfaces.
+-- CANONICAL ROLE:
+--   1) This .sql TEXT FILE is the primary relationship/schema authority for Daily Ops.
+--   2) It is PostgreSQL-compatible DDL for deterministic AI/human inspection; no live PostgreSQL server is required or implied.
+--   3) ops/data/current-works.json is the canonical serialized CURRENT-STATE value layer.
+--   4) ops/events/daily-ops-events.jsonl is the canonical append-only EVENT/HISTORY layer.
+--   5) Google Sheets, GitHub Pages and Slack are downstream projections / interaction surfaces only.
+--   6) If a projection conflicts with the SQL relationship contract or canonical JSON/JSONL, reconcile the projection; do not silently promote it to truth.
 
 CREATE TABLE IF NOT EXISTS ops_projects (
   project_id text PRIMARY KEY,
