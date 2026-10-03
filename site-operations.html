@@ -2,416 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="JP Ecosystem current works and Daily Ops project view">
-  <title>Daily Site Operations — JP Ecosystem</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="JP Ecosystem Daily Site Operations dashboard">
+  <title>Site Operations — JP Ecosystem</title>
   <style>
-    :root{
-      --page:#f4f6f8;--panel:#fff;--text:#172033;--muted:#667085;--line:#dfe4ea;
-      --accent:#175cd3;--ready:#067647;--warn:#b54708;--danger:#b42318;--soft:#eef4ff;
-      --shadow:0 8px 24px rgba(15,23,42,.08);color-scheme:light;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--page);color:var(--text)}
-    a{color:inherit}
-    .shell{max-width:1180px;margin:0 auto;padding:18px}
-    .page-nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    .page-nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;background:#fff;padding:7px 10px;font-size:12px;font-weight:750}
-    .page-nav a.active{background:var(--soft);border-color:#b2ccff;color:var(--accent)}
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-    .project-picker{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    select{min-height:40px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:8px 10px;color:var(--text)}
-    .hero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
-    .eyebrow{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-    h1{margin:5px 0 3px;font-size:clamp(24px,4vw,38px)}
-    .meta{color:var(--muted);font-size:14px}
-    .hero-row{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;flex-wrap:wrap}
-    .readiness{display:flex;align-items:center;gap:8px;font-weight:800}
-    .dot{width:11px;height:11px;border-radius:999px;background:#98a2b3}
-    .dot.READY{background:var(--ready)} .dot.READY_WITH_CONDITION{background:#f79009}
-    .dot.HOLD,.dot.NOT_READY{background:var(--danger)} .dot.UNSET{background:#98a2b3}
-    .notice{margin-top:14px;padding:11px 12px;border-radius:10px;background:#fff8e6;border:1px solid #fedf89;color:#7a2e0e;font-size:13px;line-height:1.45}
-    .ops-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:14px}
-    .ops-kpi{padding:10px 11px;border:1px solid var(--line);border-radius:11px;background:#f8fafc}
-    .ops-kpi strong,.ops-kpi span{display:block}
-    .ops-kpi strong{font-size:18px;line-height:1.1}
-    .ops-kpi span{margin-top:4px;color:var(--muted);font-size:10px;font-weight:750;letter-spacing:.04em;text-transform:uppercase}
-    .section-jump{display:flex;gap:7px;overflow-x:auto;margin:12px 0 0;padding:2px 0 4px;scrollbar-width:thin}
-    .section-jump a{flex:0 0 auto;text-decoration:none;border:1px solid var(--line);border-radius:999px;background:#fff;padding:7px 9px;color:var(--muted);font-size:11px;font-weight:750}
-    .section-jump a:hover{border-color:#b2ccff;background:var(--soft);color:var(--accent)}
-    .grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.8fr);gap:16px;margin-top:12px}
-    .stack{display:grid;gap:16px}
-    .section{scroll-margin-top:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
-    .section h2{font-size:17px;margin:0 0 12px}
-    .empty{padding:18px;border:1px dashed #cfd6df;border-radius:12px;color:var(--muted);background:#fbfcfd;font-size:14px;line-height:1.5}
-    .work-card{border:1px solid var(--line);border-radius:13px;padding:14px;margin-top:10px}
-    .work-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-    .work-title{font-weight:800}
-    .work-location{font-size:12px;color:var(--muted);margin-top:3px}
-    .status-pair{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-    .status-pill{border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800;white-space:nowrap}
-    .status-pill[data-state="READY"],.status-pill[data-state="DONE"]{border-color:#abefc6;background:#ecfdf3;color:#067647}
-    .status-pill[data-state="READY_WITH_CONDITION"],.status-pill[data-state="CONDITION"],.status-pill[data-state="PARTIAL"],.status-pill[data-state="ONGOING"]{border-color:#fedf89;background:#fffaeb;color:#b54708}
-    .status-pill[data-state="HOLD"],.status-pill[data-state="NOT_READY"],.status-pill[data-state="BLOCKED"]{border-color:#fecdca;background:#fef3f2;color:#b42318}
-    .status-pill[data-state="PLAN"],.status-pill[data-state="NOT_STARTED"],.status-pill[data-state="NEEDS_INPUT"],.status-pill[data-state="NOTE"],.status-pill[data-state="UNSET"],.status-pill[data-state="UNKNOWN"]{background:#f8fafc;color:#475467}
-    .gate-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-    .gate{display:flex;justify-content:space-between;gap:10px;padding:8px 9px;border-radius:9px;background:#f8fafc;font-size:13px}
-    .gate[data-state="READY"]{background:#ecfdf3}
-    .gate[data-state="CONDITION"]{background:#fffaeb}
-    .gate[data-state="HOLD"],.gate[data-state="NOT_READY"]{background:#fef3f2}
-    .gate b{font-weight:700}
-    .gate span{color:var(--muted);text-align:right}
-    .source-note{margin-top:8px;color:var(--muted);font-size:11px;line-height:1.45}
-    .list{display:grid;gap:9px}
-    .row{display:flex;justify-content:space-between;gap:12px;padding-bottom:9px;border-bottom:1px solid #edf0f3;font-size:14px}
-    .row:last-child{border-bottom:0;padding-bottom:0}
-    .row .value{font-weight:650;text-align:right}
-    .row .sub{display:block;margin-top:2px;color:var(--muted);font-size:11px;font-weight:500}
-    .evidence{display:flex;gap:8px;flex-wrap:wrap}
-    .evidence a{display:inline-flex;text-decoration:none;border:1px solid var(--line);border-radius:9px;padding:7px 9px;background:#fff;font-size:12px;font-weight:650;color:var(--accent)}
-    .footer{padding:18px 2px;color:var(--muted);font-size:12px;line-height:1.5}
-    @media(max-width:820px){
-      .grid{grid-template-columns:1fr}.gate-grid{grid-template-columns:1fr}.ops-kpis{grid-template-columns:1fr 1fr}.shell{padding:12px}.hero{padding:15px}
-    }
-    @media(max-width:480px){
-      .status-pair{justify-content:flex-start}.work-head{display:block}.work-head .status-pair{margin-top:9px}
-    }
+    :root{--bg:#f4f6f8;--panel:#fff;--text:#172033;--muted:#667085;--line:#dfe4ea;--blue:#175cd3;--green:#067647;--amber:#b54708;--red:#b42318;--soft:#eef4ff;--shadow:0 8px 24px rgba(15,23,42,.07)}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}a{color:inherit}.shell{max-width:1180px;margin:auto;padding:16px}
+    .nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.nav a{text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:750}.nav a.active{background:var(--soft);border-color:#b2ccff;color:var(--blue)}
+    .hero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.eyebrow{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.07em;text-transform:uppercase}h1{margin:4px 0 5px;font-size:clamp(26px,5vw,40px)}.meta{color:var(--muted);font-size:13px;line-height:1.5}
+    .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:15px}.kpi{border:1px solid var(--line);border-radius:11px;padding:10px 11px;background:#f8fafc}.kpi strong,.kpi span{display:block}.kpi strong{font-size:20px}.kpi span{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;margin-top:3px}
+    .toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:15px 0 10px;flex-wrap:wrap}.toolbar h2{font-size:17px;margin:0}.legend{font-size:11px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);transition:.15s transform,.15s border-color}.card:hover{transform:translateY(-1px);border-color:#b2ccff}.card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.card h3{font-size:16px;margin:0 0 4px}.code{font-size:11px;color:var(--muted)}.badge{border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:10px;font-weight:800;white-space:nowrap;background:#f8fafc}.badge[data-tone="red"]{background:#fef3f2;border-color:#fecdca;color:var(--red)}.badge[data-tone="amber"]{background:#fffaeb;border-color:#fedf89;color:var(--amber)}.badge[data-tone="green"]{background:#ecfdf3;border-color:#abefc6;color:var(--green)}
+    .focus{margin-top:11px;font-size:13px;line-height:1.45}.stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.stat{font-size:10px;color:var(--muted);background:#f8fafc;border-radius:999px;padding:4px 7px}.open{margin-top:11px;color:var(--blue);font-size:12px;font-weight:800}.footer{padding:17px 2px;color:var(--muted);font-size:11px;line-height:1.5}.empty{border:1px dashed #cfd6df;border-radius:12px;padding:16px;color:var(--muted);background:#fff}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.shell{padding:11px}}
   </style>
 </head>
 <body>
-  <div class="shell">
-    <div class="topbar">
-      <nav class="page-nav" aria-label="JP Ecosystem sections">
-        <a href="index.html">Overview</a>
-        <a href="map.html">Project map</a>
-        <a class="active" href="site-operations.html">Site operations</a>
-      </nav>
-      <div class="project-picker">
-        <label for="project-select" class="eyebrow">Project</label>
-        <select id="project-select" aria-label="Choose project"></select>
-      </div>
+<div class="shell">
+  <nav class="nav" aria-label="JP Ecosystem sections">
+    <a href="index.html">Overview</a>
+    <a href="map.html">Project map</a>
+    <a class="active" href="site-operations.html">Site operations</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">Daily Site Operations</div>
+    <h1>Operations dashboard</h1>
+    <div class="meta">A concise portfolio view. Projects are ordered by <b>operational attention</b> — unresolved blockers/readiness first, then active work, then projects awaiting updates. This is not a commercial or strategic ranking.</div>
+    <div class="kpis">
+      <div class="kpi"><strong id="kpi-projects">0</strong><span>Projects</span></div>
+      <div class="kpi"><strong id="kpi-attention">0</strong><span>Need attention</span></div>
+      <div class="kpi"><strong id="kpi-active">0</strong><span>Active</span></div>
+      <div class="kpi"><strong id="kpi-awaiting">0</strong><span>Awaiting update</span></div>
     </div>
+  </section>
 
-    <section class="hero">
-      <div class="hero-row">
-        <div>
-          <div class="eyebrow">Daily Site Operations</div>
-          <h1 id="project-name">Loading…</h1>
-          <div class="meta" id="project-meta"></div>
-        </div>
-        <div>
-          <div class="eyebrow">Overall site readiness</div>
-          <div class="readiness"><span class="dot UNSET" id="readiness-dot"></span><span id="readiness-label">UNSET</span></div>
-        </div>
-      </div>
-
-      <div class="ops-kpis" aria-label="Daily operations summary">
-        <div class="ops-kpi"><strong id="kpi-work">0</strong><span>Today's work items</span></div>
-        <div class="ops-kpi"><strong id="kpi-gates">0/0</strong><span>Readiness gates ready</span></div>
-        <div class="ops-kpi"><strong id="kpi-blockers">0</strong><span>Open blockers</span></div>
-        <div class="ops-kpi"><strong id="kpi-evidence">0</strong><span>Evidence refs</span></div>
-      </div>
-
-      <div class="notice" id="preview-notice">
-        This branch page is driven from machine-readable Daily Ops state. No unverified or dummy operational values are rendered as site facts.
-      </div>
-    </section>
-
-    <nav class="section-jump" aria-label="Daily Site Operations sections">
-      <a href="#todays-work">Today's work</a>
-      <a href="#materials">Materials</a>
-      <a href="#progress">Progress</a>
-      <a href="#blockers">Blockers</a>
-      <a href="#lookahead">Next 3 days</a>
-      <a href="#daily-log">Daily log</a>
-      <a href="#evidence">Evidence</a>
-    </nav>
-
-    <main class="grid">
-      <div class="stack">
-        <section class="section" id="todays-work">
-          <h2>Today's work &amp; schedule</h2>
-          <div id="work-list"></div>
-        </section>
-
-        <section class="section" id="progress">
-          <h2>Progress</h2>
-          <div id="progress-list"></div>
-        </section>
-
-        <section class="section" id="daily-log">
-          <h2>Daily log</h2>
-          <div id="daily-log-list"></div>
-        </section>
-
-        <section class="section" id="evidence">
-          <h2>Latest field evidence</h2>
-          <div id="evidence-list"></div>
-        </section>
-      </div>
-
-      <div class="stack">
-        <section class="section" id="materials">
-          <h2>Materials</h2>
-          <div id="materials-list"></div>
-        </section>
-
-        <section class="section" id="blockers">
-          <h2>Open blockers</h2>
-          <div id="blockers-list"></div>
-        </section>
-
-        <section class="section" id="lookahead">
-          <h2>Next 3 days</h2>
-          <div id="lookahead-list"></div>
-        </section>
-      </div>
-    </main>
-
-    <div class="footer">
-      This page is a downstream visualization of <code>ops/data/current-works.json</code> and <code>ops/events/daily-ops-events.jsonl</code>. The SQL contract defines relational structure; Google Sheets remains a mandatory downstream operational projection.
-    </div>
+  <div class="toolbar">
+    <h2>Attention order</h2>
+    <div class="legend">Open a project for full materials, progress, blockers, readiness and evidence.</div>
   </div>
-
+  <main class="grid" id="project-grid"></main>
+  <div class="footer">Machine-readable source: <code>ops/data/current-works.json</code>. Slack remains the short human interaction layer; this dashboard carries the detail.</div>
+</div>
 <script>
 (function(){
-  "use strict";
-  var $=function(id){return document.getElementById(id);};
-  var esc=function(value){
-    return String(value==null?"":value)
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  };
-  var params=new URLSearchParams(location.search);
-  var state={data:null,events:[],project:null};
+"use strict";
+const $=id=>document.getElementById(id);
+const esc=v=>String(v==null?"":v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+const params=new URLSearchParams(location.search);
+const requested=params.get("project");
+if(requested){ location.replace("site-operations/project.html?project="+encodeURIComponent(requested)); return; }
 
-  function empty(message){
-    return '<div class="empty">'+esc(message)+'</div>';
-  }
-
-  function label(value){
-    return String(value||"UNSET").replaceAll("_"," ");
-  }
-
-  function stateToken(value){
-    return String(value||"UNSET").toUpperCase().replace(/[^A-Z0-9_]/g,"_");
-  }
-
-  function icon(status){
-    var icons={READY:"✅",CONDITION:"⚠️",HOLD:"⛔",NOT_READY:"❌",UNKNOWN:"❓",NOT_APPLICABLE:"—"};
-    return icons[status]||"❓";
-  }
-
-  function renderMetrics(ops,readiness){
-    $("kpi-work").textContent=String((ops.todays_work||[]).length);
-    $("kpi-gates").textContent=String(readiness.ready||0)+"/"+String(readiness.total||0);
-    $("kpi-blockers").textContent=String((ops.blockers||[]).length);
-    $("kpi-evidence").textContent=String((ops.evidence||[]).length);
-  }
-
-  function setProject(projectId){
-    var project=state.data.projects.find(function(p){return p.project_id===projectId;})||state.data.projects[0];
-    if(!project)return;
-    state.project=project;
-    var ops=project.daily_ops||{};
-    var readiness=ops.readiness_summary||{ready:0,total:0};
-
-    $("project-select").value=project.project_id;
-    $("project-name").textContent=project.display_name;
-    $("project-meta").textContent=project.project_id+" · "+project.contractor+" · "+(ops.date||"Daily Ops date not yet admitted");
-    $("readiness-label").textContent=label(ops.overall_readiness)+" · "+String(readiness.ready||0)+"/"+String(readiness.total||0)+" ready";
-    $("readiness-dot").className="dot "+stateToken(ops.overall_readiness);
-    renderMetrics(ops,readiness);
-
-    renderWork(ops.todays_work||[]);
-    renderRows("materials-list",ops.materials||[],"No verified material status has been admitted yet.",function(item){
-      var quantity=[item.quantity,item.unit].filter(Boolean).join(" ");
-      return [
-        item.material||item.material_name||"Material",
-        [quantity,item.material_state||item.state||item.status,item.note].filter(Boolean).join(" · ")||"—"
-      ];
-    });
-    renderRows("progress-list",ops.progress||[],"No verified progress records have been admitted yet.",function(item){
-      return [
-        item.activity||item.work||"Progress",
-        [item.status,item.note].filter(Boolean).join(" · ")||"—"
-      ];
-    });
-    renderRows("blockers-list",ops.blockers||[],"No open blockers have been admitted yet.",function(item){
-      return [
-        item.blocker||item.title||"Blocker",
-        [
-          item.status,
-          item.responsible?"Responsible: "+item.responsible:"",
-          item.target_resolution_at?"Target: "+item.target_resolution_at:""
-        ].filter(Boolean).join(" · ")||"Open"
-      ];
-    });
-    renderRows("lookahead-list",ops.lookahead||[],"No governed lookahead has been admitted yet.",function(item){
-      return [
-        item.day||item.target_date||"Next",
-        [
-          item.activity||item.note,
-          item.condition?"Condition: "+item.condition:""
-        ].filter(Boolean).join(" · ")||"—"
-      ];
-    });
-    renderDailyLog(project.project_id);
-    renderEvidence(ops.evidence||[]);
-
-    var next=new URL(location.href);
-    next.searchParams.set("project",project.project_id);
-    history.replaceState(null,"",next);
-  }
-
-  function renderWork(items){
-    var root=$("work-list");
-    if(!items.length){
-      root.innerHTML=empty("No verified work-readiness items have been admitted yet.");
-      return;
-    }
-
-    root.innerHTML=items.map(function(item){
-      var r=item.readiness||{};
-      var gates=[
-        ["Materials",r.materials],
-        ["Manpower",r.manpower],
-        ["PPE",r.ppe],
-        ["Work briefing",r.work_briefing],
-        ["Tools",r.tools],
-        ["Preconditions",r.preconditions]
-      ];
-      var readinessState=stateToken(r.overall||"UNSET");
-      var executionState=stateToken(item.execution_status||"UNSET");
-      var gateHtml=gates.map(function(pair){
-        var name=pair[0];
-        var gate=pair[1]||{};
-        var gateState=stateToken(gate.status||"UNKNOWN");
-        var responsibility=gate.responsibility?" · "+esc(gate.responsibility):"";
-        var note=gate.note?" — "+esc(gate.note):"";
-        return '<div class="gate" data-state="'+gateState+'"><b>'+esc(name)+'</b><span>'+icon(gate.status)+" "+esc(label(gate.status||"UNKNOWN"))+note+responsibility+"</span></div>";
-      }).join("");
-
-      var blocker=item.blocker
-        ? '<div class="notice"><b>Blocker:</b> '+esc(item.blocker)+(item.responsible?" · Responsible: "+esc(item.responsible):"")+"</div>"
-        : "";
-
-      var sources=item.source_refs&&item.source_refs.length
-        ? '<div class="source-note">Source refs: '+item.source_refs.map(esc).join(" · ")+"</div>"
-        : "";
-
-      return '<article class="work-card">'+
-        '<div class="work-head">'+
-          '<div><div class="work-title">'+esc(item.activity)+'</div><div class="work-location">'+esc(item.location||"")+"</div></div>"+
-          '<div class="status-pair">'+
-            '<div class="status-pill" data-state="'+readinessState+'">Readiness · '+esc(label(r.overall||"UNSET"))+"</div>"+
-            '<div class="status-pill" data-state="'+executionState+'">Execution · '+esc(label(item.execution_status||"UNSET"))+"</div>"+
-          "</div>"+
-        "</div>"+
-        '<div class="gate-grid">'+gateHtml+"</div>"+
-        blocker+sources+
-      "</article>";
+function classify(p){
+  const o=p.daily_ops||{}, blockers=o.blockers||[], progress=o.progress||[];
+  if(o.conflict_state==="UNRESOLVED"||["HOLD","NOT_READY"].includes(o.overall_readiness)) return {label:"Hold / review",tone:"red",rank:400};
+  if(blockers.length) return {label:"Needs attention",tone:"amber",rank:300+Math.min(blockers.length,9)};
+  if(progress.some(x=>x.status==="ONGOING")) return {label:"Active",tone:"green",rank:200};
+  if(o.overall_readiness==="UNSET") return {label:"Awaiting update",tone:"amber",rank:100};
+  return {label:"Current",tone:"green",rank:0};
+}
+function focus(p){
+  const o=p.daily_ops||{};
+  if((o.blockers||[]).length) return o.blockers[0].blocker||"Open blocker needs follow-up.";
+  const ongoing=(o.progress||[]).find(x=>x.status==="ONGOING");
+  if(ongoing) return ongoing.note||ongoing.activity||"Work is in progress.";
+  const latest=(o.progress||[])[0];
+  if(latest) return latest.note||latest.activity||"Latest progress recorded.";
+  const mat=(o.materials||[])[0];
+  if(mat) return [mat.material_name||mat.material,mat.note].filter(Boolean).join(" — ");
+  return "No new verified site fact yet.";
+}
+async function load(){
+  const root=$("project-grid");
+  try{
+    const r=await fetch("ops/data/current-works.json?v="+Date.now(),{cache:"no-store"});
+    if(!r.ok) throw new Error("Daily Ops state unavailable.");
+    const data=await r.json();
+    const rows=data.projects.map(p=>({p,c:classify(p)})).sort((a,b)=>b.c.rank-a.c.rank||a.p.display_name.localeCompare(b.p.display_name));
+    $("kpi-projects").textContent=rows.length;
+    $("kpi-attention").textContent=rows.filter(x=>x.c.rank>=300).length;
+    $("kpi-active").textContent=rows.filter(x=>x.c.label==="Active").length;
+    $("kpi-awaiting").textContent=rows.filter(x=>x.c.label==="Awaiting update").length;
+    root.innerHTML=rows.map(({p,c})=>{
+      const o=p.daily_ops||{}, counts={b:(o.blockers||[]).length,m:(o.materials||[]).length,pr:(o.progress||[]).length,e:(o.evidence||[]).length};
+      return '<a class="card" href="site-operations/project.html?project='+encodeURIComponent(p.project_id)+'">'+
+        '<div class="card-head"><div><h3>'+esc(p.display_name)+'</h3><div class="code">'+esc(p.project_id+' · '+p.company_project_code+' · '+(o.date||"No date"))+'</div></div><span class="badge" data-tone="'+c.tone+'">'+esc(c.label)+'</span></div>'+
+        '<div class="focus">'+esc(focus(p))+'</div>'+
+        '<div class="stats"><span class="stat">'+counts.b+' blockers</span><span class="stat">'+counts.pr+' progress</span><span class="stat">'+counts.m+' materials</span><span class="stat">'+counts.e+' evidence</span></div>'+
+        '<div class="open">Open project →</div></a>';
     }).join("");
-  }
-
-  function renderRows(id,items,emptyMessage,mapper){
-    var root=$(id);
-    if(!items.length){
-      root.innerHTML=empty(emptyMessage);
-      return;
-    }
-    root.innerHTML='<div class="list">'+items.map(function(item){
-      var mapped=mapper(item);
-      return '<div class="row"><span>'+esc(mapped[0])+'</span><span class="value">'+esc(mapped[1])+"</span></div>";
-    }).join("")+"</div>";
-  }
-
-  function renderDailyLog(projectId){
-    var root=$("daily-log-list");
-    var items=state.events
-      .filter(function(event){return event.project_id===projectId;})
-      .sort(function(a,b){return String(b.occurred_at||"").localeCompare(String(a.occurred_at||""));});
-
-    if(!items.length){
-      root.innerHTML=empty("No project-specific Daily Ops events have been admitted yet.");
-      return;
-    }
-
-    root.innerHTML='<div class="list">'+items.slice(0,20).map(function(event){
-      var payload=event.payload||{};
-      var title=payload.summary||payload.note||event.event_type||"Daily Ops event";
-      var when=event.occurred_at||"";
-      return '<div class="row"><span>'+esc(title)+'<span class="sub">'+esc(event.event_type||"Daily Ops event")+'</span></span><span class="value">'+esc(when)+"</span></div>";
-    }).join("")+"</div>";
-  }
-
-  function renderEvidence(items){
-    var root=$("evidence-list");
-    if(!items.length){
-      root.innerHTML=empty("No field evidence references have been admitted yet.");
-      return;
-    }
-
-    root.innerHTML='<div class="evidence">'+items.map(function(item){
-      var text=item.label||item.evidence_type||item.provider||"Evidence";
-      var meta=[item.provider,item.observed_at].filter(Boolean).join(" · ");
-      var shown=meta?text+" · "+meta:text;
-      var url=item.url||item.evidence_url;
-      if(url){
-        return '<a href="'+esc(url)+'" target="_blank" rel="noopener">'+esc(shown)+"</a>";
-      }
-      return '<span class="status-pill">'+esc(shown)+"</span>";
-    }).join("")+"</div>";
-  }
-
-  async function load(){
-    try{
-      var bust=Date.now();
-      var responses=await Promise.all([
-        fetch("ops/data/current-works.json?v="+bust,{cache:"no-store"}),
-        fetch("ops/events/daily-ops-events.jsonl?v="+bust,{cache:"no-store"})
-      ]);
-      var stateResponse=responses[0];
-      var eventResponse=responses[1];
-
-      if(!stateResponse.ok)throw new Error("Could not load Daily Ops state ("+stateResponse.status+")");
-      state.data=await stateResponse.json();
-
-      if(eventResponse.ok){
-        var raw=await eventResponse.text();
-        state.events=raw.split(/\r?\n/).filter(Boolean).map(function(line,index){
-          try{return JSON.parse(line);}
-          catch(error){
-            console.warn("Skipping invalid JSONL line "+String(index+1),error);
-            return null;
-          }
-        }).filter(Boolean);
-      }
-
-      state.data.projects.forEach(function(project){
-        var option=document.createElement("option");
-        option.value=project.project_id;
-        option.textContent=project.project_id+" — "+project.display_name;
-        $("project-select").append(option);
-      });
-
-      var requested=params.get("project");
-      setProject(requested||state.data.projects[0]?.project_id);
-    }catch(error){
-      $("project-name").textContent="Current works unavailable";
-      $("project-meta").textContent=error.message;
-      ["work-list","materials-list","progress-list","daily-log-list","blockers-list","lookahead-list","evidence-list"].forEach(function(id){
-        $(id).innerHTML=empty("Daily Ops data could not be loaded.");
-      });
-    }
-  }
-
-  $("project-select").addEventListener("change",function(event){setProject(event.target.value);});
-  load();
+  }catch(e){root.innerHTML='<div class="empty">'+esc(e.message)+'</div>';}
+}
+load();
 })();
 </script>
 </body>
