@@ -258,27 +258,32 @@
     "Completed": {
       "color": "#15803d",
       "label": "Completed",
-      "order": 2
+      "order": 3
     },
     "Approval": {
       "color": "#2563eb",
       "label": "Approval",
-      "order": 3
+      "order": 4
     },
     "Planned": {
       "color": "#7c3aed",
       "label": "Planned",
-      "order": 4
+      "order": 5
     },
     "On Hold": {
       "color": "#d97706",
       "label": "On Hold",
-      "order": 5
+      "order": 6
     },
     "Cancelled": {
       "color": "#64748b",
       "label": "Cancelled",
-      "order": 6
+      "order": 7
+    },
+    "Maintenance": {
+      "color": "#0f766e",
+      "label": "Maintenance",
+      "order": 2
     }
   },
   "marker": {
