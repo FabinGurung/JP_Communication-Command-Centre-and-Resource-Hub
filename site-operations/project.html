@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="JP Ecosystem Daily Site Operations project detail">
+  <title>Project Operations — JP Ecosystem</title>
+  <style>
+    :root{--bg:#f4f6f8;--panel:#fff;--text:#172033;--muted:#667085;--line:#e1e6ec;--blue:#175cd3;--green:#067647;--amber:#b54708;--red:#b42318;--soft:#eef4ff;--shadow:0 8px 24px rgba(15,23,42,.07)}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}a{color:inherit}
+    .shell{max-width:1100px;margin:auto;padding:16px}.nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.nav a{text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:750}.nav a.active{background:var(--soft);color:var(--blue);border-color:#b2ccff}
+    .hero,.section{background:var(--panel);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.hero{padding:18px}.section{padding:15px}.eyebrow{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.06em;text-transform:uppercase}h1{font-size:clamp(24px,5vw,38px);margin:4px 0}.meta{font-size:13px;color:var(--muted)}.hero-row{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;flex-wrap:wrap}
+    .badge{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800;background:#f8fafc}.badge[data-tone="red"]{background:#fef3f2;border-color:#fecdca;color:var(--red)}.badge[data-tone="amber"]{background:#fffaeb;border-color:#fedf89;color:var(--amber)}.badge[data-tone="green"]{background:#ecfdf3;border-color:#abefc6;color:var(--green)}
+    .focus{margin-top:13px;padding:11px 12px;border-radius:11px;background:#f8fafc;border:1px solid var(--line);font-size:13px;line-height:1.45}.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,.8fr);gap:14px;margin-top:14px}.stack{display:grid;gap:14px}.section h2{font-size:16px;margin:0 0 10px}.empty{border:1px dashed #cfd6df;border-radius:11px;padding:14px;color:var(--muted);font-size:13px;background:#fbfcfd}
+    .list{display:grid;gap:9px}.row{padding-bottom:9px;border-bottom:1px solid #edf0f3;font-size:13px;line-height:1.45}.row:last-child{border-bottom:0;padding-bottom:0}.row b{display:block;margin-bottom:2px}.sub{color:var(--muted);font-size:11px}.work{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:9px}.work-head{display:flex;justify-content:space-between;gap:10px}.gate-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.gate{display:flex;justify-content:space-between;gap:8px;background:#f8fafc;border-radius:8px;padding:7px 8px;font-size:12px}.gate strong{font-size:11px}.pill{border:1px solid var(--line);border-radius:999px;padding:3px 7px;font-size:10px;font-weight:800;white-space:nowrap}.evidence{display:grid;gap:7px}.evidence a{text-decoration:none;color:var(--blue);border:1px solid var(--line);border-radius:9px;padding:8px 9px;background:#fff;font-size:12px}
+    .footer{padding:17px 2px;color:var(--muted);font-size:11px;line-height:1.5}@media(max-width:800px){.grid{grid-template-columns:1fr}.gate-grid{grid-template-columns:1fr}.shell{padding:11px}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <nav class="nav" aria-label="JP Ecosystem sections">
+    <a href="../index.html">Overview</a>
+    <a href="../map.html">Project map</a>
+    <a class="active" href="../site-operations.html">Site operations</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-row">
+      <div><div class="eyebrow">Project operations</div><h1 id="name">Loading…</h1><div class="meta" id="meta"></div></div>
+      <div><span class="badge" id="attention">Loading</span></div>
+    </div>
+    <div class="focus" id="focus">Loading current operational focus…</div>
+  </section>
+
+  <main class="grid">
+    <div class="stack">
+      <section class="section"><h2>Today's work & readiness</h2><div id="work"></div></section>
+      <section class="section"><h2>Progress</h2><div id="progress"></div></section>
+      <section class="section"><h2>Latest field evidence</h2><div id="evidence"></div></section>
+    </div>
+    <div class="stack">
+      <section class="section"><h2>Open blockers</h2><div id="blockers"></div></section>
+      <section class="section"><h2>Materials</h2><div id="materials"></div></section>
+      <section class="section"><h2>Next 3 days</h2><div id="lookahead"></div></section>
+    </div>
+  </main>
+
+  <div class="footer">Verified provider facts only. Readiness and execution are separate: READY does not mean DONE. <a href="../site-operations.html">Back to Site Operations dashboard</a>.</div>
+</div>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const esc=v=>String(v==null?"":v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+const label=v=>String(v||"UNSET").replaceAll("_"," ");
+const params=new URLSearchParams(location.search);
+function empty(t){return '<div class="empty">'+esc(t)+'</div>';}
+function attention(project){
+  const o=project.daily_ops||{}, b=o.blockers||[], c=o.conflict_state;
+  if(c==="UNRESOLVED"||["HOLD","NOT_READY"].includes(o.overall_readiness)) return ["Hold / review","red"];
+  if(b.length) return ["Needs attention","amber"];
+  if((o.progress||[]).some(x=>x.status==="ONGOING")) return ["Active","green"];
+  if(o.overall_readiness==="UNSET") return ["Awaiting update","amber"];
+  return ["Current","green"];
+}
+function focus(project){
+  const o=project.daily_ops||{};
+  if((o.blockers||[]).length) return o.blockers[0].blocker||"Open blocker needs follow-up.";
+  const ongoing=(o.progress||[]).find(x=>x.status==="ONGOING");
+  if(ongoing) return ongoing.note||ongoing.activity||"Work is in progress.";
+  const latest=(o.progress||[])[0];
+  if(latest) return latest.note||latest.activity||"Latest progress is recorded.";
+  const mat=(o.materials||[])[0];
+  if(mat) return [mat.material_name||mat.material,mat.note].filter(Boolean).join(" — ");
+  return "No new verified site fact is available yet. Use the Slack tracker to submit the next update.";
+}
+function rows(id,items,none,mapper){
+  const root=$(id); if(!items.length){root.innerHTML=empty(none);return;}
+  root.innerHTML='<div class="list">'+items.map(x=>{const m=mapper(x);return '<div class="row"><b>'+esc(m[0])+'</b><div>'+esc(m[1]||"—")+'</div>'+(m[2]?'<div class="sub">'+esc(m[2])+'</div>':"")+'</div>';}).join("")+'</div>';
+}
+function work(items){
+  const root=$("work"); if(!items.length){root.innerHTML=empty("No verified work-readiness item has been admitted yet.");return;}
+  root.innerHTML=items.map(x=>{
+    const r=x.readiness||{}, gates=[["Materials",r.materials],["Manpower",r.manpower],["PPE",r.ppe],["Briefing",r.work_briefing],["Tools",r.tools],["Preconditions",r.preconditions]];
+    return '<article class="work"><div class="work-head"><div><b>'+esc(x.activity)+'</b><div class="sub">'+esc(x.location||"")+'</div></div><div><span class="pill">'+esc(label(r.overall))+'</span> <span class="pill">'+esc(label(x.execution_status))+'</span></div></div><div class="gate-grid">'+gates.map(g=>'<div class="gate"><strong>'+esc(g[0])+'</strong><span>'+esc(label((g[1]||{}).status||"UNKNOWN"))+'</span></div>').join("")+'</div>'+(x.blocker?'<div class="focus"><b>Blocker:</b> '+esc(x.blocker)+'</div>':"")+'</article>';
+  }).join("");
+}
+async function load(){
+  try{
+    const pid=params.get("project")||"P001";
+    const bust=Date.now();
+    const [sr,er]=await Promise.all([fetch("../ops/data/current-works.json?v="+bust,{cache:"no-store"}),fetch("../ops/events/daily-ops-events.jsonl?v="+bust,{cache:"no-store"})]);
+    if(!sr.ok) throw new Error("Daily Ops state unavailable.");
+    const data=await sr.json();
+    const p=data.projects.find(x=>x.project_id===pid);
+    if(!p) throw new Error("Project not found.");
+    const o=p.daily_ops||{}, att=attention(p);
+    document.title=p.display_name+" — Site Operations";
+    $("name").textContent=p.display_name;
+    $("meta").textContent=[p.project_id,p.company_project_code,p.contractor,o.date||"No date"].filter(Boolean).join(" · ");
+    $("attention").textContent=att[0]; $("attention").dataset.tone=att[1];
+    $("focus").innerHTML="<b>Focus now:</b> "+esc(focus(p));
+    work(o.todays_work||[]);
+    rows("progress",o.progress||[],"No verified progress yet.",x=>[x.status||"Progress",x.note||x.activity||"","Observed: "+(x.observed_at||"—")]);
+    rows("blockers",o.blockers||[],"No open blocker admitted.",x=>[x.status||"Open",x.blocker||x.title||"",x.responsible?"Responsible: "+x.responsible:""]);
+    rows("materials",o.materials||[],"No verified material status yet.",x=>[x.material_name||x.material||"Material",[x.quantity,x.unit,x.material_state||x.status,x.note].filter(v=>v!==null&&v!==undefined&&v!=="").join(" · "),x.observed_at?"Observed: "+x.observed_at:""]);
+    rows("lookahead",o.lookahead||[],"No governed lookahead admitted yet.",x=>[x.target_date||x.day||"Next",x.activity||x.note||"",x.condition?"Condition: "+x.condition:""]);
+    const ev=o.evidence||[]; const root=$("evidence");
+    if(!ev.length){root.innerHTML=empty("No evidence references admitted yet.");}
+    else root.innerHTML='<div class="evidence">'+ev.map(x=>{const u=x.evidence_url||x.url, t=[x.evidence_type||x.provider||"Evidence",x.observed_at].filter(Boolean).join(" · ");return u?'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(t)+'</a>':'<div class="row">'+esc(t)+'</div>';}).join("")+'</div>';
+  }catch(e){$("name").textContent="Project operations unavailable";$("meta").textContent=e.message;["work","progress","blockers","materials","lookahead","evidence"].forEach(id=>$(id).innerHTML=empty("Could not load project data."));}
+}
+load();
+})();
+</script>
+</body>
+</html>
