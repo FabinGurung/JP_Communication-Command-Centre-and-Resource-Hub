@@ -168,7 +168,7 @@ jobs:
               "map -> project operations": "site-operations/project.html?project=",
               "site operations -> project detail": "site-operations/project.html?project=",
               "site operations -> machine state": "ops/data/current-works.json",
-              "site operations -> event stream": "ops/events/daily-ops-events.jsonl",
+              "project detail -> event stream": "../ops/events/daily-ops-events.jsonl",
               "project detail -> machine state": "../ops/data/current-works.json",
           }
           checks = {
@@ -177,7 +177,7 @@ jobs:
               "map -> project operations": required_routes["map -> project operations"] in (map_html + map_js),
               "site operations -> project detail": required_routes["site operations -> project detail"] in ops_html,
               "site operations -> machine state": required_routes["site operations -> machine state"] in ops_html,
-              "site operations -> event stream": required_routes["site operations -> event stream"] in ops_html,
+              "project detail -> event stream": required_routes["project detail -> event stream"] in project_ops_html,
               "project detail -> machine state": required_routes["project detail -> machine state"] in project_ops_html,
           }
           failed = [name for name, ok in checks.items() if not ok]
