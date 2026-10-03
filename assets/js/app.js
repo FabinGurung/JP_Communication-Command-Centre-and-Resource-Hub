@@ -414,7 +414,7 @@ function projectMarkerIcon(project) {
 function projectPopupHTML(project) {
   const ward = project.location_ward_number ? `Ward ${escapeHTML(project.location_ward_number)} · ` : "";
   const opsLink = project.legacy_project_code
-    ? `<a href="site-operations.html?project=${encodeURIComponent(project.legacy_project_code)}">Site operations</a>`
+    ? `<a href="site-operations/project.html?project=${encodeURIComponent(project.legacy_project_code)}">Site operations</a>`
     : "";
   return `<div class="popup">
     <div class="popup-code">${escapeHTML(project.company_project_code)}</div>
@@ -615,7 +615,7 @@ function renderOverview(project) {
   const physicalProgress = progressBlock("Physical Progress", project.physical_progress_percent);
   const financialProgress = state.config.features.show_financial_progress ? progressBlock("Financial Progress", project.financial_progress_percent) : "";
   const projectDetailsLink = project.details_url ? `<a class="detail-link" href="${escapeHTML(project.details_url)}" target="_blank" rel="noopener">Project details</a>` : "";
-  const operationsLink = project.legacy_project_code ? `<a class="detail-link" href="site-operations.html?project=${encodeURIComponent(project.legacy_project_code)}">Site operations</a>` : "";
+  const operationsLink = project.legacy_project_code ? `<a class="detail-link" href="site-operations/project.html?project=${encodeURIComponent(project.legacy_project_code)}">Site operations</a>` : "";
   const directionsLink = canShow(project, "show_coordinates") ? `<a class="detail-link primary" href="${directionsURL(project)}" target="_blank" rel="noopener">Directions</a>` : "";
 
   elements.overviewPanel.innerHTML = `
