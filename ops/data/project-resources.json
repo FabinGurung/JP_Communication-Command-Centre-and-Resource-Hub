@@ -6,7 +6,7 @@
     "relationship_contract": "ops/schema/daily-ops-postgres.sql",
     "access_mode": "DRIVE_PERMISSION_GATED"
   },
-  "verified_at": "2026-10-04T15:20:00+05:45",
+  "verified_at": "2026-10-04T16:47:00+05:45",
   "projects": [
     {
       "project_id": "P001",
@@ -67,14 +67,136 @@
     {
       "project_id": "P004",
       "map_project_id": "PRJ-000004",
-      "root_resolution": "UNRESOLVED",
-      "resources": []
+      "root_resolution": "VERIFIED",
+      "resources": [
+        {
+          "resource_id": "RES-P004-ROOT",
+          "resource_type": "PROJECT_DRIVE_FOLDER",
+          "display_name": "Project Drive Folder",
+          "drive_file_id": "1qM2koziyLpANUX2xcXr-D-RXYdbV5WWV",
+          "drive_url": "https://drive.google.com/drive/folders/1qM2koziyLpANUX2xcXr-D-RXYdbV5WWV",
+          "mime_type": "application/vnd.google-apps.folder",
+          "preview_mode": "DRIVE_FOLDER",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T16:47:00+05:45"
+        },
+        {
+          "resource_id": "RES-P004-ARCH-PDF-001",
+          "resource_type": "ARCHITECTURAL_PDF",
+          "display_name": "Architectural Drawing — Yamuna Pun",
+          "drive_file_id": "1yFUzhkCepNTm0xtaAbmtPmzErIeZ_0qq",
+          "drive_url": "https://drive.google.com/file/d/1yFUzhkCepNTm0xtaAbmtPmzErIeZ_0qq/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T16:47:00+05:45"
+        },
+        {
+          "resource_id": "RES-P004-ARCH-DWG-001",
+          "resource_type": "CAD_DWG",
+          "display_name": "Architectural Drawing — Yamuna Pun (DWG)",
+          "drive_file_id": "1pISZG16A_arsVr0_OoxU0_oftw8QmT9D",
+          "drive_url": "https://drive.google.com/file/d/1pISZG16A_arsVr0_OoxU0_oftw8QmT9D/view?usp=drivesdk",
+          "mime_type": "application/dwg",
+          "preview_mode": "DRIVE_FILE_OPEN",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T16:47:00+05:45"
+        }
+      ]
     },
     {
       "project_id": "P005",
       "map_project_id": "PRJ-000005",
-      "root_resolution": "UNRESOLVED",
-      "resources": []
+      "root_resolution": "VERIFIED",
+      "resources": [
+        {
+          "resource_id": "RES-P005-ROOT",
+          "resource_type": "PROJECT_DRIVE_FOLDER",
+          "display_name": "Project Drive Folder",
+          "drive_file_id": "1BUzhlUNJvUCvEV8HVJHQCZERz8maupZJ",
+          "drive_url": "https://drive.google.com/drive/folders/1BUzhlUNJvUCvEV8HVJHQCZERz8maupZJ",
+          "mime_type": "application/vnd.google-apps.folder",
+          "preview_mode": "DRIVE_FOLDER",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T16:47:00+05:45"
+        },
+        {
+          "resource_id": "RES-P005-ETABS-E2K-001",
+          "resource_type": "ETABS_MODEL",
+          "display_name": "ETABS Model — as received (E2K)",
+          "drive_file_id": "1Cy-iqEKtxzMuaHwHmPlM1Bmltp3-pLHt",
+          "drive_url": "https://drive.google.com/file/d/1Cy-iqEKtxzMuaHwHmPlM1Bmltp3-pLHt/view?usp=drivesdk",
+          "mime_type": "application/octet-stream",
+          "preview_mode": "DRIVE_FILE_OPEN",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T16:47:00+05:45"
+        },
+        {
+          "resource_id": "RES-P005-ARCH-PDF-001",
+          "resource_type": "ARCHITECTURAL_PDF",
+          "display_name": "Architectural Drawing — present, needs review",
+          "drive_file_id": "1h6LAF9GLLKZe3fqnObrfhykr5FDw5qI7",
+          "drive_url": "https://drive.google.com/file/d/1h6LAF9GLLKZe3fqnObrfhykr5FDw5qI7/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T16:47:00+05:45"
+        },
+        {
+          "resource_id": "RES-P005-STRUCT-PDF-001",
+          "resource_type": "STRUCTURAL_PDF",
+          "display_name": "Structural Drawing — present, needs review",
+          "drive_file_id": "1M8d_ClWzpJj1cjlhNBwNM4hSI60t2A1k",
+          "drive_url": "https://drive.google.com/file/d/1M8d_ClWzpJj1cjlhNBwNM4hSI60t2A1k/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T16:47:00+05:45"
+        },
+        {
+          "resource_id": "RES-P005-ARCH-DWG-001",
+          "resource_type": "CAD_DWG",
+          "display_name": "Architectural Drawing — present, needs review (DWG)",
+          "drive_file_id": "17yRvgDjdR5HWTinZTaCoIQLJTjGw1_TI",
+          "drive_url": "https://drive.google.com/file/d/17yRvgDjdR5HWTinZTaCoIQLJTjGw1_TI/view?usp=drivesdk",
+          "mime_type": "application/dwg",
+          "preview_mode": "DRIVE_FILE_OPEN",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T16:47:00+05:45"
+        },
+        {
+          "resource_id": "RES-P005-STRUCT-DWG-001",
+          "resource_type": "CAD_DWG",
+          "display_name": "Structural Drawing — present, needs review (DWG)",
+          "drive_file_id": "1CzA02nrmOJr2o9HdagFFKrAd5cT_hqcK",
+          "drive_url": "https://drive.google.com/file/d/1CzA02nrmOJr2o9HdagFFKrAd5cT_hqcK/view?usp=drivesdk",
+          "mime_type": "application/dwg",
+          "preview_mode": "DRIVE_FILE_OPEN",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T16:47:00+05:45"
+        },
+        {
+          "resource_id": "RES-P005-COST-ESTIMATE-001",
+          "resource_type": "COST_ESTIMATE_PDF",
+          "display_name": "Cost Estimate — Dipti Giri — as received",
+          "drive_file_id": "1N61cyx09L6RCAi1O2ZQLX5FPcf9tD7WW",
+          "drive_url": "https://drive.google.com/file/d/1N61cyx09L6RCAi1O2ZQLX5FPcf9tD7WW/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T16:47:00+05:45"
+        }
+      ]
     },
     {
       "project_id": "P006",
