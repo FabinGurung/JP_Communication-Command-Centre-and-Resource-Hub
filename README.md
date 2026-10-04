@@ -1,6 +1,6 @@
-# JP Ecosystem Project Map
+# JP AEC Operations Hub
 
-A public, coordinate-verified project map hosted with GitHub Pages.
+The live project-experience layer of the **JP AEC Platform**, hosted with GitHub Pages. The existing repository slug is retained for URL stability.
 
 ## Current stable version
 
@@ -13,11 +13,12 @@ Project and Daily Ops truth are maintained as canonical machine-readable files, 
 - `ops/schema/daily-ops-postgres.sql` — canonical relational/relationship authority (text DDL; no live database required)
 - `projects.csv` — canonical project-master current values: IDs, lifecycle, coordinates, public project attributes
 - `ops/data/current-works.json` — canonical Daily Ops current state
+- `ops/data/project-resources.json` — canonical structured project → permission-gated Google Drive resource links; Drive owns the actual files
 - `ops/events/daily-ops-events.jsonl` — canonical append-only Daily Ops event/history stream
 - `map-config.json` — controlled map statuses and presentation configuration
 - HTML / GitHub Pages / Google Sheets / Slack — downstream projections or interaction surfaces, never competing truth stores
 
-See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for the source-of-truth and downstream-projection rules, and [`CHANGELOG.md`](CHANGELOG.md) for version history.
+See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for source-of-truth rules, [`ops/PLATFORM_MODULES.md`](ops/PLATFORM_MODULES.md) for JP AEC Platform module naming, and [`CHANGELOG.md`](CHANGELOG.md) for version history.
 
 
 ## Live architecture
@@ -40,6 +41,7 @@ Edit the canonical file that owns the fact. Do **not** manually maintain the sam
 | --- | --- |
 | Project identity, lifecycle/status, coordinates, public project attributes | `projects.csv` |
 | Daily work, readiness, blockers, materials, current operational state | `ops/data/current-works.json` |
+| Project engineering resource links | `ops/data/project-resources.json` |
 | Append-only operational/governance history | `ops/events/daily-ops-events.jsonl` |
 | Relationships, PK/FK structure and data contract | `ops/schema/daily-ops-postgres.sql` |
 | Allowed map statuses / visual configuration | `map-config.json` |
