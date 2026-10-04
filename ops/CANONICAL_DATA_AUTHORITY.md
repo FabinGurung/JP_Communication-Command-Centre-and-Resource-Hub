@@ -11,6 +11,7 @@ The goal is simple: **edit a fact once at its owning canonical layer, then deriv
 | Relational / relationship authority | `ops/schema/daily-ops-postgres.sql` | PK/FK relationships, normalized table structure, constraints and lifecycle/readiness separation. This is text DDL; no live PostgreSQL server is required. |
 | Project-master current values | `projects.csv` | Project identity, company/legacy codes, lifecycle/status, coordinates and public project attributes. |
 | Daily Ops current values | `ops/data/current-works.json` | Today's work, readiness, materials, blockers, progress, evidence references and projection state. |
+| Project resource links | `ops/data/project-resources.json` | Normalized project → Google Drive folder/file relationships. Drive remains authority for the actual file bytes and access permissions. |
 | Append-only history | `ops/events/daily-ops-events.jsonl` | Operational and governance events. Existing events are not rewritten. |
 | Controlled map configuration | `map-config.json` | Allowed public map statuses and presentation configuration. |
 
@@ -40,6 +41,8 @@ edit **`projects.csv` only**.
 
 For Daily Ops current state, edit/admit into **`ops/data/current-works.json`** and append the corresponding event to **`ops/events/daily-ops-events.jsonl`**.
 
+For engineering-file access, preserve the actual PDF/DWG/ETABS/CAD/source file in **Google Drive** and edit only its normalized project relationship/link in **`ops/data/project-resources.json`**. Never copy the engineering file into the public repository merely to make the website render it.
+
 Do not edit HTML to change factual data. Do not edit a downstream Google Sheet merely to make a project-master fact appear correct.
 
 ## 4. Input surfaces are different from truth
@@ -56,6 +59,7 @@ validation + admission
 canonical GitHub machine data
   ├─ projects.csv
   ├─ current-works.json
+  ├─ project-resources.json
   ├─ daily-ops-events.jsonl
   └─ SQL relationship contract
         ↓
