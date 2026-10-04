@@ -1,0 +1,197 @@
+{
+  "schema_version": "0.1.0",
+  "authority": {
+    "actual_files": "GOOGLE_DRIVE_CANONICAL_SOURCE_EVIDENCE_WAREHOUSE",
+    "structured_links": "GITHUB_CANONICAL_STRUCTURED_DATA_CONTROL_WAREHOUSE",
+    "relationship_contract": "ops/schema/daily-ops-postgres.sql",
+    "access_mode": "DRIVE_PERMISSION_GATED"
+  },
+  "verified_at": "2026-10-04T15:20:00+05:45",
+  "projects": [
+    {
+      "project_id": "P001",
+      "map_project_id": "PRJ-000001",
+      "root_resolution": "VERIFIED",
+      "resources": [
+        {
+          "resource_id": "RES-P001-ROOT",
+          "resource_type": "PROJECT_DRIVE_FOLDER",
+          "display_name": "Project Drive Folder",
+          "drive_file_id": "1EDXI_zuekEXXcjtYmN_LuY3Yv6eipgM6",
+          "drive_url": "https://drive.google.com/drive/folders/1EDXI_zuekEXXcjtYmN_LuY3Yv6eipgM6",
+          "mime_type": "application/vnd.google-apps.folder",
+          "preview_mode": "DRIVE_FOLDER",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T15:20:00+05:45"
+        }
+      ]
+    },
+    {
+      "project_id": "P002",
+      "map_project_id": "PRJ-000002",
+      "root_resolution": "UNRESOLVED",
+      "resources": []
+    },
+    {
+      "project_id": "P003",
+      "map_project_id": "PRJ-000003",
+      "root_resolution": "VERIFIED",
+      "resources": [
+        {
+          "resource_id": "RES-P003-ROOT",
+          "resource_type": "PROJECT_DRIVE_FOLDER",
+          "display_name": "Project Drive Folder",
+          "drive_file_id": "1GW7s3Hr5hXU2aBdvcP73W44lzr_8jo43",
+          "drive_url": "https://drive.google.com/drive/folders/1GW7s3Hr5hXU2aBdvcP73W44lzr_8jo43",
+          "mime_type": "application/vnd.google-apps.folder",
+          "preview_mode": "DRIVE_FOLDER",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T15:20:00+05:45"
+        },
+        {
+          "resource_id": "RES-P003-ARCH-PDF-001",
+          "resource_type": "ARCHITECTURAL_PDF",
+          "display_name": "Architectural Drawing A01–A05",
+          "drive_file_id": "1kOsBzMjS0Tdqh4mgF1PQx1UL0e4bmgGI",
+          "drive_url": "https://drive.google.com/file/d/1kOsBzMjS0Tdqh4mgF1PQx1UL0e4bmgGI/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T15:20:00+05:45"
+        }
+      ]
+    },
+    {
+      "project_id": "P004",
+      "map_project_id": "PRJ-000004",
+      "root_resolution": "UNRESOLVED",
+      "resources": []
+    },
+    {
+      "project_id": "P005",
+      "map_project_id": "PRJ-000005",
+      "root_resolution": "UNRESOLVED",
+      "resources": []
+    },
+    {
+      "project_id": "P006",
+      "map_project_id": "PRJ-000006",
+      "root_resolution": "VERIFIED",
+      "resources": [
+        {
+          "resource_id": "RES-P006-ROOT",
+          "resource_type": "PROJECT_DRIVE_FOLDER",
+          "display_name": "Project Drive Folder",
+          "drive_file_id": "1OMhyxpmJBFlmAboCtkI9OAB7L08THyuI",
+          "drive_url": "https://drive.google.com/drive/folders/1OMhyxpmJBFlmAboCtkI9OAB7L08THyuI",
+          "mime_type": "application/vnd.google-apps.folder",
+          "preview_mode": "DRIVE_FOLDER",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T15:20:00+05:45"
+        }
+      ]
+    },
+    {
+      "project_id": "P007",
+      "map_project_id": "PRJ-000007",
+      "root_resolution": "VERIFIED",
+      "resources": [
+        {
+          "resource_id": "RES-P007-ROOT",
+          "resource_type": "PROJECT_DRIVE_FOLDER",
+          "display_name": "Project Drive Folder",
+          "drive_file_id": "1F1EgpEmwfi8Bm9cAraEg7Efu0gSJmsl0",
+          "drive_url": "https://drive.google.com/drive/folders/1F1EgpEmwfi8Bm9cAraEg7Efu0gSJmsl0",
+          "mime_type": "application/vnd.google-apps.folder",
+          "preview_mode": "DRIVE_FOLDER",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T15:20:00+05:45"
+        }
+      ]
+    },
+    {
+      "project_id": "P020",
+      "map_project_id": "PRJ-000020",
+      "root_resolution": "VERIFIED",
+      "resources": [
+        {
+          "resource_id": "RES-P020-ROOT",
+          "resource_type": "PROJECT_DRIVE_FOLDER",
+          "display_name": "Project Drive Folder",
+          "drive_file_id": "1X7FIR9t_A7DTqTqogCq9o3y1g91f-e1D",
+          "drive_url": "https://drive.google.com/drive/folders/1X7FIR9t_A7DTqTqogCq9o3y1g91f-e1D",
+          "mime_type": "application/vnd.google-apps.folder",
+          "preview_mode": "DRIVE_FOLDER",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T15:20:00+05:45"
+        },
+        {
+          "resource_id": "RES-P020-ARCH-DWG-001",
+          "resource_type": "CAD_DWG",
+          "display_name": "Architectural / Municipal Drawing (DWG)",
+          "drive_file_id": "1G7c-S_YmLtA_mkJHWi80xxL3OS8C4jPw",
+          "drive_url": "https://drive.google.com/file/d/1G7c-S_YmLtA_mkJHWi80xxL3OS8C4jPw/view?usp=drivesdk",
+          "mime_type": "application/dwg",
+          "preview_mode": "DRIVE_FILE_OPEN",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T15:20:00+05:45"
+        },
+        {
+          "resource_id": "RES-P020-STRUCT-PDF-001",
+          "resource_type": "STRUCTURAL_PDF",
+          "display_name": "Structural Drawing Set",
+          "drive_file_id": "1OilXeqjAFrf4TV9eqHPyCklo3iFrnbY_",
+          "drive_url": "https://drive.google.com/file/d/1OilXeqjAFrf4TV9eqHPyCklo3iFrnbY_/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T15:20:00+05:45"
+        },
+        {
+          "resource_id": "RES-P020-ETABS-EDB-001",
+          "resource_type": "ETABS_MODEL",
+          "display_name": "ETABS Model (EDB)",
+          "drive_file_id": "1QEHa3QzuJuwai9tUxlfkd26cFagPGyCa",
+          "drive_url": "https://drive.google.com/file/d/1QEHa3QzuJuwai9tUxlfkd26cFagPGyCa/view?usp=drivesdk",
+          "mime_type": "application/octet-stream",
+          "preview_mode": "DRIVE_FILE_OPEN",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T15:20:00+05:45"
+        },
+        {
+          "resource_id": "RES-P020-STRUCT-DETAIL-001",
+          "resource_type": "STRUCTURAL_DETAIL_PDF",
+          "display_name": "Combined Footing Rebar Curtailment Detail",
+          "drive_file_id": "1vn3mnfmbHdfvjidUGwBgZGfJaADZpX-6",
+          "drive_url": "https://drive.google.com/file/d/1vn3mnfmbHdfvjidUGwBgZGfJaADZpX-6/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T15:20:00+05:45"
+        },
+        {
+          "resource_id": "RES-P020-MUNICIPAL-001",
+          "resource_type": "MUNICIPAL_REPORT_PDF",
+          "display_name": "Municipal Report",
+          "drive_file_id": "1Qc7oCr5oRFIoj0HD4ENXvyYTqDN46CSP",
+          "drive_url": "https://drive.google.com/file/d/1Qc7oCr5oRFIoj0HD4ENXvyYTqDN46CSP/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T15:20:00+05:45"
+        }
+      ]
+    }
+  ]
+}
