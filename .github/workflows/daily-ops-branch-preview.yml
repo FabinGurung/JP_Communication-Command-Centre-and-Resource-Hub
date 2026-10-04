@@ -190,8 +190,12 @@ jobs:
           for event in events:
               if event["project_id"] is not None and event["project_id"] not in ops_id_set:
                   raise SystemExit(f"Event {event['event_id']} references unknown project_id.")
-              if event["work_id"] is not None and event["work_id"] not in work_ids:
-                  raise SystemExit(f"Event {event['event_id']} references unknown work_id.")
+              # JSONL is append-only history while current-works.json is CURRENT state.
+              # Historical work_ids are therefore allowed to outlive today's todays_work array.
+              if event["work_id"] is not None and (
+                  not isinstance(event["work_id"], str) or not event["work_id"].strip()
+              ):
+                  raise SystemExit(f"Event {event['event_id']} has invalid non-null work_id.")
 
           map_html = Path("map.html").read_text(encoding="utf-8")
           map_js = Path("assets/js/app.js").read_text(encoding="utf-8")
