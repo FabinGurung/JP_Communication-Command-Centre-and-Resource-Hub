@@ -18,21 +18,94 @@
       "display_name": "14 Bishal Paija",
       "contractor": "Rohini Engineering and Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-03",
+        "date": "2026-10-04",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
-          "total": 0
+          "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-03T06:32:43+05:45",
-        "source_cutoff": "2026-10-03T06:32:43+05:45",
+        "last_reconciled_at": "2026-10-04T07:21:01+05:45",
+        "source_cutoff": "2026-10-04T07:21:01+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
-        "todays_work": [],
+        "todays_work": [
+          {
+            "work_id": "WORK-P001-20261004-SITE-CLEANING",
+            "activity": "Site cleaning / housekeeping before Dashain",
+            "location": "Project site",
+            "execution_status": "PLAN",
+            "readiness": {
+              "materials": {
+                "status": "NOT_APPLICABLE",
+                "note": "No material requirement established for the housekeeping request.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C2DJNGARW/p1791032214395669"
+                ],
+                "observed_at": "2026-10-03T18:41:54+05:45",
+                "conflict_state": "NONE"
+              },
+              "manpower": {
+                "status": "UNKNOWN",
+                "note": "Cleaning manpower not yet confirmed.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C2DJNGARW/p1791032214395669"
+                ],
+                "observed_at": "2026-10-03T18:41:54+05:45",
+                "conflict_state": "NONE"
+              },
+              "ppe": {
+                "status": "UNKNOWN",
+                "note": null,
+                "responsibility": null,
+                "source_refs": [],
+                "observed_at": null,
+                "conflict_state": "UNSET"
+              },
+              "work_briefing": {
+                "status": "UNKNOWN",
+                "note": null,
+                "responsibility": null,
+                "source_refs": [],
+                "observed_at": null,
+                "conflict_state": "UNSET"
+              },
+              "tools": {
+                "status": "UNKNOWN",
+                "note": "Cleaning tools/equipment not yet confirmed.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C2DJNGARW/p1791032214395669"
+                ],
+                "observed_at": "2026-10-03T18:41:54+05:45",
+                "conflict_state": "NONE"
+              },
+              "preconditions": {
+                "status": "UNKNOWN",
+                "note": "Community request establishes the plan; actual start/completion is not yet confirmed.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C2DJNGARW/p1791032214395669"
+                ],
+                "observed_at": "2026-10-03T18:41:54+05:45",
+                "conflict_state": "NONE"
+              },
+              "overall": "UNSET"
+            },
+            "blocker": null,
+            "responsible": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2DJNGARW/p1791032214395669"
+            ],
+            "last_reconciled_at": "2026-10-04T07:21:01+05:45",
+            "conflict_state": "NONE"
+          }
+        ],
         "materials": [],
         "progress": [
           {
@@ -91,6 +164,19 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C2DJNGARW/p1790988412592699"
             ]
+          },
+          {
+            "evidence_id": "EVID-P001-20261003-CLEANING-REQUEST",
+            "work_id": "WORK-P001-20261004-SITE-CLEANING",
+            "provider": "SLACK",
+            "provider_object_id": "1791032214.395669",
+            "evidence_type": "NEXT_DAY_SITE_HOUSEKEEPING_REQUEST",
+            "evidence_url": "https://jp09.slack.com/archives/C0C2DJNGARW/p1791032214395669",
+            "observed_at": "2026-10-03T18:41:54+05:45",
+            "note": "Community reminder requested site cleaning on the morning of 4 Oct before Dashain; completion not inferred.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2DJNGARW/p1791032214395669"
+            ]
           }
         ]
       }
@@ -104,19 +190,19 @@
       "display_name": "17 Samir Man Ghubaju",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-03",
+        "date": "2026-10-04",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 0
         },
-        "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-03T06:32:43+05:45",
-        "source_cutoff": "2026-10-03T06:32:43+05:45",
+        "conflict_state": "UNRESOLVED",
+        "last_reconciled_at": "2026-10-04T07:21:01+05:45",
+        "source_cutoff": "2026-10-04T07:21:01+05:45",
         "projection_status": {
           "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [],
         "materials": [
@@ -182,6 +268,20 @@
             ],
             "observed_at": "2026-10-02T15:44:37+05:45",
             "conflict_state": "NONE"
+          },
+          {
+            "blocker_id": "BLK-P002-20261003-ELECTRICAL-WRONG-SITE",
+            "work_id": null,
+            "status": "NEEDS_INPUT",
+            "blocker": "A 3-Oct electrical-board replacement/Rs 350 report was posted here, then management questioned whether it belongs to the wrong site. Do not admit it to P002 until project attribution is clarified.",
+            "responsible": null,
+            "target_resolution_at": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791016274415849",
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791019221924569"
+            ],
+            "observed_at": "2026-10-03T15:05:21+05:45",
+            "conflict_state": "UNRESOLVED"
           }
         ],
         "lookahead": [],
@@ -224,6 +324,20 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C13SMN1QX/p1790988414335459"
             ]
+          },
+          {
+            "evidence_id": "EVID-P002-20261003-DISPUTED-ELECTRICAL",
+            "work_id": null,
+            "provider": "SLACK",
+            "provider_object_id": "1791016274.415849",
+            "evidence_type": "DISPUTED_WRONG_SITE_ATTRIBUTION_WITH_MEDIA",
+            "evidence_url": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791016274415849",
+            "observed_at": "2026-10-03T14:16:14+05:45",
+            "note": "Electrical-board replacement report with four photos is disputed by a later management reply asking whether it is the wrong site; not promoted as P002 project truth.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791016274415849",
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791019221924569"
+            ]
           }
         ]
       }
@@ -237,19 +351,19 @@
       "display_name": "13 Hari Baral",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-03",
+        "date": "2026-10-04",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 0
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-03T06:32:43+05:45",
-        "source_cutoff": "2026-10-03T06:32:43+05:45",
+        "last_reconciled_at": "2026-10-04T07:21:01+05:45",
+        "source_cutoff": "2026-10-04T07:21:01+05:45",
         "projection_status": {
           "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [],
         "materials": [
@@ -347,23 +461,23 @@
       "display_name": "16 Yamuna Pun Adai",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-03",
+        "date": "2026-10-04",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-03T08:08:00+05:45",
-        "source_cutoff": "2026-10-03T06:32:43+05:45",
+        "last_reconciled_at": "2026-10-04T07:21:01+05:45",
+        "source_cutoff": "2026-10-04T07:21:01+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [
           {
-            "work_id": "WORK-P004-20261003-LEAKAGE",
+            "work_id": "WORK-P004-20261004-LEAKAGE",
             "activity": "Leakage inspection / repair follow-up",
             "location": "Exact leakage source/location pending field confirmation",
             "execution_status": "NEEDS_INPUT",
@@ -380,7 +494,7 @@
               },
               "manpower": {
                 "status": "UNKNOWN",
-                "note": "Required person/team for inspection or repair is not yet confirmed.",
+                "note": "Required inspection/repair person or team is not yet confirmed.",
                 "responsibility": null,
                 "source_refs": [
                   "https://jp09.slack.com/archives/C0C13SSGULF/p1790988432056739"
@@ -433,7 +547,7 @@
               "https://jp09.slack.com/archives/C0C13SSGULF/p1790687986476779",
               "https://jp09.slack.com/archives/C0C13SSGULF/p1790988432056739"
             ],
-            "last_reconciled_at": "2026-10-03T08:08:00+05:45",
+            "last_reconciled_at": "2026-10-04T07:21:01+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -442,7 +556,7 @@
         "blockers": [
           {
             "blocker_id": "BLK-P004-LEAKAGE-SOURCE",
-            "work_id": "WORK-P004-20261003-LEAKAGE",
+            "work_id": "WORK-P004-20261004-LEAKAGE",
             "status": "NEEDS_INPUT",
             "blocker": "Top-water leakage source and repair closure remain unresolved; do not infer the source from symptoms.",
             "responsible": null,
@@ -483,19 +597,19 @@
       "display_name": "30 Sabitri Giri / Dipti Giri",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-03",
+        "date": "2026-10-04",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 0
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-03T06:32:43+05:45",
-        "source_cutoff": "2026-10-03T06:32:43+05:45",
+        "last_reconciled_at": "2026-10-04T07:21:01+05:45",
+        "source_cutoff": "2026-10-04T07:21:01+05:45",
         "projection_status": {
           "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [],
         "materials": [],
@@ -528,21 +642,92 @@
       "display_name": "31 Sharada Adhikari",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-03",
-        "overall_readiness": "UNSET",
+        "date": "2026-10-04",
+        "overall_readiness": "HOLD",
         "readiness_summary": {
           "ready": 0,
-          "total": 0
+          "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-03T06:32:43+05:45",
-        "source_cutoff": "2026-10-03T06:32:43+05:45",
+        "last_reconciled_at": "2026-10-04T07:21:01+05:45",
+        "source_cutoff": "2026-10-04T07:21:01+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
-        "todays_work": [],
+        "todays_work": [
+          {
+            "work_id": "WORK-P006-20261004-TOILET-PLASTER",
+            "activity": "Toilet-room plaster after door-height / plumbing coordination",
+            "location": "Toilet room planned for hanging-pipe installation",
+            "execution_status": "PLAN",
+            "readiness": {
+              "materials": {
+                "status": "UNKNOWN",
+                "note": "Plaster/material availability not re-confirmed for this room.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959"
+                ],
+                "observed_at": "2026-10-03T15:06:49+05:45",
+                "conflict_state": "NONE"
+              },
+              "manpower": {
+                "status": "CONDITION",
+                "note": "Plumber arrival is required before the held plaster can proceed.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959"
+                ],
+                "observed_at": "2026-10-03T15:06:49+05:45",
+                "conflict_state": "NONE"
+              },
+              "ppe": {
+                "status": "UNKNOWN",
+                "note": null,
+                "responsibility": null,
+                "source_refs": [],
+                "observed_at": null,
+                "conflict_state": "UNSET"
+              },
+              "work_briefing": {
+                "status": "UNKNOWN",
+                "note": null,
+                "responsibility": null,
+                "source_refs": [],
+                "observed_at": null,
+                "conflict_state": "UNSET"
+              },
+              "tools": {
+                "status": "UNKNOWN",
+                "note": null,
+                "responsibility": null,
+                "source_refs": [],
+                "observed_at": null,
+                "conflict_state": "UNSET"
+              },
+              "preconditions": {
+                "status": "HOLD",
+                "note": "Toilet door height was not fixed on 3 Oct; plaster was postponed until plumber coordination.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959"
+                ],
+                "observed_at": "2026-10-03T15:06:49+05:45",
+                "conflict_state": "NONE"
+              },
+              "overall": "HOLD"
+            },
+            "blocker": "Door height/plumbing coordination must be resolved before this toilet-room plaster proceeds.",
+            "responsible": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959"
+            ],
+            "last_reconciled_at": "2026-10-04T07:21:01+05:45",
+            "conflict_state": "NONE"
+          }
+        ],
         "materials": [
           {
             "material_event_id": "MAT-P006-20261001-PPC",
@@ -588,9 +773,60 @@
             ],
             "observed_at": "2026-10-01T14:14:58+05:45",
             "conflict_state": "NONE"
+          },
+          {
+            "blocker_id": "BLK-P006-20261004-TOILET-DOOR-PLUMBER",
+            "work_id": "WORK-P006-20261004-TOILET-PLASTER",
+            "status": "HOLD",
+            "blocker": "Toilet door height is not fixed; plaster was postponed pending plumber coordination.",
+            "responsible": null,
+            "target_resolution_at": "2026-10-04",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959"
+            ],
+            "observed_at": "2026-10-03T15:06:49+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "blocker_id": "BLK-P006-20261003-FALSE-CEILING-DECISION",
+            "work_id": null,
+            "status": "NEEDS_INPUT",
+            "blocker": "Electrical wiring/batta work is waiting on the client's false-ceiling decision; recorded electrician mistakes must be corrected before wiring resumes.",
+            "responsible": "Client decision + electrician follow-up",
+            "target_resolution_at": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791001469932479"
+            ],
+            "observed_at": "2026-10-03T10:09:29+05:45",
+            "conflict_state": "NONE"
           }
         ],
-        "lookahead": [],
+        "lookahead": [
+          {
+            "lookahead_id": "LOOK-P006-20261005-ELECTRICAL",
+            "work_id": null,
+            "target_date": "2026-10-05",
+            "sequence_order": 1,
+            "activity": "Electrician return / wiring and batta work",
+            "condition": "Client must first finalize false-ceiling decision; previously recorded electrician mistakes to be corrected before resumed wiring.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791001469932479"
+            ],
+            "conflict_state": "NONE"
+          },
+          {
+            "lookahead_id": "LOOK-P006-20261006-UPVC",
+            "work_id": null,
+            "target_date": "2026-10-06",
+            "sequence_order": 2,
+            "activity": "UPVC visit if possible",
+            "condition": "Management requested the UPVC team around Tuesday after plumbing/door-height coordination.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959"
+            ],
+            "conflict_state": "NONE"
+          }
+        ],
         "evidence": [
           {
             "evidence_id": "EVID-P006-20261001-STOCK",
@@ -617,6 +853,32 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1H9Y96KG/p1790988447873839"
             ]
+          },
+          {
+            "evidence_id": "EVID-P006-20261003-PLASTER-PLUMBER",
+            "work_id": "WORK-P006-20261004-TOILET-PLASTER",
+            "provider": "SLACK",
+            "provider_object_id": "1791019309.347959",
+            "evidence_type": "WORK_POSTPONED_PENDING_PRECONDITION",
+            "evidence_url": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959",
+            "observed_at": "2026-10-03T15:06:49+05:45",
+            "note": "Toilet-room plaster postponed to 4 Oct because door height was not fixed and plumber coordination was pending; UPVC visit requested around Tuesday.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959"
+            ]
+          },
+          {
+            "evidence_id": "EVID-P006-20261003-ELECTRICAL-DEPENDENCY",
+            "work_id": null,
+            "provider": "SLACK",
+            "provider_object_id": "1791001469.932479",
+            "evidence_type": "CLIENT_DECISION_DEPENDENCY",
+            "evidence_url": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791001469932479",
+            "observed_at": "2026-10-03T10:09:29+05:45",
+            "note": "Electrical wiring/batta work waits on false-ceiling decision; previously recorded mistakes must be corrected first.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791001469932479"
+            ]
           }
         ]
       }
@@ -630,19 +892,19 @@
       "display_name": "15 Narayani Parajuli",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-03",
+        "date": "2026-10-04",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 0
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-03T06:32:43+05:45",
-        "source_cutoff": "2026-10-03T06:32:43+05:45",
+        "last_reconciled_at": "2026-10-04T07:21:01+05:45",
+        "source_cutoff": "2026-10-04T07:21:01+05:45",
         "projection_status": {
           "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [],
         "materials": [],
@@ -684,7 +946,21 @@
             "conflict_state": "NONE"
           }
         ],
-        "blockers": [],
+        "blockers": [
+          {
+            "blocker_id": "BLK-P007-20261003-CF1-DIMENSION-CHECK",
+            "work_id": null,
+            "status": "NEEDS_INPUT",
+            "blocker": "CF1 chair/stirrup dimension calculation was posted for discrepancy checking; no responsible-engineer acceptance is recorded. Do not treat the posted sizing as approved detailing.",
+            "responsible": null,
+            "target_resolution_at": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1790993758768049"
+            ],
+            "observed_at": "2026-10-03T08:00:58+05:45",
+            "conflict_state": "NONE"
+          }
+        ],
         "lookahead": [],
         "evidence": [
           {
@@ -725,6 +1001,19 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1790988455011449"
             ]
+          },
+          {
+            "evidence_id": "EVID-P007-20261003-CF1-DIMENSION-QUERY",
+            "work_id": null,
+            "provider": "SLACK",
+            "provider_object_id": "1790993758.768049",
+            "evidence_type": "DESIGN_COORDINATION_QUERY_NOT_APPROVAL",
+            "evidence_url": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1790993758768049",
+            "observed_at": "2026-10-03T08:00:58+05:45",
+            "note": "Management posted a CF1 thickness/cover/chair/stirrup sizing calculation and requested discrepancy feedback; preserved as a query only, not engineering approval.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1790993758768049"
+            ]
           }
         ]
       }
@@ -738,46 +1027,45 @@
       "display_name": "Kharika Paudel",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-03",
-        "overall_readiness": "UNSET",
+        "date": "2026-10-04",
+        "overall_readiness": "READY_WITH_CONDITION",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-03T08:08:00+05:45",
-        "source_cutoff": "2026-10-03T06:32:43+05:45",
+        "last_reconciled_at": "2026-10-04T07:21:01+05:45",
+        "source_cutoff": "2026-10-04T07:21:01+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [
           {
-            "work_id": "WORK-P020-20261003-SHUTTERING",
-            "activity": "Shuttering mobilization",
-            "location": "Site / exact work location pending field reply",
+            "work_id": "WORK-P020-20261004-SHUTTERING-RESTART",
+            "activity": "Shuttering restart after electrical repair",
+            "location": "Site / exact shuttering work location pending field update",
             "execution_status": "PLAN",
             "readiness": {
               "materials": {
-                "status": "UNKNOWN",
-                "note": "Required shuttering consumables were listed on 2 Oct; physical availability at site is not yet confirmed.",
+                "status": "CONDITION",
+                "note": "Shuttering materials were reported bought, but exact site/store inventory remains unresolved.",
                 "responsibility": null,
                 "source_refs": [
-                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919",
-                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790925005792969"
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790994944419539"
                 ],
-                "observed_at": "2026-10-02T12:55:05+05:45",
+                "observed_at": "2026-10-03T08:20:44+05:45",
                 "conflict_state": "NONE"
               },
               "manpower": {
                 "status": "UNKNOWN",
-                "note": "Team arrival/manpower count requested in the 3-Oct tracker.",
+                "note": "Shuttering team did not perform shuttering on 3 Oct because of the electrical fault; today's manpower/restart is not yet confirmed.",
                 "responsibility": null,
                 "source_refs": [
-                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790988463809229"
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219"
                 ],
-                "observed_at": "2026-10-03T06:32:43+05:45",
+                "observed_at": "2026-10-03T13:22:11+05:45",
                 "conflict_state": "NONE"
               },
               "ppe": {
@@ -797,34 +1085,34 @@
                 "conflict_state": "UNSET"
               },
               "tools": {
-                "status": "UNKNOWN",
-                "note": "Cutting blades and related consumables were requested; current availability is unconfirmed.",
+                "status": "CONDITION",
+                "note": "Electrical board and about 10 m wire were replaced by Babu Ram; electrical problem was reported solved.",
                 "responsibility": null,
                 "source_refs": [
-                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919"
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219"
                 ],
-                "observed_at": "2026-10-02T12:37:06+05:45",
+                "observed_at": "2026-10-03T13:22:11+05:45",
                 "conflict_state": "NONE"
               },
               "preconditions": {
-                "status": "UNKNOWN",
-                "note": "Staircase-room brickwork and exact slab target date remain to be checked.",
+                "status": "CONDITION",
+                "note": "Electrical fault was reported solved, but staircase-room brickwork, staircase rebar availability and slab target remain unconfirmed.",
                 "responsibility": null,
                 "source_refs": [
-                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790988463809229"
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219"
                 ],
-                "observed_at": "2026-10-03T06:32:43+05:45",
+                "observed_at": "2026-10-03T13:22:11+05:45",
                 "conflict_state": "NONE"
               },
-              "overall": "UNSET"
+              "overall": "READY_WITH_CONDITION"
             },
-            "blocker": "Shuttering readiness cannot be confirmed until required consumables and team arrival are checked.",
+            "blocker": "Restart still needs today's team/manpower confirmation plus remaining staircase/rebar/schedule checks.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919",
-              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790988463809229"
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790994944419539"
             ],
-            "last_reconciled_at": "2026-10-03T06:32:43+05:45",
+            "last_reconciled_at": "2026-10-04T07:21:01+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -884,22 +1172,58 @@
             ],
             "observed_at": "2026-10-02T12:37:06+05:45",
             "conflict_state": "NONE"
+          },
+          {
+            "material_event_id": "MAT-P020-20261003-SHUTTERING-MATERIALS-GENERAL",
+            "work_id": "WORK-P020-20261004-SHUTTERING-RESTART",
+            "material_name": "Shuttering materials",
+            "material_state": "PURCHASE_REPORTED_EXACT_SITE_INVENTORY_UNRESOLVED",
+            "quantity": null,
+            "unit": null,
+            "note": "Management reported shuttering materials bought at hand and asked staff to check the store room; exact item-by-item site inventory was not confirmed.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790994944419539"
+            ],
+            "observed_at": "2026-10-03T08:20:44+05:45",
+            "conflict_state": "NONE"
           }
         ],
-        "progress": [],
+        "progress": [
+          {
+            "progress_event_id": "PROG-P020-20261003-NAIL-REMOVAL",
+            "work_id": "WORK-P020-20261004-SHUTTERING-RESTART",
+            "status": "ONGOING",
+            "note": "Nail removal from unloaded ply was reported as the current work on 3 Oct.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790999292980119"
+            ],
+            "observed_at": "2026-10-03T09:33:12+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "progress_event_id": "PROG-P020-20261003-SHUTTERING-BLOCKED-ELECTRICAL",
+            "work_id": "WORK-P020-20261004-SHUTTERING-RESTART",
+            "status": "BLOCKED_THEN_FAULT_REPORTED_SOLVED",
+            "note": "Shuttering team did not perform shuttering because an electric wire fault interrupted site power; Babu Ram later replaced the board and about 10 m of wire and the electrical problem was reported solved.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219"
+            ],
+            "observed_at": "2026-10-03T13:22:11+05:45",
+            "conflict_state": "NONE"
+          }
+        ],
         "blockers": [
           {
-            "blocker_id": "BLK-P020-20261003-SHUTTERING-READINESS",
-            "work_id": "WORK-P020-20261003-SHUTTERING",
+            "blocker_id": "BLK-P020-20261004-RESTART-CONFIRMATION",
+            "work_id": "WORK-P020-20261004-SHUTTERING-RESTART",
             "status": "NEEDS_INPUT",
-            "blocker": "Required shuttering consumables and actual team mobilization remain unconfirmed.",
+            "blocker": "Electrical fault was reported solved, but today's shuttering-team restart/manpower, staircase-room brickwork, staircase rebar availability and exact slab target remain unresolved.",
             "responsible": null,
-            "target_resolution_at": null,
+            "target_resolution_at": "2026-10-04",
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790923926792919",
-              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790988463809229"
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219"
             ],
-            "observed_at": "2026-10-03T06:32:43+05:45",
+            "observed_at": "2026-10-03T13:22:11+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -929,6 +1253,32 @@
             "note": "Concise 3-Oct tracker; field reply still pending.",
             "source_refs": [
               "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790988463809229"
+            ]
+          },
+          {
+            "evidence_id": "EVID-P020-20261003-ELECTRICAL-FAULT-REPAIR",
+            "work_id": "WORK-P020-20261004-SHUTTERING-RESTART",
+            "provider": "SLACK",
+            "provider_object_id": "1791013031.297219",
+            "evidence_type": "FIELD_BLOCKER_AND_REPAIR_WITH_MEDIA",
+            "evidence_url": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219",
+            "observed_at": "2026-10-03T13:22:11+05:45",
+            "note": "Two photos attached; field reporter said shuttering was not performed due to broken wire and that Babu Ram replaced the board and about 10 m wire, solving the electrical problem.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219"
+            ]
+          },
+          {
+            "evidence_id": "EVID-P020-20261003-NAIL-REMOVAL",
+            "work_id": "WORK-P020-20261004-SHUTTERING-RESTART",
+            "provider": "SLACK",
+            "provider_object_id": "1790999292.980119",
+            "evidence_type": "FIELD_PROGRESS_NOTE",
+            "evidence_url": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790999292980119",
+            "observed_at": "2026-10-03T09:33:12+05:45",
+            "note": "Current work reported as removing nails from unloaded ply.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790999292980119"
             ]
           }
         ]
