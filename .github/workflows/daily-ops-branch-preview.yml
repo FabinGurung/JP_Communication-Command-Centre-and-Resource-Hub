@@ -37,11 +37,14 @@ jobs:
               Path("site-operations.html"),
               Path("site-operations/project.html"),
               Path("ops/data/current-works.json"),
+              Path("ops/data/project-resources.json"),
               Path("ops/events/daily-ops-events.jsonl"),
               Path("ops/schema/current-works.schema.json"),
+              Path("ops/schema/project-resources.schema.json"),
               Path("ops/schema/daily-ops-event.schema.json"),
               Path("ops/schema/daily-ops-postgres.sql"),
               Path("ops/CANONICAL_DATA_AUTHORITY.md"),
+              Path("ops/PLATFORM_MODULES.md"),
           ]
           missing = [str(p) for p in required_files if not p.exists()]
           if missing:
@@ -50,6 +53,8 @@ jobs:
           state = json.loads(Path("ops/data/current-works.json").read_text(encoding="utf-8"))
           schema = json.loads(Path("ops/schema/current-works.schema.json").read_text(encoding="utf-8"))
           event_schema = json.loads(Path("ops/schema/daily-ops-event.schema.json").read_text(encoding="utf-8"))
+          resource_state = json.loads(Path("ops/data/project-resources.json").read_text(encoding="utf-8"))
+          resource_schema = json.loads(Path("ops/schema/project-resources.schema.json").read_text(encoding="utf-8"))
           map_config = json.loads(Path("map-config.json").read_text(encoding="utf-8"))
           allowed_project_statuses = set(map_config.get("status_styles", {}))
 
@@ -59,6 +64,10 @@ jobs:
               raise SystemExit("Current-state schema does not pin version 0.2.0.")
           if event_schema.get("title") != "JP Ecosystem Daily Ops Event":
               raise SystemExit("Unexpected Daily Ops event schema identity.")
+          if resource_state.get("schema_version") != "0.1.0":
+              raise SystemExit("Unexpected project-resource schema_version.")
+          if resource_schema.get("title") != "JP AEC Operations Hub Project Resources":
+              raise SystemExit("Unexpected project-resource schema identity.")
 
           event_lines = [
               line for line in Path("ops/events/daily-ops-events.jsonl").read_text(encoding="utf-8").splitlines()
@@ -122,6 +131,46 @@ jobs:
 
           map_by_id = {row["project_id"].strip(): row for row in project_rows if row.get("project_id", "").strip()}
           map_by_legacy = {row["legacy_project_code"].strip(): row for row in project_rows if row.get("legacy_project_code", "").strip()}
+
+          resource_projects = resource_state.get("projects", [])
+          resource_project_ids = [item.get("project_id") for item in resource_projects]
+          if len(set(resource_project_ids)) != len(resource_project_ids):
+              raise SystemExit("Duplicate project_id in project-resources.json.")
+          resource_ids = set()
+          allowed_root_resolution = {"VERIFIED", "UNRESOLVED"}
+          allowed_preview = {"DRIVE_FOLDER", "DRIVE_PDF_PREVIEW", "DRIVE_FILE_OPEN"}
+          for item in resource_projects:
+              pid = item.get("project_id")
+              map_id = item.get("map_project_id")
+              root_resolution = item.get("root_resolution")
+              resources = item.get("resources", [])
+              if pid not in map_by_legacy:
+                  raise SystemExit(f"Project resource set references unknown Daily Ops/project legacy id: {pid}")
+              if map_by_legacy[pid].get("project_id", "").strip() != map_id:
+                  raise SystemExit(f"{pid}: project resource map_project_id mismatch.")
+              if root_resolution not in allowed_root_resolution:
+                  raise SystemExit(f"{pid}: invalid root_resolution {root_resolution!r}.")
+              roots = 0
+              for resource in resources:
+                  rid = resource.get("resource_id")
+                  if not rid or rid in resource_ids:
+                      raise SystemExit(f"{pid}: missing or duplicate resource_id {rid!r}.")
+                  resource_ids.add(rid)
+                  if resource.get("access_mode") != "DRIVE_PERMISSION_GATED":
+                      raise SystemExit(f"{rid}: access_mode must be DRIVE_PERMISSION_GATED.")
+                  if resource.get("preview_mode") not in allowed_preview:
+                      raise SystemExit(f"{rid}: invalid preview_mode.")
+                  url = resource.get("drive_url", "")
+                  if not (url.startswith("https://drive.google.com/") or url.startswith("https://docs.google.com/")):
+                      raise SystemExit(f"{rid}: drive_url is not a Google Drive/Docs URL.")
+                  if not resource.get("drive_file_id"):
+                      raise SystemExit(f"{rid}: drive_file_id is blank.")
+                  if resource.get("resource_type") == "PROJECT_DRIVE_FOLDER" and resource.get("is_current") is not False:
+                      roots += 1
+              if root_resolution == "VERIFIED" and roots != 1:
+                  raise SystemExit(f"{pid}: VERIFIED resource set must have exactly one current PROJECT_DRIVE_FOLDER.")
+              if root_resolution == "UNRESOLVED" and roots != 0:
+                  raise SystemExit(f"{pid}: UNRESOLVED resource set cannot publish a project root.")
 
           ops_projects = state.get("projects", [])
           ops_ids = [project["project_id"] for project in ops_projects]
@@ -211,6 +260,8 @@ jobs:
               "site operations -> machine state": "ops/data/current-works.json",
               "project detail -> event stream": "../ops/events/daily-ops-events.jsonl",
               "project detail -> machine state": "../ops/data/current-works.json",
+              "project detail -> resource registry": "../ops/data/project-resources.json",
+              "site operations -> resource registry": "ops/data/project-resources.json",
           }
           checks = {
               "hub -> map": required_routes["hub -> map"] in hub_html,
@@ -220,6 +271,8 @@ jobs:
               "site operations -> machine state": required_routes["site operations -> machine state"] in ops_html,
               "project detail -> event stream": required_routes["project detail -> event stream"] in project_ops_html,
               "project detail -> machine state": required_routes["project detail -> machine state"] in project_ops_html,
+              "project detail -> resource registry": required_routes["project detail -> resource registry"] in project_ops_html,
+              "site operations -> resource registry": required_routes["site operations -> resource registry"] in ops_html,
           }
           failed = [name for name, ok in checks.items() if not ok]
           if failed:
@@ -227,8 +280,8 @@ jobs:
 
           print(
               f"PASS: schema={state['schema_version']}; map={len(project_rows)} projects; "
-              f"daily_ops={len(ops_ids)} projects; {len(events)} JSONL event(s); "
-              f"identity/provenance/projection/routes verified."
+              f"daily_ops={len(ops_ids)} projects; resources={len(resource_ids)} link(s); "
+              f"{len(events)} JSONL event(s); identity/provenance/resource/projection/routes verified."
           )
 
   deploy:
