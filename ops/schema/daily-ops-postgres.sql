@@ -5,10 +5,12 @@
 --   2) It is PostgreSQL-compatible DDL for deterministic AI/human inspection; no live PostgreSQL server is required or implied.
 --   3) projects.csv is the canonical PROJECT-MASTER current-value layer (identity, lifecycle, location, public project attributes).
 --   4) ops/data/current-works.json is the canonical DAILY-OPS current-state value layer.
---   5) ops/events/daily-ops-events.jsonl is the canonical append-only EVENT/HISTORY layer.
---   6) map-config.json is the controlled-value / presentation configuration authority for the public map.
---   7) Google Sheets, GitHub Pages and Slack are downstream projections / interaction surfaces only.
---   8) If a projection conflicts with these canonical files, reconcile the projection; do not silently promote it to truth.
+--   5) ops/data/project-resources.json is the canonical STRUCTURED LINK REGISTRY from projects to permission-gated Drive resources.
+--      The actual files/folders remain canonical source/evidence in Google Drive.
+--   6) ops/events/daily-ops-events.jsonl is the canonical append-only EVENT/HISTORY layer.
+--   7) map-config.json is the controlled-value / presentation configuration authority for the public map.
+--   8) Google Sheets, GitHub Pages and Slack are downstream projections / interaction surfaces only.
+--   9) If a projection conflicts with these canonical files, reconcile the projection; do not silently promote it to truth.
 
 CREATE TABLE IF NOT EXISTS ops_projects (
   project_id text PRIMARY KEY,
@@ -192,3 +194,33 @@ CREATE TABLE IF NOT EXISTS ops_events (
   ),
   mutates_operational_truth boolean NOT NULL DEFAULT true
 );
+
+
+-- Project-to-Drive resource relationship authority.
+-- Google Drive owns the actual source/evidence file bytes and permissions.
+-- GitHub owns only the normalized current relationship/link metadata.
+CREATE TABLE IF NOT EXISTS ops_project_resource_sets (
+  project_id text PRIMARY KEY REFERENCES ops_projects(project_id),
+  root_resolution text NOT NULL CHECK (root_resolution IN ('VERIFIED','UNRESOLVED')),
+  verified_at timestamptz
+);
+
+CREATE TABLE IF NOT EXISTS ops_project_resources (
+  resource_id text PRIMARY KEY,
+  project_id text NOT NULL REFERENCES ops_projects(project_id),
+  resource_type text NOT NULL,
+  display_name text NOT NULL,
+  drive_file_id text NOT NULL,
+  drive_url text NOT NULL,
+  mime_type text NOT NULL,
+  preview_mode text NOT NULL CHECK (
+    preview_mode IN ('DRIVE_FOLDER','DRIVE_PDF_PREVIEW','DRIVE_FILE_OPEN')
+  ),
+  access_mode text NOT NULL CHECK (access_mode = 'DRIVE_PERMISSION_GATED'),
+  is_current boolean NOT NULL DEFAULT true,
+  verified_at timestamptz NOT NULL,
+  UNIQUE (project_id, drive_file_id, resource_type)
+);
+
+CREATE INDEX IF NOT EXISTS idx_ops_project_resources_project
+  ON ops_project_resources(project_id, is_current);
