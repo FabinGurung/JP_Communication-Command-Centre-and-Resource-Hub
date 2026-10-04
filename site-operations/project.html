@@ -103,7 +103,8 @@ function resources(set){
     ETABS_MODEL:"ETABS model",
     STRUCTURAL_DETAIL_PDF:"Structural detail",
     MUNICIPAL_REPORT_PDF:"Municipal report",
-    COST_ESTIMATE_PDF:"Cost estimate"
+    COST_ESTIMATE_PDF:"Cost estimate",
+    WORKING_DRAWING_PDF:"Working drawing"
   }[t]||label(t));
   const preview=x=>x.preview_mode==="DRIVE_PDF_PREVIEW"&&x.drive_file_id
     ?"https://drive.google.com/file/d/"+encodeURIComponent(x.drive_file_id)+"/preview"
