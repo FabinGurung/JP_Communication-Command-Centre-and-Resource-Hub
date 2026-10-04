@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fabingurung.github.io/jp-ecosystem-project-map-v1/ops/schema/project-resources.schema.json",
+  "title": "JP AEC Operations Hub Project Resources",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "authority",
+    "verified_at",
+    "projects"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "actual_files",
+        "structured_links",
+        "relationship_contract",
+        "access_mode"
+      ]
+    },
+    "verified_at": {
+      "type": "string"
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "project_id",
+          "map_project_id",
+          "root_resolution",
+          "resources"
+        ],
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "pattern": "^P[0-9]{3}$"
+          },
+          "map_project_id": {
+            "type": "string",
+            "pattern": "^PRJ-[0-9]{6}$"
+          },
+          "root_resolution": {
+            "enum": [
+              "VERIFIED",
+              "UNRESOLVED"
+            ]
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "resource_id",
+                "resource_type",
+                "display_name",
+                "drive_file_id",
+                "drive_url",
+                "mime_type",
+                "preview_mode",
+                "access_mode",
+                "is_current",
+                "verified_at"
+              ],
+              "properties": {
+                "resource_id": {
+                  "type": "string"
+                },
+                "resource_type": {
+                  "type": "string"
+                },
+                "display_name": {
+                  "type": "string"
+                },
+                "drive_file_id": {
+                  "type": "string"
+                },
+                "drive_url": {
+                  "type": "string",
+                  "pattern": "^https://(drive|docs)\\.google\\.com/"
+                },
+                "mime_type": {
+                  "type": "string"
+                },
+                "preview_mode": {
+                  "enum": [
+                    "DRIVE_FOLDER",
+                    "DRIVE_PDF_PREVIEW",
+                    "DRIVE_FILE_OPEN"
+                  ]
+                },
+                "access_mode": {
+                  "const": "DRIVE_PERMISSION_GATED"
+                },
+                "is_current": {
+                  "type": "boolean"
+                },
+                "verified_at": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
