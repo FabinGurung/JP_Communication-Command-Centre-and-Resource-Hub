@@ -43,6 +43,42 @@
           "access_mode": "DRIVE_PERMISSION_GATED",
           "is_current": true,
           "verified_at": "2026-10-04T17:49:00+05:45"
+        },
+        {
+          "resource_id": "RES-P002-WORKING-DRAWING-001",
+          "resource_type": "ARCHITECTURAL_PDF",
+          "display_name": "Working Drawing — Samir Man, Damside — as received",
+          "drive_file_id": "1gfhTtWBinNvF0F6vjQnzxsSZW8grB8ID",
+          "drive_url": "https://drive.google.com/file/d/1gfhTtWBinNvF0F6vjQnzxsSZW8grB8ID/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T17:49:00+05:45"
+        },
+        {
+          "resource_id": "RES-P002-STRUCT-PDF-001",
+          "resource_type": "STRUCTURAL_PDF",
+          "display_name": "Structural Drawing — Guvaju — as received",
+          "drive_file_id": "1zF_km0vVuDMbTK7BN7270a4IhQnRghsE",
+          "drive_url": "https://drive.google.com/file/d/1zF_km0vVuDMbTK7BN7270a4IhQnRghsE/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T17:49:00+05:45"
+        },
+        {
+          "resource_id": "RES-P002-STRUCT-DWG-001",
+          "resource_type": "CAD_DWG",
+          "display_name": "Structural Drawing — Guvaju Final — as received (DWG)",
+          "drive_file_id": "1pvCubGYJvfHOrNG1ynoxBrWFafZuooC6",
+          "drive_url": "https://drive.google.com/file/d/1pvCubGYJvfHOrNG1ynoxBrWFafZuooC6/view?usp=drivesdk",
+          "mime_type": "image/vnd.dwg",
+          "preview_mode": "DRIVE_FILE_OPEN",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-04T17:49:00+05:45"
         }
       ]
     },
