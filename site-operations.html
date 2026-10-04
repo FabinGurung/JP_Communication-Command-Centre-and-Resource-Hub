@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="JP Ecosystem Daily Site Operations dashboard">
-  <title>Site Operations — JP Ecosystem</title>
+  <meta name="description" content="JP AEC Operations Hub Daily Site Operations dashboard">
+  <title>Site Operations — JP AEC Operations Hub</title>
   <style>
     :root{--bg:#f4f6f8;--panel:#fff;--text:#172033;--muted:#667085;--line:#dfe4ea;--blue:#175cd3;--green:#067647;--amber:#b54708;--red:#b42318;--soft:#eef4ff;--shadow:0 8px 24px rgba(15,23,42,.07)}
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}a{color:inherit}.shell{max-width:1180px;margin:auto;padding:16px}
@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="shell">
-  <nav class="nav" aria-label="JP Ecosystem sections">
+  <nav class="nav" aria-label="JP AEC Operations Hub sections">
     <a href="index.html">Overview</a>
     <a href="map.html">Project map</a>
     <a class="active" href="site-operations.html">Site operations</a>
@@ -39,10 +39,10 @@
 
   <div class="toolbar">
     <h2>Attention order</h2>
-    <div class="legend">Open a project for full materials, progress, blockers, readiness and evidence.</div>
+    <div class="legend">Open a project for full materials, progress, blockers, readiness, evidence and engineering files.</div>
   </div>
   <main class="grid" id="project-grid"></main>
-  <div class="footer">Machine-readable source: <code>ops/data/current-works.json</code>. Slack remains the short human interaction layer; this dashboard carries the detail.</div>
+  <div class="footer">Machine-readable sources: <code>ops/data/current-works.json</code> + <code>ops/data/project-resources.json</code>. Slack remains the short human interaction layer; this dashboard carries the detail.</div>
 </div>
 <script>
 (function(){
@@ -75,20 +75,26 @@ function focus(p){
 async function load(){
   const root=$("project-grid");
   try{
-    const r=await fetch("ops/data/current-works.json?v="+Date.now(),{cache:"no-store"});
+    const bust=Date.now();
+    const [r,rr]=await Promise.all([
+      fetch("ops/data/current-works.json?v="+bust,{cache:"no-store"}),
+      fetch("ops/data/project-resources.json?v="+bust,{cache:"no-store"})
+    ]);
     if(!r.ok) throw new Error("Daily Ops state unavailable.");
     const data=await r.json();
+    const resourceData=rr.ok?await rr.json():{projects:[]};
+    const resourceByProject=new Map((resourceData.projects||[]).map(x=>[x.project_id,x]));
     const rows=data.projects.map(p=>({p,c:classify(p)})).sort((a,b)=>b.c.rank-a.c.rank||a.p.display_name.localeCompare(b.p.display_name));
     $("kpi-projects").textContent=rows.length;
     $("kpi-attention").textContent=rows.filter(x=>x.c.rank>=300).length;
     $("kpi-active").textContent=rows.filter(x=>x.c.label==="Active").length;
     $("kpi-awaiting").textContent=rows.filter(x=>x.c.label==="Awaiting update").length;
     root.innerHTML=rows.map(({p,c})=>{
-      const o=p.daily_ops||{}, counts={b:(o.blockers||[]).length,m:(o.materials||[]).length,pr:(o.progress||[]).length,e:(o.evidence||[]).length};
+      const o=p.daily_ops||{}, rs=resourceByProject.get(p.project_id)||{root_resolution:"UNRESOLVED",resources:[]}, counts={b:(o.blockers||[]).length,m:(o.materials||[]).length,pr:(o.progress||[]).length,e:(o.evidence||[]).length,r:(rs.resources||[]).filter(x=>x.is_current!==false).length};
       return '<a class="card" href="site-operations/project.html?project='+encodeURIComponent(p.project_id)+'">'+
         '<div class="card-head"><div><h3>'+esc(p.display_name)+'</h3><div class="code">'+esc(p.project_id+' · '+p.company_project_code+' · '+(o.date||"No date"))+'</div></div><span class="badge" data-tone="'+c.tone+'">'+esc(c.label)+'</span></div>'+
         '<div class="focus">'+esc(focus(p))+'</div>'+
-        '<div class="stats"><span class="stat">'+counts.b+' blockers</span><span class="stat">'+counts.pr+' progress</span><span class="stat">'+counts.m+' materials</span><span class="stat">'+counts.e+' evidence</span></div>'+
+        '<div class="stats"><span class="stat">'+counts.b+' blockers</span><span class="stat">'+counts.pr+' progress</span><span class="stat">'+counts.m+' materials</span><span class="stat">'+counts.e+' evidence</span><span class="stat">'+(rs.root_resolution==="VERIFIED"?counts.r+" files/links":"Drive unresolved")+'</span></div>'+
         '<div class="open">Open project →</div></a>';
     }).join("");
   }catch(e){root.innerHTML='<div class="empty">'+esc(e.message)+'</div>';}
