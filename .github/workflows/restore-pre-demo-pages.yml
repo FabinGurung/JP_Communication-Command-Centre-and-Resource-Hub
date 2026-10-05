@@ -1,20 +1,16 @@
-name: Restore pre-demo JP Pages
+name: Validate pre-demo restore snapshot
+
 on:
   push:
     branches:
       - archive/restore-pre-construction-demo-pages-20261002
+  workflow_dispatch:
+
 permissions:
   contents: read
-  pages: write
-  id-token: write
-concurrency:
-  group: pages
-  cancel-in-progress: true
+
 jobs:
-  restore:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout exact pre-demo site
@@ -27,12 +23,5 @@ jobs:
           test -f _site/index.html
           test ! -e _site/construction-knowledge-demo
           test ! -e _site/.github/workflows/deploy-pages.yml
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-      - name: Upload exact pre-demo site
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-      - name: Deploy restore
-        id: deployment
-        uses: actions/deploy-pages@v4
+          echo "RESTORE_SNAPSHOT_VALIDATION=PASS"
+          echo "Deployment intentionally disabled; production owner remains feature/daily-ops-current-work."
