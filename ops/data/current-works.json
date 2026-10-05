@@ -25,12 +25,12 @@
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
-        "source_cutoff": "2026-10-06T04:50:49+05:45",
+        "last_reconciled_at": "2026-10-06T04:56:55+05:45",
+        "source_cutoff": "2026-10-06T04:56:55+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -92,9 +92,10 @@
             "blocker": "5-Oct tracker received no field closure; current construction execution remains unconfirmed.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C2DJNGARW/p1791156075880319"
+              "https://jp09.slack.com/archives/C0C2DJNGARW/p1791156075880319",
+              "https://jp09.slack.com/archives/C0C2DJNGARW/p1791241850816709"
             ],
-            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+            "last_reconciled_at": "2026-10-06T04:56:55+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -195,6 +196,19 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C2DJNGARW/p1791156075880319"
             ]
+          },
+          {
+            "evidence_id": "EVID-P001-20261006-TRACKER",
+            "work_id": "WORK-P001-20261006-SITE-STATUS",
+            "provider": "SLACK",
+            "provider_object_id": "1791241850.816709",
+            "evidence_type": "DAILY_WORK_READINESS_TRACKER",
+            "evidence_url": "https://jp09.slack.com/archives/C0C2DJNGARW/p1791241850816709",
+            "observed_at": "2026-10-06T04:56:55+05:45",
+            "note": "Concise 6-Oct Daily Ops tracker sent as a new top-level message and provider-read back; field reply pending at readback cutoff.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2DJNGARW/p1791241850816709"
+            ]
           }
         ]
       }
@@ -215,12 +229,12 @@
           "total": 6
         },
         "conflict_state": "UNRESOLVED",
-        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
-        "source_cutoff": "2026-10-06T04:50:49+05:45",
+        "last_reconciled_at": "2026-10-06T04:56:55+05:45",
+        "source_cutoff": "2026-10-06T04:56:55+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -290,9 +304,10 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C13SMN1QX/p1791156077713359",
               "https://jp09.slack.com/archives/C0C13SMN1QX/p1791174870892309",
-              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791175516166869"
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791175516166869",
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791241857469549"
             ],
-            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+            "last_reconciled_at": "2026-10-06T04:56:55+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -536,6 +551,19 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C13SMN1QX/p1791175516166869"
             ]
+          },
+          {
+            "evidence_id": "EVID-P002-20261006-TRACKER",
+            "work_id": "WORK-P002-20261006-SITE-STATUS",
+            "provider": "SLACK",
+            "provider_object_id": "1791241857.469549",
+            "evidence_type": "DAILY_WORK_READINESS_TRACKER",
+            "evidence_url": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791241857469549",
+            "observed_at": "2026-10-06T04:56:55+05:45",
+            "note": "Concise 6-Oct Daily Ops tracker sent as a new top-level message and provider-read back; field reply pending at readback cutoff.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791241857469549"
+            ]
           }
         ]
       }
@@ -556,12 +584,12 @@
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
-        "source_cutoff": "2026-10-06T04:50:49+05:45",
+        "last_reconciled_at": "2026-10-06T04:56:55+05:45",
+        "source_cutoff": "2026-10-06T04:56:55+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -623,9 +651,10 @@
             "blocker": "No 5-Oct field closure was received; completed/remaining work and blockers remain unconfirmed.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791156079260189"
+              "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791156079260189",
+              "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791241860709649"
             ],
-            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+            "last_reconciled_at": "2026-10-06T04:56:55+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -737,6 +766,19 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791156079260189"
             ]
+          },
+          {
+            "evidence_id": "EVID-P003-20261006-TRACKER",
+            "work_id": "WORK-P003-20261006-TRADE-STATUS",
+            "provider": "SLACK",
+            "provider_object_id": "1791241860.709649",
+            "evidence_type": "DAILY_WORK_READINESS_TRACKER",
+            "evidence_url": "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791241860709649",
+            "observed_at": "2026-10-06T04:56:55+05:45",
+            "note": "Concise 6-Oct Daily Ops tracker sent as a new top-level message and provider-read back; field reply pending at readback cutoff.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791241860709649"
+            ]
           }
         ]
       }
@@ -757,12 +799,12 @@
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
-        "source_cutoff": "2026-10-06T04:50:49+05:45",
+        "last_reconciled_at": "2026-10-06T04:56:55+05:45",
+        "source_cutoff": "2026-10-06T04:56:55+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -824,9 +866,10 @@
             "blocker": "Exact leakage source, action taken and remaining issue are still unresolved.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C13SSGULF/p1791156081046899"
+              "https://jp09.slack.com/archives/C0C13SSGULF/p1791156081046899",
+              "https://jp09.slack.com/archives/C0C13SSGULF/p1791241864002739"
             ],
-            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+            "last_reconciled_at": "2026-10-06T04:56:55+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -889,6 +932,19 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C13SSGULF/p1791156081046899"
             ]
+          },
+          {
+            "evidence_id": "EVID-P004-20261006-TRACKER",
+            "work_id": "WORK-P004-20261006-LEAKAGE",
+            "provider": "SLACK",
+            "provider_object_id": "1791241864.002739",
+            "evidence_type": "DAILY_WORK_READINESS_TRACKER",
+            "evidence_url": "https://jp09.slack.com/archives/C0C13SSGULF/p1791241864002739",
+            "observed_at": "2026-10-06T04:56:55+05:45",
+            "note": "Concise 6-Oct Daily Ops tracker sent as a new top-level message and provider-read back; field reply pending at readback cutoff.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C13SSGULF/p1791241864002739"
+            ]
           }
         ]
       }
@@ -909,12 +965,12 @@
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
-        "source_cutoff": "2026-10-06T04:50:49+05:45",
+        "last_reconciled_at": "2026-10-06T04:56:55+05:45",
+        "source_cutoff": "2026-10-06T04:56:55+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -979,9 +1035,10 @@
             "responsible": null,
             "source_refs": [
               "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791156082843019",
-              "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791090485531549"
+              "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791090485531549",
+              "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791241867439369"
             ],
-            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+            "last_reconciled_at": "2026-10-06T04:56:55+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -1043,6 +1100,19 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791156082843019"
             ]
+          },
+          {
+            "evidence_id": "EVID-P005-20261006-TRACKER",
+            "work_id": "WORK-P005-20261006-SITE-STATUS",
+            "provider": "SLACK",
+            "provider_object_id": "1791241867.439369",
+            "evidence_type": "DAILY_WORK_READINESS_TRACKER",
+            "evidence_url": "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791241867439369",
+            "observed_at": "2026-10-06T04:56:55+05:45",
+            "note": "Concise 6-Oct Daily Ops tracker sent as a new top-level message and provider-read back; field reply pending at readback cutoff.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791241867439369"
+            ]
           }
         ]
       }
@@ -1063,12 +1133,12 @@
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
-        "source_cutoff": "2026-10-06T04:50:49+05:45",
+        "last_reconciled_at": "2026-10-06T04:56:55+05:45",
+        "source_cutoff": "2026-10-06T04:56:55+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -1133,9 +1203,10 @@
             "responsible": null,
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791156084607249",
-              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959"
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959",
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791241870730979"
             ],
-            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+            "last_reconciled_at": "2026-10-06T04:56:55+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -1316,6 +1387,19 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791156084607249"
             ]
+          },
+          {
+            "evidence_id": "EVID-P006-20261006-TRACKER",
+            "work_id": "WORK-P006-20261006-TOILET-PLASTER",
+            "provider": "SLACK",
+            "provider_object_id": "1791241870.730979",
+            "evidence_type": "DAILY_WORK_READINESS_TRACKER",
+            "evidence_url": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791241870730979",
+            "observed_at": "2026-10-06T04:56:55+05:45",
+            "note": "Concise 6-Oct Daily Ops tracker sent as a new top-level message and provider-read back; field reply pending at readback cutoff.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791241870730979"
+            ]
           }
         ]
       }
@@ -1336,12 +1420,12 @@
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
-        "source_cutoff": "2026-10-06T04:50:49+05:45",
+        "last_reconciled_at": "2026-10-06T04:56:55+05:45",
+        "source_cutoff": "2026-10-06T04:56:55+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -1409,9 +1493,10 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791156086352619",
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791100478324599",
-              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1790993758768049"
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1790993758768049",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791241874382869"
             ],
-            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+            "last_reconciled_at": "2026-10-06T04:56:55+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -1563,6 +1648,19 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791156086352619"
             ]
+          },
+          {
+            "evidence_id": "EVID-P007-20261006-TRACKER",
+            "work_id": "WORK-P007-20261006-COLUMN-FOOTING",
+            "provider": "SLACK",
+            "provider_object_id": "1791241874.382869",
+            "evidence_type": "DAILY_WORK_READINESS_TRACKER",
+            "evidence_url": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791241874382869",
+            "observed_at": "2026-10-06T04:56:55+05:45",
+            "note": "Concise 6-Oct Daily Ops tracker sent as a new top-level message and provider-read back; field reply pending at readback cutoff.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791241874382869"
+            ]
           }
         ]
       }
@@ -1583,12 +1681,12 @@
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
-        "source_cutoff": "2026-10-06T04:50:49+05:45",
+        "last_reconciled_at": "2026-10-06T04:56:55+05:45",
+        "source_cutoff": "2026-10-06T04:56:55+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -1669,9 +1767,10 @@
               "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159944934279",
               "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791160021062969",
               "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791160045204179",
-              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184840264729"
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184840264729",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791241877726719"
             ],
-            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+            "last_reconciled_at": "2026-10-06T04:56:55+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -1950,6 +2049,19 @@
             "note": "Management requested a plan for plaster in the underground water tank; plan/execution not inferred.",
             "source_refs": [
               "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184840264729"
+            ]
+          },
+          {
+            "evidence_id": "EVID-P020-20261006-TRACKER",
+            "work_id": "WORK-P020-20261006-SLAB-PLASTER",
+            "provider": "SLACK",
+            "provider_object_id": "1791241877.726719",
+            "evidence_type": "DAILY_WORK_READINESS_TRACKER",
+            "evidence_url": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791241877726719",
+            "observed_at": "2026-10-06T04:56:55+05:45",
+            "note": "Concise 6-Oct Daily Ops tracker sent as a new top-level message and provider-read back; field reply pending at readback cutoff.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791241877726719"
             ]
           }
         ]
