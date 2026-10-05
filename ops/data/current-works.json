@@ -18,24 +18,24 @@
       "display_name": "14 Bishal Paija",
       "contractor": "Rohini Engineering and Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-05",
+        "date": "2026-10-06",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-05T05:06:28+05:45",
-        "source_cutoff": "2026-10-05T05:06:28+05:45",
+        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+        "source_cutoff": "2026-10-06T04:50:49+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [
           {
-            "work_id": "WORK-P001-20261005-SITE-STATUS",
-            "activity": "Site status follow-up: cleaning closure + shuttering/RCC/jhaller work",
+            "work_id": "WORK-P001-20261006-SITE-STATUS",
+            "activity": "Current site status follow-up: cleaning closure + shuttering/RCC/jhaller work",
             "location": "Project site",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
@@ -89,13 +89,12 @@
               },
               "overall": "UNSET"
             },
-            "blocker": "4-Oct tracker received no field closure; cleaning completion and current construction execution remain unconfirmed.",
+            "blocker": "5-Oct tracker received no field closure; current construction execution remains unconfirmed.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C2DJNGARW/p1791078203482669",
               "https://jp09.slack.com/archives/C0C2DJNGARW/p1791156075880319"
             ],
-            "last_reconciled_at": "2026-10-05T05:06:28+05:45",
+            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -209,33 +208,36 @@
       "display_name": "17 Samir Man Ghubaju",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-05",
+        "date": "2026-10-06",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "UNRESOLVED",
-        "last_reconciled_at": "2026-10-05T05:06:28+05:45",
-        "source_cutoff": "2026-10-05T05:06:28+05:45",
+        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+        "source_cutoff": "2026-10-06T04:50:49+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [
           {
-            "work_id": "WORK-P002-20261005-SITE-STATUS",
-            "activity": "Confirm actual site work, column/brick status and disputed electrical attribution",
+            "work_id": "WORK-P002-20261006-SITE-STATUS",
+            "activity": "Confirm actual site work + cement usage split + column/brick/electrical attribution",
             "location": "Project site",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
               "materials": {
-                "status": "UNKNOWN",
-                "note": null,
+                "status": "CONDITION",
+                "note": "25 PPC + 11 OPC bags were reported in stock on 5 Oct. A separate '7 bags opc and PPC used till today' statement is ambiguous; exact split/meaning needs clarification.",
                 "responsibility": null,
-                "source_refs": [],
-                "observed_at": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C13SMN1QX/p1791174870892309",
+                  "https://jp09.slack.com/archives/C0C13SMN1QX/p1791175516166869"
+                ],
+                "observed_at": "2026-10-06T04:50:49+05:45",
                 "conflict_state": "NONE"
               },
               "manpower": {
@@ -278,20 +280,19 @@
                   "https://jp09.slack.com/archives/C0C13SMN1QX/p1791016274415849",
                   "https://jp09.slack.com/archives/C0C13SMN1QX/p1791019221924569"
                 ],
-                "observed_at": "2026-10-03T15:05:21+05:45",
-                "conflict_state": "UNRESOLVED"
+                "observed_at": "2026-10-06T04:50:49+05:45",
+                "conflict_state": "NONE"
               },
               "overall": "UNSET"
             },
-            "blocker": "Brick quantity/bill and disputed electrical-board site attribution remain unresolved.",
+            "blocker": "Provider reported 25 PPC + 11 OPC stock and separately '7 bags opc and PPC used till today'; whether 7 is combined or per cement type is unresolved. Brick quantity/bill and disputed electrical-board site attribution also remain unresolved.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791078206970149",
-              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791016274415849",
-              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791019221924569",
-              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791156077713359"
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791156077713359",
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791174870892309",
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791175516166869"
             ],
-            "last_reconciled_at": "2026-10-05T05:06:28+05:45",
+            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -340,6 +341,48 @@
             ],
             "observed_at": "2026-10-02T15:43:55+05:45",
             "conflict_state": "NONE"
+          },
+          {
+            "material_event_id": "MAT-P002-20261005-PPC-STOCK",
+            "work_id": null,
+            "material_name": "Cement PPC",
+            "material_state": "OBSERVED_STOCK",
+            "quantity": 25,
+            "unit": "bag",
+            "note": "Point-in-time stock reported 5 Oct; no consumption inferred from stock differences.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791174870892309"
+            ],
+            "observed_at": "2026-10-05T10:19:30+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "material_event_id": "MAT-P002-20261005-OPC-STOCK",
+            "work_id": null,
+            "material_name": "Cement OPC",
+            "material_state": "OBSERVED_STOCK",
+            "quantity": 11,
+            "unit": "bag",
+            "note": "Point-in-time stock reported 5 Oct; no consumption inferred from stock differences.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791174870892309"
+            ],
+            "observed_at": "2026-10-05T10:19:30+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "material_event_id": "MAT-P002-20261005-CEMENT-USAGE-AMBIG",
+            "work_id": null,
+            "material_name": "Cement OPC/PPC",
+            "material_state": "REPORTED_USAGE_ALLOCATION_UNRESOLVED",
+            "quantity": 7,
+            "unit": "bag",
+            "note": "Provider wrote '7 bags opc and PPC used till today'. Seven bags is preserved as stated, but whether it is combined total or per-type usage is unresolved; do not project to PPC/OPC usage tabs until clarified.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791175516166869"
+            ],
+            "observed_at": "2026-10-05T10:30:16+05:45",
+            "conflict_state": "UNRESOLVED"
           }
         ],
         "progress": [],
@@ -371,6 +414,19 @@
               "https://jp09.slack.com/archives/C0C13SMN1QX/p1791019221924569"
             ],
             "observed_at": "2026-10-03T15:05:21+05:45",
+            "conflict_state": "UNRESOLVED"
+          },
+          {
+            "blocker_id": "BLK-P002-20261005-CEMENT-USAGE-SPLIT",
+            "work_id": "WORK-P002-20261006-SITE-STATUS",
+            "status": "NEEDS_INPUT",
+            "blocker": "Clarify whether '7 bags opc and PPC used till today' means 7 bags total combined or a per-type amount; do not allocate usage until clarified.",
+            "responsible": null,
+            "target_resolution_at": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791175516166869"
+            ],
+            "observed_at": "2026-10-05T10:30:16+05:45",
             "conflict_state": "UNRESOLVED"
           }
         ],
@@ -454,6 +510,32 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C13SMN1QX/p1791156077713359"
             ]
+          },
+          {
+            "evidence_id": "EVID-P002-20261005-STOCK",
+            "work_id": null,
+            "provider": "SLACK",
+            "provider_object_id": "1791174870.892309",
+            "evidence_type": "MATERIAL_STOCK_OBSERVATION",
+            "evidence_url": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791174870892309",
+            "observed_at": "2026-10-05T10:19:30+05:45",
+            "note": "25 PPC + 11 OPC bags reported in stock; stock only.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791174870892309"
+            ]
+          },
+          {
+            "evidence_id": "EVID-P002-20261005-USAGE-AMBIG",
+            "work_id": null,
+            "provider": "SLACK",
+            "provider_object_id": "1791175516.166869",
+            "evidence_type": "MATERIAL_USAGE_STATEMENT_ALLOCATION_UNRESOLVED",
+            "evidence_url": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791175516166869",
+            "observed_at": "2026-10-05T10:30:16+05:45",
+            "note": "'7 bags opc and PPC used till today' preserved without assigning PPC/OPC split.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C13SMN1QX/p1791175516166869"
+            ]
           }
         ]
       }
@@ -467,23 +549,23 @@
       "display_name": "13 Hari Baral",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-05",
+        "date": "2026-10-06",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-05T05:06:28+05:45",
-        "source_cutoff": "2026-10-05T05:06:28+05:45",
+        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+        "source_cutoff": "2026-10-06T04:50:49+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [
           {
-            "work_id": "WORK-P003-20261005-TRADE-STATUS",
+            "work_id": "WORK-P003-20261006-TRADE-STATUS",
             "activity": "Railing, carpentry and painting status follow-up",
             "location": "Project site",
             "execution_status": "NEEDS_INPUT",
@@ -538,13 +620,12 @@
               },
               "overall": "UNSET"
             },
-            "blocker": "No 4-Oct closure was received; current completed/remaining work and blockers are unconfirmed.",
+            "blocker": "No 5-Oct field closure was received; completed/remaining work and blockers remain unconfirmed.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791078210177909",
               "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791156079260189"
             ],
-            "last_reconciled_at": "2026-10-05T05:06:28+05:45",
+            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -669,23 +750,23 @@
       "display_name": "16 Yamuna Pun Adai",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-05",
+        "date": "2026-10-06",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-05T05:06:28+05:45",
-        "source_cutoff": "2026-10-05T05:06:28+05:45",
+        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+        "source_cutoff": "2026-10-06T04:50:49+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [
           {
-            "work_id": "WORK-P004-20261005-LEAKAGE",
+            "work_id": "WORK-P004-20261006-LEAKAGE",
             "activity": "Leakage inspection / repair follow-up",
             "location": "Exact leakage source/location pending field confirmation",
             "execution_status": "NEEDS_INPUT",
@@ -734,11 +815,8 @@
                 "status": "UNKNOWN",
                 "note": "Leakage source must be observed/identified before repair closure can be accepted.",
                 "responsibility": null,
-                "source_refs": [
-                  "https://jp09.slack.com/archives/C0C13SSGULF/p1790687986476779",
-                  "https://jp09.slack.com/archives/C0C13SSGULF/p1791078213733909"
-                ],
-                "observed_at": "2026-10-04T07:28:33+05:45",
+                "source_refs": [],
+                "observed_at": null,
                 "conflict_state": "NONE"
               },
               "overall": "UNSET"
@@ -746,11 +824,9 @@
             "blocker": "Exact leakage source, action taken and remaining issue are still unresolved.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C13SSGULF/p1790687986476779",
-              "https://jp09.slack.com/archives/C0C13SSGULF/p1791078213733909",
               "https://jp09.slack.com/archives/C0C13SSGULF/p1791156081046899"
             ],
-            "last_reconciled_at": "2026-10-05T05:06:28+05:45",
+            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -826,23 +902,23 @@
       "display_name": "30 Sabitri Giri / Dipti Giri",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-05",
+        "date": "2026-10-06",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-05T05:06:28+05:45",
-        "source_cutoff": "2026-10-05T05:06:28+05:45",
+        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+        "source_cutoff": "2026-10-06T04:50:49+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [
           {
-            "work_id": "WORK-P005-20261005-SITE-STATUS",
+            "work_id": "WORK-P005-20261006-SITE-STATUS",
             "activity": "Confirm current construction phase, active work and crew",
             "location": "Project site",
             "execution_status": "NEEDS_INPUT",
@@ -854,7 +930,7 @@
                 "source_refs": [
                   "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791090485531549"
                 ],
-                "observed_at": "2026-10-04T10:53:05+05:45",
+                "observed_at": "2026-10-06T04:50:49+05:45",
                 "conflict_state": "NONE"
               },
               "manpower": {
@@ -899,14 +975,13 @@
               },
               "overall": "UNSET"
             },
-            "blocker": "4-Oct tracker received no field closure; current construction phase/work remains unconfirmed.",
+            "blocker": "No 5-Oct field closure; current construction work remains unconfirmed. Suvakamana was only a sourcing suggestion; procurement/arrival of nails remains unconfirmed.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791078217087269",
-              "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791090485531549",
-              "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791156082843019"
+              "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791156082843019",
+              "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791090485531549"
             ],
-            "last_reconciled_at": "2026-10-05T05:06:28+05:45",
+            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -981,23 +1056,23 @@
       "display_name": "31 Sharada Adhikari",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-05",
+        "date": "2026-10-06",
         "overall_readiness": "HOLD",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-05T05:06:28+05:45",
-        "source_cutoff": "2026-10-05T05:06:28+05:45",
+        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+        "source_cutoff": "2026-10-06T04:50:49+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [
           {
-            "work_id": "WORK-P006-20261005-TOILET-PLASTER",
+            "work_id": "WORK-P006-20261006-TOILET-PLASTER",
             "activity": "Toilet-room plaster / plumbing-door-height coordination",
             "location": "Toilet room",
             "execution_status": "BLOCKED",
@@ -1006,10 +1081,8 @@
                 "status": "UNKNOWN",
                 "note": "Waterproofing pickup was reported earlier, but arrival/items/quantity remain unconfirmed.",
                 "responsibility": null,
-                "source_refs": [
-                  "https://jp09.slack.com/archives/C0C1H9Y96KG/p1790843398592599"
-                ],
-                "observed_at": "2026-10-01T14:14:58+05:45",
+                "source_refs": [],
+                "observed_at": null,
                 "conflict_state": "NONE"
               },
               "manpower": {
@@ -1051,19 +1124,18 @@
                 "source_refs": [
                   "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959"
                 ],
-                "observed_at": "2026-10-03T15:06:49+05:45",
+                "observed_at": "2026-10-06T04:50:49+05:45",
                 "conflict_state": "NONE"
               },
               "overall": "HOLD"
             },
-            "blocker": "Door-height/plumbing coordination remains a hold until a new field confirmation clears it.",
+            "blocker": "Door-height/plumbing coordination remains a hold until new field evidence clears it. Waterproofing arrival and false-ceiling/electrical coordination also remain unconfirmed.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791078220307139",
-              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959",
-              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791156084607249"
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791156084607249",
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959"
             ],
-            "last_reconciled_at": "2026-10-05T05:06:28+05:45",
+            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -1257,35 +1329,35 @@
       "display_name": "15 Narayani Parajuli",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-05",
+        "date": "2026-10-06",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-05T05:06:28+05:45",
-        "source_cutoff": "2026-10-05T05:06:28+05:45",
+        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+        "source_cutoff": "2026-10-06T04:50:49+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [
           {
-            "work_id": "WORK-P007-20261005-COLUMN-FOOTING",
+            "work_id": "WORK-P007-20261006-COLUMN-FOOTING",
             "activity": "Column/footing work status + CF1/C4 coordination",
             "location": "Foundation / column work areas",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
               "materials": {
                 "status": "CONDITION",
-                "note": "37 bags of OPC cement were reported in stock on 4 Oct; stock is not consumption or suitability confirmation.",
+                "note": "37 OPC bags were reported in stock on 4 Oct; stock is not consumption or suitability confirmation.",
                 "responsibility": null,
                 "source_refs": [
                   "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791100478324599"
                 ],
-                "observed_at": "2026-10-04T13:39:38+05:45",
+                "observed_at": "2026-10-06T04:50:49+05:45",
                 "conflict_state": "NONE"
               },
               "manpower": {
@@ -1327,20 +1399,19 @@
                 "source_refs": [
                   "https://jp09.slack.com/archives/C0C1M6AEL1X/p1790993758768049"
                 ],
-                "observed_at": "2026-10-03T08:00:58+05:45",
+                "observed_at": "2026-10-06T04:50:49+05:45",
                 "conflict_state": "NONE"
               },
               "overall": "UNSET"
             },
-            "blocker": "No 4-Oct work closure was received; CF1/C4 coordination and current work/material blockers still need confirmation.",
+            "blocker": "5-Oct included an unlabeled photo-only post, which is not enough to infer work completion. CF1/C4 coordination and current work/material blockers remain unresolved.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791078223570109",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791156086352619",
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791100478324599",
-              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1790993758768049",
-              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791156086352619"
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1790993758768049"
             ],
-            "last_reconciled_at": "2026-10-05T05:06:28+05:45",
+            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -1505,35 +1576,35 @@
       "display_name": "Kharika Paudel",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-05",
+        "date": "2026-10-06",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-05T05:06:28+05:45",
-        "source_cutoff": "2026-10-05T05:06:28+05:45",
+        "last_reconciled_at": "2026-10-06T04:50:49+05:45",
+        "source_cutoff": "2026-10-06T04:50:49+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
-          "slack": "CURRENT"
+          "google_sheets": "PENDING",
+          "website": "PENDING",
+          "slack": "PENDING"
         },
         "todays_work": [
           {
-            "work_id": "WORK-P020-20261005-SHUTTERING",
-            "activity": "Shuttering restart / current work confirmation",
-            "location": "Project site / exact work location pending field update",
+            "work_id": "WORK-P020-20261006-SLAB-PLASTER",
+            "activity": "Shuttering/slab checks + underground water tank plaster planning",
+            "location": "Project site / slab, columns and underground water tank",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
               "materials": {
                 "status": "CONDITION",
-                "note": "Shuttering materials were reported bought, but exact site/store inventory remains unresolved.",
+                "note": "2 PPC + 8 OPC bags were reported in stock on 5 Oct. Point-in-time stock only; no consumption inferred.",
                 "responsibility": null,
                 "source_refs": [
-                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790994944419539"
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184359717439"
                 ],
-                "observed_at": "2026-10-03T08:20:44+05:45",
+                "observed_at": "2026-10-06T04:50:49+05:45",
                 "conflict_state": "NONE"
               },
               "manpower": {
@@ -1553,6 +1624,20 @@
                 "conflict_state": "NONE"
               },
               "work_briefing": {
+                "status": "CONDITION",
+                "note": "Management issued curing, column-end kopla, beam-stirrup/BBS, cantilever-confirmation and 16 mm hook instructions; completion/acceptance is not yet evidenced.",
+                "responsibility": null,
+                "source_refs": [
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159818242419",
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159842940499",
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159944934279",
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791160021062969",
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791160045204179"
+                ],
+                "observed_at": "2026-10-06T04:50:49+05:45",
+                "conflict_state": "NONE"
+              },
+              "tools": {
                 "status": "UNKNOWN",
                 "note": null,
                 "responsibility": null,
@@ -1560,37 +1645,33 @@
                 "observed_at": null,
                 "conflict_state": "NONE"
               },
-              "tools": {
-                "status": "CONDITION",
-                "note": "Electrical board and about 10 m wire were replaced and electrical problem was reported solved on 3 Oct.",
-                "responsibility": null,
-                "source_refs": [
-                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219"
-                ],
-                "observed_at": "2026-10-03T13:22:11+05:45",
-                "conflict_state": "NONE"
-              },
               "preconditions": {
                 "status": "CONDITION",
-                "note": "Electrical fault was reported solved, but staircase-room brickwork, staircase rebar availability and slab target remain unconfirmed.",
+                "note": "Cantilever slab confirmation and beam-stirrup/BBS checks were instructed; U/G water-tank plaster planning was requested. Do not infer these checks/plans are complete.",
                 "responsibility": null,
                 "source_refs": [
-                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219"
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159944934279",
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791160021062969",
+                  "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184840264729"
                 ],
-                "observed_at": "2026-10-03T13:22:11+05:45",
+                "observed_at": "2026-10-06T04:50:49+05:45",
                 "conflict_state": "NONE"
               },
               "overall": "UNSET"
             },
-            "blocker": "No 4-Oct closure was received; team/manpower, exact shuttering work, stair brick/rebar and slab target remain unresolved.",
+            "blocker": "Confirm current shuttering/slab work and manpower; confirm which curing/kopla/stirrup/cantilever/16 mm hook instructions were checked or completed; prepare/confirm U/G water-tank plaster plan.",
             "responsible": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791078226968169",
-              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219",
-              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1790994944419539",
-              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791156088117719"
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791156088117719",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184359717439",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159818242419",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159842940499",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159944934279",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791160021062969",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791160045204179",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184840264729"
             ],
-            "last_reconciled_at": "2026-10-05T05:06:28+05:45",
+            "last_reconciled_at": "2026-10-06T04:50:49+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -1664,6 +1745,34 @@
             ],
             "observed_at": "2026-10-03T08:20:44+05:45",
             "conflict_state": "NONE"
+          },
+          {
+            "material_event_id": "MAT-P020-20261005-PPC-STOCK",
+            "work_id": null,
+            "material_name": "Cement PPC",
+            "material_state": "OBSERVED_STOCK",
+            "quantity": 2,
+            "unit": "bag",
+            "note": "Point-in-time stock reported 5 Oct; no consumption inferred.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184359717439"
+            ],
+            "observed_at": "2026-10-05T12:57:39+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "material_event_id": "MAT-P020-20261005-OPC-STOCK",
+            "work_id": null,
+            "material_name": "Cement OPC",
+            "material_state": "OBSERVED_STOCK",
+            "quantity": 8,
+            "unit": "bag",
+            "note": "Point-in-time stock reported 5 Oct; no consumption inferred.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184359717439"
+            ],
+            "observed_at": "2026-10-05T12:57:39+05:45",
+            "conflict_state": "NONE"
           }
         ],
         "progress": [
@@ -1702,6 +1811,21 @@
               "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791013031297219"
             ],
             "observed_at": "2026-10-03T13:22:11+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "blocker_id": "BLK-P020-20261005-DESIGN-CHECKS",
+            "work_id": "WORK-P020-20261006-SLAB-PLASTER",
+            "status": "NEEDS_INPUT",
+            "blocker": "Cantilever confirmation and beam-stirrup/BBS checks were instructed; completion/engineering acceptance is not yet evidenced.",
+            "responsible": null,
+            "target_resolution_at": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159944934279",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791160021062969",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791160045204179"
+            ],
+            "observed_at": "2026-10-05T06:10:44+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -1783,6 +1907,49 @@
             "note": "Concise 5-Oct Daily Ops tracker sent as a new top-level message and provider-read back; field reply pending at readback cutoff.",
             "source_refs": [
               "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791156088117719"
+            ]
+          },
+          {
+            "evidence_id": "EVID-P020-20261005-STOCK",
+            "work_id": null,
+            "provider": "SLACK",
+            "provider_object_id": "1791184359.717439",
+            "evidence_type": "MATERIAL_STOCK_OBSERVATION",
+            "evidence_url": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184359717439",
+            "observed_at": "2026-10-05T12:57:39+05:45",
+            "note": "2 PPC + 8 OPC bags reported in stock; stock only.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184359717439"
+            ]
+          },
+          {
+            "evidence_id": "EVID-P020-20261005-INSTRUCTIONS",
+            "work_id": "WORK-P020-20261006-SLAB-PLASTER",
+            "provider": "SLACK",
+            "provider_object_id": "1791159818.242419",
+            "evidence_type": "SITE_INSTRUCTIONS_AND_DESIGN_COORDINATION_REQUESTS",
+            "evidence_url": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159818242419",
+            "observed_at": "2026-10-05T06:08:38+05:45",
+            "note": "Curing, column-end kopla, beam-stirrup/BBS, cantilever re-confirmation and 16 mm hook instructions were issued; completion/approval not inferred.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159818242419",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159842940499",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159944934279",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791160021062969",
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791160045204179"
+            ]
+          },
+          {
+            "evidence_id": "EVID-P020-20261005-UGT-PLASTER-PLAN",
+            "work_id": "WORK-P020-20261006-SLAB-PLASTER",
+            "provider": "SLACK",
+            "provider_object_id": "1791184840.264729",
+            "evidence_type": "WORK_PLAN_REQUEST",
+            "evidence_url": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184840264729",
+            "observed_at": "2026-10-05T13:05:40+05:45",
+            "note": "Management requested a plan for plaster in the underground water tank; plan/execution not inferred.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791184840264729"
             ]
           }
         ]
