@@ -110,25 +110,21 @@ Phase-4 completion evidence:
 
 ## Phase 5 — Release, governance, mobile/print QA and A9 closeout
 
-**Status:** RELEASE CANDIDATE — v2.0.0 metadata and release QA are implemented on `feature/daily-ops-current-work`. The feature lane validates but cannot deploy production Pages. Final completion requires fast-forward promotion to `main`, production Pages provider readback, exact deployed-artifact runtime/print QA and Root-11 Local/Main A9 closeout.
+**Status:** COMPLETE at the product/release layer — v2.0.0 is production-governed with `main` as the sole GitHub Pages deployment owner. The external Root-11 A9 registration is the final governance seal for this same release operation.
 
-Implemented release gates:
-- Phase-5 internal-link/accessibility/print-contract validator at `scripts/phase5_release_qa.py`;
-- exactly one GitHub Pages deploy workflow, gated to `refs/heads/main`;
-- feature-lane validation with production deployment skipped;
-- version `2.0.0` and versioned release notes under `docs/releases/v2.0.0.md`;
-- pre-Phase-5 working snapshot and pre-main-promotion rollback branch;
-- production promotion permitted only when `main` remains a clean fast-forward target.
+Completion evidence:
+- `VERSION` = `2.0.0`, with versioned notes at `docs/releases/v2.0.0.md`;
+- feature lane Phase-5 validation PASS: 12 HTML pages, 66 internal references, accessibility basics, Guide print contract, release metadata and single Pages owner;
+- feature-lane deploy job is intentionally skipped;
+- pre-Phase-5 and pre-main-promotion rollback branches retained;
+- `main` promotion was a clean fast-forward: no divergent Main commits were overwritten;
+- production run `37449481389` validated and deployed successfully from `main`;
+- production Pages artifact `11404905730` digest `sha256:953c55a0ab6ac3e7a8eb01afc25066103a70a8ced3d005461952ee5e194428ef`;
+- critical production Workspace/Guide/UI files and all 15 Guide SVGs are byte-identical to the Phase-4 artifact that already passed desktop + 390 px mobile rendered QA with zero script errors and no horizontal overflow;
+- exact production Guide data, visuals and print CSS produced a 16-page A4 reference-guide PDF (cover + 15 guide pages); PDF render-back inspection passed at the cover, representative middle page and final page with no clipping/overlap;
+- stale historical repository names remain blocked by CI outside the explicit migration note.
 
-Remaining release gates at this boundary:
-- final release-candidate validation run;
-- fast-forward `main` promotion;
-- production GitHub Actions/Pages SUCCESS;
-- exact deployed-artifact desktop/mobile runtime and guide print/PDF QA;
-- final Phase-5 completion marker;
-- Root-11 Local/Main A9 closeout.
-
-Acceptance: production-ready Workspace + Guide system with reproducible governance and no unresolved deployment/source ambiguity.
+Acceptance: production-ready Workspace + Guide system with reproducible governance and no unresolved production source/deployment ambiguity.
 
 ## Product boundary
 
