@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/FabinGurung/jp-ecosystem-project-map-v1/blob/feature/daily-ops-current-work/ops/schema/current-works.schema.json",
+  "$id": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/feature/daily-ops-current-work/ops/schema/current-works.schema.json",
   "title": "JP Ecosystem Daily Ops Current Works",
   "type": "object",
   "additionalProperties": false,
