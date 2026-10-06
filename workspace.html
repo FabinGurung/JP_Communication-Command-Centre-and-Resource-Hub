@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Owner workspace for the JP AEC Operations Hub">
+  <title>Workspace — JP AEC Operations Hub</title>
+  <style>
+    :root{--bg:#f4f6f8;--panel:#fff;--text:#172033;--muted:#667085;--line:#dfe4ea;--blue:#175cd3;--green:#067647;--amber:#b54708;--red:#b42318;--soft:#eef4ff;--shadow:0 8px 24px rgba(15,23,42,.07)}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}a{color:inherit}
+    .shell{max-width:1180px;margin:auto;padding:16px}.nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.nav a{text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:750}.nav a.active{background:var(--soft);border-color:#b2ccff;color:var(--blue)}
+    .hero,.panel,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.hero{padding:20px}.eyebrow{font-size:11px;color:var(--blue);font-weight:800;letter-spacing:.07em;text-transform:uppercase}h1{margin:5px 0 8px;font-size:clamp(30px,5vw,46px)}h2{margin:0 0 8px;font-size:21px}h3{margin:0 0 7px;font-size:16px}.lead,.muted{color:var(--muted);line-height:1.55}.lead{max-width:860px}
+    .status-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.stat{background:#f8fafc;border:1px solid var(--line);border-radius:11px;padding:11px}.stat strong,.stat span{display:block}.stat strong{font-size:20px}.stat span{margin-top:3px;color:var(--muted);font-size:10px;font-weight:800;text-transform:uppercase}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}.card{padding:17px}.card p{margin:0 0 12px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{display:inline-block;text-decoration:none;border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:12px;font-weight:800;background:#fff;color:var(--blue)}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+    .panel{padding:18px;margin-top:14px}.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;align-items:stretch;margin-top:12px}.step{border:1px solid var(--line);border-radius:11px;padding:12px;background:#f8fafc;font-size:12px;line-height:1.45}.step b{display:block;margin-bottom:4px}.arrow{display:none}
+    .matrix{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}.matrix th,.matrix td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}.matrix th{font-size:10px;text-transform:uppercase;color:var(--muted);letter-spacing:.04em}.yes{color:var(--green);font-weight:800}.maybe{color:var(--amber);font-weight:800}.no{color:var(--red);font-weight:800}
+    .notice{border:1px solid #fedf89;background:#fffaeb;color:#7a2e0e;border-radius:12px;padding:12px 14px;line-height:1.5;font-size:12px}.ok{border-color:#abefc6;background:#ecfdf3;color:#05603a}
+    .task-list{display:grid;gap:8px;margin-top:10px}.task{display:grid;grid-template-columns:170px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:12px}.task:last-child{border-bottom:0}.task b{font-size:12px}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f8fafc;border:1px solid var(--line);border-radius:6px;padding:1px 5px}
+    footer{padding:18px 2px;color:var(--muted);font-size:11px;line-height:1.5}
+    @media(max-width:800px){.status-grid{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.task{grid-template-columns:1fr}.shell{padding:11px}.matrix{font-size:11px}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <nav class="nav" aria-label="JP AEC Operations Hub sections">
+    <a href="index.html">Overview</a>
+    <a href="map.html">Project map</a>
+    <a href="site-operations.html">Site operations</a>
+    <a class="active" href="workspace.html">Workspace</a>
+    <a href="how-to.html">How to</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">Owner / Manager Workspace</div>
+    <h1>One place to understand and operate the system</h1>
+    <p class="lead">This page is the owner-facing control desk for the JP AEC Operations Hub. It tells you what each part of the system does, which file owns which fact, where to edit it, and why some information belongs in GitHub, Google Drive, Google Sheets or a database.</p>
+    <div class="status-grid">
+      <div class="stat"><strong id="projectCount">—</strong><span>Projects in Daily Ops</span></div>
+      <div class="stat"><strong id="latestDate">—</strong><span>Latest Ops Date</span></div>
+      <div class="stat"><strong>CSV + JSON</strong><span>Current Live Data</span></div>
+      <div class="stat"><strong>No live DB required</strong><span>Current Runtime</span></div>
+    </div>
+  </section>
+
+  <section class="grid" aria-label="Workspace actions">
+    <article class="card">
+      <h2>Daily work</h2>
+      <p class="muted">See what each active site is doing, what is blocked, what material was observed, and what still needs field confirmation.</p>
+      <div class="actions"><a class="btn primary" href="site-operations.html">Open Site Operations</a><a class="btn" href="ops/data/current-works.json">View current JSON</a></div>
+    </article>
+
+    <article class="card">
+      <h2>Project master</h2>
+      <p class="muted">Project names, lifecycle, coordinates and public project attributes live in <span class="code">projects.csv</span>.</p>
+      <div class="actions"><a class="btn primary" href="map.html">Open Project Map</a><a class="btn" href="https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/feature/daily-ops-current-work/projects.csv">Open projects.csv in GitHub</a></div>
+    </article>
+
+    <article class="card">
+      <h2>Files and evidence</h2>
+      <p class="muted">PDF, DWG, ETABS, photos and other real source files remain in Google Drive. GitHub stores only the normalized project-to-file relationship metadata.</p>
+      <div class="actions"><a class="btn" href="ops/data/project-resources.json">View resource links</a><a class="btn" href="how-to.html#files">How file linking works</a></div>
+    </article>
+
+    <article class="card">
+      <h2>Deployment and audit</h2>
+      <p class="muted">GitHub Actions validates the machine data and republishes the Pages site. Use the Actions page to check whether a change passed or failed.</p>
+      <div class="actions"><a class="btn primary" href="https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions">Open GitHub Actions</a><a class="btn" href="ops/events/daily-ops-events.jsonl">Open event history</a></div>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>How the system actually flows</h2>
+    <div class="flow" aria-label="Operational data flow">
+      <div class="step"><b>1. Field input</b>Slack, photos, Forms, site observations, engineer notes.</div>
+      <div class="step"><b>2. Validation</b>Check source, project identity, ambiguity and whether the fact is actually supported.</div>
+      <div class="step"><b>3. Canonical machine data</b><span class="code">projects.csv</span>, <span class="code">current-works.json</span>, resource JSON and append-only JSONL.</div>
+      <div class="step"><b>4. Website</b>GitHub Pages renders the map, portfolio dashboard and per-project operations views.</div>
+      <div class="step"><b>5. Projections</b>Google Sheets and concise Slack follow-ups receive controlled copies/views.</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Where should data live?</h2>
+    <table class="matrix">
+      <thead><tr><th>Storage</th><th>Best for</th><th>Strength</th><th>Weakness</th><th>Current role here</th></tr></thead>
+      <tbody>
+        <tr><td><b>CSV</b></td><td>Simple project master tables</td><td>Readable, versioned, works on GitHub Pages</td><td>Weak for many linked tables and concurrent editing</td><td><span class="yes">YES</span> — project master</td></tr>
+        <tr><td><b>JSON</b></td><td>Nested current operational state</td><td>Excellent for web pages and AI</td><td>Manual editing becomes harder as data grows</td><td><span class="yes">YES</span> — Daily Ops current state</td></tr>
+        <tr><td><b>JSONL</b></td><td>Append-only event history</td><td>Easy audit trail; one event per line</td><td>Not pleasant for manual dashboards</td><td><span class="yes">YES</span> — history</td></tr>
+        <tr><td><b>Google Sheets</b></td><td>Human entry, review and reporting</td><td>Very easy for staff to edit</td><td>Relationships, constraints and audit can drift</td><td><span class="yes">YES</span> — controlled input/projection</td></tr>
+        <tr><td><b>Google Drive</b></td><td>PDF/DWG/photos/contracts/models</td><td>Permissions and large-file storage</td><td>Not a relational database</td><td><span class="yes">YES</span> — source/evidence warehouse</td></tr>
+        <tr><td><b>PostgreSQL / Neon</b></td><td>Many users, secure app writes, queries, transactions, live relationships</td><td>Strong relational integrity and concurrent operations</td><td>Needs backend/auth, migrations, monitoring and cost/ops</td><td><span class="maybe">OPTIONAL LATER</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel">
+    <h2>Neon / PostgreSQL status in this repository</h2>
+    <div class="notice ok"><b>Current truth:</b> this website does not require a live Neon database. The file <span class="code">ops/schema/daily-ops-postgres.sql</span> is currently a PostgreSQL-compatible <b>schema contract</b>: it defines tables, keys, foreign keys and constraints so humans and AI agree on the relationships. The live Pages site reads CSV/JSON/JSONL directly.</div>
+    <p class="muted" style="margin-top:12px">If a Neon project was created separately, this branch is not depending on it: there is no database connection string, database client or backend request in the current Pages runtime. Neon only becomes useful when we need secure authenticated writes, many simultaneous users, server-side queries, transactions, row-level access, or a real app/API rather than a static site.</p>
+  </section>
+
+  <section class="panel">
+    <h2>“I want to change X” — go here</h2>
+    <div class="task-list">
+      <div class="task"><b>Project name / location / status</b><div>Edit <span class="code">projects.csv</span>.</div></div>
+      <div class="task"><b>Today's work / blocker / readiness</b><div>Reconcile into <span class="code">ops/data/current-works.json</span> and append the matching event to <span class="code">ops/events/daily-ops-events.jsonl</span>.</div></div>
+      <div class="task"><b>Attach a drawing or report</b><div>Keep the file in Drive; add/update its normalized relationship in <span class="code">ops/data/project-resources.json</span>.</div></div>
+      <div class="task"><b>Change website labels / map statuses</b><div>Edit <span class="code">map-config.json</span>.</div></div>
+      <div class="task"><b>Change data relationships</b><div>Edit the schema contract only when the data model genuinely changes: <span class="code">ops/schema/daily-ops-postgres.sql</span>.</div></div>
+      <div class="task"><b>Check if website update passed</b><div>Open GitHub Actions, verify the latest run is green, then inspect the public page.</div></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>What this Workspace is — and is not</h2>
+    <div class="notice"><b>Important:</b> this is a public GitHub Pages site. It is safe as a guide and read-only control desk, but it should not contain GitHub tokens, Drive credentials, database passwords or private client data. A true write-back admin portal would require authentication plus a backend/API.</div>
+    <div class="actions" style="margin-top:12px"><a class="btn primary" href="how-to.html">Open full How-To guide</a><a class="btn" href="README.md">Read repository README</a></div>
+  </section>
+
+  <footer>JP AEC Operations Hub · Owner Workspace · governed Daily Ops branch</footer>
+</div>
+<script>
+(async function(){
+  try{
+    const r=await fetch("ops/data/current-works.json?v="+Date.now(),{cache:"no-store"});
+    if(!r.ok) return;
+    const d=await r.json();
+    const projects=d.projects||[];
+    document.getElementById("projectCount").textContent=projects.length||"0";
+    const dates=projects.map(p=>p.daily_ops&&p.daily_ops.date).filter(Boolean).sort();
+    document.getElementById("latestDate").textContent=dates.length?dates[dates.length-1]:"—";
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
