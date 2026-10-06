@@ -439,10 +439,10 @@ jobs:
 
 
           stale_names = (
-              "jp-ecosystem-project-map-v1",
-              "jp-building-cost-estimator",
-              "Project_Drawings",
-              "Project-Controls-Kernel",
+              "jp-ecosystem-" + "project-map-v1",
+              "jp-building-" + "cost-estimator",
+              "Project_" + "Drawings",
+              "Project-Controls-" + "Kernel",
           )
           text_suffixes = {".md", ".html", ".js", ".json", ".jsonl", ".yml", ".yaml", ".txt", ".csv", ".sql"}
           stale_hits = []
