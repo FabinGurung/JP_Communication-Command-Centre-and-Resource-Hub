@@ -273,7 +273,7 @@ jobs:
 
           static_workspace_projects = {
               item.get("id", "").upper()
-              for item in resources
+              for item in workspace.get("resources", [])
               if item.get("group") == "projects"
           }
           if static_workspace_projects != ops_id_set:
@@ -410,7 +410,7 @@ jobs:
           print(
               f"PASS: schema={state['schema_version']}; map={len(project_rows)} projects; "
               f"daily_ops={len(ops_ids)} projects; resources={len(resource_ids)} link(s); "
-              f"{len(events)} JSONL event(s); workspace={len(resources)} resources; "
+              f"{len(events)} JSONL event(s); workspace={len(workspace.get('resources', []))} resources; "
               f"workspace_live_projects={len(ops_projects)}; "
               f"guide_visuals={len(guide_images)} SVGs; "
               f"identity/provenance/resource/projection/routes/workspace-live/fallback/guide-visuals verified."
