@@ -391,6 +391,7 @@ function renderHealth(){
     ["Google Sheets","input","Controlled human input / downstream projection"],
     ["Slack","input","Field evidence / concise follow-up surface"],
     ["SQL contract","reference","daily-ops-postgres.sql · PK/FK/constraint reference"],
+    ["GitHub Actions / Pages","reference","Deployment status is provider-owned; browser Workspace does not pretend to poll private release state"],
     ["PostgreSQL / Neon","not-live","Not required by the current file-first Pages runtime"]
   ];
   const grid=$("health-grid");
