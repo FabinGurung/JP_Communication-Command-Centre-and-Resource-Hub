@@ -67,6 +67,37 @@
     </div>
   </section>
 
+  <section class="control-console" aria-labelledby="health-title">
+    <div class="console-block">
+      <div class="section-heading">
+        <div><p class="eyebrow">System health & ownership</p><h2 id="health-title">What is connected right now?</h2></div>
+        <span class="badge verified" id="health-overall">CHECKING</span>
+      </div>
+      <p class="metadata">Health means “the expected source/registry is reachable and structurally usable from this public Workspace.” It does not imply private-provider authentication or write permission.</p>
+      <div id="health-grid" class="health-grid" aria-live="polite"></div>
+    </div>
+
+    <div class="console-block" aria-labelledby="edit-route-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Guided ownership routing</p><h2 id="edit-route-title">What do I edit?</h2></div>
+      </div>
+      <label class="route-search">Describe what you want to change
+        <input id="route-search" type="search" placeholder="Try schedule, project status, structural report, Drive file…" autocomplete="off">
+      </label>
+      <p id="route-count" class="metadata" role="status" aria-live="polite"></p>
+      <div id="route-grid" class="route-grid"></div>
+    </div>
+  </section>
+
+  <section class="module-console" aria-labelledby="module-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">Normalized specialist ownership</p><h2 id="module-title">Which repository owns which capability?</h2></div>
+      <a class="button secondary" href="./modules.json">Open module registry</a>
+    </div>
+    <p class="metadata">Rendered from <code>workspace/modules.json</code>. The existing static resource directory remains available below as fallback/navigation.</p>
+    <div id="module-grid" class="module-grid"></div>
+  </section>
+
   <div class="toolbar" id="filters">
     <label>Find a resource<input id="search" type="search" placeholder="Try Narayani, Daily Ops, scheduling, PostgreSQL…" autocomplete="off"></label>
     <label>Category<select id="category"><option value="">All categories</option></select></label>
