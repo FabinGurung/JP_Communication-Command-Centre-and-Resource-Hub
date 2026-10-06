@@ -55,7 +55,7 @@ Phase-2 boundary note: the public external-browser fetch path is not available f
 
 ## Phase 3 — Illustrated operational tutorials
 
-**Status:** ACTIVE — 15 deterministic public-safe SVG tutorial visuals are implemented, wired into the 1/3/7/15-page guides, and registered in `guide/image-manifest.json`. Deployment and rendered visual QA are the remaining Phase-3 acceptance checks.
+**Status:** COMPLETE — 15 deterministic public-safe SVG tutorial visuals are implemented, wired into the 1/3/7/15-page guides, registered in `guide/image-manifest.json`, validated in CI and rendered from the exact deployed Pages artifact on desktop and mobile with zero broken guide images or page errors.
 
 Create public-safe visual tutorial pages for the real JP workflow:
 
@@ -75,6 +75,8 @@ Create public-safe visual tutorial pages for the real JP workflow:
 Acceptance: each guide page has a matching visual, concise text and an “Open the real screen” link.
 
 Current implementation uses version-controlled SVG workflow diagrams rather than screenshots for concepts that would otherwise become stale. The visual set covers Workspace routing, Project Map identity, Site Operations, project detail, Slack→canonical reconciliation, stock-vs-consumption, readiness gates, Drive resources, Sheets projection, GitHub Actions, storage/Neon decisions, A9 governance, specialist-module routing, Pages production ownership and architecture-change thresholds.
+
+Rendered QA evidence: deployed-artifact test rendered the 1-page guide at 1/1 visuals, 7-page guide at 7/7 visuals, 15-page guide at 15/15 visuals, and the 7-page mobile layout at 7/7 visuals; all reported zero broken images and zero page-script errors.
 
 ## Phase 4 — Deeper live integration and system-health workspace
 
