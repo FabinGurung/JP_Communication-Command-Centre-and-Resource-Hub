@@ -33,9 +33,32 @@ const DATA={
  {title:"14 · A9 governance",summary:"Rollback, provenance, readback and synchronization.",steps:["Take PRE before material mutation.","Never blind overwrite concurrent work.","Read back exact provider state.","Take finite POST and close Local/Main under the same sequence where applicable."]},
  {title:"15 · When to change architecture",summary:"Add complexity only when the current layer becomes the constraint.",steps:["Stay file-first while the team/volume fits.","Move secure write-back behind authentication/API.","Introduce PostgreSQL/Neon for multi-user transactions, permissions, complex queries or app backends.","Keep Drive for large/source files even after a database migration."]}
 ]};
+const VISUALS={
+"1":["05-slack-to-canonical.svg"],
+"3":["01-workspace.svg","05-slack-to-canonical.svg","10-github-actions.svg"],
+"7":["03-site-operations.svg","05-slack-to-canonical.svg","06-stock-vs-consumption.svg","04-project-detail.svg","10-github-actions.svg","09-sheets-projection.svg","12-a9-governance.svg"],
+"15":["01-workspace.svg","02-project-map.svg","08-drive-resources.svg","11-storage-neon.svg","04-project-detail.svg","05-slack-to-canonical.svg","09-sheets-projection.svg","05-slack-to-canonical.svg","11-storage-neon.svg","08-drive-resources.svg","13-specialist-modules.svg","10-github-actions.svg","14-pages-production.svg","12-a9-governance.svg","15-architecture-change.svg"]
+};
+const VISUAL_META={
+"01-workspace.svg":["Workspace → correct destination","Owner-facing directory routing users to the correct operational surface."],
+"02-project-map.svg":["Project Map → stable project identity","Map context resolves to stable project identifiers before operational edits."],
+"03-site-operations.svg":["Site Operations → portfolio attention","Portfolio scan highlights readiness, blockers and projects needing follow-up."],
+"04-project-detail.svg":["Project detail → one-site operating view","Work, readiness, materials, evidence and resources stay distinct but connected."],
+"05-slack-to-canonical.svg":["Slack evidence → canonical Daily Ops","Field evidence is validated and classified before current state and history change."],
+"06-stock-vs-consumption.svg":["Stock ≠ consumption","Observed stock remains separate from actual usage or consumption evidence."],
+"07-readiness-blockers.svg":["Readiness gates → execution decision","Materials, manpower, PPE, tools and preconditions determine readiness."],
+"08-drive-resources.svg":["Drive file → project resource link","Source files remain permission-gated in Drive while project pages carry normalized links."],
+"09-sheets-projection.svg":["Canonical state → Google Sheets projection","Validated state is projected to a human-friendly Sheet without creating competing truth."],
+"10-github-actions.svg":["Commit → validation → Pages","The intended commit must pass checks and deployment before publication is trusted."],
+"11-storage-neon.svg":["Choose storage by responsibility","CSV/JSON, Drive, Sheets, SQL contracts and PostgreSQL solve different storage problems."],
+"12-a9-governance.svg":["A9 → recoverable change","PRE, bounded mutation, readback, POST and Local/Main acknowledgement preserve recoverability."],
+"13-specialist-modules.svg":["Operations Hub → specialist engines","Scheduling, Cost, Structural, CAD and R&D keep specialist ownership outside Daily Ops."],
+"14-pages-production.svg":["One canonical production Pages source","Experimental branches may test while the governed source owns production deployment."],
+"15-architecture-change.svg":["Change architecture only at a real threshold","Introduce backend/database complexity only when authenticated transactional needs justify it."]
+};
 const esc=s=>String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 const root=document.body.dataset.root||"../";const depth=document.body.dataset.depth||"1";const pages=DATA[depth]||DATA["1"];
 function href(u){return /^https?:/.test(u)?u:root+u}
-document.getElementById("pages").innerHTML=pages.map((p,i)=>'<article class="guide-page"><div class="page-no">Page '+(i+1)+' of '+pages.length+'</div><h2>'+esc(p.title)+'</h2><p class="summary">'+esc(p.summary)+'</p><ol class="steps">'+p.steps.map(x=>'<li>'+esc(x)+'</li>').join("")+'</ol>'+(p.tip?'<div class="callout">'+esc(p.tip)+'</div>':'')+'<div class="visual">Phase 3 visual slot · this page already works without an illustration.</div>'+(p.links?'<div class="links">'+p.links.map(x=>'<a href="'+esc(href(x[1]))+'">'+esc(x[0])+' →</a>').join("")+'</div>':'')+'</article>').join("");
+document.getElementById("pages").innerHTML=pages.map((p,i)=>'<article class="guide-page"><div class="page-no">Page '+(i+1)+' of '+pages.length+'</div><h2>'+esc(p.title)+'</h2><p class="summary">'+esc(p.summary)+'</p><ol class="steps">'+p.steps.map(x=>'<li>'+esc(x)+'</li>').join("")+'</ol>'+(p.tip?'<div class="callout">'+esc(p.tip)+'</div>':'')+(function(){const f=VISUALS[depth]?.[i];if(!f)return "";const m=VISUAL_META[f]||["Tutorial visual","JP AEC tutorial visual"];return '<figure class="visual"><img loading="lazy" src="'+esc(root+'guide/images/'+f)+'" alt="'+esc(m[1])+'"><figcaption><strong>'+esc(m[0])+'</strong><span>'+esc(m[1])+'</span></figcaption></figure>'})()+(p.links?'<div class="links">'+p.links.map(x=>'<a href="'+esc(href(x[1]))+'">'+esc(x[0])+' →</a>').join("")+'</div>':'')+'</article>').join("");
 document.getElementById("print").addEventListener("click",()=>window.print());
 document.querySelectorAll("[data-depth-link]").forEach(a=>{if(a.dataset.depthLink===depth)a.classList.add("active")});
