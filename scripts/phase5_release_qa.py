@@ -199,12 +199,36 @@ def audit_pages_owner():
     return errors
 
 
+def audit_release_metadata():
+    errors = []
+    version_path = ROOT / "VERSION"
+    if not version_path.exists():
+        return ["VERSION file missing"]
+    version = version_path.read_text(encoding="utf-8").strip()
+    parts = version.split(".")
+    if len(parts) != 3 or not all(part.isdigit() for part in parts):
+        errors.append(f"VERSION is not simple semver: {version!r}")
+        return errors
+    marker = f"v{version}"
+    changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    release_notes = ROOT / "docs/releases" / f"{marker}.md"
+    if marker not in changelog:
+        errors.append(f"CHANGELOG.md missing {marker}")
+    if marker not in readme:
+        errors.append(f"README.md missing {marker}")
+    if not release_notes.exists():
+        errors.append(f"release notes missing: {release_notes.relative_to(ROOT)}")
+    return errors
+
+
 def main():
     errors = []
     html_errors, pages, links = audit_html()
     errors.extend(html_errors)
     errors.extend(audit_print())
     errors.extend(audit_pages_owner())
+    errors.extend(audit_release_metadata())
 
     if errors:
         print("PHASE5_QA_FAIL")
@@ -215,7 +239,7 @@ def main():
     print(
         f"PHASE5_QA_PASS: html_pages={pages}; internal_refs={links}; "
         "accessibility_basics=PASS; guide_print_contract=PASS; "
-        "single_pages_owner=main"
+        "single_pages_owner=main; release_metadata=PASS"
     )
 
 
