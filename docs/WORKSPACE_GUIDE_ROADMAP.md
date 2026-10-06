@@ -110,16 +110,23 @@ Phase-4 completion evidence:
 
 ## Phase 5 — Release, governance, mobile/print QA and A9 closeout
 
-- cross-browser/mobile QA;
-- accessibility review;
-- link checker;
-- print/PDF QA for guides;
-- stale-link and old-slug cleanup;
-- final Pages deployment verification;
-- explicit promotion decision for `main`;
-- A9 PRE → mutation → provider readback → POST;
-- Root-11 Local/Main registration;
-- versioned release notes.
+**Status:** RELEASE CANDIDATE — v2.0.0 metadata and release QA are implemented on `feature/daily-ops-current-work`. The feature lane validates but cannot deploy production Pages. Final completion requires fast-forward promotion to `main`, production Pages provider readback, exact deployed-artifact runtime/print QA and Root-11 Local/Main A9 closeout.
+
+Implemented release gates:
+- Phase-5 internal-link/accessibility/print-contract validator at `scripts/phase5_release_qa.py`;
+- exactly one GitHub Pages deploy workflow, gated to `refs/heads/main`;
+- feature-lane validation with production deployment skipped;
+- version `2.0.0` and versioned release notes under `docs/releases/v2.0.0.md`;
+- pre-Phase-5 working snapshot and pre-main-promotion rollback branch;
+- production promotion permitted only when `main` remains a clean fast-forward target.
+
+Remaining release gates at this boundary:
+- final release-candidate validation run;
+- fast-forward `main` promotion;
+- production GitHub Actions/Pages SUCCESS;
+- exact deployed-artifact desktop/mobile runtime and guide print/PDF QA;
+- final Phase-5 completion marker;
+- Root-11 Local/Main A9 closeout.
 
 Acceptance: production-ready Workspace + Guide system with reproducible governance and no unresolved deployment/source ambiguity.
 
