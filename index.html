@@ -42,15 +42,31 @@
       <a class="card" href="site-operations.html">
         <div class="icon">🏗️</div>
         <h2>Daily Site Operations</h2>
-        <p>The new detailed operational page for engineers and shareholders.</p>
+        <p>The detailed operational page for engineers and shareholders.</p>
         <ul><li>Today's work and readiness gates</li><li>Materials, progress and blockers</li><li>3-day lookahead and field evidence</li><li>Drive-backed project files and engineering documents</li></ul>
         <div class="go">Open site operations →</div>
+      </a>
+
+      <a class="card" href="workspace.html">
+        <div class="icon">🧭</div>
+        <h2>Owner Workspace</h2>
+        <p>A plain-language control desk showing where to go, what owns each fact, and how the storage layers fit together.</p>
+        <ul><li>Task → correct source mapping</li><li>Live Daily Ops orientation</li><li>CSV / JSON / Sheets / Drive / PostgreSQL guide</li><li>Deployment and audit shortcuts</li></ul>
+        <div class="go">Open workspace →</div>
+      </a>
+
+      <a class="card" href="how-to.html">
+        <div class="icon">📘</div>
+        <h2>How To</h2>
+        <p>Step-by-step instructions for project edits, Daily Ops, files, Sheets, publishing, recovery and future database migration.</p>
+        <ul><li>What we built and why</li><li>Where to edit safely</li><li>Why Neon is optional today</li><li>A9 recovery vocabulary</li></ul>
+        <div class="go">Open How-To guide →</div>
       </a>
     </section>
 
     <section class="architecture">
       <h3>Machine-first architecture</h3>
-      <p>Google Drive is the canonical source/evidence warehouse. GitHub is the canonical structured-data/control warehouse. SQL text defines relationships; CSV/JSON hold current values; JSONL holds history. Sheets, Pages and Slack remain downstream projections or input surfaces.</p>
+      <p>Google Drive is the canonical source/evidence warehouse. GitHub is the canonical structured-data/control warehouse. PostgreSQL-compatible SQL text defines the relationship contract; CSV/JSON hold current values; JSONL holds history. The current GitHub Pages runtime does <b>not</b> require a live Neon/PostgreSQL server. Sheets, Pages and Slack remain downstream projections or controlled input surfaces.</p>
     </section>
 
     <div class="notice"><b>Platform modules:</b> Operations Hub is the current live-experience point. Standard modules are JP AEC Project Controls (Primavera P6), JP AEC Cost Estimation, JP AEC Structural Analysis (OpenSees), and JP AEC CAD &amp; Drawings. Existing repository slugs remain unchanged for URL stability.</div>
