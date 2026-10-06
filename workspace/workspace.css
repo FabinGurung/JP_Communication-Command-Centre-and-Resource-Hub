@@ -38,3 +38,10 @@ footer{padding:20px 2px 0;color:var(--muted);font-size:11px}
 .module-console{margin-top:14px}.module-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}.module-card{border:1px solid var(--line);border-radius:11px;background:#fbfcfd;padding:12px;display:flex;flex-direction:column;gap:7px}.module-card h3{font-size:15px;margin:0}.module-card p{font-size:11px;line-height:1.45;color:var(--muted);margin:0}.module-card .repo{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;color:var(--muted);word-break:break-word}.module-card .module-links{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto}.module-card .module-links a{font-size:10px;color:var(--blue);font-weight:850;text-decoration:none}
 @media(max-width:900px){.control-console{grid-template-columns:1fr}.module-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.health-grid,.module-grid{grid-template-columns:1fr}}
+
+/* Phase 4 mobile intrinsic-width guard: static fallback cards must never widen the viewport. */
+.cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+.resource{min-width:0}
+.resource p,.resource a,.resource h3,.state-note{overflow-wrap:anywhere;word-break:break-word}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.cards{grid-template-columns:minmax(0,1fr)}}
