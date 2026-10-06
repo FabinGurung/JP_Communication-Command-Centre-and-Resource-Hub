@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="How to use and maintain the JP AEC Operations Hub">
+  <title>How To — JP AEC Operations Hub</title>
+  <style>
+    :root{--bg:#f4f6f8;--panel:#fff;--text:#172033;--muted:#667085;--line:#dfe4ea;--blue:#175cd3;--green:#067647;--amber:#b54708;--soft:#eef4ff;--shadow:0 8px 24px rgba(15,23,42,.07)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}a{color:var(--blue)}
+    .shell{max-width:1100px;margin:auto;padding:16px}.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.nav a{text-decoration:none;color:var(--text);border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:750}.nav a.active{background:var(--soft);border-color:#b2ccff;color:var(--blue)}
+    .hero,.section{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.hero{padding:20px}.section{padding:18px;margin-top:14px}.eyebrow{font-size:11px;color:var(--blue);font-weight:800;letter-spacing:.08em;text-transform:uppercase}h1{font-size:clamp(30px,5vw,46px);margin:5px 0 8px}h2{font-size:22px;margin:0 0 9px}h3{font-size:16px;margin:18px 0 6px}.lead,.muted{color:var(--muted);line-height:1.6}
+    .toc{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}.toc a{text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:7px 9px;background:#f8fafc;font-size:11px;font-weight:750}
+    .flow{border-left:3px solid #b2ccff;padding-left:14px;margin:12px 0}.flow p{margin:7px 0;line-height:1.55}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f8fafc;border:1px solid var(--line);border-radius:6px;padding:1px 5px}
+    ol,ul{line-height:1.65}.rule{border:1px solid #abefc6;background:#ecfdf3;color:#05603a;border-radius:11px;padding:11px 13px;line-height:1.5;font-size:12px}.warn{border-color:#fedf89;background:#fffaeb;color:#7a2e0e}
+    table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}th,td{padding:9px 7px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:10px;color:var(--muted);text-transform:uppercase}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mini{border:1px solid var(--line);border-radius:12px;padding:13px;background:#f8fafc}.mini h3{margin:0 0 6px}.footer{padding:18px 2px;color:var(--muted);font-size:11px}
+    @media(max-width:760px){.two{grid-template-columns:1fr}.shell{padding:11px}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <nav class="nav">
+    <a href="index.html">Overview</a><a href="map.html">Project map</a><a href="site-operations.html">Site operations</a><a href="workspace.html">Workspace</a><a class="active" href="how-to.html">How to</a>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">Plain-language guide</div>
+    <h1>How to use the JP AEC Operations Hub</h1>
+    <p class="lead">You do not need to think like a database engineer to use this system. The core idea is: <b>put each fact in one correct place, validate it, then let the website/Sheets/Slack show controlled views of that same fact.</b></p>
+    <div class="toc">
+      <a href="#mental-model">Mental model</a><a href="#project-master">Project edits</a><a href="#daily-ops">Daily Ops</a><a href="#files">Files</a><a href="#sheets">Sheets</a><a href="#database">Database / Neon</a><a href="#deployment">Deployment</a><a href="#recovery">Recovery</a>
+    </div>
+  </header>
+
+  <section class="section" id="mental-model">
+    <h2>1. The mental model</h2>
+    <p class="muted">Think of the system as five layers, not one giant database.</p>
+    <div class="flow">
+      <p><b>Evidence:</b> Slack messages, Drive files, photos, site notes.</p>
+      <p><b>Admission:</b> decide what is verified, ambiguous, unsupported or still pending.</p>
+      <p><b>Canonical machine data:</b> CSV/JSON/JSONL + the SQL relationship contract.</p>
+      <p><b>Website:</b> reads the canonical files and renders human-friendly pages.</p>
+      <p><b>Projections:</b> Sheets and Slack receive controlled copies, summaries or follow-up questions.</p>
+    </div>
+    <div class="rule"><b>Golden rule:</b> never maintain the same business fact independently in five places. Edit the owning source once; regenerate/reconcile the views.</div>
+  </section>
+
+  <section class="section" id="project-master">
+    <h2>2. How to change a project master fact</h2>
+    <p class="muted">Use this for project name, lifecycle/status, coordinates, company code or other public master attributes.</p>
+    <ol>
+      <li>Open <span class="code">projects.csv</span>.</li>
+      <li>Find the row using the stable project ID.</li>
+      <li>Change only the owning field.</li>
+      <li>Commit on the governed branch with a clear message.</li>
+      <li>Check GitHub Actions.</li>
+      <li>Open the Project Map and confirm the result.</li>
+    </ol>
+    <div class="rule warn"><b>Do not:</b> fix a project-master fact only in a Google Sheet or directly in HTML. That creates competing truth.</div>
+  </section>
+
+  <section class="section" id="daily-ops">
+    <h2>3. How Daily Ops works</h2>
+    <p class="muted">Daily Ops is evidence-driven. A Slack reply or photo is an input, not automatically a completed-work record.</p>
+    <ol>
+      <li>Read the provider evidence.</li>
+      <li>Identify the project and date.</li>
+      <li>Classify each statement: work, material, blocker, readiness, plan, instruction or evidence.</li>
+      <li>Do not convert stock into consumption unless the evidence says consumption.</li>
+      <li>Do not mark work DONE from an unlabeled photo.</li>
+      <li>Write the current state into <span class="code">ops/data/current-works.json</span>.</li>
+      <li>Append the corresponding immutable event into <span class="code">ops/events/daily-ops-events.jsonl</span>.</li>
+      <li>Validate/deploy, then project the controlled view to Sheets and concise Slack trackers.</li>
+    </ol>
+    <div class="two">
+      <div class="mini"><h3>Current state</h3><p class="muted"><span class="code">current-works.json</span> answers: “What do we currently believe is true?”</p></div>
+      <div class="mini"><h3>History</h3><p class="muted"><span class="code">daily-ops-events.jsonl</span> answers: “What happened, when, and why did the current state change?”</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="files">
+    <h2>4. How project files work</h2>
+    <p class="muted">Large engineering files do not belong in the public website repository just because the page needs a link to them.</p>
+    <ol>
+      <li>Keep the actual PDF/DWG/ETABS/photo/model in Google Drive.</li>
+      <li>Preserve Drive permissions there.</li>
+      <li>Add the normalized project-to-file relationship to <span class="code">ops/data/project-resources.json</span>.</li>
+      <li>The project page can then show a permission-gated link without copying the source file into GitHub.</li>
+    </ol>
+    <div class="rule"><b>Drive owns bytes and permissions. GitHub owns the structured relationship metadata.</b></div>
+  </section>
+
+  <section class="section" id="sheets">
+    <h2>5. Why Google Sheets is still useful</h2>
+    <p class="muted">Sheets is excellent for people, but not ideal as the only authority for a growing relational operations system.</p>
+    <table>
+      <thead><tr><th>Sheets is good at</th><th>Sheets is weak at</th></tr></thead>
+      <tbody>
+        <tr><td>Fast human editing</td><td>Strict PK/FK relationships</td></tr>
+        <tr><td>Visual reporting</td><td>Preventing contradictory copies across tabs/workbooks</td></tr>
+        <tr><td>Simple calculations</td><td>Reliable append-only event history</td></tr>
+        <tr><td>Field/team familiarity</td><td>Multi-user application permissions and transactions</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">So we use Sheets as a controlled input or downstream projection where it is useful, rather than forcing it to be the only database.</p>
+  </section>
+
+  <section class="section" id="database">
+    <h2>6. PostgreSQL, Neon and the SQL file</h2>
+    <h3>What PostgreSQL is</h3>
+    <p class="muted">PostgreSQL is a relational database engine. It stores tables and enforces relationships such as “every work item must belong to a valid project.”</p>
+    <h3>What Neon is</h3>
+    <p class="muted">Neon is a hosted PostgreSQL service. Instead of running PostgreSQL yourself, Neon provides the database server, connection endpoint, storage and related cloud features.</p>
+    <h3>What this repository currently does</h3>
+    <div class="rule"><b>The current Pages site does not need a live PostgreSQL/Neon server.</b> <span class="code">ops/schema/daily-ops-postgres.sql</span> is presently a schema/relationship contract. The website reads CSV/JSON/JSONL files directly.</div>
+    <h3>Then why keep a PostgreSQL schema at all?</h3>
+    <ul>
+      <li>It forces us to define stable IDs and foreign keys.</li>
+      <li>It makes relationships explicit instead of relying on memory.</li>
+      <li>AI can inspect a deterministic data model.</li>
+      <li>It gives us a clean migration path if the static files later become too limited.</li>
+      <li>It catches conceptual mistakes before we build a real backend.</li>
+    </ul>
+    <h3>When Neon becomes worth it</h3>
+    <ul>
+      <li>Several authenticated users need to edit at the same time.</li>
+      <li>The website itself must securely create/update records.</li>
+      <li>We need fast server-side queries across many tables/projects.</li>
+      <li>We need transactions: multiple related writes succeed or fail together.</li>
+      <li>We need row-level permissions, APIs, dashboards or mobile apps.</li>
+      <li>Data volume or automation makes file-based editing unreliable.</li>
+    </ul>
+    <h3>When CSV/JSON/Sheets are enough</h3>
+    <ul>
+      <li>Small team.</li>
+      <li>Mostly read-only public website.</li>
+      <li>Controlled A9/AI reconciliation.</li>
+      <li>Low simultaneous write volume.</li>
+      <li>Git history is useful and acceptable as change history.</li>
+    </ul>
+  </section>
+
+  <section class="section" id="deployment">
+    <h2>7. What happens when we publish</h2>
+    <ol>
+      <li>A governed file changes on the working branch.</li>
+      <li>GitHub Actions validates required IDs, formats and constraints.</li>
+      <li>If validation fails, the site should not be treated as successfully updated.</li>
+      <li>If it passes, GitHub Pages publishes the branch preview.</li>
+      <li>Open the site and visually confirm the result.</li>
+      <li>Only promote to <span class="code">main</span> when that release is explicitly approved.</li>
+    </ol>
+    <p><a href="https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions">Open GitHub Actions →</a></p>
+  </section>
+
+  <section class="section" id="recovery">
+    <h2>8. Recovery and A9 safety</h2>
+    <p class="muted">A9 governance is there so a convenient edit does not silently erase history or overwrite another writer.</p>
+    <ul>
+      <li><b>PRE snapshot:</b> rollback point before a material mutation.</li>
+      <li><b>Lease/current-head check:</b> avoid writing over concurrent work.</li>
+      <li><b>Append-only history:</b> preserve why the change happened.</li>
+      <li><b>Provider readback:</b> verify the external system actually contains what we think we wrote.</li>
+      <li><b>POST snapshot:</b> preserve the verified after-state.</li>
+      <li><b>Local/Main acknowledgement:</b> only advance the synchronization cursor after exact readback.</li>
+    </ul>
+    <div class="rule warn"><b>A9 does not mean “duplicate everything forever.”</b> It means preserve enough lineage and rollback evidence to safely reproduce, audit and recover the important state.</div>
+  </section>
+
+  <section class="section">
+    <h2>9. Simple rule for choosing storage</h2>
+    <table>
+      <thead><tr><th>If the thing is…</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td>A small clean table used directly by the static site</td><td>CSV</td></tr>
+        <tr><td>Nested current application state</td><td>JSON</td></tr>
+        <tr><td>An append-only history stream</td><td>JSONL</td></tr>
+        <tr><td>A large/source engineering document</td><td>Google Drive</td></tr>
+        <tr><td>Something staff must easily edit/review</td><td>Google Sheets, then reconcile</td></tr>
+        <tr><td>A multi-user secure transactional application</td><td>PostgreSQL/Neon + authenticated backend</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="footer">JP AEC Operations Hub · How-To Guide · See Workspace for shortcuts and current-system orientation.</div>
+</div>
+</body>
+</html>
