@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0.0",
+  "updated": "2026-10-06",
+  "title": "What do I edit?",
+  "note": "Owner-facing edit-routing registry. Routes people to the canonical owner of a fact or capability; it does not grant write permission.",
+  "routes": [
+    {
+      "id": "project-master",
+      "question": "Project name, location, lifecycle/status, coordinates or public project attributes",
+      "owner": "projects.csv",
+      "type": "canonical_file",
+      "target": "../projects.csv",
+      "module_id": "operations",
+      "rule": "Edit the project-master row only. Do not fix this fact in HTML or a downstream Sheet."
+    },
+    {
+      "id": "daily-current",
+      "question": "Today's work, readiness, blocker, material observation or current site status",
+      "owner": "ops/data/current-works.json",
+      "type": "canonical_file",
+      "target": "../ops/data/current-works.json",
+      "module_id": "operations",
+      "rule": "Admit only evidence-backed current state; keep unsupported facts UNKNOWN/NEEDS_INPUT/HOLD."
+    },
+    {
+      "id": "daily-history",
+      "question": "Historical Daily Ops or governance event",
+      "owner": "ops/events/daily-ops-events.jsonl",
+      "type": "append_only_file",
+      "target": "../ops/events/daily-ops-events.jsonl",
+      "module_id": "operations",
+      "rule": "Append a new event. Never rewrite old history just to simplify the present."
+    },
+    {
+      "id": "project-resource",
+      "question": "Project ↔ engineering file relationship",
+      "owner": "ops/data/project-resources.json",
+      "type": "canonical_file",
+      "target": "../ops/data/project-resources.json",
+      "module_id": "operations",
+      "rule": "Drive owns the file bytes; this registry owns the normalized project-to-resource relationship."
+    },
+    {
+      "id": "engineering-file",
+      "question": "PDF, DWG, ETABS, photo, source file or other real engineering document",
+      "owner": "Google Drive",
+      "type": "external_source",
+      "target": "#group-data",
+      "module_id": "operations",
+      "rule": "Keep the source file in Drive and respect its permission boundary."
+    },
+    {
+      "id": "sheet",
+      "question": "Human review/entry in Fishtail or Rohini operational Sheets",
+      "owner": "Google Sheets projection/input surface",
+      "type": "human_surface",
+      "target": "#group-daily",
+      "module_id": "operations",
+      "rule": "Use only the designated Sheet/tab. Do not make the Sheet an independent project-master truth store."
+    },
+    {
+      "id": "field",
+      "question": "Field clarification, tracker reply or concise follow-up",
+      "owner": "Slack field interaction",
+      "type": "human_surface",
+      "target": "../site-operations.html",
+      "module_id": "operations",
+      "rule": "Ask only for unresolved facts; evidence must be reconciled before it becomes canonical truth."
+    },
+    {
+      "id": "scheduling",
+      "question": "Schedule, activity sequence, calendars, resources, productivity, Primavera/open-source planning",
+      "owner": "JP Scheduling Work and Resources Management",
+      "type": "specialist_module",
+      "target": "https://github.com/FabinGurung/JP_Scheduling_Work_and_Resources_Management",
+      "module_id": "scheduling",
+      "rule": "Scheduling logic belongs in the specialist module, not Daily Ops JSON."
+    },
+    {
+      "id": "cost",
+      "question": "BOQ, estimate, quantities, rates or cost calculations",
+      "owner": "JP Cost Estimation",
+      "type": "specialist_module",
+      "target": "https://github.com/FabinGurung/JP_Cost_Estimation",
+      "module_id": "cost",
+      "rule": "Cost-engine logic belongs in the cost module."
+    },
+    {
+      "id": "structural",
+      "question": "Structural model, analysis, OpenSees, verification or structural analysis report",
+      "owner": "JP Structural Analysis",
+      "type": "specialist_module",
+      "target": "https://github.com/FabinGurung/JP_Structural_Analysis",
+      "module_id": "structural",
+      "rule": "Research may link to the engine, but production structural computation belongs here."
+    },
+    {
+      "id": "cad",
+      "question": "CAD drawing production or drawing publication",
+      "owner": "JP Computer-Aided Drawings",
+      "type": "specialist_module",
+      "target": "https://github.com/FabinGurung/JP_Computer-Aided-Drawings",
+      "module_id": "cad",
+      "rule": "Approved/current project drawing links may flow back to project resources."
+    },
+    {
+      "id": "research",
+      "question": "AEC/Structural research, hydropower research, methodology or research evidence",
+      "owner": "JP Research and Development",
+      "type": "specialist_module",
+      "target": "https://fabingurung.github.io/JP_Research-and-Development/",
+      "module_id": "rd",
+      "rule": "Research dissemination belongs in R&D; executable specialist engines remain separate."
+    },
+    {
+      "id": "study",
+      "question": "Academic study notes, learning materials or study workflows",
+      "owner": "JP Study Hub",
+      "type": "specialist_module",
+      "target": "https://fabingurung.github.io/JP_Study_Hub/",
+      "module_id": "study",
+      "rule": "Keep learning content separate from production project operations."
+    }
+  ]
+}
