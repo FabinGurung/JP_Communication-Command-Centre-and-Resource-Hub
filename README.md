@@ -4,9 +4,9 @@ The live project-experience layer of the **JP AEC Platform**, hosted with GitHub
 
 ## Current stable version
 
-**v1.1.0 — Data-driven Stable Map**
+**v2.0.0 — JP AEC Operations Hub**
 
-This is the first stable data-driven version of the JP Ecosystem Project Map.
+v2.0.0 is the governed production release that expands the former data-driven project-map baseline into the Operations Hub: Project Map, Daily Ops, Site Operations, per-project pages, Workspace, Guide, Drive-resource linking and specialist-module routing.
 
 Project and Daily Ops truth are maintained as canonical machine-readable files, separate from the application:
 
@@ -18,7 +18,7 @@ Project and Daily Ops truth are maintained as canonical machine-readable files, 
 - `map-config.json` — controlled map statuses and presentation configuration
 - HTML / GitHub Pages / Google Sheets / Slack — downstream projections or interaction surfaces, never competing truth stores
 
-See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for source-of-truth rules, [`ops/PLATFORM_MODULES.md`](ops/PLATFORM_MODULES.md) for JP AEC Platform module naming, and [`CHANGELOG.md`](CHANGELOG.md) for version history.
+See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for source-of-truth rules, [`ops/PLATFORM_MODULES.md`](ops/PLATFORM_MODULES.md) for JP AEC Platform module naming, [`CHANGELOG.md`](CHANGELOG.md) for version history, and [`docs/releases/v2.0.0.md`](docs/releases/v2.0.0.md) for the current release notes.
 
 ## Start here if you are the owner or manager
 
@@ -61,7 +61,7 @@ Edit the canonical file that owns the fact. Do **not** manually maintain the sam
 
 GitHub Pages reads these canonical files and is a downstream presentation layer. Google Sheets is also a downstream projection; it is not where project-master truth should be edited.
 
-During the current Daily Ops development lane, changes are made on `feature/daily-ops-current-work`, validated by GitHub Actions, and deployed by the branch-preview workflow. `main` remains untouched until an explicit governed promotion.
+The working lane `feature/daily-ops-current-work` remains available for governed validation, but production GitHub Pages deployment is owned by `main` only. Feature-lane runs validate and skip deployment; production changes reach Pages only after an explicit fast-forward release to `main`.
 
 ## Files
 
