@@ -48,6 +48,8 @@ jobs:
               Path("ops/PLATFORM_MODULES.md"),
               Path("workspace/index.html"),
               Path("workspace/links.json"),
+              Path("workspace/modules.json"),
+              Path("workspace/edit-routing.json"),
               Path("workspace/workspace.css"),
               Path("workspace/workspace.js"),
               Path("workspace.html"),
@@ -73,6 +75,9 @@ jobs:
           allowed_project_statuses = set(map_config.get("status_styles", {}))
 
           workspace = json.loads(Path("workspace/links.json").read_text(encoding="utf-8"))
+          modules_state = json.loads(Path("workspace/modules.json").read_text(encoding="utf-8"))
+          routing_state = json.loads(Path("workspace/edit-routing.json").read_text(encoding="utf-8"))
+
           if workspace.get("schema_version") != "1.0.0":
               raise SystemExit("Unexpected Workspace links schema_version.")
           group_ids = [g.get("id") for g in workspace.get("groups", [])]
@@ -91,6 +96,65 @@ jobs:
               for field in ("title", "url", "why", "how", "audience", "type", "source"):
                   if not str(item.get(field, "")).strip():
                       raise SystemExit(f"Workspace resource {item.get('id')} missing {field}.")
+
+
+          if modules_state.get("schema_version") != "1.0.0":
+              raise SystemExit("Unexpected Workspace modules schema_version.")
+          modules = modules_state.get("modules", [])
+          module_ids = [item.get("module_id") for item in modules]
+          if not modules or len(module_ids) != len(set(module_ids)):
+              raise SystemExit("Workspace module IDs are blank or duplicated.")
+          required_module_fields = {
+              "display_name", "repository", "repository_url", "pages_url",
+              "default_branch", "status", "purpose", "owns", "does_not_own"
+          }
+          expected_repositories = {
+              "operations": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+              "scheduling": "FabinGurung/JP_Scheduling_Work_and_Resources_Management",
+              "cost": "FabinGurung/JP_Cost_Estimation",
+              "structural": "FabinGurung/JP_Structural_Analysis",
+              "cad": "FabinGurung/JP_Computer-Aided-Drawings",
+              "rd": "FabinGurung/JP_Research-and-Development",
+              "study": "FabinGurung/JP_Study_Hub",
+          }
+          if set(module_ids) != set(expected_repositories):
+              raise SystemExit(
+                  f"Workspace module registry mismatch: {sorted(module_ids)}"
+              )
+          for item in modules:
+              missing_fields = {
+                  field for field in required_module_fields
+                  if not item.get(field) and item.get(field) != []
+              }
+              if missing_fields:
+                  raise SystemExit(
+                      f"Workspace module {item.get('module_id')} missing {sorted(missing_fields)}"
+                  )
+              expected_repo = expected_repositories[item["module_id"]]
+              if item["repository"] != expected_repo:
+                  raise SystemExit(
+                      f"Workspace module {item['module_id']} repository drift: "
+                      f"{item['repository']} != {expected_repo}"
+                  )
+              if item["repository_url"] != f"https://github.com/{expected_repo}":
+                  raise SystemExit(f"Workspace module {item['module_id']} repository_url drift.")
+              if not isinstance(item["owns"], list) or not isinstance(item["does_not_own"], list):
+                  raise SystemExit(f"Workspace module {item['module_id']} ownership fields must be lists.")
+
+          if routing_state.get("schema_version") != "1.0.0":
+              raise SystemExit("Unexpected Workspace edit-routing schema_version.")
+          routes = routing_state.get("routes", [])
+          route_ids = [item.get("id") for item in routes]
+          if not routes or len(route_ids) != len(set(route_ids)):
+              raise SystemExit("Workspace edit-route IDs are blank or duplicated.")
+          for item in routes:
+              for field in ("question", "owner", "type", "target", "module_id", "rule"):
+                  if not str(item.get(field, "")).strip():
+                      raise SystemExit(f"Workspace edit route {item.get('id')} missing {field}.")
+              if item["module_id"] not in set(module_ids):
+                  raise SystemExit(
+                      f"Workspace edit route {item['id']} references unknown module {item['module_id']}."
+                  )
 
           if state.get("schema_version") != "0.2.0":
               raise SystemExit("Unexpected Daily Ops schema_version.")
@@ -311,6 +375,8 @@ jobs:
 
           if "./links.json" not in workspace_js:
               raise SystemExit("Workspace JS does not load the canonical links.json registry.")
+          if "./modules.json" not in workspace_js or "./edit-routing.json" not in workspace_js:
+              raise SystemExit("Workspace JS does not load the Phase 4 module/routing registries.")
           if "../projects.csv" not in workspace_js or "../ops/data/current-works.json" not in workspace_js:
               raise SystemExit("Workspace live project layer must read projects.csv + current-works.json.")
           for marker in ("live-project-summary", "live-project-status", "live-project-grid", "group-projects"):
@@ -318,6 +384,12 @@ jobs:
                   raise SystemExit(f"Workspace page is missing live project marker: {marker}")
           if "parseCsv" not in workspace_js or "deriveOpsSignal" not in workspace_js or "loadLiveProjects" not in workspace_js:
               raise SystemExit("Workspace live project join/render functions are incomplete.")
+          for function_name in ("loadModules", "loadRouting", "renderHealth"):
+              if function_name not in workspace_js:
+                  raise SystemExit(f"Workspace Phase 4 function missing: {function_name}")
+          for marker in ("health-grid", "route-grid", "module-grid"):
+              if marker not in workspace_html:
+                  raise SystemExit(f"Workspace Phase 4 UI marker missing: {marker}")
           if "workspace.css" not in workspace_html or "workspace.js" not in workspace_html:
               raise SystemExit("Workspace page is missing its CSS/JS assets.")
           if 'location.replace("workspace/"' not in legacy_workspace_html:
@@ -364,6 +436,30 @@ jobs:
               raise SystemExit("Guide renderer is missing Print/Save PDF support.")
           if "@media print" not in guide_css:
               raise SystemExit("Guide CSS is missing print styles.")
+
+
+          stale_names = (
+              "jp-ecosystem-project-map-v1",
+              "jp-building-cost-estimator",
+              "Project_Drawings",
+              "Project-Controls-Kernel",
+          )
+          text_suffixes = {".md", ".html", ".js", ".json", ".jsonl", ".yml", ".yaml", ".txt", ".csv", ".sql"}
+          stale_hits = []
+          for path in Path(".").rglob("*"):
+              if not path.is_file() or ".git" in path.parts or path.suffix.lower() not in text_suffixes:
+                  continue
+              if path.as_posix() == "ops/PLATFORM_MODULES.md":
+                  continue
+              try:
+                  content = path.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  continue
+              for stale_name in stale_names:
+                  if stale_name in content:
+                      stale_hits.append(f"{path}:{stale_name}")
+          if stale_hits:
+              raise SystemExit(f"Stale repository names remain outside the migration note: {stale_hits}")
 
           required_routes = {
               "hub -> map": "map.html",
@@ -412,8 +508,9 @@ jobs:
               f"daily_ops={len(ops_ids)} projects; resources={len(resource_ids)} link(s); "
               f"{len(events)} JSONL event(s); workspace={len(workspace.get('resources', []))} resources; "
               f"workspace_live_projects={len(ops_projects)}; "
+              f"workspace_modules={len(modules)}; edit_routes={len(routes)}; "
               f"guide_visuals={len(guide_images)} SVGs; "
-              f"identity/provenance/resource/projection/routes/workspace-live/fallback/guide-visuals verified."
+              f"identity/provenance/resource/projection/routes/workspace-live/health/routing/modules/stale-link-audit/fallback/guide-visuals verified."
           )
 
   deploy:
