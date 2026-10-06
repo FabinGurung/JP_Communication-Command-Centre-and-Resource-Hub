@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 2,
+  "status": "PLACEHOLDERS_ONLY",
+  "note": "Phase 2 reserves visual slots and filenames. Phase 3 creates and verifies public-safe tutorial images.",
+  "images": []
+}
