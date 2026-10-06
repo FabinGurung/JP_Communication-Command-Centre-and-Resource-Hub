@@ -80,6 +80,8 @@ Rendered QA evidence: deployed-artifact test rendered the 1-page guide at 1/1 vi
 
 ## Phase 4 — Deeper live integration and system-health workspace
 
+**Status:** ACTIVE — Phase-4 PRE branch created as `snapshot/pre-workspace-phase4-20261006`. The first bounded deliverable is implemented: the Workspace now joins `projects.csv` + `ops/data/current-works.json` in the browser to generate live project/status cards, while `workspace/links.json` remains intact as the independent fallback/navigation directory.
+
 Upgrade Workspace from a static directory into a live orientation console:
 
 - derive project counts/current date from canonical JSON;
@@ -93,6 +95,15 @@ Upgrade Workspace from a static directory into a live orientation console:
 - preserve public/private boundaries.
 
 Acceptance: Workspace answers “where do I go, what is connected, and what owns this fact?” without opening raw repository files.
+
+Current Phase-4 progress:
+- dynamic project cards resolve Daily Ops `project_id` through `map_project_id` into `projects.csv`;
+- live summary shows Daily Ops project count, NEEDS_INPUT count, HOLD/BLOCKED count and latest Daily Ops date;
+- each generated card keeps project-master lifecycle/status separate from operational readiness/execution state;
+- static `workspace/links.json` project cards remain unchanged as fallback navigation;
+- CI now requires both canonical sources, the live join/render functions and exact static fallback coverage of the current Daily Ops project IDs.
+
+Remaining Phase-4 work after this boundary: system-health/connection status, “what do I edit?” guided routing, normalized specialist-module registry, stale-link/name audit and final rendered QA.
 
 ## Phase 5 — Release, governance, mobile/print QA and A9 closeout
 
