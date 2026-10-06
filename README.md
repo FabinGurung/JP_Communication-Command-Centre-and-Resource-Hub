@@ -20,6 +20,19 @@ Project and Daily Ops truth are maintained as canonical machine-readable files, 
 
 See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for source-of-truth rules, [`ops/PLATFORM_MODULES.md`](ops/PLATFORM_MODULES.md) for JP AEC Platform module naming, and [`CHANGELOG.md`](CHANGELOG.md) for version history.
 
+## Start here if you are the owner or manager
+
+- [`workspace.html`](workspace.html) — owner-facing control desk: what the system contains, where each fact belongs, storage/database choices and operational shortcuts.
+- [`how-to.html`](how-to.html) — plain-language step-by-step guide for project edits, Daily Ops, Drive resources, Sheets/Slack projections, GitHub Actions, recovery and future database migration.
+
+The design follows the same principle as the Pilates owner/member tooling: the human should not need to understand the repository tree just to operate the system.
+
+### Important database clarification
+
+The repository contains a PostgreSQL-compatible schema at `ops/schema/daily-ops-postgres.sql`, but the current GitHub Pages application does **not** require a live PostgreSQL or Neon connection. The SQL file is presently a deterministic relationship/constraint contract. Current live values remain in CSV/JSON/JSONL and source/evidence files remain in Google Drive.
+
+A hosted PostgreSQL service such as Neon becomes useful later if the system requires secure authenticated write-back, many simultaneous users, server-side querying, transactions, row-level permissions or a real API/backend.
+
 
 ## Live architecture
 
@@ -52,7 +65,10 @@ During the current Daily Ops development lane, changes are made on `feature/dail
 
 ## Files
 
-- `index.html` — map interface and logic
+- `index.html` — Operations Hub landing page
+- `workspace.html` — owner/manager workspace and storage architecture explainer
+- `how-to.html` — plain-language operating guide
+- `map.html` — map interface and logic
 - `projects.csv` — live public project dataset
 - `map-config.json` — title, map settings and status colours
 - `.github/workflows/validate-projects.yml` — automatic validation
