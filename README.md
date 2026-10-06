@@ -22,7 +22,7 @@ See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for sou
 
 ## Start here if you are the owner or manager
 
-- [`workspace.html`](workspace.html) — owner-facing control desk: what the system contains, where each fact belongs, storage/database choices and operational shortcuts.
+- [`workspace/`](workspace/) — searchable owner/manager directory: projects, Daily Ops, data sources, Sheets, specialist modules, governance and storage/database status.
 - [`how-to.html`](how-to.html) — plain-language step-by-step guide for project edits, Daily Ops, Drive resources, Sheets/Slack projections, GitHub Actions, recovery and future database migration.
 
 The design follows the same principle as the Pilates owner/member tooling: the human should not need to understand the repository tree just to operate the system.
@@ -66,8 +66,10 @@ During the current Daily Ops development lane, changes are made on `feature/dail
 ## Files
 
 - `index.html` — Operations Hub landing page
-- `workspace.html` — owner/manager workspace and storage architecture explainer
-- `how-to.html` — plain-language operating guide
+- `workspace/` — canonical Paila-style owner/manager resource directory (`index.html`, `links.json`, `workspace.css`, `workspace.js`)
+- `workspace.html` — backward-compatible redirect to `/workspace/`
+- `how-to.html` — Phase 1 plain-language operating guide; Phase 2 migrates this into the canonical `/guide/` hierarchy
+- `docs/WORKSPACE_GUIDE_ROADMAP.md` — five-phase Workspace + Guide parity plan
 - `map.html` — map interface and logic
 - `projects.csv` — live public project dataset
 - `map-config.json` — title, map settings and status colours
