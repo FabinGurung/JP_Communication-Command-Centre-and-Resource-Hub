@@ -51,6 +51,13 @@ jobs:
               Path("workspace/workspace.js"),
               Path("workspace.html"),
               Path("docs/WORKSPACE_GUIDE_ROADMAP.md"),
+              Path("guide/index.html"),
+              Path("guide/3-pages/index.html"),
+              Path("guide/7-pages/index.html"),
+              Path("guide/15-pages/index.html"),
+              Path("guide/guide.css"),
+              Path("guide/guide.js"),
+              Path("guide/image-manifest.json"),
           ]
           missing = [str(p) for p in required_files if not p.exists()]
           if missing:
@@ -280,6 +287,14 @@ jobs:
           workspace_html = Path("workspace/index.html").read_text(encoding="utf-8")
           workspace_js = Path("workspace/workspace.js").read_text(encoding="utf-8")
           legacy_workspace_html = Path("workspace.html").read_text(encoding="utf-8")
+          legacy_howto_html = Path("how-to.html").read_text(encoding="utf-8")
+          guide_root_html = Path("guide/index.html").read_text(encoding="utf-8")
+          guide_3_html = Path("guide/3-pages/index.html").read_text(encoding="utf-8")
+          guide_7_html = Path("guide/7-pages/index.html").read_text(encoding="utf-8")
+          guide_15_html = Path("guide/15-pages/index.html").read_text(encoding="utf-8")
+          guide_js = Path("guide/guide.js").read_text(encoding="utf-8")
+          guide_css = Path("guide/guide.css").read_text(encoding="utf-8")
+          guide_manifest = json.loads(Path("guide/image-manifest.json").read_text(encoding="utf-8"))
 
           if "./links.json" not in workspace_js:
               raise SystemExit("Workspace JS does not load the canonical links.json registry.")
@@ -287,6 +302,20 @@ jobs:
               raise SystemExit("Workspace page is missing its CSS/JS assets.")
           if 'location.replace("workspace/"' not in legacy_workspace_html:
               raise SystemExit("Legacy workspace.html does not redirect to canonical /workspace/.")
+          if 'location.replace("guide/"' not in legacy_howto_html:
+              raise SystemExit("Legacy how-to.html does not redirect to canonical /guide/.")
+          if guide_manifest.get("schema_version") != "1.0.0":
+              raise SystemExit("Unexpected guide image-manifest schema_version.")
+          for depth, html in (("1", guide_root_html), ("3", guide_3_html), ("7", guide_7_html), ("15", guide_15_html)):
+              if f'data-depth="{depth}"' not in html:
+                  raise SystemExit(f"Guide depth {depth} shell is misconfigured.")
+          for depth in ('"1"', '"3"', '"7"', '"15"'):
+              if depth not in guide_js:
+                  raise SystemExit(f"Guide renderer is missing depth {depth}.")
+          if "window.print()" not in guide_js:
+              raise SystemExit("Guide renderer is missing Print/Save PDF support.")
+          if "@media print" not in guide_css:
+              raise SystemExit("Guide CSS is missing print styles.")
 
           required_routes = {
               "hub -> map": "map.html",
@@ -302,6 +331,10 @@ jobs:
               "map -> workspace": "workspace/",
               "site operations -> workspace": "workspace/",
               "project detail -> workspace": "../workspace/",
+              "hub -> guide": "guide/",
+              "map -> guide": "guide/",
+              "site operations -> guide": "guide/",
+              "project detail -> guide": "../guide/",
           }
           checks = {
               "hub -> map": required_routes["hub -> map"] in hub_html,
@@ -317,6 +350,10 @@ jobs:
               "map -> workspace": required_routes["map -> workspace"] in map_html,
               "site operations -> workspace": required_routes["site operations -> workspace"] in ops_html,
               "project detail -> workspace": required_routes["project detail -> workspace"] in project_ops_html,
+              "hub -> guide": required_routes["hub -> guide"] in hub_html,
+              "map -> guide": required_routes["map -> guide"] in map_html,
+              "site operations -> guide": required_routes["site operations -> guide"] in ops_html,
+              "project detail -> guide": required_routes["project detail -> guide"] in project_ops_html,
           }
           failed = [name for name, ok in checks.items() if not ok]
           if failed:
