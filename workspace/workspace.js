@@ -1,5 +1,8 @@
 const $=id=>document.getElementById(id);
 let directoryData=null;
+let moduleData=null;
+let routingData=null;
+const runtimeHealth={directory:"checking",projects:"checking",ops:"checking",modules:"checking",routing:"checking"};
 
 const esc=s=>String(s??"")
   .replaceAll("&","&amp;")
@@ -74,6 +77,8 @@ async function loadDirectory(){
     const r=await fetch("./links.json?v="+Date.now(),{cache:"no-store"});
     if(!r.ok) throw new Error("Resource directory unavailable.");
     directoryData=await r.json();
+    runtimeHealth.directory="current";
+    renderHealth();
 
     $("total-count").textContent=directoryData.resources.length;
     $("updated").textContent=directoryData.updated+" · "+directoryData.timezone;
@@ -116,6 +121,8 @@ async function loadDirectory(){
     );
     renderDirectory();
   }catch(e){
+    runtimeHealth.directory="error";
+    renderHealth();
     $("load-status").textContent=e.message;
   }
 }
@@ -238,8 +245,17 @@ async function loadLiveProjects(){
       fetch("../ops/data/current-works.json?v="+Date.now(),{cache:"no-store"})
     ]);
 
-    if(!csvResponse.ok) throw new Error("projects.csv could not be loaded.");
-    if(!opsResponse.ok) throw new Error("current-works.json could not be loaded.");
+    if(!csvResponse.ok){
+      runtimeHealth.projects="error";
+      throw new Error("projects.csv could not be loaded.");
+    }
+    runtimeHealth.projects="current";
+    if(!opsResponse.ok){
+      runtimeHealth.ops="error";
+      throw new Error("current-works.json could not be loaded.");
+    }
+    runtimeHealth.ops="current";
+    renderHealth();
 
     const [csvText,opsState]=await Promise.all([
       csvResponse.text(),
@@ -288,11 +304,108 @@ async function loadLiveProjects(){
       (joined.length===1?"":"s")+
       " resolved to projects.csv. Status cards are derived display only; canonical files remain unchanged.";
   }catch(e){
+    if(runtimeHealth.projects==="checking") runtimeHealth.projects="error";
+    if(runtimeHealth.ops==="checking") runtimeHealth.ops="error";
+    renderHealth();
     grid.innerHTML="";
     status.textContent=
       "Live project/status layer unavailable: "+e.message+
       " Use the static Active project pages directory below; it remains the fallback navigation layer.";
   }
+}
+
+
+function moduleCard(m){
+  return '<article class="module-card">'+
+    '<div class="project-card-head"><h3>'+esc(m.display_name)+'</h3><span class="badge '+esc(String(m.status||"PREVIEW").toLowerCase())+'">'+esc(m.status||"PREVIEW")+'</span></div>'+
+    '<p>'+esc(m.purpose)+'</p>'+
+    '<div class="repo">'+esc(m.repository)+'</div>'+
+    '<p><strong>Owns:</strong> '+esc((m.owns||[]).join(" · "))+'</p>'+
+    '<p><strong>Does not own:</strong> '+esc((m.does_not_own||[]).join(" · "))+'</p>'+
+    '<div class="module-links"><a href="'+esc(m.repository_url)+'">Repository →</a><a href="'+esc(m.pages_url)+'">Pages →</a></div>'+
+  '</article>';
+}
+
+async function loadModules(){
+  try{
+    const r=await fetch("./modules.json?v="+Date.now(),{cache:"no-store"});
+    if(!r.ok) throw new Error("modules.json could not be loaded.");
+    moduleData=await r.json();
+    const modules=Array.isArray(moduleData.modules)?moduleData.modules:[];
+    $("module-grid").innerHTML=modules.map(moduleCard).join("");
+    runtimeHealth.modules="current";
+    renderHealth();
+  }catch(e){
+    runtimeHealth.modules="error";
+    renderHealth();
+    $("module-grid").innerHTML='<p class="metadata">'+esc(e.message)+' Use the static Specialist modules directory below.</p>';
+  }
+}
+
+function routeCard(r){
+  return '<article class="route-card" data-search="'+esc([r.question,r.owner,r.rule,r.module_id].join(" ").toLowerCase())+'">'+
+    '<h3>'+esc(r.question)+'</h3>'+
+    '<p class="owner">Owner: '+esc(r.owner)+'</p>'+
+    '<p>'+esc(r.rule)+'</p>'+
+    '<a href="'+esc(r.target)+'">Open owner / destination →</a>'+
+  '</article>';
+}
+
+function renderRoutes(){
+  if(!routingData) return;
+  const q=$("route-search").value.trim().toLowerCase();
+  let shown=0;
+  $("route-grid").querySelectorAll(".route-card").forEach(card=>{
+    const ok=!q||card.dataset.search.includes(q);
+    card.hidden=!ok;
+    if(ok) shown++;
+  });
+  $("route-count").textContent=shown+" route"+(shown===1?"":"s")+" shown";
+}
+
+async function loadRouting(){
+  try{
+    const r=await fetch("./edit-routing.json?v="+Date.now(),{cache:"no-store"});
+    if(!r.ok) throw new Error("edit-routing.json could not be loaded.");
+    routingData=await r.json();
+    $("route-grid").innerHTML=(routingData.routes||[]).map(routeCard).join("");
+    $("route-search").addEventListener("input",renderRoutes);
+    runtimeHealth.routing="current";
+    renderRoutes();
+    renderHealth();
+  }catch(e){
+    runtimeHealth.routing="error";
+    renderHealth();
+    $("route-grid").innerHTML='<p class="metadata">'+esc(e.message)+'</p>';
+  }
+}
+
+function renderHealth(){
+  const items=[
+    ["Project master CSV",runtimeHealth.projects,"projects.csv · canonical project identity/lifecycle"],
+    ["Daily Ops JSON",runtimeHealth.ops,"current-works.json · canonical current operational state"],
+    ["Workspace registry",runtimeHealth.directory,"links.json · static fallback/navigation"],
+    ["Module registry",runtimeHealth.modules,"modules.json · specialist ownership"],
+    ["Edit routing",runtimeHealth.routing,"edit-routing.json · canonical owner guidance"],
+    ["Google Drive","permission-gated","Source/evidence files · permissions remain in Drive"],
+    ["Google Sheets","input","Controlled human input / downstream projection"],
+    ["Slack","input","Field evidence / concise follow-up surface"],
+    ["SQL contract","reference","daily-ops-postgres.sql · PK/FK/constraint reference"],
+    ["PostgreSQL / Neon","not-live","Not required by the current file-first Pages runtime"]
+  ];
+  const grid=$("health-grid");
+  if(!grid) return;
+  grid.innerHTML=items.map(([name,state,note])=>
+    '<article class="health-item"><strong>'+esc(name)+'</strong><span>'+esc(note)+'</span><div class="health-state '+esc(state)+'">'+esc(String(state).replaceAll("-"," "))+'</div></article>'
+  ).join("");
+  const dynamic=[runtimeHealth.projects,runtimeHealth.ops,runtimeHealth.directory,runtimeHealth.modules,runtimeHealth.routing];
+  const bad=dynamic.filter(x=>x==="error").length;
+  const checking=dynamic.filter(x=>x==="checking").length;
+  const overall=$("health-overall");
+  if(!overall) return;
+  if(bad){overall.textContent="DEGRADED · "+bad+" SOURCE"+(bad===1?"":"S");overall.className="badge blocked";}
+  else if(checking){overall.textContent="CHECKING · "+checking;overall.className="badge preview";}
+  else{overall.textContent="CURRENT · FILE-FIRST";overall.className="badge verified";}
 }
 
 $("copy-link").addEventListener("click",async()=>{
@@ -304,5 +417,8 @@ $("copy-link").addEventListener("click",async()=>{
   }
 });
 
+renderHealth();
 loadDirectory();
 loadLiveProjects();
+loadModules();
+loadRouting();
