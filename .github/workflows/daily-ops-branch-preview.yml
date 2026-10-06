@@ -270,6 +270,18 @@ jobs:
                           raise SystemExit(f"{wid}/{gate_name}: source_refs must be a list.")
 
           ops_id_set = set(ops_ids)
+
+          static_workspace_projects = {
+              item.get("id", "").upper()
+              for item in resources
+              if item.get("group") == "projects"
+          }
+          if static_workspace_projects != ops_id_set:
+              raise SystemExit(
+                  "Workspace static project fallback must exactly cover current Daily Ops project IDs: "
+                  f"fallback={sorted(static_workspace_projects)} daily_ops={sorted(ops_id_set)}"
+              )
+
           for event in events:
               if event["project_id"] is not None and event["project_id"] not in ops_id_set:
                   raise SystemExit(f"Event {event['event_id']} references unknown project_id.")
@@ -299,6 +311,13 @@ jobs:
 
           if "./links.json" not in workspace_js:
               raise SystemExit("Workspace JS does not load the canonical links.json registry.")
+          if "../projects.csv" not in workspace_js or "../ops/data/current-works.json" not in workspace_js:
+              raise SystemExit("Workspace live project layer must read projects.csv + current-works.json.")
+          for marker in ("live-project-summary", "live-project-status", "live-project-grid", "group-projects"):
+              if marker not in workspace_html and marker != "group-projects":
+                  raise SystemExit(f"Workspace page is missing live project marker: {marker}")
+          if "parseCsv" not in workspace_js or "deriveOpsSignal" not in workspace_js or "loadLiveProjects" not in workspace_js:
+              raise SystemExit("Workspace live project join/render functions are incomplete.")
           if "workspace.css" not in workspace_html or "workspace.js" not in workspace_html:
               raise SystemExit("Workspace page is missing its CSS/JS assets.")
           if 'location.replace("workspace/"' not in legacy_workspace_html:
@@ -392,8 +411,9 @@ jobs:
               f"PASS: schema={state['schema_version']}; map={len(project_rows)} projects; "
               f"daily_ops={len(ops_ids)} projects; resources={len(resource_ids)} link(s); "
               f"{len(events)} JSONL event(s); workspace={len(resources)} resources; "
+              f"workspace_live_projects={len(ops_projects)}; "
               f"guide_visuals={len(guide_images)} SVGs; "
-              f"identity/provenance/resource/projection/routes/workspace/guide-visuals verified."
+              f"identity/provenance/resource/projection/routes/workspace-live/fallback/guide-visuals verified."
           )
 
   deploy:
