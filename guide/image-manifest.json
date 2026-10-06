@@ -1,7 +1,186 @@
 {
   "schema_version": "1.0.0",
-  "phase": 2,
-  "status": "PLACEHOLDERS_ONLY",
-  "note": "Phase 2 reserves visual slots and filenames. Phase 3 creates and verifies public-safe tutorial images.",
-  "images": []
+  "phase": 3,
+  "status": "ILLUSTRATED",
+  "note": "Public-safe deterministic SVG tutorial diagrams for the JP AEC Operations Guide. Visuals explain workflow and source ownership without embedding private project data.",
+  "images": [
+    {
+      "id": "VIS-01",
+      "file": "images/01-workspace.svg",
+      "title": "Workspace → correct destination",
+      "alt": "Owner-facing directory routing users to the correct operational surface.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "1:workspace",
+        "3:page1",
+        "15:page1"
+      ]
+    },
+    {
+      "id": "VIS-02",
+      "file": "images/02-project-map.svg",
+      "title": "Project Map → stable project identity",
+      "alt": "Map context resolves to stable project identifiers before operational edits.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "15:page2"
+      ]
+    },
+    {
+      "id": "VIS-03",
+      "file": "images/03-site-operations.svg",
+      "title": "Site Operations → portfolio attention",
+      "alt": "Portfolio scan highlights readiness, blockers and projects needing follow-up.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "7:page1"
+      ]
+    },
+    {
+      "id": "VIS-04",
+      "file": "images/04-project-detail.svg",
+      "title": "Project detail → one-site operating view",
+      "alt": "Work, readiness, materials, evidence and resources stay distinct but connected.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "7:page4",
+        "15:page5"
+      ]
+    },
+    {
+      "id": "VIS-05",
+      "file": "images/05-slack-to-canonical.svg",
+      "title": "Slack evidence → canonical Daily Ops",
+      "alt": "Field evidence is validated and classified before current state and history change.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "1:page1",
+        "3:page2",
+        "7:page2",
+        "15:page6",
+        "15:page8"
+      ]
+    },
+    {
+      "id": "VIS-06",
+      "file": "images/06-stock-vs-consumption.svg",
+      "title": "Stock ≠ consumption",
+      "alt": "Observed stock remains separate from actual usage or consumption evidence.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "7:page3"
+      ]
+    },
+    {
+      "id": "VIS-07",
+      "file": "images/07-readiness-blockers.svg",
+      "title": "Readiness gates → execution decision",
+      "alt": "Materials, manpower, PPE, tools and preconditions determine readiness.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "reference"
+      ]
+    },
+    {
+      "id": "VIS-08",
+      "file": "images/08-drive-resources.svg",
+      "title": "Drive file → project resource link",
+      "alt": "Source files remain permission-gated in Drive while project pages carry normalized links.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "15:page3",
+        "15:page10"
+      ]
+    },
+    {
+      "id": "VIS-09",
+      "file": "images/09-sheets-projection.svg",
+      "title": "Canonical state → Google Sheets projection",
+      "alt": "Validated state is projected to a human-friendly Sheet without creating competing truth.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "7:page6",
+        "15:page7"
+      ]
+    },
+    {
+      "id": "VIS-10",
+      "file": "images/10-github-actions.svg",
+      "title": "Commit → validation → Pages",
+      "alt": "The intended commit must pass checks and deployment before publication is trusted.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "3:page3",
+        "7:page5",
+        "15:page12"
+      ]
+    },
+    {
+      "id": "VIS-11",
+      "file": "images/11-storage-neon.svg",
+      "title": "Choose storage by responsibility",
+      "alt": "CSV/JSON, Drive, Sheets, SQL contracts and PostgreSQL solve different storage problems.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "15:page4",
+        "15:page9"
+      ]
+    },
+    {
+      "id": "VIS-12",
+      "file": "images/12-a9-governance.svg",
+      "title": "A9 → recoverable change",
+      "alt": "PRE, bounded mutation, readback, POST and Local/Main acknowledgement preserve recoverability.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "7:page7",
+        "15:page14"
+      ]
+    },
+    {
+      "id": "VIS-13",
+      "file": "images/13-specialist-modules.svg",
+      "title": "Operations Hub → specialist engines",
+      "alt": "Scheduling, Cost, Structural, CAD and R&D keep specialist ownership outside Daily Ops.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "15:page11"
+      ]
+    },
+    {
+      "id": "VIS-14",
+      "file": "images/14-pages-production.svg",
+      "title": "One canonical production Pages source",
+      "alt": "Experimental branches may test while the governed source owns production deployment.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "15:page13"
+      ]
+    },
+    {
+      "id": "VIS-15",
+      "file": "images/15-architecture-change.svg",
+      "title": "Change architecture only at a real threshold",
+      "alt": "Introduce backend/database complexity only when authenticated transactional needs justify it.",
+      "format": "svg",
+      "public_safe": true,
+      "used_by": [
+        "15:page15"
+      ]
+    }
+  ]
 }
