@@ -23,7 +23,7 @@ Acceptance: a user who does not know the repository tree can find the correct to
 
 ## Phase 2 — Guide framework parity
 
-**Status:** ACTIVE — core framework implemented on `feature/daily-ops-current-work`; latest framework validation run `37403514647` SUCCESS. Phase-2 A9 durable closeout is intentionally not yet performed because the phase has only just commenced.
+**Status:** COMPLETE — core framework implemented and provider-verified on `feature/daily-ops-current-work`. Final Phase-2 source head is included in A9 Root-11 seq48 closeout. Phase 3 remains the separate illustrated-tutorial phase.
 
 Create the canonical `/guide/` hierarchy:
 
@@ -48,7 +48,10 @@ Current implementation already includes:
 - Print / Save PDF support;
 - legacy `how-to.html` redirect;
 - Operations Hub / Map / Site Operations / Project-page navigation integrated to `/guide/`;
-- CI checks for all four depth shells, print support and route wiring.
+- CI checks for all four depth shells, print support and route wiring;
+- exact deployed GitHub Pages artifact readback confirming the complete `/guide/` hierarchy is present.
+
+Phase-2 boundary note: the public external-browser fetch path is not available from the current execution environment, so closure relies on GitHub provider deployment SUCCESS, exact deployment-artifact readback, route/content validation in CI, and source-level print CSS/JS checks. Final illustrated visual QA belongs to Phase 3.
 
 ## Phase 3 — Illustrated operational tutorials
 
