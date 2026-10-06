@@ -123,3 +123,16 @@ GitHub Pages deployment initialized.
 ## Phase 3 illustrated guide layer
 
 The canonical `/guide/` hierarchy now includes 15 public-safe, version-controlled SVG workflow diagrams. The diagrams are mapped across the 1-page, 3-page, 7-page and 15-page guide depths through `guide/guide.js`, inventoried in `guide/image-manifest.json`, validated as accessible SVG XML in CI, and designed to explain workflows without publishing private project data.
+
+
+## Phase 4 live Workspace layer
+
+The canonical `/workspace/` is now a live read-only orientation console rather than only a static resource directory. It joins `projects.csv` with `ops/data/current-works.json` for current project/status cards, while preserving `workspace/links.json` as the independent fallback/navigation registry.
+
+Phase 4 also adds:
+
+- `workspace/modules.json` — normalized specialist-module ownership and current repository identities;
+- `workspace/edit-routing.json` — owner-facing “what do I edit?” routing;
+- System Health roles for canonical files, Drive, Sheets, Slack, SQL, GitHub Actions/Pages and PostgreSQL/Neon;
+- CI enforcement for module identity, edit-routing integrity, live/fallback project coverage and stale historical repository slugs;
+- rendered desktop/mobile QA with no horizontal overflow at 390 px.
