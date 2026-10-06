@@ -27,6 +27,7 @@ jobs:
         run: |
           import csv
           import json
+          import xml.etree.ElementTree as ET
           from pathlib import Path
 
           required_files = [
@@ -306,6 +307,34 @@ jobs:
               raise SystemExit("Legacy how-to.html does not redirect to canonical /guide/.")
           if guide_manifest.get("schema_version") != "1.0.0":
               raise SystemExit("Unexpected guide image-manifest schema_version.")
+          guide_images = guide_manifest.get("images", [])
+          if guide_manifest.get("phase") != 3 or guide_manifest.get("status") != "ILLUSTRATED":
+              raise SystemExit("Guide image manifest is not in Phase 3 illustrated state.")
+          if len(guide_images) != 15:
+              raise SystemExit(f"Expected 15 Phase 3 guide visuals, found {len(guide_images)}.")
+          guide_image_ids = [item.get("id") for item in guide_images]
+          guide_image_files = [item.get("file") for item in guide_images]
+          if len(set(guide_image_ids)) != len(guide_image_ids) or len(set(guide_image_files)) != len(guide_image_files):
+              raise SystemExit("Guide visual IDs/files must be unique.")
+          for item in guide_images:
+              if item.get("format") != "svg" or item.get("public_safe") is not True:
+                  raise SystemExit(f"Guide visual {item.get('id')} must be public-safe SVG.")
+              if not str(item.get("alt", "")).strip() or not str(item.get("title", "")).strip():
+                  raise SystemExit(f"Guide visual {item.get('id')} is missing title/alt text.")
+              image_path = Path("guide") / item["file"]
+              if not image_path.is_file():
+                  raise SystemExit(f"Guide visual is missing: {image_path}")
+              try:
+                  svg_root = ET.parse(image_path).getroot()
+              except ET.ParseError as error:
+                  raise SystemExit(f"Invalid SVG XML in {image_path}: {error}")
+              if not svg_root.tag.endswith("svg"):
+                  raise SystemExit(f"Unexpected SVG root in {image_path}.")
+              image_text = image_path.read_text(encoding="utf-8")
+              if "<title" not in image_text or "<desc" not in image_text:
+                  raise SystemExit(f"Guide SVG {image_path} is missing title/desc accessibility metadata.")
+              if Path(item["file"]).name not in guide_js:
+                  raise SystemExit(f"Guide renderer does not reference manifested visual {item['file']}.")
           for depth, html in (("1", guide_root_html), ("3", guide_3_html), ("7", guide_7_html), ("15", guide_15_html)):
               if f'data-depth="{depth}"' not in html:
                   raise SystemExit(f"Guide depth {depth} shell is misconfigured.")
@@ -363,7 +392,8 @@ jobs:
               f"PASS: schema={state['schema_version']}; map={len(project_rows)} projects; "
               f"daily_ops={len(ops_ids)} projects; resources={len(resource_ids)} link(s); "
               f"{len(events)} JSONL event(s); workspace={len(resources)} resources; "
-              f"identity/provenance/resource/projection/routes/workspace verified."
+              f"guide_visuals={len(guide_images)} SVGs; "
+              f"identity/provenance/resource/projection/routes/workspace/guide-visuals verified."
           )
 
   deploy:
