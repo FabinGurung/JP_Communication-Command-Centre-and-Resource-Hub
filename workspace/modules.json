@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0.0",
+  "updated": "2026-10-06",
+  "authority": "workspace/modules.json",
+  "note": "Public-safe specialist-module ownership registry. Repository identity is canonical here for the Workspace; detailed technical truth remains in each owning repository.",
+  "modules": [
+    {
+      "module_id": "operations",
+      "display_name": "JP AEC Operations Hub",
+      "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+      "repository_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+      "pages_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/",
+      "default_branch": "main",
+      "status": "LIVE",
+      "purpose": "Project identity, Daily Ops, field/evidence reconciliation, project resources and the owner-facing Operations Hub.",
+      "owns": [
+        "projects.csv",
+        "Daily Ops current state",
+        "Daily Ops event history",
+        "project-resource relationships",
+        "Workspace/Guide presentation"
+      ],
+      "does_not_own": [
+        "detailed scheduling engine",
+        "cost engine",
+        "structural solver/report engine",
+        "CAD production",
+        "research corpus"
+      ]
+    },
+    {
+      "module_id": "scheduling",
+      "display_name": "JP Scheduling Work and Resources Management",
+      "repository": "FabinGurung/JP_Scheduling_Work_and_Resources_Management",
+      "repository_url": "https://github.com/FabinGurung/JP_Scheduling_Work_and_Resources_Management",
+      "pages_url": "https://fabingurung.github.io/JP_Scheduling_Work_and_Resources_Management/",
+      "default_branch": "main",
+      "status": "PREVIEW",
+      "purpose": "Scheduling, sequencing, calendars, activities, resources, productivity and project-specific planning, beginning with Primavera-compatible concepts plus open-source engines.",
+      "owns": [
+        "schedules",
+        "activities",
+        "calendars",
+        "resource planning",
+        "baseline/progress scheduling",
+        "Primavera/open-source scheduling interoperability"
+      ],
+      "does_not_own": [
+        "Daily Ops field truth",
+        "BOQ/cost engine",
+        "structural calculations",
+        "CAD source files"
+      ]
+    },
+    {
+      "module_id": "cost",
+      "display_name": "JP Cost Estimation",
+      "repository": "FabinGurung/JP_Cost_Estimation",
+      "repository_url": "https://github.com/FabinGurung/JP_Cost_Estimation",
+      "pages_url": "https://fabingurung.github.io/JP_Cost_Estimation/",
+      "default_branch": "main",
+      "status": "PREVIEW",
+      "purpose": "Estimation, BOQ, quantity/rate logic and cost-engine development.",
+      "owns": [
+        "BOQ",
+        "rate analysis",
+        "estimation logic",
+        "cost calculations"
+      ],
+      "does_not_own": [
+        "Daily Ops truth",
+        "construction schedule",
+        "structural solver",
+        "CAD production"
+      ]
+    },
+    {
+      "module_id": "structural",
+      "display_name": "JP Structural Analysis",
+      "repository": "FabinGurung/JP_Structural_Analysis",
+      "repository_url": "https://github.com/FabinGurung/JP_Structural_Analysis",
+      "pages_url": "https://fabingurung.github.io/JP_Structural_Analysis/",
+      "default_branch": "main",
+      "status": "INCOMPLETE",
+      "purpose": "OpenSees/open-source structural analysis, transparent benchmark solvers and government-submission-oriented structural analysis reporting.",
+      "owns": [
+        "structural models",
+        "analysis solvers",
+        "verification benchmarks",
+        "structural analysis reports"
+      ],
+      "does_not_own": [
+        "research hub",
+        "Daily Ops",
+        "scheduling",
+        "cost estimation",
+        "CAD production"
+      ]
+    },
+    {
+      "module_id": "cad",
+      "display_name": "JP Computer-Aided Drawings",
+      "repository": "FabinGurung/JP_Computer-Aided-Drawings",
+      "repository_url": "https://github.com/FabinGurung/JP_Computer-Aided-Drawings",
+      "pages_url": "https://fabingurung.github.io/JP_Computer-Aided-Drawings/",
+      "default_branch": "narayani-pages-v0.2",
+      "status": "PREVIEW",
+      "purpose": "CAD/drawing publication and drawing-system development.",
+      "owns": [
+        "drawing production",
+        "drawing publication",
+        "drawing workflows"
+      ],
+      "does_not_own": [
+        "Daily Ops truth",
+        "structural analysis engine",
+        "cost engine",
+        "scheduling engine"
+      ]
+    },
+    {
+      "module_id": "rd",
+      "display_name": "JP Research and Development",
+      "repository": "FabinGurung/JP_Research-and-Development",
+      "repository_url": "https://github.com/FabinGurung/JP_Research-and-Development",
+      "pages_url": "https://fabingurung.github.io/JP_Research-and-Development/",
+      "default_branch": "main",
+      "status": "LIVE",
+      "purpose": "Research dissemination hub with AEC/Structural Research and Hydropower Research branches.",
+      "owns": [
+        "research methodology",
+        "evidence/research pages",
+        "AEC research",
+        "hydropower research"
+      ],
+      "does_not_own": [
+        "production structural solver",
+        "Daily Ops current state",
+        "cost engine",
+        "scheduling engine"
+      ]
+    },
+    {
+      "module_id": "study",
+      "display_name": "JP Study Hub",
+      "repository": "FabinGurung/JP_Study_Hub",
+      "repository_url": "https://github.com/FabinGurung/JP_Study_Hub",
+      "pages_url": "https://fabingurung.github.io/JP_Study_Hub/",
+      "default_branch": "main",
+      "status": "LIVE",
+      "purpose": "Study and learning resources kept separate from production project operations.",
+      "owns": [
+        "study materials",
+        "learning workflows",
+        "academic study pages"
+      ],
+      "does_not_own": [
+        "project operations",
+        "engineering production engines",
+        "research production hub"
+      ]
+    }
+  ]
+}
