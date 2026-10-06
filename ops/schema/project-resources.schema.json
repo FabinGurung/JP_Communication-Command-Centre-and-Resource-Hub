@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://fabingurung.github.io/jp-ecosystem-project-map-v1/ops/schema/project-resources.schema.json",
+  "$id": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/ops/schema/project-resources.schema.json",
   "title": "JP AEC Operations Hub Project Resources",
   "type": "object",
   "required": [
