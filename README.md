@@ -119,3 +119,7 @@ GitHub Pages and this repository are public. Only public information belongs in 
 7. Promote to `main` only through an explicit governed release.
 
 GitHub Pages deployment initialized.
+
+## Phase 3 illustrated guide layer
+
+The canonical `/guide/` hierarchy now includes 15 public-safe, version-controlled SVG workflow diagrams. The diagrams are mapped across the 1-page, 3-page, 7-page and 15-page guide depths through `guide/guide.js`, inventoried in `guide/image-manifest.json`, validated as accessible SVG XML in CI, and designed to explain workflows without publishing private project data.
