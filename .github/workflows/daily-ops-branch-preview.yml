@@ -1,9 +1,10 @@
-name: Daily Ops branch preview
+name: Operations Hub production
 
 on:
   push:
     branches:
       - feature/daily-ops-current-work
+      - main
   workflow_dispatch:
 
 permissions:
@@ -12,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-feature-daily-ops
+  group: pages-production-main
   cancel-in-progress: true
 
 jobs:
@@ -513,7 +514,11 @@ jobs:
               f"identity/provenance/resource/projection/routes/workspace-live/health/routing/modules/stale-link-audit/fallback/guide-visuals verified."
           )
 
+      - name: Phase 5 release QA
+        run: python scripts/phase5_release_qa.py
+
   deploy:
+    if: github.ref == 'refs/heads/main'
     needs: validate
     runs-on: ubuntu-latest
     environment:
@@ -530,6 +535,6 @@ jobs:
         with:
           path: .
 
-      - name: Deploy branch preview to GitHub Pages
+      - name: Deploy main to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
