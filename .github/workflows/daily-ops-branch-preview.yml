@@ -45,6 +45,12 @@ jobs:
               Path("ops/schema/daily-ops-postgres.sql"),
               Path("ops/CANONICAL_DATA_AUTHORITY.md"),
               Path("ops/PLATFORM_MODULES.md"),
+              Path("workspace/index.html"),
+              Path("workspace/links.json"),
+              Path("workspace/workspace.css"),
+              Path("workspace/workspace.js"),
+              Path("workspace.html"),
+              Path("docs/WORKSPACE_GUIDE_ROADMAP.md"),
           ]
           missing = [str(p) for p in required_files if not p.exists()]
           if missing:
@@ -57,6 +63,26 @@ jobs:
           resource_schema = json.loads(Path("ops/schema/project-resources.schema.json").read_text(encoding="utf-8"))
           map_config = json.loads(Path("map-config.json").read_text(encoding="utf-8"))
           allowed_project_statuses = set(map_config.get("status_styles", {}))
+
+          workspace = json.loads(Path("workspace/links.json").read_text(encoding="utf-8"))
+          if workspace.get("schema_version") != "1.0.0":
+              raise SystemExit("Unexpected Workspace links schema_version.")
+          group_ids = [g.get("id") for g in workspace.get("groups", [])]
+          if not group_ids or len(group_ids) != len(set(group_ids)):
+              raise SystemExit("Workspace groups are blank or duplicated.")
+          resources = workspace.get("resources", [])
+          resource_ids_workspace = [r.get("id") for r in resources]
+          if not resources or len(resource_ids_workspace) != len(set(resource_ids_workspace)):
+              raise SystemExit("Workspace resource IDs are blank or duplicated.")
+          allowed_workspace_status = {"LIVE", "VERIFIED", "PREVIEW", "INCOMPLETE", "BLOCKED"}
+          for item in resources:
+              if item.get("group") not in set(group_ids):
+                  raise SystemExit(f"Workspace resource {item.get('id')} references unknown group.")
+              if item.get("status") not in allowed_workspace_status:
+                  raise SystemExit(f"Workspace resource {item.get('id')} has invalid status.")
+              for field in ("title", "url", "why", "how", "audience", "type", "source"):
+                  if not str(item.get(field, "")).strip():
+                      raise SystemExit(f"Workspace resource {item.get('id')} missing {field}.")
 
           if state.get("schema_version") != "0.2.0":
               raise SystemExit("Unexpected Daily Ops schema_version.")
@@ -251,6 +277,16 @@ jobs:
           ops_html = Path("site-operations.html").read_text(encoding="utf-8")
           project_ops_html = Path("site-operations/project.html").read_text(encoding="utf-8")
           hub_html = Path("index.html").read_text(encoding="utf-8")
+          workspace_html = Path("workspace/index.html").read_text(encoding="utf-8")
+          workspace_js = Path("workspace/workspace.js").read_text(encoding="utf-8")
+          legacy_workspace_html = Path("workspace.html").read_text(encoding="utf-8")
+
+          if "./links.json" not in workspace_js:
+              raise SystemExit("Workspace JS does not load the canonical links.json registry.")
+          if "workspace.css" not in workspace_html or "workspace.js" not in workspace_html:
+              raise SystemExit("Workspace page is missing its CSS/JS assets.")
+          if 'location.replace("workspace/"' not in legacy_workspace_html:
+              raise SystemExit("Legacy workspace.html does not redirect to canonical /workspace/.")
 
           required_routes = {
               "hub -> map": "map.html",
@@ -262,6 +298,10 @@ jobs:
               "project detail -> machine state": "../ops/data/current-works.json",
               "project detail -> resource registry": "../ops/data/project-resources.json",
               "site operations -> resource registry": "ops/data/project-resources.json",
+              "hub -> workspace": "workspace/",
+              "map -> workspace": "workspace/",
+              "site operations -> workspace": "workspace/",
+              "project detail -> workspace": "../workspace/",
           }
           checks = {
               "hub -> map": required_routes["hub -> map"] in hub_html,
@@ -273,6 +313,10 @@ jobs:
               "project detail -> machine state": required_routes["project detail -> machine state"] in project_ops_html,
               "project detail -> resource registry": required_routes["project detail -> resource registry"] in project_ops_html,
               "site operations -> resource registry": required_routes["site operations -> resource registry"] in ops_html,
+              "hub -> workspace": required_routes["hub -> workspace"] in hub_html,
+              "map -> workspace": required_routes["map -> workspace"] in map_html,
+              "site operations -> workspace": required_routes["site operations -> workspace"] in ops_html,
+              "project detail -> workspace": required_routes["project detail -> workspace"] in project_ops_html,
           }
           failed = [name for name, ok in checks.items() if not ok]
           if failed:
@@ -281,7 +325,8 @@ jobs:
           print(
               f"PASS: schema={state['schema_version']}; map={len(project_rows)} projects; "
               f"daily_ops={len(ops_ids)} projects; resources={len(resource_ids)} link(s); "
-              f"{len(events)} JSONL event(s); identity/provenance/resource/projection/routes verified."
+              f"{len(events)} JSONL event(s); workspace={len(resources)} resources; "
+              f"identity/provenance/resource/projection/routes/workspace verified."
           )
 
   deploy:
