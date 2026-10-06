@@ -4,7 +4,7 @@ Target: bring `JP_Communication-Command-Centre-and-Resource-Hub` to the same own
 
 ## Phase 1 — Workspace foundation and resource registry
 
-**Status:** IN PROGRESS / IMPLEMENTING NOW
+**Status:** COMPLETE — A9 Root-11 Local/Main seq47 FINAL_CLOSED_PASS
 
 Deliverables:
 
@@ -23,6 +23,8 @@ Acceptance: a user who does not know the repository tree can find the correct to
 
 ## Phase 2 — Guide framework parity
 
+**Status:** ACTIVE — core framework implemented on `feature/daily-ops-current-work`; latest framework validation run `37403514647` SUCCESS. Phase-2 A9 durable closeout is intentionally not yet performed because the phase has only just commenced.
+
 Create the canonical `/guide/` hierarchy:
 
 - `/guide/` — one-page quick start;
@@ -34,6 +36,19 @@ Create the canonical `/guide/` hierarchy:
 - links from each guide step back to the real Operations Hub screens.
 
 Acceptance: all four guide depths navigate and print correctly even before final illustrations are added.
+
+Current implementation already includes:
+
+- `/guide/`;
+- `/guide/3-pages/`;
+- `/guide/7-pages/`;
+- `/guide/15-pages/`;
+- shared `guide.css` and `guide.js`;
+- `image-manifest.json` placeholder for Phase 3 visuals;
+- Print / Save PDF support;
+- legacy `how-to.html` redirect;
+- Operations Hub / Map / Site Operations / Project-page navigation integrated to `/guide/`;
+- CI checks for all four depth shells, print support and route wiring.
 
 ## Phase 3 — Illustrated operational tutorials
 
