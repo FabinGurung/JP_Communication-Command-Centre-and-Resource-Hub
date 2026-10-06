@@ -80,7 +80,7 @@ Rendered QA evidence: deployed-artifact test rendered the 1-page guide at 1/1 vi
 
 ## Phase 4 — Deeper live integration and system-health workspace
 
-**Status:** ACTIVE — Phase-4 PRE branch created as `snapshot/pre-workspace-phase4-20261006`. The first bounded deliverable is implemented: the Workspace now joins `projects.csv` + `ops/data/current-works.json` in the browser to generate live project/status cards, while `workspace/links.json` remains intact as the independent fallback/navigation directory.
+**Status:** COMPLETE — Phase-4 PRE branch `snapshot/pre-workspace-phase4-20261006` was created before mutation. The Workspace now provides live project/status integration, system-health/connection roles, guided edit routing, normalized specialist-module ownership and stale-link enforcement while preserving `workspace/links.json` as the independent fallback/navigation directory. Final rendered desktop/mobile QA passed on the exact deployed Pages artifact.
 
 Upgrade Workspace from a static directory into a live orientation console:
 
@@ -96,14 +96,17 @@ Upgrade Workspace from a static directory into a live orientation console:
 
 Acceptance: Workspace answers “where do I go, what is connected, and what owns this fact?” without opening raw repository files.
 
-Current Phase-4 progress:
+Phase-4 completion evidence:
 - dynamic project cards resolve Daily Ops `project_id` through `map_project_id` into `projects.csv`;
 - live summary shows Daily Ops project count, NEEDS_INPUT count, HOLD/BLOCKED count and latest Daily Ops date;
 - each generated card keeps project-master lifecycle/status separate from operational readiness/execution state;
 - static `workspace/links.json` project cards remain unchanged as fallback navigation;
-- CI now requires both canonical sources, the live join/render functions and exact static fallback coverage of the current Daily Ops project IDs.
-
-Remaining Phase-4 work after this boundary: system-health/connection status, “what do I edit?” guided routing, normalized specialist-module registry, stale-link/name audit and final rendered QA.
+- `workspace/modules.json` defines seven canonical module owners and current repository identities;
+- `workspace/edit-routing.json` defines thirteen “what do I edit?” decision routes;
+- System Health exposes file-first source availability plus Drive/Sheets/Slack/SQL/Pages/PostgreSQL roles without pretending to have private provider authentication;
+- stale historical repository slugs are rejected by CI outside the explicit migration note, and three JSON Schema `$id` URLs were migrated to the current Operations Hub repository/Pages URLs;
+- final CI verified 28 project-master rows, 8 Daily Ops projects, 25 project-resource links, 34 JSONL events, 31 static Workspace resources, 8 live Workspace projects, 7 modules, 13 edit routes and 15 guide SVGs;
+- exact deployed-artifact render QA passed on 1440 px desktop and 390 px mobile with zero script errors, 8/8 live project cards, 8/8 fallback project cards, 7/7 module cards, 13/13 edit routes, CURRENT file-first health state and no mobile horizontal overflow.
 
 ## Phase 5 — Release, governance, mobile/print QA and A9 closeout
 
