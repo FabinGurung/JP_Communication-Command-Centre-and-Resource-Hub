@@ -25,6 +25,7 @@
       <a class="active" href="map.html">Project map</a>
       <a href="site-operations.html">Site operations</a>
       <a href="workspace/">Workspace</a>
+      <a href="pending/">Pending work</a>
       <a href="guide/">Guide</a>
     </nav>
     <header class="app-header" id="app-header">
@@ -48,6 +49,13 @@
               aria-expanded="false" aria-controls="map-controls">Filters</button>
 
       <div class="controls" id="map-controls">
+        <div class="control">
+          <label for="scope-filter">Project scope</label>
+          <select id="scope-filter">
+            <option value="working" selected>Working projects (Daily Ops)</option>
+            <option value="all">All public projects</option>
+          </select>
+        </div>
         <div class="control search-control">
           <label for="search-input">Search project, code, ward, or company</label>
           <input id="search-input" type="search" autocomplete="off"
@@ -100,8 +108,8 @@
         <div class="map-layer-control" aria-label="Map layers">
           <strong>Map layers</strong>
           <label><input id="layer-projects" type="checkbox" checked> Projects</label>
-          <label><input id="layer-opportunities" type="checkbox" checked> Opportunities</label>
-          <label><input id="layer-locations" type="checkbox" checked> Offices</label>
+          <label><input id="layer-opportunities" type="checkbox"> Opportunities</label>
+          <label><input id="layer-locations" type="checkbox"> Offices</label>
         </div>
         <button class="map-list-button" id="map-list-button" type="button">Projects</button>
       </section>

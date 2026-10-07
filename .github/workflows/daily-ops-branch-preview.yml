@@ -54,6 +54,8 @@ jobs:
               Path("workspace/links.json"),
               Path("workspace/modules.json"),
               Path("workspace/edit-routing.json"),
+              Path("pending/index.html"),
+              Path("ops/data/pending-works.json"),
               Path("workspace/workspace.css"),
               Path("workspace/workspace.js"),
               Path("workspace.html"),
@@ -81,6 +83,7 @@ jobs:
           workspace = json.loads(Path("workspace/links.json").read_text(encoding="utf-8"))
           modules_state = json.loads(Path("workspace/modules.json").read_text(encoding="utf-8"))
           routing_state = json.loads(Path("workspace/edit-routing.json").read_text(encoding="utf-8"))
+          pending_state = json.loads(Path("ops/data/pending-works.json").read_text(encoding="utf-8"))
 
           if workspace.get("schema_version") != "1.0.0":
               raise SystemExit("Unexpected Workspace links schema_version.")
@@ -159,6 +162,20 @@ jobs:
                   raise SystemExit(
                       f"Workspace edit route {item['id']} references unknown module {item['module_id']}."
                   )
+
+          if pending_state.get("schema_version") != "1.0.0":
+              raise SystemExit("Unexpected pending-work registry schema_version.")
+          pending_items = pending_state.get("items", [])
+          pending_ids = [item.get("pending_id") for item in pending_items]
+          if not pending_items or len(pending_ids) != len(set(pending_ids)):
+              raise SystemExit("Pending-work IDs are blank/duplicated or the registry is empty.")
+          for item in pending_items:
+              for field in ("title", "status", "priority", "owner_module_id", "implementation_status", "current_boundary"):
+                  if not str(item.get(field, "")).strip():
+                      raise SystemExit(f"Pending work {item.get('pending_id')} missing {field}.")
+              proposal = item.get("proposal", {})
+              if not str(proposal.get("url", "")).startswith("https://docs.google.com/document/d/"):
+                  raise SystemExit(f"Pending work {item.get('pending_id')} must carry a Google Docs proposal URL.")
 
           if state.get("schema_version") != "0.2.0":
               raise SystemExit("Unexpected Daily Ops schema_version.")
@@ -362,6 +379,10 @@ jobs:
 
           map_html = Path("map.html").read_text(encoding="utf-8")
           map_js = Path("assets/js/app.js").read_text(encoding="utf-8")
+          if 'id="scope-filter"' not in map_html or "Working projects (Daily Ops)" not in map_html:
+              raise SystemExit("Map default scope control is missing.")
+          if "workingProjectIds" not in map_js or "ops/data/current-works.json" not in map_js:
+              raise SystemExit("Map is not wired to the canonical Daily Ops working-project scope.")
           ops_html = Path("site-operations.html").read_text(encoding="utf-8")
           project_ops_html = Path("site-operations/project.html").read_text(encoding="utf-8")
           hub_html = Path("index.html").read_text(encoding="utf-8")

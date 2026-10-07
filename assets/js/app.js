@@ -24,6 +24,8 @@ const state = {
   aliasesByProjectId: new Map(),
   publicationByProjectId: new Map(),
   filteredProjects: [],
+  workingProjectIds: new Set(),
+  workingScopeAvailable: false,
   map: null,
   projectLayer: null,
   componentLayer: null,
@@ -45,6 +47,7 @@ const elements = {
   publicCount: document.getElementById("public-count"),
   updatedDate: document.getElementById("updated-date"),
   listCount: document.getElementById("list-count"),
+  scope: document.getElementById("scope-filter"),
   search: document.getElementById("search-input"),
   status: document.getElementById("status-filter"),
   sector: document.getElementById("sector-filter"),
@@ -144,6 +147,17 @@ async function loadCSV(path, cacheBust) {
   const response = await fetch(`${path}?${cacheBust}`, { cache: "no-store" });
   if (!response.ok) throw new Error(`Could not load ${path} (${response.status})`);
   return parseCSV(await response.text());
+}
+
+async function loadWorkingProjectIds(cacheBust) {
+  const response = await fetch(`ops/data/current-works.json?${cacheBust}`, { cache: "no-store" });
+  if (!response.ok) throw new Error(`Could not load Daily Ops working-project scope (${response.status})`);
+  const data = await response.json();
+  return new Set(
+    (Array.isArray(data.projects) ? data.projects : [])
+      .map((item) => String(item.map_project_id || "").trim())
+      .filter(Boolean)
+  );
 }
 
 function required(raw, field, rowNumber, fileName) {
@@ -358,7 +372,12 @@ function projectMatchesFilters(project) {
     projectAliases(project.project_id).join(" "), components,
   ].join(" ").toLowerCase();
 
-  return (!query || searchable.includes(query))
+  const scopeMatches = elements.scope.value !== "working"
+    || !state.workingScopeAvailable
+    || state.workingProjectIds.has(project.project_id);
+
+  return scopeMatches
+    && (!query || searchable.includes(query))
     && (!elements.status.value || project.status === elements.status.value)
     && (!elements.sector.value || project.project_sector === elements.sector.value)
     && (!elements.function.value || project.project_function === elements.function.value)
@@ -929,10 +948,11 @@ function requestedProjectIdFromHash() {
 }
 
 function attachEvents() {
-  [elements.search, elements.status, elements.sector, elements.function, elements.company].forEach((element) => {
+  [elements.scope, elements.search, elements.status, elements.sector, elements.function, elements.company].forEach((element) => {
     element.addEventListener(element === elements.search ? "input" : "change", () => applyFilters());
   });
   elements.reset.addEventListener("click", () => {
+    elements.scope.value = state.workingScopeAvailable && state.config.default_view?.scope !== "all" ? "working" : "all";
     elements.search.value = ""; elements.status.value = ""; elements.sector.value = ""; elements.function.value = ""; elements.company.value = "";
     applyFilters();
   });
@@ -1019,20 +1039,34 @@ async function loadApplication() {
     state.projects = accepted;
     state.filteredProjects = [...accepted];
 
+    let workingScopeError = "";
+    try {
+      state.workingProjectIds = await loadWorkingProjectIds(cacheBust);
+      state.workingScopeAvailable = true;
+    } catch (error) {
+      state.workingProjectIds = new Set();
+      state.workingScopeAvailable = false;
+      workingScopeError = error.message;
+    }
+
     elements.siteTitle.textContent = state.config.site_title;
     elements.siteSubtitle.textContent = state.config.site_subtitle;
     elements.versionBadge.textContent = `v${state.config.app_version}`;
     elements.notice.textContent = state.config.public_notice;
     elements.notice.hidden = !state.config.features.show_public_notice;
     elements.download.hidden = !state.config.features.show_download_buttons;
-    elements.layerOpportunities.checked = state.config.features.show_opportunities !== false;
-    elements.layerLocations.checked = state.config.features.show_organization_locations !== false;
+    const defaultLayers = state.config.default_view?.layers || {};
+    elements.layerProjects.checked = defaultLayers.projects !== false;
+    elements.layerOpportunities.checked = state.config.features.show_opportunities !== false && defaultLayers.opportunities === true;
+    elements.layerLocations.checked = state.config.features.show_organization_locations !== false && defaultLayers.organization_locations === true;
 
     initializeMap();
     fillFilters();
+    elements.scope.value = state.workingScopeAvailable && state.config.default_view?.scope !== "all" ? "working" : "all";
     renderLegend();
     attachEvents();
     applyFilters({ fitBounds: true });
+    if (workingScopeError) showMessage(`${workingScopeError}. Showing all public projects instead.`, "warning");
     if (errors.length) showMessage(`${errors.length} project row(s) were skipped. First issue: ${errors[0]}`, "warning");
     const requested = requestedProjectIdFromHash();
     if (requested) selectProject(requested, { updateLocation: false, openPopup: false });

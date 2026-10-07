@@ -386,5 +386,15 @@
       "shape": "circle",
       "symbol": "•"
     }
+  },
+  "default_view": {
+    "scope": "working",
+    "working_scope_source": "ops/data/current-works.json#projects[].map_project_id",
+    "layers": {
+      "projects": true,
+      "opportunities": false,
+      "organization_locations": false
+    },
+    "rule": "The first map view shows only projects registered in current Daily Ops. Users may explicitly switch to all public projects."
   }
 }

@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "registry_id": "OPS-PENDING-WORK-001",
+  "updated": "2026-10-08",
+  "timezone": "Asia/Kathmandu",
+  "authority": "Operations repository planning registry. Entries are pending decisions/work, not completed implementation claims.",
+  "items": [
+    {
+      "pending_id": "OPS-PEND-000001",
+      "title": "Automated GitHub → Google Sheets Projection & Reconciliation",
+      "short_title": "Google Sheets projection automation",
+      "status": "PROPOSAL_READY_ON_HOLD",
+      "priority": "NEXT_3",
+      "category": "AUTOMATION",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "google_drive",
+        "file_id": "1bw9yAotZEGjJWuJq_YfooFy0P_BMx_og2N0iR29yOOs",
+        "title": "PROPOSAL 01 — Automated GitHub to Google Sheets Projection and Reconciliation",
+        "url": "https://docs.google.com/document/d/1bw9yAotZEGjJWuJq_YfooFy0P_BMx_og2N0iR29yOOs/edit?usp=drivesdk"
+      },
+      "why": "Remove manual GitHub-to-Sheets duplication while keeping GitHub canonical and Sheets a controlled human projection/input surface.",
+      "proposed_first_gate": "Human approval for one bounded generated-tab pilot with stable keys, provider readback and reconciliation.",
+      "implementation_status": "NOT_STARTED",
+      "current_boundary": "Do not implement automatically. Resume only after explicit approval.",
+      "related_canonical_sources": [
+        "projects.csv",
+        "ops/data/current-works.json",
+        "ops/data/project-resources.json",
+        "ops/events/daily-ops-events.jsonl"
+      ]
+    }
+  ]
+}

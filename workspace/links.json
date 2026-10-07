@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "title": "JP AEC Operations Workspace",
-  "updated": "2026-10-07",
+  "updated": "2026-10-08",
   "timezone": "Asia/Kathmandu",
   "note": "Public-safe resource directory. Permission-gated Google resources may still require the user's Google account. No credentials are stored here.",
   "groups": [
@@ -9,6 +9,11 @@
       "id": "start",
       "label": "Start here",
       "description": "The main places an owner, manager or engineer should begin."
+    },
+    {
+      "id": "planning",
+      "label": "Pending work",
+      "description": "Prepared proposals and deferred work that must remain visible until explicitly started, rejected or completed."
     },
     {
       "id": "daily",
@@ -84,6 +89,18 @@
       "audience": "Owner / Manager / Technical handler",
       "type": "Guide hierarchy",
       "source": "guide/ + guide/guide.js"
+    },
+    {
+      "id": "pending-work",
+      "group": "planning",
+      "title": "Pending Work Registry",
+      "url": "../pending/",
+      "why": "Keep prepared proposals and deferred implementation work visible so important follow-up is not lost between chat threads.",
+      "how": "Open this page before starting a new roadmap item; follow the proposal link and explicit next approval gate.",
+      "status": "LIVE",
+      "audience": "Owner / Manager / Technical handler / AI",
+      "type": "Planning registry",
+      "source": "ops/data/pending-works.json"
     },
     {
       "id": "fbl-sheet",
