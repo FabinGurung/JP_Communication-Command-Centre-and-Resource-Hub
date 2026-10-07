@@ -23,6 +23,9 @@ jobs:
       - name: Check out branch
         uses: actions/checkout@v4
 
+      - name: Validate compulsory branch/lane registry
+        run: python scripts/validate_branch_registry.py
+
       - name: Validate machine layer and page routes
         shell: python
         run: |

@@ -99,3 +99,15 @@ If GitHub canonical data and a downstream projection disagree:
 - P005 / PRJ-000005 / FBL-004 / 30 Sabitri Giri / Dipti Giri → **Construction**
 
 Lifecycle is distinct from Daily Ops readiness and execution status.
+
+## 8. Repository-control authority
+
+Operational data authority and Git branch authority are separate concerns.
+
+The compulsory branch/lane control files are:
+
+- `ops/control/control-system.json` — repository-local Main / Local / Lane Library contract and required read order.
+- `ops/control/branch-lane-registry.json` — stable logical branch IDs, active/archive status, frozen archive SHAs and legacy-alias resolution.
+- `ops/control/BRANCH_LANE_CONTROL.md` — human-readable branch/lane operating rule.
+
+Before any repository mutation, resolve the intended branch through the registry. An unregistered branch is not an authorized working lane. Archived branches are frozen and legacy aliases must not receive new work.

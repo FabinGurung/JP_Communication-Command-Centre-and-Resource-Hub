@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "title": "JP AEC Operations Workspace",
-  "updated": "2026-10-06",
+  "updated": "2026-10-07",
   "timezone": "Asia/Kathmandu",
   "note": "Public-safe resource directory. Permission-gated Google resources may still require the user's Google account. No credentials are stored here.",
   "groups": [
@@ -408,6 +408,18 @@
       "audience": "Owner / Technical handler",
       "type": "Roadmap",
       "source": "docs/WORKSPACE_GUIDE_ROADMAP.md"
+    },
+    {
+      "id": "branch-lane-registry",
+      "group": "governance",
+      "title": "Branch / Lane Registry",
+      "url": "../ops/control/branch-lane-registry.json",
+      "why": "Resolve which Git branches are active working lanes, frozen archives or legacy aliases before any repository mutation.",
+      "how": "Read this before choosing a branch. Work only where allowed_for_work=true; never continue new work on a legacy alias or frozen archive.",
+      "status": "LIVE",
+      "audience": "Owner / Technical handler / AI",
+      "type": "Compulsory JSON control",
+      "source": "ops/control/branch-lane-registry.json"
     }
   ]
 }

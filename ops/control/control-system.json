@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "control_id": "OPS-CONTROL-SYSTEM-001",
+  "status": "ACTIVE_COMPULSORY",
+  "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "mandatory_read_order": [
+    "README.md",
+    "ops/control/control-system.json",
+    "ops/control/branch-lane-registry.json",
+    "ops/CANONICAL_DATA_AUTHORITY.md",
+    "workspace/edit-routing.json",
+    "lane-specific canonical files"
+  ],
+  "libraries": {
+    "main_library": {
+      "branch": "main",
+      "purpose": "Integrated canonical production state."
+    },
+    "local_library": {
+      "branch": "feature/daily-ops-current-work",
+      "purpose": "Validated working lane for Daily Ops / Slack-Web operational changes before promotion."
+    },
+    "lane_library": {
+      "registry": "ops/control/branch-lane-registry.json",
+      "purpose": "Stable logical branch IDs, active/archive roles, frozen SHAs and legacy alias resolution."
+    }
+  },
+  "compulsory_rules": [
+    "Resolve the branch through branch-lane-registry.json before reading or writing lane state.",
+    "Do not start work from a legacy alias or archived frozen branch.",
+    "Do not create a new branch without adding it to the registry in the same governed change.",
+    "Do not call an archive branch frozen unless its provider SHA matches frozen_sha.",
+    "Main promotion requires successful repository validation and branch-registry validation.",
+    "Provider-side branch topology changes must be reconciled back into the registry."
+  ]
+}

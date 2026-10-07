@@ -1,9 +1,18 @@
 {
   "schema_version": "1.0.0",
-  "updated": "2026-10-06",
+  "updated": "2026-10-07",
   "title": "What do I edit?",
   "note": "Owner-facing edit-routing registry. Routes people to the canonical owner of a fact or capability; it does not grant write permission.",
   "routes": [
+    {
+      "id": "branch-lane",
+      "question": "Which Git branch or lane should I use for Operations work?",
+      "owner": "ops/control/branch-lane-registry.json",
+      "type": "control_registry",
+      "target": "../ops/control/branch-lane-registry.json",
+      "module_id": "operations",
+      "rule": "Resolve the branch before mutation. Only allowed_for_work=true branches are valid working lanes; archives and legacy aliases are read-only."
+    },
     {
       "id": "project-master",
       "question": "Project name, location, lifecycle/status, coordinates or public project attributes",

@@ -1,0 +1,24 @@
+name: Validate branch and lane registry
+
+on:
+  push:
+    branches:
+      - main
+      - feature/daily-ops-current-work
+  workflow_dispatch:
+  schedule:
+    - cron: "17 0 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-branch-registry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate compulsory branch/lane registry against live provider refs
+        run: python scripts/validate_branch_registry.py

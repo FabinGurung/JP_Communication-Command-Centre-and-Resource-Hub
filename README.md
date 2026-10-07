@@ -2,6 +2,20 @@
 
 The live project-experience layer of the **JP AEC Platform**, hosted with GitHub Pages. The existing repository slug is retained for URL stability.
 
+## Mandatory Operations control read order
+
+Branch/lane governance is now a compulsory repository-local control, not an optional convention.
+
+Before ChatGPT, automation or a human starts a repository mutation:
+
+1. Read `ops/control/control-system.json`.
+2. Read `ops/control/branch-lane-registry.json` and resolve the intended lane.
+3. Work only on a branch with `allowed_for_work=true`.
+4. Read `ops/CANONICAL_DATA_AUTHORITY.md` and the lane-specific canonical files.
+5. Require validation before promotion to `main`.
+
+The registry maps the **Main Library** to `main`, the **Local Library** to `feature/daily-ops-current-work`, and the **Lane Library** to the branch registry itself. Archive refs under `archive/*` are frozen. Historical non-archive aliases are marked **DO_NOT_USE** and resolve to their archive equivalents.
+
 ## Current stable version
 
 **v2.0.0 — JP AEC Operations Hub**

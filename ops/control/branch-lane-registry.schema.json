@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JP AEC Operations Branch and Lane Registry",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "registry_id",
+    "repository",
+    "required_before_mutation",
+    "active_branches",
+    "archive_branches",
+    "legacy_aliases"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "registry_id": {
+      "const": "OPS-BRANCH-LANE-REGISTRY-001"
+    },
+    "required_before_mutation": {
+      "const": true
+    },
+    "active_branches": {
+      "type": "array",
+      "minItems": 2
+    },
+    "archive_branches": {
+      "type": "array"
+    },
+    "legacy_aliases": {
+      "type": "array"
+    }
+  }
+}
