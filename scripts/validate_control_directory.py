@@ -9,7 +9,7 @@ assert {"CONTROL","MAIN","SLACK","GITHUB"} <= {x["group"] for x in r}
 assert any(x["name"]=="Main Library" and x["url"].startswith("https://docs.google.com/spreadsheets/") for x in r)
 assert all(x["url"].startswith("https://") and x["version"] and x["note"] for x in r)
 html=Path("controls/index.html").read_text(encoding="utf-8")
-assert "control-tower-directory.json" in html and "A9-SWO" in html
+assert "control-tower-directory.json" in html and "A9-CWO" in html
 assert 'href="controls/"' in Path("index.html").read_text(encoding="utf-8")
 assert "OPS-PEND-000003" in Path("ops/data/pending-works.json").read_text(encoding="utf-8")
 print("PASS: control directory indexed, linked, traceable and explicitly not live-synced")
