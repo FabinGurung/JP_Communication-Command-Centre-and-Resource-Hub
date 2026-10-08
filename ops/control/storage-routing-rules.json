@@ -122,5 +122,19 @@
     "First successful Colab provider run and archive receipt",
     "A9-CWO ingestion of Discord candidate facts into owned project state",
     "Archived-thread and inline-embed media coverage expansion"
-  ]
+  ],
+  "notebook_versioning_policy": {
+    "control_id": "A9-CWO-NOTEBOOK-VERSIONING-001",
+    "state": "COMPULSORY",
+    "manifest": "ops/discord/notebook-versions.json",
+    "archive_folder": "ops/discord/99_VERSION_ARCHIVE",
+    "immutable_working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
+    "working_colab_link_stable": true,
+    "version_format": "YYYYMMDD-NNN",
+    "timezone": "Asia/Kathmandu",
+    "increments_for": "EVERY notebook mutation, including minor fixes, comments, markdown edits, metadata or typos",
+    "ordering": "Copy original exact bytes to numbered PRE archive; read back before editing original; update current revision in-place; POST readback + CI; append ledger and publish.",
+    "no_drive_file_id_claim": "The provided URL is GitHub-backed; it has no verified Google Drive file ID.",
+    "archive_promotion": "Do not reassign a previous archival path/name or overwrite its contents. Retrospective historical source creation dates must be distinguished from archive copy date."
+  }
 }

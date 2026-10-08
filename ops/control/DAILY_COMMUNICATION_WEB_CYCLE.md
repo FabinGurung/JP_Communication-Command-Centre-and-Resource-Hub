@@ -24,3 +24,7 @@ Open [Storage and daily procedure](../../controls/storage.html), backed by [stor
 6. Reconcile Drive source readback, Git commit, Pages deployment, Slack delivery, sheets status, capture gaps, and `Incomplete / Remaining`.
 
 This configuration and notebook are staged. **The bot has not been run in this task**, and no current Discord capture should be inferred.
+
+## Compulsory notebook creation-date enumeration
+
+For A9-CWO Colab edit operations, [`ops/discord/notebook-versions.json`](../discord/notebook-versions.json) is the machine-readable revision ledger, [`99_VERSION_ARCHIVE`](../discord/99_VERSION_ARCHIVE/README.md) the immutable PRE archive, and the same `v1.0.ipynb` GitHub path the permanent Colab working link. Use **`YYYYMMDD-NNN`** based on source-version creation date in Asia/Kathmandu, with every minor notebook modification assigned the next ordinal. Archive and verify prior exact bytes **before** writing the original. No current Google Drive-native file ID is known for this GitHub-backed notebook; do not claim one. Readback, validation, and documented remaining debt are compulsory.

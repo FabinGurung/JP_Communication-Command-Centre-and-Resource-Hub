@@ -18,3 +18,11 @@ Existing A9 Discord archive and its Local/Main catalogues remain intact. This da
 
 **v1.0.1 compatibility fix, same notebook filename:** `drive.files().list()` uses `pageSize=100` and `pageToken=token`, not snake_case `page_size`/`page_token`. The failure was in the `children()` Drive folder lookup, before collecting Discord messages; it did **not** prove messages had been archived. The notebook setup now supplies an authorized `httplib2.Http(timeout=120)` transport instead of relying on per-request timeout behavior. Restart the notebook from the current GitHub/Colab link, run **Setup**, then **Collector**, and check the final receipt. A saved older Colab copy may still contain the faulty code.
 
+
+## Compulsory date-based notebook revisions (stable working link)
+
+The exact Colab URL above is **GitHub-backed**, not a Drive `/drive/<id>` notebook. Therefore, keep the GitHub working path above constant; there is no verified Google Drive file ID to copy/update. The source versions are enumerated by **Nepal creation date** in [`notebook-versions.json`](notebook-versions.json) and physically snapshotted under [`99_VERSION_ARCHIVE/`](99_VERSION_ARCHIVE/README.md).
+
+**Mandatory every-edit sequence:** read live main/feature refs; identify current `YYYYMMDD-NNN` revision and previous archive; PRE copy exact working notebook bytes to an immutable numbered archive if not already snapshotted; provider readback and compare Git blob; increment the day's ordinal for every notebook change (including a minor spelling/code/comment change); update only the stable original working path; update manifest and clear status (CURRENT vs ARCHIVED); run CI; promote to main on PASS; re-read source and archive. Do not rewrite archived blobs or alter GitHub Colab URL.
+
+**Verified lineage:** `20261008-001` is the October 8 original; `20261009-001` is the October 9 Drive API hotfix; `20261009-002` is the October 9 immutable-versioning policy annotation. The first two snapshots were recovered from their actual historical Git blobs and archived on October 9; their date prefixes indicate **source revision creation**, not when copies were made. The current notebook's technical collector logic did not change from the hotfix.

@@ -51,4 +51,36 @@ assert "storage-routing-rules.json" in site and "A9-CWO" in site
 assert 'href="storage.html"' in Path("controls/index.html").read_text(encoding="utf-8")
 pending = Path("ops/data/pending-works.json").read_text(encoding="utf-8")
 assert "OPS-PEND-000004" in pending
+# Immutable notebook creation-date enumeration and exact archival snapshots.
+import hashlib
+import re
+ledger = json.loads(Path("ops/discord/notebook-versions.json").read_text(encoding="utf-8"))
+assert ledger["schema_version"] == "1.0.0"
+assert ledger["timezone"] == "Asia/Kathmandu"
+assert ledger["numbering"] == "YYYYMMDD-NNN"
+assert ledger["current_revision"] == "20261009-002"
+assert ledger["stable_working_path"] == str(notebook_path)
+assert ledger["drive_native_same_id"].startswith("NOT_APPLICABLE")
+revisions = ledger["versions"]
+assert len(revisions) >= 3
+assert len({x["revision"] for x in revisions}) == len(revisions)
+assert sum(x["status"] == "CURRENT" for x in revisions) == 1
+assert revisions[-1]["status"] == "CURRENT" and revisions[-1]["revision"] == ledger["current_revision"]
+assert notebook["metadata"]["a9_cwo_revision"]["version_id"] == ledger["current_revision"]
+for entry in revisions:
+    date, seq = entry["revision"].split("-")
+    assert re.fullmatch(r"\d{8}", date) and re.fullmatch(r"\d{3}", seq)
+    assert date == entry["created_date_npt"].replace("-", "")
+    artifact_path = Path(entry["archive_path"] or ledger["stable_working_path"])
+    assert artifact_path.is_file(), str(artifact_path)
+    content = artifact_path.read_bytes()
+    git_blob = hashlib.sha1(b"blob " + str(len(content)).encode() + b"\x00" + content).hexdigest()
+    assert git_blob == entry["git_blob_sha"], entry["revision"]
+    if entry["archive_path"]:
+        assert entry["archive_path"].startswith(ledger["archive_base"] + "/" + date + "/" + seq)
+        assert entry["status"] == "ARCHIVED_RETROACTIVE"
+assert pin["notebook_versioning_policy"]["manifest"] == "ops/discord/notebook-versions.json"
+assert "notebook-versions.json" in site
+print("PASS: source-date enumerations, immutable archive blobs, stable Colab link and current notebook revision")
+
 print("PASS: A9-CWO storage pin, Slack+Discord contract and Colab source syntactically valid")
