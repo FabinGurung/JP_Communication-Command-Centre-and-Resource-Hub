@@ -28,3 +28,7 @@ This configuration and notebook are staged. **The bot has not been run in this t
 ## Compulsory notebook creation-date enumeration
 
 For A9-CWO Colab edit operations, [`ops/discord/notebook-versions.json`](../discord/notebook-versions.json) is the machine-readable revision ledger, [`99_VERSION_ARCHIVE`](../discord/99_VERSION_ARCHIVE/README.md) the immutable PRE archive, and the same `v1.0.ipynb` GitHub path the permanent Colab working link. Use **`YYYYMMDD-NNN`** based on source-version creation date in Asia/Kathmandu, with every minor notebook modification assigned the next ordinal. Archive and verify prior exact bytes **before** writing the original. No current Google Drive-native file ID is known for this GitHub-backed notebook; do not claim one. Readback, validation, and documented remaining debt are compulsory.
+
+## Visual memory wall and progress semantics
+
+The [A9-CWO Memory Wall](../../controls/memory-wall.html) is a printable quick-reference poster (job aid) pinned from the Operations home, Control Towers, Storage and Quick Start guide. It states the permanent `YYYYMMDD-NNN` versioning rule and source preservation→machine fact→website→message workflow. **A running cell with repeated transport warnings is not evidence of Discord extraction or Drive archiving.** Revision `20261009-003` adds visible timestamps, 20-second heartbeat and final provider receipt.

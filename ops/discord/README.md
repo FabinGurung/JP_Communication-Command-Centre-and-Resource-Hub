@@ -26,3 +26,14 @@ The exact Colab URL above is **GitHub-backed**, not a Drive `/drive/<id>` notebo
 **Mandatory every-edit sequence:** read live main/feature refs; identify current `YYYYMMDD-NNN` revision and previous archive; PRE copy exact working notebook bytes to an immutable numbered archive if not already snapshotted; provider readback and compare Git blob; increment the day's ordinal for every notebook change (including a minor spelling/code/comment change); update only the stable original working path; update manifest and clear status (CURRENT vs ARCHIVED); run CI; promote to main on PASS; re-read source and archive. Do not rewrite archived blobs or alter GitHub Colab URL.
 
 **Verified lineage:** `20261008-001` is the October 8 original; `20261009-001` is the October 9 Drive API hotfix; `20261009-002` is the October 9 immutable-versioning policy annotation. The first two snapshots were recovered from their actual historical Git blobs and archived on October 9; their date prefixes indicate **source revision creation**, not when copies were made. The current notebook's technical collector logic did not change from the hotfix.
+
+## Oct 9 · Revision 20261009-003 — progress visibility and debugging
+
+This notebook retains the **same Colab / GitHub working URL**. The exact `20261009-002` source was first frozen at `99_VERSION_ARCHIVE/20261009/002__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_PROGRESS_DIAGNOSTICS.ipynb`. The `20261009-003` revision adds:
+
+- Timestamped progress lines at Drive root, folder checks, cursor load/save, Discord channel and active-thread discovery, message page retrieval, image/file download and upload, raw/candidate JSONL, frozen receipt and handoff.
+- A **heartbeat every 20 seconds** while long requests continue. Seeing `Still running` is not proof that data has been archived.
+- Source-specific `FAILED`/partial messages and an explicit `FINAL RECEIPT` line if the run completes.
+- Background heartbeat stops on success, exception, or ordinary interruption with a try/finally boundary.
+
+**Correct response to a long-running cell:** wait for heartbeat plus per-source progress and eventually a frozen Drive handoff; if it stays at the same stage for many minutes, note the last stage and stop the cell before sharing the sanitized error/output. Do not paste Discord tokens or Google OAuth credentials into chat. A paused/stopped run may have some Drive output; resume using cursors and readback, never wipe the archive.

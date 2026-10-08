@@ -10,7 +10,7 @@
   "stable_working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "stable_colab_url": "https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "archive_base": "ops/discord/99_VERSION_ARCHIVE",
-  "current_revision": "20261009-002",
+  "current_revision": "20261009-003",
   "archive_registration_date_npt": "2026-10-09",
   "versions": [
     {
@@ -39,13 +39,25 @@
       "revision": "20261009-002",
       "created_date_npt": "2026-10-09",
       "observed_source_created_at_utc": null,
-      "status": "CURRENT",
+      "status": "ARCHIVED_PRE",
       "version_hint": "minor governance",
       "change_summary": "Add date-enumerated source revision metadata and archive policy; runtime code unchanged from 20261009-001.",
-      "archive_path": null,
+      "archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/002__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_PROGRESS_DIAGNOSTICS.ipynb",
       "source_commit": null,
       "git_blob_sha": "c5bd4df2dbf31d6054219d1cbd71cf23e33ae129",
-      "pre_snapshot_revision": "20261009-001",
+      "pre_snapshot_revision": "20261009-001"
+    },
+    {
+      "revision": "20261009-003",
+      "created_date_npt": "2026-10-09",
+      "observed_source_created_at_utc": null,
+      "status": "CURRENT",
+      "version_hint": "v1.0.2 · progress diagnostics",
+      "change_summary": "Visible time-stamped stages and 20-second heartbeat; per-source scanned/changed/attachment counts, error messages and run completion indicator. No provider execution claimed.",
+      "archive_path": null,
+      "source_commit": null,
+      "git_blob_sha": "bf615d037709394d0b74e454d3f0b628fbb377ed",
+      "pre_snapshot_revision": "20261009-002",
       "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb"
     }
   ]

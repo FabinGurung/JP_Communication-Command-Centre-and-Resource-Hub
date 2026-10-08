@@ -468,6 +468,18 @@
       "source": "ops/control/storage-routing-rules.json"
     },
     {
+      "id": "a9-cwo-memory-wall",
+      "group": "control",
+      "title": "A9-CWO Memory Wall · pinned visual runbook",
+      "url": "../controls/memory-wall.html",
+      "why": "Remind operators of no-overwrite, every-edit date enumeration, source archive and daily scan/readback.",
+      "how": "Open it daily, print/save for offline reference; follow links to live notebook and revision ledger.",
+      "status": "LIVE",
+      "audience": "Owner / AI / Engineering",
+      "type": "Printable job aid and cheat sheet",
+      "source": "ops/discord/notebook-versions.json"
+    },
+    {
       "id": "discord-daily-colab",
       "group": "daily",
       "title": "Discord: two-channel daily Colab intake",

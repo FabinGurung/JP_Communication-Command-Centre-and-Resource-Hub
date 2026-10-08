@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "id": "A9-CWO-PIN-001",
   "status": "ACTIVE_PINNED_GUIDANCE",
-  "updated_npt": "2026-10-08",
+  "updated_npt": "2026-10-09",
   "control_alias": "A9-CWO",
   "label": "Communication & Web Operations",
   "principle": "Choose storage by function: preserve provider evidence and original bytes in the governed source archive; keep normalized domain truth and code as versioned machine data; derive human pages and outbound messages from verified records.",
@@ -135,6 +135,15 @@
     "increments_for": "EVERY notebook mutation, including minor fixes, comments, markdown edits, metadata or typos",
     "ordering": "Copy original exact bytes to numbered PRE archive; read back before editing original; update current revision in-place; POST readback + CI; append ledger and publish.",
     "no_drive_file_id_claim": "The provided URL is GitHub-backed; it has no verified Google Drive file ID.",
-    "archive_promotion": "Do not reassign a previous archival path/name or overwrite its contents. Retrospective historical source creation dates must be distinguished from archive copy date."
+    "archive_promotion": "Do not reassign a previous archival path/name or overwrite its contents. Retrospective historical source creation dates must be distinguished from archive copy date.",
+    "current_revision": "20261009-003",
+    "quick_reference_wall": "controls/memory-wall.html",
+    "progress_requirements": [
+      "visible provider stage",
+      "20-second heartbeat during long calls",
+      "per-channel counts",
+      "per-attachment status",
+      "final receipt verified"
+    ]
   }
 }

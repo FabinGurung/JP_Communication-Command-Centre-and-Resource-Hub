@@ -58,7 +58,7 @@ ledger = json.loads(Path("ops/discord/notebook-versions.json").read_text(encodin
 assert ledger["schema_version"] == "1.0.0"
 assert ledger["timezone"] == "Asia/Kathmandu"
 assert ledger["numbering"] == "YYYYMMDD-NNN"
-assert ledger["current_revision"] == "20261009-002"
+assert ledger["current_revision"] == "20261009-003"
 assert ledger["stable_working_path"] == str(notebook_path)
 assert ledger["drive_native_same_id"].startswith("NOT_APPLICABLE")
 revisions = ledger["versions"]
@@ -78,9 +78,21 @@ for entry in revisions:
     assert git_blob == entry["git_blob_sha"], entry["revision"]
     if entry["archive_path"]:
         assert entry["archive_path"].startswith(ledger["archive_base"] + "/" + date + "/" + seq)
-        assert entry["status"] == "ARCHIVED_RETROACTIVE"
+        assert entry["status"] in {"ARCHIVED_RETROACTIVE", "ARCHIVED_PRE"}
 assert pin["notebook_versioning_policy"]["manifest"] == "ops/discord/notebook-versions.json"
 assert "notebook-versions.json" in site
+assert "20261009-003" == notebook["metadata"]["a9_cwo_revision"]["version_id"]
+assert 'progress("Drive: verifying existing A9 Discord archive root")' in source
+assert '_HEARTBEAT_STOP.wait(20)' in source
+assert 'progress("Discord: BEGIN source' in source
+assert 'progress("FAILED source' in source
+assert 'progress("FINAL RECEIPT:' in source
+assert 'finally:' in source
+assert Path("controls/memory-wall.html").exists()
+assert 'notebook-versions.json' in Path("controls/memory-wall.html").read_text(encoding="utf-8")
+assert 'memory-wall.html' in Path("controls/index.html").read_text(encoding="utf-8")
+assert 'memory-wall.html' in Path("controls/storage.html").read_text(encoding="utf-8")
+
 print("PASS: source-date enumerations, immutable archive blobs, stable Colab link and current notebook revision")
 
 print("PASS: A9-CWO storage pin, Slack+Discord contract and Colab source syntactically valid")
