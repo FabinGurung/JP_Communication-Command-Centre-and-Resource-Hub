@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0.0",
+  "control_id": "OPS-DAILY-SLACK-WEB-CYCLE-001",
+  "status": "ACTIVE_PROCESS_CONTRACT",
+  "effective_from_npt": "2026-10-08",
+  "purpose": "Per-channel Slack observation -> private A9 archive -> evidence-gated public-safe structured Operations state -> validated website -> company/project Slack communication; every delivery is receipt-verified.",
+  "authorities": {
+    "company_project_channel_routing": "EXISTING_PRIVATE_A9_SLACK_CONTROL_REGISTRY_AND_MESSAGE_LOG_v0.3",
+    "provider_capture_cursor": "EXISTING_PRIVATE_A9_SLACK_RECOVERY_ARCHIVE_CONTROL_v1.0",
+    "private_archive": "EXISTING_PRIVATE_A9_SLACK_RECOVERY_ARCHIVE (RAW_JSONL / NORMALIZED_JSON / POSTGRESQL / ATTACHMENTS / MANIFEST)",
+    "private_archive_status": "EXISTING_WITH_HISTORICAL_RECOVERY_DEBT; CURRENT_DAILY_INCREMENTAL_COMPLETENESS_UNVERIFIED",
+    "project_identity": "LIVE_A9_PROJECT_IDENTITY_AND_OPERATIONS_projects.csv_RECONCILED_BY_STABLE_ID",
+    "operational_state": "ops/data/current-works.json",
+    "operational_event_history": "ops/events/daily-ops-events.jsonl",
+    "project_master": "projects.csv",
+    "project_drive_links": "ops/data/project-resources.json",
+    "relational_contract": "ops/schema/daily-ops-postgres.sql"
+  },
+  "collection": {
+    "resume_rule": "Use last provider-verified per-channel message_ts/cursor from private archive manifest; do NOT assume midnight, 24 hours, or previous chat response is exhaustive.",
+    "source_window_boundaries": "Record inclusive oldest and exclusive latest per channel and the cutoff NPT for each run.",
+    "bootstrap_when_cursor_missing": "Read bounded provider history and mark coverage PARTIAL until archived/readback-verified; never invent a cursor.",
+    "thread_policy": "Capture messages AND replies; revisit tracked older parent threads for replies after cursor; deduplicate by workspace_id + channel_id + message_ts.",
+    "retention_backfill_policy": "Detect gaps/late replies and queue governed catch-up; never silently skip channels or claim COMPLETE.",
+    "original_text": "Preserve original Unicode Slack text/language in PRIVATE Drive raw JSONL only; normalized fields may use English controlled vocabularies; translations never replace originals.",
+    "excluded_from_truth": "Outbound tracker posts, instructions, plans, reactions, reported intent, delivery receipts and raw discussion are not automatically confirmed work.",
+    "sensitive_content": "Private messages, personal data, private finance and restricted evidence must never be placed in the public GitHub repository or Pages assets.",
+    "archive_rule": "Reuse existing A9 Slack archive; never create a parallel archive. Preserve existing B001-B004 history and unresolved file/binary recovery debt.",
+    "archived_record_identity": "workspace_id + channel_id + message_ts"
+  },
+  "coverage": {
+    "company_rollups": [
+      {
+        "company_id": "ORG-000002",
+        "company_label": "Rohini Engineering and Builders",
+        "route": "REB_COMPANY_ROLLUP",
+        "mode": "MANAGEMENT_SUMMARY",
+        "required_in_daily_scan": true
+      },
+      {
+        "company_id": "ORG-000001",
+        "company_label": "Fishtail Builders",
+        "route": "FBL_COMPANY_ROLLUP",
+        "mode": "MANAGEMENT_SUMMARY",
+        "required_in_daily_scan": true
+      }
+    ],
+    "existing_project_tracker_count": 8,
+    "project_channel_scope": "Resolve ALL active governed project channels from the private Slack ChannelRegistry, not only project IDs currently appearing in Daily Ops JSON.",
+    "unprojected_project_policy": "Recognize governed channel-level projects missing from public projects.csv as COVERAGE_GAP/NOT_PROJECTED; preserve observations privately and request owning project-master admission, never invent missing GitHub IDs or statuses.",
+    "current_known_reb_not_in_ops": [
+      {
+        "route": "REB_PROJECT_ONE_BAY",
+        "identity_status": "PRESENT_IN_PRIVATE_SLACK_PROJECT_IDENTITY; MISSING_FROM_PUBLIC_OPERATIONS_MASTER"
+      },
+      {
+        "route": "REB_PROJECT_ASHOK_ADHIKARI",
+        "identity_status": "PRIVATE_ROUTE_EXISTS; OPERATIONS_MASTER_IDENTITY_UNRESOLVED"
+      }
+    ],
+    "company_separation": "REB and FBL summaries are separately routed; do not share private company facts or mention REB recipients in FBL channels."
+  },
+  "admission": {
+    "supported_input": "Slack provider verified source, owning project/Drive authority, current approved project controls",
+    "fact_classes": [
+      "ACTUAL_WORK",
+      "PLAN",
+      "BLOCKER",
+      "MATERIAL_ORDER",
+      "MATERIAL_RECEIPT",
+      "STOCK",
+      "CONSUMPTION",
+      "QUALITY_OBSERVATION",
+      "ENGINEERING_DECISION",
+      "FINANCE_PRIVATE",
+      "UNRESOLVED"
+    ],
+    "terminology": "ORDERED != RECEIVED != IN_STOCK != CONSUMED; PLAN != STARTED != DONE != ENGINEER_ACCEPTED",
+    "public_repository_rule": "Admit only appropriately public-safe normalized facts; private site information requires gated Drive/backend instead, not client-side filtering.",
+    "output_formats": [
+      "JSON",
+      "JSONL",
+      "CSV",
+      "SQL_DDL"
+    ],
+    "immutable_source_rule": "Private raw archived Slack messages cannot be rewritten to force agreement with current interpretations."
+  },
+  "publication": {
+    "repository_working_lane": "feature/daily-ops-current-work",
+    "repository_production_lane": "main",
+    "required_checks": [
+      "SCHEMA_VALIDATION",
+      "BRANCH_REGISTRY_VALIDATION",
+      "PROJECT_IDENTITY_FK_CHECKS",
+      "NO_RAW_PRIVATE_SLACK_IN_PUBLIC_REPO",
+      "GITHUB_ACTIONS_RELEASE_QA",
+      "PAGES_DEPLOY_READBACK"
+    ],
+    "website_source": "Canonical GitHub public-safe JSON/JSONL/CSV, never manually duplicated HTML facts.",
+    "sheets_status": "PARTIALLY_MANUAL_OR_PENDING; DO_NOT_CLAIM_FULLY_AUTOMATED",
+    "slack_delivery": {
+      "project_channels": "Concise per-site questions from supported current facts; one daily tracker per channel unless meaningful follow-up; deduplicate exact date/channel.",
+      "company_channels": "Concise REB/FBL company rollup of cross-site priorities, blockers, decisions and deep links; do not copy every project transcript.",
+      "authorization": "Preserve live Slack READ FIRST send gate; any automatic source-triggered delivery stays disabled unless existing A9 owner-approved routing/source binding/pilot QA permits it.",
+      "readback": "After each authorized post verify provider message_ts/permalink and log receipt in existing private MessageLog and public-safe run receipt.",
+      "company_rollup_missing": "Mark MISSING/NOT_SENT rather than claim delivery."
+    }
+  },
+  "run_closeout": {
+    "require_source_window_per_channel": true,
+    "require_private_archive_receipt_or_explicit_debt": true,
+    "require_canonical_commit_sha_or_explicit_no_delta": true,
+    "require_website_release_status": true,
+    "require_slack_sent_readback_or_explicit_not_sent": true,
+    "require_sheets_projection_status": true,
+    "flags": [
+      "PASS",
+      "PARTIAL",
+      "PENDING",
+      "BLOCKED",
+      "NOT_APPLICABLE",
+      "UNVERIFIED"
+    ],
+    "do_not_report_full_success_on_partial_archival": true,
+    "handle_unverified": "Retain unresolved debt and next exact safe boundary; scheduler remains enabled."
+  }
+}

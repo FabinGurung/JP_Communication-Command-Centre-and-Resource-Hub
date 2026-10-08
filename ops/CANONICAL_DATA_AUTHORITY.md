@@ -111,3 +111,7 @@ The compulsory branch/lane control files are:
 - `ops/control/BRANCH_LANE_CONTROL.md` — human-readable branch/lane operating rule.
 
 Before any repository mutation, resolve the intended branch through the registry. An unregistered branch is not an authorized working lane. Archived branches are frozen and legacy aliases must not receive new work.
+
+## 9. Slack source archival and company rollups
+
+The existing **private A9 Slack Recovery Archive** is the durable destination for original multilingual Slack message text in JSONL, associated normalized JSON, thread/file manifests and archive readback. The public Operations GitHub repository is the derived, properly classified machine-data/control layer, **not a raw Slack dump**. The A9 Slack Control Registry owns private company/project channel routing. Read both Rohini (REB) and Fishtail (FBL) company discussion channels, and include private project channels not yet in public projects.csv as unresolved coverage gaps, not silently skipped sites. Keep private financial/personnel/engineering data outside GitHub Pages. See `ops/control/DAILY_SLACK_WEB_CYCLE.md` for collection-window, archive, source-admission, publication and output gates.

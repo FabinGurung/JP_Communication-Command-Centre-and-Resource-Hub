@@ -150,3 +150,7 @@ Phase 4 also adds:
 - System Health roles for canonical files, Drive, Sheets, Slack, SQL, GitHub Actions/Pages and PostgreSQL/Neon;
 - CI enforcement for module identity, edit-routing integrity, live/fallback project coverage and stale historical repository slugs;
 - rendered desktop/mobile QA with no horizontal overflow at 390 px.
+
+## Daily Slack + Web cycle contract
+
+See [`ops/control/daily-slack-web-cycle.json`](ops/control/daily-slack-web-cycle.json) and [the governed procedure](ops/control/DAILY_SLACK_WEB_CYCLE.md). The existing PRIVATE A9 Slack Recovery Archive owns raw multilingual JSONL; this public repository holds public-safe normalized JSON/JSONL/CSV/SQL contracts only. The cycle must read both REB/FBL company rollups as well as governed project channels and must show per-channel cutoffs and receipt status. Missing Rohini project-master mappings are coverage gaps, not evidence that those projects do not exist.
