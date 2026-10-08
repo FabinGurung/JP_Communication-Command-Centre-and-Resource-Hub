@@ -137,7 +137,7 @@
             "responsible": "Responsible engineer / site team",
             "target_resolution_at": null,
             "source_refs": [
-              "https://jp09.slack.com/archives/C0C2DJNGARW/p1791374116000000"
+              "https://jp09.slack.com/archives/C0C2DJNGARW/p1791374216966389"
             ],
             "observed_at": "2026-10-07T17:41:56+05:45",
             "conflict_state": "NONE"
@@ -1798,7 +1798,7 @@
             "material_event_id": "MAT-P007-20261006-OPC-FOOTING-USAGE",
             "work_id": "WORK-P007-20261007-FOOTING-CEMENT-ALLOC",
             "material_name": "Cement OPC",
-            "material_state": "REPORTED_CONSUMPTION_DISPUTED_TOTAL",
+            "material_state": "REPORTED_CONSUMPTION_CONFIRMED_TOTAL",
             "quantity": 101,
             "unit": "bag",
             "note": "Historical 6-Oct field statement: 101 OPC bags for footing work. New 7-Oct claims include 78 footing bags and an 86-bag sum of the listed grid groups; all are retained as provider statements pending reconciliation. Do NOT post 101/78/86 as a reconciled total or daily cement usage.",

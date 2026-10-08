@@ -174,8 +174,18 @@ jobs:
                   if not str(item.get(field, "")).strip():
                       raise SystemExit(f"Pending work {item.get('pending_id')} missing {field}.")
               proposal = item.get("proposal", {})
-              if not str(proposal.get("url", "")).startswith("https://docs.google.com/document/d/"):
-                  raise SystemExit(f"Pending work {item.get('pending_id')} must carry a Google Docs proposal URL.")
+              provider = proposal.get("provider")
+              url = str(proposal.get("url", ""))
+              if provider == "google_drive":
+                  if not url.startswith("https://docs.google.com/document/d/"):
+                      raise SystemExit(f"Pending proposal {item.get('pending_id')} must carry a Google Docs link.")
+              elif provider == "operations_pending_registry":
+                  if not url.startswith("https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"):
+                      raise SystemExit(f"Pending architecture hold {item.get('pending_id')} must link to the owning registry.")
+                  if not item.get("recommendation") or not item.get("when_to_build") or not item.get("security_invariants"):
+                      raise SystemExit(f"Pending architecture hold {item.get('pending_id')} is missing security decision details.")
+              else:
+                  raise SystemExit(f"Unknown pending proposal provider: {provider}")
 
           if state.get("schema_version") != "0.2.0":
               raise SystemExit("Unexpected Daily Ops schema_version.")
