@@ -13,7 +13,8 @@
       "version": "Fabin_Gurung_Drive_Index",
       "url": "https://docs.google.com/spreadsheets/d/18NE0GIbw0lDDlrIcflGS3_VccDZ2LZn1FoPbebSc71o/edit",
       "group": "MAIN",
-      "note": "Documented entry point; Main ACK/cursors require live readback"
+      "note": "Documented entry point; Main ACK/cursors require live readback",
+      "source_modified_at": "2026-10-07T23:30:53.078Z"
     },
     {
       "id": "A9-CTRL-002",
@@ -22,7 +23,8 @@
       "version": "20261004 R06",
       "url": "https://drive.google.com/file/d/10vbBnJ4IxiZTCwvQgxczGc3UJwvQtyAe/view",
       "group": "CONTROL",
-      "note": "Current address-first pointers; not a global closeout"
+      "note": "Current address-first pointers; not a global closeout",
+      "source_modified_at": "2026-10-04T03:30:17.255Z"
     },
     {
       "id": "A9-CTRL-003",
@@ -31,7 +33,8 @@
       "version": "v1.13",
       "url": "https://docs.google.com/document/d/1fRmQCvFvyoSwI0y-wKbOFG-esrkG61Z0dmweGoehCUU/edit",
       "group": "CONTROL",
-      "note": "Address-first Drive save routing"
+      "note": "Address-first Drive save routing",
+      "source_modified_at": "2026-10-04T02:54:58.529Z"
     },
     {
       "id": "A9-CTRL-004",
@@ -40,7 +43,8 @@
       "version": "v0.42",
       "url": "https://docs.google.com/document/d/1ZMql2ac5G0nTx2vukE6ezlMh8vq0RXH_RREugshJCCA/edit",
       "group": "CONTROL",
-      "note": "Tool capability routing"
+      "note": "Tool capability routing",
+      "source_modified_at": "2026-10-04T02:54:56.748Z"
     },
     {
       "id": "A9-CTRL-005",
@@ -49,7 +53,8 @@
       "version": "v0.2L",
       "url": "https://docs.google.com/document/d/1R3Nw8Onp4A2xQ811Z7byb1Kw56uJS2JGsuiJNq2AKo8/edit",
       "group": "CONTROL",
-      "note": "Chat/project and history routing"
+      "note": "Chat/project and history routing",
+      "source_modified_at": "2026-10-04T02:42:42.574Z"
     },
     {
       "id": "A9-CTRL-006",
@@ -58,7 +63,8 @@
       "version": "v2.4",
       "url": "https://docs.google.com/document/d/1fNY5HuvOE6ANjrnrZAYjdtMR-I3yPB4IWT2E31vi4Cg/edit",
       "group": "CONTROL",
-      "note": "Local/Main governance and acknowledgement"
+      "note": "Local/Main governance and acknowledgement",
+      "source_modified_at": "2026-10-04T02:12:43.043Z"
     },
     {
       "id": "A9-CTRL-007",
@@ -67,7 +73,8 @@
       "version": "v1.4",
       "url": "https://docs.google.com/document/d/1xI7QTvYLojvJRJR6Duovc6UiiNPy1vmDuqLyjT0Duzk/edit",
       "group": "CONTROL",
-      "note": "Provenance, reproduction and history"
+      "note": "Provenance, reproduction and history",
+      "source_modified_at": "2026-10-02T01:51:55.515Z"
     },
     {
       "id": "A9-CTRL-008",
@@ -76,7 +83,8 @@
       "version": "v1.8",
       "url": "https://docs.google.com/document/d/1ZGWdS--yS4TUccie2ypt3e6ovqaevbMJmmWvT5zCqss/edit",
       "group": "CONTROL",
-      "note": "Durable workspace and incomplete-work rules"
+      "note": "Durable workspace and incomplete-work rules",
+      "source_modified_at": "2026-10-04T03:19:33.655Z"
     },
     {
       "id": "A9-CTRL-009",
@@ -85,7 +93,8 @@
       "version": "v2.0 inventory",
       "url": "https://docs.google.com/spreadsheets/d/1hk79YGGwP1p7sdivCyvst6RKXtjPgWXmYEHl8RQKUxY/edit",
       "group": "MAIN",
-      "note": "Derived directory; not live version proof"
+      "note": "Derived directory; not live version proof",
+      "source_modified_at": "2026-10-04T11:45:01.992Z"
     },
     {
       "id": "A9-CTRL-010",
@@ -94,7 +103,8 @@
       "version": "v0.4",
       "url": "https://docs.google.com/document/d/1lVyCr7lAwLrGfspKxOnPITS7XgFOQ_7uWufuy7t2vtY/edit",
       "group": "SLACK",
-      "note": "Send permissions, field messaging"
+      "note": "Send permissions, field messaging",
+      "source_modified_at": "2026-10-02T13:09:49.612Z"
     },
     {
       "id": "A9-CTRL-011",
@@ -103,7 +113,8 @@
       "version": "v1.1 file label",
       "url": "https://docs.google.com/document/d/1l7jiQsbGIKkpLyJGsFvzDcuBwkTWnxSMpUqlNQoTvFI/edit",
       "group": "SLACK",
-      "note": "Raw JSONL archive control; last version needs header reconciliation"
+      "note": "Raw JSONL archive control; last version needs header reconciliation",
+      "source_modified_at": "2026-10-02T01:20:26.670Z"
     },
     {
       "id": "A9-CTRL-012",
@@ -112,7 +123,9 @@
       "version": "v1.0",
       "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/control/daily-slack-web-cycle.json",
       "group": "GITHUB",
-      "note": "GitHub derived machine data and Slack follow-up flow"
+      "note": "GitHub derived machine data and Slack follow-up flow",
+      "source_modified_at": null
     }
-  ]
+  ],
+  "date_meaning": "Drive modifiedTime: source file modification timestamp, not a semantic revision diff or release acknowledgment."
 }
