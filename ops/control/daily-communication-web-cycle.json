@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "control_id": "OPS-DAILY-COMM-WEB-CYCLE-001",
+  "operation_name": "A9-CWO",
+  "display_name": "Communication & Web Operations",
+  "effective_from_npt": "2026-10-08",
+  "status": "ACTIVE_GOVERNED_PROCESS_CONTRACT",
+  "scope": "Provider-agnostic intake from Slack, two selected Discord channels and later explicitly registered providers; reconcile once to project machine facts, website and authorized replies.",
+  "source_providers": [
+    {
+      "provider": "SLACK",
+      "adapter": "ops/control/daily-slack-web-cycle.json",
+      "collection": "Provider per-channel cursor with replies and readback",
+      "status": "ADAPTER_EXISTS_SOURCE_CAPTURE_COMPLETENESS_UNVERIFIED"
+    },
+    {
+      "provider": "DISCORD",
+      "guild_id": "682670494658330644",
+      "channel_ids": [
+        "1463826087841890417",
+        "1492168056858738809"
+      ],
+      "active_child_threads_only": true,
+      "archive_root_drive_id": "1nTFR9xQXNwgkWRrAq1jJw7ph6rKg3C9X",
+      "runner": "USER_OPERATED_COLAB",
+      "notebook": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
+      "handoff": "A9_CWO_DAILY_TWO_CHANNELS/handoff_current.json",
+      "status": "STAGED_UNRUN"
+    }
+  ],
+  "precondition": "For each provider discover latest provider-verified cursor, source range and archive receipts; never present a manually staged Colab notebook as already scanned.",
+  "ingest_order": [
+    "RUN_DISCORD_COLAB_OR_RECORD_NOT_RUN",
+    "READ_DISCORD_DRIVE_HANDOFF_IF_PRESENT",
+    "READ_SLACK_CHANNELS_AND_THREAD_DELTAS",
+    "NORMALIZE_CANDIDATE_JSONL",
+    "MAP_COMPANY_AND_PROJECT_IDENTITIES",
+    "RECONCILE_CONFLICTS_AND_EVIDENCE",
+    "COMMIT_GITHUB_JSON_JSONL_CSV",
+    "VALIDATE_AND_DEPLOY_WEBSITE",
+    "SEND_AUTHORIZED_SLACK_DISCUSSION_SUMMARIES",
+    "RECORD_PROVIDER_RECEIPTS_AND_REMAINING_GAPS"
+  ],
+  "storage_policy": "ops/control/storage-routing-rules.json",
+  "source_processing": {
+    "originals": "Existing A9 source archives in Drive; raw JSONL + source IDs + original attachment bytes",
+    "facts": "Versioned owning GitHub JSON/JSONL/CSV and SQL relationship contracts",
+    "website": "Derived GitHub Pages view",
+    "messages": "Source-specific Slack/company groups (or Discord if separately approved); provider send readback"
+  },
+  "project_truth": "Do not equate uploaded image or message with DONE; classify as observed/requested/planned/completed only when source-grounded.",
+  "company_routing": "Use authorized A9 registry for REB/FBL and governed projects; both company rollups are required targets when send gate allows.",
+  "safety_and_accuracy": "Do not store Discord/Slack bot secrets in GitHub, logs, exports or notebook outputs. No server-wide Discord harvest. Never invent messages/cursors or skip incompleteness. Preserve stricter live A9 source controls where they apply.",
+  "daily_closeout": [
+    "DISCORD_RECEIPT_PASS_PARTIAL_NOT_RUN",
+    "SLACK_SCAN_PER_CHANNEL_WINDOW",
+    "DRIVE_ARCHIVE_READBACK",
+    "GITHUB_COMMIT_OR_NO_DELTA",
+    "WEBSITE_DEPLOYMENT",
+    "SLACK_REPLIES_SENT_OR_DRAFT",
+    "UNRESOLVED_PROJECT_IDENTITIES",
+    "SHEETS_PROJECTION_STATUS"
+  ],
+  "user_facing_name_change": {
+    "new": "A9-CWO",
+    "old": "A9-SWO",
+    "meaning": "Operational rename only, no new bot token or Slack account"
+  }
+}

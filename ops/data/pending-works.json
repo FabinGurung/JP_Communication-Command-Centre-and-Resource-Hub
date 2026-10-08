@@ -91,6 +91,31 @@
         "ops/control/control-tower-directory.json",
         "Fabin_Gurung_Drive_Index / Drive stable ID 18NE0GIbw0lDDlrIcflGS3_VccDZ2LZn1FoPbebSc71o"
       ]
+    },
+    {
+      "pending_id": "OPS-PEND-000004",
+      "title": "A9-CWO two-channel Discord daily intake activation",
+      "short_title": "Discord daily Colab pilot",
+      "status": "NOTEBOOK_READY_PROVIDER_RUN_REQUIRED",
+      "priority": "NEXT_OPERATIONAL",
+      "category": "COMMUNICATION_INTAKE",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "github",
+        "title": "A9-CWO Discord two-channel daily Colab",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/README.md"
+      },
+      "why": "Daily field images and current-work updates arrive via Discord, not Slack alone; currently the daily cycle lacks provider-read Discord evidence.",
+      "recommendation": "First run bounded seven-day catch-up via authorized Discord bot in Colab. Verify attachment SHA/Drive receipt and candidate JSONL, then reconcile with Slack facts by project ID into GitHub before website and Slack summaries.",
+      "when_to_build": "Owner connects existing Discord bot credential in Colab and runs bounded first pilot.",
+      "proposed_first_gate": "Run two specified channels with View/Read History/Message Content permissions; validate per-channel source counts, image byte receipts, cursor and handoff_current.json.",
+      "implementation_status": "CODE_STAGED_NOT_PROVIDER_EXECUTED",
+      "current_boundary": "No Discord API provider read or Drive upload has been executed by the new notebook; archived threads and embed-only images not covered in v1.",
+      "related_canonical_sources": [
+        "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
+        "ops/control/storage-routing-rules.json",
+        "ops/control/daily-communication-web-cycle.json"
+      ]
     }
   ],
   "archived_items": [

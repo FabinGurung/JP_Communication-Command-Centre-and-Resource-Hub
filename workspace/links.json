@@ -454,6 +454,30 @@
       "audience": "Owner / Technical handler / AI",
       "type": "Compulsory JSON control",
       "source": "ops/control/branch-lane-registry.json"
+    },
+    {
+      "id": "a9-storage-pin",
+      "group": "control",
+      "title": "Pinned data routing & A9-CWO daily procedure",
+      "url": "../controls/storage.html",
+      "why": "Remember where raw communication, machine facts, control rules, libraries, images and website projections belong.",
+      "how": "Review storage matrix and daily steps before adopting any new provider.",
+      "status": "LIVE",
+      "audience": "Owner / AI / Engineer",
+      "type": "Pinned control reference",
+      "source": "ops/control/storage-routing-rules.json"
+    },
+    {
+      "id": "discord-daily-colab",
+      "group": "daily",
+      "title": "Discord: two-channel daily Colab intake",
+      "url": "https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
+      "why": "Save new field images and messages from exactly the two approved Discord channels before reconciliation.",
+      "how": "Run Colab using a Discord bot credential and authorized Google Drive account; verify PASS handoff receipt.",
+      "status": "STAGED_UNRUN",
+      "audience": "Owner",
+      "type": "Google Colab notebook",
+      "source": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb"
     }
   ]
 }

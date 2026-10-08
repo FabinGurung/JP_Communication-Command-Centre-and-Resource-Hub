@@ -154,3 +154,7 @@ Phase 4 also adds:
 ## Daily Slack + Web cycle contract
 
 See [`ops/control/daily-slack-web-cycle.json`](ops/control/daily-slack-web-cycle.json) and [the governed procedure](ops/control/DAILY_SLACK_WEB_CYCLE.md). The existing PRIVATE A9 Slack Recovery Archive owns raw multilingual JSONL; this public repository holds public-safe normalized JSON/JSONL/CSV/SQL contracts only. The cycle must read both REB/FBL company rollups as well as governed project channels and must show per-channel cutoffs and receipt status. Missing Rohini project-master mappings are coverage gaps, not evidence that those projects do not exist.
+
+## A9-CWO — Communication & Web Operations
+
+**A9-CWO** supersedes the user-facing A9-SWO nickname. It represents a multi-source operating cycle (governed Slack, two-channel Discord Colab and future admitted providers), **not a new Discord/Slack bot account**. See the [pinned storage and daily pipeline](controls/storage.html), machine contract `ops/control/storage-routing-rules.json`, and [two-channel Discord Colab](ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb). An operator runs the Discord notebook before daily reconciliation and the run must report Discord `PASS/PARTIAL/NOT_RUN`. Full historical Discord server harvesting is out of scope. Storage assignment is by original evidence / normalized truth / binary file / human projection, not by channel brand.

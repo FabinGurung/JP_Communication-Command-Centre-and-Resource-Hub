@@ -123,5 +123,8 @@
     ],
     "do_not_report_full_success_on_partial_archival": true,
     "handle_unverified": "Retain unresolved debt and next exact safe boundary; scheduler remains enabled."
-  }
+  },
+  "parent_cycle": "ops/control/daily-communication-web-cycle.json",
+  "alias": "SLACK_ADAPTER_OF_A9_CWO",
+  "legacy_name": "A9-SWO/Daily Slack-Web v1"
 }

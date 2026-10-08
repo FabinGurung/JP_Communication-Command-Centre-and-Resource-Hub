@@ -26,3 +26,7 @@ Resolve current routes from the private Slack Control Registry rather than hardc
 This document does not supersede the private A9 Slack Control READ FIRST, private A9 Recovery Archive READ FIRST, project Drive authority, or current authorized Slack send modes. It adds an Operations-side machine-readable cycle contract and QA expectations. The existing A9 archive owns raw Slack JSONL; A9 Project Identity owns canonical identity; GitHub owns only normalized/public-safe Operations data.
 
 **Important:** The existing routine Daily Ops snapshot carried a global source cutoff of 2026-10-07T17:41:56+05:45; this is *not* proof that every eligible channel/thread was fully captured after that timestamp. A new governed per-channel checkpoint and provider readback are required before upgrading coverage to PASS.
+
+## Parent operating cycle (2026-10-08)
+
+The operational alias is now **A9-CWO — Communication & Web Operations**. This document and its machine-readable sibling remain the **Slack adapter**, not the complete daily-cycle contract. For a source-agnostic pipeline, use [`DAILY_COMMUNICATION_WEB_CYCLE.md`](DAILY_COMMUNICATION_WEB_CYCLE.md), the pinned [`storage-routing-rules.json`](storage-routing-rules.json), and the two-channel Discord Colab. No Discord run has been executed merely by activating this contract.
