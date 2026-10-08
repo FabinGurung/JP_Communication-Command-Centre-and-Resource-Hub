@@ -11,6 +11,11 @@
       "description": "The main places an owner, manager or engineer should begin."
     },
     {
+      "id": "control",
+      "label": "Control Towers & Main Library",
+      "description": "A9 source-linked control directory and Main Library navigation"
+    },
+    {
       "id": "planning",
       "label": "Pending work",
       "description": "Prepared proposals and deferred work that must remain visible until explicitly started, rejected or completed."
@@ -65,6 +70,18 @@
       "audience": "Owner / Manager / Engineer",
       "type": "Website",
       "source": "ops/data/current-works.json"
+    },
+    {
+      "id": "a9-controls",
+      "group": "control",
+      "title": "Control Towers & Main Library",
+      "url": "../controls/",
+      "why": "Find documented A9 version pointers and Main Library entry point from the website.",
+      "how": "Search the directory and open the actual Drive source. This is a dated snapshot until automatic sync is implemented.",
+      "status": "LIVE",
+      "audience": "Owner / Manager / Engineer / AI",
+      "type": "Control directory",
+      "source": "ops/control/control-tower-directory.json"
     },
     {
       "id": "map",

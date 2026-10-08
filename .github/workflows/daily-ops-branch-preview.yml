@@ -26,6 +26,9 @@ jobs:
       - name: Validate compulsory branch/lane registry
         run: python scripts/validate_branch_registry.py
 
+      - name: Validate A9 control directory
+        run: python scripts/validate_control_directory.py
+
       - name: Validate Daily Slack/Web cycle contract
         run: python scripts/validate_daily_slack_cycle.py
 
@@ -57,6 +60,8 @@ jobs:
               Path("workspace/links.json"),
               Path("workspace/modules.json"),
               Path("workspace/edit-routing.json"),
+              Path("controls/index.html"),
+              Path("ops/control/control-tower-directory.json"),
               Path("pending/index.html"),
               Path("ops/data/pending-works.json"),
               Path("workspace/workspace.css"),

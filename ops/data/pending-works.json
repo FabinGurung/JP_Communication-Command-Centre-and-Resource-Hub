@@ -63,6 +63,34 @@
         "A7 project identity/routing contracts",
         "future private user/companies/membership/grant store"
       ]
+    },
+    {
+      "pending_id": "OPS-PEND-000003",
+      "title": "Control Towers and Main Library automated GitHub synchronization",
+      "short_title": "A9 control index refresh and complete migration",
+      "status": "INDEX_PILOT_LIVE_FULL_MIGRATION_PENDING",
+      "priority": "NEXT_CONTROL_PLANE",
+      "category": "GOVERNANCE",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Source-linked directory pilot and future deterministic Drive-to-GitHub mirror",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
+      },
+      "why": "The Controls page is a static versioned index; changes to Drive Main Library and control tower sources do not automatically update it.",
+      "recommendation": "Use a provider-authenticated scheduled sync to read source Drive stable IDs and version/revisions, compare to the GitHub control-directory JSON, and update it only after source and write readback. Keep unchanged Drive originals; migrate full Main/Local catalogues only after verified PK/FK/cursor lineage.",
+      "when_to_build": "After accepting the initial Control Towers subpage, verifying the full A9 control inventory and selecting an authenticated Drive sync method.",
+      "security_invariants": [
+        "Do not replace stable Drive IDs or erase historical PRE/POST or artifact relationships.",
+        "Do not call the index real-time synchronized or claim the Main Library is fully migrated until all scope/edge/cursor readbacks pass."
+      ],
+      "proposed_first_gate": "Inventory full Main AddressLookup and eligible control sources; build one-control drift-detection pilot.",
+      "implementation_status": "STATIC_DIRECTORY_PILOT_ONLY",
+      "current_boundary": "Full automatic refresh and wholesale A9 Main/Local migration are not implemented.",
+      "related_canonical_sources": [
+        "ops/control/control-tower-directory.json",
+        "Fabin_Gurung_Drive_Index / Drive stable ID 18NE0GIbw0lDDlrIcflGS3_VccDZ2LZn1FoPbebSc71o"
+      ]
     }
   ],
   "archived_items": [
