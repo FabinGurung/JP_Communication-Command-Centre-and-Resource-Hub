@@ -339,6 +339,18 @@
           "verified_at": "2026-10-04T15:20:00+05:45"
         },
         {
+          "resource_id": "RES-P020-STRUCT-ANALYSIS-PDF-001",
+          "resource_type": "STRUCTURAL_ANALYSIS_PDF",
+          "display_name": "Structural Analysis & Design Report — Kharika Paudel (G+1.5 Storey RC, ETABS v20.0.0)",
+          "drive_file_id": "1uPYCoKK-n7J_o3flTUWOEgCQdYAjbfFt",
+          "drive_url": "https://drive.google.com/file/d/1uPYCoKK-n7J_o3flTUWOEgCQdYAjbfFt/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-08T08:41:42.496Z"
+        },
+        {
           "resource_id": "RES-P020-ETABS-EDB-001",
           "resource_type": "ETABS_MODEL",
           "display_name": "ETABS Model (EDB)",
