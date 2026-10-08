@@ -13,3 +13,8 @@ Only server `682670494658330644` and channels `1463826087841890417`, `1492168056
 - A9-CWO reconciles candidates to project identities, site progress, drawings and engineering references, then publishes validated GitHub JSON/JSONL/CSV, website, and authorized outbound Slack discussion posts. The Colab never automatically claims construction facts or posts messages.
 
 Existing A9 Discord archive and its Local/Main catalogues remain intact. This daily intake is a **bounded delta lane**, not a replacement for prior archived source batches. Repeat history is recorded by immutable Discord message IDs and digest/version, not by filename alone.
+
+### Colab Google Drive API hotfix — 2026-10-09
+
+**v1.0.1 compatibility fix, same notebook filename:** `drive.files().list()` uses `pageSize=100` and `pageToken=token`, not snake_case `page_size`/`page_token`. The failure was in the `children()` Drive folder lookup, before collecting Discord messages; it did **not** prove messages had been archived. The notebook setup now supplies an authorized `httplib2.Http(timeout=120)` transport instead of relying on per-request timeout behavior. Restart the notebook from the current GitHub/Colab link, run **Setup**, then **Collector**, and check the final receipt. A saved older Colab copy may still contain the faulty code.
+

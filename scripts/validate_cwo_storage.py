@@ -32,6 +32,11 @@ for i, code in enumerate(codes):
 source = "\n".join(codes)
 for channel in chans:
     assert channel in source
+# Regression guard: googleapiclient's discovery client uses camelCase parameters.
+assert "page_size=" not in source and "page_token=" not in source
+assert "pageSize=100" in source and "pageToken=token" in source
+assert "httplib2.Http(timeout=120)" in source
+assert "AuthorizedHttp(credentials" in source
 assert "with requests.get(url" in source
 assert "with http.get(url" not in source  # no Discord Authorization header to CDN
 assert 'BOT_TOKEN = userdata.get("DISCORD_BOT_TOKEN")' in source
