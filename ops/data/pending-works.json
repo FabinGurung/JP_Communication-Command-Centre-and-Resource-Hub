@@ -29,6 +29,53 @@
         "ops/data/project-resources.json",
         "ops/events/daily-ops-events.jsonl"
       ]
+    },
+    {
+      "pending_id": "OPS-PEND-000002",
+      "title": "Secure user/company-specific project visibility",
+      "short_title": "Authenticated project access and company permissions",
+      "status": "ON_HOLD_ARCHITECTURE_OPTION",
+      "priority": "FUTURE_ACCESS_CONTROL",
+      "category": "SECURITY_AND_ACCESS",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Security architecture decision — recommended Supabase Auth + Postgres RLS for a future private project portal",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
+      },
+      "why": "Allow a signed-in person to see ONLY projects permitted by verified company membership, project assignment and role, including cross-company and exceptional access.",
+      "recommendation": "When real per-user access is approved, prefer Supabase Auth + PostgreSQL Row Level Security (RLS) for user identity, company memberships, project grants and server-enforced per-project reads. Treat Supabase as the authorization runtime, not a replacement for A7, Git version control or Drive evidence storage.",
+      "proposed_architecture": "A7 semantic project/company identities and Operations project-master IDs → authenticated user identity → company_memberships + project_access rules in private Postgres → RLS-filtered API/view → authorized map and project page. Google Drive file access must also be checked separately.",
+      "security_invariants": [
+        "Never rely on URL parameters, JavaScript hiding, or static GitHub Pages CSV/JSON as access control.",
+        "Private project facts and user/company membership lists must NOT be shipped in the public Pages artifact/repository.",
+        "Default-deny at the data/API layer. Validate every project row against logged-in user identity and grants.",
+        "Separate public marketing/project-map data from authenticated operational/engineering views.",
+        "Use existing A7 identities/route references; do not build a duplicate project identity or authority plane."
+      ],
+      "alternatives": "Neon/PostgreSQL + separate authentication/API service is viable but requires more integration; Supabase is the default candidate if Auth + RLS + API in one managed stack is desirable. Confirm plan, pricing, hosting region, integration and security needs at decision time.",
+      "when_to_build": "Start only when distinct user accounts must have different protected project datasets, or authenticated write workflows are approved. For a public convenience filter such as showing Fishtail first, no database is required.",
+      "proposed_first_gate": "Human approves required personas, companies, project-grants matrix, privacy classification and a private proof-of-concept scope.",
+      "implementation_status": "NOT_STARTED",
+      "current_boundary": "Deferred. Current map scope/filter is public convenience only, not a secure access boundary.",
+      "related_canonical_sources": [
+        "projects.csv",
+        "A7 project identity/routing contracts",
+        "future private user/companies/membership/grant store"
+      ]
+    }
+  ],
+  "archived_items": [
+    {
+      "archive_id": "OPS-ARCH-000001",
+      "title": "Project Command Center v1 (standalone proposal)",
+      "disposition": "ARCHIVED_SUPERSEDED_BY_A7",
+      "description": "Standalone Project↔Module routing and registry work would duplicate A7. A7 already has project-module routing, ownership, identity/authority and visualization derivation. Any future Operations UI should consume A7 outputs/verified peer-module state only, after the current A7 thread decides.",
+      "original_proposal_url": "https://docs.google.com/document/d/1Mb99EdLinRAiUCgF_0S_aiORGEytCUpEUz4mKRPdEwc/edit",
+      "archive_folder_url": "https://drive.google.com/drive/folders/1L_045jFBc30Gdu3YQaQwqHgyLw9S6xaJ",
+      "owning_repository": "https://github.com/FabinGurung/JP_A7_System_Registry_and_Knowledge_Graph",
+      "future_trigger": "Explicit user request for an Operations-side project cockpit after A7 ownership/routing decisions.",
+      "implementation_status": "SCRAPPED_AS_SEPARATE_INFRASTRUCTURE_PROPOSAL"
     }
   ]
 }

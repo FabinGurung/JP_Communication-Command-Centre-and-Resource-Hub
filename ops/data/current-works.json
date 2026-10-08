@@ -18,24 +18,24 @@
       "display_name": "14 Bishal Paija",
       "contractor": "Rohini Engineering and Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-07",
+        "date": "2026-10-08",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-07T03:49:00+05:45",
-        "source_cutoff": "2026-10-06T20:33:10+05:45",
+        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
+        "source_cutoff": "2026-10-07T17:41:56+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
+          "google_sheets": "PENDING",
+          "website": "PENDING",
           "slack": "CURRENT"
         },
         "todays_work": [
           {
             "work_id": "WORK-P001-20261007-SITE-STATUS",
-            "activity": "Current site status follow-up: cleaning closure + shuttering/RCC/jhaller work",
+            "activity": "Carry-forward from 7 Oct (completion not reverified): Current site status follow-up: cleaning closure + shuttering/RCC/jhaller work",
             "location": "Project site",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
@@ -127,6 +127,19 @@
               "https://jp09.slack.com/archives/C0C2DJNGARW/p1790988412592699"
             ],
             "observed_at": "2026-10-02T06:19:28+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "blocker_id": "BLK-P001-20261008-ANCHORAGE-CRACK-CONCERN",
+            "work_id": "WORK-P001-20261007-SITE-STATUS",
+            "status": "NEEDS_INPUT",
+            "blocker": "Management raised a visible crack/anchorage concern from imagery. Engineering diagnosis, location-specific assessment and remedial approval are not yet established.",
+            "responsible": "Responsible engineer / site team",
+            "target_resolution_at": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C2DJNGARW/p1791374116000000"
+            ],
+            "observed_at": "2026-10-07T17:41:56+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -235,24 +248,24 @@
       "display_name": "17 Samir Man Ghubaju",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-07",
+        "date": "2026-10-08",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "UNRESOLVED",
-        "last_reconciled_at": "2026-10-07T03:49:00+05:45",
-        "source_cutoff": "2026-10-06T20:33:10+05:45",
+        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
+        "source_cutoff": "2026-10-07T17:41:56+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
+          "google_sheets": "PENDING",
+          "website": "PENDING",
           "slack": "CURRENT"
         },
         "todays_work": [
           {
             "work_id": "WORK-P002-20261007-DUCT-LINTEL-DOOR",
-            "activity": "Duct/lintel and door coordination; reconcile remaining cement/brick/electrical questions",
+            "activity": "Carry-forward from 7 Oct (completion not reverified): Duct/lintel and door coordination; reconcile remaining cement/brick/electrical questions",
             "location": "Project site / duct opening",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
@@ -626,24 +639,24 @@
       "display_name": "13 Hari Baral",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-07",
+        "date": "2026-10-08",
         "overall_readiness": "READY_WITH_CONDITION",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-07T03:49:00+05:45",
-        "source_cutoff": "2026-10-06T20:33:10+05:45",
+        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
+        "source_cutoff": "2026-10-07T17:41:56+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
+          "google_sheets": "PENDING",
+          "website": "PENDING",
           "slack": "CURRENT"
         },
         "todays_work": [
           {
             "work_id": "WORK-P003-20261007-FALSE-CEILING-ELECTRICAL",
-            "activity": "Complete remaining washroom false ceiling and electrical bulb openings; verify other trade balance",
+            "activity": "Carry-forward from 7 Oct (completion not reverified): Complete remaining washroom false ceiling and electrical bulb openings; verify other trade balance",
             "location": "Project site",
             "execution_status": "PARTIAL",
             "readiness": {
@@ -895,24 +908,24 @@
       "display_name": "16 Yamuna Pun Adai",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-07",
+        "date": "2026-10-08",
         "overall_readiness": "HOLD",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-07T03:49:00+05:45",
-        "source_cutoff": "2026-10-06T20:33:10+05:45",
+        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
+        "source_cutoff": "2026-10-07T17:41:56+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
+          "google_sheets": "PENDING",
+          "website": "PENDING",
           "slack": "CURRENT"
         },
         "todays_work": [
           {
             "work_id": "WORK-P004-20261007-DEFECT-QUALITY",
-            "activity": "Defect/leakage/embedded-bamboo quality inspection and remediation planning",
+            "activity": "Carry-forward from 7 Oct (completion not reverified): Defect/leakage/embedded-bamboo quality inspection and remediation planning",
             "location": "Affected wall / waterproofing-parquet interface",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
@@ -1110,24 +1123,24 @@
       "display_name": "30 Sabitri Giri / Dipti Giri",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-07",
+        "date": "2026-10-08",
         "overall_readiness": "READY_WITH_CONDITION",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-07T03:49:00+05:45",
-        "source_cutoff": "2026-10-06T20:33:10+05:45",
+        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
+        "source_cutoff": "2026-10-07T17:41:56+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
+          "google_sheets": "PENDING",
+          "website": "PENDING",
           "slack": "CURRENT"
         },
         "todays_work": [
           {
             "work_id": "WORK-P005-20261007-SLAB-MATERIALS",
-            "activity": "2nd-floor slab material order follow-up and execution readiness",
+            "activity": "Carry-forward from 7 Oct (completion not reverified): 2nd-floor slab material order follow-up and execution readiness",
             "location": "Second-floor slab",
             "execution_status": "PLAN",
             "readiness": {
@@ -1331,24 +1344,24 @@
       "display_name": "31 Sharada Adhikari",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-07",
+        "date": "2026-10-08",
         "overall_readiness": "HOLD",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-07T03:49:00+05:45",
-        "source_cutoff": "2026-10-06T20:33:10+05:45",
+        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
+        "source_cutoff": "2026-10-07T17:41:56+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
+          "google_sheets": "PENDING",
+          "website": "PENDING",
           "slack": "CURRENT"
         },
         "todays_work": [
           {
             "work_id": "WORK-P006-20261007-PLUMBING-UPVC",
-            "activity": "Kitchen plumbing + UPVC coordination; resolve toilet/plaster/electrical holds",
+            "activity": "Carry-forward from 7 Oct (completion not reverified): Kitchen plumbing + UPVC coordination; resolve toilet/plaster/electrical holds",
             "location": "Kitchen / doors and windows / toilet coordination",
             "execution_status": "ONGOING",
             "readiness": {
@@ -1670,24 +1683,24 @@
       "display_name": "15 Narayani Parajuli",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-07",
+        "date": "2026-10-08",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
-        "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-07T03:49:00+05:45",
-        "source_cutoff": "2026-10-06T20:33:10+05:45",
+        "conflict_state": "UNRESOLVED",
+        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
+        "source_cutoff": "2026-10-07T17:41:56+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
+          "google_sheets": "PENDING",
+          "website": "PENDING",
           "slack": "CURRENT"
         },
         "todays_work": [
           {
             "work_id": "WORK-P007-20261007-FOOTING-CEMENT-ALLOC",
-            "activity": "Footing/column phase: per-footing OPC allocation + CF1 coordination",
+            "activity": "Footing/column phase: reconcile conflicting OPC totals/grids; engineering and plumbing coordination",
             "location": "Foundation / grids H1,H2,H3,H6,I2,I3,G1,G3,G6,D7,E7",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
@@ -1747,7 +1760,7 @@
               },
               "overall": "UNSET"
             },
-            "blocker": "Need the 101 OPC bags broken down by individual footing/grid. CF1/detail acceptance also remains unresolved.",
+            "blocker": "Grid list sums to 86 bags; later field reply says 78 footing bags out of 110 loaded and 32 for column-of-footing use, conflicting with prior 101-bag report. Need corrected confirmed allocation. Structural top-column/shear-key query, CF1/detail acceptance and plumber estimate remain open.",
             "responsible": null,
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791260991997729",
@@ -1755,10 +1768,15 @@
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791262726883179",
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791262750222249",
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791297982325979",
-              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791325032821449"
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791325032821449",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791356719272659",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791357548212629",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791373760324279",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791373944497509",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791373984085579"
             ],
             "last_reconciled_at": "2026-10-07T03:49:00+05:45",
-            "conflict_state": "NONE"
+            "conflict_state": "UNRESOLVED"
           }
         ],
         "materials": [
@@ -1780,18 +1798,20 @@
             "material_event_id": "MAT-P007-20261006-OPC-FOOTING-USAGE",
             "work_id": "WORK-P007-20261007-FOOTING-CEMENT-ALLOC",
             "material_name": "Cement OPC",
-            "material_state": "REPORTED_CONSUMPTION_CONFIRMED_TOTAL",
+            "material_state": "REPORTED_CONSUMPTION_DISPUTED_TOTAL",
             "quantity": 101,
             "unit": "bag",
-            "note": "Paras reported 101 OPC bags used for footing work across grids H1,H2,H3,H6,I2,I3,G1,G3,G6,D7,E7. Provider also stated 110 was loaded. Per-footing/grid allocation remains unresolved; do not invent a split.",
+            "note": "Historical 6-Oct field statement: 101 OPC bags for footing work. New 7-Oct claims include 78 footing bags and an 86-bag sum of the listed grid groups; all are retained as provider statements pending reconciliation. Do NOT post 101/78/86 as a reconciled total or daily cement usage.",
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791260991997729",
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791262726883179",
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791262750222249",
-              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791297982325979"
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791297982325979",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791356719272659",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791357548212629"
             ],
             "observed_at": "2026-10-06T10:44:10+05:45",
-            "conflict_state": "NONE"
+            "conflict_state": "UNRESOLVED"
           },
           {
             "material_event_id": "MAT-P007-20261006-OPC-STOCK",
@@ -1891,15 +1911,32 @@
             "blocker_id": "BLK-P007-20261006-OPC-PER-FOOTING-ALLOC",
             "work_id": "WORK-P007-20261007-FOOTING-CEMENT-ALLOC",
             "status": "NEEDS_INPUT",
-            "blocker": "Break down the reported 101 OPC bags by individual footing/grid (e.g. H1, H2, etc.); total-only usage is insufficient for footing-level allocation.",
+            "blocker": "Provider statements conflict: 6-Oct 101 OPC bags for footings; 7-Oct individual grid/group figures sum 86; 7-Oct second report says 78 footing bags of 110 loaded and 32 for column-of-footing use. Need corrected grid mapping (I3/H3 and I2/H2 remain grouped), stage split and consumption dates. Do not infer missing values.",
             "responsible": "Paras / site engineer",
             "target_resolution_at": null,
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791260991997729",
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791262726883179",
-              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791297982325979"
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791297982325979",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791356719272659",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791357548212629"
             ],
             "observed_at": "2026-10-06T20:31:22+05:45",
+            "conflict_state": "UNRESOLVED"
+          },
+          {
+            "blocker_id": "BLK-P007-20261008-STRUCTURAL-PLUMBING-REBAR-QUESTIONS",
+            "work_id": "WORK-P007-20261007-FOOTING-CEMENT-ALLOC",
+            "status": "NEEDS_INPUT",
+            "blocker": "Management queried missing top-column shear key, rebar lying on bare soil and a plumber/material estimate before plumbing work. These are requests/observations, not approved engineering solutions or completed work.",
+            "responsible": "Responsible structural engineer / site team",
+            "target_resolution_at": null,
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791373760324279",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791373944497509",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791373984085579"
+            ],
+            "observed_at": "2026-10-07T17:38:04+05:45",
             "conflict_state": "NONE"
           }
         ],
@@ -2025,6 +2062,20 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791325032821449"
             ]
+          },
+          {
+            "evidence_id": "EVID-P007-20261007-OPC-GRID-DISCREPANCY",
+            "work_id": "WORK-P007-20261007-FOOTING-CEMENT-ALLOC",
+            "provider": "SLACK",
+            "provider_object_id": "1791356719.272659",
+            "evidence_type": "FIELD_REPORT_WITH_CONFLICTING_QUANTITY_FOLLOW_UP",
+            "evidence_url": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791356719272659",
+            "observed_at": "2026-10-07T12:50:19+05:45",
+            "note": "Grid/group quantities sum 86; separate report says 78 and 32 from loaded 110; previous 101 remains unresolved.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791356719272659",
+              "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791357548212629"
+            ]
           }
         ]
       }
@@ -2038,24 +2089,24 @@
       "display_name": "Kharika Paudel",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-07",
+        "date": "2026-10-08",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-07T03:49:00+05:45",
-        "source_cutoff": "2026-10-06T20:33:10+05:45",
+        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
+        "source_cutoff": "2026-10-07T17:41:56+05:45",
         "projection_status": {
-          "google_sheets": "CURRENT",
-          "website": "CURRENT",
+          "google_sheets": "PENDING",
+          "website": "PENDING",
           "slack": "CURRENT"
         },
         "todays_work": [
           {
             "work_id": "WORK-P020-20261007-SLAB-PLASTER",
-            "activity": "Shuttering/slab checks + underground water-tank plaster planning",
+            "activity": "Carry-forward from 7 Oct (completion not reverified): Shuttering/slab checks + underground water-tank plaster planning",
             "location": "Project site / slab, columns and underground water tank",
             "execution_status": "NEEDS_INPUT",
             "readiness": {

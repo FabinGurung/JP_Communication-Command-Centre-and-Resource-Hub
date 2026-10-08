@@ -28,6 +28,7 @@
     <p class="meta" id="updated">Loading registry…</p>
   </section>
   <section class="grid" id="pending-grid" aria-live="polite"></section>
+  <section aria-labelledby="archive-title" style="margin-bottom:60px"><h2 id="archive-title">Archived / superseded proposals</h2><p class="meta">Preserved for provenance. These are not active implementation requests.</p><div class="grid" id="archived-grid" aria-live="polite"></div></section>
 </main>
 <script>
 const esc=s=>String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
@@ -50,10 +51,17 @@ const esc=s=>String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replac
           '<div>Implementation</div><div>'+esc(item.implementation_status)+'</div>'+
           '<div>Next gate</div><div>'+esc(item.proposed_first_gate)+'</div>'+
           '<div>Boundary</div><div>'+esc(item.current_boundary)+'</div>'+
+          (item.recommendation?'<div>Recommended design</div><div>'+esc(item.recommendation)+'</div>':'')+
+          (item.when_to_build?'<div>Build trigger</div><div>'+esc(item.when_to_build)+'</div>':'')+
+          (item.alternatives?'<div>Alternatives</div><div>'+esc(item.alternatives)+'</div>':'')+
         '</div>'+
         (proposal.url?'<a class="button" href="'+esc(proposal.url)+'" target="_blank" rel="noopener">Open proposal in Google Docs →</a>':'')+
       '</article>';
     }).join("");
+    const archived=Array.isArray(data.archived_items)?data.archived_items:[];
+    document.getElementById("archived-grid").innerHTML=archived.length
+      ?archived.map(item=>'<article class="card"><div class="id">'+esc(item.archive_id)+' · '+esc(item.disposition)+'</div><h2>'+esc(item.title)+'</h2><p>'+esc(item.description)+'</p><p><a href="'+esc(item.owning_repository)+'">Continue in owning A7 repository →</a></p><p><a href="'+esc(item.original_proposal_url)+'">Archived original proposal (reference only) →</a></p></article>').join("")
+      :'<div class="empty">No archived proposals.</div>';
   }catch(e){grid.innerHTML='<div class="empty">'+esc(e.message)+'</div>';}
 })();
 </script>
