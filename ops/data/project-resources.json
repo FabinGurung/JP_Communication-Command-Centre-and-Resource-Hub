@@ -315,6 +315,18 @@
           "verified_at": "2026-10-04T15:20:00+05:45"
         },
         {
+          "resource_id": "RES-P020-ARCH-PDF-001",
+          "resource_type": "ARCHITECTURAL_PDF",
+          "display_name": "Architectural / Municipal Drawing (PDF) — Pokhara Municipal",
+          "drive_file_id": "1gG04rPHxuGoh8rRcS3iscfjUGojlb7Ti",
+          "drive_url": "https://drive.google.com/file/d/1gG04rPHxuGoh8rRcS3iscfjUGojlb7Ti/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "preview_mode": "DRIVE_PDF_PREVIEW",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "is_current": true,
+          "verified_at": "2026-10-08T00:46:11.331Z"
+        },
+        {
           "resource_id": "RES-P020-STRUCT-PDF-001",
           "resource_type": "STRUCTURAL_PDF",
           "display_name": "Structural Drawing Set",
