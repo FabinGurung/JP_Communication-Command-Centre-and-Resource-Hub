@@ -99,7 +99,7 @@ def fixtures():
     receipt = {
         "run_id": run_id, "guild_id": "123456789012345678",
         "scan_rule": "ROLLING_SEVEN_DAYS_WITH_CATCHUP_EXTENSION",
-        "replay_lookback_days": 7, "status": "PARTIAL",
+        "replay_lookback_days": 7, "status": "PARTIAL", "preflight_confirmed": True,
         "collection_started_at": "2026-10-10T22:00:00+00:00",
         "target_parent_channels": ["111111111111111111", "999999999999999999"],
         "sources": [{"channel_id": "222222222222222222", "parent_channel_id": "111111111111111111",
@@ -116,7 +116,7 @@ def fixtures():
 
 def main():
     nb = json.loads(NB.read_text("utf-8"))
-    check(nb["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-009", "Unexpected notebook revision")
+    check(nb["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-010", "Unexpected notebook revision")
     cells = {cell["id"]: "".join(cell["source"]) for cell in nb["cells"]}
     for name in ("a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot", "a9-cwo-c05-daily-index"):
         ast.parse(cells[name], filename=name)
@@ -175,6 +175,8 @@ def main():
     drive = fixtures()
     ctx = {
         "__name__": "__test__", "drive": object(), "GUILD_ID": "123456789012345678",
+        "C02_CONFIRMED_RUN_ID": drive.run_id,
+        "C02_CONFIRMED_RECEIPT_ID": "synthetic_immutable_receipt",
         "ROOT_DRIVE_ID": "ROOT", "RUN_FOLDER_NAME": "A9_CWO_DAILY_TWO_CHANNELS",
         "TZ": ZoneInfo("Asia/Kathmandu"), "children": drive.children,
         "directory": drive.directory, "byte_readback": drive.byte_readback,
@@ -207,6 +209,19 @@ def main():
     check(drive.writes == writes_before, "Repeated C05 run created duplicate immutable objects")
     check(drive.files["synthetic_state_current"] == state_before, "C05 modified the old verified cursor")
 
+    # A preview-only C02 must invalidate the confirmation and forbid reusing
+    # this already-indexed frozen receipt as though it came from a new run.
+    ctx["C02_CONFIRMED_RUN_ID"] = None
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):
+            exec(src, ctx)
+    except RuntimeError as exc:
+        check("preview-only or stale handoff" in str(exc), "Wrong preview-only rejection")
+    else:
+        raise AssertionError("C05 accepted previous confirmed receipt after preview-only C02")
+    check(drive.writes == writes_before, "Preview-only C05 attempt wrote Drive objects")
+    ctx["C02_CONFIRMED_RUN_ID"] = drive.run_id
+
     old_receipt = json.loads(drive.files["synthetic_immutable_receipt"])
     old_receipt["scan_rule"] = "OLDER_TWO_DAY_RULE"
     drive.files["synthetic_immutable_receipt"] = canonical(old_receipt)
@@ -222,6 +237,7 @@ def main():
     print("PASS: read-only preflight planner, live roster fields, operator gate, exact shared NPT/UTC window")
     print("PASS: SHA-readback, pointer-only private indexes, Nepal day partitions, manifest PARTIAL")
     print("PASS: exact same-run idempotence; old state unmodified; older-window refused")
+    print("PASS: preview-only invalidates confirmation and forbids stale C05 receipt reuse")
 
 
 if __name__ == "__main__":
