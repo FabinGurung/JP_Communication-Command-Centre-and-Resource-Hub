@@ -9,7 +9,7 @@ from pathlib import Path
 
 notebook = json.loads(Path("ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb").read_text())
 cells = {item["id"]: "".join(item["source"]) for item in notebook["cells"]}
-assert notebook["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-012"
+assert notebook["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-013"
 c06 = cells["a9-cwo-c06-full-history"]
 c07 = cells["a9-cwo-c07-media-recovery"]
 c08 = cells["a9-cwo-c08-sqlite-query"]
@@ -25,6 +25,9 @@ assert "PASS_DATA_VERIFIED_ONLY" in c09 and "BLOCKED" in c09
 assert "H_MAX_PAGES_PER_INVOCATION = 8" in c06
 assert "H_MAX_MEDIA_ATTEMPTS_PER_INVOCATION = 20" in c06
 assert '"MEDIA_BYTES_OVER_LIMIT"' in c06
+assert "h_hash.sha256(stored).hexdigest() != digest.hexdigest()" in c06
+assert '"reason":"EXISTING_DRIVE_SHA_NOT_EQUAL_FRESH_PROVIDER_SOURCE"' in c06
+assert "provider_refetched" in c06
 assert "H_DISCORD_EPOCH" in c06 and "h_gzip.compress(lines,compresslevel=6,mtime=0)" in c06
 assert 'h_immutable(rawdir,stem+".jsonl.gz"' in c06
 assert 'page=h_immutable(pagedir,' in c06
