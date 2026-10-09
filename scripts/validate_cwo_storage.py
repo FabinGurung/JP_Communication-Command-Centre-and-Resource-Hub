@@ -102,7 +102,12 @@ assert '"Attachment size mismatch, id=%s declared=%d observed=%d "' in source
 assert "MEDIA FAILURE DETAIL" in source
 # Durable cell identifiers and visible Setup milestones; do not re-number with cell position.
 code_cells = [c for c in notebook["cells"] if c["cell_type"] == "code"]
-assert [c["id"] for c in code_cells] == ["a9-cwo-c01-setup", "a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot", "a9-cwo-c05-daily-index"]
+assert [c["id"] for c in code_cells] == ["a9-cwo-c01-setup", "a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot", "a9-cwo-c05-daily-index", "a9-cwo-c06-full-history"]
+assert "A9-CWO-C06-FULL-HISTORY" in code_cells[5]["metadata"]["tags"]
+assert "FULL_HISTORY_ARCHIVE_V1" in codes[5] and "MESSAGE_PAGES_GZIP_JSONL" in codes[5]
+assert "h_gzip.compress(" in codes[5] and "h_immutable(" in codes[5]
+assert "threads/archived" in codes[5] and "threads/active" in codes[5]
+assert "FULL_HISTORY" in codes[5]
 assert "DAILY_INDEX_JSONL" in codes[4]
 assert "SOURCE_PARTIAL" in codes[4] and "source_receipt_id" in codes[4]
 assert "state_write(" not in codes[4] and "drive.files().update" not in codes[4]
@@ -129,7 +134,7 @@ assert 'receipt["run_id"]' not in codes[2]  # deliberate: uses handoff match ins
 assert "MediaFileUpload" not in codes[2] and "drive.files().create" not in codes[2]
 assert "drive.files().update" not in codes[2]
 assert "with requests.get(" in codes[2] and "get_media(" in codes[2]
-assert {c["id"] for c in notebook["cells"] if c["cell_type"] == "markdown"} >= {"a9-cwo-c01-guide", "a9-cwo-c02-guide", "a9-cwo-c03-guide", "a9-cwo-c04-guide", "a9-cwo-c05-guide"}
+assert {c["id"] for c in notebook["cells"] if c["cell_type"] == "markdown"} >= {"a9-cwo-c01-guide", "a9-cwo-c02-guide", "a9-cwo-c03-guide", "a9-cwo-c04-guide", "a9-cwo-c05-guide", "a9-cwo-c06-guide"}
 assert "scripts/test_cwo_media_diagnostics.py" in Path(".github/workflows/daily-ops-branch-preview.yml").read_text(encoding="utf-8")
 assert Path("controls/memory-wall.html").exists()
 assert 'notebook-versions.json' in Path("controls/memory-wall.html").read_text(encoding="utf-8")
