@@ -94,9 +94,9 @@
     },
     {
       "pending_id": "OPS-PEND-000004",
-      "title": "A9-CWO two-channel Discord daily intake activation",
-      "short_title": "Discord daily Colab pilot",
-      "status": "PARTIAL_PROVIDER_RUN_RECOVERY_REQUIRED",
+      "title": "A9-CWO seven-day Discord collector and private machine-index execution",
+      "short_title": "Run Discord C01 → C02 → C05",
+      "status": "REVISION_008_QA_PASS_PROVIDER_EXECUTION_PENDING",
       "priority": "NEXT_OPERATIONAL",
       "category": "COMMUNICATION_INTAKE",
       "owner_module_id": "MOD-OPS-001",
@@ -106,15 +106,16 @@
         "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
       },
       "why": "Two-channel Discord message/attachment data now exists in a provider-verified partial Drive receipt. Media fidelity is unresolved and must not be counted as a completed daily backup.",
-      "recommendation": "C04 is a strictly bounded one-JPEG source-CDN derivative pilot, not bulk attachment recovery or proof of original fidelity. In a valid C01/C03 runtime, execute C04 to archive only one image in private DERIVATIVE_BYTES + immutable sidecar with exact provider readback. Avoid running full C02 while original-byte mismatch persists. Update project-group coverage before proposing new channels.",
-      "when_to_build": "Use the next authorized Colab execution, review per-source media mismatch diagnostics and verify new Drive receipt.",
-      "proposed_first_gate": "Completed user-reported C03 sample; next make original-vs-provider-derivative classification explicit, test one small targeted recovery without advancing incomplete source cursor, and record evidence/receipt before broad media retry.",
-      "implementation_status": "USER_REPORTED_C03_DONE_C04_BOUNDED_PILOT_STAGED_UNRUN",
-      "current_boundary": "Oct 9: 174 Discord messages reconciled into eight Daily Ops project records, with 7 new Discord evidence admissions; 11 Slack trackers/rollups sent with readback. 749 original byte mismatches remain. Notebook revision 20261009-007 includes optional single-file C04 provenance-labelled derivative pilot, NOT YET EXECUTED. Await user C01/C03/C04 then sanitized receipt; no C02 rerun.",
+      "recommendation": "Source notebook revision 20261009-008 is published with rolling seven-day replay and older-cursor catch-up plus C05 immutable private pointer-only date-index. Execute C01→C02→C05 in Colab and verify real Drive receipts. C04 has preserved one provider derivative, NOT original attachment fidelity. Keep original-byte recovery as separate work.",
+      "when_to_build": "Next user-authorized Google Colab runtime with Discord bot credential and Drive OAuth; do not pretend GitHub Actions can access the bot or run Discord itself.",
+      "proposed_first_gate": "User runs current GitHub-backed C01/C02; verify C02 seven-day scan status and frozen receipt. Then run C05; verify immutable private daily index and manifest. Record counts, media debts and A9 Local/Main before project fact admission.",
+      "implementation_status": "C04_ONE_DERIVATIVE_DRIVE_READBACK_PASS;NOTEBOOK_20261009_008_SOURCE_COMMITTED;SEVEN_DAY_C05_SYNTHETIC_CI_PASS;COLAB_008_RUNTIME_NOT_RUN",
+      "current_boundary": "Only parent channels 1463826087841890417 and 1492168056858738809 plus active child threads. Earlier PARTIAL receipt 20261009T020256Z remains canonical execution evidence, with 749 unresolved attachment original-byte mismatches; no daily C05 private index has been executed yet. No fabricated scheduled run or completed media archive.",
       "related_canonical_sources": [
         "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
         "ops/control/storage-routing-rules.json",
-        "ops/control/daily-communication-web-cycle.json"
+        "ops/control/daily-communication-web-cycle.json",
+        "ops/discord/DAILY_7_DAY_MACHINE_ARCHIVE_RUNBOOK.md"
       ],
       "collector_notebook_url": "https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
       "security_invariants": [
@@ -177,13 +178,22 @@
           "revision": "20261009-007",
           "cell_id": "a9-cwo-c04-derivative-pilot",
           "published_in_feature_branch": true,
-          "execution_status": "NOT_RUN",
+          "execution_status": "ONE_DERIVATIVE_SAVED_READBACK_VERIFIED_ORIGINAL_NOT_CERTIFIED",
           "size_limit_bytes": 26214400,
           "admission": "PROVIDER_DERIVATIVE_NOT_ORIGINAL",
           "writes": "ONE_DRIVE_DERIVATIVE_PLUS_SIDECAR",
-          "cursors": "UNCHANGED"
+          "cursors": "UNCHANGED",
+          "derivative_drive_id": "1HBLKmpQV5yCD_90_v9iHEIbiTw3VduPw",
+          "receipt_drive_id": "1ftkzIKyqUhVvCCWYAw5ka_YfKlDg2tVi"
         }
-      }
+      },
+      "last_source_revision": "20261009-008",
+      "static_qa_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37922352759",
+      "machine_contracts": [
+        "ops/discord/schemas/daily-message-index-v1.schema.json",
+        "ops/discord/schemas/daily-run-index-manifest-v1.schema.json",
+        "ops/discord/DAILY_7_DAY_MACHINE_ARCHIVE_RUNBOOK.md"
+      ]
     },
     {
       "pending_id": "OPS-PEND-000005",
