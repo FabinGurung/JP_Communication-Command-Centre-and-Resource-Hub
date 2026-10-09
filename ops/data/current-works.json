@@ -30,7 +30,7 @@
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -288,7 +288,7 @@
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -706,7 +706,7 @@
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -1001,7 +1001,7 @@
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -1216,7 +1216,7 @@
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -1464,7 +1464,7 @@
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -1857,7 +1857,7 @@
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
@@ -2289,7 +2289,7 @@
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "PENDING"
+          "slack": "CURRENT"
         },
         "todays_work": [
           {
