@@ -1,22 +1,22 @@
 # A9-CWO · Discord daily seven-day replay and machine-index runbook
 
-**State:** Source code published; Colab revision `20261009-008` requires user execution and fresh provider receipt. This document and the GitHub notebook are not evidence of an executed 008 run.
+**State:** Source revision `20261009-009` published, with an explicit live roster/time-window preflight and operator `COLLECT` gate. Authenticated revision-009 provider execution and a fresh C05 receipt are not yet verified. This document and the GitHub notebook are not evidence of an executed 008 run.
 
 [**Stable working Google Colab notebook**](https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb) · [Notebook revision ledger](notebook-versions.json) · [Archive controls](../control/storage-routing-rules.json).
 
 ## 1. What the collector truly scans
 
 - Discord guild `682670494658330644`, parent channels `1463826087841890417` (Fishtail pictures) and `1492168056858738809` (Rohini pictures) and **currently active child threads** belonging to those parents only. It does not scan the rest of the guild; archived child threads and external embed-only images are outside v008 coverage.
-- On every C02 invocation, the lower bound is **the previous seven rolling 24-hour days**. If the prior source's verified high-water message predates that window, extend further backward by at least one day to catch missed intervals. Message pagination hard cap remains 100 pages per source; exceeding it fails the source without cursor advancement.
+- On every C02 invocation, the baseline lower bound is **the previous seven rolling 24-hour days** relative to the single frozen C02 start instant. If the prior source's verified high-water message predates that window, extend further backward by at least one day to catch missed intervals. Message pagination hard cap remains 100 pages per source; exceeding it fails the source without cursor advancement.
 - Raw Discord messages are versioned on message ID + content/edit/attachment/embedding digest. Replayed unchanged messages are **not** new messages; candidates are only new or changed versions.
 - Files with Discord-declared original-size mismatches are **not** certified original bytes. If any attachments fail, that source is PARTIAL and its verified watermark does not advance. The single C04 provider derivative saved 9 Oct is useful evidence, **not** a recovered original.
 
 ## 2. Daily operator sequence
 
-1. Open the stable GitHub-backed Colab link; check notebook header shows **20261009-008**. Avoid GitHub's "save a copy in Drive" button when working on the canonical GitHub source.
+1. Open the stable GitHub-backed Colab link; check notebook header shows **20261009-009**. Avoid GitHub's "save a copy in Drive" button when working on the canonical GitHub source.
 2. Run **C01 SETUP**. Complete Drive OAuth and supply bot token **only** in authorized Colab Secrets. Expect **C01 06/06 PASS**; never paste credentials in source, GitHub, logs, Slack or chat.
-3. Run **C02 COLLECTOR**. Wait for the **FINAL RECEIPT**, with exact PASS or PARTIAL; do not treat a heartbeat or uploaded file as proof of run success.
-4. Run **C05 DAILY INDEX** in the same runtime. It reads the **new** C02 frozen receipt (old 2-day receipts are rejected), hashes both private raw/candidate JSONL files, then saves one readback-verified JSONL day partition per **message creation date in Nepal**. Finally it saves the immutable run manifest. Expect **C05 06/06 PASS** with Drive file IDs.
+3. Run **C02 PREFLIGHT + COLLECTOR**. C02 first reads the existing private state and live Discord parent/active-thread metadata without writing archive records. It prints the exact names, parent memberships, IDs/links, planned seven-day UTC/NPT cutoffs for every source, and whether older verified cursors extend the window. Verify this roster and the per-source time bounds BEFORE proceeding. Type **`COLLECT`** at the prompt to start message/attachment archiving, or anything else to finish PREVIEW ONLY without writes. When collecting, wait for **FINAL RECEIPT** with exact PASS/PARTIAL; do not treat a heartbeat or preflight printout as a saved source receipt.
+4. **After a confirmed new C02 receipt only**, run **C05 DAILY INDEX** in the same runtime. It reads the **new** C02 frozen receipt (old 2-day receipts are rejected), hashes both private raw/candidate JSONL files, then saves one readback-verified JSONL day partition per **message creation date in Nepal**. Finally it saves the immutable run manifest. Expect **C05 06/06 PASS** with Drive file IDs.
 5. Record C02/C05 run IDs, count, source receipt, index manifest, original-media PARTIAL statuses, archived-thread coverage gap and any provider errors in the A9-CWO operational handoff. Register Local/Main PRE/POST/ACK using authorized authority. No false full-complete claim.
 6. Only then reconcile private candidate messages into the owning project/event model by project ID and source, review conflicts, and publish **approved public-safe facts** to the website. Google Sheets are optional downstream projections, not the primary Discord archive.
 
@@ -95,3 +95,12 @@ Retain governance boundaries: stock ≠ consumption; ordered ≠ delivered; plan
 - **Uncovered:** truly archived Discord child threads, embed-only images, deleted-message audit, comprehensive private Slack archive, and any unregistered future provider.
 - **Not yet deployed:** Colab runtime execution of r008/C05; automated scheduled Colab execution; private JSONL → project-approved fact admission; optional Parquet / DuckDB / compressed warehouse generation.
 - **Future efficiency:** isolate failed-original-media recovery from normal daily message metadata scans, so unresolved 749 images do not require unnecessary repeated downloads. Preserve source-side failure statuses and do not advance original-media completeness.
+
+## 6. Transparency/read-only preflight contract (r009)
+
+- **Before any archive writes**: print an ordered live roster of each parent and active child thread, parent ID/name, channel ID/name, direct Discord link, source type, previous verified cursor, exact effective cutoff in NPT and UTC, and frozen C02 run-start instant. The display is generated from the same `run_plan` consumed by confirmed C02 and preserved in its private immutable receipt.
+- **Confirm or stop**: only exact operator input `COLLECT` runs the message/attachment/archive phase. Any other input produces PREVIEW ONLY, no new C02 receipt, no Drive archive mutation, and no cursor advance. C05 must not be treated as executed in this case.
+- **Time semantics**: seven days means minimum **168 rolling hours**, not midnight-aligned dates. A stale verified cursor extends the window earlier by the one-day overlap; a missing verified cursor means only the rolling seven-day bootstrap is guaranteed. Earlier never-observed messages are not automatically recovered. Messages posted during a lengthy run can appear after the preview timestamp, so the receipt also records actual per-source API fetch start/finish timestamps.
+- **Coverage**: the number and names of active child threads can change from one daily run to the next. Threads whose names contain `Archive_` may still be active; truly Discord-archived threads are outside r009. No unrestricted guild harvest.
+- **Known risk**: the separate 749 original-byte mismatches remain PARTIAL and may trigger repeated recovery attempts; the transparency change does not certify, suppress, or resolve them.
+- **Governance**: the stable Colab URL is unchanged. The exact r008 notebook is stored as immutable PRE revision 008 under `99_VERSION_ARCHIVE/20261009/`; the controlled working revision is `20261009-009`. C03 and C04 remain optional.
