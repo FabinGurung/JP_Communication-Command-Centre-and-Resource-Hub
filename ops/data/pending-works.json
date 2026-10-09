@@ -106,11 +106,11 @@
         "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
       },
       "why": "Two-channel Discord message/attachment data now exists in a provider-verified partial Drive receipt. Media fidelity is unresolved and must not be counted as a completed daily backup.",
-      "recommendation": "Run published notebook revision 20261009-006 in Colab: C01 SETUP then C03 CDN PROBE only. Evaluate one failed attachment's refreshed Discord source_url and proxy_url response bytes/dimensions/hash. Do not rerun C02, relax original-byte certification, or advance failed-source cursors until the mismatch is resolved.",
+      "recommendation": "Do not rerun C01/C03 solely to repeat the completed sample. Read user-supplied sanitized C03 results: fresh Discord attachment metadata 1,103,988 bytes; source CDN image 8,830,415 bytes; media proxy image 1,943,867 bytes; both full-resolution 4284x5712 decodable JPEGs, with distinct SHA-256 and neither byte count matching metadata. The endpoints serve different representations; exact uploaded original remains unproven. Preserve failure status, original-byte validation, existing archived media and failed-source cursors. Next investigate evidence needed to distinguish original representation from transformations or stale metadata; design a bounded provenance-labelled derivative recovery only after safety tests.",
       "when_to_build": "Use the next authorized Colab execution, review per-source media mismatch diagnostics and verify new Drive receipt.",
-      "proposed_first_gate": "Read frozen receipt 1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3; run C01 → C03 without C02; compare source and proxy byte fidelity; retain PARTIAL until evidence proves completeness.",
-      "implementation_status": "TWO_PARTIAL_PROVIDER_RUNS_VERIFIED_C03_PUBLISHED_EXECUTION_UNVERIFIED",
-      "current_boundary": "Latest provider run 20261009T020256Z: PARTIAL, 26 sources (17 PASS, 9 PARTIAL_ATTACHMENTS), 174 new/changed messages, 749 attachment size mismatches, 207 previously archived attachments. C03 is published in revision 20261009-006; no provider-backed C03 execution result was found at reconciliation on 2026-10-09. Next: user executes C01 then C03; inspect sanitized RESULT output before any fix or C02 retry.",
+      "proposed_first_gate": "Completed user-reported C03 sample; next make original-vs-provider-derivative classification explicit, test one small targeted recovery without advancing incomplete source cursor, and record evidence/receipt before broad media retry.",
+      "implementation_status": "USER_REPORTED_C03_COMPLETED_ORIGINAL_MEDIA_UNRESOLVED",
+      "current_boundary": "C03 user-reported DONE 2026-10-09; one failed attachment returned two nonidentical decodable full-resolution JPEG representations (8,830,415 and 1,943,867 bytes), Discord metadata 1,103,988 bytes. No byte-identical original proved. Preserve PARTIAL and 749 media failures. Next: narrow original/proxy/archive classification and recovery design; CI on PR #4 then main promotion and readback.",
       "related_canonical_sources": [
         "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
         "ops/control/storage-routing-rules.json",
@@ -140,9 +140,39 @@
         "cell_id": "a9-cwo-c03-cdn-probe",
         "revision": "20261009-006",
         "published": true,
-        "provider_execution_status": "UNVERIFIED",
-        "expected_user_action": "C01_THEN_C03_ONLY",
-        "full_collector_rerun_required": false
+        "execution_status": "USER_REPORTED_COMPLETED_SANITIZED_LOG",
+        "provider_native_execution_receipt": "NOT_AVAILABLE",
+        "full_collector_rerun_required": false,
+        "source_message_selection": "FROZEN_FAILED_ATTACHMENT_WITHIN_TWO_PARENT_SCOPE",
+        "metadata": {
+          "declared_bytes": 1103988,
+          "mime": "image/jpeg",
+          "dimensions": [
+            4284,
+            5712
+          ]
+        },
+        "source_url_response": {
+          "host": "cdn.discordapp.com",
+          "http_status": 200,
+          "observed_bytes": 8830415,
+          "byte_count_matches_discord": false,
+          "image_decodes": true,
+          "dimensions_match_discord": true
+        },
+        "proxy_url_response": {
+          "host": "media.discordapp.net",
+          "http_status": 200,
+          "observed_bytes": 1943867,
+          "byte_count_matches_discord": false,
+          "image_decodes": true,
+          "dimensions_match_discord": true
+        },
+        "source_proxy_sha256_different": true,
+        "raw_hashes_and_attachment_identifiers": "RETAINED_IN_USER_SUPPLIED_PRIVATE_C03_LOG_NOT_COPIED_TO_PUBLIC_REPOSITORY",
+        "conclusion": "TWO_NONIDENTICAL_VALID_JPEG_REPRESENTATIONS_NO_CERTIFIED_ORIGINAL",
+        "probe_writes_drive": false,
+        "probe_advanced_cursors": false
       }
     }
   ],
