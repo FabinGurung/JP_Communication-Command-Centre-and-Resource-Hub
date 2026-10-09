@@ -1,0 +1,97 @@
+# A9-CWO · Discord daily seven-day replay and machine-index runbook
+
+**State:** Source code published; Colab revision `20261009-008` requires user execution and fresh provider receipt. This document and the GitHub notebook are not evidence of an executed 008 run.
+
+[**Stable working Google Colab notebook**](https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb) · [Notebook revision ledger](notebook-versions.json) · [Archive controls](../control/storage-routing-rules.json).
+
+## 1. What the collector truly scans
+
+- Discord guild `682670494658330644`, parent channels `1463826087841890417` (Fishtail pictures) and `1492168056858738809` (Rohini pictures) and **currently active child threads** belonging to those parents only. It does not scan the rest of the guild; archived child threads and external embed-only images are outside v008 coverage.
+- On every C02 invocation, the lower bound is **the previous seven rolling 24-hour days**. If the prior source's verified high-water message predates that window, extend further backward by at least one day to catch missed intervals. Message pagination hard cap remains 100 pages per source; exceeding it fails the source without cursor advancement.
+- Raw Discord messages are versioned on message ID + content/edit/attachment/embedding digest. Replayed unchanged messages are **not** new messages; candidates are only new or changed versions.
+- Files with Discord-declared original-size mismatches are **not** certified original bytes. If any attachments fail, that source is PARTIAL and its verified watermark does not advance. The single C04 provider derivative saved 9 Oct is useful evidence, **not** a recovered original.
+
+## 2. Daily operator sequence
+
+1. Open the stable GitHub-backed Colab link; check notebook header shows **20261009-008**. Avoid GitHub's "save a copy in Drive" button when working on the canonical GitHub source.
+2. Run **C01 SETUP**. Complete Drive OAuth and supply bot token **only** in authorized Colab Secrets. Expect **C01 06/06 PASS**; never paste credentials in source, GitHub, logs, Slack or chat.
+3. Run **C02 COLLECTOR**. Wait for the **FINAL RECEIPT**, with exact PASS or PARTIAL; do not treat a heartbeat or uploaded file as proof of run success.
+4. Run **C05 DAILY INDEX** in the same runtime. It reads the **new** C02 frozen receipt (old 2-day receipts are rejected), hashes both private raw/candidate JSONL files, then saves one readback-verified JSONL day partition per **message creation date in Nepal**. Finally it saves the immutable run manifest. Expect **C05 06/06 PASS** with Drive file IDs.
+5. Record C02/C05 run IDs, count, source receipt, index manifest, original-media PARTIAL statuses, archived-thread coverage gap and any provider errors in the A9-CWO operational handoff. Register Local/Main PRE/POST/ACK using authorized authority. No false full-complete claim.
+6. Only then reconcile private candidate messages into the owning project/event model by project ID and source, review conflicts, and publish **approved public-safe facts** to the website. Google Sheets are optional downstream projections, not the primary Discord archive.
+
+**C03/C04** are separately bounded media-integrity diagnostics/pilots. They are *not* mandatory daily collection, do not advance C02 state, and do not certify originals.
+
+## 3. Where the bytes belong
+
+```text
+PRIVATE Google Drive · existing Discord A9 source root (DO NOT CREATE A NEW AUTHORITY)
+└── A9_CWO_DAILY_TWO_CHANNELS/
+    ├── RAW_JSONL/
+    │   └── {channel_id}__{run_id}.jsonl           # exact provider message objects, private
+    ├── CANDIDATES_JSONL/
+    │   └── {channel_id}__{run_id}.jsonl           # extraction candidates, NOT verified facts
+    ├── ATTACHMENT_BYTES/                           # verified original bytes only
+    │   └── {channel_id}/...
+    ├── DERIVATIVE_BYTES/                           # labelled provider representations, not originals
+    ├── DAILY_INDEX_JSONL/
+    │   └── YYYY-MM-DD/
+    │       └── A9_CWO_DISCORD_DAY_INDEX__YYYY-MM-DD__{run_id}.jsonl
+    ├── RUN_RECEIPTS/
+    │   ├── A9_CWO_DISCORD_RECEIPT__{run_id}.json
+    │   ├── A9_CWO_DISCORD_DAILY_INDEX_MANIFEST__{run_id}.json
+    │   └── prior immutable C04 receipts...
+    ├── state_current.json                         # existing provider-verified cursor; C05 never edits
+    └── handoff_current.json                       # existing C02 handoff; C05 never edits
+
+PUBLIC GitHub · controls and public-safe derived projection only
+└── ops/discord/
+    ├── ...COLLECTOR_v1.0.ipynb                      # stable GitHub-backed working path
+    ├── notebook-versions.json
+    ├── schemas/
+    │   ├── daily-message-index-v1.schema.json
+    │   └── daily-run-index-manifest-v1.schema.json
+    └── 99_VERSION_ARCHIVE/...
+```
+
+### Index row (synthetic illustration — NOT a fetched message)
+
+```json
+{
+  "schema": "a9-cwo-discord-day-index-v1",
+  "provider": "DISCORD",
+  "run_id": "20261009T120000Z",
+  "guild_id": "123456789012345678",
+  "parent_channel_id": "111111111111111111",
+  "channel_id": "222222222222222222",
+  "message_id": "333333333333333333",
+  "message_created_at_utc": "2026-10-09T09:12:00+00:00",
+  "date_npt": "2026-10-09",
+  "event_version_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "source_message_url": "https://discord.com/channels/123456789012345678/222222222222222222/333333333333333333",
+  "raw_drive_id": "synthetic_raw_drive_file",
+  "raw_line_1_based": 1,
+  "candidate_drive_id": "synthetic_candidate_drive_file",
+  "candidate_line_1_based": 1,
+  "source_receipt_id": "synthetic_receipt_file",
+  "attachment_count": 2,
+  "evidence_class": "MESSAGE_METADATA_POINTER_ONLY",
+  "admission_status": "NOT_RECONCILED",
+  "attachments_original_certification": "SOURCE_PARTIAL"
+}
+```
+
+The original text lives **once** in the private RAW/CANDIDATE archive; the day-index row is a fast locator, not the truth of the construction activity. Keep `provider/guild/channel/message/version digest` as the cross-run event identity, and never make `run_id` alone a dedup key.
+
+## 4. Day-specific construction report is a SEPARATE admission step
+
+A source message created on a day is not necessarily about work executed on that day. For any claimed `work_date_npt`, require a dated site engineer statement or a well-supported project record. Separate `source_timestamp`, `reported_work_date`, `activity_trade`, `location`, `planned/ongoing/done/hold`, `source_id`, `engineer_approval` and `project_fk`. Do not auto-promote a photo into DONE, and do not call a future plan approved because a message mentions it.
+
+Retain governance boundaries: stock ≠ consumption; ordered ≠ delivered; plan ≠ done; unknown ≠ zero; private raw text/attachments do not belong in this public repository.
+
+## 5. Pending coverage and engineering gates
+
+- **Unresolved:** 749 original-attachment byte mismatches in the previous PARTIAL collection. C04 preserved one private **provider derivative**, not original recovery.
+- **Uncovered:** truly archived Discord child threads, embed-only images, deleted-message audit, comprehensive private Slack archive, and any unregistered future provider.
+- **Not yet deployed:** Colab runtime execution of r008/C05; automated scheduled Colab execution; private JSONL → project-approved fact admission; optional Parquet / DuckDB / compressed warehouse generation.
+- **Future efficiency:** isolate failed-original-media recovery from normal daily message metadata scans, so unresolved 749 images do not require unnecessary repeated downloads. Preserve source-side failure statuses and do not advance original-media completeness.
