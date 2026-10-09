@@ -116,9 +116,9 @@ def fixtures():
 
 def main():
     nb = json.loads(NB.read_text("utf-8"))
-    check(nb["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-010", "Unexpected notebook revision")
+    check(nb["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-011", "Unexpected notebook revision")
     cells = {cell["id"]: "".join(cell["source"]) for cell in nb["cells"]}
-    for name in ("a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot", "a9-cwo-c05-daily-index"):
+    for name in ("a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot", "a9-cwo-c05-daily-index", "a9-cwo-c06-full-history"):
         ast.parse(cells[name], filename=name)
     check("REVISIT_DAYS = 7" in cells["a9-cwo-c01-setup"], "Daily revisit must be seven days")
     check("BACKFILL_OVERLAP_DAYS = 1" in cells["a9-cwo-c01-setup"], "Catch-up safety overlap missing")
@@ -232,7 +232,7 @@ def main():
         check("older window" in str(exc), "Wrong rejection for outdated C02 receipt")
     else:
         raise AssertionError("C05 accepted a non-seven-day receipt")
-    print("PASS: notebook syntax for C02/C03/C04/C05")
+    print("PASS: notebook syntax for C02/C03/C04/C05/C06")
     print("PASS: seven-day replay and stale-cursor catch-up policy")
     print("PASS: read-only preflight planner, live roster fields, operator gate, exact shared NPT/UTC window")
     print("PASS: SHA-readback, pointer-only private indexes, Nepal day partitions, manifest PARTIAL")
