@@ -106,7 +106,7 @@
     ],
     "collector": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
     "runtime": "USER_RUNS_GOOGLE_COLAB_BEFORE_DAILY_A9_CWO",
-    "status": "PROVIDER_PARTIAL_C04_ONE_DERIVATIVE_READBACK_VERIFIED_C02_R010_NOT_RUN",
+    "status": "R012_SOURCE_READY_HISTORICAL_FULL_GUILD_NOT_RUN_PRIOR_TWO_CHANNEL_PARTIAL",
     "scope": "Only these two parent channels and currently active child threads belonging to them; not a server-wide archive",
     "archive_root_drive_id": "1nTFR9xQXNwgkWRrAq1jJw7ph6rKg3C9X",
     "handoff": "A9_CWO_DAILY_TWO_CHANNELS/handoff_current.json (created only after user executes notebook)",
@@ -124,7 +124,8 @@
       "old_media_debt": "749_ORIGINAL_BYTE_MISMATCHES_FROM_PRIOR_PARTIAL_RUN",
       "day_index": "PRIVATE_POINTER_ONLY_JSONL_C05",
       "first_runtime_execution": "PENDING",
-      "transparency": "R010_LIVE_PREFLIGHT_CONFIRMATION_AND_C05_STALE_RUN_FAIL_CLOSED"
+      "transparency": "R010_LIVE_PREFLIGHT_CONFIRMATION_AND_C05_STALE_RUN_FAIL_CLOSED",
+      "separate_historical_backfill": "C06_ALL_ACCESSIBLE_GUILD_HISTORY_REQUIRES_FULL_HISTORY_AUTHORIZED_EXECUTION"
     },
     "c04_verified_pilot": {
       "provider_derivative_drive_id": "1HBLKmpQV5yCD_90_v9iHEIbiTw3VduPw",
@@ -153,7 +154,7 @@
     "ordering": "Copy original exact bytes to numbered PRE archive; read back before editing original; update current revision in-place; POST readback + CI; append ledger and publish.",
     "no_drive_file_id_claim": "The provided URL is GitHub-backed; it has no verified Google Drive file ID.",
     "archive_promotion": "Do not reassign a previous archival path/name or overwrite its contents. Retrospective historical source creation dates must be distinguished from archive copy date.",
-    "current_revision": "20261009-010",
+    "current_revision": "20261009-012",
     "quick_reference_wall": "controls/memory-wall.html",
     "progress_requirements": [
       "visible provider stage",
@@ -204,15 +205,37 @@
         "name": "DAILY INDEX",
         "definition": "Reads new C02 immutable receipt, verifies original raw/candidate JSONL SHA, writes private pointer-only date-partitioned JSONL and immutable manifest without touching high-water cursors.",
         "stable_notebook_cell_id": "a9-cwo-c05-daily-index"
+      },
+      {
+        "id": "C06",
+        "name": "FULL HISTORY",
+        "definition": "Resumable full guild accessible-message backfill; all discoverable active/archived threads; immutable gzip JSONL pages with SHA-256, independent history cursor and explicit gaps",
+        "stable_notebook_cell_id": "a9-cwo-c06-full-history"
+      },
+      {
+        "id": "C07",
+        "name": "ORIGINAL MEDIA REPAIR",
+        "definition": "Targeted retry of failed/deferred originals by Discord message/attachment ID, immutable recovery receipts",
+        "stable_notebook_cell_id": "a9-cwo-c07-media-recovery"
+      },
+      {
+        "id": "C08",
+        "name": "PRIVATE SQLITE",
+        "definition": "Readback verified JSONL to indexed private SQLite query snapshot; preserves raw source as authority",
+        "stable_notebook_cell_id": "a9-cwo-c08-sqlite-query"
+      },
+      {
+        "id": "C09",
+        "name": "PUBLICATION GATE",
+        "definition": "Fail-closed source completion/original media/query integrity validation; data-ready only, never self-publishes",
+        "stable_notebook_cell_id": "a9-cwo-c09-publication-gate"
       }
     ],
-    "previous_revision_archived_exact": "ops/discord/99_VERSION_ARCHIVE/20261009/009__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_C05_PREVIEW_ONLY_GUARD.ipynb",
+    "previous_revision_archived_exact": "ops/discord/99_VERSION_ARCHIVE/20261009/011__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_MEDIA_REPAIR_SQLITE_GATES.ipynb",
     "latest_source_validation": {
-      "revision": "20261009-010",
-      "status": "STATIC_SYNTHETIC_QA_PASS_PRODUCTION_PASS_COLAB_RUNTIME_NOT_RUN",
-      "ci_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37927820893",
-      "production_validation_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37927820962",
-      "branch_lane_validation_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37927820866"
+      "revision": "20261009-012",
+      "status": "STATIC_QA_IN_PROGRESS_COLAB_RUNTIME_NOT_RUN",
+      "ci_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions"
     },
     "preflight_contract": {
       "mode": "LIVE_READ_ONLY_PARENT_AND_ACTIVE_THREAD_ROSTER_THEN_EXPLICIT_COLLECT",
@@ -240,6 +263,23 @@
       "runtime_status": "NOT_RUN",
       "c05_same_runtime_guard": "C02_CONFIRMED_RUN_ID_AND_C02_CONFIRMED_RECEIPT_ID_REQUIRED",
       "preview_only_resets_confirmed_marker": true
+    },
+    "full_history_contract": {
+      "requested_scope": "ALL_ACCESSIBLE_GUILD_MESSAGE_CHANNELS_AND_DISCOVERABLE_ACTIVE_ARCHIVED_THREADS",
+      "historical_mode": "EXHAUSTIVE_OLDEST_MESSAGE_BACKFILL_BOUNDED_RESUMABLE",
+      "incremental_mode": "C02_CURRENTLY_TWO_PARENTS_SEVEN_DAY_INCREMENTAL_ONLY;GUILD_WIDE_INCREMENTAL_EXPANSION_PENDING",
+      "required_raw": "PRIVATE_GDRIVE_LOSSLESS_DISCORD_JSON_GZIP_JSONL_WITH_IMMUTABLE_PAGE_RECEIPTS",
+      "media_policy": "EXACT_ORIGINAL_BYTES_OR_UNVERIFIED_DEBT_NO_DERIVATIVE_PASSED_AS_ORIGINAL",
+      "query_policy": "PRIVATE_SQLITE_REBUILD_FROM_VERIFIED_DRIVE_JSONL_ONLY",
+      "publish_rule": "HISTORY_PASS_AND_MEDIA_DEBT_ZERO_AND_DISCOVERY_GAPS_ZERO_AND_QUERY_READBACK_BEFORE_ANY_NEW_WEBSITE_OR_SLACK_DERIVATIVE",
+      "publish_auth": "PUBLIC_SAFE_PROJECT_FACT_RECONCILIATION_AND_SLACK_SEND_GATES_STILL_REQUIRED",
+      "runtime_execution": "NOT_RUN",
+      "limitations": [
+        "deleted messages and historical edit states that Discord no longer serves are unrecoverable",
+        "scope limited to bot-authorized Discord content",
+        "per-invocation quotas require repeated C06/C07 executions until PASS",
+        "guild-wide recurring change capture expansion pending"
+      ]
     }
   },
   "archive_format_standard": {
