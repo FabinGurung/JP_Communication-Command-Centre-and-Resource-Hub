@@ -1,6 +1,6 @@
 # A9-CWO · Discord daily seven-day replay and machine-index runbook
 
-**State:** Source revision `20261009-009` published, with an explicit live roster/time-window preflight and operator `COLLECT` gate. Authenticated revision-009 provider execution and a fresh C05 receipt are not yet verified. This document and the GitHub notebook are not evidence of an executed 008 run.
+**State:** Source revision `20261009-010` published, with an explicit live roster/time-window preflight, operator `COLLECT` gate, and same-runtime C05 guard. Authenticated revision-009 provider execution and a fresh C05 receipt are not yet verified. This document and the GitHub notebook are not evidence of an executed 008 run.
 
 [**Stable working Google Colab notebook**](https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb) · [Notebook revision ledger](notebook-versions.json) · [Archive controls](../control/storage-routing-rules.json).
 
@@ -13,7 +13,7 @@
 
 ## 2. Daily operator sequence
 
-1. Open the stable GitHub-backed Colab link; check notebook header shows **20261009-009**. Avoid GitHub's "save a copy in Drive" button when working on the canonical GitHub source.
+1. Open the stable GitHub-backed Colab link; check notebook header shows **20261009-010**. Avoid GitHub's "save a copy in Drive" button when working on the canonical GitHub source.
 2. Run **C01 SETUP**. Complete Drive OAuth and supply bot token **only** in authorized Colab Secrets. Expect **C01 06/06 PASS**; never paste credentials in source, GitHub, logs, Slack or chat.
 3. Run **C02 PREFLIGHT + COLLECTOR**. C02 first reads the existing private state and live Discord parent/active-thread metadata without writing archive records. It prints the exact names, parent memberships, IDs/links, planned seven-day UTC/NPT cutoffs for every source, and whether older verified cursors extend the window. Verify this roster and the per-source time bounds BEFORE proceeding. Type **`COLLECT`** at the prompt to start message/attachment archiving, or anything else to finish PREVIEW ONLY without writes. When collecting, wait for **FINAL RECEIPT** with exact PASS/PARTIAL; do not treat a heartbeat or preflight printout as a saved source receipt.
 4. **After a confirmed new C02 receipt only**, run **C05 DAILY INDEX** in the same runtime. It reads the **new** C02 frozen receipt (old 2-day receipts are rejected), hashes both private raw/candidate JSONL files, then saves one readback-verified JSONL day partition per **message creation date in Nepal**. Finally it saves the immutable run manifest. Expect **C05 06/06 PASS** with Drive file IDs.
@@ -104,3 +104,7 @@ Retain governance boundaries: stock ≠ consumption; ordered ≠ delivered; plan
 - **Coverage**: the number and names of active child threads can change from one daily run to the next. Threads whose names contain `Archive_` may still be active; truly Discord-archived threads are outside r009. No unrestricted guild harvest.
 - **Known risk**: the separate 749 original-byte mismatches remain PARTIAL and may trigger repeated recovery attempts; the transparency change does not certify, suppress, or resolve them.
 - **Governance**: the stable Colab URL is unchanged. The exact r008 notebook is stored as immutable PRE revision 008 under `99_VERSION_ARCHIVE/20261009/`; the controlled working revision is `20261009-009`. C03 and C04 remain optional.
+
+## 7. Revision `20261009-010`: reject stale receipts after preview-only
+
+Every new C02 attempt clears its previously confirmed run marker. Only after the operator types `COLLECT` and the collector saves and reads back the exact frozen C02 receipt/handoff does it set `C02_CONFIRMED_RUN_ID` and `C02_CONFIRMED_RECEIPT_ID` in the active Colab runtime. C05 rejects attempts without both markers, or whenever the Drive handoff and frozen receipt IDs do not exactly match the current run markers. This prevents a PREVIEW ONLY execution from quietly reusing an older 7-day receipt. Existing JSONL idempotence and original-media PARTIAL classifications are preserved. The version-009 notebook is immutable at `99_VERSION_ARCHIVE/20261009/009__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_C05_PREVIEW_ONLY_GUARD.ipynb`.
