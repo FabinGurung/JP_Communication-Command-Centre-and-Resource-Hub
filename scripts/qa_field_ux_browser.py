@@ -35,6 +35,27 @@ def ready(server):
         time.sleep(0.25)
     raise RuntimeError("Local HTTP server not ready")
 
+def audit_wcag(page, label):
+    axe_path=pathlib.Path("node_modules/axe-core/axe.min.js")
+    require(axe_path.exists(), "axe-core missing from UI QA runner")
+    page.add_script_tag(path=str(axe_path))
+    report=page.evaluate("""async () => {
+      const result=await axe.run(document, {
+        runOnly: {type: "tag", values:["wcag2a","wcag2aa","wcag21a","wcag21aa","wcag22aa"]},
+        resultTypes:["violations"]
+      });
+      return result.violations.map(v=>({
+        id:v.id, impact:v.impact,
+        nodes:v.nodes.slice(0,5).map(n=>({selector:n.target,summary:n.failureSummary}))
+      }));
+    }""")
+    print("WCAG_AUDIT",label,"violations",len(report))
+    for v in report:
+        print("WCAG_FINDING",label,v["id"],v["impact"],str(v["nodes"])[:280])
+    fatal=[v for v in report if v["impact"] in {"critical","serious"}]
+    require(not fatal, f"{label}: serious or critical WCAG errors: {[x['id'] for x in fatal]}")
+    return report
+
 def screenshot(page, name):
     dest=OUT/name
     page.screenshot(path=str(dest), full_page=True, animations="disabled", timeout=25000)
@@ -79,6 +100,7 @@ def run():
                 page.locator("#company-filter").select_option("")
                 require(page.locator("#projects article.project").count()==8,"Filter reset failed")
                 no_wide_overflow(page,"field desk desktop")
+                audit_wcag(page,"field desk")
                 screenshot(page, "field-desk-desktop.png")
                 print("PASS: field desk desktop, search, filters, dated status and focus navigation")
 
@@ -97,6 +119,7 @@ def run():
                 require(page.locator("#historical-records").get_attribute("open") is None,"Progress disclosure did not close")
                 require(page.locator("#work").count()==1 and page.locator("#blockers").count()==1,"Field brief missing work or holds")
                 no_wide_overflow(page,"P007 desktop")
+                audit_wcag(page,"project brief")
                 screenshot(page, "narayani-brief-desktop.png")
                 print("PASS: Narayani field plan, project documents and collapsed history")
 
@@ -124,6 +147,7 @@ def run():
                 require(page.locator("#workspace").evaluate("(e)=>e.classList.contains('list-collapsed')"),
                         "Map did not start map-first")
                 require(page.locator("#project-pane").is_hidden(),"Project list visible by default")
+                audit_wcag(page,"map")
                 screenshot(page,"map-first-desktop.png")
                 page.locator("#map-list-button").click()
                 require(page.locator("#map-list-button").get_attribute("aria-expanded")=="true",
@@ -145,6 +169,7 @@ def run():
                 print("MAP_TILES_MOBILE",m.locator("img.leaflet-tile-loaded").count())
                 require(m.locator("#project-pane").is_hidden(),"Mobile map list not initially collapsed")
                 no_wide_overflow(m,"map mobile",tolerance=22)
+                audit_wcag(m,"map mobile")
                 screenshot(m,"map-first-mobile.png")
                 print("PASS: map mobile screenshot and disclosure default")
                 mobile.close()
