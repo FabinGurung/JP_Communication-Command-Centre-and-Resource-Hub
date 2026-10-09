@@ -5,7 +5,7 @@
   "display_name": "Communication & Web Operations",
   "effective_from_npt": "2026-10-08",
   "status": "ACTIVE_GOVERNED_PROCESS_CONTRACT",
-  "scope": "Provider-agnostic intake from Slack, two selected Discord channels and later explicitly registered providers; reconcile once to project machine facts, website and authorized replies.",
+  "scope": "A9-CWO intake: full retrievable, bot-authorized Discord guild message history in an archive-first separate C06 lane; two-parent seven-day C02 maintenance; private Slack source archives and later registered providers. Public site/Slack derivation only after verified Drive provenance, SQLite query gate and current send policies.",
   "source_providers": [
     {
       "provider": "SLACK",
@@ -101,7 +101,7 @@
   },
   "project_truth": "Do not equate uploaded image or message with DONE; classify as observed/requested/planned/completed only when source-grounded.",
   "company_routing": "Use authorized A9 registry for REB/FBL and governed projects; both company rollups are required targets when send gate allows.",
-  "safety_and_accuracy": "Do not store Discord/Slack bot secrets in GitHub, logs, exports or notebook outputs. No server-wide Discord harvest. Never invent messages/cursors or skip incompleteness. Preserve stricter live A9 source controls where they apply. Full historical backfill precedes a seven-day incremental-only routine; when metadata/media completeness is partial, do not claim history PASS or issue new downstream publications based on missing source evidence.",
+  "safety_and_accuracy": "Do not store Discord/Slack bot secrets in GitHub, logs, exports or notebook outputs. Guild-wide archive only with explicitly authorized bot for verified guild, exact source roster/permissions and FULL_HISTORY confirmation; no unrestricted other-guild or DM harvest. Never invent messages/cursors or skip incompleteness. Preserve stricter live A9 source controls where they apply. Full historical backfill precedes a seven-day incremental-only routine; when metadata/media completeness is partial, do not claim history PASS or issue new downstream publications based on missing source evidence.",
   "daily_closeout": [
     "PRIVATE_SQLITE_ARCHIVE_RECONSTRUCTION_VERIFIED_OR_NOT_RUN",
     "HISTORICAL_ARCHIVE_SOURCE_AND_MEDIA_PASS_OR_PUBLICATION_BLOCKED",
