@@ -551,6 +551,13 @@ function renderMapMarkers({ fitBounds = false } = {}) {
   if (fitBounds && bounds.length) {
     state.map.invalidateSize({ pan: false });
     state.map.fitBounds(bounds, { padding: [state.config.fit_bounds_padding, state.config.fit_bounds_padding], maxZoom: 15 });
+    // On narrow touch screens, favor discernible individually tappable site
+    // markers. The provider coordinates are unchanged; the user can zoom out
+    // one step to return to full-portfolio extent.
+    if (window.matchMedia("(max-width: 600px)").matches && bounds.length > 1) {
+      const workingZoom = state.map.getZoom();
+      state.map.setZoom(Math.min(15, workingZoom + 1), { animate: false });
+    }
   }
   window.setTimeout(updateProjectTooltips, 50);
 }
