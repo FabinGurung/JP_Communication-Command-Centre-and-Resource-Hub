@@ -15,41 +15,74 @@
     .list{display:grid;gap:9px}.row{padding-bottom:9px;border-bottom:1px solid #edf0f3;font-size:13px;line-height:1.45}.row:last-child{border-bottom:0;padding-bottom:0}.row b{display:block;margin-bottom:2px}.sub{color:var(--muted);font-size:11px}.work{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:9px}.work-head{display:flex;justify-content:space-between;gap:10px}.gate-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.gate{display:flex;justify-content:space-between;gap:8px;background:#f8fafc;border-radius:8px;padding:7px 8px;font-size:12px}.gate strong{font-size:11px}.pill{border:1px solid var(--line);border-radius:999px;padding:3px 7px;font-size:10px;font-weight:800;white-space:nowrap}.evidence{display:grid;gap:7px}.evidence a{text-decoration:none;color:var(--blue);border:1px solid var(--line);border-radius:9px;padding:8px 9px;background:#fff;font-size:12px}
     .resource-list{display:grid;gap:9px}.resource-card{border:1px solid var(--line);border-radius:11px;padding:11px;background:#fbfcfd}.resource-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.resource-type{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.resource-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.resource-actions a{text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:11px;font-weight:800;background:#fff;color:var(--blue)}.resource-note{font-size:11px;color:var(--muted);margin-top:7px;line-height:1.4}.resource-intro{padding:11px 13px;border:1px solid #c3d8cd;background:#f0f7f2;color:#295e49;border-radius:10px;font-size:12px;line-height:1.5}.resource-group{margin-top:15px}.resource-group h3{font-size:14px;margin:0 0 9px;color:#254d42;display:flex;gap:8px;align-items:center}.resource-group h3 small{font:700 11px system-ui;background:#e9f3ee;padding:2px 7px;border-radius:20px}.resource-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}.resource-card{background:#fff}.historical-group{margin-top:17px;border:1px dashed #a8b4ad;border-radius:12px;padding:10px 12px;background:#fbfaf5}.historical-group summary{font-size:12px;font-weight:750;cursor:pointer;color:#745d32}.historical-group .resource-cards{margin-top:12px}
     .footer{padding:17px 2px;color:var(--muted);font-size:11px;line-height:1.5}@media(max-width:800px){.grid{grid-template-columns:1fr}.gate-grid{grid-template-columns:1fr}.shell{padding:11px}}
+ 
+/* FIELD BRIEF v2.1 — hero-first editorial design */
+:root{--bg:#f5f6f0;--panel:#fffefa;--text:#22392f;--muted:#697e70;--line:#dfe8de;--blue:#146e58;--green:#2b674a;--soft:#e8f3e9;--shadow:0 6px 26px #123b260b}
+body{background:radial-gradient(ellipse at 88% 0,#e2f1e6 0,transparent 34%),var(--bg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.shell{max-width:1200px;padding:20px}.nav{padding:2px 0 15px}.nav a{font-size:12px;background:#fff;border-color:#d7e3d8;color:#355c4b;padding:9px 12px}.nav a:hover{background:#e8f3e9}
+.hero{position:relative;overflow:hidden;background:linear-gradient(118deg,#173c35,#29634d);border:none;border-radius:24px;color:#fff;padding:33px 35px;box-shadow:0 15px 35px #113b3130;min-height:180px}
+.hero:after{content:"";position:absolute;right:-90px;bottom:-210px;width:390px;height:390px;border:1px solid #ffffff24;border-radius:50%;box-shadow:0 0 0 60px #ffffff0c;pointer-events:none}
+.hero h1{font:700 clamp(29px,4vw,49px)/1.12 Georgia,serif;letter-spacing:-.025em;position:relative;z-index:1}
+.hero .eyebrow{color:#c4e9d6}.hero .meta{color:#def0e1;font-size:12px;max-width:580px}
+.hero .focus{border:1px solid #ffffff41;background:#ffffff16;color:#fff;font-size:14px;max-width:820px;padding:13px 16px;line-height:1.55;position:relative;z-index:1}
+.hero .badge{background:#fff;color:#235342;border-color:#d9e8d9}.record-hint{font-size:11px;color:#e0f0e3;margin-top:11px;position:relative;z-index:1}
+.hero-icon{position:absolute;right:38px;top:26px;font-size:74px;opacity:.25;transform:rotate(8deg);pointer-events:none}
+.quick-nav{display:flex;flex-wrap:wrap;gap:9px;margin:17px 0 18px}.quick-nav a{text-decoration:none;border:1px solid #d5e4d8;padding:9px 13px;background:#fff;border-radius:24px;font-weight:750;font-size:12px;color:#255d49}
+.quick-nav a:hover{background:#e5f4e9}
+.field-lead{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);gap:15px}.section{padding:21px;border-radius:17px;box-shadow:var(--shadow)}
+.section-heading{display:flex;align-items:center;gap:13px;margin-bottom:11px}.section-symbol{font-size:27px;display:grid;place-items:center;width:49px;height:49px;border-radius:14px;background:#e9f3e9}
+.section-heading h2{font:700 23px/1.2 Georgia,serif;margin:2px 0}.section .eyebrow{font-size:10px;color:#548674}
+.section-intro{font-size:12px;line-height:1.6;color:var(--muted);margin:2px 0 15px}.issue-panel{background:#fffdf7}.issue-panel .section-symbol{background:#fff1da}
+.issue-panel .row{background:#fff;padding:11px;border:1px solid #eee7da;border-radius:11px;margin-bottom:8px;line-height:1.55}
+.issue-panel .row b{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#99692c}.small-print{font-size:11px;color:#866b41;line-height:1.6;margin-top:11px}
+.docs-section{margin-top:15px}.docs-section .resource-group h3{font:700 17px Georgia,serif;color:#245544}.docs-section .resource-cards{grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:11px}
+.docs-section .resource-card{border:1px solid #e1e8de;box-shadow:0 5px 16px #23503d09;padding:14px}.docs-section .resource-card b{font-size:13px;line-height:1.45}
+.docs-section .resource-actions a{font-size:12px;color:#176f54}.docs-section .resource-type{font-size:10px}
+.work{border:1px solid #d6e3d7;background:#fafffb}.work-head b{line-height:1.6;font-size:13px}.gate-grid{grid-template-columns:1fr 1fr}
+.gate{background:#f0f6ef;min-height:32px}.gate strong{color:#486b58}.pill{background:#edf4ec}
+.secondary-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:15px}.detail-section{padding:0;align-self:start;min-width:0}.detail-section summary{list-style:none;cursor:pointer;padding:21px 19px;font-weight:800;font:700 19px Georgia,serif}.detail-section summary::-webkit-details-marker{display:none}
+.detail-section summary::after{content:"＋";float:right;color:#277358;font:700 20px system-ui}.detail-section[open] summary::after{content:"−"}
+.detail-section summary small{display:block;font:400 11px/1.6 system-ui;margin-top:4px;color:var(--muted)}.detail-content{padding:3px 19px 19px}
+.footer{margin-top:19px;text-align:center}
+@media(max-width:820px){.field-lead,.secondary-grid{grid-template-columns:1fr}.hero-icon{right:5px;opacity:.16}.shell{padding:12px}.hero{padding:27px 21px;border-radius:19px}.quick-nav{gap:6px}.quick-nav a{font-size:11px;padding:8px 10px}.section{padding:17px}.docs-section .resource-cards{grid-template-columns:1fr 1fr}}
+@media(max-width:470px){.docs-section .resource-cards{grid-template-columns:1fr}.hero h1{font-size:33px}.hero .focus{font-size:12px}.section-heading h2{font-size:20px}.section-symbol{width:42px;height:42px;font-size:23px}}
   </style>
 </head>
 <body>
 <div class="shell">
-  <nav class="nav" aria-label="JP AEC Operations Hub sections">
-    <a href="../index.html">Overview</a>
-    <a href="../map.html">Project map</a>
-    <a class="active" href="../site-operations.html">Site operations</a>
+  <nav class="nav" aria-label="Main navigation">
+    <a href="../site-operations.html">← Field desk</a>
+    <a href="../map.html">🗺️ Map</a>
     <a href="../workspace/">Workspace</a>
-    <a href="../guide/">Guide</a>
-    <a href="../controls/archive-formats.html">Evidence archive</a>
+    <a href="../controls/archive-formats.html">Archive policy</a>
   </nav>
 
   <section class="hero">
     <div class="hero-row">
-      <div><div class="eyebrow">Project operations</div><h1 id="name">Loading…</h1><div class="meta" id="meta"></div></div>
+      <div><div class="eyebrow">SITE FIELD BRIEF · LATEST ADMITTED RECORD</div><h1 id="name">Loading…</h1><div class="meta" id="meta"></div></div>
       <div><span class="badge" id="attention">Loading</span></div>
     </div>
-    <div class="focus" id="focus">Loading current operational focus…</div>
+    <div class="focus" id="focus">Loading site focus…</div><div class="record-hint" id="record-hint">Verify the record date before work proceeds.</div><div class="hero-icon" aria-hidden="true">🏗️</div>
   </section>
 
-  <main class="grid">
-    <div class="stack">
-      <section class="section"><h2>Today's work & readiness</h2><div id="work"></div></section>
-      <section class="section"><h2>Project files & engineering documents</h2><div id="resources"></div></section>
-      <section class="section"><h2>Progress</h2><div id="progress"></div></section>
-      <section class="section"><h2>Latest field evidence</h2><div id="evidence"></div></section>
+  <nav class="quick-nav" aria-label="Project field brief sections">
+    <a href="#field-plan">🧭 Field plan</a><a href="#drawings">📐 Drawings</a><a href="#material-check">🧱 Materials</a><a href="#historical-records">📚 Records</a>
+  </nav>
+  <main>
+    <div class="field-lead">
+      <section class="section" id="field-plan"><div class="section-heading"><span class="section-symbol" aria-hidden="true">👷</span><div><div class="eyebrow">01 / Start here</div><h2>Work to verify on site</h2></div></div>
+      <p class="section-intro">This is the latest reported activity, not an automatically approved instruction or completed-work certificate. Confirm conditions with the responsible team.</p><div id="work"></div></section>
+      <section class="section issue-panel" id="decision-list"><div class="section-heading"><span class="section-symbol" aria-hidden="true">⚑</span><div><div class="eyebrow">02 / Before proceeding</div><h2>Decisions &amp; holds</h2></div></div><div id="blockers"></div><div class="small-print">A missing answer remains unresolved. Engineering HOLD and NOT_READY statuses are not overridden by this webpage.</div></section>
     </div>
-    <div class="stack">
-      <section class="section"><h2>Open blockers</h2><div id="blockers"></div></section>
-      <section class="section"><h2>Materials</h2><div id="materials"></div></section>
-      <section class="section"><h2>Next 3 days</h2><div id="lookahead"></div></section>
+    <section class="section docs-section" id="drawings"><div class="section-heading"><span class="section-symbol" aria-hidden="true">📐</span><div><div class="eyebrow">03 / Find the correct reference</div><h2>Drawings, models &amp; project folders</h2></div></div>
+      <p class="section-intro">Access controlled by Google Drive. A linked document is not a substitute for engineer-issued revision approval.</p><div id="resources"></div></section>
+    <div class="secondary-grid">
+      <details class="section detail-section" id="material-check"><summary>🧱 Material checks <small>stock, delivery and usage are separate</small></summary><div id="materials" class="detail-content"></div></details>
+      <details class="section detail-section" id="next-steps"><summary>🗓️ Next steps / lookahead <small>plans are not completion records</small></summary><div id="lookahead" class="detail-content"></div></details>
+      <details class="section detail-section" id="historical-records"><summary>📚 Progress history <small>older field reports and updates</small></summary><div id="progress" class="detail-content"></div></details>
+      <details class="section detail-section" id="evidence-links"><summary>📷 Evidence and audit links <small>original provider references</small></summary><div id="evidence" class="detail-content"></div></details>
     </div>
   </main>
-
   <div class="footer">Verified provider facts only. Readiness and execution are separate: READY does not mean DONE. <a href="../site-operations.html">Back to Site Operations dashboard</a>.</div>
 </div>
 <script>
@@ -152,6 +185,7 @@ async function load(){
     document.title=p.display_name+" — Site Operations";
     $("name").textContent=p.display_name;
     $("meta").textContent=[p.project_id,p.company_project_code,p.contractor,o.date||"No date"].filter(Boolean).join(" · ");
+    $("record-hint").textContent="📅 Source record: "+(o.date||"date unverified")+" · Field readiness must be confirmed for the work date. Never infer current site status from an older report.";
     $("attention").textContent=att[0]; $("attention").dataset.tone=att[1];
     $("focus").innerHTML="<b>Focus now:</b> "+esc(focus(p));
     work(o.todays_work||[]);
