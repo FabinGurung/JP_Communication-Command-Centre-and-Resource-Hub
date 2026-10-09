@@ -85,6 +85,11 @@ def run():
                 page.goto(BASE+"/site-operations/project.html?project=P007",wait_until="domcontentloaded",timeout=20000)
                 page.locator("#drawings .resource-card").first.wait_for(timeout=18000)
                 require(page.locator("#drawings .resource-card").count()>=11,"P007 document pointers missing")
+                require(page.locator(".resource-optional").count()>=3,"Optional discipline disclosures missing")
+                require(not page.locator(".resource-optional").first.evaluate("(e)=>e.open"),"Optional models should start collapsed")
+                page.locator(".resource-optional").first.locator("summary").click()
+                require(page.locator(".resource-optional").first.evaluate("(e)=>e.open"),"Optional model disclosure failed")
+                page.locator(".resource-optional").first.locator("summary").click()
                 require(page.locator("#historical-records").get_attribute("open") is None,"History unexpectedly expanded")
                 page.locator("#historical-records summary").click()
                 require(page.locator("#historical-records").get_attribute("open") is not None,"Progress disclosure did not open")
@@ -112,6 +117,10 @@ def run():
                 # A failed external asset is an explicit error, not a successful visual certification.
                 page.goto(BASE+"/map.html",wait_until="domcontentloaded",timeout=25000)
                 page.locator(".leaflet-container").wait_for(timeout=25000)
+                # Wait for a useful amount of background imagery; Leaflet container alone
+                # does not prove tiles finished loading.
+                page.wait_for_function("() => document.querySelectorAll('img.leaflet-tile-loaded').length >= 8",timeout=18000)
+                print("MAP_TILES_DESKTOP",page.locator("img.leaflet-tile-loaded").count())
                 require(page.locator("#workspace").evaluate("(e)=>e.classList.contains('list-collapsed')"),
                         "Map did not start map-first")
                 require(page.locator("#project-pane").is_hidden(),"Project list visible by default")
@@ -132,6 +141,8 @@ def run():
                 print("PASS: map first, optional list, filters and layer disclosure")
                 m.goto(BASE+"/map.html",wait_until="domcontentloaded",timeout=25000)
                 m.locator(".leaflet-container").wait_for(timeout=25000)
+                m.wait_for_function("() => document.querySelectorAll('img.leaflet-tile-loaded').length >= 3",timeout=18000)
+                print("MAP_TILES_MOBILE",m.locator("img.leaflet-tile-loaded").count())
                 require(m.locator("#project-pane").is_hidden(),"Mobile map list not initially collapsed")
                 no_wide_overflow(m,"map mobile",tolerance=22)
                 screenshot(m,"map-first-mobile.png")
