@@ -106,7 +106,7 @@
     ],
     "collector": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
     "runtime": "USER_RUNS_GOOGLE_COLAB_BEFORE_DAILY_A9_CWO",
-    "status": "PROVIDER_PARTIAL_C04_PILOT_STAGED_NOT_RUN",
+    "status": "PROVIDER_PARTIAL_C04_ONE_DERIVATIVE_READBACK_VERIFIED_C02_R008_NOT_RUN",
     "scope": "Only these two parent channels and currently active child threads belonging to them; not a server-wide archive",
     "archive_root_drive_id": "1nTFR9xQXNwgkWRrAq1jJw7ph6rKg3C9X",
     "handoff": "A9_CWO_DAILY_TWO_CHANNELS/handoff_current.json (created only after user executes notebook)",
@@ -115,11 +115,27 @@
       "Embed-only external images not downloaded",
       "Incomplete attachments or API permissions prohibit PASS",
       "No Discord posting automation in v1"
-    ]
+    ],
+    "daily_scan_rule": {
+      "mode": "SEVEN_ROLLING_DAYS_EVERY_RUN_WITH_OLDER_CURSOR_CATCHUP",
+      "days": 7,
+      "catchup_overlap_days": 1,
+      "coverage": "2 parents + currently active children only",
+      "old_media_debt": "749_ORIGINAL_BYTE_MISMATCHES_FROM_PRIOR_PARTIAL_RUN",
+      "day_index": "PRIVATE_POINTER_ONLY_JSONL_C05",
+      "first_runtime_execution": "PENDING"
+    },
+    "c04_verified_pilot": {
+      "provider_derivative_drive_id": "1HBLKmpQV5yCD_90_v9iHEIbiTw3VduPw",
+      "receipt_drive_id": "1ftkzIKyqUhVvCCWYAw5ka_YfKlDg2tVi",
+      "original_certified": false,
+      "source_run_id": "20261009T020256Z",
+      "note": "Exactly one separate, integrity-labelled provider derivative; no original recovery or cursor advancement."
+    }
   },
   "pending": [
     "Drive-to-GitHub automated Main/Local Control Tower refresh",
-    "Complete Discord original-media fidelity investigation and execute optional C04 private derivative pilot (C01/C03/C04) after reviewing its bounded write; preserve PARTIAL and failed-source cursors",
+    "C04 one private derivative verified; original mismatch debt remains. Run daily C01/C02/C05 as new revision 008 and preserve PARTIAL, failed original-media certification and archived-thread coverage gap",
     "A9-CWO ingestion of Discord candidate facts into owned project state",
     "Archived-thread and inline-embed media coverage expansion"
   ],
@@ -136,7 +152,7 @@
     "ordering": "Copy original exact bytes to numbered PRE archive; read back before editing original; update current revision in-place; POST readback + CI; append ledger and publish.",
     "no_drive_file_id_claim": "The provided URL is GitHub-backed; it has no verified Google Drive file ID.",
     "archive_promotion": "Do not reassign a previous archival path/name or overwrite its contents. Retrospective historical source creation dates must be distinguished from archive copy date.",
-    "current_revision": "20261009-007",
+    "current_revision": "20261009-008",
     "quick_reference_wall": "controls/memory-wall.html",
     "progress_requirements": [
       "visible provider stage",
@@ -158,7 +174,7 @@
       "handoff_drive_file_id": "1QUZRvXuW3Z7z4UD1BkoI_jJD2ZWkZQN4",
       "cause_known": "Original CDN url returns JPEG bytes with HTTP Content-Length matching observed count, but many attachments differ from Discord attachment size metadata; identity encoding did not change this.",
       "root_cause": "UNDETERMINED",
-      "next_gate": "C03 user-completed: source and proxy JPEGs nonidentical and both size-mismatched; C04 revision 20261009-007 staged for ONE provenance-labelled private Drive derivative with exact SHA/readback. No original certification, cursor progress, or change to frozen PARTIAL receipt. Await bounded pilot execution and result.",
+      "next_gate": "C04 one derivative verified, original still unresolved. Run revised C01→C02 seven-day collection→C05 private daily index; capture new immutable receipts and leave media FAIL/PARTIAL status explicit.",
       "prior_partial_receipt_drive_file_id": "1gwH1_kGG4kSmfRv3r7DRrPOMGHN_QBrN"
     },
     "cell_reference_ids": [
@@ -179,8 +195,20 @@
         "name": "CDN PROBE",
         "definition": "Read-only one-failed-attachment source/proxy byte and dimensions comparison; no Drive writes or cursor changes",
         "stable_notebook_cell_id": "a9-cwo-c03-cdn-probe"
+      },
+      {
+        "id": "C05",
+        "name": "DAILY INDEX",
+        "definition": "Reads new C02 immutable receipt, verifies original raw/candidate JSONL SHA, writes private pointer-only date-partitioned JSONL and immutable manifest without touching high-water cursors.",
+        "stable_notebook_cell_id": "a9-cwo-c05-daily-index"
       }
-    ]
+    ],
+    "previous_revision_archived_exact": "ops/discord/99_VERSION_ARCHIVE/20261009/007__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SEVEN_DAY_DAILY_INDEX.ipynb",
+    "latest_source_validation": {
+      "revision": "20261009-008",
+      "status": "STATIC_SYNTHETIC_QA_PASS_COLAB_RUNTIME_NOT_RUN",
+      "ci_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37922352759"
+    }
   },
   "archive_format_standard": {
     "standard_id": "A9-CWO-MULTI_PROVIDER_ARCHIVE-FORMAT-v1.0",
