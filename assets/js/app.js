@@ -981,7 +981,8 @@ function attachEvents() {
     elements.workspace.classList.toggle("list-collapsed", collapsed);
     elements.listToggle.setAttribute("aria-expanded", String(!collapsed));
     elements.listToggle.textContent = collapsed ? "Show list" : "Hide list";
-    elements.mapListButton.textContent = collapsed ? "Show projects" : "Hide projects";
+    elements.mapListButton.textContent = collapsed ? "☷ Show sites" : "☷ Hide sites";
+    elements.mapListButton.setAttribute("aria-expanded", String(!collapsed));
     refreshMapSoon();
   };
   elements.listToggle.addEventListener("click", toggleList);
@@ -1049,7 +1050,7 @@ async function loadApplication() {
       workingScopeError = error.message;
     }
 
-    elements.siteTitle.textContent = state.config.site_title;
+    elements.siteTitle.textContent = "Project map";
     elements.siteSubtitle.textContent = state.config.site_subtitle;
     elements.versionBadge.textContent = `v${state.config.app_version}`;
     elements.notice.textContent = state.config.public_notice;
