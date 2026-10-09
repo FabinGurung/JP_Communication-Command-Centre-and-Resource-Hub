@@ -25,7 +25,7 @@
           "trade_id": "PROCUREMENT",
           "summary": "Materials (cement, crusher sand, plaster sand, bricks and water) were reported available; quantities not established.",
           "status": "REPORTED_INFORMATION",
-          "source_ref": "https://jp09.slack.com/archives/C0C2DJNGARW/p1791454471",
+          "source_ref": "https://jp09.slack.com/archives/C0C2DJNGARW/p1791422015827689",
           "source_date": "2026-10-08",
           "proof_state": "FIELD_OR_MANAGEMENT_REPORTED_UNVERIFIED_TECHNICAL_ACCEPTANCE"
         }
@@ -194,7 +194,7 @@
           "trade_id": "ENGINEERING",
           "summary": "Management discussed possible reasons for parapet/railing defects; causes remain hypotheses, not diagnosis.",
           "status": "ISSUE_RAISED",
-          "source_ref": "https://jp09.slack.com/archives/C0C13SSGULF/p1791442101",
+          "source_ref": "https://jp09.slack.com/archives/C0C13SSGULF/p1791412381717639",
           "source_date": "2026-10-08",
           "proof_state": "FIELD_OR_MANAGEMENT_REPORTED_UNVERIFIED_TECHNICAL_ACCEPTANCE"
         }
@@ -214,7 +214,7 @@
           "trade_id": "PLASTER",
           "summary": "Investigate parapet and railing-wall cracking, surface preparation and repair method.",
           "status": "ENGINEER_HOLD",
-          "source_ref": "https://jp09.slack.com/archives/C0C13SSGULF/p1791442101",
+          "source_ref": "https://jp09.slack.com/archives/C0C13SSGULF/p1791412381717639",
           "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
           "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
         },
@@ -303,7 +303,7 @@
           "trade_id": "UPVC",
           "summary": "Confirm correction to mismatched toilet/bedroom door and window dimensions.",
           "status": "NEEDS_CORRECTION",
-          "source_ref": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791350300",
+          "source_ref": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791362008660439",
           "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
           "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
         },
@@ -355,7 +355,7 @@
           "trade_id": "ENGINEERING",
           "summary": "Management questioned veranda slab level and possible outside-water entry; no design acceptance.",
           "status": "ISSUE_RAISED",
-          "source_ref": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791459404",
+          "source_ref": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791442304254949",
           "source_date": "2026-10-08",
           "proof_state": "FIELD_OR_MANAGEMENT_REPORTED_UNVERIFIED_TECHNICAL_ACCEPTANCE"
         }
@@ -384,7 +384,7 @@
           "trade_id": "ENGINEERING",
           "summary": "Resolve veranda level/water entry and junction-column detailing before changing execution.",
           "status": "NEEDS_ENGINEER_DECISION",
-          "source_ref": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791459404",
+          "source_ref": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791442304254949",
           "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
           "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
         },
@@ -393,7 +393,7 @@
           "trade_id": "PLUMBING",
           "summary": "Confirm plumbing material estimate and when the plumber will inspect site.",
           "status": "NEEDS_REPORT",
-          "source_ref": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791373844",
+          "source_ref": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791373944497509",
           "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
           "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
         },
