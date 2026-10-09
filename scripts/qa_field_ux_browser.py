@@ -70,6 +70,8 @@ def no_wide_overflow(page, desc, tolerance=18):
     })""")
     print("DIMENSIONS", desc, dims)
     require(dims["html"] <= dims["window"]+tolerance, f"{desc} horizontal html overflow {dims}")
+    intended=page.viewport_size["width"]
+    require(dims["html"] <= intended+2, f"{desc} exceeds specified {intended}px viewport: {dims}")
 
 def run():
     server=subprocess.Popen([sys.executable,"-m","http.server","8878","--bind","127.0.0.1"],
