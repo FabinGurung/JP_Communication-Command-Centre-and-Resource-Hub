@@ -45,7 +45,10 @@ assert "state_current.json" in source and "handoff_current.json" in source
 assert "hashlib.sha256" in source and "MediaFileUpload" in source
 assert "CANDIDATES_JSONL" in source and "RUN_RECEIPTS" in source
 assert "INCLUDE_ACTIVE_CHILD_THREADS = True" in source
-assert 'horizon = datetime.fromtimestamp(previous_ms/1000, timezone.utc) - timedelta(days=REVISIT_DAYS)' in source
+# Daily replay: seven full days with stale-cursor backfill.
+assert "REVISIT_DAYS = 7" in source and "BACKFILL_OVERLAP_DAYS = 1" in source
+assert "horizon = datetime.now(timezone.utc) - timedelta(days=REVISIT_DAYS)" in source
+assert "horizon = min(horizon, catchup_start)" in source
 site = Path("controls/storage.html").read_text(encoding="utf-8")
 assert "storage-routing-rules.json" in site and "A9-CWO" in site
 assert 'href="storage.html"' in Path("controls/index.html").read_text(encoding="utf-8")
@@ -58,7 +61,8 @@ ledger = json.loads(Path("ops/discord/notebook-versions.json").read_text(encodin
 assert ledger["schema_version"] == "1.0.0"
 assert ledger["timezone"] == "Asia/Kathmandu"
 assert ledger["numbering"] == "YYYYMMDD-NNN"
-assert ledger["current_revision"] == "20261009-007"
+assert ledger["current_revision"] == pin["notebook_versioning_policy"]["current_revision"]
+assert ledger["current_revision"] >= "20261009-008"
 assert ledger["stable_working_path"] == str(notebook_path)
 assert ledger["drive_native_same_id"].startswith("NOT_APPLICABLE")
 revisions = ledger["versions"]
@@ -81,7 +85,7 @@ for entry in revisions:
         assert entry["status"] in {"ARCHIVED_RETROACTIVE", "ARCHIVED_PRE"}
 assert pin["notebook_versioning_policy"]["manifest"] == "ops/discord/notebook-versions.json"
 assert "notebook-versions.json" in site
-assert "20261009-007" == notebook["metadata"]["a9_cwo_revision"]["version_id"]
+assert ledger["current_revision"] == notebook["metadata"]["a9_cwo_revision"]["version_id"]
 assert 'progress("Drive: verifying existing A9 Discord archive root")' in source
 assert '_HEARTBEAT_STOP.wait(20)' in source
 assert 'progress("Discord: BEGIN source' in source
@@ -93,7 +97,11 @@ assert '"Attachment size mismatch, id=%s declared=%d observed=%d "' in source
 assert "MEDIA FAILURE DETAIL" in source
 # Durable cell identifiers and visible Setup milestones; do not re-number with cell position.
 code_cells = [c for c in notebook["cells"] if c["cell_type"] == "code"]
-assert [c["id"] for c in code_cells] == ["a9-cwo-c01-setup", "a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot"]
+assert [c["id"] for c in code_cells] == ["a9-cwo-c01-setup", "a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot", "a9-cwo-c05-daily-index"]
+assert "DAILY_INDEX_JSONL" in codes[4]
+assert "SOURCE_PARTIAL" in codes[4] and "source_receipt_id" in codes[4]
+assert "state_write(" not in codes[4] and "drive.files().update" not in codes[4]
+assert "ROLLING_SEVEN_DAYS_WITH_CATCHUP_EXTENSION" in codes[1] and "ROLLING_SEVEN_DAYS_WITH_CATCHUP_EXTENSION" in codes[4]
 assert "A9-CWO-C01-SETUP" in code_cells[0]["metadata"]["tags"]
 assert "A9-CWO-C02-COLLECTOR" in code_cells[1]["metadata"]["tags"]
 assert all((f"[A9-CWO C01 SETUP | {i:02d}/06]" in codes[0]) for i in range(1,7))
@@ -116,7 +124,7 @@ assert 'receipt["run_id"]' not in codes[2]  # deliberate: uses handoff match ins
 assert "MediaFileUpload" not in codes[2] and "drive.files().create" not in codes[2]
 assert "drive.files().update" not in codes[2]
 assert "with requests.get(" in codes[2] and "get_media(" in codes[2]
-assert {c["id"] for c in notebook["cells"] if c["cell_type"] == "markdown"} >= {"a9-cwo-c01-guide", "a9-cwo-c02-guide", "a9-cwo-c03-guide", "a9-cwo-c04-guide"}
+assert {c["id"] for c in notebook["cells"] if c["cell_type"] == "markdown"} >= {"a9-cwo-c01-guide", "a9-cwo-c02-guide", "a9-cwo-c03-guide", "a9-cwo-c04-guide", "a9-cwo-c05-guide"}
 assert "scripts/test_cwo_media_diagnostics.py" in Path(".github/workflows/daily-ops-branch-preview.yml").read_text(encoding="utf-8")
 assert Path("controls/memory-wall.html").exists()
 assert 'notebook-versions.json' in Path("controls/memory-wall.html").read_text(encoding="utf-8")
