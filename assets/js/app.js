@@ -551,13 +551,6 @@ function renderMapMarkers({ fitBounds = false } = {}) {
   if (fitBounds && bounds.length) {
     state.map.invalidateSize({ pan: false });
     state.map.fitBounds(bounds, { padding: [state.config.fit_bounds_padding, state.config.fit_bounds_padding], maxZoom: 15 });
-    // On narrow touch screens, favor discernible individually tappable site
-    // markers. The provider coordinates are unchanged; the user can zoom out
-    // one step to return to full-portfolio extent.
-    if (window.matchMedia("(max-width: 600px)").matches && bounds.length > 1) {
-      const workingZoom = state.map.getZoom();
-      state.map.setZoom(Math.min(15, workingZoom + 1), { animate: false });
-    }
   }
   window.setTimeout(updateProjectTooltips, 50);
 }
@@ -841,7 +834,13 @@ function selectProject(projectId, { pan = true, openPopup = true, updateLocation
     const position = marker?.getLatLng() || L.latLng(project.latitude, project.longitude);
     state.map.setView(position, Math.max(state.map.getZoom(), 15), { animate: true });
   }
-  if (openPopup && marker) marker.openPopup();
+  if (openPopup && marker) {
+    if (typeof state.projectLayer.zoomToShowLayer === "function") {
+      state.projectLayer.zoomToShowLayer(marker, () => marker.openPopup());
+    } else {
+      marker.openPopup();
+    }
+  }
   if (updateLocation) updateHash(projectId);
   refreshMapSoon();
 }
@@ -929,7 +928,23 @@ function initializeMap() {
   state.map = L.map("map", { zoomControl: true }).setView(state.config.default_center, state.config.default_zoom);
   L.tileLayer(state.config.tile_url, { maxZoom: state.config.maximum_zoom, attribution: state.config.tile_attribution }).addTo(state.map);
   L.control.scale({ imperial: false }).addTo(state.map);
-  state.projectLayer = L.layerGroup().addTo(state.map);
+  state.projectLayer = typeof L.markerClusterGroup === "function"
+    ? L.markerClusterGroup({
+        maxClusterRadius: window.matchMedia("(max-width: 600px)").matches ? 64 : 50,
+        showCoverageOnHover: false,
+        zoomToBoundsOnClick: true,
+        spiderfyOnMaxZoom: true,
+        spiderfyDistanceMultiplier: 1.8,
+        iconCreateFunction: cluster => L.divIcon({
+          className: "site-cluster-icon",
+          html: '<span class="site-cluster"><b>'+cluster.getChildCount()+'</b><small>sites</small></span>',
+          iconSize: [46, 46], iconAnchor: [23, 23]
+        })
+      }).addTo(state.map)
+    : L.layerGroup().addTo(state.map);
+  if(typeof L.markerClusterGroup !== "function") {
+    showMessage("Group markers are unavailable right now. Use 'Show sites' to select a project instead.", "warning");
+  }
   state.componentLayer = L.layerGroup().addTo(state.map);
   state.supplementalLayer = L.layerGroup().addTo(state.map);
   state.map.on("popupopen", (event) => {
