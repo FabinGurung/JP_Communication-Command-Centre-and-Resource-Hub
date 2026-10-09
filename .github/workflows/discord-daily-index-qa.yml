@@ -9,11 +9,13 @@ on:
     paths:
       - 'ops/discord/**'
       - 'scripts/test_discord_daily_index_contract.py'
+      - 'scripts/test_discord_full_history_contract.py'
       - '.github/workflows/discord-daily-index-qa.yml'
   pull_request:
     paths:
       - 'ops/discord/**'
       - 'scripts/test_discord_daily_index_contract.py'
+      - 'scripts/test_discord_full_history_contract.py'
       - '.github/workflows/discord-daily-index-qa.yml'
 
 permissions:
@@ -32,3 +34,5 @@ jobs:
           python-version: '3.11'
       - name: Check notebook syntax, seven-day window, SHA pointers and idempotence
         run: python scripts/test_discord_daily_index_contract.py
+      - name: Verify full-history scope, JSONL provenance, SQLite indexing and publication gate
+        run: python scripts/test_discord_full_history_contract.py
