@@ -106,11 +106,11 @@
         "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
       },
       "why": "Two-channel Discord message/attachment data now exists in a provider-verified partial Drive receipt. Media fidelity is unresolved and must not be counted as a completed daily backup.",
-      "recommendation": "Do not rerun C01/C03 solely to repeat the completed sample. Read user-supplied sanitized C03 results: fresh Discord attachment metadata 1,103,988 bytes; source CDN image 8,830,415 bytes; media proxy image 1,943,867 bytes; both full-resolution 4284x5712 decodable JPEGs, with distinct SHA-256 and neither byte count matching metadata. The endpoints serve different representations; exact uploaded original remains unproven. Preserve failure status, original-byte validation, existing archived media and failed-source cursors. Next investigate evidence needed to distinguish original representation from transformations or stale metadata; design a bounded provenance-labelled derivative recovery only after safety tests.",
+      "recommendation": "C04 is a strictly bounded one-JPEG source-CDN derivative pilot, not bulk attachment recovery or proof of original fidelity. In a valid C01/C03 runtime, execute C04 to archive only one image in private DERIVATIVE_BYTES + immutable sidecar with exact provider readback. Avoid running full C02 while original-byte mismatch persists. Update project-group coverage before proposing new channels.",
       "when_to_build": "Use the next authorized Colab execution, review per-source media mismatch diagnostics and verify new Drive receipt.",
       "proposed_first_gate": "Completed user-reported C03 sample; next make original-vs-provider-derivative classification explicit, test one small targeted recovery without advancing incomplete source cursor, and record evidence/receipt before broad media retry.",
-      "implementation_status": "USER_REPORTED_C03_COMPLETED_ORIGINAL_MEDIA_UNRESOLVED",
-      "current_boundary": "C03 user-reported DONE 2026-10-09; one failed attachment returned two nonidentical decodable full-resolution JPEG representations (8,830,415 and 1,943,867 bytes), Discord metadata 1,103,988 bytes. No byte-identical original proved. Preserve PARTIAL and 749 media failures. Next: narrow original/proxy/archive classification and recovery design; CI on PR #4 then main promotion and readback.",
+      "implementation_status": "USER_REPORTED_C03_DONE_C04_BOUNDED_PILOT_STAGED_UNRUN",
+      "current_boundary": "Oct 9: 174 Discord messages reconciled into eight Daily Ops project records, with 7 new Discord evidence admissions; 11 Slack trackers/rollups sent with readback. 749 original byte mismatches remain. Notebook revision 20261009-007 includes optional single-file C04 provenance-labelled derivative pilot, NOT YET EXECUTED. Await user C01/C03/C04 then sanitized receipt; no C02 rerun.",
       "related_canonical_sources": [
         "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
         "ops/control/storage-routing-rules.json",
@@ -172,7 +172,17 @@
         "raw_hashes_and_attachment_identifiers": "RETAINED_IN_USER_SUPPLIED_PRIVATE_C03_LOG_NOT_COPIED_TO_PUBLIC_REPOSITORY",
         "conclusion": "TWO_NONIDENTICAL_VALID_JPEG_REPRESENTATIONS_NO_CERTIFIED_ORIGINAL",
         "probe_writes_drive": false,
-        "probe_advanced_cursors": false
+        "probe_advanced_cursors": false,
+        "c04": {
+          "revision": "20261009-007",
+          "cell_id": "a9-cwo-c04-derivative-pilot",
+          "published_in_feature_branch": true,
+          "execution_status": "NOT_RUN",
+          "size_limit_bytes": 26214400,
+          "admission": "PROVIDER_DERIVATIVE_NOT_ORIGINAL",
+          "writes": "ONE_DRIVE_DERIVATIVE_PLUS_SIDECAR",
+          "cursors": "UNCHANGED"
+        }
       }
     }
   ],
