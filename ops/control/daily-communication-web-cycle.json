@@ -25,7 +25,7 @@
       "runner": "USER_OPERATED_COLAB",
       "notebook": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
       "handoff": "A9_CWO_DAILY_TWO_CHANNELS/handoff_current.json",
-      "status": "CURRENT_NOTEBOOK_REVISION_010_TRANSPARENT_AND_STALE_RECEIPT_GUARDED_NOT_RUN",
+      "status": "R012_FULL_HISTORY_DRIVE_FIRST_SOURCE_READY_PROVIDER_NOT_RUN",
       "last_frozen_run": {
         "run_id": "20261009T020256Z",
         "receipt_drive_id": "1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3",
@@ -38,7 +38,7 @@
         "attachments_failed": 749,
         "attachments_previously_archived": 207
       },
-      "next_gate": "C01 → C02 live roster/timestamps preview → operator COLLECT → verify fresh receipt → same-runtime C05 index. Preview-only clears confirmation and cannot index an older receipt.",
+      "next_gate": "Operator: C01 → C06 FULL_HISTORY repeatedly → C07 REPAIR_MEDIA until all originals verified → C08 BUILD_SQLITE → C09 publication gate. Do not publish from incomplete raw Drive coverage. C02/C05 remain rolling update lane, NOT historical completion.",
       "c03_result": {
         "status": "USER_REPORTED_COMPLETED",
         "native_provider_receipt": "NOT_AVAILABLE",
@@ -55,14 +55,19 @@
         "catchup_overlap_days": 1,
         "archived_child_threads": false,
         "last_completed_provider_collection_run": "20261009T020256Z",
-        "revision": "20261009-010",
+        "revision": "20261009-012",
         "runtime_execution_of_revision": "NOT_RUN",
         "machine_day_index_schema": "ops/discord/schemas/daily-message-index-v1.schema.json",
         "machine_run_manifest_schema": "ops/discord/schemas/daily-run-index-manifest-v1.schema.json",
         "runbook": "ops/discord/DAILY_7_DAY_MACHINE_ARCHIVE_RUNBOOK.md",
         "preflight": "LIVE_READ_ONLY_ROSTER_AND_FROZEN_NPT_WINDOW_OPERATOR_COLLECT_REQUIRED",
         "preflight_scope_limit": "TWO_REGISTERED_PARENTS_PLUS_ACTIVELY_DISCOVERED_CHILD_THREADS",
-        "c05_same_runtime_confirmed_c02_required": true
+        "c05_same_runtime_confirmed_c02_required": true,
+        "full_history": "C06_ALL_ACCESSIBLE_GUILD_MESSAGES_AND_DISCOVERABLE_ARCHIVED_THREADS",
+        "original_media": "C07_RETRY_FAILURES_THEN_C09_MEDIA_DEBT_ZERO_REQUIRED",
+        "private_query": "C08_SQLITE_GENERATED_FROM_DRIVE_VERIFIED_IMMUTABLE_GZIP_JSONL",
+        "publication_gate": "C09_PASS_DATA_VERIFIED_ONLY_AND_PUBLIC_SAFETY_RECONCILIATION",
+        "incremental_limitation": "C02_ONLY_2_PARENT_CHANNELS_UNTIL_FULL_GUILD_DELTA_EXTENSION"
       },
       "c04_result": {
         "status": "ONE_PROVIDER_DERIVATIVE_DRIVE_READBACK_PASS",
@@ -72,30 +77,34 @@
       }
     }
   ],
-  "precondition": "For each provider discover latest provider-verified cursor, source range and archive receipts; never present a manually staged Colab notebook as already scanned.",
+  "precondition": "BEFORE ANY NEW DERIVATIVE/PUBLICATION: complete the Discord full-history archive for target guild, preserve exact source JSONL and original attachments in private Drive, read back SHA manifests, build private query indexes, run C09 gate; then reconcile project identities and only publish approved public-safe website/authorized Slack facts. C02 seven-day replay is not total history.",
   "ingest_order": [
-    "RUN_DISCORD_COLAB_OR_RECORD_NOT_RUN",
-    "READ_DISCORD_DRIVE_HANDOFF_IF_PRESENT",
-    "READ_SLACK_CHANNELS_AND_THREAD_DELTAS",
-    "NORMALIZE_CANDIDATE_JSONL",
-    "MAP_COMPANY_AND_PROJECT_IDENTITIES",
-    "RECONCILE_CONFLICTS_AND_EVIDENCE",
-    "COMMIT_GITHUB_JSON_JSONL_CSV",
+    "DISCOVER_DISCORD_FULL_GUILD_AND_ARCHIVED_THREAD_SCOPE",
+    "RUN_C06_HISTORICAL_ARCHIVE_TO_OWNING_DRIVE_UNTIL_SOURCE_COVERAGE_PASS",
+    "RUN_C07_ORIGINAL_MEDIA_RECOVERY_AND_MANIFEST_READBACK",
+    "BUILD_C08_PRIVATE_SQLITE_FROM_VERIFIED_JSONL",
+    "CHECK_C09_PUBLISH_DATA_GATE_OR_BLOCK",
+    "READ_SLACK_PRIVATE_ARCHIVES_AND_CAPTURE_VERIFIED_SOURCE_DELTAS",
+    "NORMALIZE_PRIVATE_CANDIDATES_WITH_PROVENANCE",
+    "RECONCILE_PROJECT_COMPANY_IDENTITY_AND_CONFLICTS",
+    "ADMIT_ONLY_APPROVED_PUBLIC_SAFE_GITHUB_FACTS",
     "VALIDATE_AND_DEPLOY_WEBSITE",
-    "SEND_AUTHORIZED_SLACK_DISCUSSION_SUMMARIES",
-    "RECORD_PROVIDER_RECEIPTS_AND_REMAINING_GAPS"
+    "SEND_AUTHORIZED_SLACK_SUMMARIES_WITH_MESSAGELOG_RECEIPTS",
+    "REGISTER_POST_RELEASE_SHA_AND_UNRESOLVED_GAPS"
   ],
   "storage_policy": "ops/control/storage-routing-rules.json",
   "source_processing": {
-    "originals": "Existing A9 source archives in Drive; raw JSONL + source IDs + original attachment bytes",
-    "facts": "Versioned owning GitHub JSON/JSONL/CSV and SQL relationship contracts",
-    "website": "Derived GitHub Pages view",
-    "messages": "Source-specific Slack/company groups (or Discord if separately approved); provider send readback"
+    "originals": "PRIVATE Google Drive source archive first: immutable full-fidelity JSONL gzip pages, exact original media when retrievable, explicit byte mismatch/coverage debt, all source IDs/cursor/receipt SHA provenance",
+    "facts": "Private normalized indexed SQLite from verified Drive original JSONL first, then approved public-safe GitHub JSON/JSONL/CSV projections/SQL schema",
+    "website": "Only after C09 data gate + source provenance, approved public-safe facts, code validation and deployment",
+    "messages": "Only after C09 data gate and governing Slack send permissions; post source-grounded project/REB/FBL summaries and read back receipts"
   },
   "project_truth": "Do not equate uploaded image or message with DONE; classify as observed/requested/planned/completed only when source-grounded.",
   "company_routing": "Use authorized A9 registry for REB/FBL and governed projects; both company rollups are required targets when send gate allows.",
-  "safety_and_accuracy": "Do not store Discord/Slack bot secrets in GitHub, logs, exports or notebook outputs. No server-wide Discord harvest. Never invent messages/cursors or skip incompleteness. Preserve stricter live A9 source controls where they apply.",
+  "safety_and_accuracy": "Do not store Discord/Slack bot secrets in GitHub, logs, exports or notebook outputs. No server-wide Discord harvest. Never invent messages/cursors or skip incompleteness. Preserve stricter live A9 source controls where they apply. Full historical backfill precedes a seven-day incremental-only routine; when metadata/media completeness is partial, do not claim history PASS or issue new downstream publications based on missing source evidence.",
   "daily_closeout": [
+    "PRIVATE_SQLITE_ARCHIVE_RECONSTRUCTION_VERIFIED_OR_NOT_RUN",
+    "HISTORICAL_ARCHIVE_SOURCE_AND_MEDIA_PASS_OR_PUBLICATION_BLOCKED",
     "DISCORD_RECEIPT_PASS_PARTIAL_NOT_RUN",
     "SLACK_SCAN_PER_CHANNEL_WINDOW",
     "DRIVE_ARCHIVE_READBACK",
