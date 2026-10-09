@@ -1351,8 +1351,8 @@
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
-        "source_cutoff": "2026-10-07T17:41:56+05:45",
+        "last_reconciled_at": "2026-10-09T08:41:22+05:45",
+        "source_cutoff": "2026-10-08T12:06:52+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
@@ -1458,6 +1458,20 @@
               "https://jp09.slack.com/archives/C0C1H9Y96KG/p1790843398592599"
             ],
             "observed_at": "2026-10-01T14:14:58+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "material_event_id": "MAT-P006-20261008-OPC-STOCK",
+            "work_id": null,
+            "material_name": "Cement OPC",
+            "material_state": "OBSERVED_STOCK",
+            "quantity": 16,
+            "unit": "bag",
+            "note": "Field-reported point-in-time stock on 8 Oct; not a measured reconciliation. No delivery, purchase or consumption inferred.",
+            "source_refs": [
+              "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791440512724179"
+            ],
+            "observed_at": "2026-10-08T12:06:52+05:45",
             "conflict_state": "NONE"
           }
         ],
