@@ -317,6 +317,39 @@
         "narayani_drive_links_permissions": "16_OF_16_RESTRICTED_READBACK_PASS",
         "manual_human_acceptance": "NOT_CLAIMED"
       }
+    },
+    {
+      "pending_id": "OPS-PEND-000009",
+      "title": "Engineer-confirmed three-day trade reports and daily CWO projection",
+      "short_title": "3-day trade-report replies → verified workboard",
+      "status": "AWAITING_SITE_ENGINEER_REPLIES",
+      "priority": "HIGH",
+      "category": "SITE_FIELD_DATA_RECONCILIATION",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Eight project 3-day engineer reply intake",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/site-operations.html"
+      },
+      "why": "The public field-workboard is an explicit, source-linked projection for 8-10 Oct. Missing yesterday/next-day or crew confirmations must come from each site engineer, not automatic 'UNKNOWN' checklists or assumptions.",
+      "proposed_first_gate": "Collect dated trade rows from the eight existing project Slack tracker threads, confirm author/project/time, admit corrections via the owning private provider records, then update field-three-day-board.json with PRE/POST and release readback. Move tomorrow's plan to current work only when engineering authorization exists.",
+      "recommendation": "Maintain one three-day trade workboard, with clear statuses and source IDs; work trade catalog is vocabulary only. No parallel material, attendance, finance or construction schedule authority.",
+      "when_to_build": "As soon as site engineers provide real replies or a separately approved daily projection adapter is ready.",
+      "implementation_status": "THREE_DAY_PUBLIC_DISPLAY_DEPLOYED;21_TRADE_VOCABULARY_CREATED;8_PROJECT_SLACK_REQUESTS_SENT_AND_PROVIDER_READBACK_PASS;ENGINEER_REPLIES_UNCONFIRMED;AUTO_ADAPTER_NOT_IMPLEMENTED",
+      "current_boundary": "No automatic future-day work assignment, manpower counts, specific PPE/tool readiness assumption, or blanket HOLD. Private Slack/Discord bytes remain gated in Drive. Engineer approval required to lift hold.",
+      "related_canonical_sources": [
+        "ops/data/current-works.json",
+        "ops/data/field-three-day-board.json",
+        "ops/control/field-trade-taxonomy.json",
+        "ops/events/daily-ops-events.jsonl"
+      ],
+      "security_invariants": [
+        "DO_NOT_FABRICATE_TASKS_OR_CREWS",
+        "HOLD_REQUIRES_ENGINEER_RELEASE",
+        "DUPLICATE_MESSAGES_DEDUPED_BY_PROVIDER_IDS",
+        "SOURCE_PROVIDER_PRIVATE"
+      ]
     }
   ],
   "archived_items": [
