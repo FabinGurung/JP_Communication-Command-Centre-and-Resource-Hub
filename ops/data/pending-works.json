@@ -96,7 +96,7 @@
       "pending_id": "OPS-PEND-000004",
       "title": "A9-CWO seven-day Discord collector and private machine-index execution",
       "short_title": "Run Discord C01 → C02 → C05",
-      "status": "REVISION_008_QA_PASS_PROVIDER_EXECUTION_PENDING",
+      "status": "REVISION_009_TRANSPARENT_PREFLIGHT_QA_PASS_PROVIDER_EXECUTION_PENDING",
       "priority": "NEXT_OPERATIONAL",
       "category": "COMMUNICATION_INTAKE",
       "owner_module_id": "MOD-OPS-001",
@@ -106,11 +106,11 @@
         "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
       },
       "why": "Two-channel Discord message/attachment data now exists in a provider-verified partial Drive receipt. Media fidelity is unresolved and must not be counted as a completed daily backup.",
-      "recommendation": "Source notebook revision 20261009-008 is published with rolling seven-day replay and older-cursor catch-up plus C05 immutable private pointer-only date-index. Execute C01→C02→C05 in Colab and verify real Drive receipts. C04 has preserved one provider derivative, NOT original attachment fidelity. Keep original-byte recovery as separate work.",
+      "recommendation": "Revision 009 adds a live, read-only C02 source/active-thread roster, individual NPT cutoff/catch-up previews and explicit COLLECT confirmation. User runs C01 then previews C02; after confirming COLLECT, review C02 source receipt and only then run C05 private machine index. Earlier 749 original-media mismatches remain unresolved and can require separate recovery.",
       "when_to_build": "Next user-authorized Google Colab runtime with Discord bot credential and Drive OAuth; do not pretend GitHub Actions can access the bot or run Discord itself.",
-      "proposed_first_gate": "User runs current GitHub-backed C01/C02; verify C02 seven-day scan status and frozen receipt. Then run C05; verify immutable private daily index and manifest. Record counts, media debts and A9 Local/Main before project fact admission.",
-      "implementation_status": "C04_ONE_DERIVATIVE_DRIVE_READBACK_PASS;NOTEBOOK_20261009_008_SOURCE_COMMITTED;SEVEN_DAY_C05_SYNTHETIC_CI_PASS;COLAB_008_RUNTIME_NOT_RUN",
-      "current_boundary": "Only parent channels 1463826087841890417 and 1492168056858738809 plus active child threads. Earlier PARTIAL receipt 20261009T020256Z remains canonical execution evidence, with 749 unresolved attachment original-byte mismatches; no daily C05 private index has been executed yet. No fabricated scheduled run or completed media archive.",
+      "proposed_first_gate": "Run C01 → C02 live preview. Verify live parent/thread roster and every NPT cutoff; type COLLECT; verify new frozen C02 receipt and then execute C05. Do not attempt unsupported whole-guild/archived-thread collection.",
+      "implementation_status": "C04_DERIVATIVE_READBACK_PASS;R009_PREVIEW_SOURCE_COMMITTED_AND_ARCHIVED_PRE;SYNTHETIC_QA_PASS;AUTHENTICATED_COLAB_R009_NOT_RUN",
+      "current_boundary": "Live C02 preflight is source-level implemented but needs user-authenticated Colab test. Only 2 registered parents and current active children. Earlier frozen C02 receipt 20261009T020256Z remains PARTIAL with 749 original-byte mismatches. No live C02 r009 or C05 private index verified.",
       "related_canonical_sources": [
         "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
         "ops/control/storage-routing-rules.json",
@@ -187,13 +187,22 @@
           "receipt_drive_id": "1ftkzIKyqUhVvCCWYAw5ka_YfKlDg2tVi"
         }
       },
-      "last_source_revision": "20261009-008",
+      "last_source_revision": "20261009-009",
       "static_qa_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37922352759",
       "machine_contracts": [
         "ops/discord/schemas/daily-message-index-v1.schema.json",
         "ops/discord/schemas/daily-run-index-manifest-v1.schema.json",
         "ops/discord/DAILY_7_DAY_MACHINE_ARCHIVE_RUNBOOK.md"
-      ]
+      ],
+      "preview_contract": {
+        "revision": "20261009-009",
+        "stage": "C02 BEFORE ANY ARCHIVE WRITES",
+        "operator_confirmation": "COLLECT",
+        "scope": "two parents and currently active child threads only",
+        "per_source": "kind,name,id,parent,Discord link,cursor,actual planned cutoff NPT/UTC,seven-day or catch-up",
+        "no_confirmation": "preview only, no receipt, no state mutation",
+        "live_provider_confirmation": "NOT_RUN"
+      }
     },
     {
       "pending_id": "OPS-PEND-000005",
