@@ -96,7 +96,7 @@
       "pending_id": "OPS-PEND-000004",
       "title": "A9-CWO seven-day Discord collector and private machine-index execution",
       "short_title": "Run Discord C01 → C02 → C05",
-      "status": "REVISION_010_PREFLIGHT_AND_C05_GUARD_SOURCE_READY_RUNTIME_PENDING",
+      "status": "REVISION_010_SOURCE_QA_AND_PRODUCTION_PASS_COLAB_RUNTIME_PENDING",
       "priority": "NEXT_OPERATIONAL",
       "category": "COMMUNICATION_INTAKE",
       "owner_module_id": "MOD-OPS-001",
@@ -109,7 +109,7 @@
       "recommendation": "Revision 009 adds a live, read-only C02 source/active-thread roster, individual NPT cutoff/catch-up previews and explicit COLLECT confirmation. User runs C01 then previews C02; after confirming COLLECT, review C02 source receipt and only then run C05 private machine index. Earlier 749 original-media mismatches remain unresolved and can require separate recovery.",
       "when_to_build": "Next user-authorized Google Colab runtime with Discord bot credential and Drive OAuth; do not pretend GitHub Actions can access the bot or run Discord itself.",
       "proposed_first_gate": "Run C01 → C02 live preview. Verify live parent/thread roster and every NPT cutoff; type COLLECT; verify new frozen C02 receipt and then execute C05. Do not attempt unsupported whole-guild/archived-thread collection.",
-      "implementation_status": "PRE_ARCHIVES_R008_R009_READBACK;SOURCE_R010_COMMITTED;SYNTHETIC_CI_PENDING;AUTHENTICATED_COLAB_NOT_RUN",
+      "implementation_status": "R008_R009_PRE_SNAPSHOTS_VERIFIED;R010_COMMITTED;SYNTHETIC_QA_PASS_37927820893;PRODUCTION_PASS_37927820962;LIVE_DISCORD_R010_NOT_RUN",
       "current_boundary": "Live C02 preview and C05 stale-receipt protection are implemented in r010 but awaiting provider execution. The older C02 receipt stays PARTIAL (749 original-byte mismatches); no private C05 indexes from this revision are verified.",
       "related_canonical_sources": [
         "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
@@ -203,6 +203,14 @@
         "no_confirmation": "preview only, no receipt, no state mutation",
         "live_provider_confirmation": "NOT_RUN",
         "c05_safe_only_when": "SAME_RUNTIME_CONFIRMED_C02_RUN_AND_RECEIPT_MATCH"
+      },
+      "source_qc": {
+        "revision": "20261009-010",
+        "synthetic_qa": "PASS",
+        "synthetic_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37927820893",
+        "production": "PASS",
+        "production_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37927820962",
+        "provider_runtime": "NOT_RUN"
       }
     },
     {
