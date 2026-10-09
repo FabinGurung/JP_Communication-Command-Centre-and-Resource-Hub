@@ -209,8 +209,10 @@
     "previous_revision_archived_exact": "ops/discord/99_VERSION_ARCHIVE/20261009/009__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_C05_PREVIEW_ONLY_GUARD.ipynb",
     "latest_source_validation": {
       "revision": "20261009-010",
-      "status": "SYNTHETIC_QA_PENDING_AUTHENTICATED_COLAB_NOT_RUN",
-      "ci_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions"
+      "status": "STATIC_SYNTHETIC_QA_PASS_PRODUCTION_PASS_COLAB_RUNTIME_NOT_RUN",
+      "ci_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37927820893",
+      "production_validation_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37927820962",
+      "branch_lane_validation_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37927820866"
     },
     "preflight_contract": {
       "mode": "LIVE_READ_ONLY_PARENT_AND_ACTIVE_THREAD_ROSTER_THEN_EXPLICIT_COLLECT",
