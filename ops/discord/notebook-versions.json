@@ -10,7 +10,7 @@
   "stable_working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "stable_colab_url": "https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "archive_base": "ops/discord/99_VERSION_ARCHIVE",
-  "current_revision": "20261009-011",
+  "current_revision": "20261009-012",
   "archive_registration_date_npt": "2026-10-09",
   "versions": [
     {
@@ -160,16 +160,31 @@
     {
       "revision": "20261009-011",
       "created_date_npt": "2026-10-09",
-      "status": "CURRENT",
+      "status": "ARCHIVED_PRE",
       "version_hint": "v1.1.0 · resumable full guild history + archived threads",
       "change_summary": "C06 independent historical provider scanner: live guild channel and active/archived thread discovery, explicit operator FULL_HISTORY gate, snapshot-preserving complete-history pagination, immutable gzip lossless JSONL pages to private Drive, SHA-256 readback, bounded attachment attempts, per-page frozen receipts, independent resume cursor and explicit incomplete discovery/media debt. Prior C02 daily seven-day route unchanged.",
-      "archive_path": null,
+      "archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/011__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_MEDIA_REPAIR_SQLITE_GATES.ipynb",
       "source_commit": "2a0d803e0bc86cbf9ef90442fbb5b50b558a97ad",
       "git_blob_sha": "c5d9f6d22430a109c7eb79150b749ba651cbbcfe",
       "pre_snapshot_revision": "20261009-010",
       "pre_archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/010__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_FULL_HISTORY_ARCHIVE.ipynb",
       "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
-      "runtime_validation": "SOURCE_COMMITTED_GITHUB_CI_PENDING_AUTHENTICATED_COLAB_NOT_RUN"
+      "runtime_validation": "SOURCE_COMMITTED_GITHUB_CI_PENDING_AUTHENTICATED_COLAB_NOT_RUN",
+      "next_revision": "20261009-012"
+    },
+    {
+      "revision": "20261009-012",
+      "created_date_npt": "2026-10-09",
+      "status": "CURRENT",
+      "version_hint": "v1.1.1 · recovery, SQLite and strict publication gate",
+      "change_summary": "Adds C07 original attachment repair from immutable message-page receipts, C08 private indexed SQLite reconstruction with per-page SHA checks and integrity check, and C09 data-only publication gate blocking while archive, media or query evidence incomplete. No downstream website or Slack action is taken by these cells.",
+      "archive_path": null,
+      "source_commit": "d3a82e9dc7d17a61574a2ffab6e62a9d537d9623",
+      "git_blob_sha": "6b13c30860f3052d1630e5661a28065f373c47cb",
+      "pre_snapshot_revision": "20261009-011",
+      "pre_archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/011__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_MEDIA_REPAIR_SQLITE_GATES.ipynb",
+      "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
+      "runtime_validation": "SOURCE_COMMITTED_SYNTHETIC_QA_PENDING_COLAB_RUNTIME_NOT_RUN"
     }
   ]
 }
