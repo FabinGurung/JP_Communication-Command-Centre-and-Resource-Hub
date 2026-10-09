@@ -5,6 +5,9 @@ on:
     branches:
       - feature/daily-ops-current-work
       - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -13,7 +16,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-production-main
+  group: pages-production-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
