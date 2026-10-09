@@ -1,0 +1,378 @@
+{
+  "schema_version": "1.0.0",
+  "registry_id": "OPS-PENDING-WORK-001",
+  "updated": "2026-10-09",
+  "timezone": "Asia/Kathmandu",
+  "authority": "Operations repository planning registry. Entries are pending decisions/work, not completed implementation claims.",
+  "items": [
+    {
+      "pending_id": "OPS-PEND-000001",
+      "title": "Automated GitHub → Google Sheets Projection & Reconciliation",
+      "short_title": "Google Sheets projection automation",
+      "status": "PROPOSAL_READY_ON_HOLD",
+      "priority": "NEXT_3",
+      "category": "AUTOMATION",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "google_drive",
+        "file_id": "1bw9yAotZEGjJWuJq_YfooFy0P_BMx_og2N0iR29yOOs",
+        "title": "PROPOSAL 01 — Automated GitHub to Google Sheets Projection and Reconciliation",
+        "url": "https://docs.google.com/document/d/1bw9yAotZEGjJWuJq_YfooFy0P_BMx_og2N0iR29yOOs/edit?usp=drivesdk"
+      },
+      "why": "Remove manual GitHub-to-Sheets duplication while keeping GitHub canonical and Sheets a controlled human projection/input surface.",
+      "proposed_first_gate": "Human approval for one bounded generated-tab pilot with stable keys, provider readback and reconciliation.",
+      "implementation_status": "NOT_STARTED",
+      "current_boundary": "Do not implement automatically. Resume only after explicit approval.",
+      "related_canonical_sources": [
+        "projects.csv",
+        "ops/data/current-works.json",
+        "ops/data/project-resources.json",
+        "ops/events/daily-ops-events.jsonl"
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000002",
+      "title": "Secure user/company-specific project visibility",
+      "short_title": "Authenticated project access and company permissions",
+      "status": "ON_HOLD_ARCHITECTURE_OPTION",
+      "priority": "FUTURE_ACCESS_CONTROL",
+      "category": "SECURITY_AND_ACCESS",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Security architecture decision — recommended Supabase Auth + Postgres RLS for a future private project portal",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
+      },
+      "why": "Allow a signed-in person to see ONLY projects permitted by verified company membership, project assignment and role, including cross-company and exceptional access.",
+      "recommendation": "When real per-user access is approved, prefer Supabase Auth + PostgreSQL Row Level Security (RLS) for user identity, company memberships, project grants and server-enforced per-project reads. Treat Supabase as the authorization runtime, not a replacement for A7, Git version control or Drive evidence storage.",
+      "proposed_architecture": "A7 semantic project/company identities and Operations project-master IDs → authenticated user identity → company_memberships + project_access rules in private Postgres → RLS-filtered API/view → authorized map and project page. Google Drive file access must also be checked separately.",
+      "security_invariants": [
+        "Never rely on URL parameters, JavaScript hiding, or static GitHub Pages CSV/JSON as access control.",
+        "Private project facts and user/company membership lists must NOT be shipped in the public Pages artifact/repository.",
+        "Default-deny at the data/API layer. Validate every project row against logged-in user identity and grants.",
+        "Separate public marketing/project-map data from authenticated operational/engineering views.",
+        "Use existing A7 identities/route references; do not build a duplicate project identity or authority plane."
+      ],
+      "alternatives": "Neon/PostgreSQL + separate authentication/API service is viable but requires more integration; Supabase is the default candidate if Auth + RLS + API in one managed stack is desirable. Confirm plan, pricing, hosting region, integration and security needs at decision time.",
+      "when_to_build": "Start only when distinct user accounts must have different protected project datasets, or authenticated write workflows are approved. For a public convenience filter such as showing Fishtail first, no database is required.",
+      "proposed_first_gate": "Human approves required personas, companies, project-grants matrix, privacy classification and a private proof-of-concept scope.",
+      "implementation_status": "NOT_STARTED",
+      "current_boundary": "Deferred. Current map scope/filter is public convenience only, not a secure access boundary.",
+      "related_canonical_sources": [
+        "projects.csv",
+        "A7 project identity/routing contracts",
+        "future private user/companies/membership/grant store"
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000003",
+      "title": "Control Towers and Main Library automated GitHub synchronization",
+      "short_title": "A9 control index refresh and complete migration",
+      "status": "INDEX_PILOT_LIVE_FULL_MIGRATION_PENDING",
+      "priority": "NEXT_CONTROL_PLANE",
+      "category": "GOVERNANCE",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Source-linked directory pilot and future deterministic Drive-to-GitHub mirror",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
+      },
+      "why": "The Controls page is a static versioned index; changes to Drive Main Library and control tower sources do not automatically update it.",
+      "recommendation": "Use a provider-authenticated scheduled sync to read source Drive stable IDs and version/revisions, compare to the GitHub control-directory JSON, and update it only after source and write readback. Keep unchanged Drive originals; migrate full Main/Local catalogues only after verified PK/FK/cursor lineage.",
+      "when_to_build": "After accepting the initial Control Towers subpage, verifying the full A9 control inventory and selecting an authenticated Drive sync method.",
+      "security_invariants": [
+        "Do not replace stable Drive IDs or erase historical PRE/POST or artifact relationships.",
+        "Do not call the index real-time synchronized or claim the Main Library is fully migrated until all scope/edge/cursor readbacks pass."
+      ],
+      "proposed_first_gate": "Inventory full Main AddressLookup and eligible control sources; build one-control drift-detection pilot.",
+      "implementation_status": "STATIC_DIRECTORY_PILOT_ONLY",
+      "current_boundary": "Full automatic refresh and wholesale A9 Main/Local migration are not implemented.",
+      "related_canonical_sources": [
+        "ops/control/control-tower-directory.json",
+        "Fabin_Gurung_Drive_Index / Drive stable ID 18NE0GIbw0lDDlrIcflGS3_VccDZ2LZn1FoPbebSc71o"
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000004",
+      "title": "A9-CWO seven-day Discord collector and private machine-index execution",
+      "short_title": "Run Discord C01 → C02 → C05",
+      "status": "REVISION_008_QA_PASS_PROVIDER_EXECUTION_PENDING",
+      "priority": "NEXT_OPERATIONAL",
+      "category": "COMMUNICATION_INTAKE",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "A9-CWO Discord two-channel daily Colab",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
+      },
+      "why": "Two-channel Discord message/attachment data now exists in a provider-verified partial Drive receipt. Media fidelity is unresolved and must not be counted as a completed daily backup.",
+      "recommendation": "Source notebook revision 20261009-008 is published with rolling seven-day replay and older-cursor catch-up plus C05 immutable private pointer-only date-index. Execute C01→C02→C05 in Colab and verify real Drive receipts. C04 has preserved one provider derivative, NOT original attachment fidelity. Keep original-byte recovery as separate work.",
+      "when_to_build": "Next user-authorized Google Colab runtime with Discord bot credential and Drive OAuth; do not pretend GitHub Actions can access the bot or run Discord itself.",
+      "proposed_first_gate": "User runs current GitHub-backed C01/C02; verify C02 seven-day scan status and frozen receipt. Then run C05; verify immutable private daily index and manifest. Record counts, media debts and A9 Local/Main before project fact admission.",
+      "implementation_status": "C04_ONE_DERIVATIVE_DRIVE_READBACK_PASS;NOTEBOOK_20261009_008_SOURCE_COMMITTED;SEVEN_DAY_C05_SYNTHETIC_CI_PASS;COLAB_008_RUNTIME_NOT_RUN",
+      "current_boundary": "Only parent channels 1463826087841890417 and 1492168056858738809 plus active child threads. Earlier PARTIAL receipt 20261009T020256Z remains canonical execution evidence, with 749 unresolved attachment original-byte mismatches; no daily C05 private index has been executed yet. No fabricated scheduled run or completed media archive.",
+      "related_canonical_sources": [
+        "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
+        "ops/control/storage-routing-rules.json",
+        "ops/control/daily-communication-web-cycle.json",
+        "ops/discord/DAILY_7_DAY_MACHINE_ARCHIVE_RUNBOOK.md"
+      ],
+      "collector_notebook_url": "https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
+      "security_invariants": [
+        "Read only the two specified Discord parent channels plus currently active child threads; never crawl the whole server",
+        "No credential stored in GitHub, Drive source JSONL or a notebook output",
+        "No provider cursor advancement on failed raw or attachment archival",
+        "Do not claim provider capture DONE until first real Discord API and Drive readback"
+      ],
+      "last_provider_run": {
+        "run_id": "20261009T020256Z",
+        "status": "PARTIAL",
+        "at_npt": "2026-10-09T07:54:30+05:45",
+        "sources": 26,
+        "passed_sources": 17,
+        "partial_sources": 9,
+        "messages_new_or_changed": 174,
+        "attachment_failures": 749,
+        "previously_archived_attachments": 207,
+        "receipt_drive_id": "1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3",
+        "handoff_drive_id": "1QUZRvXuW3Z7z4UD1BkoI_jJD2ZWkZQN4"
+      },
+      "probe": {
+        "cell_id": "a9-cwo-c03-cdn-probe",
+        "revision": "20261009-006",
+        "published": true,
+        "execution_status": "USER_REPORTED_COMPLETED_SANITIZED_LOG",
+        "provider_native_execution_receipt": "NOT_AVAILABLE",
+        "full_collector_rerun_required": false,
+        "source_message_selection": "FROZEN_FAILED_ATTACHMENT_WITHIN_TWO_PARENT_SCOPE",
+        "metadata": {
+          "declared_bytes": 1103988,
+          "mime": "image/jpeg",
+          "dimensions": [
+            4284,
+            5712
+          ]
+        },
+        "source_url_response": {
+          "host": "cdn.discordapp.com",
+          "http_status": 200,
+          "observed_bytes": 8830415,
+          "byte_count_matches_discord": false,
+          "image_decodes": true,
+          "dimensions_match_discord": true
+        },
+        "proxy_url_response": {
+          "host": "media.discordapp.net",
+          "http_status": 200,
+          "observed_bytes": 1943867,
+          "byte_count_matches_discord": false,
+          "image_decodes": true,
+          "dimensions_match_discord": true
+        },
+        "source_proxy_sha256_different": true,
+        "raw_hashes_and_attachment_identifiers": "RETAINED_IN_USER_SUPPLIED_PRIVATE_C03_LOG_NOT_COPIED_TO_PUBLIC_REPOSITORY",
+        "conclusion": "TWO_NONIDENTICAL_VALID_JPEG_REPRESENTATIONS_NO_CERTIFIED_ORIGINAL",
+        "probe_writes_drive": false,
+        "probe_advanced_cursors": false,
+        "c04": {
+          "revision": "20261009-007",
+          "cell_id": "a9-cwo-c04-derivative-pilot",
+          "published_in_feature_branch": true,
+          "execution_status": "ONE_DERIVATIVE_SAVED_READBACK_VERIFIED_ORIGINAL_NOT_CERTIFIED",
+          "size_limit_bytes": 26214400,
+          "admission": "PROVIDER_DERIVATIVE_NOT_ORIGINAL",
+          "writes": "ONE_DRIVE_DERIVATIVE_PLUS_SIDECAR",
+          "cursors": "UNCHANGED",
+          "derivative_drive_id": "1HBLKmpQV5yCD_90_v9iHEIbiTw3VduPw",
+          "receipt_drive_id": "1ftkzIKyqUhVvCCWYAw5ka_YfKlDg2tVi"
+        }
+      },
+      "last_source_revision": "20261009-008",
+      "static_qa_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37922352759",
+      "machine_contracts": [
+        "ops/discord/schemas/daily-message-index-v1.schema.json",
+        "ops/discord/schemas/daily-run-index-manifest-v1.schema.json",
+        "ops/discord/DAILY_7_DAY_MACHINE_ARCHIVE_RUNBOOK.md"
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000005",
+      "title": "Narayani source-version certification and A9 Local/Main closeout",
+      "short_title": "Narayani engineering import QA",
+      "status": "IMPORTED_INDEXED_REVIEW_GATES_OPEN",
+      "priority": "HIGH",
+      "category": "ENGINEERING_DOCUMENT_GOVERNANCE",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "google_drive",
+        "file_id": "18M_KYt7U-zqwni2OvE1kcUg3TAyfP45OssdWJgu3ex8",
+        "title": "Source import manifest — 13 files copied, 16 CWO resources linked",
+        "url": "https://docs.google.com/document/d/18M_KYt7U-zqwni2OvE1kcUg3TAyfP45OssdWJgu3ex8/edit"
+      },
+      "why": "Maintain clear, verified lineage between the external Rambazar/Narayani source account and the governed kaksaveksaka project while preventing legacy 2025 models from being mistaken for approved 2026 drawings.",
+      "proposed_first_gate": "Confirm engineer-approved drawing/model revision IDs and independent SHA-256 source-vs-copy equality; register source→copy edges in the existing project file index, owning Local Library and Main Library without duplicates.",
+      "implementation_status": "13_SOURCE_FILES_COPIED_PROVIDER_METADATA_READBACK_PASS;P007_16_DRIVE_LINKS_REGISTERED;SOURCE_SHA256_AND_A9_LIBRARY_ACK_PENDING",
+      "current_boundary": "Never delete old source or replace revised 2026 drawings without engineer QC. No direct claim of byte-hash match or engineering design approval.",
+      "related_canonical_sources": [
+        "ops/data/project-resources.json",
+        "ops/events/daily-ops-events.jsonl",
+        "ops/control/storage-routing-rules.json"
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000006",
+      "title": "Legacy materials/progress/Slack source-of-truth consolidation audit",
+      "short_title": "Legacy-to-CWO event reconciliation",
+      "status": "READ_ONLY_COMPARISON_PENDING",
+      "priority": "HIGH",
+      "category": "A9_AUTHORITY_RECONCILIATION",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Retain legacy material/progress ledgers until exact event/provider/project crosswalk is verified",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://drive.google.com/drive/folders/1-ZPGmjfO5Hw8K0-JOFdZSyx2x12YRUQo"
+      },
+      "why": "Legacy September Nexus JSONL/SQLite and provider events are not comprehensively linked to current CWO event IDs; preserve material-accounting truth and avoid double Slack reminders or duplicate transactions.",
+      "proposed_first_gate": "READ ONLY: compare older FBL/REB event IDs, Slack ProviderEvents, current CWO events and Sheets, then issue fact-level authority matrix and unmigrated-ID list; obtain separate approval before data/schema mutation or legacy chat retirement.",
+      "implementation_status": "LEGACY_LEDGERS_RETAINED_IN_DRIVE;AUDIT_NOT_YET_COMPLETE",
+      "current_boundary": "No independent new ledger, provider send, retirement mutation or replacement of live quantitative Sheets before certified migration.",
+      "related_canonical_sources": [
+        "ops/events/daily-ops-events.jsonl",
+        "ops/data/current-works.json",
+        "ops/CANONICAL_DATA_AUTHORITY.md"
+      ],
+      "recommendation": "Legacy September Nexus JSONL/SQLite and provider events are not comprehensively linked to current CWO event IDs; preserve material-accounting truth and avoid double Slack reminders or duplicate transactions.",
+      "when_to_build": "READ ONLY: compare older FBL/REB event IDs, Slack ProviderEvents, current CWO events and Sheets, then issue fact-level authority matrix and unmigrated-ID list; obtain separate approval before data/schema mutation or legacy chat retirement.",
+      "security_invariants": [
+        "No independent new ledger, provider send, retirement mutation or replacement of live quantitative Sheets before certified migration."
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000007",
+      "title": "Multi-provider archive completeness and optional AI query indexes",
+      "short_title": "AI archive indexes and coverage",
+      "status": "STANDARD_PUBLISHED_IMPLEMENTATION_PARTIAL",
+      "priority": "NEXT_3",
+      "category": "EVIDENCE_ARCHITECTURE",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Pinned archive formats reference",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/controls/archive-formats.html"
+      },
+      "why": "Keep one durable, lossless private provider archive and derive efficient AI search indexes without misclassifying missing Discord originals, archived threads or private Slack history as complete.",
+      "proposed_first_gate": "Certify provider raw source coverage/cursors and 749 Discord original byte mismatches; only then pilot rebuildable SQLite/DuckDB and reversible compressed partitions on private verified data. Treat Parquet as optional.",
+      "implementation_status": "SEVEN_FORMAT_MACHINE_POLICY_AND_WEBSITE_LIVE;JSONL_RECEIPTS_EXIST;PARQUET_DUCKDB_NOT_DEPLOYED",
+      "current_boundary": "Private evidence stays in Drive. No original overwrite, false archive certification or public raw-message publication.",
+      "related_canonical_sources": [
+        "ops/control/storage-routing-rules.json",
+        "ops/control/daily-communication-web-cycle.json",
+        "ops/events/daily-ops-events.jsonl"
+      ],
+      "recommendation": "Keep one durable, lossless private provider archive and derive efficient AI search indexes without misclassifying missing Discord originals, archived threads or private Slack history as complete.",
+      "when_to_build": "Certify provider raw source coverage/cursors and 749 Discord original byte mismatches; only then pilot rebuildable SQLite/DuckDB and reversible compressed partitions on private verified data. Treat Parquet as optional.",
+      "security_invariants": [
+        "Private evidence stays in Drive. No original overwrite, false archive certification or public raw-message publication."
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000008",
+      "title": "Site Operations visual QA and user-centred UX v2",
+      "short_title": "Dashboard UX v2",
+      "status": "CLOSED_TECHNICAL_QA_PASS",
+      "priority": "COMPLETED",
+      "category": "FRONTEND_UX",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Site Operations portfolio",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/site-operations.html"
+      },
+      "why": "The first mobile-friendly style, search and P007 grouped document changes are deployed; validate end-user usability, responsive layouts, PDF previews and permission-gated links across actual browsers.",
+      "proposed_first_gate": "COMPLETED: GitHub Actions browser run 37916264367; branch registry 37916264531; desktop/mobile screenshots and interaction QA. Future design refinements must be separately scoped and versioned.",
+      "implementation_status": "FIELD_DESK_HERO_V2_LIVE;PROJECT_BRIEF_DISCLOSURES;MAP_FIRST_CLUSTERED_TOUCH;CHROME_DESKTOP_MOBILE_QA_PASS;ZERO_AXE_WCAG_AA_DETECTED_VIOLATIONS_FOUR_VIEWS;P007_16_DRIVE_LINKS_PRIVATE_PROVIDER_VERIFIED;PRODUCTION_DEPLOYMENT_VALIDATION_PASS",
+      "current_boundary": "Technical browser/keyboard/automated accessibility smoke and 16 P007 Drive permission checks passed; not blanket certification of all WCAG criteria, account-specific link access, human aesthetic acceptance, or engineering revision approval. Continue to preserve raw evidence outside public GitHub.",
+      "related_canonical_sources": [
+        "site-operations.html",
+        "site-operations/project.html",
+        "ops/data/project-resources.json"
+      ],
+      "recommendation": "Completed: field-engineer-oriented hero, dated state, action-first cards, drawings and deferred history; map-first layout with tap-sized clustered locations and accessible disclosures.",
+      "when_to_build": "Completed on 2026-10-09. A new user-requested design iteration may reopen separately.",
+      "security_invariants": [
+        "Do not show restricted provider messages or original file bytes publicly, and do not present historic received drawings as approved construction versions."
+      ],
+      "qa_evidence": {
+        "run_id": 37916264367,
+        "run_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37916264367",
+        "script_path": "scripts/qa_field_ux_browser.py",
+        "workflow_path": ".github/workflows/field-ux-visual-qa.yml",
+        "browser": "Playwright/Chrome",
+        "viewports": [
+          "1440x900",
+          "390x844"
+        ],
+        "screenshots": 6,
+        "wcag_automated_violations": {
+          "field_desk": 0,
+          "project_brief": 0,
+          "map_desktop": 0,
+          "map_mobile": 0
+        },
+        "mobile_horizontal_overflow": "NONE_DOCUMENT_WIDTH_390PX",
+        "source_evidence_admission": "NOT_MODIFIED",
+        "narayani_drive_links_permissions": "16_OF_16_RESTRICTED_READBACK_PASS",
+        "manual_human_acceptance": "NOT_CLAIMED"
+      }
+    },
+    {
+      "pending_id": "OPS-PEND-000009",
+      "title": "Engineer-confirmed three-day trade reports and daily CWO projection",
+      "short_title": "3-day trade-report replies → verified workboard",
+      "status": "AWAITING_SITE_ENGINEER_REPLIES",
+      "priority": "HIGH",
+      "category": "SITE_FIELD_DATA_RECONCILIATION",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Eight project 3-day engineer reply intake",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/site-operations.html"
+      },
+      "why": "The public field-workboard is an explicit, source-linked projection for 8-10 Oct. Missing yesterday/next-day or crew confirmations must come from each site engineer, not automatic 'UNKNOWN' checklists or assumptions.",
+      "proposed_first_gate": "Collect dated trade rows from the eight existing project Slack tracker threads, confirm author/project/time, admit corrections via the owning private provider records, then update field-three-day-board.json with PRE/POST and release readback. Move tomorrow's plan to current work only when engineering authorization exists.",
+      "recommendation": "Maintain one three-day trade workboard, with clear statuses and source IDs; work trade catalog is vocabulary only. No parallel material, attendance, finance or construction schedule authority.",
+      "when_to_build": "As soon as site engineers provide real replies or a separately approved daily projection adapter is ready.",
+      "implementation_status": "THREE_DAY_PUBLIC_DISPLAY_DEPLOYED;21_TRADE_VOCABULARY_CREATED;8_PROJECT_SLACK_REQUESTS_SENT_AND_PROVIDER_READBACK_PASS;ENGINEER_REPLIES_UNCONFIRMED;AUTO_ADAPTER_NOT_IMPLEMENTED",
+      "current_boundary": "No automatic future-day work assignment, manpower counts, specific PPE/tool readiness assumption, or blanket HOLD. Private Slack/Discord bytes remain gated in Drive. Engineer approval required to lift hold.",
+      "related_canonical_sources": [
+        "ops/data/current-works.json",
+        "ops/data/field-three-day-board.json",
+        "ops/control/field-trade-taxonomy.json",
+        "ops/events/daily-ops-events.jsonl"
+      ],
+      "security_invariants": [
+        "DO_NOT_FABRICATE_TASKS_OR_CREWS",
+        "HOLD_REQUIRES_ENGINEER_RELEASE",
+        "DUPLICATE_MESSAGES_DEDUPED_BY_PROVIDER_IDS",
+        "SOURCE_PROVIDER_PRIVATE"
+      ]
+    }
+  ],
+  "archived_items": [
+    {
+      "archive_id": "OPS-ARCH-000001",
+      "title": "Project Command Center v1 (standalone proposal)",
+      "disposition": "ARCHIVED_SUPERSEDED_BY_A7",
+      "description": "Standalone Project↔Module routing and registry work would duplicate A7. A7 already has project-module routing, ownership, identity/authority and visualization derivation. Any future Operations UI should consume A7 outputs/verified peer-module state only, after the current A7 thread decides.",
+      "original_proposal_url": "https://docs.google.com/document/d/1Mb99EdLinRAiUCgF_0S_aiORGEytCUpEUz4mKRPdEwc/edit",
+      "archive_folder_url": "https://drive.google.com/drive/folders/1L_045jFBc30Gdu3YQaQwqHgyLw9S6xaJ",
+      "owning_repository": "https://github.com/FabinGurung/JP_A7_System_Registry_and_Knowledge_Graph",
+      "future_trigger": "Explicit user request for an Operations-side project cockpit after A7 ownership/routing decisions.",
+      "implementation_status": "SCRAPPED_AS_SEPARATE_INFRASTRUCTURE_PROPOSAL"
+    }
+  ]
+}
