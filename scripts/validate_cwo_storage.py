@@ -47,8 +47,13 @@ assert "CANDIDATES_JSONL" in source and "RUN_RECEIPTS" in source
 assert "INCLUDE_ACTIVE_CHILD_THREADS = True" in source
 # Daily replay: seven full days with stale-cursor backfill.
 assert "REVISIT_DAYS = 7" in source and "BACKFILL_OVERLAP_DAYS = 1" in source
-assert "horizon = datetime.now(timezone.utc) - timedelta(days=REVISIT_DAYS)" in source
-assert "horizon = min(horizon, catchup_start)" in source
+assert "baseline = planned_at - timedelta(days=REVISIT_DAYS)" in source
+assert "overlap_start = cursor_dt - timedelta(days=BACKFILL_OVERLAP_DAYS)" in source
+assert "if overlap_start < cutoff:" in source
+assert 'operator_choice = input("Type COLLECT' in source
+assert 'if operator_choice != "COLLECT":' in source
+assert '"preflight_plan": run_plan' in source
+assert 'record["message_fetch_finished_at_utc"]' in source
 site = Path("controls/storage.html").read_text(encoding="utf-8")
 assert "storage-routing-rules.json" in site and "A9-CWO" in site
 assert 'href="storage.html"' in Path("controls/index.html").read_text(encoding="utf-8")
@@ -86,7 +91,7 @@ for entry in revisions:
 assert pin["notebook_versioning_policy"]["manifest"] == "ops/discord/notebook-versions.json"
 assert "notebook-versions.json" in site
 assert ledger["current_revision"] == notebook["metadata"]["a9_cwo_revision"]["version_id"]
-assert 'progress("Drive: verifying existing A9 Discord archive root")' in source
+assert 'progress("PREFLIGHT: reading Drive state and live Discord parent/active-thread metadata")' in source
 assert '_HEARTBEAT_STOP.wait(20)' in source
 assert 'progress("Discord: BEGIN source' in source
 assert 'progress("FAILED source' in source
