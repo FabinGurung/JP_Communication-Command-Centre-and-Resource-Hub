@@ -96,7 +96,7 @@
       "pending_id": "OPS-PEND-000004",
       "title": "A9-CWO two-channel Discord daily intake activation",
       "short_title": "Discord daily Colab pilot",
-      "status": "NOTEBOOK_READY_PROVIDER_RUN_REQUIRED",
+      "status": "PARTIAL_PROVIDER_RUN_RECOVERY_REQUIRED",
       "priority": "NEXT_OPERATIONAL",
       "category": "COMMUNICATION_INTAKE",
       "owner_module_id": "MOD-OPS-001",
@@ -105,12 +105,12 @@
         "title": "A9-CWO Discord two-channel daily Colab",
         "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
       },
-      "why": "Daily field images and current-work updates arrive via Discord, not Slack alone; currently the daily cycle lacks provider-read Discord evidence.",
-      "recommendation": "First run bounded seven-day catch-up via authorized Discord bot in Colab. Verify attachment SHA/Drive receipt and candidate JSONL, then reconcile with Slack facts by project ID into GitHub before website and Slack summaries.",
-      "when_to_build": "Owner connects existing Discord bot credential in Colab and runs bounded first pilot.",
+      "why": "Two-channel Discord message/attachment data now exists in a provider-verified partial Drive receipt. Media fidelity is unresolved and must not be counted as a completed daily backup.",
+      "recommendation": "Run revision 20261009-004 with identity-encoding request and detailed byte-count/MIME diagnostics, preserve original raw JSONL and unreadced partial cursors, resolve missing media before declaring complete; meanwhile reconcile only accurately classified message facts.",
+      "when_to_build": "Use the next authorized Colab execution, review per-source media mismatch diagnostics and verify new Drive receipt.",
       "proposed_first_gate": "Run two specified channels with View/Read History/Message Content permissions; validate per-channel source counts, image byte receipts, cursor and handoff_current.json.",
-      "implementation_status": "CODE_STAGED_NOT_PROVIDER_EXECUTED",
-      "current_boundary": "No Discord API provider read or Drive upload has been executed by the new notebook; archived threads and embed-only images not covered in v1.",
+      "implementation_status": "FIRST_REAL_DISCORD_COLAB_RUN_COMPLETED_PARTIAL",
+      "current_boundary": "20261009T004444Z finished with 174 new/changed messages, 17 sources PASS, 9 sources PARTIAL and 749 attachment-size mismatch failures. Raw/candidate JSONL and frozen receipt readback succeeded; the full media archive is not closed.",
       "related_canonical_sources": [
         "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
         "ops/control/storage-routing-rules.json",
@@ -122,7 +122,20 @@
         "No credential stored in GitHub, Drive source JSONL or a notebook output",
         "No provider cursor advancement on failed raw or attachment archival",
         "Do not claim provider capture DONE until first real Discord API and Drive readback"
-      ]
+      ],
+      "last_provider_run": {
+        "run_id": "20261009T004444Z",
+        "status": "PARTIAL",
+        "at_npt": "2026-10-09T06:35:34+05:45",
+        "sources": 26,
+        "passed_sources": 17,
+        "partial_sources": 9,
+        "messages_new_or_changed": 174,
+        "attachment_failures": 749,
+        "previously_archived_attachments": 207,
+        "receipt_drive_id": "1gwH1_kGG4kSmfRv3r7DRrPOMGHN_QBrN",
+        "handoff_drive_id": "1QUZRvXuW3Z7z4UD1BkoI_jJD2ZWkZQN4"
+      }
     }
   ],
   "archived_items": [

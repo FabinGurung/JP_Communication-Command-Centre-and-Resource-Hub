@@ -26,6 +26,9 @@ jobs:
       - name: Validate compulsory branch/lane registry
         run: python scripts/validate_branch_registry.py
 
+      - name: Test Discord CDN byte-fidelity diagnostics
+        run: python scripts/test_cwo_media_diagnostics.py
+
       - name: Validate A9-CWO pinned storage and Discord notebook
         run: python scripts/validate_cwo_storage.py
 

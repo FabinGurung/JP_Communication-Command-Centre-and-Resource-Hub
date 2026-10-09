@@ -32,3 +32,7 @@ For A9-CWO Colab edit operations, [`ops/discord/notebook-versions.json`](../disc
 ## Visual memory wall and progress semantics
 
 The [A9-CWO Memory Wall](../../controls/memory-wall.html) is a printable quick-reference poster (job aid) pinned from the Operations home, Control Towers, Storage and Quick Start guide. It states the permanent `YYYYMMDD-NNN` versioning rule and source preservation→machine fact→website→message workflow. **A running cell with repeated transport warnings is not evidence of Discord extraction or Drive archiving.** Revision `20261009-003` adds visible timestamps, 20-second heartbeat and final provider receipt.
+
+## 2026-10-09 partial Discord attachment fidelity gate
+
+Colab receipt `20261009T004444Z` is **PARTIAL**: 26 scoped sources, 174 changed messages, 17 source PASS, 9 source PARTIAL_ATTACHMENTS, and 749 attachment-size mismatch failures. The frozen receipt ID is `1gwH1_kGG4kSmfRv3r7DRrPOMGHN_QBrN`, handoff ID `1QUZRvXuW3Z7z4UD1BkoI_jJD2ZWkZQN4`. These preserve provider evidence, not full original media. The daily cycle must explicitly surface partial intake, never equate 174 raw messages with admitted engineering completion. Use revision `20261009-004` at the permanent Colab link for byte-length/content diagnostic retry; no cursor advance for failed source attachments.

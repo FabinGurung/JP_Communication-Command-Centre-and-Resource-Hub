@@ -58,7 +58,7 @@ ledger = json.loads(Path("ops/discord/notebook-versions.json").read_text(encodin
 assert ledger["schema_version"] == "1.0.0"
 assert ledger["timezone"] == "Asia/Kathmandu"
 assert ledger["numbering"] == "YYYYMMDD-NNN"
-assert ledger["current_revision"] == "20261009-003"
+assert ledger["current_revision"] == "20261009-004"
 assert ledger["stable_working_path"] == str(notebook_path)
 assert ledger["drive_native_same_id"].startswith("NOT_APPLICABLE")
 revisions = ledger["versions"]
@@ -81,13 +81,17 @@ for entry in revisions:
         assert entry["status"] in {"ARCHIVED_RETROACTIVE", "ARCHIVED_PRE"}
 assert pin["notebook_versioning_policy"]["manifest"] == "ops/discord/notebook-versions.json"
 assert "notebook-versions.json" in site
-assert "20261009-003" == notebook["metadata"]["a9_cwo_revision"]["version_id"]
+assert "20261009-004" == notebook["metadata"]["a9_cwo_revision"]["version_id"]
 assert 'progress("Drive: verifying existing A9 Discord archive root")' in source
 assert '_HEARTBEAT_STOP.wait(20)' in source
 assert 'progress("Discord: BEGIN source' in source
 assert 'progress("FAILED source' in source
 assert 'progress("FINAL RECEIPT:' in source
 assert 'finally:' in source
+assert '"Accept-Encoding": "identity"' in source
+assert '"Attachment size mismatch, id=%s declared=%d observed=%d "' in source
+assert "MEDIA FAILURE DETAIL" in source
+assert "scripts/test_cwo_media_diagnostics.py" in Path(".github/workflows/daily-ops-branch-preview.yml").read_text(encoding="utf-8")
 assert Path("controls/memory-wall.html").exists()
 assert 'notebook-versions.json' in Path("controls/memory-wall.html").read_text(encoding="utf-8")
 assert 'memory-wall.html' in Path("controls/index.html").read_text(encoding="utf-8")
