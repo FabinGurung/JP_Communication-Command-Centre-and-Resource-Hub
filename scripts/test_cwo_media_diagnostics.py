@@ -8,7 +8,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 nb=json.loads(Path("ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb").read_text())
-code="".join(nb["cells"][2]["source"])
+collector_cell = next(cell for cell in nb["cells"] if cell.get("id") == "a9-cwo-c02-collector")
+code = "".join(collector_cell["source"])
 tree=ast.parse(code)
 func=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="media_archive")
 
