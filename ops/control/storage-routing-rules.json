@@ -181,5 +181,76 @@
         "stable_notebook_cell_id": "a9-cwo-c03-cdn-probe"
       }
     ]
+  },
+  "archive_format_standard": {
+    "standard_id": "A9-CWO-MULTI_PROVIDER_ARCHIVE-FORMAT-v1.0",
+    "effective_date_npt": "2026-10-09",
+    "scope": "Slack, Discord and explicitly authorized future provider adapters; CAD/PDF/ETABS/SKP and other project binaries remain Drive-hosted.",
+    "status": "ACTIVE_TARGET_STANDARD_PARTIAL_PROVIDER_COVERAGE",
+    "canonical_location": "ops/control/storage-routing-rules.json#archive_format_standard",
+    "formats": [
+      {
+        "format": "JSONL / NDJSON (UTF-8)",
+        "role": "Source-granular, normalized append-only event exchange; preserve provider message revisions and deletions, never fabricated.",
+        "authority": "PRIVATE_DRIVE_RAW_AND_EVENT_LEDGER"
+      },
+      {
+        "format": "Original binary bytes + SHA-256",
+        "role": "PDF, DWG, SKP, E2K, photos and message attachments; retain provider identity, copy lineage and byte-integrity evidence.",
+        "authority": "PRIVATE_GOOGLE_DRIVE"
+      },
+      {
+        "format": "JSON manifests and receipts",
+        "role": "Account, workspace, channel, thread, file, cursor, revision, source/destination IDs, MIME, checksums, failure states and run PRE/POST/ACK.",
+        "authority": "PRIVATE_GOOGLE_DRIVE"
+      },
+      {
+        "format": "Parquet",
+        "role": "Optional columnar analytical projection from verified JSONL; not a new authority.",
+        "authority": "DERIVED_QUERY_CACHE"
+      },
+      {
+        "format": "SQLite / DuckDB",
+        "role": "Rebuildable fast indexed lookup, FK joins, corrections, and field/company/project query surfaces.",
+        "authority": "DERIVED_QUERY_INDEX"
+      },
+      {
+        "format": "Compressed historical partitions",
+        "role": "Versioned historical ranges stored with reversible decompression; preserve byte-identical original recoverability and hash manifest.",
+        "authority": "PRIVATE_ARCHIVE_DERIVED_PACK"
+      },
+      {
+        "format": "JSON Schema / SQL DDL",
+        "role": "Provider envelope, project/company PK/FK, evidence status, provenance, typed material and readiness state, and validation rules.",
+        "authority": "VERSIONED_CODE_AND_CONTROL"
+      }
+    ],
+    "minimal_envelope": [
+      "provider",
+      "provider_account_id",
+      "workspace_or_guild_id",
+      "channel_id",
+      "thread_id",
+      "message_id",
+      "message_revision",
+      "source_timestamp_utc",
+      "capture_timestamp_utc",
+      "project_id",
+      "company_id",
+      "raw_source_receipt_id",
+      "attachment_sha256",
+      "evidence_class",
+      "admission_status",
+      "correction_of"
+    ],
+    "rules": [
+      "Original provider evidence in gated Drive, not in the public GitHub repository.",
+      "Public website shows public-safe reconciled facts and authorized Drive links only; Drive permissions remain the access control.",
+      "One canonical raw provider event ID and immutable correction chain; derived indexes must not duplicate source transactions.",
+      "Unknown remains unknown; stock, delivered, ordered and consumed are distinct; a photograph is not proof of DONE.",
+      "Incomplete archived-thread coverage, missing attachments, unverified bytes and provider cursor gaps remain explicitly partial.",
+      "Parquet, DuckDB and compressed partitions are future-optional derived artifacts, not already-deployed features.",
+      "PRE / POST / ACK, stable file IDs, SHA checks when available, and provider readback are required for governed mutations."
+    ]
   }
 }
