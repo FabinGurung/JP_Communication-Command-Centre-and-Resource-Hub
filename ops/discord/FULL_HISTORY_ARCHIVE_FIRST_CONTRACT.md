@@ -1,6 +1,6 @@
 # A9-CWO — Full Discord History, Drive Archive First (v0.1)
 
-**Effective:** 2026-10-09 NPT. **Code authority:** notebook `20261009-012`, same permanent GitHub-backed Colab URL. **Provider execution:** NOT RUN. Historic C02 receipt remains PARTIAL; this document is not source-capture evidence.
+**Effective:** 2026-10-09 NPT. **Code authority:** notebook `20261009-013`, same permanent GitHub-backed Colab URL. **Provider execution:** NOT RUN. Historic C02 receipt remains PARTIAL; this document is not source-capture evidence.
 
 ## Intent and scope
 
@@ -52,3 +52,6 @@ Existing `A9_CWO_DAILY_TWO_CHANNELS` remains separately intact. Neither channel 
 This is a **code and gate implementation**, not a provider-run result. No C06/C07/C08/C09 live outputs are verified as of this revision. The older C02 evidence consists of 26 two-parent/active-thread sources, 174 new/changed messages and 749 failed native media checks; it is not a complete historical run. C02 still scans only its registered two parents; guild-wide recurring delta capture must be extended separately. Any such gap remains explicit and blocks a full-complete claim.
 
 Do not run publication or outgoing Slack updates based merely on this specification or static CI. The correct trigger is a verified authoritative Drive receipt plus downstream permissions.
+
+
+**Integrity hardening (revision 013):** A previously stored Drive attachment is never classified as an original merely because its size equals Discord's declared original size. A fresh authorized provider download must satisfy declared size and SHA-256 parity with complete Drive readback; mismatches remain open debt. This is code policy, not proof that the live provider run has occurred.
