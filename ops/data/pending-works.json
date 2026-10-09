@@ -271,8 +271,8 @@
       "pending_id": "OPS-PEND-000008",
       "title": "Site Operations visual QA and user-centred UX v2",
       "short_title": "Dashboard UX v2",
-      "status": "INITIAL_REDESIGN_DEPLOYED_VISUAL_QA_OPEN",
-      "priority": "NEXT_3",
+      "status": "CLOSED_TECHNICAL_QA_PASS",
+      "priority": "COMPLETED",
       "category": "FRONTEND_UX",
       "owner_module_id": "MOD-OPS-001",
       "proposal": {
@@ -282,19 +282,41 @@
         "supporting_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/site-operations.html"
       },
       "why": "The first mobile-friendly style, search and P007 grouped document changes are deployed; validate end-user usability, responsive layouts, PDF previews and permission-gated links across actual browsers.",
-      "proposed_first_gate": "Desktop/mobile visual and keyboard accessibility smoke test plus Drive-link access test for Fishtail/Rohini members; fix any issues through authorized branch, CI and release readback.",
-      "implementation_status": "SITE_HOME_RESTYLE_SEARCH_QUICKLINKS_AND_P007_RESOURCE_GROUPING_DEPLOYED;BROWSER_VISUAL_READBACK_UNVERIFIED",
-      "current_boundary": "Do not show restricted provider messages or original file bytes publicly, and do not present historic received drawings as approved construction versions.",
+      "proposed_first_gate": "COMPLETED: GitHub Actions browser run 37916264367; branch registry 37916264531; desktop/mobile screenshots and interaction QA. Future design refinements must be separately scoped and versioned.",
+      "implementation_status": "FIELD_DESK_HERO_V2_LIVE;PROJECT_BRIEF_DISCLOSURES;MAP_FIRST_CLUSTERED_TOUCH;CHROME_DESKTOP_MOBILE_QA_PASS;ZERO_AXE_WCAG_AA_DETECTED_VIOLATIONS_FOUR_VIEWS;P007_16_DRIVE_LINKS_PRIVATE_PROVIDER_VERIFIED;PRODUCTION_DEPLOYMENT_VALIDATION_PASS",
+      "current_boundary": "Technical browser/keyboard/automated accessibility smoke and 16 P007 Drive permission checks passed; not blanket certification of all WCAG criteria, account-specific link access, human aesthetic acceptance, or engineering revision approval. Continue to preserve raw evidence outside public GitHub.",
       "related_canonical_sources": [
         "site-operations.html",
         "site-operations/project.html",
         "ops/data/project-resources.json"
       ],
-      "recommendation": "The first mobile-friendly style, search and P007 grouped document changes are deployed; validate end-user usability, responsive layouts, PDF previews and permission-gated links across actual browsers.",
-      "when_to_build": "Desktop/mobile visual and keyboard accessibility smoke test plus Drive-link access test for Fishtail/Rohini members; fix any issues through authorized branch, CI and release readback.",
+      "recommendation": "Completed: field-engineer-oriented hero, dated state, action-first cards, drawings and deferred history; map-first layout with tap-sized clustered locations and accessible disclosures.",
+      "when_to_build": "Completed on 2026-10-09. A new user-requested design iteration may reopen separately.",
       "security_invariants": [
         "Do not show restricted provider messages or original file bytes publicly, and do not present historic received drawings as approved construction versions."
-      ]
+      ],
+      "qa_evidence": {
+        "run_id": 37916264367,
+        "run_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37916264367",
+        "script_path": "scripts/qa_field_ux_browser.py",
+        "workflow_path": ".github/workflows/field-ux-visual-qa.yml",
+        "browser": "Playwright/Chrome",
+        "viewports": [
+          "1440x900",
+          "390x844"
+        ],
+        "screenshots": 6,
+        "wcag_automated_violations": {
+          "field_desk": 0,
+          "project_brief": 0,
+          "map_desktop": 0,
+          "map_mobile": 0
+        },
+        "mobile_horizontal_overflow": "NONE_DOCUMENT_WIDTH_390PX",
+        "source_evidence_admission": "NOT_MODIFIED",
+        "narayani_drive_links_permissions": "16_OF_16_RESTRICTED_READBACK_PASS",
+        "manual_human_acceptance": "NOT_CLAIMED"
+      }
     }
   ],
   "archived_items": [
