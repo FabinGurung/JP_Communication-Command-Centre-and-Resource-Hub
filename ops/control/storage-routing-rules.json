@@ -106,7 +106,7 @@
     ],
     "collector": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
     "runtime": "USER_RUNS_GOOGLE_COLAB_BEFORE_DAILY_A9_CWO",
-    "status": "R012_SOURCE_READY_HISTORICAL_FULL_GUILD_NOT_RUN_PRIOR_TWO_CHANNEL_PARTIAL",
+    "status": "PROVIDER_PARTIAL_R012_FULL_HISTORY_CODE_READY_BUT_NOT_RUN",
     "scope": "Only these two parent channels and currently active child threads belonging to them; not a server-wide archive",
     "archive_root_drive_id": "1nTFR9xQXNwgkWRrAq1jJw7ph6rKg3C9X",
     "handoff": "A9_CWO_DAILY_TWO_CHANNELS/handoff_current.json (created only after user executes notebook)",
