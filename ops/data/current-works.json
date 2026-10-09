@@ -18,24 +18,24 @@
       "display_name": "14 Bishal Paija",
       "contractor": "Rohini Engineering and Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
-        "source_cutoff": "2026-10-07T17:41:56+05:45",
+        "last_reconciled_at": "2026-10-09T09:50:00+05:45",
+        "source_cutoff": "2026-10-09T07:54:30+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "CURRENT"
+          "slack": "PENDING"
         },
         "todays_work": [
           {
             "work_id": "WORK-P001-20261007-SITE-STATUS",
-            "activity": "Carry-forward from 7 Oct (completion not reverified): Current site status follow-up: cleaning closure + shuttering/RCC/jhaller work",
+            "activity": "9 Oct carry-forward: site condition, crack/anchorage engineering assessment, external plumbing routing, cleaning closure, and crew status; completion unverified.",
             "location": "Project site",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
@@ -141,6 +141,20 @@
             ],
             "observed_at": "2026-10-07T17:41:56+05:45",
             "conflict_state": "NONE"
+          },
+          {
+            "blocker_id": "BLK-P001-20261009-DISCORD-FOLLOWUP",
+            "work_id": "WORK-P001-20261007-SITE-STATUS",
+            "status": "NEEDS_INPUT",
+            "blocker": "External pipe-concealment/detail beyond structural grid remains a design query, not permission to extend walls or alter framing.",
+            "responsible": "Responsible engineer / project site lead",
+            "target_resolution_at": null,
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1548906581121306635/1556465865401045012",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ],
+            "observed_at": "2026-10-09",
+            "conflict_state": "NONE"
           }
         ],
         "lookahead": [],
@@ -235,6 +249,20 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C2DJNGARW/p1791325023326849"
             ]
+          },
+          {
+            "evidence_id": "EVID-P001-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P001-20261007-SITE-STATUS",
+            "provider": "DISCORD",
+            "provider_object_id": "1556465865401045012",
+            "evidence_type": "UNRESOLVED_PLUMBING_DESIGN_QUERY",
+            "evidence_url": "https://discord.com/channels/682670494658330644/1548906581121306635/1556465865401045012",
+            "observed_at": "2026-10-09",
+            "note": "Field asked how to conceal plumbing pipes near walls outside structural grid; design/engineer disposition not established. Evidence from 7-day capture; original attachment certification remains PARTIAL (749 mismatches across entire scope).",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1548906581121306635/1556465865401045012",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ]
           }
         ]
       }
@@ -248,24 +276,24 @@
       "display_name": "17 Samir Man Ghubaju",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "UNRESOLVED",
-        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
-        "source_cutoff": "2026-10-07T17:41:56+05:45",
+        "last_reconciled_at": "2026-10-09T09:50:00+05:45",
+        "source_cutoff": "2026-10-09T07:54:30+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "CURRENT"
+          "slack": "PENDING"
         },
         "todays_work": [
           {
             "work_id": "WORK-P002-20261007-DUCT-LINTEL-DOOR",
-            "activity": "Carry-forward from 7 Oct (completion not reverified): Duct/lintel and door coordination; reconcile remaining cement/brick/electrical questions",
+            "activity": "9 Oct carry-forward: beam shear reinforcement/shuttering progress, duct-lintel/door fit, brick bill and cement-allocation clarification; completion unverified.",
             "location": "Project site / duct opening",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
@@ -422,7 +450,20 @@
             "conflict_state": "UNRESOLVED"
           }
         ],
-        "progress": [],
+        "progress": [
+          {
+            "progress_event_id": "PROG-P002-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P002-20261007-DUCT-LINTEL-DOOR",
+            "status": "ONGOING",
+            "note": "Beam shear reinforcement fabrication and shuttering were reported in progress during the 7-day Discord window, not completed.",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1502154332878016673/1556525226144043058",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ],
+            "observed_at": "2026-10-09",
+            "conflict_state": "NONE"
+          }
+        ],
         "blockers": [
           {
             "blocker_id": "BLK-P002-20261002-BRICK-QTY-BILL",
@@ -626,6 +667,20 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C13SMN1QX/p1791325024943769"
             ]
+          },
+          {
+            "evidence_id": "EVID-P002-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P002-20261007-DUCT-LINTEL-DOOR",
+            "provider": "DISCORD",
+            "provider_object_id": "1556525226144043058",
+            "evidence_type": "FIELD_WORK_IN_PROGRESS_WITH_MEDIA",
+            "evidence_url": "https://discord.com/channels/682670494658330644/1502154332878016673/1556525226144043058",
+            "observed_at": "2026-10-09",
+            "note": "5 Oct Discord site update states beam shear reinforcement making in progress; later shuttering updates; no completion or QA sign-off evidenced. Evidence from 7-day capture; original attachment certification remains PARTIAL (749 mismatches across entire scope).",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1502154332878016673/1556525226144043058",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ]
           }
         ]
       }
@@ -639,24 +694,24 @@
       "display_name": "13 Hari Baral",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "overall_readiness": "READY_WITH_CONDITION",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
-        "source_cutoff": "2026-10-07T17:41:56+05:45",
+        "last_reconciled_at": "2026-10-09T09:50:00+05:45",
+        "source_cutoff": "2026-10-09T07:54:30+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "CURRENT"
+          "slack": "PENDING"
         },
         "todays_work": [
           {
             "work_id": "WORK-P003-20261007-FALSE-CEILING-ELECTRICAL",
-            "activity": "Carry-forward from 7 Oct (completion not reverified): Complete remaining washroom false ceiling and electrical bulb openings; verify other trade balance",
+            "activity": "9 Oct carry-forward: remaining washroom false ceiling and electrical bulb openings; verify railing/carpentry and UPVC measurement follow-through.",
             "location": "Project site",
             "execution_status": "PARTIAL",
             "readiness": {
@@ -799,6 +854,18 @@
             ],
             "observed_at": "2026-10-06T16:57:34+05:45",
             "conflict_state": "NONE"
+          },
+          {
+            "progress_event_id": "PROG-P003-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P003-20261007-FALSE-CEILING-ELECTRICAL",
+            "status": "ONGOING",
+            "note": "Painting and carpentry were reported ongoing and UPVC window measurements noted on 5 Oct; no completed UPVC installation evidenced.",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1501506202809532456/1556556059706130492",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ],
+            "observed_at": "2026-10-09",
+            "conflict_state": "NONE"
           }
         ],
         "blockers": [],
@@ -895,6 +962,20 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791325026262279"
             ]
+          },
+          {
+            "evidence_id": "EVID-P003-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P003-20261007-FALSE-CEILING-ELECTRICAL",
+            "provider": "DISCORD",
+            "provider_object_id": "1556556059706130492",
+            "evidence_type": "FIELD_FINISHES_AND_UPVC_MEASUREMENT",
+            "evidence_url": "https://discord.com/channels/682670494658330644/1501506202809532456/1556556059706130492",
+            "observed_at": "2026-10-09",
+            "note": "Discord 2–5 Oct messages document painting/carpentry/compound railing in progress and UPVC window measurement. Later Slack 6 Oct notes unfinished washroom ceiling and lamp openings. Evidence from 7-day capture; original attachment certification remains PARTIAL (749 mismatches across entire scope).",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1501506202809532456/1556556059706130492",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ]
           }
         ]
       }
@@ -908,24 +989,24 @@
       "display_name": "16 Yamuna Pun Adai",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "overall_readiness": "HOLD",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
-        "source_cutoff": "2026-10-07T17:41:56+05:45",
+        "last_reconciled_at": "2026-10-09T09:50:00+05:45",
+        "source_cutoff": "2026-10-09T07:54:30+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "CURRENT"
+          "slack": "PENDING"
         },
         "todays_work": [
           {
             "work_id": "WORK-P004-20261007-DEFECT-QUALITY",
-            "activity": "Carry-forward from 7 Oct (completion not reverified): Defect/leakage/embedded-bamboo quality inspection and remediation planning",
+            "activity": "9 Oct maintenance HOLD: inspect parapet/railing cracking, embedded bamboo, waterproofing/leakage concerns; engineer to document remedial method and acceptance; no repair completion verified.",
             "location": "Affected wall / waterproofing-parquet interface",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
@@ -1123,24 +1204,24 @@
       "display_name": "30 Sabitri Giri / Dipti Giri",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "overall_readiness": "READY_WITH_CONDITION",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
-        "source_cutoff": "2026-10-07T17:41:56+05:45",
+        "last_reconciled_at": "2026-10-09T09:50:00+05:45",
+        "source_cutoff": "2026-10-09T07:54:30+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "CURRENT"
+          "slack": "PENDING"
         },
         "todays_work": [
           {
             "work_id": "WORK-P005-20261007-SLAB-MATERIALS",
-            "activity": "Carry-forward from 7 Oct (completion not reverified): 2nd-floor slab material order follow-up and execution readiness",
+            "activity": "9 Oct carry-forward: centring status, second-floor slab-material receipt/qty, crew and readiness; front design query requires responsible review before treating as approved.",
             "location": "Second-floor slab",
             "execution_status": "PLAN",
             "readiness": {
@@ -1236,7 +1317,20 @@
             "conflict_state": "NONE"
           }
         ],
-        "progress": [],
+        "progress": [
+          {
+            "progress_event_id": "PROG-P005-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P005-20261007-SLAB-MATERIALS",
+            "status": "ONGOING",
+            "note": "Centring was reported ongoing 6 Oct; casting or engineer readiness was not reported.",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1503183104397803570/1556982880108945518",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ],
+            "observed_at": "2026-10-09",
+            "conflict_state": "NONE"
+          }
+        ],
         "blockers": [
           {
             "blocker_id": "BLK-P005-20261006-SLAB-MATERIAL-ORDER",
@@ -1331,6 +1425,20 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791325029512199"
             ]
+          },
+          {
+            "evidence_id": "EVID-P005-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P005-20261007-SLAB-MATERIALS",
+            "provider": "DISCORD",
+            "provider_object_id": "1556982880108945518",
+            "evidence_type": "CENTRING_WORK_AND_FRONT_DESIGN_QUERY",
+            "evidence_url": "https://discord.com/channels/682670494658330644/1503183104397803570/1556982880108945518",
+            "observed_at": "2026-10-09",
+            "note": "6 Oct Discord update reports centring in progress; 8 Oct references front design without engineering acceptance. Slack reports second-floor slab materials ordered, with delivery unverified. Evidence from 7-day capture; original attachment certification remains PARTIAL (749 mismatches across entire scope).",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1503183104397803570/1556982880108945518",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ]
           }
         ]
       }
@@ -1344,24 +1452,24 @@
       "display_name": "31 Sharada Adhikari",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "overall_readiness": "HOLD",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-09T08:41:22+05:45",
-        "source_cutoff": "2026-10-08T12:06:52+05:45",
+        "last_reconciled_at": "2026-10-09T09:50:00+05:45",
+        "source_cutoff": "2026-10-09T07:54:30+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "CURRENT"
+          "slack": "PENDING"
         },
         "todays_work": [
           {
             "work_id": "WORK-P006-20261007-PLUMBING-UPVC",
-            "activity": "Carry-forward from 7 Oct (completion not reverified): Kitchen plumbing + UPVC coordination; resolve toilet/plaster/electrical holds",
+            "activity": "9 Oct carry-forward: external plaster and kitchen plumbing site updates, pipe repair/kitchen-seepage checks, toilet door/UPVC correction, waterproofing and false-ceiling electrical decisions.",
             "location": "Kitchen / doors and windows / toilet coordination",
             "execution_status": "ONGOING",
             "readiness": {
@@ -1497,6 +1605,18 @@
             ],
             "observed_at": "2026-10-04",
             "conflict_state": "NONE"
+          },
+          {
+            "progress_event_id": "PROG-P006-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P006-20261007-PLUMBING-UPVC",
+            "status": "ONGOING",
+            "note": "External plastering reported in progress on 8 Oct; kitchen plumbing and scaffolding reported 6 Oct. No QC acceptance or completion inferred.",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1501419594361999410/1557630511252373564",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ],
+            "observed_at": "2026-10-09",
+            "conflict_state": "NONE"
           }
         ],
         "blockers": [
@@ -1538,6 +1658,20 @@
               "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791001469932479"
             ],
             "observed_at": "2026-10-03T10:09:29+05:45",
+            "conflict_state": "NONE"
+          },
+          {
+            "blocker_id": "BLK-P006-20261009-DISCORD-FOLLOWUP",
+            "work_id": "WORK-P006-20261007-PLUMBING-UPVC",
+            "status": "NEEDS_INPUT",
+            "blocker": "Kitchen bottom-slab seepage was raised as a question in the Discord photo thread; responsible site inspection and leak/no-leak verification are still required.",
+            "responsible": "Responsible engineer / project site lead",
+            "target_resolution_at": null,
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1501419594361999410/1557630511252373564",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ],
+            "observed_at": "2026-10-09",
             "conflict_state": "NONE"
           }
         ],
@@ -1684,6 +1818,20 @@
             "source_refs": [
               "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791325031182949"
             ]
+          },
+          {
+            "evidence_id": "EVID-P006-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P006-20261007-PLUMBING-UPVC",
+            "provider": "DISCORD",
+            "provider_object_id": "1557630511252373564",
+            "evidence_type": "EXTERNAL_PLASTER_AND_QUALITY_QUERIES",
+            "evidence_url": "https://discord.com/channels/682670494658330644/1501419594361999410/1557630511252373564",
+            "observed_at": "2026-10-09",
+            "note": "8 Oct Discord update reports external plastering; earlier kitchen plumbing/scaffolding. 5 Oct messages ask about kitchen bottom-slab seepage, pipe break/repair, waterproofing and tile/granite measurements; historical dated photo batches are not 5 Oct completion. Evidence from 7-day capture; original attachment certification remains PARTIAL (749 mismatches across entire scope).",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1501419594361999410/1557630511252373564",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ]
           }
         ]
       }
@@ -1697,24 +1845,24 @@
       "display_name": "15 Narayani Parajuli",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "UNRESOLVED",
-        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
-        "source_cutoff": "2026-10-07T17:41:56+05:45",
+        "last_reconciled_at": "2026-10-09T09:50:00+05:45",
+        "source_cutoff": "2026-10-09T07:54:30+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "CURRENT"
+          "slack": "PENDING"
         },
         "todays_work": [
           {
             "work_id": "WORK-P007-20261007-FOOTING-CEMENT-ALLOC",
-            "activity": "Footing/column phase: reconcile conflicting OPC totals/grids; engineering and plumbing coordination",
+            "activity": "9 Oct carry-forward: stone masonry and footing/column stage; reconcile OPC usage (86 grid sum vs 78/101 statements) and obtain engineer decisions on shear key, CF1 and veranda/column details.",
             "location": "Foundation / grids H1,H2,H3,H6,I2,I3,G1,G3,G6,D7,E7",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
@@ -1905,6 +2053,18 @@
             ],
             "observed_at": "2026-10-06T10:44:10+05:45",
             "conflict_state": "NONE"
+          },
+          {
+            "progress_event_id": "PROG-P007-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P007-20261007-FOOTING-CEMENT-ALLOC",
+            "status": "ONGOING",
+            "note": "Stone masonry was reported in progress on 8 Oct; earlier footing casting photographs do not certify engineer acceptance.",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1502155951711719475/1557696291457339402",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ],
+            "observed_at": "2026-10-09",
+            "conflict_state": "NONE"
           }
         ],
         "blockers": [
@@ -2090,6 +2250,20 @@
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791356719272659",
               "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791357548212629"
             ]
+          },
+          {
+            "evidence_id": "EVID-P007-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P007-20261007-FOOTING-CEMENT-ALLOC",
+            "provider": "DISCORD",
+            "provider_object_id": "1557696291457339402",
+            "evidence_type": "STONE_MASONRY_IN_PROGRESS_WITH_FOOTING_HISTORY",
+            "evidence_url": "https://discord.com/channels/682670494658330644/1502155951711719475/1557696291457339402",
+            "observed_at": "2026-10-09",
+            "note": "8 Oct Discord reports stone masonry in progress; earlier footing casting and shuttering updates. Oct 7 conflicting cement grid totals remain unresolved, and Oct 8 veranda/wall-column discussions require designer/engineer disposition. Evidence from 7-day capture; original attachment certification remains PARTIAL (749 mismatches across entire scope).",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1502155951711719475/1557696291457339402",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ]
           }
         ]
       }
@@ -2103,24 +2277,24 @@
       "display_name": "Kharika Paudel",
       "contractor": "Fishtail Builders Pvt Ltd",
       "daily_ops": {
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "overall_readiness": "UNSET",
         "readiness_summary": {
           "ready": 0,
           "total": 6
         },
         "conflict_state": "NONE",
-        "last_reconciled_at": "2026-10-08T06:08:00+05:45",
-        "source_cutoff": "2026-10-07T17:41:56+05:45",
+        "last_reconciled_at": "2026-10-09T09:50:00+05:45",
+        "source_cutoff": "2026-10-09T07:54:30+05:45",
         "projection_status": {
           "google_sheets": "PENDING",
           "website": "PENDING",
-          "slack": "CURRENT"
+          "slack": "PENDING"
         },
         "todays_work": [
           {
             "work_id": "WORK-P020-20261007-SLAB-PLASTER",
-            "activity": "Carry-forward from 7 Oct (completion not reverified): Shuttering/slab checks + underground water-tank plaster planning",
+            "activity": "9 Oct carry-forward: shuttering status, reinforcement/secondary-beam/cantilever and shaft checks, U/G tank-plaster planning, engineer approval of relevant details.",
             "location": "Project site / slab, columns and underground water tank",
             "execution_status": "NEEDS_INPUT",
             "readiness": {
@@ -2306,6 +2480,18 @@
             ],
             "observed_at": "2026-10-03T13:22:11+05:45",
             "conflict_state": "NONE"
+          },
+          {
+            "progress_event_id": "PROG-P020-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P020-20261007-SLAB-PLASTER",
+            "status": "ONGOING",
+            "note": "Shuttering was reported ongoing as recently as 8 Oct; no approval or completion demonstrated.",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1502093475984965835/1557551951493726280",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
+            ],
+            "observed_at": "2026-10-09",
+            "conflict_state": "NONE"
           }
         ],
         "blockers": [
@@ -2485,6 +2671,20 @@
             "note": "Concise 7-Oct Daily Ops tracker sent as a new top-level message; field reply pending at send-time readback.",
             "source_refs": [
               "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791325034831649"
+            ]
+          },
+          {
+            "evidence_id": "EVID-P020-20261009-DISCORD-WEEKLY",
+            "work_id": "WORK-P020-20261007-SLAB-PLASTER",
+            "provider": "DISCORD",
+            "provider_object_id": "1557551951493726280",
+            "evidence_type": "SHUTTERING_IN_PROGRESS_CURING_REQUEST",
+            "evidence_url": "https://discord.com/channels/682670494658330644/1502093475984965835/1557551951493726280",
+            "observed_at": "2026-10-09",
+            "note": "8 Oct Discord reports shuttering ongoing; Oct 5 curing reminder is a requested action, not proof of curing. Slack has unresolved cantilever, secondary beam, stirrup and west duct queries. Evidence from 7-day capture; original attachment certification remains PARTIAL (749 mismatches across entire scope).",
+            "source_refs": [
+              "https://discord.com/channels/682670494658330644/1502093475984965835/1557551951493726280",
+              "https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view"
             ]
           }
         ]
