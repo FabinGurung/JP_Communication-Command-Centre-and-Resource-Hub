@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "registry_id": "OPS-PENDING-WORK-001",
-  "updated": "2026-10-08",
+  "updated": "2026-10-09",
   "timezone": "Asia/Kathmandu",
   "authority": "Operations repository planning registry. Entries are pending decisions/work, not completed implementation claims.",
   "items": [
@@ -106,11 +106,11 @@
         "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
       },
       "why": "Two-channel Discord message/attachment data now exists in a provider-verified partial Drive receipt. Media fidelity is unresolved and must not be counted as a completed daily backup.",
-      "recommendation": "Run revision 20261009-004 with identity-encoding request and detailed byte-count/MIME diagnostics, preserve original raw JSONL and unreadced partial cursors, resolve missing media before declaring complete; meanwhile reconcile only accurately classified message facts.",
+      "recommendation": "Run published notebook revision 20261009-006 in Colab: C01 SETUP then C03 CDN PROBE only. Evaluate one failed attachment's refreshed Discord source_url and proxy_url response bytes/dimensions/hash. Do not rerun C02, relax original-byte certification, or advance failed-source cursors until the mismatch is resolved.",
       "when_to_build": "Use the next authorized Colab execution, review per-source media mismatch diagnostics and verify new Drive receipt.",
-      "proposed_first_gate": "Run two specified channels with View/Read History/Message Content permissions; validate per-channel source counts, image byte receipts, cursor and handoff_current.json.",
-      "implementation_status": "FIRST_REAL_DISCORD_COLAB_RUN_COMPLETED_PARTIAL",
-      "current_boundary": "20261009T004444Z finished with 174 new/changed messages, 17 sources PASS, 9 sources PARTIAL and 749 attachment-size mismatch failures. Raw/candidate JSONL and frozen receipt readback succeeded; the full media archive is not closed.",
+      "proposed_first_gate": "Read frozen receipt 1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3; run C01 → C03 without C02; compare source and proxy byte fidelity; retain PARTIAL until evidence proves completeness.",
+      "implementation_status": "TWO_PARTIAL_PROVIDER_RUNS_VERIFIED_C03_PUBLISHED_EXECUTION_UNVERIFIED",
+      "current_boundary": "Latest provider run 20261009T020256Z: PARTIAL, 26 sources (17 PASS, 9 PARTIAL_ATTACHMENTS), 174 new/changed messages, 749 attachment size mismatches, 207 previously archived attachments. C03 is published in revision 20261009-006; no provider-backed C03 execution result was found at reconciliation on 2026-10-09. Next: user executes C01 then C03; inspect sanitized RESULT output before any fix or C02 retry.",
       "related_canonical_sources": [
         "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
         "ops/control/storage-routing-rules.json",
@@ -124,17 +124,25 @@
         "Do not claim provider capture DONE until first real Discord API and Drive readback"
       ],
       "last_provider_run": {
-        "run_id": "20261009T004444Z",
+        "run_id": "20261009T020256Z",
         "status": "PARTIAL",
-        "at_npt": "2026-10-09T06:35:34+05:45",
+        "at_npt": "2026-10-09T07:54:30+05:45",
         "sources": 26,
         "passed_sources": 17,
         "partial_sources": 9,
         "messages_new_or_changed": 174,
         "attachment_failures": 749,
         "previously_archived_attachments": 207,
-        "receipt_drive_id": "1gwH1_kGG4kSmfRv3r7DRrPOMGHN_QBrN",
+        "receipt_drive_id": "1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3",
         "handoff_drive_id": "1QUZRvXuW3Z7z4UD1BkoI_jJD2ZWkZQN4"
+      },
+      "probe": {
+        "cell_id": "a9-cwo-c03-cdn-probe",
+        "revision": "20261009-006",
+        "published": true,
+        "provider_execution_status": "UNVERIFIED",
+        "expected_user_action": "C01_THEN_C03_ONLY",
+        "full_collector_rerun_required": false
       }
     }
   ],
