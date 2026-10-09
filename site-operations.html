@@ -15,7 +15,35 @@
     .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);transition:.15s transform,.15s border-color}.card:hover{transform:translateY(-1px);border-color:#b2ccff}.card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.card h3{font-size:16px;margin:0 0 4px}.code{font-size:11px;color:var(--muted)}.badge{border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:10px;font-weight:800;white-space:nowrap;background:#f8fafc}.badge[data-tone="red"]{background:#fef3f2;border-color:#fecdca;color:var(--red)}.badge[data-tone="amber"]{background:#fffaeb;border-color:#fedf89;color:var(--amber)}.badge[data-tone="green"]{background:#ecfdf3;border-color:#abefc6;color:var(--green)}
     .focus{margin-top:11px;font-size:13px;line-height:1.45}.stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.stat{font-size:10px;color:var(--muted);background:#f8fafc;border-radius:999px;padding:4px 7px}.open{margin-top:11px;color:var(--blue);font-size:12px;font-weight:800}.footer{padding:17px 2px;color:var(--muted);font-size:11px;line-height:1.5}.empty{border:1px dashed #cfd6df;border-radius:12px;padding:16px;color:var(--muted);background:#fff}
     @media(max-width:760px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.shell{padding:11px}}
-  </style>
+  
+    /* Human-centred portfolio skin; preserves canonical machine-data loaders. */
+    :root{--bg:#f5f7f3;--text:#173333;--muted:#627774;--line:#dbe7df;--blue:#0d736a;--soft:#e8f5ef;--shadow:0 7px 30px rgba(28,73,60,.065)}
+    body{background:radial-gradient(circle at 88% -4%,#e1f1e6,transparent 36%),var(--bg)}
+    .shell{max-width:1220px;padding:22px}
+    .nav{position:relative;margin-bottom:20px;gap:9px}
+    .nav a{background:#fff;border-color:#dce5de;color:#31534d;font-size:12px;padding:9px 13px}
+    .nav a.active{background:#0b7167;color:#fff;border-color:#0b7167}
+    .hero{background:linear-gradient(118deg,#15423e,#236e60);color:#fff;border:none;border-radius:24px;padding:29px 32px;box-shadow:0 15px 45px #123f3233}
+    .hero .eyebrow{color:#c4e9d8}.hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(33px,5vw,54px);line-height:1.11;letter-spacing:-.025em;max-width:700px;margin:10px 0}
+    .hero .meta{color:#e0f0e8;max-width:785px;font-size:14px;line-height:1.65}
+    .kpis{gap:12px;margin-top:26px}.kpi{background:#ffffffee;border:1px solid #ffffffa8;color:#22463d;border-radius:13px;padding:15px 17px}.kpi strong{font-family:Georgia,serif;font-size:26px}.kpi span{font-size:11px;color:#59756a}
+    .quicklinks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0 21px}
+    .quicklinks a{display:flex;gap:15px;align-items:center;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;color:var(--text);box-shadow:var(--shadow)}
+    .quicklinks a:hover{border-color:#83baa0}.quickicon{width:46px;height:46px;border-radius:13px;background:#e7f5eb;display:grid;place-items:center;font-size:23px;flex-shrink:0}
+    .quicklinks b{display:block;font-size:15px}.quicklinks small{display:block;font-size:12px;line-height:1.5;color:var(--muted);margin-top:3px}
+    .toolbar{margin:23px 0 14px}.toolbar h2{font-family:Georgia,serif;font-size:26px;color:#214a41}.legend{font-size:12px;max-width:410px}
+    .toolbar-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    #project-search{background:#fff;border:1px solid #bfd1c6;border-radius:10px;padding:11px 13px;min-width:195px;max-width:100%;font-size:13px;color:#193a34}
+    #project-search:focus-visible{outline:3px solid #a5dac5}
+    .grid{gap:16px}.card{border-radius:18px;padding:19px 19px 17px;box-shadow:0 5px 22px #213b2f0a;transition:transform .2s,border-color .2s,box-shadow .2s}
+    .card:hover{transform:translateY(-3px);border-color:#8ebcaa;box-shadow:0 10px 24px #213b2f13}
+    .card h3{font-family:Georgia,serif;font-size:21px}.code{font-size:12px;margin-top:4px}.badge{font-size:11px;padding:6px 9px}
+    .focus{font-size:13px;line-height:1.6;color:#375a54;padding-top:5px;min-height:54px}
+    .stats{gap:7px;margin-top:15px}.stat{font-size:11px;background:#eef5f0;padding:6px 9px;color:#4d6760;border-radius:8px}
+    .open{margin-top:16px;font-size:13px;color:#087468}
+    .card[hidden]{display:none}.footer{font-size:12px;line-height:1.6}
+    @media(max-width:760px){.shell{padding:12px}.hero{padding:23px 20px;border-radius:19px}.quicklinks{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.toolbar{align-items:stretch}.toolbar-actions{width:100%}#project-search{width:100%}}
+</style>
 </head>
 <body>
 <div class="shell">
@@ -26,12 +54,13 @@
     <a href="workspace/">Workspace</a>
     <a href="pending/">Pending work</a>
     <a href="guide/">Guide</a>
+    <a href="controls/archive-formats.html">Evidence archive</a>
   </nav>
 
   <section class="hero">
     <div class="eyebrow">Daily Site Operations</div>
-    <h1>Operations dashboard</h1>
-    <div class="meta">A concise portfolio view. Projects are ordered by <b>operational attention</b> — unresolved blockers/readiness first, then active work, then projects awaiting updates. This is not a commercial or strategic ranking.</div>
+    <h1>Your sites, at a glance.</h1>
+    <div class="meta">A clearer picture of what is happening on site, what needs a decision, and where the drawings live. Projects needing attention appear first. Every field claim remains linked to its recorded evidence.</div>
     <div class="kpis">
       <div class="kpi"><strong id="kpi-projects">0</strong><span>Projects</span></div>
       <div class="kpi"><strong id="kpi-attention">0</strong><span>Need attention</span></div>
@@ -40,9 +69,13 @@
     </div>
   </section>
 
+  <section class="quicklinks" aria-label="Project resources and evidence policy">
+    <a href="site-operations/project.html?project=P007"><span class="quickicon" aria-hidden="true">▤</span><span><b>Narayani · drawings &amp; models</b><small>Architecture, structural, ETABS, SketchUp and soil documents, access-controlled in Drive.</small></span></a>
+    <a href="controls/archive-formats.html"><span class="quickicon" aria-hidden="true">◇</span><span><b>How we preserve source evidence</b><small>Seven AI-ready archive formats, hashes, source lineage and certification gaps.</small></span></a>
+  </section>
   <div class="toolbar">
-    <h2>Attention order</h2>
-    <div class="legend">Open a project for full materials, progress, blockers, readiness, evidence and engineering files.</div>
+    <h2>Projects &amp; priorities</h2>
+    <div class="toolbar-actions"><div class="legend">Open a project for the full field and design picture.</div><label for="project-search" style="font-size:12px;font-weight:750">Find site <input id="project-search" type="search" placeholder="Search projects…" aria-label="Search projects"></label></div>
   </div>
   <main class="grid" id="project-grid"></main>
   <div class="footer">Machine-readable sources: <code>ops/data/current-works.json</code> + <code>ops/data/project-resources.json</code>. Slack remains the short human interaction layer; this dashboard carries the detail.</div>
@@ -100,6 +133,8 @@ async function load(){
         '<div class="stats"><span class="stat">'+counts.b+' blockers</span><span class="stat">'+counts.pr+' progress</span><span class="stat">'+counts.m+' materials</span><span class="stat">'+counts.e+' evidence</span><span class="stat">'+(rs.root_resolution==="VERIFIED"?counts.r+" files/links":"Drive unresolved")+'</span></div>'+
         '<div class="open">Open project →</div></a>';
     }).join("");
+    const search=$("project-search");
+    if(search){search.addEventListener("input",()=>{const q=search.value.trim().toLowerCase();root.querySelectorAll(".card").forEach(card=>{card.hidden=!!q&&!card.textContent.toLowerCase().includes(q);});});}
   }catch(e){root.innerHTML='<div class="empty">'+esc(e.message)+'</div>';}
 }
 load();
