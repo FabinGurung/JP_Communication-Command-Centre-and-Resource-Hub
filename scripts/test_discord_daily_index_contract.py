@@ -116,9 +116,9 @@ def fixtures():
 
 def main():
     nb = json.loads(NB.read_text("utf-8"))
-    check(nb["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-011", "Unexpected notebook revision")
+    check(nb["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-012", "Unexpected notebook revision")
     cells = {cell["id"]: "".join(cell["source"]) for cell in nb["cells"]}
-    for name in ("a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot", "a9-cwo-c05-daily-index", "a9-cwo-c06-full-history"):
+    for name in ("a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot", "a9-cwo-c05-daily-index", "a9-cwo-c06-full-history", "a9-cwo-c07-media-recovery", "a9-cwo-c08-sqlite-query", "a9-cwo-c09-publication-gate"):
         ast.parse(cells[name], filename=name)
     check("REVISIT_DAYS = 7" in cells["a9-cwo-c01-setup"], "Daily revisit must be seven days")
     check("BACKFILL_OVERLAP_DAYS = 1" in cells["a9-cwo-c01-setup"], "Catch-up safety overlap missing")
