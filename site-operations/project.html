@@ -35,7 +35,7 @@ body{background:radial-gradient(ellipse at 88% 0,#e2f1e6 0,transparent 34%),var(
 .section-intro{font-size:12px;line-height:1.6;color:var(--muted);margin:2px 0 15px}.issue-panel{background:#fffdf7}.issue-panel .section-symbol{background:#fff1da}
 .issue-panel .row{background:#fff;padding:11px;border:1px solid #eee7da;border-radius:11px;margin-bottom:8px;line-height:1.55}
 .issue-panel .row b{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#99692c}.small-print{font-size:11px;color:#866b41;line-height:1.6;margin-top:11px}
-.docs-section{margin-top:15px}.docs-section .resource-group h3{font:700 17px Georgia,serif;color:#245544}.docs-section .resource-cards{grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:11px}
+.docs-section{margin-top:15px}.resource-optional{background:#f8faf6;border:1px solid #dfe8dd;border-radius:12px;padding:10px 13px}.resource-optional summary{cursor:pointer;list-style:none;color:#2a6250;font-weight:750;font-size:13px}.resource-optional summary::-webkit-details-marker{display:none}.resource-optional summary::after{content:" +";float:right;font-size:17px}.resource-optional[open] summary::after{content:" −"}.resource-optional .resource-cards{margin-top:12px}.docs-section .resource-group h3{font:700 17px Georgia,serif;color:#245544}.docs-section .resource-cards{grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:11px}
 .docs-section .resource-card{border:1px solid #e1e8de;box-shadow:0 5px 16px #23503d09;padding:14px}.docs-section .resource-card b{font-size:13px;line-height:1.45}
 .docs-section .resource-actions a{font-size:12px;color:#176f54}.docs-section .resource-type{font-size:10px}
 .work{border:1px solid #d6e3d7;background:#fafffb}.work-head b{line-height:1.6;font-size:13px}.gate-grid{grid-template-columns:1fr 1fr}
@@ -164,7 +164,11 @@ function resources(set){
   const historic=items.filter(x=>category(x)==="History");
   const summary=set.project_id==="P007"?"Revised 2026 drawings are source references, not an independently certified construction issue. Older drawings and models are held separately.":"Source files remain in Drive; approval and execution are independent statuses.";
   root.innerHTML='<p class="resource-intro">'+esc(summary)+'</p>'+
-    groups.map(g=>'<section class="resource-group"><h3>'+esc(g.name)+' <small>'+g.entries.length+'</small></h3><div class="resource-cards">'+g.entries.map(renderCard).join("")+'</div></section>').join("")+
+    groups.map(g=>{
+      const isPrimary=["Project folders","Architecture","Structure"].includes(g.name);
+      if(isPrimary)return '<section class="resource-group"><h3>'+esc(g.name)+' <small>'+g.entries.length+'</small></h3><div class="resource-cards">'+g.entries.map(renderCard).join("")+'</div></section>';
+      return '<details class="resource-group resource-optional"><summary>'+esc(g.name)+' <small>'+g.entries.length+' file(s)</small></summary><div class="resource-cards">'+g.entries.map(renderCard).join("")+'</div></details>';
+    }).join("")+
     (historic.length?'<details class="historical-group"><summary>Historical and received alternatives ('+historic.length+') — not approved current revisions</summary><div class="resource-cards">'+historic.map(renderCard).join("")+'</div></details>':"")+
     '<p class="resource-note">Links are governed by Google Drive permissions. The public page contains only source pointers, not private file bytes.</p>';
 }
