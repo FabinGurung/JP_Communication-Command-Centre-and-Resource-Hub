@@ -154,7 +154,7 @@
     "ordering": "Copy original exact bytes to numbered PRE archive; read back before editing original; update current revision in-place; POST readback + CI; append ledger and publish.",
     "no_drive_file_id_claim": "The provided URL is GitHub-backed; it has no verified Google Drive file ID.",
     "archive_promotion": "Do not reassign a previous archival path/name or overwrite its contents. Retrospective historical source creation dates must be distinguished from archive copy date.",
-    "current_revision": "20261009-012",
+    "current_revision": "20261009-013",
     "quick_reference_wall": "controls/memory-wall.html",
     "progress_requirements": [
       "visible provider stage",
@@ -231,10 +231,10 @@
         "stable_notebook_cell_id": "a9-cwo-c09-publication-gate"
       }
     ],
-    "previous_revision_archived_exact": "ops/discord/99_VERSION_ARCHIVE/20261009/011__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_MEDIA_REPAIR_SQLITE_GATES.ipynb",
+    "previous_revision_archived_exact": "ops/discord/99_VERSION_ARCHIVE/20261009/012__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_ORIGINAL_REUSE_SHA_GUARD.ipynb",
     "latest_source_validation": {
-      "revision": "20261009-012",
-      "status": "STATIC_QA_IN_PROGRESS_COLAB_RUNTIME_NOT_RUN",
+      "revision": "20261009-013",
+      "status": "SOURCE_READY_QA_PENDING_COLAB_RUNTIME_NOT_RUN",
       "ci_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions"
     },
     "preflight_contract": {
@@ -269,7 +269,7 @@
       "historical_mode": "EXHAUSTIVE_OLDEST_MESSAGE_BACKFILL_BOUNDED_RESUMABLE",
       "incremental_mode": "C02_CURRENTLY_TWO_PARENTS_SEVEN_DAY_INCREMENTAL_ONLY;GUILD_WIDE_INCREMENTAL_EXPANSION_PENDING",
       "required_raw": "PRIVATE_GDRIVE_LOSSLESS_DISCORD_JSON_GZIP_JSONL_WITH_IMMUTABLE_PAGE_RECEIPTS",
-      "media_policy": "EXACT_ORIGINAL_BYTES_OR_UNVERIFIED_DEBT_NO_DERIVATIVE_PASSED_AS_ORIGINAL",
+      "media_policy": "NATIVE_MEDIA_ORIGINAL_REQUIRES_DECLARED_SIZE_AND_FRESH_PROVIDER_SHA256_MATCH_TO_PRIVATE_DRIVE_READBACK;NO_SIZE_ONLY_REUSE",
       "query_policy": "PRIVATE_SQLITE_REBUILD_FROM_VERIFIED_DRIVE_JSONL_ONLY",
       "publish_rule": "HISTORY_PASS_AND_MEDIA_DEBT_ZERO_AND_DISCOVERY_GAPS_ZERO_AND_QUERY_READBACK_BEFORE_ANY_NEW_WEBSITE_OR_SLACK_DERIVATIVE",
       "publish_auth": "PUBLIC_SAFE_PROJECT_FACT_RECONCILIATION_AND_SLACK_SEND_GATES_STILL_REQUIRED",
