@@ -10,7 +10,7 @@
   "stable_working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "stable_colab_url": "https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "archive_base": "ops/discord/99_VERSION_ARCHIVE",
-  "current_revision": "20261009-008",
+  "current_revision": "20261009-009",
   "archive_registration_date_npt": "2026-10-09",
   "versions": [
     {
@@ -113,15 +113,32 @@
       "revision": "20261009-008",
       "created_date_npt": "2026-10-09",
       "observed_source_created_at_utc": null,
-      "status": "CURRENT",
+      "status": "ARCHIVED_PRE",
       "version_hint": "v1.0.7 · daily seven-day replay + C05 immutable private day-pointer index",
       "change_summary": "Change C01/C02 per-source daily scan to minimum rolling seven days with one-day catchup extension for stale high-water; add C05 index-only immutable JSONL date partitions and run manifest verified against private C02 raw/candidate SHA. Scope remains 2 parent channels + active child threads. No original-media certification or provider run claimed.",
-      "archive_path": null,
+      "archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/008__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_TRANSPARENT_SEVEN_DAY_PREFLIGHT.ipynb",
       "source_commit": "8d5ac779cd1e844ed3779cface552ad754182fde",
       "git_blob_sha": "6b954da36225d58f62207a3973418bf4d205b584",
       "pre_snapshot_revision": "20261009-007",
       "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
-      "runtime_validation": "STATIC_POST_READBACK_PASS_COLAB_RUNTIME_NOT_RUN"
+      "runtime_validation": "STATIC_POST_READBACK_PASS_COLAB_RUNTIME_NOT_RUN",
+      "archived_readback_blob_sha": "6b954da36225d58f62207a3973418bf4d205b584",
+      "next_revision": "20261009-009"
+    },
+    {
+      "revision": "20261009-009",
+      "created_date_npt": "2026-10-09",
+      "observed_source_created_at_utc": null,
+      "status": "CURRENT",
+      "version_hint": "v1.0.8 · transparent source-by-source live preflight + operator confirmation",
+      "change_summary": "C02 prints full live two-parent/active-child source roster, parent membership, Discord links, seven-day NPT/UTC cutoffs, stale-cursor extension, and approval before any Drive writes. One frozen RUN_AT for all lower bounds, actual message fetch timestamps, plan copied into private receipt. Preview-only does not create a receipt. No change to original-byte certification or archived-thread coverage.",
+      "archive_path": null,
+      "source_commit": "071f79490ad2c0b8245e322b69e5691dd723c4df",
+      "git_blob_sha": "2459537c92071ee79b18f79fd8a5fa8d05388693",
+      "pre_snapshot_revision": "20261009-008",
+      "pre_archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/008__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_TRANSPARENT_SEVEN_DAY_PREFLIGHT.ipynb",
+      "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
+      "runtime_validation": "SOURCE_POST_READBACK_PASS_COLAB_RUNTIME_NOT_RUN"
     }
   ]
 }
