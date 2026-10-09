@@ -10,7 +10,7 @@
   "stable_working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "stable_colab_url": "https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "archive_base": "ops/discord/99_VERSION_ARCHIVE",
-  "current_revision": "20261009-004",
+  "current_revision": "20261009-005",
   "archive_registration_date_npt": "2026-10-09",
   "versions": [
     {
@@ -63,13 +63,25 @@
       "revision": "20261009-004",
       "created_date_npt": "2026-10-09",
       "observed_source_created_at_utc": null,
-      "status": "CURRENT",
+      "status": "ARCHIVED_PRE",
       "version_hint": "v1.0.3 · media byte-fidelity diagnostics",
       "change_summary": "Following the first partial collection, request identity-encoded CDN responses, show declared vs actual byte count and safe response MIME/content signatures for up to three failures per source. Remain fail-closed on mismatched originals.",
-      "archive_path": null,
+      "archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/004__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_CELL_IDS_AND_SETUP_PROGRESS.ipynb",
       "source_commit": null,
       "git_blob_sha": "d11f31d6627e8ab647f4c7d7b3502abbfc23ef08",
-      "pre_snapshot_revision": "20261009-003",
+      "pre_snapshot_revision": "20261009-003"
+    },
+    {
+      "revision": "20261009-005",
+      "created_date_npt": "2026-10-09",
+      "observed_source_created_at_utc": null,
+      "status": "CURRENT",
+      "version_hint": "v1.0.4 · permanent C01/C02 labels & Setup stage diagnostics",
+      "change_summary": "Name two code cells C01 SETUP and C02 COLLECTOR, add visible Markdown identification and stable notebook cell IDs, print labeled Setup milestones to diagnose Colab/auth/secret waits, label collector output, preserve exact working Colab URL.",
+      "archive_path": null,
+      "source_commit": null,
+      "git_blob_sha": "b273716b8a34e5c8fb7a943879f14b140cbf02e2",
+      "pre_snapshot_revision": "20261009-004",
       "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb"
     }
   ]

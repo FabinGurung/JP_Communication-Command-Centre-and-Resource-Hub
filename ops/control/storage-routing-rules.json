@@ -136,7 +136,7 @@
     "ordering": "Copy original exact bytes to numbered PRE archive; read back before editing original; update current revision in-place; POST readback + CI; append ledger and publish.",
     "no_drive_file_id_claim": "The provided URL is GitHub-backed; it has no verified Google Drive file ID.",
     "archive_promotion": "Do not reassign a previous archival path/name or overwrite its contents. Retrospective historical source creation dates must be distinguished from archive copy date.",
-    "current_revision": "20261009-004",
+    "current_revision": "20261009-005",
     "quick_reference_wall": "controls/memory-wall.html",
     "progress_requirements": [
       "visible provider stage",
@@ -158,7 +158,21 @@
       "handoff_drive_file_id": "1QUZRvXuW3Z7z4UD1BkoI_jJD2ZWkZQN4",
       "cause_known": "Discord-reported file byte count does not match downloaded HTTP 200 payload",
       "root_cause": "UNDETERMINED",
-      "next_gate": "Retry version 20261009-004; inspect observed byte count and Content-Type safely, then resolve media source fidelity"
-    }
+      "next_gate": "Use current version 20261009-005: C01 SETUP must reach 06/06 PASS before C02 COLLECTOR. Retry CDN mismatches with 20261009-004 byte/MIME diagnostics retained."
+    },
+    "cell_reference_ids": [
+      {
+        "id": "C01",
+        "name": "SETUP",
+        "definition": "Google Drive authorization and Discord credential, six visible stage markers",
+        "stable_notebook_cell_id": "a9-cwo-c01-setup"
+      },
+      {
+        "id": "C02",
+        "name": "COLLECTOR",
+        "definition": "Discord and Drive collection, stamped live progress and final receipt",
+        "stable_notebook_cell_id": "a9-cwo-c02-collector"
+      }
+    ]
   }
 }
