@@ -116,13 +116,60 @@ def fixtures():
 
 def main():
     nb = json.loads(NB.read_text("utf-8"))
-    check(nb["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-008", "Unexpected notebook revision")
+    check(nb["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-009", "Unexpected notebook revision")
     cells = {cell["id"]: "".join(cell["source"]) for cell in nb["cells"]}
     for name in ("a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot", "a9-cwo-c05-daily-index"):
         ast.parse(cells[name], filename=name)
     check("REVISIT_DAYS = 7" in cells["a9-cwo-c01-setup"], "Daily revisit must be seven days")
     check("BACKFILL_OVERLAP_DAYS = 1" in cells["a9-cwo-c01-setup"], "Catch-up safety overlap missing")
-    check("horizon = min(horizon, catchup_start)" in cells["a9-cwo-c02-collector"], "Missed-day catch-up rule absent")
+    check("def build_run_plan" in cells["a9-cwo-c02-collector"], "Source preflight planner absent")
+    check('operator_choice = input("Type COLLECT' in cells["a9-cwo-c02-collector"], "Operator gate absent")
+    check('if operator_choice != "COLLECT":' in cells["a9-cwo-c02-collector"], "Preview-only branch absent")
+    check('if jsonbytes(fresh_state) != jsonbytes(state):' in cells["a9-cwo-c02-collector"], "Concurrent cursor guard missing")
+    check('record["message_fetch_finished_at_utc"]' in cells["a9-cwo-c02-collector"], "Actual fetch timestamp absent")
+
+    # Execute ONLY the pure run planner's AST in an offline synthetic fixture.
+    collector_tree = ast.parse(cells["a9-cwo-c02-collector"])
+    plan_func = next((x for x in collector_tree.body
+                      if isinstance(x, ast.FunctionDef) and x.name == "build_run_plan"), None)
+    check(plan_func is not None, "Missing callable preflight planner")
+    from datetime import timedelta, timezone
+    fake_scope = {
+        "111111111111111111": {"parent_id": "111111111111111111", "name": "SYNTHETIC_PARENT"},
+        "222222222222222222": {"parent_id": "111111111111111111", "name": "SYNTHETIC_STALE"},
+        "333333333333333333": {"parent_id": "111111111111111111", "name": "SYNTHETIC_FRESH"},
+    }
+    now_utc = datetime(2026, 10, 9, 11, 0, tzinfo=timezone.utc)
+    base_utc = now_utc - timedelta(days=7)
+    stale_utc = now_utc - timedelta(days=11)
+    recent_utc = now_utc - timedelta(days=1)
+    epoch = 1420070400000
+    def fake_snowflake(dt):
+        return str((int(dt.timestamp()*1000) - epoch) << 22)
+    fake_state = {"source_states": {
+        "222222222222222222": {"highwater_message_id": fake_snowflake(stale_utc)},
+        "333333333333333333": {"highwater_message_id": fake_snowflake(recent_utc)},
+    }}
+    scope = {"datetime": datetime, "timezone": timezone, "timedelta": timedelta,
+             "TZ": ZoneInfo("Asia/Kathmandu"), "REVISIT_DAYS": 7,
+             "BACKFILL_OVERLAP_DAYS": 1, "DISCORD_EPOCH_MS": epoch,
+             "GUILD_ID": "123456789012345678"}
+    exec(compile(ast.Module(body=[plan_func], type_ignores=[]), "synthetic_plan", "exec"), scope)
+    planned = scope["build_run_plan"](fake_scope, fake_state, now_utc)
+    check(len(planned) == 3, "Preflight skipped a scoped source")
+    first, stale, fresh = planned
+    check(datetime.fromisoformat(first["window_start_utc"]) == base_utc, "Default 168h window incorrect")
+    check(first["window_rule"] == "ROLLING_7_DAYS_NO_VERIFIED_CURSOR", "No-cursor classification")
+    check(datetime.fromisoformat(stale["window_start_utc"]) == stale_utc - timedelta(days=1),
+          "Older cursor catch-up overlap was dropped")
+    check(stale["window_rule"].startswith("CATCHUP_"), "Missing catch-up warning")
+    check(datetime.fromisoformat(fresh["window_start_utc"]) == base_utc,
+          "Recent verified cursor shortened the seven-day window")
+    check(all(row["planned_start_utc"] == now_utc.isoformat() for row in planned),
+          "Per-source window drift; preview must use one frozen run time")
+    check(first["kind"] == "PARENT" and stale["kind"] == "ACTIVE_THREAD", "Thread identity classification")
+    check(all(row["discord_url"].startswith("https://discord.com/channels/") for row in planned),
+          "Missing directly inspectable source URLs")
     check("DAILY_INDEX_JSONL" in cells["a9-cwo-c05-daily-index"], "Private date partitions absent")
 
     drive = fixtures()
@@ -171,7 +218,8 @@ def main():
     else:
         raise AssertionError("C05 accepted a non-seven-day receipt")
     print("PASS: notebook syntax for C02/C03/C04/C05")
-    print("PASS: seven-day replay and catch-up policy")
+    print("PASS: seven-day replay and stale-cursor catch-up policy")
+    print("PASS: read-only preflight planner, live roster fields, operator gate, exact shared NPT/UTC window")
     print("PASS: SHA-readback, pointer-only private indexes, Nepal day partitions, manifest PARTIAL")
     print("PASS: exact same-run idempotence; old state unmodified; older-window refused")
 
