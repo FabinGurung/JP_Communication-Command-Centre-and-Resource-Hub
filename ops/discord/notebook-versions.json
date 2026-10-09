@@ -10,7 +10,7 @@
   "stable_working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "stable_colab_url": "https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "archive_base": "ops/discord/99_VERSION_ARCHIVE",
-  "current_revision": "20261009-005",
+  "current_revision": "20261009-006",
   "archive_registration_date_npt": "2026-10-09",
   "versions": [
     {
@@ -75,13 +75,25 @@
       "revision": "20261009-005",
       "created_date_npt": "2026-10-09",
       "observed_source_created_at_utc": null,
-      "status": "CURRENT",
+      "status": "ARCHIVED_PRE",
       "version_hint": "v1.0.4 · permanent C01/C02 labels & Setup stage diagnostics",
       "change_summary": "Name two code cells C01 SETUP and C02 COLLECTOR, add visible Markdown identification and stable notebook cell IDs, print labeled Setup milestones to diagnose Colab/auth/secret waits, label collector output, preserve exact working Colab URL.",
-      "archive_path": null,
+      "archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/005__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SINGLE_ATTACHMENT_PROBE.ipynb",
       "source_commit": null,
       "git_blob_sha": "b273716b8a34e5c8fb7a943879f14b140cbf02e2",
-      "pre_snapshot_revision": "20261009-004",
+      "pre_snapshot_revision": "20261009-004"
+    },
+    {
+      "revision": "20261009-006",
+      "created_date_npt": "2026-10-09",
+      "observed_source_created_at_utc": null,
+      "status": "CURRENT",
+      "version_hint": "v1.0.5 · C03 read-only CDN source/proxy probe",
+      "change_summary": "After completed PARTIAL C02 run 20261009T020256Z, add optional C03 diagnostic that reads frozen Drive handoff/receipt, selects one mismatch within two scoped parents, refreshes one Discord message and tests source_url versus proxy_url JPEG bytes, dimensions, hashes and MIME. No archive writes/cursor changes; never call mismatched/proxy bytes original.",
+      "archive_path": null,
+      "source_commit": null,
+      "git_blob_sha": "3efe6a0e752b6fb584f34b882988a7a4db71546f",
+      "pre_snapshot_revision": "20261009-005",
       "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb"
     }
   ]

@@ -136,7 +136,7 @@
     "ordering": "Copy original exact bytes to numbered PRE archive; read back before editing original; update current revision in-place; POST readback + CI; append ledger and publish.",
     "no_drive_file_id_claim": "The provided URL is GitHub-backed; it has no verified Google Drive file ID.",
     "archive_promotion": "Do not reassign a previous archival path/name or overwrite its contents. Retrospective historical source creation dates must be distinguished from archive copy date.",
-    "current_revision": "20261009-005",
+    "current_revision": "20261009-006",
     "quick_reference_wall": "controls/memory-wall.html",
     "progress_requirements": [
       "visible provider stage",
@@ -146,7 +146,7 @@
       "final receipt verified"
     ],
     "partial_capture_evidence": {
-      "run_id": "20261009T004444Z",
+      "run_id": "20261009T020256Z",
       "status": "PARTIAL",
       "sources_total": 26,
       "sources_pass": 17,
@@ -154,11 +154,12 @@
       "new_or_changed_messages": 174,
       "attachment_failures": 749,
       "previously_archived_attachments": 207,
-      "receipt_drive_file_id": "1gwH1_kGG4kSmfRv3r7DRrPOMGHN_QBrN",
+      "receipt_drive_file_id": "1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3",
       "handoff_drive_file_id": "1QUZRvXuW3Z7z4UD1BkoI_jJD2ZWkZQN4",
-      "cause_known": "Discord-reported file byte count does not match downloaded HTTP 200 payload",
+      "cause_known": "Original CDN url returns JPEG bytes with HTTP Content-Length matching observed count, but many attachments differ from Discord attachment size metadata; identity encoding did not change this.",
       "root_cause": "UNDETERMINED",
-      "next_gate": "Use current version 20261009-005: C01 SETUP must reach 06/06 PASS before C02 COLLECTOR. Retry CDN mismatches with 20261009-004 byte/MIME diagnostics retained."
+      "next_gate": "Run C01 then optional C03 only; compare one frozen mismatch source_url vs proxy_url sizes, dimensions, and hashes. Do not repeat full C02 or mark mismatched bytes original until provider fidelity diagnosed.",
+      "prior_partial_receipt_drive_file_id": "1gwH1_kGG4kSmfRv3r7DRrPOMGHN_QBrN"
     },
     "cell_reference_ids": [
       {
@@ -172,6 +173,12 @@
         "name": "COLLECTOR",
         "definition": "Discord and Drive collection, stamped live progress and final receipt",
         "stable_notebook_cell_id": "a9-cwo-c02-collector"
+      },
+      {
+        "id": "C03",
+        "name": "CDN PROBE",
+        "definition": "Read-only one-failed-attachment source/proxy byte and dimensions comparison; no Drive writes or cursor changes",
+        "stable_notebook_cell_id": "a9-cwo-c03-cdn-probe"
       }
     ]
   }

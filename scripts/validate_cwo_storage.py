@@ -58,7 +58,7 @@ ledger = json.loads(Path("ops/discord/notebook-versions.json").read_text(encodin
 assert ledger["schema_version"] == "1.0.0"
 assert ledger["timezone"] == "Asia/Kathmandu"
 assert ledger["numbering"] == "YYYYMMDD-NNN"
-assert ledger["current_revision"] == "20261009-005"
+assert ledger["current_revision"] == "20261009-006"
 assert ledger["stable_working_path"] == str(notebook_path)
 assert ledger["drive_native_same_id"].startswith("NOT_APPLICABLE")
 revisions = ledger["versions"]
@@ -81,7 +81,7 @@ for entry in revisions:
         assert entry["status"] in {"ARCHIVED_RETROACTIVE", "ARCHIVED_PRE"}
 assert pin["notebook_versioning_policy"]["manifest"] == "ops/discord/notebook-versions.json"
 assert "notebook-versions.json" in site
-assert "20261009-005" == notebook["metadata"]["a9_cwo_revision"]["version_id"]
+assert "20261009-006" == notebook["metadata"]["a9_cwo_revision"]["version_id"]
 assert 'progress("Drive: verifying existing A9 Discord archive root")' in source
 assert '_HEARTBEAT_STOP.wait(20)' in source
 assert 'progress("Discord: BEGIN source' in source
@@ -93,12 +93,19 @@ assert '"Attachment size mismatch, id=%s declared=%d observed=%d "' in source
 assert "MEDIA FAILURE DETAIL" in source
 # Durable cell identifiers and visible Setup milestones; do not re-number with cell position.
 code_cells = [c for c in notebook["cells"] if c["cell_type"] == "code"]
-assert [c["id"] for c in code_cells] == ["a9-cwo-c01-setup", "a9-cwo-c02-collector"]
+assert [c["id"] for c in code_cells] == ["a9-cwo-c01-setup", "a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe"]
 assert "A9-CWO-C01-SETUP" in code_cells[0]["metadata"]["tags"]
 assert "A9-CWO-C02-COLLECTOR" in code_cells[1]["metadata"]["tags"]
 assert all((f"[A9-CWO C01 SETUP | {i:02d}/06]" in codes[0]) for i in range(1,7))
 assert "[A9-CWO C02 COLLECTOR |" in codes[1]
-assert {c["id"] for c in notebook["cells"] if c["cell_type"] == "markdown"} >= {"a9-cwo-c01-guide", "a9-cwo-c02-guide"}
+assert "A9-CWO-C03-CDN-PROBE" in code_cells[2]["metadata"]["tags"]
+assert "A9-CWO C03 CDN PROBE | 05/05" in codes[2]
+assert "diagnostics = [c03_probe(" in codes[2]
+assert 'receipt["run_id"]' not in codes[2]  # deliberate: uses handoff match instead
+assert "MediaFileUpload" not in codes[2] and "drive.files().create" not in codes[2]
+assert "drive.files().update" not in codes[2]
+assert "with requests.get(" in codes[2] and "get_media(" in codes[2]
+assert {c["id"] for c in notebook["cells"] if c["cell_type"] == "markdown"} >= {"a9-cwo-c01-guide", "a9-cwo-c02-guide", "a9-cwo-c03-guide"}
 assert "scripts/test_cwo_media_diagnostics.py" in Path(".github/workflows/daily-ops-branch-preview.yml").read_text(encoding="utf-8")
 assert Path("controls/memory-wall.html").exists()
 assert 'notebook-versions.json' in Path("controls/memory-wall.html").read_text(encoding="utf-8")
