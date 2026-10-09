@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/schemas/daily-message-index-v1.schema.json",
+  "title": "A9-CWO Discord Date-Partitioned Private Message Index Row v1",
+  "description": "One compact pointer to a message version in an immutable source JSONL file. No raw message text, signed CDN URL, or auth secrets. Rows live in private Google Drive, not public GitHub.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "provider",
+    "run_id",
+    "guild_id",
+    "parent_channel_id",
+    "channel_id",
+    "message_id",
+    "message_created_at_utc",
+    "date_npt",
+    "event_version_sha256",
+    "source_message_url",
+    "raw_drive_id",
+    "raw_line_1_based",
+    "candidate_drive_id",
+    "candidate_line_1_based",
+    "evidence_class",
+    "admission_status",
+    "source_receipt_id"
+  ],
+  "properties": {
+    "schema": {
+      "const": "a9-cwo-discord-day-index-v1"
+    },
+    "provider": {
+      "const": "DISCORD"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[0-9]{8}T[0-9]{6}Z$"
+    },
+    "guild_id": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "parent_channel_id": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "channel_id": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "message_id": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "message_created_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "date_npt": {
+      "type": "string",
+      "format": "date"
+    },
+    "event_version_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "source_message_url": {
+      "type": "string",
+      "pattern": "^https://discord[.]com/channels/"
+    },
+    "raw_drive_id": {
+      "type": "string",
+      "minLength": 10
+    },
+    "raw_line_1_based": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "candidate_drive_id": {
+      "type": "string",
+      "minLength": 10
+    },
+    "candidate_line_1_based": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_receipt_id": {
+      "type": "string",
+      "minLength": 10
+    },
+    "attachment_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "evidence_class": {
+      "const": "MESSAGE_METADATA_POINTER_ONLY"
+    },
+    "admission_status": {
+      "const": "NOT_RECONCILED"
+    },
+    "attachments_original_certification": {
+      "enum": [
+        "SOURCE_PARTIAL",
+        "SOURCE_PASS",
+        "UNKNOWN"
+      ]
+    }
+  }
+}
