@@ -10,7 +10,7 @@
   "stable_working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "stable_colab_url": "https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "archive_base": "ops/discord/99_VERSION_ARCHIVE",
-  "current_revision": "20261009-006",
+  "current_revision": "20261009-007",
   "archive_registration_date_npt": "2026-10-09",
   "versions": [
     {
@@ -87,13 +87,26 @@
       "revision": "20261009-006",
       "created_date_npt": "2026-10-09",
       "observed_source_created_at_utc": null,
-      "status": "CURRENT",
+      "status": "ARCHIVED_PRE",
       "version_hint": "v1.0.5 · C03 read-only CDN source/proxy probe",
       "change_summary": "After completed PARTIAL C02 run 20261009T020256Z, add optional C03 diagnostic that reads frozen Drive handoff/receipt, selects one mismatch within two scoped parents, refreshes one Discord message and tests source_url versus proxy_url JPEG bytes, dimensions, hashes and MIME. No archive writes/cursor changes; never call mismatched/proxy bytes original.",
-      "archive_path": null,
+      "archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/006__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_DERIVATIVE_PILOT.ipynb",
       "source_commit": null,
       "git_blob_sha": "3efe6a0e752b6fb584f34b882988a7a4db71546f",
       "pre_snapshot_revision": "20261009-005",
+      "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb"
+    },
+    {
+      "revision": "20261009-007",
+      "created_date_npt": "2026-10-09",
+      "observed_source_created_at_utc": null,
+      "status": "CURRENT",
+      "version_hint": "v1.0.6 · C04 bounded provider derivative pilot",
+      "change_summary": "Add C04 cell: after C01+C03, re-fetch exactly one mismatched source JPEG, verify full-resolution dimensions and repeated C03 hash, archive only as labelled private provider derivative under DERIVATIVE_BYTES with sidecar hash/readback. No full collector run, original certification, cursor advancement, or freeze receipt mutation.",
+      "archive_path": null,
+      "source_commit": null,
+      "git_blob_sha": "cb8a4228ab4e9c59ffbfab680aaaac37d4734e22",
+      "pre_snapshot_revision": "20261009-006",
       "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb"
     }
   ]

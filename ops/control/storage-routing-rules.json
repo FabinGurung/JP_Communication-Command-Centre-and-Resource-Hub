@@ -106,7 +106,7 @@
     ],
     "collector": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
     "runtime": "USER_RUNS_GOOGLE_COLAB_BEFORE_DAILY_A9_CWO",
-    "status": "NOTEBOOK_STAGED_UNRUN",
+    "status": "PROVIDER_PARTIAL_C04_PILOT_STAGED_NOT_RUN",
     "scope": "Only these two parent channels and currently active child threads belonging to them; not a server-wide archive",
     "archive_root_drive_id": "1nTFR9xQXNwgkWRrAq1jJw7ph6rKg3C9X",
     "handoff": "A9_CWO_DAILY_TWO_CHANNELS/handoff_current.json (created only after user executes notebook)",
@@ -119,7 +119,7 @@
   },
   "pending": [
     "Drive-to-GitHub automated Main/Local Control Tower refresh",
-    "First successful Colab provider run and archive receipt",
+    "Complete Discord original-media fidelity investigation and execute optional C04 private derivative pilot (C01/C03/C04) after reviewing its bounded write; preserve PARTIAL and failed-source cursors",
     "A9-CWO ingestion of Discord candidate facts into owned project state",
     "Archived-thread and inline-embed media coverage expansion"
   ],
@@ -136,7 +136,7 @@
     "ordering": "Copy original exact bytes to numbered PRE archive; read back before editing original; update current revision in-place; POST readback + CI; append ledger and publish.",
     "no_drive_file_id_claim": "The provided URL is GitHub-backed; it has no verified Google Drive file ID.",
     "archive_promotion": "Do not reassign a previous archival path/name or overwrite its contents. Retrospective historical source creation dates must be distinguished from archive copy date.",
-    "current_revision": "20261009-006",
+    "current_revision": "20261009-007",
     "quick_reference_wall": "controls/memory-wall.html",
     "progress_requirements": [
       "visible provider stage",
@@ -158,7 +158,7 @@
       "handoff_drive_file_id": "1QUZRvXuW3Z7z4UD1BkoI_jJD2ZWkZQN4",
       "cause_known": "Original CDN url returns JPEG bytes with HTTP Content-Length matching observed count, but many attachments differ from Discord attachment size metadata; identity encoding did not change this.",
       "root_cause": "UNDETERMINED",
-      "next_gate": "Run C01 then optional C03 only; compare one frozen mismatch source_url vs proxy_url sizes, dimensions, and hashes. Do not repeat full C02 or mark mismatched bytes original until provider fidelity diagnosed.",
+      "next_gate": "C03 user-completed: source and proxy JPEGs nonidentical and both size-mismatched; C04 revision 20261009-007 staged for ONE provenance-labelled private Drive derivative with exact SHA/readback. No original certification, cursor progress, or change to frozen PARTIAL receipt. Await bounded pilot execution and result.",
       "prior_partial_receipt_drive_file_id": "1gwH1_kGG4kSmfRv3r7DRrPOMGHN_QBrN"
     },
     "cell_reference_ids": [

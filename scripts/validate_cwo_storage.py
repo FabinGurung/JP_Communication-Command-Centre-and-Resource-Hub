@@ -13,7 +13,7 @@ assert pin["id"] == "A9-CWO-PIN-001"
 assert len(pin["storage"]) == 6 and len(pin["steps"]) == 6
 assert pin["control_alias"] == "A9-CWO"
 assert {x["home"] for x in pin["storage"]} >= {"GitHub", "Google Drive", "GitHub Pages"}
-assert pin["two_channel_discord"]["status"] == "NOTEBOOK_STAGED_UNRUN"
+assert pin["two_channel_discord"]["status"].startswith("PROVIDER_PARTIAL_")
 guild = "682670494658330644"
 chans = {"1463826087841890417", "1492168056858738809"}
 assert pin["two_channel_discord"]["guild_id"] == guild
@@ -58,7 +58,7 @@ ledger = json.loads(Path("ops/discord/notebook-versions.json").read_text(encodin
 assert ledger["schema_version"] == "1.0.0"
 assert ledger["timezone"] == "Asia/Kathmandu"
 assert ledger["numbering"] == "YYYYMMDD-NNN"
-assert ledger["current_revision"] == "20261009-006"
+assert ledger["current_revision"] == "20261009-007"
 assert ledger["stable_working_path"] == str(notebook_path)
 assert ledger["drive_native_same_id"].startswith("NOT_APPLICABLE")
 revisions = ledger["versions"]
@@ -81,7 +81,7 @@ for entry in revisions:
         assert entry["status"] in {"ARCHIVED_RETROACTIVE", "ARCHIVED_PRE"}
 assert pin["notebook_versioning_policy"]["manifest"] == "ops/discord/notebook-versions.json"
 assert "notebook-versions.json" in site
-assert "20261009-006" == notebook["metadata"]["a9_cwo_revision"]["version_id"]
+assert "20261009-007" == notebook["metadata"]["a9_cwo_revision"]["version_id"]
 assert 'progress("Drive: verifying existing A9 Discord archive root")' in source
 assert '_HEARTBEAT_STOP.wait(20)' in source
 assert 'progress("Discord: BEGIN source' in source
@@ -93,19 +93,30 @@ assert '"Attachment size mismatch, id=%s declared=%d observed=%d "' in source
 assert "MEDIA FAILURE DETAIL" in source
 # Durable cell identifiers and visible Setup milestones; do not re-number with cell position.
 code_cells = [c for c in notebook["cells"] if c["cell_type"] == "code"]
-assert [c["id"] for c in code_cells] == ["a9-cwo-c01-setup", "a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe"]
+assert [c["id"] for c in code_cells] == ["a9-cwo-c01-setup", "a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot"]
 assert "A9-CWO-C01-SETUP" in code_cells[0]["metadata"]["tags"]
 assert "A9-CWO-C02-COLLECTOR" in code_cells[1]["metadata"]["tags"]
 assert all((f"[A9-CWO C01 SETUP | {i:02d}/06]" in codes[0]) for i in range(1,7))
 assert "[A9-CWO C02 COLLECTOR |" in codes[1]
 assert "A9-CWO-C03-CDN-PROBE" in code_cells[2]["metadata"]["tags"]
 assert "A9-CWO C03 CDN PROBE | 05/05" in codes[2]
+assert "A9-CWO-C04-DERIVATIVE-PILOT" in code_cells[3]["metadata"]["tags"]
+assert "PROVIDER_DERIVATIVE_NOT_ORIGINAL" in codes[3]
+assert "UNVERIFIED_ORIGINAL_MEDIA_FAILURE_OPEN" in codes[3]
+assert "DERIVATIVE_BYTES" in codes[3]
+assert "c04_read_bytes" in codes[3]
+assert "c03_find_child(run_root, \"RUN_RECEIPTS\")" in codes[3]
+assert "does_not_advance_cursors" in codes[3]
+assert "state_current.json" not in codes[3]
+assert "handoff_current.json" not in codes[3]
+assert "MediaIoBaseUpload" in codes[3]
+assert "original_certified\": False" in codes[3]
 assert "diagnostics = [c03_probe(" in codes[2]
 assert 'receipt["run_id"]' not in codes[2]  # deliberate: uses handoff match instead
 assert "MediaFileUpload" not in codes[2] and "drive.files().create" not in codes[2]
 assert "drive.files().update" not in codes[2]
 assert "with requests.get(" in codes[2] and "get_media(" in codes[2]
-assert {c["id"] for c in notebook["cells"] if c["cell_type"] == "markdown"} >= {"a9-cwo-c01-guide", "a9-cwo-c02-guide", "a9-cwo-c03-guide"}
+assert {c["id"] for c in notebook["cells"] if c["cell_type"] == "markdown"} >= {"a9-cwo-c01-guide", "a9-cwo-c02-guide", "a9-cwo-c03-guide", "a9-cwo-c04-guide"}
 assert "scripts/test_cwo_media_diagnostics.py" in Path(".github/workflows/daily-ops-branch-preview.yml").read_text(encoding="utf-8")
 assert Path("controls/memory-wall.html").exists()
 assert 'notebook-versions.json' in Path("controls/memory-wall.html").read_text(encoding="utf-8")

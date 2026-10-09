@@ -5,6 +5,9 @@ on:
     branches:
       - feature/daily-ops-current-work
       - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -13,7 +16,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-production-main
+  group: pages-production-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -28,6 +31,9 @@ jobs:
 
       - name: Test Discord CDN byte-fidelity diagnostics
         run: python scripts/test_cwo_media_diagnostics.py
+
+      - name: Test C04 one-image derivative safety without provider writes
+        run: python scripts/test_cwo_derivative_pilot.py
 
       - name: Validate A9-CWO pinned storage and Discord notebook
         run: python scripts/validate_cwo_storage.py
