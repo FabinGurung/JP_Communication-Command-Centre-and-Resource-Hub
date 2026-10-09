@@ -1,0 +1,34 @@
+name: Discord Colab Seven-Day Machine Archive QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - feature/daily-ops-current-work
+    paths:
+      - 'ops/discord/**'
+      - 'scripts/test_discord_daily_index_contract.py'
+      - '.github/workflows/discord-daily-index-qa.yml'
+  pull_request:
+    paths:
+      - 'ops/discord/**'
+      - 'scripts/test_discord_daily_index_contract.py'
+      - '.github/workflows/discord-daily-index-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test-private-index-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Read GitHub working revision and schemas
+        uses: actions/checkout@v4
+      - name: Python runtime
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check notebook syntax, seven-day window, SHA pointers and idempotence
+        run: python scripts/test_discord_daily_index_contract.py
