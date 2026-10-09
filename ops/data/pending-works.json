@@ -218,9 +218,10 @@
       "category": "A9_AUTHORITY_RECONCILIATION",
       "owner_module_id": "MOD-OPS-001",
       "proposal": {
-        "provider": "google_drive",
+        "provider": "operations_pending_registry",
         "title": "Retain legacy material/progress ledgers until exact event/provider/project crosswalk is verified",
-        "url": "https://drive.google.com/drive/folders/1-ZPGmjfO5Hw8K0-JOFdZSyx2x12YRUQo"
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://drive.google.com/drive/folders/1-ZPGmjfO5Hw8K0-JOFdZSyx2x12YRUQo"
       },
       "why": "Legacy September Nexus JSONL/SQLite and provider events are not comprehensively linked to current CWO event IDs; preserve material-accounting truth and avoid double Slack reminders or duplicate transactions.",
       "proposed_first_gate": "READ ONLY: compare older FBL/REB event IDs, Slack ProviderEvents, current CWO events and Sheets, then issue fact-level authority matrix and unmigrated-ID list; obtain separate approval before data/schema mutation or legacy chat retirement.",
@@ -230,6 +231,11 @@
         "ops/events/daily-ops-events.jsonl",
         "ops/data/current-works.json",
         "ops/CANONICAL_DATA_AUTHORITY.md"
+      ],
+      "recommendation": "Legacy September Nexus JSONL/SQLite and provider events are not comprehensively linked to current CWO event IDs; preserve material-accounting truth and avoid double Slack reminders or duplicate transactions.",
+      "when_to_build": "READ ONLY: compare older FBL/REB event IDs, Slack ProviderEvents, current CWO events and Sheets, then issue fact-level authority matrix and unmigrated-ID list; obtain separate approval before data/schema mutation or legacy chat retirement.",
+      "security_invariants": [
+        "No independent new ledger, provider send, retirement mutation or replacement of live quantitative Sheets before certified migration."
       ]
     },
     {
@@ -241,9 +247,10 @@
       "category": "EVIDENCE_ARCHITECTURE",
       "owner_module_id": "MOD-OPS-001",
       "proposal": {
-        "provider": "github",
+        "provider": "operations_pending_registry",
         "title": "Pinned archive formats reference",
-        "url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/controls/archive-formats.html"
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/controls/archive-formats.html"
       },
       "why": "Keep one durable, lossless private provider archive and derive efficient AI search indexes without misclassifying missing Discord originals, archived threads or private Slack history as complete.",
       "proposed_first_gate": "Certify provider raw source coverage/cursors and 749 Discord original byte mismatches; only then pilot rebuildable SQLite/DuckDB and reversible compressed partitions on private verified data. Treat Parquet as optional.",
@@ -253,6 +260,11 @@
         "ops/control/storage-routing-rules.json",
         "ops/control/daily-communication-web-cycle.json",
         "ops/events/daily-ops-events.jsonl"
+      ],
+      "recommendation": "Keep one durable, lossless private provider archive and derive efficient AI search indexes without misclassifying missing Discord originals, archived threads or private Slack history as complete.",
+      "when_to_build": "Certify provider raw source coverage/cursors and 749 Discord original byte mismatches; only then pilot rebuildable SQLite/DuckDB and reversible compressed partitions on private verified data. Treat Parquet as optional.",
+      "security_invariants": [
+        "Private evidence stays in Drive. No original overwrite, false archive certification or public raw-message publication."
       ]
     },
     {
@@ -264,9 +276,10 @@
       "category": "FRONTEND_UX",
       "owner_module_id": "MOD-OPS-001",
       "proposal": {
-        "provider": "github_pages",
+        "provider": "operations_pending_registry",
         "title": "Site Operations portfolio",
-        "url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/site-operations.html"
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/site-operations.html"
       },
       "why": "The first mobile-friendly style, search and P007 grouped document changes are deployed; validate end-user usability, responsive layouts, PDF previews and permission-gated links across actual browsers.",
       "proposed_first_gate": "Desktop/mobile visual and keyboard accessibility smoke test plus Drive-link access test for Fishtail/Rohini members; fix any issues through authorized branch, CI and release readback.",
@@ -276,6 +289,11 @@
         "site-operations.html",
         "site-operations/project.html",
         "ops/data/project-resources.json"
+      ],
+      "recommendation": "The first mobile-friendly style, search and P007 grouped document changes are deployed; validate end-user usability, responsive layouts, PDF previews and permission-gated links across actual browsers.",
+      "when_to_build": "Desktop/mobile visual and keyboard accessibility smoke test plus Drive-link access test for Fishtail/Rohini members; fix any issues through authorized branch, CI and release readback.",
+      "security_invariants": [
+        "Do not show restricted provider messages or original file bytes publicly, and do not present historic received drawings as approved construction versions."
       ]
     }
   ],
