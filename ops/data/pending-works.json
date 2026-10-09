@@ -96,7 +96,7 @@
       "pending_id": "OPS-PEND-000004",
       "title": "A9-CWO seven-day Discord collector and private machine-index execution",
       "short_title": "Run Discord C01 → C02 → C05",
-      "status": "REVISION_012_FULL_HISTORY_SOURCE_READY_AUTHENTICATED_BACKFILL_PENDING",
+      "status": "REVISION_013_FULL_HISTORY_ARCHIVE_SOURCE_READY_PROVIDER_EXECUTION_PENDING",
       "priority": "NEXT_OPERATIONAL",
       "category": "COMMUNICATION_INTAKE",
       "owner_module_id": "MOD-OPS-001",
@@ -109,7 +109,7 @@
       "recommendation": "Run authorized C01/C06 backfill repeatedly, C07 original-media recovery until all native bytes verified, C08 private SQLite generation and C09 strict data gate. Then reconcile identities and publish approved public safe records; do not send Slack or update website until provenance and release gates pass.",
       "when_to_build": "Next user-authorized Google Colab runtime with Discord bot credential and Drive OAuth; do not pretend GitHub Actions can access the bot or run Discord itself.",
       "proposed_first_gate": "Run C01 → C02 live preview. Verify live parent/thread roster and every NPT cutoff; type COLLECT; verify new frozen C02 receipt and then execute C05. Do not attempt unsupported whole-guild/archived-thread collection.",
-      "implementation_status": "C06_HISTORY_C07_RECOVERY_C08_SQLITE_C09_PUBLICATION_GATE_SOURCE_COMMITTED;LIVE_COLAB_NOT_RUN;FULL_ORIGINAL_MEDIA_INCOMPLETE",
+      "implementation_status": "C06_HISTORY_C07_MEDIA_C08_SQLITE_C09_DATA_GATE;SAME_BYTES_SHA_CERTIFICATION_FOR_REUSED_MEDIA;COLAB_PROVIDER_EXECUTION_NOT_RUN",
       "current_boundary": "User requested COMPLETE retrievable Discord guild history, not a 7-day-only source. C06 provides resumable all-accessible-channel and active/archived thread history with private immutable Drive JSONL. C07 media-recovery, C08 private indexed SQLite and C09 publication block are code-ready; authenticated source receipts, complete backfill, original-media parity, and authorized web/Slack publication all remain NOT_DONE.",
       "related_canonical_sources": [
         "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
@@ -187,7 +187,7 @@
           "receipt_drive_id": "1ftkzIKyqUhVvCCWYAw5ka_YfKlDg2tVi"
         }
       },
-      "last_source_revision": "20261009-012",
+      "last_source_revision": "20261009-013",
       "static_qa_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37922352759",
       "machine_contracts": [
         "ops/discord/schemas/daily-message-index-v1.schema.json",
@@ -195,7 +195,7 @@
         "ops/discord/DAILY_7_DAY_MACHINE_ARCHIVE_RUNBOOK.md"
       ],
       "preview_contract": {
-        "revision": "20261009-012",
+        "revision": "20261009-013",
         "stage": "C02 BEFORE ANY ARCHIVE WRITES",
         "operator_confirmation": "COLLECT",
         "scope": "two parents and currently active child threads only",
@@ -207,8 +207,8 @@
         "after_history": "C07_REPAIR_MEDIA_THEN_C08_SQLITE_THEN_C09_PASS_BEFORE_PUBLICATION"
       },
       "source_qc": {
-        "revision": "20261009-012",
-        "source_commit": "d3a82e9dc7d17a61574a2ffab6e62a9d537d9623",
+        "revision": "20261009-013",
+        "source_commit": "e5f354ad47939ca1bec6e0a9870c04326230a76a",
         "provider_runtime": "NOT_RUN",
         "publication": "BLOCKED_UNTIL_PRIVATE_ARCHIVE_COMPLETE"
       }
