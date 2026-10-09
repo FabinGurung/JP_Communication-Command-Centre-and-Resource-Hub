@@ -184,6 +184,99 @@
           "cursors": "UNCHANGED"
         }
       }
+    },
+    {
+      "pending_id": "OPS-PEND-000005",
+      "title": "Narayani source-version certification and A9 Local/Main closeout",
+      "short_title": "Narayani engineering import QA",
+      "status": "IMPORTED_INDEXED_REVIEW_GATES_OPEN",
+      "priority": "HIGH",
+      "category": "ENGINEERING_DOCUMENT_GOVERNANCE",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "google_drive",
+        "file_id": "18M_KYt7U-zqwni2OvE1kcUg3TAyfP45OssdWJgu3ex8",
+        "title": "Source import manifest — 13 files copied, 16 CWO resources linked",
+        "url": "https://docs.google.com/document/d/18M_KYt7U-zqwni2OvE1kcUg3TAyfP45OssdWJgu3ex8/edit"
+      },
+      "why": "Maintain clear, verified lineage between the external Rambazar/Narayani source account and the governed kaksaveksaka project while preventing legacy 2025 models from being mistaken for approved 2026 drawings.",
+      "proposed_first_gate": "Confirm engineer-approved drawing/model revision IDs and independent SHA-256 source-vs-copy equality; register source→copy edges in the existing project file index, owning Local Library and Main Library without duplicates.",
+      "implementation_status": "13_SOURCE_FILES_COPIED_PROVIDER_METADATA_READBACK_PASS;P007_16_DRIVE_LINKS_REGISTERED;SOURCE_SHA256_AND_A9_LIBRARY_ACK_PENDING",
+      "current_boundary": "Never delete old source or replace revised 2026 drawings without engineer QC. No direct claim of byte-hash match or engineering design approval.",
+      "related_canonical_sources": [
+        "ops/data/project-resources.json",
+        "ops/events/daily-ops-events.jsonl",
+        "ops/control/storage-routing-rules.json"
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000006",
+      "title": "Legacy materials/progress/Slack source-of-truth consolidation audit",
+      "short_title": "Legacy-to-CWO event reconciliation",
+      "status": "READ_ONLY_COMPARISON_PENDING",
+      "priority": "HIGH",
+      "category": "A9_AUTHORITY_RECONCILIATION",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "google_drive",
+        "title": "Retain legacy material/progress ledgers until exact event/provider/project crosswalk is verified",
+        "url": "https://drive.google.com/drive/folders/1-ZPGmjfO5Hw8K0-JOFdZSyx2x12YRUQo"
+      },
+      "why": "Legacy September Nexus JSONL/SQLite and provider events are not comprehensively linked to current CWO event IDs; preserve material-accounting truth and avoid double Slack reminders or duplicate transactions.",
+      "proposed_first_gate": "READ ONLY: compare older FBL/REB event IDs, Slack ProviderEvents, current CWO events and Sheets, then issue fact-level authority matrix and unmigrated-ID list; obtain separate approval before data/schema mutation or legacy chat retirement.",
+      "implementation_status": "LEGACY_LEDGERS_RETAINED_IN_DRIVE;AUDIT_NOT_YET_COMPLETE",
+      "current_boundary": "No independent new ledger, provider send, retirement mutation or replacement of live quantitative Sheets before certified migration.",
+      "related_canonical_sources": [
+        "ops/events/daily-ops-events.jsonl",
+        "ops/data/current-works.json",
+        "ops/CANONICAL_DATA_AUTHORITY.md"
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000007",
+      "title": "Multi-provider archive completeness and optional AI query indexes",
+      "short_title": "AI archive indexes and coverage",
+      "status": "STANDARD_PUBLISHED_IMPLEMENTATION_PARTIAL",
+      "priority": "NEXT_3",
+      "category": "EVIDENCE_ARCHITECTURE",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "github",
+        "title": "Pinned archive formats reference",
+        "url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/controls/archive-formats.html"
+      },
+      "why": "Keep one durable, lossless private provider archive and derive efficient AI search indexes without misclassifying missing Discord originals, archived threads or private Slack history as complete.",
+      "proposed_first_gate": "Certify provider raw source coverage/cursors and 749 Discord original byte mismatches; only then pilot rebuildable SQLite/DuckDB and reversible compressed partitions on private verified data. Treat Parquet as optional.",
+      "implementation_status": "SEVEN_FORMAT_MACHINE_POLICY_AND_WEBSITE_LIVE;JSONL_RECEIPTS_EXIST;PARQUET_DUCKDB_NOT_DEPLOYED",
+      "current_boundary": "Private evidence stays in Drive. No original overwrite, false archive certification or public raw-message publication.",
+      "related_canonical_sources": [
+        "ops/control/storage-routing-rules.json",
+        "ops/control/daily-communication-web-cycle.json",
+        "ops/events/daily-ops-events.jsonl"
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000008",
+      "title": "Site Operations visual QA and user-centred UX v2",
+      "short_title": "Dashboard UX v2",
+      "status": "INITIAL_REDESIGN_DEPLOYED_VISUAL_QA_OPEN",
+      "priority": "NEXT_3",
+      "category": "FRONTEND_UX",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "github_pages",
+        "title": "Site Operations portfolio",
+        "url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/site-operations.html"
+      },
+      "why": "The first mobile-friendly style, search and P007 grouped document changes are deployed; validate end-user usability, responsive layouts, PDF previews and permission-gated links across actual browsers.",
+      "proposed_first_gate": "Desktop/mobile visual and keyboard accessibility smoke test plus Drive-link access test for Fishtail/Rohini members; fix any issues through authorized branch, CI and release readback.",
+      "implementation_status": "SITE_HOME_RESTYLE_SEARCH_QUICKLINKS_AND_P007_RESOURCE_GROUPING_DEPLOYED;BROWSER_VISUAL_READBACK_UNVERIFIED",
+      "current_boundary": "Do not show restricted provider messages or original file bytes publicly, and do not present historic received drawings as approved construction versions.",
+      "related_canonical_sources": [
+        "site-operations.html",
+        "site-operations/project.html",
+        "ops/data/project-resources.json"
+      ]
     }
   ],
   "archived_items": [
