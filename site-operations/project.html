@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="description" content="JP AEC Operations Hub Daily Site Operations project detail">
-  <title>Project Operations — JP AEC Operations Hub</title>
+  <title>Three-day Site Workboard · JP AEC</title>
   <style>
     :root{--bg:#f4f6f8;--panel:#fff;--text:#172033;--muted:#667085;--line:#e1e6ec;--blue:#175cd3;--green:#067647;--amber:#b54708;--red:#b42318;--soft:#eef4ff;--shadow:0 8px 24px rgba(15,23,42,.07)}
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}a{color:inherit}
@@ -52,6 +52,38 @@ body{background:radial-gradient(ellipse at 88% 0,#e2f1e6 0,transparent 34%),var(
 .resource-card,.resource-head,.work-head,.row{overflow-wrap:anywhere}
 @media(max-width:820px){.field-lead,.secondary-grid{grid-template-columns:minmax(0,1fr)}.docs-section .resource-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.section{max-width:100%}}
 @media(max-width:470px){.docs-section .resource-cards{grid-template-columns:minmax(0,1fr)}.shell{padding-inline:10px}}
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap');
+:root{--ui:'Nunito Sans',Verdana,sans-serif;--display:'Fraunces',Georgia,serif;--text:#263b32;--muted:#486254;--panel:#fffefa;--line:#dde8dd;--bg:#f7f7f0}
+html,body{font-family:var(--ui)}.hero h1,.section-heading h2,.resource-group h3,.compact-archive summary{font-family:var(--display)}
+.nav a,.quick-nav a{font-family:var(--ui);font-weight:800}.hero{padding:30px 34px;min-height:165px}.hero h1{font-size:clamp(31px,4.5vw,51px)}
+.hero .focus{font-family:var(--ui);font-weight:650}
+.day-workboard,.issue-panel{margin-top:17px}.day-workboard{background:#fffefa}.issue-panel{background:#fff9f0}
+.day-stack{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}.day-panel{border:1px solid #dce7dd;background:#fff;border-radius:15px;overflow:hidden}
+.day-panel[data-bucket="today"]{border-color:#a3cbb4;box-shadow:0 5px 20px #245e3f0c}
+.day-panel header{display:flex;flex-wrap:wrap;gap:9px;align-items:center;justify-content:space-between;padding:14px 17px;background:#f3f6ef}
+.day-panel[data-bucket="today"] header{background:#eaf3e9}.day-panel header h3{font:650 19px/1.25 var(--display);margin:0;color:#215841}
+.day-panel header p{margin:2px 0 0;font-size:12px;color:#526e59}.day-panel header .count{color:#41604c;font-weight:850;font-size:11px}
+.table-wrap{overflow-x:auto}.schedule-table,.issues-table{border-collapse:collapse;width:100%;font-size:13px;table-layout:fixed}
+.schedule-table th,.issues-table th{text-align:left;font:800 11px var(--ui);text-transform:uppercase;letter-spacing:.06em;color:#5a7865;background:#fafbf8;padding:10px 13px;border-bottom:1px solid #dce6dd}
+.schedule-table td,.issues-table td{padding:12px 13px;vertical-align:top;border-bottom:1px solid #e7ece5;line-height:1.55}
+.schedule-table tr:last-child td,.issues-table tr:last-child td{border-bottom:0}
+.schedule-table th:nth-child(1){width:20%}.schedule-table th:nth-child(3){width:20%}.schedule-table th:nth-child(4){width:11%}
+.issues-table th:nth-child(1){width:18%}.issues-table th:nth-child(3){width:21%}.issues-table th:nth-child(4){width:11%}
+.trade{display:inline-flex;gap:5px;align-items:center;font-weight:800;color:#225a45;font-size:12px}
+.row-state{display:inline-block;font-size:11px;font-weight:800;padding:4px 8px;border-radius:9px;background:#eff3ed;color:#385f4d}
+.row-state[data-danger="true"]{background:#fff0e9;color:#934b32}
+.source-link{text-decoration:none;color:#17705a;font-size:12px;font-weight:800}.source-link:hover{text-decoration:underline}
+.no-report{padding:17px;color:#576f60;font-size:13px;background:#fafbf8}
+.queue-summary{max-width:100%;overflow-wrap:anywhere}
+.queue-summary details{margin-top:6px;font-size:12px;color:#5c6b60}.queue-summary details summary{cursor:pointer;color:#245e49}
+.compact-archive{margin-top:16px;background:#fafbf7;padding:0}.compact-archive>summary{cursor:pointer;padding:18px 21px;font-size:19px;font-weight:650;list-style:none}.compact-archive summary::-webkit-details-marker{display:none}
+.compact-archive summary small{font:500 12px var(--ui);display:block;margin-top:4px;color:#52705d}
+.compact-archive .archive-inner{padding:0 22px 22px}.compact-archive h3{margin:19px 0 8px;font:700 15px var(--ui)}.compact-archive .row{background:#fff;border-radius:9px;margin:5px 0;padding:10px}
+.docs-section{margin-top:16px}.issue-panel .row{background:#fff}
+@media(max-width:680px){.schedule-table,.issues-table{font-size:12px}.schedule-table th,.issues-table th,.schedule-table td,.issues-table td{padding:9px 8px}
+.schedule-table th:nth-child(1),.issues-table th:nth-child(1){width:25%}.schedule-table th:nth-child(3),.issues-table th:nth-child(3){width:23%}.schedule-table th:nth-child(4),.issues-table th:nth-child(4){width:12%}
+.day-panel header{padding:12px}.row-state{font-size:10px;padding:3px 5px}.trade{font-size:11px}}
+
   </style>
 </head>
 <body>
@@ -71,25 +103,37 @@ body{background:radial-gradient(ellipse at 88% 0,#e2f1e6 0,transparent 34%),var(
     <div class="focus" id="focus">Loading site focus…</div><div class="record-hint" id="record-hint">Verify the record date before work proceeds.</div><div class="hero-icon" aria-hidden="true">🏗️</div>
   </section>
 
-  <nav class="quick-nav" aria-label="Project field brief sections">
-    <a href="#field-plan">🧭 Field plan</a><a href="#drawings">📐 Drawings</a><a href="#material-check">🧱 Materials</a><a href="#historical-records">📚 Records</a>
-  </nav>
-  <main>
-    <div class="field-lead">
-      <section class="section" id="field-plan"><div class="section-heading"><span class="section-symbol" aria-hidden="true">👷</span><div><div class="eyebrow">01 / Start here</div><h2>Work to verify on site</h2></div></div>
-      <p class="section-intro">This is the latest reported activity, not an automatically approved instruction or completed-work certificate. Confirm conditions with the responsible team.</p><div id="work"></div></section>
-      <section class="section issue-panel" id="decision-list"><div class="section-heading"><span class="section-symbol" aria-hidden="true">⚑</span><div><div class="eyebrow">02 / Before proceeding</div><h2>Decisions &amp; holds</h2></div></div><div id="blockers"></div><div class="small-print">A missing answer remains unresolved. Engineering HOLD and NOT_READY statuses are not overridden by this webpage.</div></section>
-    </div>
-    <section class="section docs-section" id="drawings"><div class="section-heading"><span class="section-symbol" aria-hidden="true">📐</span><div><div class="eyebrow">03 / Find the correct reference</div><h2>Drawings, models &amp; project folders</h2></div></div>
-      <p class="section-intro">Access controlled by Google Drive. A linked document is not a substitute for engineer-issued revision approval.</p><div id="resources"></div></section>
-    <div class="secondary-grid">
-      <details class="section detail-section" id="material-check"><summary>🧱 Material checks <small>stock, delivery and usage are separate</small></summary><div id="materials" class="detail-content"></div></details>
-      <details class="section detail-section" id="next-steps"><summary>🗓️ Next steps / lookahead <small>plans are not completion records</small></summary><div id="lookahead" class="detail-content"></div></details>
-      <details class="section detail-section" id="historical-records"><summary>📚 Progress history <small>older field reports and updates</small></summary><div id="progress" class="detail-content"></div></details>
-      <details class="section detail-section" id="evidence-links"><summary>📷 Evidence and audit links <small>original provider references</small></summary><div id="evidence" class="detail-content"></div></details>
-    </div>
-  </main>
-  <details class="site-help" style="margin-top:16px;font-size:12px;color:#56766a"><summary style="cursor:pointer;font-weight:750">Help &amp; full sources</summary><p><a href="../guide/">How to use the platform</a> · <a href="../ops/data/project-resources.json">Resource registry</a> · <a href="../ops/events/daily-ops-events.jsonl">Event history</a></p></details>
+  <nav class="quick-nav" aria-label="Project field briefing">
+  <a href="#field-plan">🗓️ 3-day work plan</a>
+  <a href="#decision-list">⚠️ Holds &amp; decisions</a>
+  <a href="#drawings">📐 Drawings</a>
+</nav>
+<main>
+  <section class="section day-workboard" id="field-plan" aria-labelledby="day-board-title">
+    <div class="section-heading"><span class="section-symbol" aria-hidden="true">👷</span><div><div class="eyebrow">Site planning · reported, not assumed</div><h2 id="day-board-title">Yesterday · Today · Tomorrow</h2></div></div>
+    <p class="section-intro">Every activity belongs to a trade and a dated evidence state. Carry-forward questions are not confirmed assignments. The engineer’s replies will supply the next actual report.</p>
+    <div id="work" aria-live="polite"></div>
+  </section>
+  <section class="section issue-panel" id="decision-list">
+    <div class="section-heading"><span class="section-symbol" aria-hidden="true">🚧</span><div><div class="eyebrow">Action queue</div><h2>Defects, decisions and work holds</h2></div></div>
+    <p class="section-intro">Only a recorded engineering HOLD is a hold. Other unresolved items are questions awaiting the relevant engineer or trade lead—not a blanket stop on the whole site.</p>
+    <div id="blockers"></div>
+  </section>
+  <section class="section docs-section" id="drawings">
+    <div class="section-heading"><span class="section-symbol" aria-hidden="true">📐</span><div><div class="eyebrow">Drawing room</div><h2>Drawings &amp; models</h2></div></div>
+    <p class="section-intro">Controlled Drive links, with primary architecture and structure first. Technical revision/approval must be confirmed independently.</p>
+    <div id="resources"></div>
+  </section>
+  <details id="historical-records" class="section compact-archive">
+    <summary>📚 Older reports and evidence <small>Open only when auditing or resolving a question</small></summary>
+    <div class="archive-inner"><h3>Previously reported progress</h3><div id="progress"></div>
+    <h3>Materials and historical stock/usage</h3><div id="materials"></div>
+    <h3>Older lookahead suggestions</h3><div id="lookahead"></div>
+    <h3>Raw evidence links</h3><div id="evidence"></div>
+    <p><a href="../ops/control/field-trade-taxonomy.json" target="_blank" rel="noopener">View 21 construction work categories ↗</a></p></div>
+  </details>
+</main>
+<details class="site-help" style="margin-top:16px;font-size:12px;color:#56766a"><summary style="cursor:pointer;font-weight:750">Help &amp; full sources</summary><p><a href="../guide/">How to use the platform</a> · <a href="../ops/data/project-resources.json">Resource registry</a> · <a href="../ops/events/daily-ops-events.jsonl">Event history</a></p></details>
 <div class="footer">Verified provider facts only. Readiness and execution are separate: READY does not mean DONE. <a href="../site-operations.html">Back to Site Operations dashboard</a>.</div>
 </div>
 <script>
@@ -124,12 +168,54 @@ function rows(id,items,none,mapper){
   const root=$(id); if(!items.length){root.innerHTML=empty(none);return;}
   root.innerHTML='<div class="list">'+items.map(x=>{const m=mapper(x);return '<div class="row"><b>'+esc(m[0])+'</b><div>'+esc(m[1]||"—")+'</div>'+(m[2]?'<div class="sub">'+esc(m[2])+'</div>':"")+'</div>';}).join("")+'</div>';
 }
-function work(items){
-  const root=$("work"); if(!items.length){root.innerHTML=empty("No verified work-readiness item has been admitted yet.");return;}
-  root.innerHTML=items.map(x=>{
-    const r=x.readiness||{}, gates=[["Materials",r.materials],["Manpower",r.manpower],["PPE",r.ppe],["Briefing",r.work_briefing],["Tools",r.tools],["Preconditions",r.preconditions]];
-    return '<article class="work"><div class="work-head"><div><b>'+esc(x.activity)+'</b><div class="sub">'+esc(x.location||"")+'</div></div><div><span class="pill">'+esc(label(r.overall))+'</span> <span class="pill">'+esc(label(x.execution_status))+'</span></div></div><div class="gate-grid">'+gates.map(g=>'<div class="gate"><strong>'+esc(g[0])+'</strong><span>'+esc(label((g[1]||{}).status||"UNKNOWN"))+'</span></div>').join("")+'</div>'+(x.blocker?'<div class="focus"><b>Blocker:</b> '+esc(x.blocker)+'</div>':"")+'</article>';
-  }).join("");
+function tradeLabel(id, catalog) {
+  const t=(catalog.trades||[]).find(x=>x.id===id);
+  return t ? '<span class="trade"><span aria-hidden="true">'+esc(t.emoji)+'</span>'+esc(t.name)+'</span>' : '<span class="trade">'+esc(id)+'</span>';
+}
+function stageLabel(v) {
+  const m={REPORTED_INFORMATION:"Reported / not quantity-verified",REPORTED_ONGOING:"Reported ongoing",ISSUE_RAISED:"Issue raised",NEEDS_REPORT:"Engineer reply needed",RECONFIRM_PREVIOUS_REPORT:"Reconfirm prior activity",NEEDS_ENGINEER_DECISION:"Engineer decision",NEEDS_DECISION:"Decision needed",NEEDS_SITE_INSPECTION:"Inspect on site",NEEDS_CORRECTION:"Correction needed",WRONG_SITE_REVIEW:"Verify site identity",ENGINEER_HOLD:"HOLD — engineer release"};
+  return m[v]||"Confirmation needed";
+}
+function dayTable(bucket,rows,catalog,date){
+ const title={yesterday:"Yesterday",today:"Today",tomorrow:"Tomorrow"}[bucket];
+ const desc={yesterday:"Reported on the date; not all work was verified",today:"Open workstreams to confirm—not assigned work",tomorrow:"Plans require an engineer's dated reply"}[bucket];
+ const body=rows.length?'<div class="table-wrap"><table class="schedule-table"><thead><tr><th scope="col">Trade</th><th scope="col">Specific work / question</th><th scope="col">State</th><th scope="col">Evidence</th></tr></thead><tbody>'+rows.map(x=>'<tr><td>'+tradeLabel(x.trade_id,catalog)+'</td><td>'+esc(x.summary)+'</td><td><span class="row-state" data-danger="'+(x.status==="ENGINEER_HOLD")+'">'+esc(stageLabel(x.status))+'</span></td><td>'+(x.source_ref?'<a class="source-link" href="'+esc(x.source_ref)+'" target="_blank" rel="noopener noreferrer">Source ↗</a>':'Not yet')+'</td></tr>').join("")+'</tbody></table></div>':
+ '<div class="no-report">'+(bucket==="tomorrow"?"No dated engineer-approved next-day plan has been received. Request work, trade, location, crew only if assigned, and any hold for "+esc(date)+".":bucket==="yesterday"?"No source-confirmed work/result has been entered for this date. This does not mean no work occurred.":"A project work review has not been admitted for this date.")+'</div>';
+ return '<section class="day-panel" data-bucket="'+bucket+'"><header><div><h3>'+({yesterday:"↩ ",today:"👷 ",tomorrow:"↪ "}[bucket])+title+' · '+esc(date)+'</h3><p>'+esc(desc)+'</p></div><span class="count">'+rows.length+' sourced item'+(rows.length===1?'':'s')+'</span></header>'+body+'</section>';
+}
+function renderBoard(record,catalog){
+ const root=$("work");
+ if(!record){root.innerHTML=empty("Three-day trade record unavailable. Do not infer a schedule.");return;}
+ root.innerHTML='<div class="day-stack">'+dayTable("yesterday",record.yesterday||[],catalog,record.date_yesterday||"2026-10-08")+dayTable("today",record.today||[],catalog,record.date_today||"2026-10-09")+dayTable("tomorrow",record.tomorrow||[],catalog,record.date_tomorrow||"2026-10-10")+'</div>';
+}
+function issueTrade(text){
+ const t=text.toLowerCase();
+ if(/waterproof|leak|seepage/.test(t))return "WATERPROOF";
+ if(/electric|wiring|board/.test(t))return "ELECTRICAL";
+ if(/pipe|plumb|toilet/.test(t))return "PLUMBING";
+ if(/rebar|stirrup|shear|anchorage|cf1|cantilever/.test(t))return "REBAR";
+ if(/shutter|centring|ply/.test(t))return "FORMWORK";
+ if(/plaster/.test(t))return "PLASTER";
+ if(/brick|lintel/.test(t))return "BRICKWORK";
+ if(/upvc|door|window/.test(t))return "UPVC";
+ if(/cement|stock|material|bill|ordered/.test(t))return "PROCUREMENT";
+ return "ENGINEERING";
+}
+function shortIssue(text){
+ const t=String(text||"");
+ const m=[[/top.water leakage/i,"Top-water leakage / cause unknown"],[/toilet door height/i,"Toilet door height / held plaster"],[/kitchen bottom.slab seepage/i,"Kitchen seepage inspection"],[/electrical wiring\/batta/i,"Electrical work awaiting ceiling decision"],[/embedded bamboo|bamboo scaffolding/i,"Embedded bamboo and wall quality"],[/crack\/anchorage|visible crack/i,"Crack and anchorage review"],[/CF1 chair\/stirrup/i,"CF1 chair / stirrup dimensions"],[/provider statements conflict/i,"Footing OPC quantities conflict"],[/brick quantity/i,"Brick quantity and bill"],[/second.floor slab materials/i,"Second-floor material receipt"],[/cantilever confirmation/i,"Cantilever / stirrup checks"],[/external pipe.concealment/i,"External plumbing route / wall detail"]];
+ for(const [rx,title] of m)if(rx.test(t))return title;
+ const first=t.split(/[.;]/)[0];return first.length>97?first.slice(0,94)+"…":first;
+}
+function renderIssues(project,catalog){
+ const root=$("blockers"),o=project.daily_ops||{},items=o.blockers||[];
+ const hold=["HOLD","NOT_READY"].includes(o.overall_readiness);
+ let info=hold?'<p class="row-state" data-danger="true">⚠ Engineering/site HOLD recorded for affected work. Do not infer approval to resume.</p>':'';
+ if(!items.length){root.innerHTML=info+'<div class="no-report">No open issue is registered; this does not certify unrestricted work readiness.</div>';return;}
+ root.innerHTML=info+'<div class="table-wrap"><table class="issues-table"><thead><tr><th scope="col">Trade</th><th scope="col">Issue / answer needed</th><th scope="col">Decision state</th><th scope="col">Evidence</th></tr></thead><tbody>'+
+ items.map(x=>{const raw=x.blocker||x.title||"",source=(x.source_refs||[]).find(y=>typeof y==="string"&&/^https:\/\//.test(y));
+ return '<tr><td>'+tradeLabel(issueTrade(raw),catalog)+'</td><td class="queue-summary"><strong>'+esc(shortIssue(raw))+'</strong><details><summary>Context &amp; follow-up</summary>'+esc(raw)+(x.responsible?'<p>Response role: '+esc(x.responsible)+'</p>':'')+'</details></td><td><span class="row-state" data-danger="'+(x.status==="HOLD")+'">'+(x.status==="HOLD"?"HOLD / engineer":"Needs reply")+'</span></td><td>'+(source?'<a class="source-link" href="'+esc(source)+'" target="_blank" rel="noopener noreferrer">Source ↗</a>':"—")+'</td></tr>';
+ }).join("")+'</tbody></table></div>';
 }
 function resources(set){
   const root=$("resources");
@@ -183,27 +269,33 @@ async function load(){
   try{
     const pid=params.get("project")||"P001";
     const bust=Date.now();
-    const [sr,er,rr]=await Promise.all([
+    const [sr,er,rr,br,tr]=await Promise.all([
       fetch("../ops/data/current-works.json?v="+bust,{cache:"no-store"}),
       fetch("../ops/events/daily-ops-events.jsonl?v="+bust,{cache:"no-store"}),
-      fetch("../ops/data/project-resources.json?v="+bust,{cache:"no-store"})
+      fetch("../ops/data/project-resources.json?v="+bust,{cache:"no-store"}),
+      fetch("../ops/data/field-three-day-board.json?v="+bust,{cache:"no-store"}),
+      fetch("../ops/control/field-trade-taxonomy.json?v="+bust,{cache:"no-store"})
     ]);
     if(!sr.ok) throw new Error("Daily Ops state unavailable.");
     const data=await sr.json();
     const resourceData=rr.ok?await rr.json():{projects:[]};
+    const tradeBoard=br.ok?await br.json():{projects:[]};
+    const catalog=tr.ok?await tr.json():{trades:[]};
     const p=data.projects.find(x=>x.project_id===pid);
     if(!p) throw new Error("Project not found.");
     const o=p.daily_ops||{}, att=attention(p);
-    document.title=p.display_name+" — Site Operations";
+    document.title=p.display_name+" — 3-Day Site Workboard";
     $("name").textContent=p.display_name;
     $("meta").textContent=[p.project_id,p.company_project_code,p.contractor,o.date||"No date"].filter(Boolean).join(" · ");
     $("record-hint").textContent="📅 Source record: "+(o.date||"date unverified")+" · Field readiness must be confirmed for the work date. Never infer current site status from an older report.";
     $("attention").textContent=att[0]; $("attention").dataset.tone=att[1];
-    $("focus").innerHTML="<b>Focus now:</b> "+esc(focus(p));
-    work(o.todays_work||[]);
+    $("focus").innerHTML="<b>Work briefing:</b> Dated trade reports and engineer responses are required before this can be treated as an approved daily schedule.";
+    const row=(tradeBoard.projects||[]).find(x=>x.project_id===pid);
+    if(row){row.date_yesterday=tradeBoard.date_yesterday;row.date_today=tradeBoard.date_today;row.date_tomorrow=tradeBoard.date_tomorrow;}
+    renderBoard(row,catalog);
     resources((resourceData.projects||[]).find(x=>x.project_id===pid));
     rows("progress",o.progress||[],"No verified progress yet.",x=>[x.status||"Progress",x.note||x.activity||"","Observed: "+(x.observed_at||"—")]);
-    rows("blockers",o.blockers||[],"No open blocker admitted.",x=>[x.status||"Open",x.blocker||x.title||"",x.responsible?"Responsible: "+x.responsible:""]);
+    renderIssues(p,catalog);
     rows("materials",o.materials||[],"No verified material status yet.",x=>[x.material_name||x.material||"Material",[x.quantity,x.unit,x.material_state||x.status,x.note].filter(v=>v!==null&&v!==undefined&&v!=="").join(" · "),x.observed_at?"Observed: "+x.observed_at:""]);
     rows("lookahead",o.lookahead||[],"No governed lookahead admitted yet.",x=>[x.target_date||x.day||"Next",x.activity||x.note||"",x.condition?"Condition: "+x.condition:""]);
     const ev=o.evidence||[]; const root=$("evidence");
