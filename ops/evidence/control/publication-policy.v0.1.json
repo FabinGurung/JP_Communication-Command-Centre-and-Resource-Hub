@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1.0",
+  "publication_default": "DENY",
+  "applicable_repo_visibility": "PUBLIC",
+  "private_fields": [
+    "caption_or_text",
+    "source_uri_ref",
+    "provider_message_id",
+    "provider_channel_id",
+    "attachment_ids",
+    "company_id",
+    "personnel",
+    "original_media_bytes",
+    "provider_cdn_url",
+    "drive_file_id"
+  ],
+  "conditions_all": [
+    "PROJECT_FK_VERIFIED",
+    "OWNING_COMPANY_VERIFIED",
+    "ADMISSION_RECEIPT_VERIFIED",
+    "PRIVACY_REVIEW_APPROVED",
+    "SOURCE_LINEAGE_RETAINED",
+    "ENGINEERING_CLAIM_NOT_INFERRED",
+    "PROJECTION_ONLY_PUBLIC_SAFE_FIELDS"
+  ],
+  "eligible_claims": [
+    "FIELD_REPORTED_WITH_NEUTRAL_ATTRIBUTION",
+    "SITE_LEAD_CONFIRMED_WHEN_RECEIPT_EXISTS",
+    "ENGINEER_ACCEPTED_WHEN_RECEIPT_EXISTS"
+  ],
+  "rejected_media_statuses": [
+    "PREVIOUSLY_ARCHIVED_UNRECONFIRMED_SHA",
+    "PROVIDER_DERIVATIVE_UNVERIFIED_ORIGINAL",
+    "SOURCE_METADATA_ONLY",
+    "FAILED_SIZE_MISMATCH",
+    "NOT_YET_CHECKED"
+  ],
+  "approved_projection_fields": [
+    "schema_version",
+    "source_run_id",
+    "project_id",
+    "summary_date",
+    "reported_observation_count",
+    "verified_evidence_count",
+    "unresolved_evidence_count",
+    "admission_receipt_ref",
+    "safe_summary",
+    "generated_at_utc"
+  ],
+  "projection_path": "ops/data/evidence-public-summary.json",
+  "notes": "Aggregate counters are an inventory, not an engineering/completion finding. No media in default public projection."
+}

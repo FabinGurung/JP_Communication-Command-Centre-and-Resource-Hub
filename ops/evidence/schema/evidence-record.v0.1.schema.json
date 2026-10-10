@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/ops/evidence/schema/evidence-record.v0.1.schema.json",
+  "title": "A9-CWO private evidence record (append-only version)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "provider",
+    "provider_message_id",
+    "provider_channel_id",
+    "captured_at_utc",
+    "project_id",
+    "company_id",
+    "source_run_id",
+    "source_receipt_id",
+    "source_content_sha256",
+    "evidence_kind",
+    "caption_or_text",
+    "observation_date",
+    "claim_state",
+    "verification_state",
+    "attachment_ids",
+    "access_classification",
+    "source_uri_ref",
+    "version",
+    "supersedes_id"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "pattern": "^EV-[a-f0-9]{64}$",
+      "description": "SHA256 of canonical provider|channel|message|source_content_sha256; never regenerate on a replay."
+    },
+    "provider": {
+      "enum": [
+        "DISCORD",
+        "SLACK",
+        "GOOGLE_FORMS",
+        "OTHER_APPROVED"
+      ]
+    },
+    "provider_message_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provider_channel_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "captured_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "project_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^PRJ-[0-9]{6}$"
+    },
+    "company_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^ORG-[0-9]{6}$"
+    },
+    "source_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_receipt_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_content_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "evidence_kind": {
+      "enum": [
+        "MESSAGE",
+        "FIELD_PHOTO",
+        "FIELD_VIDEO",
+        "DOCUMENT",
+        "REPORT",
+        "OTHER"
+      ]
+    },
+    "caption_or_text": {
+      "type": "string",
+      "description": "PRIVATE: original text or caption; never copied into public projection without review."
+    },
+    "observation_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "claim_state": {
+      "enum": [
+        "FIELD_REPORTED",
+        "SITE_LEAD_CONFIRMED",
+        "ENGINEER_ACCEPTED",
+        "NEEDS_INPUT",
+        "CONFLICTED",
+        "REJECTED"
+      ]
+    },
+    "verification_state": {
+      "enum": [
+        "NOT_YET_CHECKED",
+        "SOURCE_METADATA_ONLY",
+        "SOURCE_VERIFIED",
+        "ORIGINAL_VERIFIED",
+        "PARTIAL",
+        "FAILED"
+      ]
+    },
+    "attachment_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "access_classification": {
+      "enum": [
+        "PRIVATE_RESTRICTED",
+        "INTERNAL_REVIEW",
+        "PUBLIC_CANDIDATE",
+        "PUBLIC_APPROVED"
+      ]
+    },
+    "source_uri_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque authenticated source lookup key, not CDN or public URL."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "supersedes_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^EV-[a-f0-9]{64}$"
+    },
+    "admission_status": {
+      "enum": [
+        "QUARANTINED_UNMAPPED",
+        "PENDING_REVIEW",
+        "ADMITTED",
+        "REJECTED"
+      ]
+    },
+    "admission_receipt_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "version": {
+            "const": 1
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "then": {
+        "properties": {
+          "supersedes_id": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "admission_status": {
+            "const": "ADMITTED"
+          }
+        },
+        "required": [
+          "admission_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "project_id": {
+            "type": "string"
+          },
+          "company_id": {
+            "type": "string"
+          },
+          "admission_receipt_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ]
+}
