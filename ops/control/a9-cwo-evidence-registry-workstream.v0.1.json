@@ -1,6 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "schema_version": "0.1.0",
+  "schema_version": "0.1.1",
   "registry_id": "A9-CWO-EVIDENCE-REGISTRY-WORKSTREAM-001",
   "status": "WORKSTREAM_BOOTSTRAP_DESIGN_ONLY",
   "date_npt": "2026-10-10",
@@ -63,14 +62,15 @@
     ],
     "proposed_files": {
       "catalog_schema": "ops/evidence/schema/evidence-record.v0.1.schema.json",
-      "evidence_rows": "ops/evidence/private-gated/evidence-index.v0.1.jsonl",
-      "attachment_qa": "ops/evidence/private-gated/attachment-fidelity.v0.1.jsonl",
+      "evidence_rows": "private-store://a9-cwo/evidence-index.v0.1.jsonl",
+      "attachment_qa": "private-store://a9-cwo/attachment-fidelity.v0.1.jsonl",
       "project_map": "ops/evidence/control/project-source-map.v0.1.json",
       "projection_policy": "ops/evidence/control/publication-policy.v0.1.json",
       "website_projection": "ops/data/evidence-public-summary.json",
       "events": "ops/events/cwo-daily/"
     },
-    "note": "PROPOSED_FILES_ARE_NOT_YET_IMPLEMENTED. Do not commit private evidence rows, secrets, signed CDN URLs or private file contents to a public GitHub repository. Use local/private staging or authenticated storage for private-gated paths."
+    "note": "PROPOSED_FILES_NOT_IMPLEMENTED. private-store:// denotes an authenticated private data store, NOT a path or repository location. Never commit private provider evidence rows, secrets, signed CDN URLs, or private attachments into this public GitHub repository. Only sanitized public-safe summaries may be committed.",
+    "private_evidence_repo_policy": "PRIVATE_RAW_OR_NORMALIZED_EVIDENCE_GITHUB_PUBLIC_COMMIT_FORBIDDEN"
   },
   "mandatory_record_fields": [
     "record_id",
@@ -173,7 +173,7 @@
   ],
   "handoff": {
     "start_instruction": "Read precedence files and 10 Oct source receipt first, then implement P0→P1 before any mass source transformation.",
-    "first_output": "Machine-readable schema + identity mapping + 269-item failure classification manifest, no unverified downloads certified as originals.",
+    "first_output": "P0 inventory and P1 schema/identity mapping + 269 unresolved attachment mismatch classification via private storage; do not publish image binary, metadata that reveals private personnel, or assume source file completeness.",
     "chat_creation": "User opens a separate ChatGPT conversation and references this machine workstream contract; chat creation is not a GitHub operation."
   }
 }
