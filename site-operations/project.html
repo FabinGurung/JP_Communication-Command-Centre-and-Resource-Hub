@@ -104,10 +104,11 @@ html,body{font-family:var(--ui)}.hero h1,.section-heading h2,.resource-group h3,
 <body>
 <div class="shell">
   <nav class="nav" aria-label="Main navigation">
-    <a href="../site-operations.html">← Morning Desk</a>
+    <a href="../site-operations.html">← Daily Checklist</a>
+    <a id="coordination-page-link" href="coordination.html">Site Coordination</a>
     <a id="schedule-page-link" href="schedule.html">Work &amp; Holds</a>
     <a id="question-page-link" href="questions.html">Engineer Questions</a>
-    <a href="history.html" id="history-page-link">Progress History</a>
+    <a href="history.html" id="history-page-link">Progress Report</a>
     <a href="../map.html">🗺️ Map</a>
     <a href="../workspace/">Workspace</a>
     <a href="../controls/archive-formats.html">Archive policy</a>
@@ -289,6 +290,7 @@ async function load(){
     document.getElementById("schedule-page-link").href="schedule.html?project="+encodeURIComponent(pid);
     document.getElementById("question-page-link").href="questions.html?project="+encodeURIComponent(pid);
     document.getElementById("history-page-link").href="history.html?project="+encodeURIComponent(pid);
+    document.getElementById("coordination-page-link").href="coordination.html?project="+encodeURIComponent(pid);
     const bust=Date.now();
     const [sr,er,rr,br,tr]=await Promise.all([
       fetch("../ops/data/current-works.json?v="+bust,{cache:"no-store"}),
