@@ -45,7 +45,7 @@ assert "PARTIAL_BACKFILL" in c08
 assert "h_media(R_MEDIA" in c07 and 'R_RECOVERED[aid]' in c07
 assert 'q_database=h_immutable(q_dir,' in c08 and "sqlite3" in c08
 assert 'g_fail.append("ORIGINAL_MEDIA_RECOVERY_INCOMPLETE")' in c09
-assert "if g_last.get(\"status\")!=\"PASS\":" in c09
+assert "LAST_HISTORY_RECEIPT_INCOMPLETE" in c09 and "QUERY_INDEX_BUILT_FROM_PARTIAL_HISTORY" in c09
 assert "g_build.get(\"source_run_receipt_id\")!=g_runs[-1][\"id\"]" in c09
 for code in (c06,c07,c08,c09):
     assert "chat.postMessage" not in code and "slack.chat_postMessage" not in code
