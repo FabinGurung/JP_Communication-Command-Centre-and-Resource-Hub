@@ -15,8 +15,7 @@ CREATE TABLE IF NOT EXISTS cwo_source_messages (
 CREATE TABLE IF NOT EXISTS cwo_project_company_links (
  project_id text PRIMARY KEY REFERENCES ops_projects(project_id),
  company_id text NOT NULL CHECK(company_id ~ '^ORG-[0-9]{6}$'),
- verified_source_ref text NOT NULL,
- UNIQUE(project_id,company_id)
+ verified_source_ref text NOT NULL
 );
 CREATE TABLE IF NOT EXISTS cwo_evidence_records (
  record_id text PRIMARY KEY CHECK(record_id ~ '^EV-[a-f0-9]{64}$'),
@@ -41,6 +40,9 @@ CREATE TABLE IF NOT EXISTS cwo_evidence_records (
  UNIQUE(provider,provider_channel_id,provider_message_id,source_content_sha256),
  UNIQUE(provider,provider_channel_id,provider_message_id,version)
 );
+-- Composite FK target requires explicit uniqueness in PostgreSQL.
+CREATE UNIQUE INDEX IF NOT EXISTS cwo_project_company_pair
+ ON cwo_project_company_links(project_id,company_id);
 CREATE TABLE IF NOT EXISTS cwo_attachment_versions (
  fidelity_event_id text PRIMARY KEY,provider text NOT NULL,
  provider_channel_id text NOT NULL,provider_message_id text NOT NULL,
