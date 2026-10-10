@@ -1,0 +1,117 @@
+{
+  "contract_id": "A9-CWO-SITE-OPERATIONS-VIEWS-001",
+  "schema_version": "0.1.0",
+  "effective_date_npt": "2026-10-10",
+  "canonical_project_data": "ops/data/current-works.json",
+  "source_evidence_originals": "PRIVATE_GDRIVE_ONLY",
+  "evidence_run_id": "20261010T005617Z",
+  "information_architecture": [
+    {
+      "page": "site-operations.html",
+      "role": "MORNING_ACTION_DESK",
+      "priority": 1,
+      "focus": [
+        "confirmed_work_only_if_authorized",
+        "action_checks_before_assigning_crews",
+        "open_issues_and_hold_readiness",
+        "one_action_preview_per_site"
+      ],
+      "avoid": [
+        "historical_cement_detail",
+        "raw_attachment_listing",
+        "past_daily_progress_as_to_do"
+      ]
+    },
+    {
+      "page": "site-operations/schedule.html",
+      "role": "WORK_AND_HOLDS_DETAILED",
+      "priority": 2,
+      "focus": [
+        "source_authorized_daily_plan",
+        "site_readiness_and_hold",
+        "unresolved_issues"
+      ]
+    },
+    {
+      "page": "site-operations/questions.html",
+      "role": "ENGINEER_QA_AND_RESPONSES",
+      "priority": 3,
+      "focus": [
+        "question_id",
+        "mcq_draft",
+        "supporting_evidence",
+        "manual_slack_reply"
+      ],
+      "write_back": "NOT_IMPLEMENTED"
+    },
+    {
+      "page": "site-operations/history.html",
+      "role": "HISTORICAL_PROGRESS_REPORT",
+      "priority": 4,
+      "focus": [
+        "source_linked_reported_progress",
+        "timeline_and_project_drilldown",
+        "long_term_evidence_trail",
+        "attachment_fidelity_limitations"
+      ]
+    },
+    {
+      "page": "site-operations/project.html",
+      "role": "LEGACY_DETAILED_SOURCE_SNAPSHOT",
+      "priority": 5,
+      "url_stability": "PRESERVE",
+      "focus": [
+        "full_drawings_and_resources",
+        "legacy_detail",
+        "previous_reports"
+      ]
+    }
+  ],
+  "historical_event_stream": {
+    "public_projection": "ops/data/progress-history-public.v0.1.jsonl",
+    "event_id_pk": "event_id",
+    "project_id_fk": "ops/data/current-works.json:project_id",
+    "source_external_fk": "source_message_url",
+    "append_only": true,
+    "published_rows_now": 5,
+    "complete_discord_archive": false,
+    "complete_slack_history": false
+  },
+  "ingestion_control": {
+    "raw_originals": "GDRIVE_READ_ONLY",
+    "machine_formats": [
+      "JSONL",
+      "JSON_SCHEMA",
+      "SQL"
+    ],
+    "photo_originals_unresolved": 269,
+    "fidelity": "DO_NOT_CERTIFY_UNVERIFIED_IMAGES",
+    "future_ingestion_ownership": "A9-CWO_EVIDENCE_REGISTRY_WORKSTREAM",
+    "write_owner": "EVIDENCE_REGISTRY_FOR_HISTORY; SCHEDULING_MODULE_FOR_APPROVED_SCHEDULE",
+    "web": "PUBLIC_SAFE_PROJECTION_ONLY"
+  },
+  "morning_policy": {
+    "source_as_of": "2026-10-10",
+    "authorizations_from_history": "FORBIDDEN",
+    "question_is_task_instruction": false,
+    "issue_age": "DAYS_SINCE_OBSERVATION_NOT_HOLD_DURATION",
+    "site_hold": "RECORDED_READINESS_HOLD_NOT_PROOF_ALL_CREWS_STOPPED",
+    "today": "USER_TIMEZONE_ASIA_KATHMANDU_SHOW_SNAPSHOT_STALENESS",
+    "daily_brief": "ONE_OR_TWO_PRIORITY_CHECKS_PER_SITE_WITH_SOURCE",
+    "start_work": "ONLY_ENGINEER_PM_AUTHORIZED_DATED_PLAN_NOT_IN_CURRENT_SNAPSHOT",
+    "slack": "COPY_DRAFT_ONLY_NEVER_CLAIM_SENT"
+  },
+  "compatibility": {
+    "dont_rename_existing_routes": true,
+    "dont_delete_archive": true,
+    "dont_move_drive_files": true,
+    "dont_promote_uncertified_cement_quantities": true
+  },
+  "qa": [
+    "PRE_ARCHIVE_POST_GITHUB_READBACK",
+    "PRODUCTION_ACTION_SUCCESS",
+    "NO_ARCHIVED_HTML_REFERENCES_IN_LIVE_ROUTE_QA",
+    "VISIBLE_SOURCE_DATE",
+    "MOBILE_MENU"
+  ]
+}
