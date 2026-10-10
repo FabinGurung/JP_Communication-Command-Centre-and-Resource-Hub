@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="description" content="JP AEC Operations Hub Daily Site Operations project detail">
-  <title>Three-day Site Workboard · JP AEC</title>
+  <title>Site Evidence Snapshot · JP AEC</title>
   <style>
     :root{--bg:#f4f6f8;--panel:#fff;--text:#172033;--muted:#667085;--line:#e1e6ec;--blue:#175cd3;--green:#067647;--amber:#b54708;--red:#b42318;--soft:#eef4ff;--shadow:0 8px 24px rgba(15,23,42,.07)}
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}a{color:inherit}
@@ -105,6 +105,8 @@ html,body{font-family:var(--ui)}.hero h1,.section-heading h2,.resource-group h3,
 <div class="shell">
   <nav class="nav" aria-label="Main navigation">
     <a href="../site-operations.html">← Field desk</a>
+    <a href="schedule.html">Work &amp; Holds</a>
+    <a href="questions.html">Engineer Questions</a>
     <a href="../map.html">🗺️ Map</a>
     <a href="../workspace/">Workspace</a>
     <a href="../controls/archive-formats.html">Archive policy</a>
@@ -119,14 +121,14 @@ html,body{font-family:var(--ui)}.hero h1,.section-heading h2,.resource-group h3,
   </section>
 
   <nav class="quick-nav" aria-label="Project field briefing">
-  <a href="#field-plan">🗓️ 3-day work plan</a>
+  <a href="#field-plan">🗓️ Evidence snapshot (not work order)</a>
   <a href="#decision-list">⚠️ Holds &amp; decisions</a>
   <a href="#drawings">📐 Drawings</a>
 </nav>
 <main>
   <section class="section day-workboard" id="field-plan" aria-labelledby="day-board-title">
-    <div class="section-heading"><span class="section-symbol" aria-hidden="true">👷</span><div><div class="eyebrow">Site planning · reported, not assumed</div><h2 id="day-board-title">Yesterday · Today · Tomorrow</h2></div></div>
-    <p class="section-intro">Every activity belongs to a trade and a dated evidence state. Carry-forward questions are not confirmed assignments. The engineer’s replies will supply the next actual report.</p>
+    <div class="section-heading"><span class="section-symbol" aria-hidden="true">👷</span><div><div class="eyebrow">Site planning · reported, not assumed</div><h2 id="day-board-title">Past reports · Open questions · Plan status</h2></div></div>
+    <p class="section-intro">This is a historical evidence snapshot, not an approved crew schedule. Go to Work &amp; Holds for scheduling and on-hold items, or Engineer Questions to prepare a response. An engineer must approve actual execution tasks.</p>
     <div id="work" aria-live="polite"></div>
   </section>
   <section class="section issue-panel" id="decision-list">
@@ -192,7 +194,7 @@ function stageLabel(v) {
   return m[v]||"Confirmation needed";
 }
 function dayTable(bucket,rows,catalog,date){
- const title={yesterday:"Yesterday",today:"Today",tomorrow:"Tomorrow"}[bucket];
+ const title={yesterday:"Reported activity",today:"Questions to verify",tomorrow:"Next-day plan status"}[bucket];
  const desc={yesterday:"Reported on the date; not all work was verified",today:"Open workstreams to confirm—not assigned work",tomorrow:"Plans require an engineer's dated reply"}[bucket];
  const body=rows.length?'<div class="table-wrap"><table class="schedule-table"><thead><tr><th scope="col">Trade</th><th scope="col">Specific work / question</th><th scope="col">State</th><th scope="col">Evidence</th></tr></thead><tbody>'+rows.map(x=>'<tr><td>'+tradeLabel(x.trade_id,catalog)+'</td><td>'+esc(x.summary)+'</td><td><span class="row-state" data-danger="'+(x.status==="ENGINEER_HOLD")+'">'+esc(stageLabel(x.status))+'</span></td><td>'+(x.source_ref?'<a class="source-link" href="'+esc(x.source_ref)+'" target="_blank" rel="noopener noreferrer">Source ↗</a>':'Not yet')+'</td></tr>').join("")+'</tbody></table></div>':
  '<div class="no-report">'+(bucket==="tomorrow"?"No dated engineer-approved next-day plan has been received. Request work, trade, location, crew only if assigned, and any hold for "+esc(date)+".":bucket==="yesterday"?"No source-confirmed work/result has been entered for this date. This does not mean no work occurred.":"A project work review has not been admitted for this date.")+'</div>';
@@ -299,7 +301,7 @@ async function load(){
     const p=data.projects.find(x=>x.project_id===pid);
     if(!p) throw new Error("Project not found.");
     const o=p.daily_ops||{}, att=attention(p);
-    document.title=p.display_name+" — 3-Day Site Workboard";
+    document.title=p.display_name+" — Site Evidence Snapshot";
     $("name").textContent=p.display_name;
     $("meta").textContent=[p.project_id,p.company_project_code,p.contractor,o.date||"No date"].filter(Boolean).join(" · ");
     $("record-hint").textContent="📅 Source record: "+(o.date||"date unverified")+" · Field readiness must be confirmed for the work date. Never infer current site status from an older report.";
