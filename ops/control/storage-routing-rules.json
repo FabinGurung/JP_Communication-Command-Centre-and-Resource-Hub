@@ -231,7 +231,7 @@
         "stable_notebook_cell_id": "a9-cwo-c09-publication-gate"
       }
     ],
-    "previous_revision_archived_exact": "ops/discord/99_VERSION_ARCHIVE/20261010/013__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SCOPED_REPAIR.ipynb",
+    "previous_revision_archived_exact": "ops/discord/99_VERSION_ARCHIVE/20261009/013__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SCOPED_REPAIR.ipynb",
     "latest_source_validation": {
       "revision": "20261010-001",
       "status": "CI_AND_COLAB_RUNTIME_PENDING",
