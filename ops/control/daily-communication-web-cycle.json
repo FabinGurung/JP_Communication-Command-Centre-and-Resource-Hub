@@ -97,8 +97,8 @@
   "source_processing": {
     "originals": "PRIVATE Google Drive source archive first: immutable full-fidelity JSONL gzip pages, exact original media when retrievable, explicit byte mismatch/coverage debt, all source IDs/cursor/receipt SHA provenance",
     "facts": "Private normalized indexed SQLite from verified Drive original JSONL first, then approved public-safe GitHub JSON/JSONL/CSV projections/SQL schema",
-    "website": "Only after C09 data gate + source provenance, approved public-safe facts, code validation and deployment",
-    "messages": "Only after C09 data gate and governing Slack send permissions; post source-grounded project/REB/FBL summaries and read back receipts"
+    "website": "Provisional public-safe field-caption evidence with source links and no engineering acceptance can be refreshed after frozen manifest SHA/readback verification; material/quantity approvals and permanent completion claims remain blocked by source/history admission gates.",
+    "messages": "Daily private index may inform qualified human communications with explicit source partiality, but does NOT authorize completion or quantitative engineering truth. Website carries the capped provisional caption ledger; final C09 history gate still required for archival COMPLETE claims and unrestricted promotion."
   },
   "project_truth": "Do not equate uploaded image or message with DONE; classify as observed/requested/planned/completed only when source-grounded.",
   "company_routing": "Use authorized A9 registry for REB/FBL and governed projects; both company rollups are required targets when send gate allows.",
@@ -111,7 +111,7 @@
     "DRIVE_ARCHIVE_READBACK",
     "GITHUB_COMMIT_OR_NO_DELTA",
     "WEBSITE_DEPLOYMENT",
-    "SLACK_REPLIES_SENT_OR_DRAFT",
+    "COMMUNICATION_DELIVERY_SENT_DRAFT_OR_BLOCKED_PER_DESTINATION",
     "UNRESOLVED_PROJECT_IDENTITIES",
     "SHEETS_PROJECTION_STATUS"
   ],
@@ -185,6 +185,53 @@
       "REB_ASHOK_STABLE_PUBLIC_IDENTITY_UNRESOLVED",
       "SLACK_PRIVATE_RAW_INCREMENTAL_CAPTURE_AND_THREAD_CURSORS_UNVERIFIED",
       "RESPONSIBLE_ENGINEER_SITE_HOLDS_PENDING"
+    ]
+  },
+  "daily_run_20261010": {
+    "date_npt": "2026-10-10",
+    "run_id": "A9-CWO-20261010-DAILY-COMM-WEB-001",
+    "status": "EXECUTED_PARTIAL_SOURCE_MEDIA_AND_ONE_COMMS_BLOCK",
+    "source": "A9_CWO_DISCORD_RECEIPT__20261010T005617Z.json",
+    "source_receipt_drive_id": "1HXOjV7CpYOQw6mGwK_n_SDAQBYmqOjE5",
+    "machine_day_manifest_drive_id": "19yXv6LJexxmp9BaIifSXmj6W9Fwf9LnJ",
+    "source_rows": 89,
+    "source_manifest_partitions_sha256_verified": "PASS_6_OF_6",
+    "source_channels": 21,
+    "photo_original_failures": 269,
+    "communication": {
+      "platform": "EXISTING_GOVERNED_SLACK_CHANNELS",
+      "channels_targeted": 11,
+      "sent_and_readback": 10,
+      "blocked": 1,
+      "blocked_project": "P002",
+      "project_channels_sent_and_readback": 8,
+      "company_rollups_sent_and_readback": 2,
+      "no_new_channels": true,
+      "manifest": "ops/data/communication-web-daily/2026-10-10.json"
+    },
+    "website": {
+      "file": "ops/data/field-three-day-board.json",
+      "status": "GITHUB_UPDATED_DEPLOYMENT_UNVERIFIED",
+      "date_today": "2026-10-10",
+      "yesterday": "2026-10-09",
+      "tomorrow": "2026-10-11",
+      "site_projects": 8,
+      "caption_based_report_projects": 5,
+      "source_proof": "FIELD_CAPTIONS_NO_ENGINEERING_ACCEPTANCE",
+      "current_works": "UNCHANGED_BY_THIS_CYCLE"
+    },
+    "preserved": {
+      "overbroad_guild_archive": "FULL_HISTORY_ARCHIVE_V1_UNCHANGED_OUT_OF_SCOPE",
+      "raw_messages": "IN_PRIVATE_DRIVE",
+      "previous_field_board": "ops/data/99_VERSION_ARCHIVE/20261010/field-three-day-board__PRE_20261010.json"
+    },
+    "audit_manifest": "ops/data/communication-web-daily/2026-10-10.json",
+    "pending": [
+      "269_original_media_fidelity_mismatches",
+      "Scoped C06 V2 historical backfill not authenticated executed",
+      "P002 comms provider safety block",
+      "Engineering decisions and actual daily field reports pending",
+      "Website browser deployment readback pending"
     ]
   }
 }
