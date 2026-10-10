@@ -10,7 +10,7 @@
   "stable_working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "stable_colab_url": "https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
   "archive_base": "ops/discord/99_VERSION_ARCHIVE",
-  "current_revision": "20261009-013",
+  "current_revision": "20261010-001",
   "archive_registration_date_npt": "2026-10-09",
   "versions": [
     {
@@ -190,16 +190,39 @@
     {
       "revision": "20261009-013",
       "created_date_npt": "2026-10-09",
-      "status": "CURRENT",
+      "status": "ARCHIVED_PRE",
       "version_hint": "v1.1.2 · fresh provider-SHA proof for reused originals",
       "change_summary": "C06 and C07 shared media function refuses to treat previously saved Drive bytes as native originals based only on identical declared size; it downloads current authorized source bytes, verifies original declared length, then compares SHA-256 against complete existing Drive readback before ORIGINAL_REUSED. Prevents false source/media completeness.",
-      "archive_path": null,
+      "archive_path": "ops/discord/99_VERSION_ARCHIVE/20261010/013__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SCOPED_REPAIR.ipynb",
       "source_commit": "e5f354ad47939ca1bec6e0a9870c04326230a76a",
       "git_blob_sha": "dc4a89f4146b6e44039f426431c23e7db262ddaa",
       "pre_snapshot_revision": "20261009-012",
       "pre_archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/012__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_ORIGINAL_REUSE_SHA_GUARD.ipynb",
       "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
-      "runtime_validation": "SOURCE_COMMITTED_SYNTHETIC_QA_PENDING_COLAB_RUNTIME_NOT_RUN"
+      "runtime_validation": "SOURCE_COMMITTED_SYNTHETIC_QA_PENDING_COLAB_RUNTIME_NOT_RUN",
+      "next_revision": "20261010-001"
+    },
+    {
+      "revision": "20261010-001",
+      "created_date_npt": "2026-10-10",
+      "status": "CURRENT",
+      "version_hint": "v1.1.3 · scope restore to two parents, isolated V2 raw and partial SQLite",
+      "change_summary": "After user Colab r013 C06 discovered 1,574 guild sources, fix incorrect overbroad scope by restricting C06 to 2 registered parent picture channels plus their active/archived children. Preserve original unrelated overbroad FULL_HISTORY_ARCHIVE_V1 untouched; isolate new TWO_PARENT_HISTORY_ARCHIVE_V2 with independent state. Permit explicitly PARTIAL private SQLite snapshots and replace C09 missing-query traceback with clear blocked message.",
+      "archive_path": null,
+      "source_commit": "ab6b519e8fb4550b1d753a5be641cd52c4db14f5",
+      "git_blob_sha": "020ebec39f316ffa26cc96de53c31dab6b25317c",
+      "pre_snapshot_revision": "20261009-013",
+      "pre_archive_path": "ops/discord/99_VERSION_ARCHIVE/20261010/013__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SCOPED_REPAIR.ipynb",
+      "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
+      "runtime_validation": "STATIC_CODE_QA_PENDING_COLAB_R01010_NOT_RUN",
+      "historical_provider_evidence": {
+        "original_r013_run": "20261010T011528Z",
+        "original_r013_scope": "OVERBROAD_1574_GUILD_SOURCES",
+        "source_pages": 8,
+        "archive": "FULL_HISTORY_ARCHIVE_V1",
+        "r013_recovery_attempts": 11,
+        "r013_recovered_originals": 0
+      }
     }
   ]
 }
