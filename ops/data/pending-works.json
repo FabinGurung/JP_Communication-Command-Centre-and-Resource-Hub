@@ -96,7 +96,7 @@
       "pending_id": "OPS-PEND-000004",
       "title": "A9-CWO seven-day Discord collector and private machine-index execution",
       "short_title": "Run Discord C01 → C02 → C05",
-      "status": "REVISION_013_FULL_HISTORY_ARCHIVE_SOURCE_READY_PROVIDER_EXECUTION_PENDING",
+      "status": "R20261010_001_TWO_PARENT_HISTORICAL_SCOPE_FIXED_LIVE_EXECUTION_PENDING",
       "priority": "NEXT_OPERATIONAL",
       "category": "COMMUNICATION_INTAKE",
       "owner_module_id": "MOD-OPS-001",
@@ -109,8 +109,8 @@
       "recommendation": "Run authorized C01/C06 backfill repeatedly, C07 original-media recovery until all native bytes verified, C08 private SQLite generation and C09 strict data gate. Then reconcile identities and publish approved public safe records; do not send Slack or update website until provenance and release gates pass.",
       "when_to_build": "Next user-authorized Google Colab runtime with Discord bot credential and Drive OAuth; do not pretend GitHub Actions can access the bot or run Discord itself.",
       "proposed_first_gate": "Run C01 → C02 live preview. Verify live parent/thread roster and every NPT cutoff; type COLLECT; verify new frozen C02 receipt and then execute C05. Do not attempt unsupported whole-guild/archived-thread collection.",
-      "implementation_status": "C06_HISTORY_C07_MEDIA_C08_SQLITE_C09_DATA_GATE;SAME_BYTES_SHA_CERTIFICATION_FOR_REUSED_MEDIA;COLAB_PROVIDER_EXECUTION_NOT_RUN",
-      "current_boundary": "User requested COMPLETE retrievable Discord guild history, not a 7-day-only source. C06 provides resumable all-accessible-channel and active/archived thread history with private immutable Drive JSONL. C07 media-recovery, C08 private indexed SQLite and C09 publication block are code-ready; authenticated source receipts, complete backfill, original-media parity, and authorized web/Slack publication all remain NOT_DONE.",
+      "implementation_status": "SCOPE_R001_FIXED_C06_ONLY_TWO_PARENTS;V1_GUILD_OVERBROAD_CAPTURE_ISOLATED_UNMODIFIED;V2_SCOPED_HISTORY_NOT_RUN;C08_PARTIAL_PRIVATE_SQLITE_ALLOWED;C09_GRACEFUL_QUERY_ABSENT_BLOCKED;LATE_EDIT_DETECTION_OUTSIDE_7_DAY_WINDOW_OPEN",
+      "current_boundary": "Today C02 r013 CONFIRMED PARTIAL: 21 parent/active-thread sources, 89 changed messages, 269 media mismatches; C05 private daily index 89 rows written. Today overbroad C06 r013 discovered 1574 guild sources, captured 8 pages and C07 original media recovery succeeded 0/11; C08/C09 errors were due unfinished history and absent query directory. Revised 20261010-001 scopes C06 to only the 2 company picture parents plus child threads, writes isolated TWO_PARENT_HISTORY_ARCHIVE_V2. Needs real Colab re-run; historical edits outside replay and downstream website syncing still pending.",
       "related_canonical_sources": [
         "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
         "ops/control/storage-routing-rules.json",
@@ -125,17 +125,15 @@
         "Do not claim provider capture DONE until first real Discord API and Drive readback"
       ],
       "last_provider_run": {
-        "run_id": "20261009T020256Z",
-        "status": "PARTIAL",
-        "at_npt": "2026-10-09T07:54:30+05:45",
-        "sources": 26,
-        "passed_sources": 17,
-        "partial_sources": 9,
-        "messages_new_or_changed": 174,
-        "attachment_failures": 749,
-        "previously_archived_attachments": 207,
-        "receipt_drive_id": "1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3",
-        "handoff_drive_id": "1QUZRvXuW3Z7z4UD1BkoI_jJD2ZWkZQN4"
+        "date_npt": "2026-10-10",
+        "daily_run_id": "20261010T005617Z",
+        "daily_receipt_drive_id": "1HXOjV7CpYOQw6mGwK_n_SDAQBYmqOjE5",
+        "daily_index_manifest_drive_id": "19yXv6LJexxmp9BaIifSXmj6W9Fwf9LnJ",
+        "history_r013_run_id": "20261010T011528Z",
+        "history_receipt_id": "1bmOa0t3zaRI_-pHp5_TIZte8cy8J27cc",
+        "history_scope": "OVERBROAD_1574_DISCOVERED_8_PAGES_ARCHIVED_11_MEDIA_RECOVERY_ATTEMPTS_0_SUCCESS",
+        "history_archive": "FULL_HISTORY_ARCHIVE_V1",
+        "current_revision_history_archive": "TWO_PARENT_HISTORY_ARCHIVE_V2_NOT_RUN"
       },
       "probe": {
         "cell_id": "a9-cwo-c03-cdn-probe",
@@ -187,7 +185,7 @@
           "receipt_drive_id": "1ftkzIKyqUhVvCCWYAw5ka_YfKlDg2tVi"
         }
       },
-      "last_source_revision": "20261009-013",
+      "last_source_revision": "20261010-001",
       "static_qa_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37922352759",
       "machine_contracts": [
         "ops/discord/schemas/daily-message-index-v1.schema.json",
@@ -195,7 +193,7 @@
         "ops/discord/DAILY_7_DAY_MACHINE_ARCHIVE_RUNBOOK.md"
       ],
       "preview_contract": {
-        "revision": "20261009-013",
+        "revision": "20261010-001",
         "stage": "C02 BEFORE ANY ARCHIVE WRITES",
         "operator_confirmation": "COLLECT",
         "scope": "two parents and currently active child threads only",
@@ -203,14 +201,14 @@
         "no_confirmation": "preview only, no receipt, no state mutation",
         "live_provider_confirmation": "NOT_RUN",
         "c05_safe_only_when": "SAME_RUNTIME_CONFIRMED_C02_RUN_AND_RECEIPT_MATCH",
-        "additional_history_scope": "C06_FULL_GUILD_WITH_ARCHIVED_THREADS",
+        "additional_history_scope": "ONLY_TWO_PARENT_PICTURE_CHANNELS_AND_DISCOVERABLE_ACTIVE_AND_ARCHIVED_THREADS",
         "after_history": "C07_REPAIR_MEDIA_THEN_C08_SQLITE_THEN_C09_PASS_BEFORE_PUBLICATION"
       },
       "source_qc": {
-        "revision": "20261009-013",
+        "revision": "20261010-001",
         "source_commit": "e5f354ad47939ca1bec6e0a9870c04326230a76a",
-        "provider_runtime": "NOT_RUN",
-        "publication": "BLOCKED_UNTIL_PRIVATE_ARCHIVE_COMPLETE"
+        "provider_runtime": "OLDER_R013_RUN_ONLY_R001_UNEXECUTED",
+        "publication": "NONE_FROM_THIS_BROADER_SOURCE"
       }
     },
     {
