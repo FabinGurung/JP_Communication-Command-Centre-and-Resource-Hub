@@ -1,0 +1,37 @@
+{
+  "schema_version": "0.1.0",
+  "id": "A9-CWO-SITE-EXECUTION-AND-ENGINEER-QUERIES-001",
+  "status": "PROJECTION_SCHEMA_AND_WEB_READ_ONLY",
+  "owner": "Communication & Web Operations",
+  "sources": [
+    "ops/data/current-works.json",
+    "ops/data/field-three-day-board.json"
+  ],
+  "storage": "GitHub-public-safe-derived-metadata-only",
+  "normalization": "Project IDs resolved to current-works; individual question IDs unique; blockers inherit source blocker IDs; no private file bytes",
+  "publication_gate": "APPROVED_SOURCE_LINKS_ONLY_NO_PRIVATE_MEDIA",
+  "schedule_definition": {
+    "confirmed": "Only explicit engineer/PM authorized dated work, crew, location, readiness and source",
+    "reported": "Source captions are historical observations not planned tasks",
+    "hold": "Only recorded explicit task HOLD or admitted site HOLD; never infer stop from an unanswered question",
+    "issue_age": "Days since first recorded source observation, not hold duration",
+    "overdue": "Only if verified committed target date is present. Prior source targets shown as unverified."
+  },
+  "question_definition": {
+    "answers": "Drafts in browser; user copies and posts to Slack; answers remain pending until source re-ingestion and engineer evidence admission",
+    "options": [
+      "FIELD_PROGRESS",
+      "ENGINEER_DECISION",
+      "MATERIAL_VERIFICATION"
+    ],
+    "engineering": "MCQ answers not an engineering signoff",
+    "resolution": "Require responsible person, timestamp and supporting link, explicit resolution state"
+  },
+  "source_snapshot": "2026-10-10",
+  "next_actions": [
+    "Implement authenticated response capture adapter or Slack callback with stable question IDs",
+    "Import actual dated approved crew schedules from the scheduling-module authority rather than auto-promoting questions",
+    "Engineer verification and overdue policy to be separately approved"
+  ],
+  "reconciliation": "PRE_ARCHIVE_POST_SHA256_GITHUB_READBACK"
+}
