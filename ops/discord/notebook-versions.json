@@ -193,7 +193,7 @@
       "status": "ARCHIVED_PRE",
       "version_hint": "v1.1.2 · fresh provider-SHA proof for reused originals",
       "change_summary": "C06 and C07 shared media function refuses to treat previously saved Drive bytes as native originals based only on identical declared size; it downloads current authorized source bytes, verifies original declared length, then compares SHA-256 against complete existing Drive readback before ORIGINAL_REUSED. Prevents false source/media completeness.",
-      "archive_path": "ops/discord/99_VERSION_ARCHIVE/20261010/013__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SCOPED_REPAIR.ipynb",
+      "archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/013__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SCOPED_REPAIR.ipynb",
       "source_commit": "e5f354ad47939ca1bec6e0a9870c04326230a76a",
       "git_blob_sha": "dc4a89f4146b6e44039f426431c23e7db262ddaa",
       "pre_snapshot_revision": "20261009-012",
@@ -212,7 +212,7 @@
       "source_commit": "ab6b519e8fb4550b1d753a5be641cd52c4db14f5",
       "git_blob_sha": "020ebec39f316ffa26cc96de53c31dab6b25317c",
       "pre_snapshot_revision": "20261009-013",
-      "pre_archive_path": "ops/discord/99_VERSION_ARCHIVE/20261010/013__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SCOPED_REPAIR.ipynb",
+      "pre_archive_path": "ops/discord/99_VERSION_ARCHIVE/20261009/013__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SCOPED_REPAIR.ipynb",
       "working_path": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
       "runtime_validation": "STATIC_CODE_QA_PENDING_COLAB_R01010_NOT_RUN",
       "historical_provider_evidence": {
