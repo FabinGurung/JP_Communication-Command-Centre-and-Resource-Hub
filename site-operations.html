@@ -154,7 +154,7 @@ $("site-search").addEventListener("input",render);$("company-filter").addEventLi
 </script>
 <script>
 (()=>{"use strict";const $=id=>document.getElementById(id),esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));let data=null,shown=[];
-function age(date){if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(date||""))return null;const n=(Date.parse(data.as_of_npt+"T00:00:00Z")-Date.parse(date+"T00:00:00Z"))/86400000;return Number.isFinite(n)&&n>=0?Math.floor(n):null;}
+function age(date){if(!/^\d{4}-\d{2}-\d{2}$/.test(date||""))return null;const n=(Date.parse(data.as_of_npt+"T00:00:00Z")-Date.parse(date+"T00:00:00Z"))/86400000;return Number.isFinite(n)&&n>=0?Math.floor(n):null;}
 const rank=q=>q.severity==="HOLD_RELATED"?0:q.question_kind==="ENGINEER_DECISION"?1:q.question_kind==="MATERIAL_VERIFICATION"?2:3;
 function visible(){let company=$("morning-company").value,search=$("morning-search").value.toLowerCase().trim();return data.sites.filter(s=>(!company||s.company.includes(company))&&(!search||[s.display_name,s.project_id,...data.engineer_questions.filter(x=>x.project_id===s.project_id).map(x=>x.question)].join(" ").toLowerCase().includes(search)));}
 function row(s){const questions=data.engineer_questions.filter(q=>q.project_id===s.project_id).sort((a,b)=>rank(a)-rank(b)),issues=data.open_issues.filter(x=>x.project_id===s.project_id),oldest=Math.max(-1,...issues.map(i=>age(i.first_recorded_date)??-1)),hold=s.readiness_snapshot==="HOLD";
