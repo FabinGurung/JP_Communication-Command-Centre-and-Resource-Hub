@@ -25,11 +25,11 @@
   },
   "communications": {
     "destination_count": 11,
-    "posted_and_provider_readback": 10,
-    "blocked": 1,
-    "delivery_state": "PARTIAL_10_OF_11",
+    "posted_and_provider_readback": 11,
+    "blocked": 0,
+    "delivery_state": "COMPLETE_11_OF_11",
     "project_channels_targeted": 9,
-    "project_messages_readback": 8,
+    "project_messages_readback": 9,
     "company_rollups_readback": 2,
     "project_messages": [
       {
@@ -46,9 +46,12 @@
       },
       {
         "project": "P002",
-        "status": "PLATFORM_SAFETY_BLOCKED_NOT_SENT",
-        "link": null,
-        "discord_message_id": "1558011137088290856"
+        "status": "SENT_AND_PROVIDER_READBACK",
+        "link": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791598058040639",
+        "discord_message_id": "1558011137088290856",
+        "initial_attempt": "PLATFORM_SAFETY_BLOCKED",
+        "recovery_note": "SHORTENED_NEUTRAL_MESSAGE_ACCEPTED_2026-10-10T07:52:38+05:45",
+        "message_ts": "1791598058.040639"
       },
       {
         "project": "P003",
@@ -99,7 +102,16 @@
         "discord_message_id": null
       }
     ],
-    "no_new_slack_channels_created": true
+    "no_new_slack_channels_created": true,
+    "provider_readback_all": "PASS_11_OF_11",
+    "delivery_recovery": {
+      "project": "P002",
+      "channel_id": "C0C13SMN1QX",
+      "url": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791598058040639",
+      "verified_message_contains": "Daily site communication update — 10 October 2026",
+      "timestamp_npt": "2026-10-10T07:52:38+05:45",
+      "prior_blocked_attempts_preserved": true
+    }
   },
   "website": {
     "projection": "ops/data/field-three-day-board.json",
@@ -121,7 +133,8 @@
     "field_observations_oct09_project_count": 5,
     "policy": "SOURCE_CAPTION_ONLY_NOT_COMPLETION_OR_APPROVED_WORK_SCHEDULE",
     "current_works_not_mutated": true,
-    "repository_release_status": "COMMIT_CREATED_DEPLOYMENT_QA_PENDING"
+    "repository_release_status": "GITHUB_ACTIONS_PRODUCTION_SUCCESS__RUN_38015321307_AND_LANE_QA_PASS_38015321436; BROWSER_RENDER_NOT_INDEPENDENTLY_VERIFIED",
+    "production_workflow_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38015321307"
   },
   "gates": {
     "admission": "CAPTION_AS_REPORT_ONLY; DO_NOT_PROMOTE_TO_MATERIAL_QUANTITIES_OR_ENGINEERING_SIGNOFF",
@@ -131,14 +144,15 @@
     "discord_old_edits_outside_7d": "NOT_DETECTED_AUTOMATICALLY",
     "website_factual_completion": "NO_NEW_COMPLETIONS_ADMITTED",
     "site_sensitive_data": "PRIVATE_OR_OMITTED",
-    "unresolved_communication": "P002_SAMIR_PLATFORM_BLOCKED"
+    "unresolved_communication": "NONE"
   },
   "pre_evidence_archive": "ops/data/99_VERSION_ARCHIVE/20261010/field-three-day-board__PRE_20261010.json",
   "next_actions": [
     "Resolve 269 Discord original-media byte mismatches without substituting derivative bytes",
     "Complete V2 two-parent historical backfill + C08 private indexed coverage and C09 control gate",
     "Obtain today site lead/engineer replies and update actual truth in owning Drive controls",
-    "Reattempt blocked Samir provider delivery only when allowed; do not represent as sent",
+    "Samir 10 Oct delivery succeeded; await site engineer confirmation, not just message readback",
     "Reconcile 9 Oct unlabeled Narayani photo batch and One Bay activity captions"
-  ]
+  ],
+  "audit_revision": "20261010-P002-RECOVERED"
 }
