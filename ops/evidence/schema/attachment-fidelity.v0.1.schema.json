@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "A9-CWO private attachment fidelity event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fidelity_event_id",
+    "provider",
+    "provider_message_id",
+    "attachment_id",
+    "source_run_id",
+    "status",
+    "checked_at_utc",
+    "declared_bytes",
+    "observed_bytes",
+    "original_sha256",
+    "archived_sha256",
+    "archive_ref"
+  ],
+  "properties": {
+    "fidelity_event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provider": {
+      "enum": [
+        "DISCORD",
+        "SLACK",
+        "OTHER_APPROVED"
+      ]
+    },
+    "provider_message_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attachment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "ORIGINAL_VERIFIED",
+        "PREVIOUSLY_ARCHIVED_UNRECONFIRMED_SHA",
+        "PROVIDER_DERIVATIVE_UNVERIFIED_ORIGINAL",
+        "SOURCE_METADATA_ONLY",
+        "FAILED_SIZE_MISMATCH",
+        "NOT_YET_CHECKED"
+      ]
+    },
+    "checked_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "declared_bytes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "observed_bytes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "original_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "archived_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "archive_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Authenticated private ref only. No signed media URL."
+    },
+    "failure_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supersedes_fidelity_event_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "ORIGINAL_VERIFIED"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "original_sha256": {
+            "type": "string"
+          },
+          "archived_sha256": {
+            "type": "string"
+          },
+          "archive_ref": {
+            "type": "string"
+          },
+          "observed_bytes": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  ]
+}

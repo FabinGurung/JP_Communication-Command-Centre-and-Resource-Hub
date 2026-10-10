@@ -1,0 +1,26 @@
+{
+  "schema_version": "0.1.0",
+  "audit_type": "PRE_MAIN_SCOPED_PROMOTION",
+  "source_run_id": "20261010T005617Z",
+  "main_pre_commit": "548568fcc298f608ec4f6491162496fc148372d5",
+  "feature_verified_commit": "e612aaf512bd76b72dfd5cf5f6a0a414fa2610bb",
+  "source_receipt_drive_id": "1HXOjV7CpYOQw6mGwK_n_SDAQBYmqOjE5",
+  "source_manifest_drive_id": "19yXv6LJexxmp9BaIifSXmj6W9Fwf9LnJ",
+  "source_receipt_sha256": "0ae2e3ffd911617bb0cc93bd6ef3e9b899e553a4f616d51c71cee2767acef0eb",
+  "source_manifest_sha256": "b9c45ab3f3eb73785ffedf1d27b754f86e60bea7305349a22d234f5f8ae47e92",
+  "partitions_sha256_verified": 6,
+  "indexed_messages_verified": 89,
+  "source_scopes": 21,
+  "attachments_total": 459,
+  "original_byte_mismatches_unresolved": 269,
+  "preserve_drive_originals": true,
+  "drive_writes": "NONE",
+  "private_ingestion": "NOT_EXECUTED",
+  "public_projection": "DENY_BY_DEFAULT",
+  "no_project_truth_mutation": true,
+  "branch_scope": "MAIN_SCOPED_ADD_FILES_NO_FEATURE_HISTORY_MERGE",
+  "pre_feature_ci": {
+    "branch_registry": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38029655843",
+    "production": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38029655866"
+  }
+}

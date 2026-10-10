@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.1.0",
+  "report_type": "PUBLIC_SAFE_SOURCE_INVENTORY_NOT_EVIDENCE_ADMISSION",
+  "source_run_id": "20261010T005617Z",
+  "source_receipt_status": "PARTIAL",
+  "private_receipt_sha256": "0ae2e3ffd911617bb0cc93bd6ef3e9b899e553a4f616d51c71cee2767acef0eb",
+  "private_manifest_sha256": "b9c45ab3f3eb73785ffedf1d27b754f86e60bea7305349a22d234f5f8ae47e92",
+  "provider": "DISCORD",
+  "allowed_parent_count": 2,
+  "scoped_source_count": 21,
+  "sources_pass": 12,
+  "sources_partial_attachments": 9,
+  "indexed_messages": 89,
+  "indexed_message_source_key_duplicates": 0,
+  "source_partitions": 6,
+  "partition_sha256_verified": 6,
+  "partition_row_counts_verified": 6,
+  "attachment_records": 459,
+  "attachment_archived_this_run": 43,
+  "attachment_previously_archived_unreconfirmed": 147,
+  "attachment_failed_size_mismatch": 269,
+  "media_original_certification": "PARTIAL",
+  "archived_child_threads_covered": false,
+  "embedded_only_media_covered": false,
+  "candidates_admitted_as_construction_truth": 0,
+  "source_mapping_status": "UNVERIFIED_PER_MESSAGE",
+  "partitions": [
+    {
+      "date_npt": "2026-10-03",
+      "rows": 12,
+      "manifest_sha256_verified": true
+    },
+    {
+      "date_npt": "2026-10-04",
+      "rows": 8,
+      "manifest_sha256_verified": true
+    },
+    {
+      "date_npt": "2026-10-05",
+      "rows": 38,
+      "manifest_sha256_verified": true
+    },
+    {
+      "date_npt": "2026-10-06",
+      "rows": 16,
+      "manifest_sha256_verified": true
+    },
+    {
+      "date_npt": "2026-10-08",
+      "rows": 10,
+      "manifest_sha256_verified": true
+    },
+    {
+      "date_npt": "2026-10-09",
+      "rows": 5,
+      "manifest_sha256_verified": true
+    }
+  ],
+  "baseline_git_branch": "feature/daily-ops-current-work",
+  "pre_git_commit": "5c7e1d7010fc1f961f16232beb1fa0c19e0df4a5",
+  "gate": "BLOCKED_PRIVATE_MEDIA_MISSING_AND_ADMISSION_NOT_COMPLETED"
+}

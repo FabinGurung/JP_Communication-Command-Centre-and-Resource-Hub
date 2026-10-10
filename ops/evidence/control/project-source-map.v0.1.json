@@ -1,0 +1,51 @@
+{
+  "schema_version": "0.1.0",
+  "source_of_truth": "projects.csv",
+  "status": "SOURCE_CHANNEL_BINDINGS_NOT_VERIFIED",
+  "rule": "Only verified project_id + company_id pairs may be used. Provider channel IDs are not inferred from captions, file names, or project aliases.",
+  "project_aliases": [
+    {
+      "public_alias": "P001",
+      "project_id": "PRJ-000001",
+      "company_id": "ORG-000002"
+    },
+    {
+      "public_alias": "P002",
+      "project_id": "PRJ-000002",
+      "company_id": "ORG-000001"
+    },
+    {
+      "public_alias": "P003",
+      "project_id": "PRJ-000003",
+      "company_id": "ORG-000001"
+    },
+    {
+      "public_alias": "P004",
+      "project_id": "PRJ-000004",
+      "company_id": "ORG-000001"
+    },
+    {
+      "public_alias": "P005",
+      "project_id": "PRJ-000005",
+      "company_id": "ORG-000001"
+    },
+    {
+      "public_alias": "P006",
+      "project_id": "PRJ-000006",
+      "company_id": "ORG-000001"
+    },
+    {
+      "public_alias": "P007",
+      "project_id": "PRJ-000007",
+      "company_id": "ORG-000001"
+    },
+    {
+      "public_alias": "P020",
+      "project_id": "PRJ-000020",
+      "company_id": "ORG-000001"
+    }
+  ],
+  "source_channel_bindings": [],
+  "unmapped_policy": "QUARANTINE_UNMAPPED_NOT_INFERRED",
+  "one_bay": "PRESERVE_EXISTING_PLANNED_IDENTITY_UNTIL_OWNING_PROJECT_MASTER_VERIFIED"
+}
