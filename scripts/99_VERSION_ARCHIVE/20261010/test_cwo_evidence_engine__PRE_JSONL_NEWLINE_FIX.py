@@ -45,12 +45,12 @@ class EvidenceTests(unittest.TestCase):
             raw_path=t/"raw.jsonl"
             raw={"id":"m1","channel_id":"child1","content":"private image caption",
                  "attachments":[{"id":"a1"}],"timestamp":"2026-10-03T00:00:00+00:00"}
-            raw_path.write_text(json.dumps(raw,sort_keys=True)+"\n",encoding="utf-8")
+            raw_path.write_text(json.dumps(raw,sort_keys=True)+"\\n",encoding="utf-8")
             pointer={"run_id":"R1","source_receipt_id":"receipt1","parent_channel_id":"parent1",
                      "provider":"DISCORD","channel_id":"child1","message_id":"m1",
                      "raw_drive_id":"rawfile1","raw_line_1_based":1,"admission_status":"NOT_RECONCILED"}
             partition=index/"day__2026-10-03__R1.jsonl"
-            partition.write_text(json.dumps(pointer)+"\n",encoding="utf-8")
+            partition.write_text(json.dumps(pointer)+"\\n",encoding="utf-8")
             manifest={"run_id":"R1","source_receipt_status":"PARTIAL","source_receipt_drive_id":"receipt1",
                       "source_scope":{"parent_channel_ids":["parent1","parent2"],"archived_threads_covered":False},
                       "partitions":[{"date_npt":"2026-10-03","sha256":digest(partition.read_bytes()),"rows":1}],
