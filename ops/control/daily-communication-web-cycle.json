@@ -190,7 +190,7 @@
   "daily_run_20261010": {
     "date_npt": "2026-10-10",
     "run_id": "A9-CWO-20261010-DAILY-COMM-WEB-001",
-    "status": "EXECUTED_PARTIAL_SOURCE_MEDIA_AND_ONE_COMMS_BLOCK",
+    "status": "COMMUNICATION_DELIVERY_COMPLETE_SOURCE_MEDIA_PARTIAL",
     "source": "A9_CWO_DISCORD_RECEIPT__20261010T005617Z.json",
     "source_receipt_drive_id": "1HXOjV7CpYOQw6mGwK_n_SDAQBYmqOjE5",
     "machine_day_manifest_drive_id": "19yXv6LJexxmp9BaIifSXmj6W9Fwf9LnJ",
@@ -201,17 +201,20 @@
     "communication": {
       "platform": "EXISTING_GOVERNED_SLACK_CHANNELS",
       "channels_targeted": 11,
-      "sent_and_readback": 10,
-      "blocked": 1,
+      "sent_and_readback": 11,
+      "blocked": 0,
       "blocked_project": "P002",
-      "project_channels_sent_and_readback": 8,
+      "project_channels_sent_and_readback": 9,
       "company_rollups_sent_and_readback": 2,
       "no_new_channels": true,
-      "manifest": "ops/data/communication-web-daily/2026-10-10.json"
+      "manifest": "ops/data/communication-web-daily/2026-10-10.json",
+      "recovery_event": "ops/events/cwo-daily/OPS-0057__2026-10-10_P002_DELIVERY_RECOVERY.json",
+      "samirs_message_url": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791598058040639",
+      "provider_readback": "PASS_11_OF_11"
     },
     "website": {
       "file": "ops/data/field-three-day-board.json",
-      "status": "GITHUB_UPDATED_DEPLOYMENT_UNVERIFIED",
+      "status": "GITHUB_PAGES_PRODUCTION_CI_PASS_38015891461__LATEST_REDEPLOY_IN_PROGRESS_38015923811",
       "date_today": "2026-10-10",
       "yesterday": "2026-10-09",
       "tomorrow": "2026-10-11",
@@ -229,9 +232,9 @@
     "pending": [
       "269_original_media_fidelity_mismatches",
       "Scoped C06 V2 historical backfill not authenticated executed",
-      "P002 comms provider safety block",
       "Engineering decisions and actual daily field reports pending",
-      "Website browser deployment readback pending"
+      "Website browser deployment readback pending",
+      "Samir Slack delivery recovered, site crew and engineering responses remain pending"
     ]
   }
 }
