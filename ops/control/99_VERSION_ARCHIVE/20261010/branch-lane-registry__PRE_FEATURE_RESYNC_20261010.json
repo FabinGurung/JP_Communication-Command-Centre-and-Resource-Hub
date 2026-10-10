@@ -7,7 +7,7 @@
     "full_name": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
     "default_branch": "main"
   },
-  "observed_at": "2026-10-09T11:49:12.215+05:45",
+  "observed_at": "2026-10-07T15:25:00+05:45",
   "authority": "This file is the compulsory repository-local authority for branch/lane role, active-vs-archive status and legacy alias resolution.",
   "required_before_mutation": true,
   "fail_closed_rules": [
@@ -32,10 +32,10 @@
     "consequence": "Archive refs were created at exact historical SHAs. Original historical aliases remain provider-side until a rename/delete-capable interface is used."
   },
   "counts": {
-    "provider_branch_refs": 45,
+    "provider_branch_refs": 43,
     "active_logical_branches": 2,
-    "canonical_archive_refs": 22,
-    "legacy_alias_refs_pending_delete": 21
+    "canonical_archive_refs": 21,
+    "legacy_alias_refs_pending_delete": 20
   },
   "active_branches": [
     {
@@ -311,18 +311,6 @@
       "frozen_sha": "1f22bbfa4c1711857ac73d356fb7c2652ce5ff0f",
       "archived_from": "v1.3-construction-knowledge-kernel-demo",
       "legacy_alias_present": true
-    },
-    {
-      "branch_id": "OPS-BR-000024",
-      "branch_name": "archive/fix/cwo-20261009-website-projection-readback",
-      "git_ref": "refs/heads/archive/fix/cwo-20261009-website-projection-readback",
-      "role": "LANE_LIBRARY_ARCHIVE",
-      "status": "ARCHIVED_FROZEN",
-      "mutable": false,
-      "allowed_for_work": false,
-      "frozen_sha": "41681de57531ccb314afde5b5ab99adb2ad47794",
-      "archived_from": "fix/cwo-20261009-website-projection-readback",
-      "legacy_alias_present": true
     }
   ],
   "legacy_aliases": [
@@ -545,17 +533,6 @@
       "do_not_use": true,
       "allowed_for_work": false,
       "note": "Historical provider ref retained only because the connected GitHub tool cannot delete/rename branch refs. Use resolves_to_archive_ref."
-    },
-    {
-      "alias_ref": "fix/cwo-20261009-website-projection-readback",
-      "alias_git_ref": "refs/heads/fix/cwo-20261009-website-projection-readback",
-      "resolves_to_archive_ref": "archive/fix/cwo-20261009-website-projection-readback",
-      "archive_branch_id": "OPS-BR-000024",
-      "expected_sha": "41681de57531ccb314afde5b5ab99adb2ad47794",
-      "status": "LEGACY_ALIAS_PENDING_PROVIDER_DELETE",
-      "do_not_use": true,
-      "allowed_for_work": false,
-      "note": "Short-lived off-policy website projection branch immediately frozen as registered archive after compulsory registry CI prevented use. Canonical changes must be replayed through main or feature/daily-ops-current-work. Historical ref kept only because the connected GitHub app cannot delete/rename it."
     }
   ]
 }
