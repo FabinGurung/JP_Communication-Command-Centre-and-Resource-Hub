@@ -1,468 +1,461 @@
 {
   "schema_version": "0.1.0",
-  "projection_id": "A9-CWO-FIELD-THREE-DAY-BOARD-20261009",
-  "as_of_npt": "2026-10-09",
-  "date_yesterday": "2026-10-08",
-  "date_today": "2026-10-09",
-  "date_tomorrow": "2026-10-10",
+  "projection_id": "A9-CWO-FIELD-THREE-DAY-BOARD-20261010",
+  "as_of_npt": "2026-10-10",
+  "date_yesterday": "2026-10-09",
+  "date_today": "2026-10-10",
+  "date_tomorrow": "2026-10-11",
   "authority": "DERIVED_PUBLIC_SAFE_DISPLAY_NOT_APPROVED_WORK_SCHEDULE",
   "basis": [
-    "ops/data/current-works.json 2026-10-09 reconciliation",
-    "provider Slack/Discord refs already incorporated into CWO"
+    "PRIVATE_DRIVE_DISCORD_RUN_20261010T005617Z_89_INDEXED_MESSAGES_SHA256_6_PARTITIONS_PASS",
+    "SELECTED_PROJECT_CAPTIONS_FROM_ORIGINAL_RAW_JSONL_9_CHANNELS_AND_CURRENT_SLACK_THREADS",
+    "ops/data/current-works.json 2026-10-09 prior operational control; do not rewrite unverified project status"
   ],
   "notes": [
-    "Rows listed for TODAY are questions / workstreams awaiting actual engineer update, not confirmed job assignments.",
-    "Yesterday shows only dated source observations; missing reports remain missing, not zero activity.",
-    "Tomorrow is not fabricated; no site-specific 10 October execution plans were verified when this projection was created.",
-    "Only the owning engineer may admit completion and release engineering holds. Source text remains private in Drive/Slack."
+    "New source-supported text field reports refer mainly to 9 October; no construction progress was independently signed off or accepted.",
+    "Captured Discord scope: 2 parent picture channels and 19 active child threads (21); 89 candidate messages; 269 original-attachment failures. Capture status PARTIAL, no photo-original completion or visual QA claims.",
+    "All TODAY entries are questions and holds carried forward until field engineer replies; no 10 October DONE inferred from 9 October photo captions.",
+    "11 October is not a verified production plan. Private photo URLs, full JSON source archives and unrelated guild history never leave Drive.",
+    "10 October communication sent in the existing Slack company and project channels; one project destination was blocked by provider safety checks."
   ],
   "projects": [
     {
       "project_id": "P001",
-      "yesterday": [
-        {
-          "item_id": "P001-Y-01",
-          "trade_id": "PROCUREMENT",
-          "summary": "Materials (cement, crusher sand, plaster sand, bricks and water) were reported available; quantities not established.",
-          "status": "REPORTED_INFORMATION",
-          "source_ref": "https://jp09.slack.com/archives/C0C2DJNGARW/p1791422015827689",
-          "source_date": "2026-10-08",
-          "proof_state": "FIELD_OR_MANAGEMENT_REPORTED_UNVERIFIED_TECHNICAL_ACCEPTANCE"
-        }
-      ],
+      "yesterday": [],
       "today": [
         {
-          "item_id": "P001-T-01",
+          "item_id": "P001-T-20261010",
           "trade_id": "REBAR",
           "summary": "Confirm crack/anchorage location and request the structural engineer’s assessment.",
           "status": "NEEDS_ENGINEER_DECISION",
           "source_ref": "https://jp09.slack.com/archives/C0C2DJNGARW/p1791374216966389",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P001-T-02",
+          "item_id": "P001-T-20261010",
           "trade_id": "PLUMBING",
           "summary": "Confirm external concealed-pipe route against approved wall and frame details.",
           "status": "NEEDS_ENGINEER_DECISION",
           "source_ref": "https://discord.com/channels/682670494658330644/1548906581121306635/1556465865401045012",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P001-T-03",
+          "item_id": "P001-T-20261010",
           "trade_id": "FORMWORK",
           "summary": "Confirm which shuttering / RCC stages were actually done and their dates.",
           "status": "NEEDS_REPORT",
           "source_ref": "https://jp09.slack.com/archives/C0C2DJNGARW/p1790901268148989",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P001-T-04",
+          "item_id": "P001-T-20261010",
           "trade_id": "SITE",
           "summary": "Confirm cleaning, curing and crew activity only where work occurred.",
           "status": "NEEDS_REPORT",
           "source_ref": "https://jp09.slack.com/archives/C0C2DJNGARW/p1791518979352079",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         }
       ],
       "tomorrow": [],
-      "engineer_reply_status": "AWAITING_3_DAY_TRADE_REPORT"
+      "engineer_reply_status": "10_OCT_REPORT_REQUESTED_OR_PENDING; WORK_NOT_CERTIFIED"
     },
     {
       "project_id": "P002",
-      "yesterday": [],
+      "yesterday": [
+        {
+          "item_id": "P002-Y-20261009-1",
+          "trade_id": "REBAR",
+          "summary": "Discord 9 Oct caption reports slab rebar work starting; exact bar detail, QA approval and concrete-pour readiness are not confirmed.",
+          "status": "REPORTED_IN_PROGRESS",
+          "source_ref": "https://discord.com/channels/682670494658330644/1502154332878016673/1558011137088290856",
+          "source_date": "2026-10-09",
+          "proof_state": "CAPTION_IN_VERIFIED_DRIVE_JSONL_OR_UNCAPTIONED_IMAGE_BATCH; ORIGINAL_PHOTO_FIDELITY_PARTIAL; NOT_ENGINEER_ACCEPTANCE"
+        }
+      ],
       "today": [
         {
-          "item_id": "P002-T-01",
+          "item_id": "P002-T-20261010",
           "trade_id": "REBAR",
           "summary": "Confirm beam shear-reinforcement fabrication progress; no QA approval inferred.",
           "status": "RECONFIRM_PREVIOUS_REPORT",
           "source_ref": "https://discord.com/channels/682670494658330644/1502154332878016673/1556525226144043058",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P002-T-02",
+          "item_id": "P002-T-20261010",
           "trade_id": "FORMWORK",
           "summary": "Confirm shuttering progress, workface and site crew.",
           "status": "NEEDS_REPORT",
           "source_ref": "https://discord.com/channels/682670494658330644/1502154332878016673/1556525226144043058",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P002-T-03",
+          "item_id": "P002-T-20261010",
           "trade_id": "BRICKWORK",
           "summary": "Clarify duct-lintel construction and adjoining door opening.",
           "status": "NEEDS_REPORT",
           "source_ref": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791265262397099",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P002-T-04",
+          "item_id": "P002-T-20261010",
           "trade_id": "UPVC",
           "summary": "Confirm the required door type/fit before procurement.",
           "status": "NEEDS_DECISION",
           "source_ref": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791264609130209",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P002-T-05",
+          "item_id": "P002-T-20261010",
           "trade_id": "PROCUREMENT",
           "summary": "Correct brick-bill quantity and the ambiguous 7-bag PPC/OPC usage allocation.",
           "status": "NEEDS_CORRECTION",
           "source_ref": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791175516166869",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P002-T-06",
+          "item_id": "P002-T-20261010",
           "trade_id": "ELECTRICAL",
           "summary": "Resolve whether the reported electrical-board replacement belongs to this site.",
           "status": "WRONG_SITE_REVIEW",
           "source_ref": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791016274415849",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         }
       ],
       "tomorrow": [],
-      "engineer_reply_status": "AWAITING_3_DAY_TRADE_REPORT"
+      "engineer_reply_status": "10_OCT_REPORT_REQUESTED_OR_PENDING; WORK_NOT_CERTIFIED"
     },
     {
       "project_id": "P003",
       "yesterday": [],
       "today": [
         {
-          "item_id": "P003-T-01",
+          "item_id": "P003-T-20261010",
           "trade_id": "CEILING",
           "summary": "Confirm remaining washroom false-ceiling work (6 Oct report).",
           "status": "RECONFIRM_PREVIOUS_REPORT",
           "source_ref": "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791285154551019",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P003-T-02",
+          "item_id": "P003-T-20261010",
           "trade_id": "ELECTRICAL",
           "summary": "Confirm whether ceiling openings for bulbs have been made.",
           "status": "RECONFIRM_PREVIOUS_REPORT",
           "source_ref": "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791282929197949",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P003-T-03",
+          "item_id": "P003-T-20261010",
           "trade_id": "METAL",
           "summary": "Check status of the reported railing work; do not infer completion.",
           "status": "NEEDS_REPORT",
           "source_ref": "https://jp09.slack.com/archives/C0C1NTR4CGL/p1790922724307779",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P003-T-04",
+          "item_id": "P003-T-20261010",
           "trade_id": "CARPENTRY",
           "summary": "Check remaining carpentry work since the earlier ongoing report.",
           "status": "NEEDS_REPORT",
           "source_ref": "https://jp09.slack.com/archives/C0C1NTR4CGL/p1790922724307779",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P003-T-05",
+          "item_id": "P003-T-20261010",
           "trade_id": "UPVC",
           "summary": "Confirm measured windows against actual installation progress.",
           "status": "NEEDS_REPORT",
           "source_ref": "https://discord.com/channels/682670494658330644/1501506202809532456/1556556059706130492",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         }
       ],
       "tomorrow": [],
-      "engineer_reply_status": "AWAITING_3_DAY_TRADE_REPORT"
+      "engineer_reply_status": "10_OCT_REPORT_REQUESTED_OR_PENDING; WORK_NOT_CERTIFIED"
     },
     {
       "project_id": "P004",
-      "yesterday": [
-        {
-          "item_id": "P004-Y-01",
-          "trade_id": "ENGINEERING",
-          "summary": "Management discussed possible reasons for parapet/railing defects; causes remain hypotheses, not diagnosis.",
-          "status": "ISSUE_RAISED",
-          "source_ref": "https://jp09.slack.com/archives/C0C13SSGULF/p1791412381717639",
-          "source_date": "2026-10-08",
-          "proof_state": "FIELD_OR_MANAGEMENT_REPORTED_UNVERIFIED_TECHNICAL_ACCEPTANCE"
-        }
-      ],
+      "yesterday": [],
       "today": [
         {
-          "item_id": "P004-T-01",
+          "item_id": "P004-T-20261010",
           "trade_id": "WATERPROOF",
           "summary": "Locate and inspect top-water leakage; do not assume the cause from photographs.",
           "status": "ENGINEER_HOLD",
           "source_ref": "https://jp09.slack.com/archives/C0C13SSGULF/p1790687986476779",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P004-T-02",
+          "item_id": "P004-T-20261010",
           "trade_id": "PLASTER",
           "summary": "Investigate parapet and railing-wall cracking, surface preparation and repair method.",
           "status": "ENGINEER_HOLD",
           "source_ref": "https://jp09.slack.com/archives/C0C13SSGULF/p1791412381717639",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P004-T-03",
+          "item_id": "P004-T-20261010",
           "trade_id": "FORMWORK",
           "summary": "Inspect trapped bamboo at the waterproofed wall and document accepted remediation.",
           "status": "ENGINEER_HOLD",
           "source_ref": "https://jp09.slack.com/archives/C0C13SSGULF/p1791269835356459",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         }
       ],
       "tomorrow": [],
-      "engineer_reply_status": "AWAITING_3_DAY_TRADE_REPORT"
+      "engineer_reply_status": "10_OCT_REPORT_REQUESTED_OR_PENDING; WORK_NOT_CERTIFIED"
     },
     {
       "project_id": "P005",
-      "yesterday": [],
+      "yesterday": [
+        {
+          "item_id": "P005-Y-20261009-1",
+          "trade_id": "FORMWORK",
+          "summary": "Discord 9 Oct caption reports laying ply on battens completed. This is the poster's stated work stage, not verified formwork readiness.",
+          "status": "REPORTED_COMPLETE_NOT_VERIFIED",
+          "source_ref": "https://discord.com/channels/682670494658330644/1503183104397803570/1558037146491822090",
+          "source_date": "2026-10-09",
+          "proof_state": "CAPTION_IN_VERIFIED_DRIVE_JSONL_OR_UNCAPTIONED_IMAGE_BATCH; ORIGINAL_PHOTO_FIDELITY_PARTIAL; NOT_ENGINEER_ACCEPTANCE"
+        }
+      ],
       "today": [
         {
-          "item_id": "P005-T-01",
+          "item_id": "P005-T-20261010",
           "trade_id": "FORMWORK",
           "summary": "Confirm second-floor slab centring stage and actual crew/workface.",
           "status": "RECONFIRM_PREVIOUS_REPORT",
           "source_ref": "https://discord.com/channels/682670494658330644/1503183104397803570/1556982880108945518",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P005-T-02",
+          "item_id": "P005-T-20261010",
           "trade_id": "PROCUREMENT",
           "summary": "Identify ordered second-floor slab materials, quantities, and proof of site receipt.",
           "status": "NEEDS_CORRECTION",
           "source_ref": "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791284186886889",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P005-T-03",
+          "item_id": "P005-T-20261010",
           "trade_id": "ENGINEERING",
           "summary": "Resolve front-design query and pre-pour checks before assuming acceptance.",
           "status": "NEEDS_ENGINEER_DECISION",
           "source_ref": "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791518998071959",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         }
       ],
       "tomorrow": [],
-      "engineer_reply_status": "AWAITING_3_DAY_TRADE_REPORT"
+      "engineer_reply_status": "10_OCT_REPORT_REQUESTED_OR_PENDING; WORK_NOT_CERTIFIED"
     },
     {
       "project_id": "P006",
       "yesterday": [
         {
-          "item_id": "P006-Y-01",
-          "trade_id": "PLASTER",
-          "summary": "External plastering was reported ongoing on 8 October; no completion certificate.",
-          "status": "REPORTED_ONGOING",
-          "source_ref": "https://discord.com/channels/682670494658330644/1501419594361999410/1557630511252373564",
-          "source_date": "2026-10-08",
-          "proof_state": "FIELD_OR_MANAGEMENT_REPORTED_UNVERIFIED_TECHNICAL_ACCEPTANCE"
+          "item_id": "P006-Y-20261009-1",
+          "trade_id": "WATERPROOF",
+          "summary": "Discord 9 Oct caption reports top-floor surface chipping for waterproofing. No completion or engineer acceptance is established.",
+          "status": "REPORTED_IN_PROGRESS",
+          "source_ref": "https://discord.com/channels/682670494658330644/1501419594361999410/1558074035290771557",
+          "source_date": "2026-10-09",
+          "proof_state": "CAPTION_IN_VERIFIED_DRIVE_JSONL_OR_UNCAPTIONED_IMAGE_BATCH; ORIGINAL_PHOTO_FIDELITY_PARTIAL; NOT_ENGINEER_ACCEPTANCE"
         }
       ],
       "today": [
         {
-          "item_id": "P006-T-01",
+          "item_id": "P006-T-20261010",
           "trade_id": "PLUMBING",
           "summary": "Confirm kitchen pipe repair and whether bottom-slab seepage is actually present.",
           "status": "NEEDS_SITE_INSPECTION",
           "source_ref": "https://discord.com/channels/682670494658330644/1501419594361999410/1557630511252373564",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P006-T-02",
+          "item_id": "P006-T-20261010",
           "trade_id": "PLASTER",
           "summary": "Do not resume affected toilet plaster until door height and plumbing coordination are resolved.",
           "status": "ENGINEER_HOLD",
           "source_ref": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P006-T-03",
+          "item_id": "P006-T-20261010",
           "trade_id": "UPVC",
           "summary": "Confirm correction to mismatched toilet/bedroom door and window dimensions.",
           "status": "NEEDS_CORRECTION",
           "source_ref": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791362008660439",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P006-T-04",
+          "item_id": "P006-T-20261010",
           "trade_id": "ELECTRICAL",
           "summary": "Resolve client false-ceiling decision and previously reported wiring errors.",
           "status": "NEEDS_DECISION",
           "source_ref": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791001469932479",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P006-T-05",
+          "item_id": "P006-T-20261010",
           "trade_id": "WATERPROOF",
           "summary": "Confirm whether waterproofing materials arrived and report exact quantities.",
           "status": "NEEDS_REPORT",
           "source_ref": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1790843398592599",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P006-T-06",
+          "item_id": "P006-T-20261010",
           "trade_id": "PLASTER",
           "summary": "Confirm remaining external plastering locations and any completed areas.",
           "status": "RECONFIRM_PREVIOUS_REPORT",
           "source_ref": "https://discord.com/channels/682670494658330644/1501419594361999410/1557630511252373564",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         }
       ],
       "tomorrow": [],
-      "engineer_reply_status": "AWAITING_3_DAY_TRADE_REPORT"
+      "engineer_reply_status": "10_OCT_REPORT_REQUESTED_OR_PENDING; WORK_NOT_CERTIFIED"
     },
     {
       "project_id": "P007",
       "yesterday": [
         {
-          "item_id": "P007-Y-01",
-          "trade_id": "STONE_MASONRY",
-          "summary": "Stone masonry was reported in progress on 8 October; not certified complete.",
-          "status": "REPORTED_ONGOING",
-          "source_ref": "https://discord.com/channels/682670494658330644/1502155951711719475/1557696291457339402",
-          "source_date": "2026-10-08",
-          "proof_state": "FIELD_OR_MANAGEMENT_REPORTED_UNVERIFIED_TECHNICAL_ACCEPTANCE"
-        },
-        {
-          "item_id": "P007-Y-02",
-          "trade_id": "ENGINEERING",
-          "summary": "Management questioned veranda slab level and possible outside-water entry; no design acceptance.",
-          "status": "ISSUE_RAISED",
-          "source_ref": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791442304254949",
-          "source_date": "2026-10-08",
-          "proof_state": "FIELD_OR_MANAGEMENT_REPORTED_UNVERIFIED_TECHNICAL_ACCEPTANCE"
+          "item_id": "P007-Y-20261009-1",
+          "trade_id": "SITE",
+          "summary": "Discord 9 Oct image batch contains nine pictures without a meaningful work caption; activity, location and progress classification remain unresolved.",
+          "status": "PHOTO_POSTED_ACTIVITY_UNCLASSIFIED",
+          "source_ref": "https://discord.com/channels/682670494658330644/1502155951711719475/1558018639146262598",
+          "source_date": "2026-10-09",
+          "proof_state": "CAPTION_IN_VERIFIED_DRIVE_JSONL_OR_UNCAPTIONED_IMAGE_BATCH; ORIGINAL_PHOTO_FIDELITY_PARTIAL; NOT_ENGINEER_ACCEPTANCE"
         }
       ],
       "today": [
         {
-          "item_id": "P007-T-01",
+          "item_id": "P007-T-20261010",
           "trade_id": "STONE_MASONRY",
           "summary": "Confirm footing/stone masonry location and how much was finished.",
           "status": "RECONFIRM_PREVIOUS_REPORT",
           "source_ref": "https://discord.com/channels/682670494658330644/1502155951711719475/1557696291457339402",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P007-T-02",
+          "item_id": "P007-T-20261010",
           "trade_id": "REBAR",
           "summary": "Obtain responsible engineer decision on CF1 chair/stirrup and missing column shear-key concerns.",
           "status": "NEEDS_ENGINEER_DECISION",
           "source_ref": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1790993758768049",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P007-T-03",
+          "item_id": "P007-T-20261010",
           "trade_id": "ENGINEERING",
           "summary": "Resolve veranda level/water entry and junction-column detailing before changing execution.",
           "status": "NEEDS_ENGINEER_DECISION",
           "source_ref": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791442304254949",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P007-T-04",
+          "item_id": "P007-T-20261010",
           "trade_id": "PLUMBING",
           "summary": "Confirm plumbing material estimate and when the plumber will inspect site.",
           "status": "NEEDS_REPORT",
           "source_ref": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791373944497509",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P007-T-05",
+          "item_id": "P007-T-20261010",
           "trade_id": "PROCUREMENT",
           "summary": "Correct footing OPC use by grid/stage: 101 versus 86 versus 78 bags; no total inferred.",
           "status": "NEEDS_CORRECTION",
           "source_ref": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791260991997729",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         }
       ],
       "tomorrow": [],
-      "engineer_reply_status": "AWAITING_3_DAY_TRADE_REPORT"
+      "engineer_reply_status": "10_OCT_REPORT_REQUESTED_OR_PENDING; WORK_NOT_CERTIFIED"
     },
     {
       "project_id": "P020",
       "yesterday": [
         {
-          "item_id": "P020-Y-01",
+          "item_id": "P020-Y-20261009-1",
           "trade_id": "FORMWORK",
-          "summary": "Shuttering was reported ongoing on 8 October; no completion acceptance.",
-          "status": "REPORTED_ONGOING",
-          "source_ref": "https://discord.com/channels/682670494658330644/1502093475984965835/1557551951493726280",
-          "source_date": "2026-10-08",
-          "proof_state": "FIELD_OR_MANAGEMENT_REPORTED_UNVERIFIED_TECHNICAL_ACCEPTANCE"
+          "summary": "Discord 9 Oct caption refers to shuttering works, without a verified acceptance or completed-stage statement.",
+          "status": "REPORTED_ACTIVITY_UNVERIFIED",
+          "source_ref": "https://discord.com/channels/682670494658330644/1502093475984965835/1558010652046532708",
+          "source_date": "2026-10-09",
+          "proof_state": "CAPTION_IN_VERIFIED_DRIVE_JSONL_OR_UNCAPTIONED_IMAGE_BATCH; ORIGINAL_PHOTO_FIDELITY_PARTIAL; NOT_ENGINEER_ACCEPTANCE"
         }
       ],
       "today": [
         {
-          "item_id": "P020-T-01",
+          "item_id": "P020-T-20261010",
           "trade_id": "FORMWORK",
           "summary": "Confirm current slab shuttering stage and whether the team restarted.",
           "status": "RECONFIRM_PREVIOUS_REPORT",
           "source_ref": "https://discord.com/channels/682670494658330644/1502093475984965835/1557551951493726280",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P020-T-02",
+          "item_id": "P020-T-20261010",
           "trade_id": "REBAR",
           "summary": "Confirm engineering disposition of cantilever, secondary beams and beam stirrup/BBS.",
           "status": "NEEDS_ENGINEER_DECISION",
           "source_ref": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159944934279",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P020-T-03",
+          "item_id": "P020-T-20261010",
           "trade_id": "BRICKWORK",
           "summary": "Confirm whether staircase-room brickwork is scheduled or started.",
           "status": "NEEDS_REPORT",
           "source_ref": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791519004196719",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         },
         {
-          "item_id": "P020-T-04",
+          "item_id": "P020-T-20261010",
           "trade_id": "PLASTER",
           "summary": "Confirm whether underground tank plaster work is actually planned and its date.",
           "status": "NEEDS_REPORT",
           "source_ref": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791519004196719",
-          "source_date": "2026-10-09_OR_EARLIER_CARRY_FORWARD",
-          "proof_state": "REQUEST_NOT_CONFIRMED_TODAY"
+          "source_date": "2026-10-10_OR_EARLIER_CARRY_FORWARD",
+          "proof_state": "CARRY_FORWARD_ACTION_NOT_ACTUAL_10_OCT_WORK_ANSWER"
         }
       ],
       "tomorrow": [],
-      "engineer_reply_status": "AWAITING_3_DAY_TRADE_REPORT"
+      "engineer_reply_status": "10_OCT_REPORT_REQUESTED_OR_PENDING; WORK_NOT_CERTIFIED"
     }
   ]
 }
