@@ -106,7 +106,7 @@
     ],
     "collector": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
     "runtime": "USER_RUNS_GOOGLE_COLAB_BEFORE_DAILY_A9_CWO",
-    "status": "PROVIDER_PARTIAL_R012_FULL_HISTORY_CODE_READY_BUT_NOT_RUN",
+    "status": "PROVIDER_PARTIAL_R001_20261010_C06_SCOPE_CORRECTION_CODE_STAGED_UNEXECUTED",
     "scope": "Only these two parent channels and currently active child threads belonging to them; not a server-wide archive",
     "archive_root_drive_id": "1nTFR9xQXNwgkWRrAq1jJw7ph6rKg3C9X",
     "handoff": "A9_CWO_DAILY_TWO_CHANNELS/handoff_current.json (created only after user executes notebook)",
@@ -154,7 +154,7 @@
     "ordering": "Copy original exact bytes to numbered PRE archive; read back before editing original; update current revision in-place; POST readback + CI; append ledger and publish.",
     "no_drive_file_id_claim": "The provided URL is GitHub-backed; it has no verified Google Drive file ID.",
     "archive_promotion": "Do not reassign a previous archival path/name or overwrite its contents. Retrospective historical source creation dates must be distinguished from archive copy date.",
-    "current_revision": "20261009-013",
+    "current_revision": "20261010-001",
     "quick_reference_wall": "controls/memory-wall.html",
     "progress_requirements": [
       "visible provider stage",
@@ -231,11 +231,12 @@
         "stable_notebook_cell_id": "a9-cwo-c09-publication-gate"
       }
     ],
-    "previous_revision_archived_exact": "ops/discord/99_VERSION_ARCHIVE/20261009/012__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_ORIGINAL_REUSE_SHA_GUARD.ipynb",
+    "previous_revision_archived_exact": "ops/discord/99_VERSION_ARCHIVE/20261010/013__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SCOPED_REPAIR.ipynb",
     "latest_source_validation": {
-      "revision": "20261009-013",
-      "status": "SOURCE_READY_QA_PENDING_COLAB_RUNTIME_NOT_RUN",
-      "ci_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions"
+      "revision": "20261010-001",
+      "status": "CI_AND_COLAB_RUNTIME_PENDING",
+      "prior_provider_receipt": "20261010T011528Z_GUILD_OVERSCOPE_PARTIAL",
+      "historical_overbroad_pages_preserved": 8
     },
     "preflight_contract": {
       "mode": "LIVE_READ_ONLY_PARENT_AND_ACTIVE_THREAD_ROSTER_THEN_EXPLICIT_COLLECT",
@@ -265,21 +266,23 @@
       "preview_only_resets_confirmed_marker": true
     },
     "full_history_contract": {
-      "requested_scope": "ALL_ACCESSIBLE_GUILD_MESSAGE_CHANNELS_AND_DISCOVERABLE_ACTIVE_ARCHIVED_THREADS",
-      "historical_mode": "EXHAUSTIVE_OLDEST_MESSAGE_BACKFILL_BOUNDED_RESUMABLE",
-      "incremental_mode": "C02_CURRENTLY_TWO_PARENTS_SEVEN_DAY_INCREMENTAL_ONLY;GUILD_WIDE_INCREMENTAL_EXPANSION_PENDING",
+      "requested_scope": "ONLY_REGISTERED_FISHTAIL_AND_ROHINI_PICTURE_PARENT_CHANNELS_PLUS_THEIR_DISCOVERABLE_ACTIVE_AND_ARCHIVED_CHILD_THREADS",
+      "historical_mode": "TWO_PARENT_COMPLETE_HISTORY_RESUMABLE_V2_ISOLATED_FROM_OVERBROAD_GUILD_V1",
+      "incremental_mode": "C02_TWO_PARENT_SEVEN_DAY_INCREMENTAL_WITH_CURSOR_AND_VERSION_SHA;LATE_EDITS_OUTSIDE_REPLAY_REQUIRE_TARGETED_OLDER_AUDIT",
       "required_raw": "PRIVATE_GDRIVE_LOSSLESS_DISCORD_JSON_GZIP_JSONL_WITH_IMMUTABLE_PAGE_RECEIPTS",
       "media_policy": "NATIVE_MEDIA_ORIGINAL_REQUIRES_DECLARED_SIZE_AND_FRESH_PROVIDER_SHA256_MATCH_TO_PRIVATE_DRIVE_READBACK;NO_SIZE_ONLY_REUSE",
-      "query_policy": "PRIVATE_SQLITE_REBUILD_FROM_VERIFIED_DRIVE_JSONL_ONLY",
-      "publish_rule": "HISTORY_PASS_AND_MEDIA_DEBT_ZERO_AND_DISCOVERY_GAPS_ZERO_AND_QUERY_READBACK_BEFORE_ANY_NEW_WEBSITE_OR_SLACK_DERIVATIVE",
+      "query_policy": "PRIVATE_SQLITE_MAY_BE_INDEXED_FROM_PARTIAL_VERIFIED_JSONL_WITH_PARTIAL_LABEL;NEVER_CONFUSE_WITH_COMPLETE_SOURCE_HISTORY",
+      "publish_rule": "C09_BLOCKS_UNTIL_SCOPED_SOURCES_COMPLETE_MEDIA_GAPS_ZERO_QUERY_VERIFIED;SEPARATE_EVIDENCE_SAFE_FACT_PROMOTION_WORKFLOW_PENDING",
       "publish_auth": "PUBLIC_SAFE_PROJECT_FACT_RECONCILIATION_AND_SLACK_SEND_GATES_STILL_REQUIRED",
-      "runtime_execution": "NOT_RUN",
+      "runtime_execution": "20261010-001_NOT_RUN",
       "limitations": [
         "deleted messages and historical edit states that Discord no longer serves are unrecoverable",
         "scope limited to bot-authorized Discord content",
         "per-invocation quotas require repeated C06/C07 executions until PASS",
         "guild-wide recurring change capture expansion pending"
-      ]
+      ],
+      "history_storage_folder": "TWO_PARENT_HISTORY_ARCHIVE_V2",
+      "earlier_history_storage_folder": "FULL_HISTORY_ARCHIVE_V1_PRESERVED_OUT_OF_SCOPE_DO_NOT_USE_AS_SITE_PROJECT_CANDIDATE"
     }
   },
   "archive_format_standard": {
