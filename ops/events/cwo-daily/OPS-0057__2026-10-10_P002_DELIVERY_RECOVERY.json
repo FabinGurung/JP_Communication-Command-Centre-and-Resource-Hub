@@ -1,0 +1,34 @@
+{
+  "event_id": "OPS-0057",
+  "event_type": "A9_CWO_SLACK_DELIVERY_RETRY_RECOVERED",
+  "date_npt": "2026-10-10",
+  "corrects_event": "OPS-0056",
+  "corrects_prior_status": "P002_PLATFORM_SAFETY_BLOCK",
+  "status": "COMPLETE_11_OF_11_COMMUNICATION_DESTINATIONS",
+  "scope": "COMMUNICATION_RECEIPTS_ONLY_NOT_CONSTRUCTION_TRUTH",
+  "project_id": "P002",
+  "company": "FISHTAIL_BUILDERS",
+  "message_context": {
+    "channel_id": "C0C13SMN1QX",
+    "provider": "SLACK",
+    "provider_message_ts": "1791598058.040639",
+    "sent_at_npt": "2026-10-10T07:52:38+05:45",
+    "message_url": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791598058040639",
+    "readback": "PASS"
+  },
+  "other_destinations": "10_PREVIOUSLY_VERIFIED_NO_RESEND",
+  "website": {
+    "latest_project": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/site-operations/project.html?project=P002",
+    "production_build": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38015321307",
+    "build_result": "SUCCESS",
+    "browser_readback": "UNVERIFIED"
+  },
+  "source": {
+    "discord_message": "https://discord.com/channels/682670494658330644/1502154332878016673/1558011137088290856",
+    "private_drive_manifest_id": "19yXv6LJexxmp9BaIifSXmj6W9Fwf9LnJ",
+    "media_original_status": "PARTIAL"
+  },
+  "daily_receipt": "ops/data/communication-web-daily/2026-10-10.json",
+  "private_source_unchanged": true,
+  "construction_facts_unchanged": true
+}
