@@ -104,7 +104,7 @@ assert "MEDIA FAILURE DETAIL" in source
 code_cells = [c for c in notebook["cells"] if c["cell_type"] == "code"]
 assert [c["id"] for c in code_cells] == ["a9-cwo-c01-setup", "a9-cwo-c02-collector", "a9-cwo-c03-cdn-probe", "a9-cwo-c04-derivative-pilot", "a9-cwo-c05-daily-index", "a9-cwo-c06-full-history", "a9-cwo-c07-media-recovery", "a9-cwo-c08-sqlite-query", "a9-cwo-c09-publication-gate"]
 assert "A9-CWO-C06-FULL-HISTORY" in code_cells[5]["metadata"]["tags"]
-assert "FULL_HISTORY_ARCHIVE_V1" in codes[5] and "MESSAGE_PAGES_GZIP_JSONL" in codes[5]
+assert "TWO_PARENT_HISTORY_ARCHIVE_V2" in codes[5] and "MESSAGE_PAGES_GZIP_JSONL" in codes[5]
 assert "h_gzip.compress(" in codes[5] and "h_immutable(" in codes[5]
 assert "threads/archived" in codes[5] and "threads/active" in codes[5]
 assert "FULL_HISTORY" in codes[5]
