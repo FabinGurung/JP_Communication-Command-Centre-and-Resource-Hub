@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1.1",
+  "schema_version": "0.1.2",
   "registry_id": "A9-CWO-EVIDENCE-REGISTRY-WORKSTREAM-001",
   "status": "WORKSTREAM_BOOTSTRAP_DESIGN_ONLY",
   "date_npt": "2026-10-10",
@@ -174,6 +174,19 @@
   "handoff": {
     "start_instruction": "Read precedence files and 10 Oct source receipt first, then implement P0→P1 before any mass source transformation.",
     "first_output": "P0 inventory and P1 schema/identity mapping + 269 unresolved attachment mismatch classification via private storage; do not publish image binary, metadata that reveals private personnel, or assume source file completeness.",
-    "chat_creation": "User opens a separate ChatGPT conversation and references this machine workstream contract; chat creation is not a GitHub operation."
+    "chat_creation": "User opens a separate ChatGPT conversation and references this machine workstream contract; chat creation is not a GitHub operation.",
+    "chat_title_recommendation": "A9-CWO Progress Report",
+    "chat_title_note": "The separate ChatGPT conversation must be renamed by its participant. GitHub naming does not rename a chat."
+  },
+  "display_name": "A9-CWO Progress Report",
+  "workstream_display_alias": "Progress Report — Source Evidence & Machine Registry",
+  "existing_workstream_id_preserved": true,
+  "public_projection": {
+    "website_page": "site-operations/history.html",
+    "label": "Progress Report",
+    "published_seed_events": 5,
+    "complete_history": false,
+    "provenance": "ops/data/progress-history-public.v0.1.jsonl",
+    "evidence_admission": "PRIVATE_DRIVE_ORIGINALS_TO_REVIEWED_PUBLIC_SAFE_PROJECTION_ONLY"
   }
 }
