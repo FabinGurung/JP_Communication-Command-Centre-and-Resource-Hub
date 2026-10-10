@@ -9,7 +9,7 @@ from pathlib import Path
 
 notebook = json.loads(Path("ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb").read_text())
 cells = {item["id"]: "".join(item["source"]) for item in notebook["cells"]}
-assert notebook["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-013"
+assert notebook["metadata"]["a9_cwo_revision"]["version_id"] == "20261010-001"
 c06 = cells["a9-cwo-c06-full-history"]
 c07 = cells["a9-cwo-c07-media-recovery"]
 c08 = cells["a9-cwo-c08-sqlite-query"]
@@ -36,6 +36,12 @@ assert c06.index('raw=h_immutable(rawdir') < c06.index("for msg in messages:") <
 assert c06.index("page=h_immutable(pagedir,") < c06.index('h_mutable_json(archive_root,"historical_state_current.json",state)')
 assert "threads/archived" in c06 and "threads/active" in c06
 assert "guilds/%s/channels" in c06
+assert 'H_HISTORY_FOLDER = "TWO_PARENT_HISTORY_ARCHIVE_V2"' in c06
+assert "in_scope = {str(ch[\"id\"]): ch for ch in channels if str(ch[\"id\"]) in H_PARENT_IDS}" in c06
+assert "FULL_HISTORY_ARCHIVE_V1" not in c06
+assert "QUERY_SNAPSHOTS missing because C08" in c09
+assert "source_history_complete" in c08
+assert "PARTIAL_BACKFILL" in c08
 assert "h_media(R_MEDIA" in c07 and 'R_RECOVERED[aid]' in c07
 assert 'q_database=h_immutable(q_dir,' in c08 and "sqlite3" in c08
 assert 'g_fail.append("ORIGINAL_MEDIA_RECOVERY_INCOMPLETE")' in c09
@@ -50,7 +56,7 @@ tree = ast.parse(c06)
 definitions = {x.name:x for x in tree.body if isinstance(x,ast.FunctionDef)}
 assert {"h_payload","h_discover","h_archived"}.issubset(definitions)
 module = ast.Module(body=[definitions["h_payload"],definitions["h_discover"]],type_ignores=[])
-root = {"h_json":json,"GUILD_ID":"1234"}
+root = {"h_json":json,"GUILD_ID":"1234","H_PARENT_IDS":("parent1","parent2")}
 def archived(parent,kind):
     return ([{"id":"archive1","name":"Past job","type":11,"parent_id":"parent1"}],None) if parent=="parent1" and kind=="public" else ([],None)
 def requester(url,params=None,allow_failure=False):
@@ -66,8 +72,8 @@ exec(compile(module,"synthetic_archive","exec"),root)
 sources,gaps=root["h_discover"]()
 assert {x["id"] for x in sources}=={"parent1","parent2","archive1","active1"}
 assert any(x["kind"]=="ARCHIVED_THREAD" for x in sources)
-assert any(x.get("reason")=="UNSUPPORTED_NON_MESSAGE_CHANNEL_TYPE" for x in gaps)
-print("PASS: live scope classification includes forum, active and archived threads and explicit unsupported gaps")
+assert not gaps, "out-of-scope category/voice channels must not create false scope debt"
+print("PASS: two registered parents, active and archived child threads only, no out-of-scope guild content")
 
 payload={"id":"12345","content":"कुमारी site – 🏗","embeds":[{"image":{"url":"https://example.org/a.png"}}],
          "reactions":[{"emoji":{"name":"👍"},"count":2}],"attachments":[{"id":"999","size":1234}]}
