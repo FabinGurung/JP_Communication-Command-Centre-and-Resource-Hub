@@ -1,0 +1,82 @@
+[
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-STRUCT-HISTORY",
+    "fileId": "1U-DlkGOGnSMIqmgpi7V1X6yYhmXR4GMl",
+    "name": "99_RECEIVED_STRUCTURE_UNVERIFIED",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-ETABS-HISTORY",
+    "fileId": "1p6L_ZAAH5xXBgaviluRVdcC6wlvnXKUH",
+    "name": "02_HISTORICAL_E2K_SOURCE",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P020",
+    "id": "RES-P020-ROOT",
+    "fileId": "1X7FIR9t_A7DTqTqogCq9o3y1g91f-e1D",
+    "name": "PRJ-000020__FBL-019__14_Kharika_Paudel",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P020",
+    "id": "RES-P020-ARCH-DWG-001",
+    "fileId": "1G7c-S_YmLtA_mkJHWi80xxL3OS8C4jPw",
+    "name": "ARCHITECTURAL_MUNICIPAL_DRAWING__14_Kharika_Paudel__AS_RECEIVED.dwg",
+    "mime": "application/dwg",
+    "verified": true
+  },
+  {
+    "pid": "P020",
+    "id": "RES-P020-ARCH-PDF-001",
+    "fileId": "1gG04rPHxuGoh8rRcS3iscfjUGojlb7Ti",
+    "name": "Pokhara Municipal.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P020",
+    "id": "RES-P020-STRUCT-PDF-001",
+    "fileId": "1OilXeqjAFrf4TV9eqHPyCklo3iFrnbY_",
+    "name": "STRUCTURAL_DRAWING_SET__14_Kharika_Paudel__AS_RECEIVED.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P020",
+    "id": "RES-P020-STRUCT-ANALYSIS-PDF-001",
+    "fileId": "1uPYCoKK-n7J_o3flTUWOEgCQdYAjbfFt",
+    "name": "Safal_Revise_Residence_report[1]_PDF_2.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P020",
+    "id": "RES-P020-ETABS-EDB-001",
+    "fileId": "1QEHa3QzuJuwai9tUxlfkd26cFagPGyCa",
+    "name": "ETABS_MODEL__14_Kharika_Paudel__AS_RECEIVED.EDB",
+    "mime": "application/octet-stream",
+    "verified": true
+  },
+  {
+    "pid": "P020",
+    "id": "RES-P020-STRUCT-DETAIL-001",
+    "fileId": "1vn3mnfmbHdfvjidUGwBgZGfJaADZpX-6",
+    "name": "STRUCTURAL_DETAIL_CALC__COMBINED_FOOTING_REBAR_CURTAILMENT__AS_RECEIVED.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P020",
+    "id": "RES-P020-MUNICIPAL-001",
+    "fileId": "1Qc7oCr5oRFIoj0HD4ENXvyYTqDN46CSP",
+    "name": "MUNICIPAL_REPORT__14_Kharika_Paudel__AS_RECEIVED.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  }
+]
