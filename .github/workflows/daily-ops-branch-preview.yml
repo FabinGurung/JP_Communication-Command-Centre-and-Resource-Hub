@@ -442,19 +442,25 @@ jobs:
               raise SystemExit("Workspace JS does not load the Phase 4 module/routing registries.")
           if "../projects.csv" not in workspace_js or "../ops/data/current-works.json" not in workspace_js:
               raise SystemExit("Workspace live project layer must read projects.csv + current-works.json.")
-          for marker in ("live-project-summary", "live-project-status", "live-project-grid", "group-projects"):
-              if marker not in workspace_html and marker != "group-projects":
-                  raise SystemExit(f"Workspace page is missing live project marker: {marker}")
+          # /workspace/ presents only website developer information; historic project
+          # data joins remain validated as legacy sources, but are not displayed here.
+          for marker in ("developer-directory", "Developer Workspace", "developer-links.v0.1.json"):
+              if marker not in workspace_html:
+                  raise SystemExit(f"Developer Workspace missing required developer-only marker: {marker}")
+          if 'id="live-project-grid"' in workspace_html:
+              raise SystemExit("Developer Workspace must not render site project records.")
           if "parseCsv" not in workspace_js or "deriveOpsSignal" not in workspace_js or "loadLiveProjects" not in workspace_js:
               raise SystemExit("Workspace live project join/render functions are incomplete.")
           for function_name in ("loadModules", "loadRouting", "renderHealth"):
               if function_name not in workspace_js:
                   raise SystemExit(f"Workspace Phase 4 function missing: {function_name}")
-          for marker in ("health-grid", "route-grid", "module-grid"):
-              if marker not in workspace_html:
-                  raise SystemExit(f"Workspace Phase 4 UI marker missing: {marker}")
-          if "workspace.css" not in workspace_html or "workspace.js" not in workspace_html:
-              raise SystemExit("Workspace page is missing its CSS/JS assets.")
+          developer_links = json.loads(Path("workspace/developer-links.v0.1.json").read_text(encoding="utf-8"))
+          if developer_links.get("scope") != "WEBSITE_IMPLEMENTATION_NOT_PROJECT_CASE_FILES":
+              raise SystemExit("Developer Workspace registry must be developer-only.")
+          if len(developer_links.get("categories", [])) < 4:
+              raise SystemExit("Developer Workspace technical links are incomplete.")
+          if "developer-links.v0.1.json" not in workspace_html:
+              raise SystemExit("Developer Workspace is missing its developer link source.")
           if 'location.replace("workspace/"' not in legacy_workspace_html:
               raise SystemExit("Legacy workspace.html does not redirect to canonical /workspace/.")
           if 'location.replace("guide/"' not in legacy_howto_html:
