@@ -1,0 +1,81 @@
+{
+  "event_id": "OPS-0064",
+  "date_npt": "2026-10-11",
+  "type": "WEBSITE_ENGINEER_FIRST_INFORMATION_ARCHITECTURE_REFRESH",
+  "status": "PRODUCTION_AND_BROWSER_QA_PASS",
+  "primary_pages": [
+    "index.html",
+    "map.html",
+    "site-operations.html",
+    "site-operations/history.html",
+    "resources/index.html",
+    "workspace/index.html",
+    "guide/index.html"
+  ],
+  "secondary_pages": [
+    "site-operations/coordination.html",
+    "site-operations/project.html",
+    "site-operations/schedule.html",
+    "site-operations/questions.html",
+    "controls/index.html",
+    "pending/index.html"
+  ],
+  "homepage_visual": {
+    "style": "EYE_FRIENDLY_LIGHT_GREEN_VALLEY_WHITE_CLOUD_STRUCTURAL_FRAME_AND_CRANE",
+    "implementation": "NATIVE_CANVAS_2D_POINTER_PARALLAX",
+    "threejs_loaded": false,
+    "reduced_motion": true,
+    "route": "index.html"
+  },
+  "map": {
+    "primary_focus": "BROWSER_LOCAL_TODAY_CHECKLIST_AND_BROAD_VERIFIED_WORK_STATE",
+    "source": "ops/data/current-works.json plus public works, personal browser-local reminders",
+    "private_technical_metadata": "COLLAPSED_DISCLOSURE",
+    "status_limitations": "NO_CONFIRMED_COMPLETION_OR_IDLE_STATUS_FROM_MISSING_RECORDS"
+  },
+  "resource_library": {
+    "originals_moved": false,
+    "originals_renamed": false,
+    "source_file_count": 46,
+    "authenticated_original_names": 46,
+    "normalized_catalog": "ops/data/resource-catalog-normalized.v0.1.json",
+    "raw_registry": "ops/data/project-resources.json",
+    "priority_order": [
+      "PDF_DRAWINGS_AND_REPORTS",
+      "EDITABLE_DWG_E2K_EDB_SKP_NATIVE_MODELS",
+      "SPREADSHEETS_AND_SUPPORT",
+      "SOURCE_FOLDERS_AND_ARCHIVE"
+    ],
+    "source_metadata": "ops/data/resource-original-names/metadata-batch-01..04.v0.1.json"
+  },
+  "developer_workspace": {
+    "role": "DEVELOPER_ONLY",
+    "source": "workspace/developer-links.v0.1.json",
+    "history_archived": true,
+    "shows_site_case_files": false,
+    "read_only_public_not_an_admin_portal": true
+  },
+  "governance": {
+    "contract": "ops/control/site-experience-and-pipeline-isolation.v0.1.json",
+    "guard_script": "scripts/validate_site_experience_contract.py",
+    "workflow": ".github/workflows/daily-ops-branch-preview.yml",
+    "revision_principle": "PRE_ARCHIVE_POST_READBACK",
+    "cross_domain_data_commit_rule": "ONE_DATA_LANE_PER_COMMIT",
+    "progress_canonical": "DRIVE_RAW_THEN_NORMALIZED_EVIDENCE_THEN_APPROVED_PUBLIC_GITHUB_PROJECTION",
+    "checklist_write": "USER_BROWSER_LOCAL_ONLY",
+    "resource_write": "AUTHENTICATED_DRIVE_METADATA_AND_VERSIONED_DERIVATION_ONLY"
+  },
+  "limitations": [
+    "GITHUB_PAGES_IS_PUBLIC_NOT_AUTHENTICATED_OWNER_PORTAL",
+    "MAP_CHECKLIST_ITEMS_VISIBLE_ONLY_ON_SAME_BROWSER_DEVICE_AND_DATE",
+    "ONLY_46_KNOWN_RESOURCE_LINKS_INDEXED",
+    "DRIVE_ACCESS_AND_ISSUE_APPROVAL_DO_NOT_FOLLOW_FROM_PUBLIC_LINK",
+    "PROGRESS_REPORT_37_INITIAL_ROWS_NOT_FULL_DISCORD_SLACK_ARCHIVE",
+    "FUTURE_FILE_UPLOADS_NOT_YET_AUTOMATICALLY_INDEXED_OR_NORMALIZED"
+  ],
+  "validation": {
+    "branch": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38138726130",
+    "production": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38138726107",
+    "desktop_mobile": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38138632822"
+  }
+}
