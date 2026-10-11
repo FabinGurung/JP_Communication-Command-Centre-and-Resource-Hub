@@ -1,108 +1,25 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="JP AEC Platform operations hub for live project experience, site operations and engineering resources">
-  <title>JP AEC Operations Hub</title>
-  <style>
-    :root{--page:#f4f6f8;--panel:#fff;--text:#172033;--muted:#667085;--line:#dfe4ea;--accent:#175cd3;--soft:#eef4ff;--shadow:0 12px 30px rgba(15,23,42,.08);color-scheme:light}
-    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--page);color:var(--text)}
-    .shell{max-width:1120px;margin:0 auto;padding:28px 18px 42px}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
-    .eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}h1{font-size:clamp(30px,5vw,52px);line-height:1.04;margin:8px 0 10px}
-    .lead{max-width:760px;color:var(--muted);font-size:16px;line-height:1.6}.branch{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:700}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}.card{display:flex;flex-direction:column;min-height:280px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);text-decoration:none;color:inherit;transition:transform .15s ease,border-color .15s ease}
-    .card:hover{transform:translateY(-2px);border-color:#b2ccff}.icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--soft);font-size:24px}
-    .card h2{font-size:24px;margin:18px 0 8px}.card p{color:var(--muted);line-height:1.55;margin:0}.card ul{padding-left:18px;color:var(--muted);line-height:1.7}.go{margin-top:auto;color:var(--accent);font-weight:800}
-    .architecture{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}.architecture h3{margin:0 0 8px}.architecture p{margin:0;color:var(--muted);line-height:1.55}
-    .quicklinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.quicklinks a{background:#fff;color:#165c44;border:1px solid #d6e5dd;text-decoration:none;padding:10px 12px;min-height:42px;border-radius:10px;font-size:12px;font-weight:750}.quicklinks a:hover{background:#eaf4ec}
-    .notice{margin-top:18px;border:1px solid #fedf89;background:#fff8e6;color:#7a2e0e;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.5}
-    footer{margin-top:24px;color:var(--muted);font-size:12px}@media(max-width:760px){.grid{grid-template-columns:1fr}.card{min-height:240px}.shell{padding:20px 12px 32px}}
-  </style>
-</head>
-<body>
-  <main class="shell">
-    <div class="top">
-      <div>
-        <div class="eyebrow">JP AEC Platform</div>
-        <h1>JP AEC Operations Hub</h1>
-        <div class="lead">The live experience layer of the JP AEC Platform: project locations, owner workspaces, Drive-hosted drawings and models, a personal checklist, communication follow-ups and source-attributed progress reports. Specialist planning, estimation, structural-analysis and CAD systems remain standardized modules around this hub.</div>
-      </div>
-      <div class="branch">Website · main / GitHub Pages</div>
-    </div>
-
-    <nav class="quicklinks" aria-label="Quick access"><a href="map.html">🗺️ Map</a><a href="workspace/">🧭 Owner Workspace</a><a href="resources/">📐 Drawings &amp; Models</a><a href="site-operations.html">☑ Daily Checklist</a><a href="site-operations/coordination.html">⚠ Site Coordination</a><a href="site-operations/history.html">🗓 Progress Report</a></nav>
-    <section class="grid" aria-label="JP Ecosystem pages">
-      <a class="card" href="map.html">
-        <div class="icon">🗺️</div>
-        <h2>Project Map</h2>
-        <p>See project locations, then jump directly into the project's drawing room, operations record and Drive-linked resources.</p>
-        <ul><li>Project locations and status</li><li>Contractor filtering and search</li><li>Directions and project navigation</li></ul>
-        <div class="go">Open project map →</div>
-      </a>
-
-      <a class="card" href="site-operations.html">
-        <div class="icon">🏗️</div>
-        <h2>Checklist for Today</h2>
-        <p>Write your own concise daily site reminders, by project. Historical communication questions are not added automatically.</p>
-        <ul><li>Empty personal checklist</li><li>Browser-only per-site daily entries</li><li>Copy the checklist for the team</li></ul>
-        <div class="go">Open daily checklist →</div>
-      </a>
-
-      <a class="card" href="resources/"><div class="icon">📐</div><h2>Project Resources — Drawings &amp; Models</h2><p>Search the source-linked drawing room across projects, including DWG, SketchUp SKP, ETABS E2K, PDFs and controlled Google Drive folders.</p><ul><li>Find documents by project and format</li><li>Open originals in permission-gated Drive</li><li>Review provenance and revision limitations</li></ul><div class="go">Open drawings directory →</div></a>
-
-      <a class="card" href="workspace/">
-        <div class="icon">🧭</div>
-        <h2>Owner Workspace</h2>
-        <p>A plain-language control desk showing where to go, what owns each fact, and how the storage layers fit together.</p>
-        <ul><li>Task → correct source mapping</li><li>Live Daily Ops orientation</li><li>CSV / JSON / Sheets / Drive / PostgreSQL guide</li><li>Deployment and audit shortcuts</li></ul>
-        <div class="go">Open workspace →</div>
-      </a>
-
-      <a class="card" href="site-operations/coordination.html"><div class="icon">⚠️</div><h2>Site Coordination</h2><p>Pending holds, unresolved engineer questions and decisions requiring a responsible response. Not automatic construction instructions.</p><div class="go">Open coordination →</div></a>
-
-      <a class="card" href="site-operations/history.html"><div class="icon">🗓️</div><h2>Progress Report</h2><p>Read dated, source-attributed field observations and archived follow-ups, separated from completed-work certifications.</p><div class="go">Open progress report →</div></a>
-
-      <a class="card" href="controls/memory-wall.html">
-        <div class="icon">🧠</div>
-        <h2>A9-CWO Memory Wall</h2>
-        <p>Pinned, printable reminders for Colab versioning, source capture and website publishing.</p>
-        <ul><li>Same Colab link, every revision</li><li>Snapshot → edit → verify → register</li><li>Daily Discord/Slack intake runbook</li></ul>
-        <div class="go">Open Memory Wall →</div>
-      </a>
-
-      <a class="card" href="controls/">
-        <div class="icon">🗼</div>
-        <h2>Control Towers &amp; Main Library</h2>
-        <p>Browse documented A9 control versions, the Main Library entry point and their owning Drive sources.</p>
-        <ul><li>Source-linked control directory</li><li>Machine-readable GitHub index</li><li>Migration and synchronization boundary</li></ul>
-        <div class="go">Open Control Towers →</div>
-      </a>
-
-      <a class="card" href="pending/">
-        <div class="icon">📌</div>
-        <h2>Pending Work</h2>
-        <p>Prepared proposals and deferred implementation work that must remain visible until explicitly resolved.</p>
-        <ul><li>Proposal links and stable IDs</li><li>Current status and next approval gate</li><li>No false completion claims</li></ul>
-        <div class="go">Open pending work →</div>
-      </a>
-
-      <a class="card" href="guide/">
-        <div class="icon">📘</div>
-        <h2>How To</h2>
-        <p>Step-by-step instructions for project edits, Daily Ops, files, Sheets, publishing, recovery and future database migration.</p>
-        <ul><li>What we built and why</li><li>Where to edit safely</li><li>Why Neon is optional today</li><li>A9 recovery vocabulary</li></ul>
-        <div class="go">Open How-To guide →</div>
-      </a>
-    </section>
-
-    <section class="architecture">
-      <h3>Machine-first architecture</h3>
-      <p>Google Drive is the canonical source/evidence warehouse. GitHub is the canonical structured-data/control warehouse. PostgreSQL-compatible SQL text defines the relationship contract; CSV/JSON hold current values; JSONL holds history. The current GitHub Pages runtime does <b>not</b> require a live Neon/PostgreSQL server. Sheets, Pages and Slack remain downstream projections or controlled input surfaces.</p>
-    </section>
-
-    <div class="notice"><b>Platform modules:</b> Operations Hub is the current live-experience point. Standard modules are JP AEC Project Controls (Primavera P6), JP AEC Cost Estimation, JP AEC Structural Analysis (OpenSees), and JP AEC CAD &amp; Drawings. Existing repository slugs remain unchanged for URL stability.</div>
-    <footer>JP AEC Platform · Operations Hub · main website</footer>
-  </main>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f1f7ee"><meta name="description" content="JP AEC project map, site checklist, progress reporting, drawings and models, developer workspace and guidance."><title>JP AEC · Projects, Progress & Resources</title>
+<style>
+:root{--bg:#f3f8f1;--ink:#183b2d;--muted:#536f5c;--green:#1a6b4e;--line:#d7e6d8;--mint:#e4f1e3;--paper:#fffef9;--shadow:0 12px 30px #244e2c0b}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}a{color:var(--green)}a:focus-visible,button:focus-visible{outline:3px solid #dcae49;outline-offset:3px}
+.shell{max-width:1150px;margin:auto;padding:12px 18px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;min-height:53px;padding-bottom:10px;border-bottom:1px solid var(--line)}.logo{color:#1a6149;text-decoration:none;font-size:14px;font-weight:900;display:inline-flex;gap:8px;align-items:center}.logo-mark{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:#d5ebdc}.nav{display:flex;gap:5px;flex-wrap:wrap}.nav a{color:#3e6751;text-decoration:none;font-size:12px;font-weight:790;padding:9px 10px;min-height:40px;display:inline-flex;align-items:center;border-radius:8px}.nav a:hover{background:#e5f0e5}
+.hero{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);margin-top:18px;min-height:370px;border:1px solid #cedfcc;border-radius:23px;overflow:hidden;background:linear-gradient(112deg,#e7f4e7,#fbf9ec);box-shadow:var(--shadow)}.hero-copy{padding:34px 28px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:10px;position:relative;z-index:1}.eyebrow{font-size:11px;letter-spacing:.13em;font-weight:900;color:#408058;text-transform:uppercase}.hero h1{font-size:clamp(35px,5vw,59px);letter-spacing:-.055em;line-height:1.06;margin:0}.hero p{font-size:14px;color:#506e5e;line-height:1.6;max-width:460px;margin:0}.hero-art{position:relative;min-height:285px;overflow:hidden}.hero-art canvas{width:100%;height:100%;display:block}.art-label{position:absolute;top:16px;right:17px;border:1px solid #d3e6d4;border-radius:999px;background:#ffffffcc;color:#3a7552;padding:7px 11px;font-size:10px;font-weight:850}
+.choices{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.cta{display:inline-flex;align-items:center;justify-content:center;min-height:45px;border-radius:10px;padding:10px 16px;text-decoration:none;font-size:13px;font-weight:850;background:#1b6b4c;color:#fff}.cta.alt{background:#fff;color:#24674a;border:1px solid #afcbb6}.cta:hover{filter:brightness(.95)}
+.intro{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:28px 0 12px}.intro h2{font-size:22px;letter-spacing:-.025em;margin:0}.intro p{font-size:12px;color:var(--muted);margin:3px 0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{background:var(--paper);padding:17px;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:7px;min-height:172px;color:var(--ink);text-decoration:none;transition:transform .18s ease,border-color .18s ease}.card:hover{transform:translateY(-3px);border-color:#90b49e}.card .emoji{display:grid;place-items:center;width:42px;height:42px;border-radius:11px;background:#e4f1e6;font-size:23px}.card h3{font-size:17px;line-height:1.22;margin:3px 0 0}.card p{font-size:12px;line-height:1.55;color:var(--muted);margin:0}.card .go{color:#1b6849;font-size:12px;font-weight:850;margin-top:auto;padding-top:8px}
+.secondary{margin-top:19px;background:#e8f0e4;border:1px solid #d4e2d1;border-radius:13px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.secondary h2{font-size:16px;margin:0}.secondary p{font-size:12px;color:#5b7161;margin:3px 0}.secondary-links{display:flex;gap:8px;flex-wrap:wrap}.secondary-links a{display:inline-flex;min-height:38px;align-items:center;border-radius:8px;background:#fff;padding:8px 11px;color:var(--green);font-size:12px;font-weight:800;text-decoration:none}
+.foot{font-size:11px;color:var(--muted);margin-top:24px}
+@media(max-width:820px){.hero{grid-template-columns:1fr}.hero-copy{padding:26px 21px}.hero-art{height:240px;min-height:0}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){.shell{padding:11px 11px 40px}.hero h1{font-size:34px}.grid{grid-template-columns:1fr}.card{min-height:138px;padding:15px}.top{align-items:flex-start}.hero-art{height:190px}.hero-copy{padding:20px 16px}.intro{margin-top:22px}}
+@media(prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+</style></head><body><main class="shell">
+<header class="top"><a class="logo" href="./"><span class="logo-mark">🏗️</span> JP AEC · Operations Hub</a><nav class="nav" aria-label="Main site navigation"><a href="map.html">🗺️ Map</a><a href="site-operations.html">☑️ Checklist</a><a href="site-operations/history.html">📊 Progress</a><a href="resources/">📐 Resources</a><a href="workspace/">🛠️ Developer</a><a href="guide/">📘 How-To</a></nav></header>
+<section class="hero" aria-label="Welcome to JP AEC"><div class="hero-copy"><div class="eyebrow">Practical construction coordination · Nepal</div><h1>Know the site.<br>Know what’s next.</h1><p>One simple entrance for site engineers to prepare their day and shareholders to follow reported progress, with original drawings and models one click away.</p><div class="choices"><a class="cta" href="site-operations.html">☑️ Today's Site Checklist ↗</a><a class="cta alt" href="site-operations/history.html">📊 View Progress ↗</a></div></div><div class="hero-art"><canvas id="field-hero-canvas" role="img" aria-label="Animated light-green construction landscape and structural frame illustration"></canvas><span class="art-label">LIGHT FIELD · CONSTRUCTION</span></div></section>
+<section aria-labelledby="destinations-title"><div class="intro"><div><h2 id="destinations-title">Where would you like to go?</h2><p>Six focused destinations. Detailed records stay inside the relevant page.</p></div></div><div class="grid">
+<a class="card" href="map.html"><span class="emoji">🗺️</span><h3>Project Map</h3><p>Find a site, preview today’s reminders and open its source resources.</p><span class="go">Open map ↗</span></a>
+<a class="card" href="site-operations.html"><span class="emoji">☑️</span><h3>Today's Site Checklist</h3><p>Your own dated tasks and relay reminders, separated by site and saved locally.</p><span class="go">Write today's checklist ↗</span></a>
+<a class="card" href="site-operations/history.html"><span class="emoji">📊</span><h3>Progress Report</h3><p>What was reported, the evidence date and whether it came from Discord or Slack.</p><span class="go">Review historical progress ↗</span></a>
+<a class="card" href="resources/"><span class="emoji">📐</span><h3>Project Resources</h3><p>Architectural and structural PDFs first, then DWG, E2K, SKP and original folders.</p><span class="go">Browse drawings and models ↗</span></a>
+<a class="card" href="workspace/"><span class="emoji">🛠️</span><h3>Developer Workspace</h3><p>Website code, GitHub versions, control towers, component libraries and development tasks.</p><span class="go">Manage the website ↗</span></a>
+<a class="card" href="guide/"><span class="emoji">📘</span><h3>How-To</h3><p>Short instructions for engineers, managers and developers using the hub.</p><span class="go">Read the guide ↗</span></a></div></section>
+<section class="secondary"><div><h2>⚠️ Site Coordination · secondary workspace</h2><p>Unresolved engineering questions, site holds and decisions—not the personal daily checklist.</p></div><div class="secondary-links"><a href="site-operations/coordination.html">Open coordination ↗</a><a href="pending/">Software backlog ↗</a><a href="controls/">Control towers ↗</a><a href="controls/memory-wall.html">A9 Memory Wall ↗</a></div></section>
+<footer class="foot">JP AEC · Original communication and engineering documents stay in their governed source systems. The website displays approved, attributed projections only.</footer></main><script defer src="assets/js/hero-field.js"></script></body></html>
