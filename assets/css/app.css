@@ -194,3 +194,27 @@ h1 { margin-bottom: 2px; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.15;
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+
+/* A9-CWO Site UX: operations first, technical project data by disclosure. */
+.map-quick-checklist{display:grid;gap:7px;padding:10px 12px;border:1px solid #dcebdc;background:#f1f8ef;border-radius:10px;margin:9px 0;color:#245943;line-height:1.45}
+.map-quick-checklist strong{font-size:13px}
+.map-quick-checklist small{font-size:11px;color:#5f7967}
+.map-quick-checklist ul{margin:0;padding-left:18px;list-style:none;display:grid;gap:6px}
+.map-quick-checklist li{font-size:12px;overflow-wrap:anywhere}
+.map-work-summary{display:grid;gap:5px;margin:8px 0;color:#365943}
+.map-work-summary strong{font-size:12px}
+.map-work-summary small{font-size:11px;color:#587368;line-height:1.5}
+.map-technical{border:1px solid #d5e5dc;background:#f7faf6;border-radius:11px;padding:11px;margin-top:13px}
+.map-technical>summary{cursor:pointer;font-weight:800;font-size:12px;min-height:33px;line-height:1.5;color:#3a7154}
+.map-technical .section-card{margin:8px 0}
+.map-counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:10px 0}
+.map-counts span{border-radius:9px;background:#f1f7f0;border:1px solid #e0eade;padding:9px 6px;text-align:center;display:grid;gap:4px;color:#4f6857;font-size:11px}
+.map-counts strong{font-size:22px;color:#246c4e}
+.map-readiness{font-weight:750;color:#6b542a;font-size:12px}
+.map-note{color:#677b6d;font-size:11px;line-height:1.5}
+.jp-checklist-tooltip .leaflet-tooltip-content{max-width:285px}
+.jp-checklist-tooltip{white-space:normal;max-width:310px;border:1px solid #b9d8bd;border-radius:11px;background:#fffef8;box-shadow:0 8px 22px #254b321e;padding:9px}
+.jp-checklist-tooltip .map-quick-checklist{margin:4px 0;padding:5px 6px}
+.jp-checklist-tooltip .map-quick-checklist li{font-size:11px}
+@media(max-width:550px){.map-counts strong{font-size:18px}.map-quick-checklist{padding:9px}}
