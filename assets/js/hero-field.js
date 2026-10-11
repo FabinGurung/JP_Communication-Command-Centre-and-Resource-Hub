@@ -4,7 +4,7 @@ let width=0,height=0,dpr=1,pointer=0,active=true,frame=0;const reduce=window.mat
 function resize(){const r=c.getBoundingClientRect();width=Math.max(1,r.width);height=Math.max(1,r.height);dpr=Math.min(window.devicePixelRatio||1,1.6);c.width=Math.round(width*dpr);c.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw(0);}
 function stroke(x1,y1,x2,y2,color=colors.green,sw=1.5){ctx.strokeStyle=color;ctx.lineWidth=sw;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
 function cloud(x,y,s=1){ctx.fillStyle="rgba(255,255,255,.83)";ctx.beginPath();ctx.ellipse(x,y,23*s,10*s,0,0,Math.PI*2);ctx.ellipse(x+15*s,y-6*s,17*s,12*s,0,0,Math.PI*2);ctx.ellipse(x+32*s,y,21*s,10*s,0,0,Math.PI*2);ctx.fill();}
-function draw(t){if(!width||!height)return;ctx.clearRect(0,0,width,height);const p=reduce.matches?0:Math.sin(t*.00035),float=reduce.matches?0:Math.sin(t*.0007)*2;const floor=height*.81,span=width*.19,base=width*.48;const sky=ctx.createLinearGradient(0,0,0,height);sky.addColorStop(0,"#e1f1e2");sky.addColorStop(.7,"#f6f6e6");sky.addColorStop(1,"#d7e8d4");ctx.fillStyle=sky;ctx.fillRect(0,0,width,height);
+function draw(t){if(!width||!height)return;ctx.clearRect(0,0,width,height);const p=reduce.matches?0:Math.sin(t*.00035)+(pointer-.5)*.6,float=reduce.matches?0:Math.sin(t*.0007)*2;const floor=height*.81,span=width*.19,base=width*.48;const sky=ctx.createLinearGradient(0,0,0,height);sky.addColorStop(0,"#e1f1e2");sky.addColorStop(.7,"#f6f6e6");sky.addColorStop(1,"#d7e8d4");ctx.fillStyle=sky;ctx.fillRect(0,0,width,height);
 cloud(width*.13+p*19,42,1.05);cloud(width*.63-p*13,height*.18,.9);cloud(width*.81+p*17,height*.39,.65);
 ctx.fillStyle="#d0e5cd";ctx.beginPath();ctx.moveTo(0,floor);ctx.bezierCurveTo(width*.22,height*.63,width*.32,height*.9,width*.53,height*.69);ctx.bezierCurveTo(width*.73,height*.52,width*.79,height*.83,width,floor*.91);ctx.lineTo(width,height);ctx.lineTo(0,height);ctx.fill();
 ctx.fillStyle="#b2d1b2";ctx.beginPath();ctx.moveTo(0,height*.9);ctx.bezierCurveTo(width*.22,height*.75,width*.47,height*1.01,width*.67,height*.79);ctx.bezierCurveTo(width*.85,height*.73,width*.95,height*.88,width,height*.8);ctx.lineTo(width,height);ctx.lineTo(0,height);ctx.fill();
@@ -18,6 +18,6 @@ let hookX=ex+span*.32+p*span*.06;stroke(hookX,mastTop,hookX,top+height*.22+float
 stroke(0,floor+6,width,floor+6,colors.dark,1.2);ctx.fillStyle=colors.dark;ctx.font="700 11px system-ui";ctx.fillText("SITE • PLAN • BUILD • VERIFY",16,height-17);
 }
 function tick(t){if(!active)return;frame=requestAnimationFrame(tick);if(!reduce.matches)draw(t);}
-c.addEventListener("pointermove",e=>{pointer=e.offsetX/Math.max(width,1);},{passive:true});document.addEventListener("visibilitychange",()=>{active=!document.hidden;if(active){resize();if(!reduce.matches)tick(performance.now());}else cancelAnimationFrame(frame);});
-window.addEventListener("resize",resize,{passive:true});reduce.addEventListener?.("change",resize);resize();if(!reduce.matches)tick(0);
+c.addEventListener("pointermove",e=>{pointer=e.offsetX/Math.max(width,1);if(reduce.matches)draw(0);},{passive:true});document.addEventListener("visibilitychange",()=>{active=!document.hidden;if(active){resize();if(!reduce.matches)tick(performance.now());}else cancelAnimationFrame(frame);});
+window.addEventListener("resize",resize,{passive:true});reduce.addEventListener?.("change",()=>{cancelAnimationFrame(frame);resize();if(!reduce.matches&&active)tick(performance.now());});resize();if(!reduce.matches)tick(0);
 })();
