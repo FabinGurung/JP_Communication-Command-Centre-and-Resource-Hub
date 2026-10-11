@@ -582,6 +582,9 @@ jobs:
               f"identity/provenance/resource/projection/routes/workspace-live/health/routing/modules/stale-link-audit/fallback/guide-visuals verified."
           )
 
+      - name: Validate developer/site/progress/resources isolation
+        run: python scripts/validate_site_experience_contract.py
+
       - name: Phase 5 release QA
         run: python scripts/phase5_release_qa.py
 
