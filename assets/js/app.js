@@ -26,6 +26,7 @@ const state = {
   filteredProjects: [],
   workingProjectIds: new Set(),
   workingScopeAvailable: false,
+  siteReadinessByLegacyId: new Map(),
   map: null,
   projectLayer: null,
   componentLayer: null,
@@ -153,6 +154,9 @@ async function loadWorkingProjectIds(cacheBust) {
   const response = await fetch(`ops/data/current-works.json?${cacheBust}`, { cache: "no-store" });
   if (!response.ok) throw new Error(`Could not load Daily Ops working-project scope (${response.status})`);
   const data = await response.json();
+  state.siteReadinessByLegacyId = new Map((Array.isArray(data.projects) ? data.projects : [])
+    .filter((site) => site.project_id)
+    .map((site) => [site.project_id, {readiness: site.daily_ops?.overall_readiness || "NOT_CONFIRMED", as_of: site.daily_ops?.date || null}]));
   return new Set(
     (Array.isArray(data.projects) ? data.projects : [])
       .map((item) => String(item.map_project_id || "").trim())
@@ -430,20 +434,15 @@ function projectMarkerIcon(project) {
   });
 }
 
-function projectPopupHTML(project) {
-  const ward = project.location_ward_number ? `Ward ${escapeHTML(project.location_ward_number)} · ` : "";
-  const opsLink = project.legacy_project_code
-    ? `<a href="site-operations/project.html?project=${encodeURIComponent(project.legacy_project_code)}">Site operations</a>`
-    : "";
-  return `<div class="popup">
-    <div class="popup-code">${escapeHTML(project.company_project_code)}</div>
-    <h3>${escapeHTML(project.display_name)}</h3>
-    <div class="popup-status">${ward}${escapeHTML(humanLabel(project.project_function))} · ${escapeHTML(project.status)}</div>
-    <div class="popup-actions">
-      <button type="button" data-view-project="${escapeHTML(project.project_id)}">View Project</button>
-      ${opsLink}
-      ${canShow(project, "show_coordinates") ? `<a href="${directionsURL(project)}" target="_blank" rel="noopener">Directions</a>` : ""}
-    </div></div>`;
+function nepalDateForMap(){const parts=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Kathmandu",day:"2-digit",month:"2-digit",year:"numeric"}).formatToParts(new Date());const get=type=>parts.find(p=>p.type===type)?.value;return [get("year"),get("month"),get("day")].join("-");}
+function personalChecklistForMap(code){if(!code)return [];try{const value=JSON.parse(window.localStorage.getItem("JPAEC:diy-checklist:v1:"+nepalDateForMap()+":"+code)||"[]");return Array.isArray(value)?value.filter(x=>typeof x.text==="string"&&x.text.trim()).slice(0,30):[]}catch{return []}}
+function publicWorkCounts(project){const rows=projectWorkItems(project.project_id);return{completed:rows.filter(r=>r.work_status==="COMPLETED").length,ongoing:rows.filter(r=>r.work_status==="IN_PROGRESS").length,held:rows.filter(r=>["ON_HOLD","BLOCKED"].includes(r.work_status)).length,total:rows.length};}
+function mapChecklistSummary(project){const code=project.legacy_project_code,tasks=personalChecklistForMap(code);return '<div class="map-quick-checklist"><strong>☑️ Today’s Site Checklist</strong>'+(tasks.length?'<ul>'+tasks.slice(0,3).map(t=>'<li>'+(t.done?"☑":"☐")+' '+escapeHTML(t.text)+'</li>').join("")+'</ul>'+(tasks.length>3?'<small>+'+(tasks.length-3)+' more reminders</small>':""):'<small>No tasks written on this browser today.</small>')+'</div>';}
+function projectPopupHTML(project){
+  const code=project.legacy_project_code,ops=state.siteReadinessByLegacyId.get(code),counts=publicWorkCounts(project);
+  const readiness=ops?.readiness==="HOLD"?"⚠️ Reported HOLD — verify":ops?.readiness==="READY_WITH_CONDITION"?"⚠️ Conditional readiness":"Current readiness not verified";
+  const links=code?'<a href="site-operations.html?project='+encodeURIComponent(code)+'">Checklist ↗</a><a href="resources/?project='+encodeURIComponent(code)+'">📐 Resources ↗</a><a href="site-operations/history.html?project='+encodeURIComponent(code)+'">Progress ↗</a>':"";
+  return '<div class="popup"><h3>'+escapeHTML(project.display_name)+'</h3><div class="popup-status">'+escapeHTML(readiness)+'</div>'+mapChecklistSummary(project)+'<div class="map-work-summary"><strong>Work overview</strong><small>'+(counts.total?counts.ongoing+' ongoing · '+counts.completed+' completed · '+counts.held+' held/blocked, from '+counts.total+' indexed public work items':'No verified public work-item statuses linked yet.')+'</small></div><div class="popup-actions">'+links+'<button type="button" data-view-project="'+escapeHTML(project.project_id)+'">More detail</button></div></div>';
 }
 
 function pointKey(latitude, longitude) {
@@ -521,10 +520,7 @@ function renderSupplementalMarkers(bounds) {
   }
 }
 
-function updateProjectTooltips() {
-  const show = state.map && state.map.getZoom() >= (state.config.marker.label_min_zoom || 14);
-  state.markerByProjectId.forEach((marker) => show ? marker.openTooltip() : marker.closeTooltip());
-}
+function updateProjectTooltips(){/* Tooltips open on hover/focus only; avoid obscuring multiple map nodes. */}
 
 function renderMapMarkers({ fitBounds = false } = {}) {
   state.projectLayer.clearLayers();
@@ -538,7 +534,7 @@ function renderMapMarkers({ fitBounds = false } = {}) {
     state.filteredProjects.forEach((project) => {
       const position = state.displayPositionByKey.get(`project:${project.project_id}`) || [project.latitude, project.longitude];
       const marker = L.marker(position, { icon: projectMarkerIcon(project), keyboard: true })
-        .bindTooltip(project.company_project_code, { permanent: false, direction: "top", opacity: 0.95 })
+        .bindTooltip(`<strong>${escapeHTML(project.display_name)}</strong><br>${mapChecklistSummary(project)}`, { permanent: false, direction: "top", opacity: 0.98, className:"jp-checklist-tooltip" })
         .bindPopup(projectPopupHTML(project), { minWidth: 240, maxWidth: 310 })
         .addTo(state.projectLayer);
       marker.on("click", () => selectProject(project.project_id, { pan: false, openPopup: false }));
@@ -638,16 +634,27 @@ function renderOverview(project) {
   const resourceLink = project.legacy_project_code ? `<a class="detail-link" href="resources/?project=${encodeURIComponent(project.legacy_project_code)}">📐 Drawings &amp; Models</a>` : `<a class="detail-link" href="resources/">Browse project resources</a>`;
   const directionsLink = canShow(project, "show_coordinates") ? `<a class="detail-link primary" href="${directionsURL(project)}" target="_blank" rel="noopener">Directions</a>` : "";
 
+  const counts=publicWorkCounts(project),code=project.legacy_project_code,ops=state.siteReadinessByLegacyId.get(code);
+  const actionLinks=code?'<a class="detail-link" href="site-operations.html?project='+encodeURIComponent(code)+'">☑️ Today’s Site Checklist</a><a class="detail-link" href="resources/?project='+encodeURIComponent(code)+'">📐 Drawing & Resource Library</a><a class="detail-link" href="site-operations/history.html?project='+encodeURIComponent(code)+'">📊 Progress Report</a><a class="detail-link" href="site-operations/coordination.html?project='+encodeURIComponent(code)+'">⚠️ Site Coordination</a>':'<a class="detail-link" href="resources/">📐 Browse Resources</a>';
+  const siteReadiness=ops?.readiness==="HOLD"?"Reported HOLD — confirm affected work":ops?.readiness==="READY_WITH_CONDITION"?"Readiness with conditions":"Readiness not confirmed here";
   elements.overviewPanel.innerHTML = `
-    ${(physicalProgress || financialProgress) ? `<div class="section-card"><h3>Progress</h3>${physicalProgress}${financialProgress}</div>` : ""}
-    <div class="section-card"><h3>Project identity</h3>${identifiers}</div>
-    <div class="section-card"><h3>Classification</h3>${classifications}</div>
-    ${relationships ? `<div class="section-card"><h3>Project parties and funding</h3>${relationships}</div>` : ""}
-    ${componentCard(project)}
-    ${dates ? `<div class="section-card"><h3>Dates</h3>${dates}</div>` : ""}
-    ${updates ? `<div class="section-card"><h3>Public information</h3>${updates}</div>` : ""}
-    ${(project.data_quality_status === "WARNING" || project.contractor_verification_status === "UNVERIFIED") ? `<div class="section-card quality-card"><h3>Verification status</h3>${quality}<p>Provisional information is shown transparently and should be replaced when verified records become available.</p></div>` : ""}
-    ${(directionsLink || projectDetailsLink || operationsLink || resourceLink) ? `<div class="section-card"><h3>Open</h3><div class="detail-actions">${resourceLink}${operationsLink}${directionsLink}${projectDetailsLink}</div></div>` : ""}`;
+    <div class="section-card"><h3>☑️ Checklist for today</h3>${mapChecklistSummary(project)}
+      <p class="map-note">Browser-local reminders for Nepal today; they are not shared work instructions or accepted progress.</p></div>
+    <div class="section-card"><h3>🏗️ Current work overview</h3>
+      <p class="map-readiness">${escapeHTML(siteReadiness)}${ops?.as_of?' · recorded '+escapeHTML(ops.as_of):''}</p>
+      <div class="map-counts"><span><strong>${counts.ongoing}</strong> Ongoing</span><span><strong>${counts.completed}</strong> Completed</span><span><strong>${counts.held}</strong> Held/blocked</span></div>
+      <p class="map-note">${counts.total?'Counts refer only to '+counts.total+' admitted public work-item records; not an all-site completion certificate.':'No admitted public work items with these statuses. Do not infer that the site is idle or completed.'}</p>
+    </div>
+    <div class="section-card"><h3>📂 Quick access</h3><div class="detail-actions">${actionLinks}${directionsLink}${projectDetailsLink}</div></div>
+    <details class="map-technical"><summary>🧬 Technical project metadata (expand only if needed)</summary>
+      <div class="section-card"><h3>Project identity</h3>${identifiers}</div>
+      <div class="section-card"><h3>Classification</h3>${classifications}</div>
+      ${relationships ? '<div class="section-card"><h3>Parties and funding</h3>'+relationships+'</div>' : ''}
+      ${dates ? '<div class="section-card"><h3>Dates</h3>'+dates+'</div>' : ''}
+      ${updates ? '<div class="section-card"><h3>Public information</h3>'+updates+'</div>' : ''}
+      ${quality ? '<div class="section-card"><h3>Source / QA</h3>'+quality+'</div>' : ''}
+    </details>`;
+
 }
 
 function projectWorkItems(projectId) {
