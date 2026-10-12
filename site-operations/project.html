@@ -99,7 +99,12 @@ html,body{font-family:var(--ui)}.hero h1,.section-heading h2,.resource-group h3,
   .issues-table td:nth-child(2) strong{font-size:14px}.issues-table td:nth-child(2) details{font-size:13px}
 }
 
-  </style>
+   .identity-details{margin-top:10px;border:1px solid #d6e8dc;border-radius:10px;background:#f9fcf8;padding:8px 12px;color:#244c3c}
+ .identity-details summary{font-weight:800;font-size:12px;cursor:pointer}
+ .identity-details dl{display:grid;grid-template-columns:135px minmax(0,1fr);gap:7px;font-size:12px;margin:9px 0 1px}
+ .identity-details dt{color:#516a5f}.identity-details dd{margin:0;overflow-wrap:anywhere}
+ @media(max-width:520px){.identity-details dl{grid-template-columns:1fr;gap:2px}.identity-details dd{margin-bottom:5px}}
+</style>
 </head>
 <body>
 <div class="shell">
@@ -116,7 +121,7 @@ html,body{font-family:var(--ui)}.hero h1,.section-heading h2,.resource-group h3,
 
   <section class="hero">
     <div class="hero-row">
-      <div><div class="eyebrow">SITE FIELD BRIEF · LATEST ADMITTED RECORD</div><h1 id="name">Loading…</h1><div class="meta" id="meta"></div></div>
+      <div><div class="eyebrow">SITE FIELD BRIEF · LATEST ADMITTED RECORD</div><h1 id="name">Loading…</h1><div class="meta" id="meta"></div><details class="identity-details"><summary>🔗 Project identity and source IDs</summary><dl id="identity-record"></dl></details></div>
       <div><span class="badge" id="attention">Loading</span></div>
     </div>
     <div class="focus" id="focus">Loading site focus…</div><div class="record-hint" id="record-hint">Verify the record date before work proceeds.</div><div class="hero-icon" aria-hidden="true">🏗️</div>
@@ -309,7 +314,13 @@ async function load(){
     const o=p.daily_ops||{}, att=attention(p);
     document.title=p.display_name+" — Site Evidence Snapshot";
     $("name").textContent=p.display_name;
-    $("meta").textContent=[p.project_id,p.company_project_code,p.contractor,o.date||"No date"].filter(Boolean).join(" · ");
+    $("meta").textContent=[p.contractor,o.date?"Report dated "+o.date:"No report date verified"].filter(Boolean).join(" · ");
+    $("identity-record").innerHTML=[
+      ["Global project ID",p.map_project_id],
+      ["Company project code",p.company_project_code],
+      ["Local site reference",p.project_id],
+      ["Source project slug",p.project_slug]
+    ].map(([label,value])=>'<dt>'+esc(label)+'</dt><dd>'+esc(value||"Not recorded")+'</dd>').join("");
     $("record-hint").textContent="📅 Source record: "+(o.date||"date unverified")+" · Field readiness must be confirmed for the work date. Never infer current site status from an older report.";
     $("attention").textContent=att[0]; $("attention").dataset.tone=att[1];
     $("focus").innerHTML="<b>Work briefing:</b> Dated trade reports and engineer responses are required before this can be treated as an approved daily schedule.";
