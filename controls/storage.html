@@ -15,4 +15,4 @@ document.getElementById("storage").innerHTML=d.storage.map(x=>'<div class="tile"
 document.getElementById("steps").innerHTML=d.steps.map(x=>'<div class="step"><h3>'+x.id+'. '+esc(x.name)+'</h3><p>'+esc(x.output)+'</p><span class="where">'+esc(x.where)+'</span></div>').join("");
 document.getElementById("pending").innerHTML=d.pending.map(x=>'<li>'+esc(x)+'</li>').join("");
 }).catch(e=>{document.getElementById("storage").textContent="Could not load routing contract: "+e.message});fetch("../ops/discord/notebook-versions.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).then(j=>{const el=document.getElementById("currentNotebookRevision");if(el)el.textContent="Current working revision: "+j.current_revision+" · "+j.versions.length+" enumerated revisions";}).catch(()=>{const el=document.getElementById("currentNotebookRevision");if(el)el.textContent="Read version ledger directly for authoritative revision."});
-</script></body></html>
+</script><script src="../assets/js/site-shell.js?v=20261012-2"></script></body></html>
