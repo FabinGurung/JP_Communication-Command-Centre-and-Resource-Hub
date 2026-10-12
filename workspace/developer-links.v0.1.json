@@ -1,129 +1,176 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "id": "JP_AEC_DEVELOPER_ONLY_RESOURCE_DIRECTORY",
   "scope": "WEBSITE_IMPLEMENTATION_NOT_PROJECT_CASE_FILES",
-  "notice": "Public-read-only developer dashboard; do not expose secrets, private messages, raw project files or credentials.",
+  "notice": "Read-only website/software developer directory: no private admin actions, site case files, raw provider evidence or construction work tasks.",
   "categories": [
     {
       "id": "architecture",
-      "name": "🏗️ Architecture & Technologies",
-      "explanation": "See the technology stack and system boundaries",
+      "name": "🧩 Website Architecture & Technologies",
+      "explanation": "Actual software implementation, source boundaries and reusable navigation architecture.",
       "links": [
         {
-          "label": "📘 Architecture principles and lane separation",
-          "href": "../ops/control/site-experience-and-pipeline-isolation.v0.1.json"
+          "label": "🌿 Shared six-section navigation",
+          "href": "../assets/js/site-shell.js"
         },
         {
-          "label": "⚙️ GitHub repository source",
+          "label": "🎨 Green design tokens",
+          "href": "../assets/css/site-shell.css"
+        },
+        {
+          "label": "🎬 Canvas hero renderer",
+          "href": "../assets/js/hero-field.js"
+        },
+        {
+          "label": "🗺️ Leaflet map implementation",
+          "href": "../assets/js/app.js"
+        },
+        {
+          "label": "🧱 Seven-module source boundaries",
+          "href": "../workspace/modules.json"
+        },
+        {
+          "label": "⚙️ GitHub source repository",
           "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub"
-        },
-        {
-          "label": "🧬 Data authority and provenance",
-          "href": "../ops/CANONICAL_DATA_AUTHORITY.md"
-        },
-        {
-          "label": "📐 CAD engine repository",
-          "href": "https://github.com/FabinGurung/JP_Computer-Aided-Drawings"
-        },
-        {
-          "label": "📅 Scheduling module repository",
-          "href": "https://github.com/FabinGurung/JP_Scheduling_Work_and_Resources_Management"
         }
       ]
     },
     {
       "id": "controls",
-      "name": "🗼 Control Towers & Libraries",
-      "explanation": "Read governance, SOPs, versioned rules and templates",
+      "name": "🗼 Developer Control Towers & Libraries",
+      "explanation": "Versioned governance and development policies—not project execution case files.",
       "links": [
         {
-          "label": "Control tower directory",
+          "label": "🗼 Control Tower directory (governance metadata)",
           "href": "../controls/"
         },
         {
-          "label": "A9-CWO operational memory wall",
-          "href": "../controls/memory-wall.html"
+          "label": "🛡️ Publication & source-lane isolation",
+          "href": "../ops/control/site-experience-and-pipeline-isolation.v0.1.json"
         },
         {
-          "label": "Communication version/control contract",
-          "href": "../ops/control/control-system.json"
+          "label": "🌲 Branch ownership rules",
+          "href": "../ops/control/branch-lane-registry.json"
         },
         {
-          "label": "Storage and file routing",
+          "label": "📦 Storage routing rules",
           "href": "../ops/control/storage-routing-rules.json"
         },
         {
-          "label": "Website view contract",
-          "href": "../ops/control/site-operations-view-contract.v0.1.json"
+          "label": "🧬 Project PK/FK validator source",
+          "href": "../scripts/project_identity_index.py"
+        },
+        {
+          "label": "🔖 Eight-request software roadmap",
+          "href": "../ops/control/website-eight-request-roadmap.v0.1.json"
         }
       ]
     },
     {
       "id": "versioning",
-      "name": "🧬 Versions, Source Code & Releases",
-      "explanation": "Inspect commits, source archive, actions and deployment",
+      "name": "🧬 Git, Versioning & Recovery",
+      "explanation": "Source commits, historical snapshots and reproducible rollback evidence.",
       "links": [
         {
-          "label": "GitHub commit history",
-          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/commits/main"
-        },
-        {
-          "label": "GitHub Actions / CI",
-          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions"
-        },
-        {
-          "label": "Code root (main)",
+          "label": "🌳 GitHub main source",
           "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/tree/main"
         },
         {
-          "label": "Validation workflow",
-          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/.github/workflows/daily-ops-branch-preview.yml"
+          "label": "🕘 Commit history",
+          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/commits/main"
+        },
+        {
+          "label": "🗃️ Pre-change archive (Git history)",
+          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/tree/main/ops/99_VERSION_ARCHIVE/20261012/REQ05_DEVELOPER_SCOPE_PRE"
+        },
+        {
+          "label": "📘 Branch governance",
+          "href": "../ops/control/BRANCH_LANE_CONTROL.md"
+        },
+        {
+          "label": "📄 Release audit records",
+          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/tree/main/ops/events/cwo-daily"
+        }
+      ]
+    },
+    {
+      "id": "quality",
+      "name": "🧪 Testing, CI & Publication",
+      "explanation": "Browser checks, accessibility smoke, identity protection and Pages release workflow.",
+      "links": [
+        {
+          "label": "✅ GitHub Actions / CI",
+          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions"
+        },
+        {
+          "label": "🌍 Production workflow",
+          "href": "../.github/workflows/daily-ops-branch-preview.yml"
+        },
+        {
+          "label": "📱 Desktop/mobile browser & WCAG smoke",
+          "href": "../scripts/qa_field_ux_browser.py"
+        },
+        {
+          "label": "🔎 Cross-lane contract validator",
+          "href": "../scripts/validate_site_experience_contract.py"
+        },
+        {
+          "label": "🪪 Identity generator & PK/FK checks",
+          "href": "../scripts/project_identity_index.py"
+        },
+        {
+          "label": "🚦 Visual QA workflow",
+          "href": "../.github/workflows/field-ux-visual-qa.yml"
         }
       ]
     },
     {
       "id": "backlog",
       "name": "📌 Software Backlog & Roadmap",
-      "explanation": "Unfinished website/system implementation, not construction site tasks",
+      "explanation": "Software/system development only. No pending site engineering or provider execution tasks.",
       "links": [
         {
-          "label": "System development pending work",
-          "href": "../pending/"
+          "label": "📌 Software-only development backlog",
+          "href": "../workspace/backlog/"
         },
         {
-          "label": "GitHub issues",
+          "label": "🧭 Eight-request milestone tracker",
+          "href": "../ops/control/website-eight-request-roadmap.v0.1.json"
+        },
+        {
+          "label": "🐛 Repository issues",
           "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/issues"
         },
         {
-          "label": "Module boundaries",
-          "href": "../ops/PLATFORM_MODULES.md"
-        },
-        {
-          "label": "How-To for developer maintenance",
+          "label": "📚 Developer guide",
           "href": "../guide/"
         }
       ]
     },
     {
       "id": "pipelines",
-      "name": "🔌 Communication & Website Pipelines",
-      "explanation": "Collector, private Drive normalization, approved derived web projections",
+      "name": "🔌 Integration Software Boundaries",
+      "explanation": "Source interfaces, staging specifications and separate module repositories; no raw provider rows.",
       "links": [
         {
-          "label": "Evidence-to-website workstream",
-          "href": "../ops/control/a9-cwo-evidence-registry-workstream.v0.1.json"
+          "label": "🧰 Discord/Slack private staging contract",
+          "href": "../ops/control/communication-extract-staging.v0.1.json"
         },
         {
-          "label": "Pipeline isolation restrictions",
+          "label": "🔒 System and publication ownership",
           "href": "../ops/control/site-experience-and-pipeline-isolation.v0.1.json"
         },
         {
-          "label": "Resource naming registry",
-          "href": "../ops/data/resource-catalog-normalized.v0.1.json"
+          "label": "📘 Provenance and normalized-data principles",
+          "href": "../ops/CANONICAL_DATA_AUTHORITY.md"
         },
         {
-          "label": "Progress website derivation",
-          "href": "../ops/data/progress-report-public.v0.2.jsonl"
+          "label": "🧭 CAD engine repository",
+          "href": "https://github.com/FabinGurung/JP_Computer-Aided-Drawings"
+        },
+        {
+          "label": "📅 Scheduling engine repository",
+          "href": "https://github.com/FabinGurung/JP_Scheduling_Work_and_Resources_Management"
         }
       ]
     }
