@@ -104,7 +104,18 @@ def run():
                 audit_wcag(page, 'how-to quick start')
                 no_wide_overflow(page, 'how-to quick start')
                 screenshot(page, 'how-to-quick-start.png')
+                require("Developer Workspace (developers only)" in page.locator("#pages").inner_text(),
+                        "Quick Start does not distinguish developer-only workspace")
                 print('PASS: How-To quick-start content and four tutorial depths')
+                for guide_depth, count in (("3",3),("7",7),("15",15)):
+                    page.goto(BASE+"/guide/"+guide_depth+"-pages/",wait_until="domcontentloaded",timeout=20000)
+                    page.wait_for_function("n => document.querySelectorAll('#pages article.guide-page').length === n",
+                                           arg=count, timeout=15000)
+                    require("Developer Workspace" in page.locator("#pages").inner_text(),
+                            "Missing developer-only guidance in "+guide_depth+"-page tutorial")
+                    require(page.locator(".top a").first.inner_text()=="← Operations Hub",
+                            "How-To backward navigation leads to Developer Workspace")
+                print("PASS: 1/3/7/15-page guide role guidance and back links")
 
                 page.goto(BASE+"/workspace/",wait_until="domcontentloaded",timeout=20000)
                 page.wait_for_function("() => document.querySelectorAll('#developer-directory .card').length >= 4",timeout=15000)
@@ -142,6 +153,8 @@ def run():
 
                 page.goto(BASE+"/site-operations/coordination.html?project=P004",wait_until="domcontentloaded",timeout=20000)
                 page.locator("#issues .item").first.wait_for(timeout=18000)
+                require("Developer Workspace" in page.locator('a[href="../workspace/"]').inner_text(),
+                        "Coordination page retains old Owner Workspace label")
                 require(page.locator("#issues .item").count()==2,"Yamuna should have two source issues")
                 require(page.locator("#questions .item").count()==3,"Yamuna should have three follow-up questions")
                 require(page.locator("#project").input_value()=="P004","Project deep link not retained")
@@ -151,6 +164,8 @@ def run():
                 page.goto(BASE+"/site-operations/history.html?project=P002",wait_until="domcontentloaded",timeout=20000)
                 page.locator("#history details.entry").first.wait_for(timeout=18000)
                 require(page.locator("h1").inner_text()=="Progress Report","Progress Report heading missing")
+                require("Developer Workspace" in page.locator('a[href="../workspace/"]').inner_text(),
+                        "Progress Report retains old Owner Workspace label")
                 require(page.locator("#history details.entry").count()==1,"Samir history should contain one indexed report")
                 require(page.locator("#carryover-records .carry-record").count()==0 or page.locator("#carry-count").inner_text().startswith("4 archived"),"Samir carryover index unexpected")
                 page.locator("#carryover-records .carry-project").first.locator("summary").click()
@@ -189,6 +204,8 @@ def run():
                 page.goto(BASE+"/site-operations/project.html?project=P007",wait_until="domcontentloaded",timeout=20000)
                 page.locator("#drawings .resource-card").first.wait_for(timeout=18000)
                 require(page.locator("#drawings .resource-card").count()>=11,"P007 document pointers missing")
+                require("Developer Workspace" in page.locator('a[href="../workspace/"]').inner_text(),
+                        "Project detail retains old Owner Workspace label")
                 require(page.locator("#work .day-panel").count()==3, "Yesterday, Today and Tomorrow panels missing")
                 require(page.locator("#work .schedule-table").count()>=2, "Expected yesterday and today trade tables")
                 require(page.locator("#work .schedule-table tbody tr").count()>=5, "Expected source-grounded trade rows")
