@@ -3,7 +3,7 @@
   "roadmap_id": "JP_AEC_ORIGINAL_REQUESTS_SEQUENTIAL_20261012",
   "date_npt": "2026-10-12",
   "policy": "ONE_USER_EXPERIENCE_REQUEST_AT_A_TIME__PRE_ARCHIVE__VALIDATE__POST_READBACK",
-  "status": "REQ01_REQ02_REQ03_IMPLEMENTED_QA_PASS__REQ04_NEXT__REQ08_ORIGINAL_TEXT_EMPTY",
+  "status": "REQ01_THROUGH_REQ04_IMPLEMENTED_VERIFIED__REQ05_NEXT__REQ08_ORIGINAL_TEXT_EMPTY",
   "source": "User's original dated 2026-10-12 request, seven substantive numbered items and empty item 8; item 8 is a provisional site-wide QA/release closeout, not fabricated user content.",
   "completion_order": [
     {
@@ -73,12 +73,27 @@
     {
       "id": 4,
       "title": "Human labels backed by stable project PK/FK",
-      "status": "PARTIALLY_COMPLETE",
+      "status": "IMPLEMENTED_VERIFIED",
       "scope": "Keep canonical stable keys but show understandable names first, offer provenance in secondary details.",
       "acceptance": [
         "project IDs stable across map/works/resources/report",
         "no duplicate project identity authority",
         "sourced human labels and lineage QA"
+      ],
+      "completion_date_npt": "2026-10-12",
+      "implementation": "projects.csv remains the sole identity authority for 28 mapped projects. Reproducible public-safe derived index and fail-closed validator link 8 operational sites, project-resource source/directory rows and 37 historical Progress Report entries. Resources and Project Brief show human-readable names first and move PK/FK/provenance into explicit disclosures; native machine keys remain unchanged.",
+      "verification": {
+        "source_release_commit": "6318e37b2a820623f1d2219ed81985e6b97f0f7f",
+        "identity_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38258065851",
+        "browser_mobile": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38258142975",
+        "production": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38258142881",
+        "pre_change_archive_commit": "67a5038752ee1f4445e6a55902875298a6c07809",
+        "pre_ci_workflow_archive_commit": "83953c03f069da5910258c8b69f228ccfb94a42e"
+      },
+      "limitations": [
+        "Twenty canonical map projects have no registered Pxxx operational-site alias; no alias is fabricated.",
+        "The identity index is a publicly readable projection, not confidential storage.",
+        "Original source Drive files, progress claims, daily checklist storage and resource links were not modified."
       ]
     },
     {
@@ -139,5 +154,5 @@
     "rollback": "COMMIT_WITH_EXACT_PRE_SOURCE_BLOBS",
     "no_discord_slack_collector_changes_during_theme_work": true
   },
-  "next_phase": "REQ04_HUMAN_READABLE_STABLE_PROJECT_PK_FK"
+  "next_phase": "REQ05_DEVELOPER_WORKSPACE_SCOPE_AND_SOFTWARE_BACKLOG"
 }
