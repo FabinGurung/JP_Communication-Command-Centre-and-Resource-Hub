@@ -43,4 +43,4 @@ async function load(){day=nepDate();$("date").textContent="Nepal · "+day;try{co
 $("project").innerHTML=projects.map(p=>'<option value="'+esc(p.project_id)+'">'+esc(p.display_name)+'</option>').join("");const choose=new URLSearchParams(location.search).get("project");if(choose&&projects.some(p=>p.project_id===choose))$("project").value=choose;render();}
 catch(e){$("count").textContent="Project data unavailable";$("tasks").innerHTML='<li class="empty">Could not load the project list; tasks were not assumed.</li>';}}
 load();})();
-</script></body></html>
+</script><script src="assets/js/site-shell.js?v=20261012-1"></script></body></html>
