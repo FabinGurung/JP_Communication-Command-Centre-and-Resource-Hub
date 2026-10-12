@@ -73,6 +73,33 @@ def no_wide_overflow(page, desc, tolerance=18):
     intended=page.viewport_size["width"]
     require(dims["html"] <= intended+2, f"{desc} exceeds specified {intended}px viewport: {dims}")
 
+def verify_shared_shell(page, section):
+    host=page.locator("jp-site-header")
+    host.wait_for(timeout=12000)
+    details=host.evaluate("""e => {
+      const root=e.shadowRoot;
+      const links=[...root.querySelectorAll('nav[aria-label="JP AEC six primary sections"] a')];
+      return {
+        labels:links.map(a=>a.innerText.trim()),
+        active:links.filter(a=>a.getAttribute("aria-current")==="page").map(a=>a.textContent.trim()),
+        paths:links.map(a=>new URL(a.href).pathname),
+        developer:links.some(a=>a.textContent.includes("Developer Workspace")),
+        shadowStyle:!!root.querySelector('link[href*="site-shell.css"]'),
+        sourceTheme:!!document.querySelector('link[href*="site-shell.css"]'),
+        oldVisible:!![...document.querySelectorAll('nav:not(.depth-nav)')].find(n=>
+            !root.contains(n) && !n.closest("jp-site-header") && getComputedStyle(n).display !== "none")
+      };
+    }""")
+    require(len(details["labels"])==6, "Shared shell does not have six routes: "+str(details))
+    require(len(set(details["paths"]))==6, "Shared shell has duplicate routes")
+    require(details["developer"] and details["shadowStyle"] and details["sourceTheme"],
+            "Developer route or theme stylesheet missing")
+    require(not details["oldVisible"], "Two competing primary navigations visible")
+    if section!="overview":
+        require(len(details["active"])==1, "Active department not visible for "+section)
+    else:
+        require(len(details["active"])==0, "Homepage must not mark an unrelated department active")
+
 def run():
     server=subprocess.Popen([sys.executable,"-m","http.server","8878","--bind","127.0.0.1"],
                             stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
@@ -227,6 +254,32 @@ def run():
                 screenshot(page, "narayani-brief-desktop.png")
                 print("PASS: Narayani field plan, project documents and collapsed history")
 
+                # Request 01: all public routes share one themed, accessible six-section shell.
+                routes={
+                    "":"overview",
+                    "map.html":"map",
+                    "site-operations.html":"checklist",
+                    "site-operations/history.html":"progress",
+                    "site-operations/coordination.html":"checklist",
+                    "site-operations/questions.html":"checklist",
+                    "site-operations/schedule.html":"checklist",
+                    "site-operations/project.html":"checklist",
+                    "resources/":"resources",
+                    "workspace/":"developer",
+                    "guide/":"guide",
+                    "guide/3-pages/":"guide",
+                    "guide/7-pages/":"guide",
+                    "guide/15-pages/":"guide",
+                    "pending/":"developer",
+                    "controls/":"developer",
+                }
+                for route,group in routes.items():
+                    page.goto(BASE+"/"+route,wait_until="domcontentloaded",timeout=20000)
+                    verify_shared_shell(page,group)
+                print("PASS: 16 routes use one six-section website shell without duplicate navigation")
+
+
+
                 mobile=browser.new_context(viewport={"width":390,"height":844},device_scale_factor=1,
                                             is_mobile=True,has_touch=True,reduced_motion="reduce")
                 m=mobile.new_page()
@@ -240,10 +293,12 @@ def run():
                 m.wait_for_function("() => document.querySelectorAll('#project option').length >= 8",timeout=18000)
                 require(m.locator("#project option").count()==8,"Mobile user checklist project choices missing")
                 require(m.locator("#tasks input[type=checkbox]").count()==0,"Mobile checklist should start empty")
+                verify_shared_shell(m,"checklist")
                 no_wide_overflow(m,"field desk mobile")
                 screenshot(m,"site-daily-checklist-mobile.png")
                 m.goto(BASE+"/resources/?project=P007",wait_until="domcontentloaded",timeout=20000)
                 m.wait_for_function("() => document.querySelectorAll('#directory .file').length >= 10",timeout=18000)
+                verify_shared_shell(m,"resources")
                 no_wide_overflow(m,"drawings directory mobile")
                 audit_wcag(m,"drawings directory mobile")
                 screenshot(m,"project-resources-mobile.png")
@@ -297,6 +352,7 @@ def run():
                 m.wait_for_function("() => document.querySelectorAll('img.leaflet-tile-loaded').length >= 3",timeout=18000)
                 print("MAP_TILES_MOBILE",m.locator("img.leaflet-tile-loaded").count())
                 require(m.locator("#project-pane").is_hidden(),"Mobile map list not initially collapsed")
+                verify_shared_shell(m,"map")
                 no_wide_overflow(m,"map mobile",tolerance=22)
                 audit_wcag(m,"map mobile")
                 screenshot(m,"map-first-mobile.png")
