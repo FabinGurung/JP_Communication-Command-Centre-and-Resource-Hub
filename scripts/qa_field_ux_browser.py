@@ -315,7 +315,11 @@ def run():
                 top.locator('nav a[data-jp-route="resources/"]').click()
                 page.wait_for_url("**/resources/?project=P004",timeout=16000)
                 page.wait_for_function("() => document.querySelector('#project')?.value === 'P004'",timeout=15000)
-                print("PASS: Checklist to Progress to Resources retains selected site safely")
+                page.locator("#project").select_option("")
+                top=page.locator("jp-site-header")
+                require("project=" not in top.locator('nav a[data-jp-route="site-operations/history.html"]').get_attribute("href"),
+                        "Cleared All projects selection still leaks previous project FK")
+                print("PASS: Checklist to Progress to Resources retains selected site safely and clearing filter clears context")
 
                 page.goto(BASE+"/workspace/",wait_until="domcontentloaded",timeout=20000)
                 top=page.locator("jp-site-header")
