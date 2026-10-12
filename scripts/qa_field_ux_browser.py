@@ -208,6 +208,15 @@ def run():
                 require(page.locator("#project").input_value()=="P001","Bishal resource deep link failed")
                 require(page.locator("#directory .file").count()==4,"Bishal should have Drive root and three linked CAD resources")
                 require(page.locator("#directory .original").count()==4,"Original Drive names are not shown on resource cards")
+                require("P001" not in page.locator("#directory .site-title small").first.inner_text(),
+                        "Resource title still exposes machine site code in primary view")
+                provenance=page.locator("#directory .project-identity").first
+                require(provenance.count()==1 and provenance.get_attribute("open") is None,
+                        "Resource source PK/FK disclosure should be initially collapsed")
+                provenance.locator("summary").click()
+                require("PRJ-000001" in provenance.inner_text() and "REB-001" in provenance.inner_text(),
+                        "Resource source identity does not resolve to canonical project")
+                provenance.locator("summary").click()
                 require(page.locator('a[href*="16rUpvmH1JGyp_8hbU9BqispHfJNQzQh7"]').count()==1,"Bishal source DWG missing")
                 require(page.locator('a[href*="1TzUCNxZ3WExD7H0mWYJ42KHsx11-A7BG"]').count()==1,"Bishal structural DWG missing")
                 page.locator("#project").select_option("P007")
@@ -231,6 +240,17 @@ def run():
                 page.goto(BASE+"/site-operations/project.html?project=P007",wait_until="domcontentloaded",timeout=20000)
                 page.locator("#drawings .resource-card").first.wait_for(timeout=18000)
                 require(page.locator("#drawings .resource-card").count()>=11,"P007 document pointers missing")
+                require("P007" not in page.locator("#meta").inner_text() and
+                        "FBL-006" not in page.locator("#meta").inner_text(),
+                        "Project Brief still foregrounds machine identifiers")
+                brief_identity=page.locator(".identity-details")
+                require(brief_identity.count()==1 and brief_identity.get_attribute("open") is None,
+                        "Project Brief identity disclosure should initially be collapsed")
+                brief_identity.locator("summary").click()
+                require("PRJ-000007" in brief_identity.inner_text() and
+                        "FBL-006" in brief_identity.inner_text(),
+                        "Project Brief PK and FK provenance mismatch")
+                brief_identity.locator("summary").click()
                 require("Developer Workspace" in page.locator('a[href="../workspace/"]').inner_text(),
                         "Project detail retains old Owner Workspace label")
                 require(page.locator("#work .day-panel").count()==3, "Yesterday, Today and Tomorrow panels missing")
