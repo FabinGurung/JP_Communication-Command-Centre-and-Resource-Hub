@@ -27,7 +27,7 @@ def clean(v):
 
 def build():
     source=(ROOT/MASTER).read_bytes()
-    digest=hashlib.sha256(source).hexdigest()
+    digest=hashlib.sha1(b"blob "+str(len(source)).encode("ascii")+b"\x00"+source).hexdigest()
     with (ROOT/MASTER).open(newline="",encoding="utf-8-sig") as f:
         master=list(csv.DictReader(f))
     require(master,"Empty project identity master")
@@ -104,7 +104,7 @@ def build():
         "schema_version":"0.1.0",
         "kind":"DERIVED_READ_ONLY_PROJECT_IDENTITY_INDEX",
         "canonical_master":MASTER,
-        "master_sha256":digest,
+        "canonical_git_blob_sha":digest,
         "authority_rule":"projects.csv is the sole authoritative source for project names and global identifiers; all website project references are foreign keys.",
         "project_count":len(records),
         "indexed_site_count":len(current_ids),
