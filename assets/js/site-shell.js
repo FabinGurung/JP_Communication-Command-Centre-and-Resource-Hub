@@ -30,8 +30,10 @@
   ].includes(href);
   function selectedProject(){
     const choice=document.getElementById("project");
-    const fromSelect=choice instanceof HTMLSelectElement?choice.value:"";
-    const fromQuery=url.searchParams.get("project")||"";
+    const ready=choice instanceof HTMLSelectElement&&choice.options.length>1;
+    const fromSelect=ready?choice.value:"";
+    // Clearing a loaded project filter means All projects; do not revive a stale URL FK.
+    const fromQuery=ready?"":url.searchParams.get("project")||"";
     const fromPopup=(()=>{const a=document.querySelector('.leaflet-popup-content a[href*="project="]');try{
       return a?new URL(a.href,location.href).searchParams.get("project"):"";
     }catch{return "";}})();
