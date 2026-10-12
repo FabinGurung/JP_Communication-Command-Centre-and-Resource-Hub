@@ -79,6 +79,7 @@
     document.querySelector("header.top").replaceWith(header);
   } else if (oldNav) {
     oldNav.before(header);
+    oldNav.dataset.jpLegacyPrimary = "1";
     oldNav.hidden = true;
     oldNav.setAttribute("aria-hidden","true");
     oldNav.style.setProperty("display","none","important");
