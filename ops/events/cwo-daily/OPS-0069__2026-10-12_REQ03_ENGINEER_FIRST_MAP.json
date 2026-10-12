@@ -1,0 +1,76 @@
+{
+  "event_id": "OPS-0069",
+  "date_npt": "2026-10-12",
+  "workstream": "JP AEC original request 3 of 8",
+  "scope": "ENGINEER_FIRST_MAP_READ_ONLY_PRESENTATION",
+  "status": "IMPLEMENTED__DESKTOP_MOBILE_BROWSER_QA_AND_PRODUCTION_PASS",
+  "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "branch": "main",
+  "verified_source_commit": "dea09b893d1cb7138907dd6625c42fb779e15a23",
+  "pre_change_archive_commit": "6b5bbfe34b48542393e4c70f086b0073f541d50b",
+  "pre_change_archive_root": "ops/99_VERSION_ARCHIVE/20261012/REQ03_ENGINEER_FIRST_MAP_PRE",
+  "changes": [
+    "Reordered map information: human site name, local checklist, dated public evidence, Quick Access, then optional metadata.",
+    "Removed company code and imported physical progress percent from primary map list, without changing underlying project master.",
+    "Added strict status grouping of existing source-attributed dated Daily Ops progress: ONGOING, DONE, BLOCKED/ON_HOLD only. Other status strings are not reclassified.",
+    "Recorded HOLD/readiness separately from activity status; no inference of engineering acceptance or site completion.",
+    "Kept technical PK/FK identities and classification under a collapsed opt-in disclosure.",
+    "Added explicit user-visible source-date and no-construction-certification limitations.",
+    "Added desktop/mobile regression tests for the site header, checklist continuity, P001 reported done, P003 ongoing and P004 reported hold."
+  ],
+  "files": [
+    {
+      "path": "assets/js/app.js",
+      "readback_blob_sha": "ab920fa47d3bcb6ea761040662aa6a877b75dca4"
+    },
+    {
+      "path": "map.html",
+      "readback_blob_sha": "15c5f112edc70922e508f9bfaf3315021c3f06ea"
+    },
+    {
+      "path": "assets/css/app.css",
+      "readback_blob_sha": "6d04ae59f207f605e4ea0ca7c2157772fe65967c"
+    },
+    {
+      "path": "scripts/qa_field_ux_browser.py",
+      "readback_blob_sha": "0d4f75aefccfb2b6f6a96f7e430819b036a9f751"
+    },
+    {
+      "path": "ops/control/website-eight-request-roadmap.v0.1.json",
+      "readback_blob_sha": "8c89d91385458f2d6307dc402e8636c8bb7c5d7b"
+    }
+  ],
+  "verification": {
+    "browser": {
+      "run_id": 38213437846,
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38213437846"
+    },
+    "production": {
+      "run_id": 38213437740,
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38213437740"
+    },
+    "branch": {
+      "run_id": 38213437756,
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38213437756"
+    }
+  },
+  "protected_domains": [
+    "Google Drive originals and provider extracts",
+    "site-operations.html browser checklist and localStorage key",
+    "ops/data/current-works.json values",
+    "ops/data/progress-report-public.v0.2.jsonl",
+    "ops/data/resource-catalog-normalized.v0.1.json",
+    "projects.csv"
+  ],
+  "limitations": [
+    "Dated observations cannot be represented as current site assignments.",
+    "Unavailable or unverified status does not mean zero work or a completed project.",
+    "Technical metadata is collapsed in UI but still publicly accessible within GitHub Pages source; confidential access requires authenticated project data.",
+    "Detailed work registry currently has no published rows, so source-attributed Daily Ops observations are shown and labeled as reported."
+  ],
+  "next_request": "REQ04__HUMAN_READABLE_PROJECT_IDENTITY_PK_FK_CONSISTENCY",
+  "rollback": "Restore source file blobs from pre_change_archive_root with a new commit. Never reset main or delete originals."
+}
