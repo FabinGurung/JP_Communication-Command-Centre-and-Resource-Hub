@@ -1,0 +1,73 @@
+{
+  "event_id": "OPS-0068",
+  "date_npt": "2026-10-12",
+  "workstream": "JP AEC original website request 2 of 8",
+  "status": "IMPLEMENTED__PASS_BROWSER_DESKTOP_MOBILE_AND_PRODUCTION",
+  "task": "Six main destinations with relevant contextual tools and site-preserving navigation",
+  "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "branch": "main",
+  "verified_source_commit": "bef2dbe04f6f62991090ec8077fa472eab29c9a6",
+  "pre_archive_commit": "a03df6dec04c6a390540c802480bc32bdd64bc50",
+  "pre_archive": "ops/99_VERSION_ARCHIVE/20261012/REQ02_SIX_DESTINATION_NAV_PRE",
+  "changed_files": [
+    {
+      "path": "assets/js/site-shell.js",
+      "source_sha": "659e9a75554598ad01eef16a93b02c9c655fefc6"
+    },
+    {
+      "path": "scripts/qa_field_ux_browser.py",
+      "source_sha": "6f76ebfff03f98e7ff68325b9542d4fcf5fb9847"
+    },
+    {
+      "path": "controls/archive-formats.html",
+      "source_sha": "80d0d63f8b4e4178a2c446d907dd728d19b46055"
+    },
+    {
+      "path": "controls/memory-wall.html",
+      "source_sha": "afcc84191e60071e37fdbf9007f8a2ab79069120"
+    },
+    {
+      "path": "controls/storage.html",
+      "source_sha": "c904a5d2641fa26d7a9602f269717a46bc8b88cb"
+    },
+    {
+      "path": "ops/control/website-eight-request-roadmap.v0.1.json",
+      "source_sha": "98d04d11d09a6af0678a1f1a66ece355e61effd7"
+    }
+  ],
+  "changes": [
+    "Explicit semantic sections: map, daily checklist, dated progress, original resources, developer-only workspace, user instructions.",
+    "Build contextual More tools by role: field coordination/holds/questions/brief; software controls/backlog/rules; guide depths.",
+    "Preserve verified Pxxx project ID across relevant primary/secondary routes without contaminating developer links.",
+    "Clear project context after explicit All projects selection, avoid stale filter leakage.",
+    "Integrate three legacy developer control subpages into unified six-section site navigation.",
+    "Add keyboard, desktop/mobile and 19-page browser route regression checks."
+  ],
+  "checks": {
+    "browser": {
+      "status": "SUCCESS",
+      "run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38205841982",
+      "source_commit": "bef2dbe04f6f62991090ec8077fa472eab29c9a6"
+    },
+    "production": {
+      "status": "SUCCESS",
+      "run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38205842005",
+      "source_commit": "bef2dbe04f6f62991090ec8077fa472eab29c9a6"
+    },
+    "branch": {
+      "status": "SUCCESS",
+      "run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38205841972",
+      "source_commit": "bef2dbe04f6f62991090ec8077fa472eab29c9a6"
+    }
+  },
+  "protected_data": [
+    "No changes to private Google Drive originals, extracted Discord/Slack JSONL, site checklist storage, progress history, project resources catalog or engineer acceptance."
+  ],
+  "boundaries": [
+    "The six route destinations are public GitHub Pages; access control not implemented.",
+    "Map metadata simplification is Request 3, not covered.",
+    "Future project-specific provider evidence requires private review and approved public projection."
+  ],
+  "next_request": "REQ03__MAP_ENGINNER_FIRST_COMPACT_PROJECT_POPUP",
+  "rollback": "Restore exact previous source blobs from pre_archive in a new commit, never force-push main."
+}
