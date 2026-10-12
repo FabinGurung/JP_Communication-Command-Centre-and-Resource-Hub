@@ -8,6 +8,13 @@ on:
     paths:
       - 'index.html'
       - 'assets/js/hero-field.js'
+      - 'assets/js/site-shell.js'
+      - 'assets/css/site-shell.css'
+      - 'pending/index.html'
+      - 'controls/index.html'
+      - 'guide/3-pages/index.html'
+      - 'guide/7-pages/index.html'
+      - 'guide/15-pages/index.html'
       - 'site-operations.html'
       - 'site-operations/coordination.html'
       - 'site-operations/history.html'
