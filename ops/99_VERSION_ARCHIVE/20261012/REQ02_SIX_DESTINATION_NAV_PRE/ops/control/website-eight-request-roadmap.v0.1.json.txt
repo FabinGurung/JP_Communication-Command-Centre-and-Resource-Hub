@@ -1,0 +1,120 @@
+{
+  "schema_version": "0.1.0",
+  "roadmap_id": "JP_AEC_ORIGINAL_REQUESTS_SEQUENTIAL_20261012",
+  "date_npt": "2026-10-12",
+  "policy": "ONE_USER_EXPERIENCE_REQUEST_AT_A_TIME__PRE_ARCHIVE__VALIDATE__POST_READBACK",
+  "status": "REQ01_IMPLEMENTED_QA_PASS__REQ02_NEXT__REQ08_ORIGINAL_TEXT_EMPTY",
+  "source": "User's original dated 2026-10-12 request, seven substantive numbered items and empty item 8; item 8 is a provisional site-wide QA/release closeout, not fabricated user content.",
+  "completion_order": [
+    {
+      "id": 1,
+      "title": "Consistent interactive homepage and site-wide visual theme",
+      "status": "IMPLEMENTED_VERIFIED",
+      "scope": "Keep existing animated canvas hero; use one green/cream responsive six-section header on homepage and 15 departmental/secondary routes.",
+      "files": [
+        "assets/js/site-shell.js",
+        "assets/css/site-shell.css"
+      ],
+      "acceptance": [
+        "animated hero remains usable",
+        "six themed primary links on sixteen routes",
+        "consistent active section and emoji labels",
+        "mobile scrollable navigation without body overflow",
+        "map and checklist interaction regressions pass"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Six well-defined user destinations",
+      "status": "PARTIALLY_COMPLETE",
+      "scope": "Map, Checklist, Progress, Resources, Developer Workspace and How-To remain separate, with page-specific secondary tools presented contextually.",
+      "acceptance": [
+        "every page provides useful 6-section navigation",
+        "all contextual links work and retain project FK",
+        "role-focused content clear",
+        "no duplicate headings/navigations"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Map: site-centric daily checklist + broad work overview",
+      "status": "PARTIALLY_COMPLETE",
+      "scope": "Favor concise site names and checklist/status/quick links, remove excessive technical metadata from primary user path, show only source-supported work states.",
+      "acceptance": [
+        "compact mobile popup",
+        "no automatic progress inferences",
+        "source-linked broad states distinct from daily checklist",
+        "metadata behind deliberate technical disclosure"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Human labels backed by stable project PK/FK",
+      "status": "PARTIALLY_COMPLETE",
+      "scope": "Keep canonical stable keys but show understandable names first, offer provenance in secondary details.",
+      "acceptance": [
+        "project IDs stable across map/works/resources/report",
+        "no duplicate project identity authority",
+        "sourced human labels and lineage QA"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Developer Workspace only for website/software development",
+      "status": "PARTIALLY_COMPLETE",
+      "scope": "Maintain technology, source repositories, control towers, Git versions, CI and software backlog. No project execution or construction task information.",
+      "acceptance": [
+        "software-only dashboard",
+        "no stale owner-facing references in active screens",
+        "software pending work separated from construction holds"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Separate provider evidence extraction, project progress and resource/checklist lanes",
+      "status": "STORAGE_TREE_PREPARED__AUTOMATION_PENDING",
+      "scope": "Drive holds source Discord/Slack evidence; verified normalized material remains privately staged until approved projection. The three public site lanes must not cross-write.",
+      "contract": "ops/control/communication-extract-staging.v0.1.json",
+      "acceptance": [
+        "Drive ids read back and source originals never moved",
+        "JSONL identity PK/FK and SHA receipts",
+        "quarantine unmapped/failed media",
+        "only approved source-linked public-safe summaries",
+        "no cross-write CI violations"
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Usable prioritized normalized project resource library",
+      "status": "PARTIALLY_COMPLETE",
+      "scope": "PDF architecture/structural/geotechnical reports first, native design/analysis models next, estimates/spreadsheets later; original filenames and Drive IDs must remain traceable.",
+      "acceptance": [
+        "complete authorized inventory, not only 46 file pointers",
+        "idempotent filename normalization and provenance",
+        "prioritized type taxonomy and template/font rules",
+        "source revision/approval never invented"
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Final site-wide verification and governed release closeout",
+      "status": "PROVISIONAL_QA_GATE__NO_ORIGINAL_TEXT",
+      "scope": "Original item 8 contained no substantive instruction. Treat only as a release check unless user supplies a separate requirement.",
+      "acceptance": [
+        "desktop/mobile/keyboard/WCAG smoke",
+        "navigation and data boundaries",
+        "GitHub Actions on intended commit",
+        "PRE/POST source SHA and readback",
+        "no false engineering claims"
+      ]
+    }
+  ],
+  "change_contract": {
+    "one_owner_per_path": true,
+    "private_provider_origins": "GOOGLE_DRIVE_READ_ONLY_FOR_WEBSITE",
+    "public_source": "APPROVED_GITHUB_PROJECTIONS_ONLY",
+    "rollback": "COMMIT_WITH_EXACT_PRE_SOURCE_BLOBS",
+    "no_discord_slack_collector_changes_during_theme_work": true
+  },
+  "next_phase": "REQ02_AFTER_REQ01_QA_AND_READBACK"
+}
