@@ -1,0 +1,291 @@
+{
+  "schema_version": "0.1.0",
+  "kind": "DERIVED_READ_ONLY_PROJECT_IDENTITY_INDEX",
+  "canonical_master": "projects.csv",
+  "canonical_git_blob_sha": "240addc16ab1ae1d16c7150929cae2ffcd5c6aae",
+  "authority_rule": "projects.csv is the sole authoritative source for project names and global identifiers; all website project references are foreign keys.",
+  "project_count": 28,
+  "indexed_site_count": 8,
+  "records": [
+    {
+      "project_id": "PRJ-000001",
+      "display_name": "14 Bishal Paija",
+      "company_project_code": "REB-001",
+      "legacy_project_code": "P001",
+      "project_slug": "14_bishal_paija",
+      "executing_company_id": "ORG-000002",
+      "ward_number": "14",
+      "master_source_row": 2
+    },
+    {
+      "project_id": "PRJ-000002",
+      "display_name": "17 Samir Man Ghubaju",
+      "company_project_code": "FBL-001",
+      "legacy_project_code": "P002",
+      "project_slug": "17_samir_man_ghubaju",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "17",
+      "master_source_row": 3
+    },
+    {
+      "project_id": "PRJ-000003",
+      "display_name": "13 Hari Baral",
+      "company_project_code": "FBL-002",
+      "legacy_project_code": "P003",
+      "project_slug": "13_hari_baral",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "13",
+      "master_source_row": 4
+    },
+    {
+      "project_id": "PRJ-000004",
+      "display_name": "16 Yamuna Pun Adai",
+      "company_project_code": "FBL-003",
+      "legacy_project_code": "P004",
+      "project_slug": "16_yamuna_pun_adai",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "16",
+      "master_source_row": 5
+    },
+    {
+      "project_id": "PRJ-000005",
+      "display_name": "30 Sabitri Giri / Dipti Giri",
+      "company_project_code": "FBL-004",
+      "legacy_project_code": "P005",
+      "project_slug": "30_sabitri_giri_dipti_giri",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "30",
+      "master_source_row": 6
+    },
+    {
+      "project_id": "PRJ-000006",
+      "display_name": "31 Sharada Adhikari",
+      "company_project_code": "FBL-005",
+      "legacy_project_code": "P006",
+      "project_slug": "31_sharada_adhikari",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "31",
+      "master_source_row": 7
+    },
+    {
+      "project_id": "PRJ-000007",
+      "display_name": "15 Narayani Parajuli",
+      "company_project_code": "FBL-006",
+      "legacy_project_code": "P007",
+      "project_slug": "15_narayani_parajuli",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "15",
+      "master_source_row": 8
+    },
+    {
+      "project_id": "PRJ-000008",
+      "display_name": "Basketball Court",
+      "company_project_code": "FBL-007",
+      "legacy_project_code": null,
+      "project_slug": "basketball_court",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "4",
+      "master_source_row": 9
+    },
+    {
+      "project_id": "PRJ-000009",
+      "display_name": "Chautara Landscaping",
+      "company_project_code": "FBL-008",
+      "legacy_project_code": null,
+      "project_slug": "chautara_landscaping",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "4",
+      "master_source_row": 10
+    },
+    {
+      "project_id": "PRJ-000010",
+      "display_name": "Ward No. 4 Office Front Drain",
+      "company_project_code": "FBL-009",
+      "legacy_project_code": null,
+      "project_slug": "ward_04_office_front_drain",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "4",
+      "master_source_row": 11
+    },
+    {
+      "project_id": "PRJ-000011",
+      "display_name": "Firke Pool Road and Drain Works",
+      "company_project_code": "FBL-010",
+      "legacy_project_code": null,
+      "project_slug": "firke_pool_road_and_drain_works",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "4",
+      "master_source_row": 12
+    },
+    {
+      "project_id": "PRJ-000012",
+      "display_name": "Gyan Marga Road Work",
+      "company_project_code": "FBL-011",
+      "legacy_project_code": null,
+      "project_slug": "gyan_marga_road_work",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "4",
+      "master_source_row": 13
+    },
+    {
+      "project_id": "PRJ-000013",
+      "display_name": "Red Cross Flagstone Pavement, Metal Door and Stone Cladding Works",
+      "company_project_code": "FBL-012",
+      "legacy_project_code": null,
+      "project_slug": "red_cross_improvement_works",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "5",
+      "master_source_row": 14
+    },
+    {
+      "project_id": "PRJ-000014",
+      "display_name": "Shree Sansarimai Mandir Truss, Brickwork and RCC Slab Works",
+      "company_project_code": "FBL-013",
+      "legacy_project_code": null,
+      "project_slug": "shree_sansarimai_mandir_works",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "5",
+      "master_source_row": 15
+    },
+    {
+      "project_id": "PRJ-000015",
+      "display_name": "Parshyang Paver Work",
+      "company_project_code": "FBL-014",
+      "legacy_project_code": null,
+      "project_slug": "parshyang_paver_work",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "5",
+      "master_source_row": 16
+    },
+    {
+      "project_id": "PRJ-000016",
+      "display_name": "Old Airport Petty Renovation and Maintenance Works",
+      "company_project_code": "FBL-015",
+      "legacy_project_code": null,
+      "project_slug": "old_airport_maintenance_works",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "6",
+      "master_source_row": 17
+    },
+    {
+      "project_id": "PRJ-000017",
+      "display_name": "Temple Himalaya Hotel and Spa Renovation",
+      "company_project_code": "FBL-016",
+      "legacy_project_code": null,
+      "project_slug": "temple_himalaya_hotel_spa_renovation",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "6",
+      "master_source_row": 18
+    },
+    {
+      "project_id": "PRJ-000018",
+      "display_name": "Prithvi Mandi Septic Tank, Public Toilet and Boundary Wall Construction",
+      "company_project_code": "FBL-017",
+      "legacy_project_code": null,
+      "project_slug": "prithvi_mandi_public_sanitation_works",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "9",
+      "master_source_row": 19
+    },
+    {
+      "project_id": "PRJ-000019",
+      "display_name": "Matepani Plastic Dai Project",
+      "company_project_code": "FBL-018",
+      "legacy_project_code": null,
+      "project_slug": "matepani_plastic_dai_project",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "12",
+      "master_source_row": 20
+    },
+    {
+      "project_id": "PRJ-000020",
+      "display_name": "Kharika Paudel",
+      "company_project_code": "FBL-019",
+      "legacy_project_code": "P020",
+      "project_slug": "kharika_paudel",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "14",
+      "master_source_row": 21
+    },
+    {
+      "project_id": "PRJ-000021",
+      "display_name": "New Airport Restroom Construction",
+      "company_project_code": "FBL-020",
+      "legacy_project_code": null,
+      "project_slug": "new_airport_restroom_construction",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "14",
+      "master_source_row": 22
+    },
+    {
+      "project_id": "PRJ-000022",
+      "display_name": "New Airport Petty Works — 2025-08-22",
+      "company_project_code": "FBL-021",
+      "legacy_project_code": null,
+      "project_slug": "new_airport_petty_works_2025_08_22",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "14",
+      "master_source_row": 23
+    },
+    {
+      "project_id": "PRJ-000023",
+      "display_name": "Bhalam Road — 28 m",
+      "company_project_code": "FBL-022",
+      "legacy_project_code": null,
+      "project_slug": "bhalam_road_28_m",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "20",
+      "master_source_row": 24
+    },
+    {
+      "project_id": "PRJ-000024",
+      "display_name": "Bhalam 200 m Road",
+      "company_project_code": "FBL-023",
+      "legacy_project_code": null,
+      "project_slug": "bhalam_200_m_road",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "20",
+      "master_source_row": 25
+    },
+    {
+      "project_id": "PRJ-000025",
+      "display_name": "Bhalam River Works — Phase 1",
+      "company_project_code": "FBL-024",
+      "legacy_project_code": null,
+      "project_slug": "bhalam_river_works_phase_1",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "20",
+      "master_source_row": 26
+    },
+    {
+      "project_id": "PRJ-000026",
+      "display_name": "Bhalam River Gabion Mesh Works — Phase 2",
+      "company_project_code": "FBL-025",
+      "legacy_project_code": null,
+      "project_slug": "bhalam_river_gabion_mesh_phase_2",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "20",
+      "master_source_row": 27
+    },
+    {
+      "project_id": "PRJ-000027",
+      "display_name": "Bhalam Park — Phase 1",
+      "company_project_code": "FBL-026",
+      "legacy_project_code": null,
+      "project_slug": "bhalam_park_phase_1",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "20",
+      "master_source_row": 28
+    },
+    {
+      "project_id": "PRJ-000028",
+      "display_name": "Bhalam Park — Phase 2",
+      "company_project_code": "FBL-027",
+      "legacy_project_code": null,
+      "project_slug": "bhalam_park_phase_2",
+      "executing_company_id": "ORG-000001",
+      "ward_number": "20",
+      "master_source_row": 29
+    }
+  ]
+}
