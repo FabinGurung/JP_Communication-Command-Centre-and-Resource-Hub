@@ -3,7 +3,7 @@
   "roadmap_id": "JP_AEC_ORIGINAL_REQUESTS_SEQUENTIAL_20261012",
   "date_npt": "2026-10-12",
   "policy": "ONE_USER_EXPERIENCE_REQUEST_AT_A_TIME__PRE_ARCHIVE__VALIDATE__POST_READBACK",
-  "status": "REQ01_AND_REQ02_IMPLEMENTED_QA_PASS__REQ03_NEXT__REQ08_ORIGINAL_TEXT_EMPTY",
+  "status": "REQ01_REQ02_REQ03_IMPLEMENTED_QA_PASS__REQ04_NEXT__REQ08_ORIGINAL_TEXT_EMPTY",
   "source": "User's original dated 2026-10-12 request, seven substantive numbered items and empty item 8; item 8 is a provisional site-wide QA/release closeout, not fabricated user content.",
   "completion_order": [
     {
@@ -47,13 +47,27 @@
     {
       "id": 3,
       "title": "Map: site-centric daily checklist + broad work overview",
-      "status": "PARTIALLY_COMPLETE",
+      "status": "IMPLEMENTED_VERIFIED",
       "scope": "Favor concise site names and checklist/status/quick links, remove excessive technical metadata from primary user path, show only source-supported work states.",
       "acceptance": [
         "compact mobile popup",
         "no automatic progress inferences",
         "source-linked broad states distinct from daily checklist",
         "metadata behind deliberate technical disclosure"
+      ],
+      "completion_date_npt": "2026-10-12",
+      "implementation": "Source-backed human-first map project list, daily checklist and dated reported ongoing/done/held work groups; machine identifiers and classification only under optional technical disclosure; no zero-work inference.",
+      "verification": {
+        "source_commit": "dea09b893d1cb7138907dd6625c42fb779e15a23",
+        "pre_archive_commit": "6b5bbfe34b48542393e4c70f086b0073f541d50b",
+        "browser_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38213437846",
+        "production_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38213437740",
+        "branch_registry_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38213437756"
+      },
+      "limitations": [
+        "Map field observations are dated Daily Ops source projections, not live crew assignments.",
+        "Map still ships public-safe published technical metadata behind explicit disclosure; true confidentiality requires authenticated data access in a separate phase.",
+        "Reports absent from the source must never be counted as zero site activity."
       ]
     },
     {
@@ -125,5 +139,5 @@
     "rollback": "COMMIT_WITH_EXACT_PRE_SOURCE_BLOBS",
     "no_discord_slack_collector_changes_during_theme_work": true
   },
-  "next_phase": "REQ03_AFTER_REQ02_QA_AND_READBACK"
+  "next_phase": "REQ04_HUMAN_READABLE_STABLE_PROJECT_PK_FK"
 }
