@@ -71,11 +71,14 @@
     if(pid&&supportsProject(target))link.searchParams.set("project",pid);
     return link.href;
   }
-  function syncRoutes(){
+  let lastMenuProject=null;
+  function syncRoutes(rebuildMenu=true){
     const pid=selectedProject();
     shell.querySelectorAll("a[data-jp-route]").forEach(a=>{
       a.href=routeURL(a.getAttribute("data-jp-route"),pid);
     });
+    if(!rebuildMenu||lastMenuProject===pid)return;
+    lastMenuProject=pid;
     const options=[...choices[section]];
     if(pid&&["map","checklist","progress","resources"].includes(section))
       options.push(["🗂️ Project Brief","site-operations/project.html"]);
@@ -118,14 +121,19 @@
   pageStyles.href=local("assets/css/site-shell.css?v=2");
   document.head.appendChild(pageStyles);
   syncRoutes();
+  const projectChoice=document.getElementById("project");
+  if(projectChoice){
+    const observer=new MutationObserver(()=>syncRoutes());
+    observer.observe(projectChoice,{childList:true,subtree:true});
+  }
   document.addEventListener("change",e=>{
     if(e.target?.id==="project")syncRoutes();
   },true);
   // Refresh before mouse, touch and keyboard navigation, including deep links
   // when project options were loaded asynchronously after this script.
-  shadow.addEventListener("pointerdown",syncRoutes,true);
-  shadow.addEventListener("focusin",syncRoutes,true);
+  shadow.addEventListener("pointerdown",()=>syncRoutes(false),true);
+  shadow.addEventListener("focusin",()=>syncRoutes(false),true);
   shadow.addEventListener("click",e=>{
-    if(e.target?.closest("a"))syncRoutes();
+    if(e.target?.closest("a"))syncRoutes(false);
   },true);
 })();
