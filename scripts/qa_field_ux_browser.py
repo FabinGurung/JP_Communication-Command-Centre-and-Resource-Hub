@@ -146,13 +146,45 @@ def run():
 
                 page.goto(BASE+"/workspace/",wait_until="domcontentloaded",timeout=20000)
                 page.wait_for_function("() => document.querySelectorAll('#developer-directory .card').length >= 4",timeout=15000)
-                require(page.locator("#developer-directory .card").count()>=4,"Developer control groups missing")
+                require(page.locator("#developer-directory .card").count()==6,
+                        "Developer Workspace must show six software-only categories")
+                require(page.locator(".development-map .dev-step").count()==3,
+                        "Developer workflow plan, test, release diagram missing")
+                developer_labels=page.locator("#developer-directory").inner_text()
+                require("Software Backlog" in developer_labels and "GitHub" in developer_labels,
+                        "Developer directory does not surface backlog/version control")
+                require("Site field reports" not in developer_labels and
+                        "Open original in Google Drive" not in developer_labels,
+                        "Raw project facts or source files leaked into developer directory")
                 require(page.locator("#live-project-grid").count()==0,"Project operations leaked into Developer Workspace")
                 require(page.locator('a[href="../controls/"]').count()>=0,"Control navigation route")
                 audit_wcag(page,"developer workspace")
                 no_wide_overflow(page,"developer workspace")
                 screenshot(page,"developer-workspace.png")
-                print("PASS: developer-only workspace")
+                print("PASS: software-only Developer Workspace technologies, control towers and releases")
+                page.locator('.dev-step a[href="backlog/"]').click()
+                page.wait_for_url("**/workspace/backlog/",timeout=15000)
+                page.wait_for_function("() => document.querySelectorAll('#tasks .card').length === 9",
+                                       timeout=15000)
+                verify_shared_shell(page,"developer")
+                cards=page.locator("#tasks .card").all_inner_texts()
+                require(any("Authenticated" in x for x in cards) and
+                        any("Control index" in x for x in cards),
+                        "Developer backlog missing genuine software plans")
+                for forbidden in ("Narayani engineering", "trade-report replies",
+                                  "Run Discord C01", "Legacy-to-CWO event reconciliation"):
+                    require(forbidden not in page.locator("#tasks").inner_text(),
+                            "Operational case record leaked into developer backlog: "+forbidden)
+                page.locator("#state").select_option("complete")
+                require(page.locator("#tasks .card").count()==1,
+                        "Developer completed filtering does not isolate verified software work")
+                page.locator("#state").select_option("open")
+                require(page.locator("#tasks .card").count()==8,
+                        "Developer open-only filtering includes completed software tasks")
+                audit_wcag(page,"developer software backlog")
+                no_wide_overflow(page,"developer software backlog")
+                screenshot(page,"developer-software-backlog-desktop.png")
+                print("PASS: software backlog provenance, field task exclusions and scope filters")
 
                 page.goto(BASE+"/site-operations.html",wait_until="domcontentloaded",timeout=20000)
                 page.wait_for_function("() => document.querySelectorAll('#project option').length >= 8",timeout=18000)
@@ -290,7 +322,8 @@ def run():
                     "guide/3-pages/":"guide",
                     "guide/7-pages/":"guide",
                     "guide/15-pages/":"guide",
-                    "pending/":"developer",
+                    "pending/":"overview",
+                    "workspace/backlog/":"developer",
                     "controls/":"developer",
                     "controls/storage.html":"developer",
                     "controls/archive-formats.html":"developer",
@@ -299,7 +332,7 @@ def run():
                 for route,group in routes.items():
                     page.goto(BASE+"/"+route,wait_until="domcontentloaded",timeout=20000)
                     verify_shared_shell(page,group)
-                print("PASS: 19 routes use one six-section website shell without duplicate navigation")
+                print("PASS: 20 routes use one six-section website shell without duplicate navigation")
 
                 # Request 02: project identity follows navigation, while developer tools
                 # never inherit project identity or appear in the field context menu.
