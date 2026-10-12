@@ -37,4 +37,4 @@ let pre=new URLSearchParams(location.search).get("project");if(pre&&data.sites.s
 $("notice").textContent="Last source reconciliation: "+data.as_of_npt+" · "+data.open_issues.length+" unresolved issues and "+data.engineer_questions.length+" questions across "+data.sites.length+" sites. Site status requires fresh review.";render();}
 catch(e){$("notice").textContent="Source unavailable; no hold or approval status can be inferred.";$("issues").innerHTML='<div class="blank">Source not loaded.</div>';$("questions").innerHTML='<div class="blank">Source not loaded.</div>';}}
 $("project").addEventListener("change",render);load();})();
-</script></body></html>
+</script><script src="../assets/js/site-shell.js?v=20261012-1"></script></body></html>
