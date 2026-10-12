@@ -399,6 +399,43 @@ def run():
                 require("Bishal" in page.locator('#detail-title').inner_text(),
                         'Selected map project did not match P001 checklist site')
                 print('PASS: project map popup and engineer-authored local checklist use one key')
+                # Request 03: site-first map never makes legacy IDs or unsourced
+                # completion assertions the main content. Source progress is dated.
+                require(page.locator("#detail-code").inner_text()=="📍 Site snapshot",
+                        "Map detail header still foregrounds machine project code")
+                require("PRJ-" not in page.locator("#detail-subtitle").inner_text() and
+                        "legacy P" not in page.locator("#detail-subtitle").inner_text(),
+                        "Legacy machine identifiers leaked into site header")
+                require(page.locator("#panel-overview .map-technical").count()==1 and
+                        page.locator("#panel-overview .map-technical").get_attribute("open") is None,
+                        "Technical map metadata must start collapsed")
+                require(not page.locator("#panel-overview .map-technical .detail-grid").first.is_visible(),
+                        "Project identity details expanded without user request")
+                require("Reported done" in page.locator("#panel-overview .map-work-summary").inner_text(),
+                        "Source-backed reported done observation missing from Bishal overview")
+                require("not live instructions or engineer-accepted completion" in
+                        page.locator("#panel-overview .map-work-summary").inner_text(),
+                        "Map reported work lost engineering acceptance disclaimer")
+                page.locator("#panel-overview .map-technical summary").click()
+                require(page.locator("#panel-overview .map-technical").get_attribute("open") is not None,
+                        "Opt-in technical information cannot be opened")
+                require("PRJ-000001" in page.locator("#panel-overview .map-technical").inner_text(),
+                        "Stable project ID disappeared from optional provenance")
+
+                page.locator('#project-list .project-item').filter(has_text='Hari Baral').first.click()
+                overview=page.locator("#panel-overview .map-work-summary").inner_text()
+                require("Reported ongoing" in overview and "Painting" in overview and
+                        "Observed 2026-10-02" in overview,
+                        "Hari public source-linked dated ongoing work is not shown")
+                require("P003" not in page.locator("#detail-subtitle").inner_text(),
+                        "Technical code present in normal Hari overview")
+                page.locator('#project-list .project-item').filter(has_text='Yamuna').first.click()
+                require("Reported HOLD" in page.locator("#panel-overview .map-readiness").inner_text(),
+                        "Documented site HOLD not surfaced")
+                require("No source-attributed" in page.locator("#panel-overview .map-work-summary").inner_text(),
+                        "No published work records must never become zero completed claims")
+                print('PASS: compact human-first site map, field-reported status and optional PK/FK details')
+
                 page.locator("#map-list-button").click()
                 require(page.locator("#project-pane").is_hidden(),"Map project list failed to close")
                 page.locator("#filter-toggle").click()
