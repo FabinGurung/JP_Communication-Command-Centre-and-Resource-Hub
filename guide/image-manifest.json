@@ -7,13 +7,11 @@
     {
       "id": "VIS-01",
       "file": "images/01-workspace.svg",
-      "title": "Workspace → correct destination",
-      "alt": "Owner-facing directory routing users to the correct operational surface.",
+      "title": "Developer Workspace → website controls",
+      "alt": "For developers: repositories, governance, Git versioning, deployment checks and software backlog; project files are elsewhere.",
       "format": "svg",
       "public_safe": true,
       "used_by": [
-        "1:workspace",
-        "3:page1",
         "15:page1"
       ]
     },
@@ -25,6 +23,9 @@
       "format": "svg",
       "public_safe": true,
       "used_by": [
+        "1:page1",
+        "3:page1",
+        "7:page1",
         "15:page2"
       ]
     },
@@ -36,7 +37,7 @@
       "format": "svg",
       "public_safe": true,
       "used_by": [
-        "7:page1"
+        "reference_only"
       ]
     },
     {
@@ -59,7 +60,6 @@
       "format": "svg",
       "public_safe": true,
       "used_by": [
-        "1:page1",
         "3:page2",
         "7:page2",
         "15:page6",
