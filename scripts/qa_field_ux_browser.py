@@ -256,11 +256,14 @@ def run():
                         "Map list button aria state did not update")
                 require(page.locator("#project-pane").is_visible(),"Map project list failed to open")
                 page.locator('#project-list .project-item').filter(has_text='Bishal').first.click()
-                popup=page.locator('.leaflet-popup-content .map-quick-checklist')
+                # Leaflet may briefly expose a popup before its selected content settles.
+                # Wait for the expected user-authored item, not just any popup element.
+                popup=page.locator('.leaflet-popup-content .map-quick-checklist').filter(
+                    has_text="Confirm today's site toolbox instructions"
+                )
                 popup.wait_for(timeout=16000)
-                browser_checklist = page.evaluate("""() => Object.fromEntries(Object.keys(localStorage).filter(k=>k.startsWith('JPAEC:diy-checklist:v1:')).map(k=>[k,JSON.parse(localStorage.getItem(k) || '[]').map(r=>r.text)]))""")
-                print('MAP_CHECKLIST_DEBUG', 'selected', page.locator('#detail-title').inner_text(), 'popup', popup.inner_text(), 'browser_storage', browser_checklist, flush=True)
-                require("Confirm today's site toolbox instructions" in popup.inner_text(), 'Map popup did not show the same browser-local P001 daily checklist')
+                require("Bishal" in page.locator('#detail-title').inner_text(),
+                        'Selected map project did not match P001 checklist site')
                 print('PASS: project map popup and engineer-authored local checklist use one key')
                 page.locator("#map-list-button").click()
                 require(page.locator("#project-pane").is_hidden(),"Map project list failed to close")
