@@ -40,13 +40,13 @@
       "software_task_id": "JP-AEC-REQ-05",
       "title": "Developer Workspace only for website/software development",
       "purpose": "Maintain technology, source repositories, control towers, Git versions, CI and software backlog. No project execution or construction task information.",
-      "status": "PARTIALLY_COMPLETE",
+      "status": "IMPLEMENTED_VERIFIED",
       "category": "WEBSITE_IMPLEMENTATION",
       "source_ref": {
         "path": "ops/control/website-eight-request-roadmap.v0.1.json",
         "record_id": 5
       },
-      "source_status": "PARTIALLY_COMPLETE",
+      "source_status": "IMPLEMENTED_VERIFIED",
       "source_href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/control/website-eight-request-roadmap.v0.1.json"
     },
     {
