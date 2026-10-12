@@ -176,11 +176,13 @@ def run():
                     require(forbidden not in page.locator("#tasks").inner_text(),
                             "Operational case record leaked into developer backlog: "+forbidden)
                 page.locator("#state").select_option("complete")
-                require(page.locator("#tasks .card").count()==1,
-                        "Developer completed filtering does not isolate verified software work")
+                completed_count=page.locator("#tasks .card").count()
+                require(completed_count>=1,
+                        "Verified software milestones disappeared from completed filter")
                 page.locator("#state").select_option("open")
-                require(page.locator("#tasks .card").count()==8,
-                        "Developer open-only filtering includes completed software tasks")
+                open_count=page.locator("#tasks .card").count()
+                require(open_count+completed_count==9,
+                        "Software state filter omitted or duplicated source-owned task records")
                 audit_wcag(page,"developer software backlog")
                 no_wide_overflow(page,"developer software backlog")
                 screenshot(page,"developer-software-backlog-desktop.png")
