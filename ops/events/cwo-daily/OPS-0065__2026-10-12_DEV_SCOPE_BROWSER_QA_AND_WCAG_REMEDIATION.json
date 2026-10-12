@@ -1,0 +1,109 @@
+{
+  "event_id": "OPS-0065",
+  "date_npt": "2026-10-12",
+  "workstream": "A9-CWO / JP AEC WEB UI",
+  "type": "DEVELOPER_SCOPE_BROWSER_QA_AND_ACCESSIBILITY_HARDENING",
+  "status": "PRODUCTION_BRANCH_AND_BROWSER_QA_PASS_AT_VERIFIED_SOURCE_SHA",
+  "authority": {
+    "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+    "branch": "main",
+    "baseline_commit_sha": "ecc39c17c66f475307f9b1ae34261a03ef240dc3",
+    "verified_website_commit_sha": "a5b5885259a6a137d3eacc8b7873d103bd7c6076",
+    "source_originals": "GOOGLE_DRIVE_UNMODIFIED",
+    "data_publication_lanes": "UNMODIFIED"
+  },
+  "changes": [
+    {
+      "path": "map.html",
+      "purpose": "Developer-only navigation label and underlined Leaflet attribution",
+      "source_blob_before": "599947839c27695b6dddb9795084712950240cc1",
+      "verified_blob_after": "ccace2a3e602e9bfbe2a9cf36ef3baef9a65aebc"
+    },
+    {
+      "path": "site-operations.html",
+      "purpose": "Correct developer workspace label only; preserve user-local checklist contract",
+      "source_blob_before": "dd705853d76c084abba61427699d829eb01ce1a3",
+      "verified_blob_after": "f7d771a7789c73758f4ff13fb61de05083f9ce34"
+    },
+    {
+      "path": "README.md",
+      "purpose": "Clarify six distinct user roles and mark historical owner workspace documentation",
+      "source_blob_before": "ff77ebe258e1038d213da4bc31792957748b9bd3",
+      "verified_blob_after": "aceae3ee554ef0afebcc0cd378d5544ee3b9e214"
+    },
+    {
+      "path": ".github/workflows/field-ux-visual-qa.yml",
+      "purpose": "Include actual visual/contract-owning page and JSON paths in browser QA triggers",
+      "source_blob_before": "23444f023a0c54555405be9cf6f0229e51e97766",
+      "verified_blob_after": "47c603f104ec7208e4f2222856711bdec3a1a3f8"
+    },
+    {
+      "path": "scripts/qa_field_ux_browser.py",
+      "purpose": "Check guide rendering/accessibility and wait for matching map popup user-local checklist entry",
+      "source_blob_before": "488192755fe0cbb563721d14748a6cf493ab2a3e",
+      "verified_blob_after": "7c1bd44b4699963e6768a70081883da547c22ffa"
+    },
+    {
+      "path": "guide/guide.css",
+      "purpose": "Improve muted text contrast on How-To background from measured ~4.42:1 to calculated ~5.13:1",
+      "source_blob_before": "8beda7667de709bd374ce37f598f62a613de94f3",
+      "verified_blob_after": "f11f157865be38c4a633915506cea5a5e5dd29ee"
+    }
+  ],
+  "prechange_archive": {
+    "initial_snapshot_commit": "bffca4bba7d5ba25fb2237efb40434cac94538bd",
+    "files": [
+      "ops/data/99_VERSION_ARCHIVE/20261012/map__PRE_DEV_SCOPE_QA.html.txt",
+      "ops/data/99_VERSION_ARCHIVE/20261012/site-operations__PRE_DEV_SCOPE_QA.html.txt",
+      "ops/control/99_VERSION_ARCHIVE/20261012/README__PRE_DEV_SCOPE_QA.md.txt",
+      ".github/workflows/99_VERSION_ARCHIVE/20261012/field-ux-visual-qa__PRE_TRIGGER_COVERAGE.yml.txt",
+      "scripts/99_VERSION_ARCHIVE/20261012/qa_field_ux_browser__PRE_TUTORIAL_AND_SHARED_CHECKLIST.py.txt",
+      "guide/99_VERSION_ARCHIVE/20261012/guide__PRE_WCAG_CONTRAST.css.txt",
+      "scripts/99_VERSION_ARCHIVE/20261012/qa_field_ux_browser__PRE_MAP_KEY_DIAG.py.txt",
+      "scripts/99_VERSION_ARCHIVE/20261012/qa_field_ux_browser__PRE_POPUP_WAIT_STABILITY.py.txt",
+      "ops/data/99_VERSION_ARCHIVE/20261012/map__PRE_LEAFLET_ATTRIBUTION_WCAG.html.txt"
+    ],
+    "archive_immutable_claim": "NONE; exact source blobs preserved at specified archive commits",
+    "rollback_method": "Reapply content from the archived source blobs into their original paths in a new governed forward rollback commit; do not reset history."
+  },
+  "verification": {
+    "branch_lane": {
+      "status": "PASS",
+      "run_id": 38193574121,
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38193574121"
+    },
+    "production": {
+      "status": "PASS",
+      "run_id": 38193574070,
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38193574070",
+      "validate_job": "success",
+      "deploy_job": "success"
+    },
+    "browser": {
+      "status": "PASS",
+      "run_id": 38193574094,
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38193574094",
+      "map_wcag_violations": 0,
+      "howto_wcag_violations": 0,
+      "synthetic_checklist_map_popup": "PASS",
+      "desktop_mobile": "PASS",
+      "screenshot_artifact_id": 11722995604
+    },
+    "machine_checks": {
+      "site_foreign_keys": 8,
+      "resource_identities": 46,
+      "progress_records": 37,
+      "other_data_lanes_mutated": false
+    }
+  },
+  "limitations": [
+    "Browser checklist is local to a device, browser, project and Nepal date; no backend sync.",
+    "Only 37 public-safe progress sample records, not a complete provider archive or accepted construction completions.",
+    "Original-media verification failures from the evidence lane (269) not addressed here.",
+    "Resource catalog holds 46 known resource pointers, not a full Drive inventory.",
+    "No engineering approval, project completion or drawing revision certified by this UI run.",
+    "Historic guide narrative in guide/guide.js still needs a separate content/role alignment pass; rendering/accessibility alone does not certify instructional currency."
+  ],
+  "next_action": "Review and align guide content with six role-specific current routes; then independently validate future-upload resource normalization inside its authorized lane.",
+  "publication": "GITHUB_PUBLIC_WEBSITE_SAFE"
+}
