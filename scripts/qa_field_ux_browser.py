@@ -86,8 +86,8 @@ def verify_shared_shell(page, section):
         developer:links.some(a=>a.textContent.includes("Developer Workspace")),
         shadowStyle:!!root.querySelector('link[href*="site-shell.css"]'),
         sourceTheme:!!document.querySelector('link[href*="site-shell.css"]'),
-        oldVisible:!![...document.querySelectorAll('nav:not(.depth-nav)')].find(n=>
-            !root.contains(n) && !n.closest("jp-site-header") && getComputedStyle(n).display !== "none")
+        oldVisible:!![...document.querySelectorAll('nav[data-jp-legacy-primary="1"]')].find(n=>
+            getComputedStyle(n).display !== "none")
       };
     }""")
     require(len(details["labels"])==6, "Shared shell does not have six routes: "+str(details))
