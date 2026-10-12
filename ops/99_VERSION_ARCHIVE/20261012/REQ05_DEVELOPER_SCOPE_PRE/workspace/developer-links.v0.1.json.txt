@@ -1,0 +1,131 @@
+{
+  "schema_version": "0.1.0",
+  "id": "JP_AEC_DEVELOPER_ONLY_RESOURCE_DIRECTORY",
+  "scope": "WEBSITE_IMPLEMENTATION_NOT_PROJECT_CASE_FILES",
+  "notice": "Public-read-only developer dashboard; do not expose secrets, private messages, raw project files or credentials.",
+  "categories": [
+    {
+      "id": "architecture",
+      "name": "🏗️ Architecture & Technologies",
+      "explanation": "See the technology stack and system boundaries",
+      "links": [
+        {
+          "label": "📘 Architecture principles and lane separation",
+          "href": "../ops/control/site-experience-and-pipeline-isolation.v0.1.json"
+        },
+        {
+          "label": "⚙️ GitHub repository source",
+          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub"
+        },
+        {
+          "label": "🧬 Data authority and provenance",
+          "href": "../ops/CANONICAL_DATA_AUTHORITY.md"
+        },
+        {
+          "label": "📐 CAD engine repository",
+          "href": "https://github.com/FabinGurung/JP_Computer-Aided-Drawings"
+        },
+        {
+          "label": "📅 Scheduling module repository",
+          "href": "https://github.com/FabinGurung/JP_Scheduling_Work_and_Resources_Management"
+        }
+      ]
+    },
+    {
+      "id": "controls",
+      "name": "🗼 Control Towers & Libraries",
+      "explanation": "Read governance, SOPs, versioned rules and templates",
+      "links": [
+        {
+          "label": "Control tower directory",
+          "href": "../controls/"
+        },
+        {
+          "label": "A9-CWO operational memory wall",
+          "href": "../controls/memory-wall.html"
+        },
+        {
+          "label": "Communication version/control contract",
+          "href": "../ops/control/control-system.json"
+        },
+        {
+          "label": "Storage and file routing",
+          "href": "../ops/control/storage-routing-rules.json"
+        },
+        {
+          "label": "Website view contract",
+          "href": "../ops/control/site-operations-view-contract.v0.1.json"
+        }
+      ]
+    },
+    {
+      "id": "versioning",
+      "name": "🧬 Versions, Source Code & Releases",
+      "explanation": "Inspect commits, source archive, actions and deployment",
+      "links": [
+        {
+          "label": "GitHub commit history",
+          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/commits/main"
+        },
+        {
+          "label": "GitHub Actions / CI",
+          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions"
+        },
+        {
+          "label": "Code root (main)",
+          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/tree/main"
+        },
+        {
+          "label": "Validation workflow",
+          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/.github/workflows/daily-ops-branch-preview.yml"
+        }
+      ]
+    },
+    {
+      "id": "backlog",
+      "name": "📌 Software Backlog & Roadmap",
+      "explanation": "Unfinished website/system implementation, not construction site tasks",
+      "links": [
+        {
+          "label": "System development pending work",
+          "href": "../pending/"
+        },
+        {
+          "label": "GitHub issues",
+          "href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/issues"
+        },
+        {
+          "label": "Module boundaries",
+          "href": "../ops/PLATFORM_MODULES.md"
+        },
+        {
+          "label": "How-To for developer maintenance",
+          "href": "../guide/"
+        }
+      ]
+    },
+    {
+      "id": "pipelines",
+      "name": "🔌 Communication & Website Pipelines",
+      "explanation": "Collector, private Drive normalization, approved derived web projections",
+      "links": [
+        {
+          "label": "Evidence-to-website workstream",
+          "href": "../ops/control/a9-cwo-evidence-registry-workstream.v0.1.json"
+        },
+        {
+          "label": "Pipeline isolation restrictions",
+          "href": "../ops/control/site-experience-and-pipeline-isolation.v0.1.json"
+        },
+        {
+          "label": "Resource naming registry",
+          "href": "../ops/data/resource-catalog-normalized.v0.1.json"
+        },
+        {
+          "label": "Progress website derivation",
+          "href": "../ops/data/progress-report-public.v0.2.jsonl"
+        }
+      ]
+    }
+  ]
+}
