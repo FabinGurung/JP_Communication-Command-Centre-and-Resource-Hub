@@ -7,7 +7,17 @@ body[data-jp-site="1"] {
   background:var(--jp-canvas);
   color:var(--jp-ink);
   font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --blue:#17664a;--accent:#17664a;--soft:#e4f2e5;--page:#f3f8f2;
 }
+body[data-jp-site="1"] .cover {
+  background:linear-gradient(112deg,#e7f5e7 0%,#fffdf1 100%);
+  border-color:#d2e5d6;
+}
+body[data-jp-site="1"] .cover .eyebrow{color:#215f45;}
+body[data-jp-site="1"] .top:has(.kicker){background:#173e32;}
+body[data-jp-site="1"] .top:has(.kicker) .kicker{color:#caead1;}
+body[data-jp-site="1"] .top:has(.kicker) .lead{color:#e4f2e8;}
+
 body[data-jp-site="1"] h1,
 body[data-jp-site="1"] h2 { font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif; }
 body[data-jp-site="1"][data-jp-section="checklist"] .heading {
