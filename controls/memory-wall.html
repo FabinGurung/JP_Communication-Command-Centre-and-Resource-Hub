@@ -31,4 +31,4 @@ fetch("../ops/discord/notebook-versions.json",{cache:"no-store"}).then(r=>{if(!r
 document.getElementById("current").textContent=d.current_revision;
 document.getElementById("revisions").innerHTML=d.versions.map(v=>'<tr><td><strong>'+esc(v.revision)+'</strong></td><td>'+esc(v.created_date_npt)+'</td><td>'+esc(v.change_summary)+'</td><td class="'+(v.status==="CURRENT"?"current":"muted")+'">'+(v.status==="CURRENT"?"Current":"Archived")+'</td></tr>').join("");
 }).catch(()=>{document.getElementById("current").textContent="See version ledger";});
-</script></body></html>
+</script><script src="../assets/js/site-shell.js?v=20261012-2"></script></body></html>
