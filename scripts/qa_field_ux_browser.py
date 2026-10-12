@@ -272,11 +272,67 @@ def run():
                     "guide/15-pages/":"guide",
                     "pending/":"developer",
                     "controls/":"developer",
+                    "controls/storage.html":"developer",
+                    "controls/archive-formats.html":"developer",
+                    "controls/memory-wall.html":"developer",
                 }
                 for route,group in routes.items():
                     page.goto(BASE+"/"+route,wait_until="domcontentloaded",timeout=20000)
                     verify_shared_shell(page,group)
-                print("PASS: 16 routes use one six-section website shell without duplicate navigation")
+                print("PASS: 19 routes use one six-section website shell without duplicate navigation")
+
+                # Request 02: project identity follows navigation, while developer tools
+                # never inherit project identity or appear in the field context menu.
+                page.goto(BASE+"/resources/?project=P007",wait_until="domcontentloaded",timeout=20000)
+                page.wait_for_function("() => document.querySelector('#project')?.value === 'P007'",timeout=15000)
+                top=page.locator("jp-site-header")
+                progress=top.locator('nav a[data-jp-route="site-operations/history.html"]')
+                require(progress.get_attribute("href").endswith("/site-operations/history.html?project=P007"),
+                        "Project FK lost from Resources to Progress")
+                top.locator(".jp-related summary").click()
+                brief=top.locator('.jp-related a[data-jp-route="site-operations/project.html"]')
+                require(brief.count()==1 and "project=P007" in brief.get_attribute("href"),
+                        "Selected project not linked to project brief")
+                brief.click()
+                page.wait_for_url("**/site-operations/project.html?project=P007",timeout=16000)
+                require(page.locator("#drawings").count()==1,"Project Brief navigation failed")
+                top=page.locator("jp-site-header")
+                resources=top.locator('nav a[data-jp-route="resources/"]')
+                require(resources.get_attribute("href").endswith("/resources/?project=P007"),
+                        "Project Brief not linked back to matching Resources")
+                resources.click()
+                page.wait_for_url("**/resources/?project=P007",timeout=16000)
+                require(page.locator("#project").input_value()=="P007","Site context changed on return to Resources")
+                print("PASS: contextual Resources to Project Brief round trip retains project FK")
+
+                page.goto(BASE+"/site-operations.html?project=P004",wait_until="domcontentloaded",timeout=20000)
+                page.wait_for_function("() => document.querySelector('#project')?.value === 'P004'",timeout=15000)
+                top=page.locator("jp-site-header")
+                top.locator('nav a[data-jp-route="site-operations/history.html"]').click()
+                page.wait_for_url("**/site-operations/history.html?project=P004",timeout=16000)
+                page.wait_for_function("() => document.querySelector('#project')?.value === 'P004'",timeout=15000)
+                top=page.locator("jp-site-header")
+                top.locator('nav a[data-jp-route="resources/"]').click()
+                page.wait_for_url("**/resources/?project=P004",timeout=16000)
+                page.wait_for_function("() => document.querySelector('#project')?.value === 'P004'",timeout=15000)
+                print("PASS: Checklist to Progress to Resources retains selected site safely")
+
+                page.goto(BASE+"/workspace/",wait_until="domcontentloaded",timeout=20000)
+                top=page.locator("jp-site-header")
+                top.locator(".jp-related summary").click()
+                names=top.locator(".jp-related a").all_inner_texts()
+                require(any("Control Towers" in x for x in names) and any("Software Backlog" in x for x in names),
+                        "Developer secondary menu missing control tower or software backlog")
+                require(not any("Site Coordination" in x or "Project Brief" in x for x in names),
+                        "Construction tools appeared inside developer-only menu")
+                top.locator('.jp-related a[data-jp-route="controls/"]').click()
+                page.wait_for_url("**/controls/",timeout=15000)
+                verify_shared_shell(page,"developer")
+                require(page.locator("jp-site-header").locator(".jp-related summary").count()==1,
+                        "Developer secondary navigation missing on control tower")
+                print("PASS: developer-only tools and category navigation")
+
+
 
 
 
@@ -299,6 +355,8 @@ def run():
                 m.goto(BASE+"/resources/?project=P007",wait_until="domcontentloaded",timeout=20000)
                 m.wait_for_function("() => document.querySelectorAll('#directory .file').length >= 10",timeout=18000)
                 verify_shared_shell(m,"resources")
+                require(m.locator("jp-site-header").locator('nav a[data-jp-route="site-operations/history.html"]').get_attribute("href").endswith("?project=P007"),
+                        "Mobile Resources navigation loses project selection")
                 no_wide_overflow(m,"drawings directory mobile")
                 audit_wcag(m,"drawings directory mobile")
                 screenshot(m,"project-resources-mobile.png")
