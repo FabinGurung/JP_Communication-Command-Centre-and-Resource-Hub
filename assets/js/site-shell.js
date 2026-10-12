@@ -20,7 +20,7 @@
     path==="site-operations/history.html"?"progress":
     path==="site-operations.html"||path.startsWith("site-operations/")?"checklist":
     path==="resources"||path.startsWith("resources/")?"resources":
-    path==="workspace"||path.startsWith("workspace/")||path==="pending"||path.startsWith("pending/")||path==="controls"||path.startsWith("controls/")?"developer":
+    path==="workspace"||path.startsWith("workspace/")||path==="controls"||path.startsWith("controls/")?"developer":
     path==="guide"||path.startsWith("guide/")?"guide":"overview";
   const escapeHTML=x=>String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const local=href=>new URL(href,root).href;
@@ -46,7 +46,7 @@
     checklist:[["🏗️ Site Coordination","site-operations/coordination.html"],["🗓️ Work & Holds","site-operations/schedule.html"],["📝 Engineer Questions","site-operations/questions.html"]],
     progress:[["🏗️ Site Coordination","site-operations/coordination.html"],["🗓️ Work & Holds","site-operations/schedule.html"]],
     resources:[["🏗️ Site Coordination","site-operations/coordination.html"]],
-    developer:[["🗼 Control Towers","controls/"],["📌 Software Backlog","pending/"],["🧭 Storage Rules","controls/storage.html"],["🗃️ Archive Policy","controls/archive-formats.html"]],
+    developer:[["🗼 Control Towers","controls/"],["📌 Software Backlog","workspace/backlog/"],["🧭 Storage Rules","controls/storage.html"],["🗃️ Archive Policy","controls/archive-formats.html"]],
     guide:[["📄 Quick Start","guide/"],["📖 3-page walkthrough","guide/3-pages/"],["🗂️ 7-page routine","guide/7-pages/"],["📚 15-page reference","guide/15-pages/"]]
   };
   const oldNav=document.querySelector("nav:not(.depth-nav)");
