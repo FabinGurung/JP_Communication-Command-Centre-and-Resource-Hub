@@ -156,7 +156,14 @@ async function loadWorkingProjectIds(cacheBust) {
   const data = await response.json();
   state.siteReadinessByLegacyId = new Map((Array.isArray(data.projects) ? data.projects : [])
     .filter((site) => site.project_id)
-    .map((site) => [site.project_id, {readiness: site.daily_ops?.overall_readiness || "NOT_CONFIRMED", as_of: site.daily_ops?.date || null}]));
+    .map((site) => [site.project_id, {
+      readiness: site.daily_ops?.overall_readiness || "NOT_CONFIRMED",
+      as_of: site.daily_ops?.date || null,
+      // This is already-published source-attributed Daily Ops evidence, not checklist data.
+      progress: Array.isArray(site.daily_ops?.progress) ? site.daily_ops.progress.filter(row =>
+        row && typeof row.note === "string" && Array.isArray(row.source_refs) && row.source_refs.length > 0
+      ) : []
+    }]));
   return new Set(
     (Array.isArray(data.projects) ? data.projects : [])
       .map((item) => String(item.map_project_id || "").trim())
@@ -407,18 +414,17 @@ function renderProjectList() {
     item.type = "button";
     item.className = `project-item${state.activeProjectId === project.project_id ? " active" : ""}`;
     item.setAttribute("aria-current", state.activeProjectId === project.project_id ? "true" : "false");
-    const progress = project.physical_progress_percent === null ? "" : ` · ${project.physical_progress_percent}% physical`;
-    const ward = project.location_ward_number ? `Ward ${project.location_ward_number} · ` : "";
+    const ward = canShow(project,"show_ward_number") && project.location_ward_number
+      ? `Ward ${project.location_ward_number}` : "";
+    const company = canShow(project,"show_executing_company_role") ? companyName(project) : "";
     item.innerHTML = `
       <div class="project-item-head">
         <div>
-          <div class="project-code">${escapeHTML(project.company_project_code)} ${qualityBadge(project)}</div>
           <div class="project-name">${escapeHTML(project.display_name)}</div>
         </div>
         <span class="badge"><span class="status-dot" style="background:${escapeHTML(style.color)}"></span>${escapeHTML(style.label)}</span>
       </div>
-      <div class="project-meta">${escapeHTML(ward + humanLabel(project.project_function))}</div>
-      <div class="project-meta">${escapeHTML(companyName(project) + progress)}</div>`;
+      <div class="project-meta">${escapeHTML([ward, company].filter(Boolean).join(" · ") || "Site overview")}</div>`;
     item.addEventListener("click", () => selectProject(project.project_id));
     elements.list.append(item);
   });
@@ -436,13 +442,43 @@ function projectMarkerIcon(project) {
 
 function nepalDateForMap(){const parts=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Kathmandu",day:"2-digit",month:"2-digit",year:"numeric"}).formatToParts(new Date());const get=type=>parts.find(p=>p.type===type)?.value;return [get("year"),get("month"),get("day")].join("-");}
 function personalChecklistForMap(code){if(!code)return [];try{const value=JSON.parse(window.localStorage.getItem("JPAEC:diy-checklist:v1:"+nepalDateForMap()+":"+code)||"[]");return Array.isArray(value)?value.filter(x=>typeof x.text==="string"&&x.text.trim()).slice(0,30):[]}catch{return []}}
-function publicWorkCounts(project){const rows=projectWorkItems(project.project_id);return{completed:rows.filter(r=>r.work_status==="COMPLETED").length,ongoing:rows.filter(r=>r.work_status==="IN_PROGRESS").length,held:rows.filter(r=>["ON_HOLD","BLOCKED"].includes(r.work_status)).length,total:rows.length};}
+function reportedWorkForMap(project){
+  const site=state.siteReadinessByLegacyId.get(project.legacy_project_code);
+  const rows=Array.isArray(site?.progress)?site.progress:[];
+  // These are prior field observations with source references; do not infer current assignments.
+  const recognized=new Set(["ONGOING","DONE","BLOCKED","ON_HOLD"]);
+  return {
+    as_of:site?.as_of||null,
+    ongoing:rows.filter(r=>r.status==="ONGOING"),
+    done:rows.filter(r=>r.status==="DONE"),
+    held:rows.filter(r=>["BLOCKED","ON_HOLD"].includes(r.status)),
+    other:rows.filter(r=>!recognized.has(r.status))
+  };
+}
+function reportedWorkHTML(project,compact=false){
+  const r=reportedWorkForMap(project);
+  const groups=[["🟢 Reported ongoing",r.ongoing],["✓ Reported done",r.done],["⚠ Reported held",r.held]];
+  const count=groups.reduce((n,[,rows])=>n+rows.length,0);
+  const date=r.as_of?" · index updated "+escapeHTML(r.as_of):"";
+  const content=count?groups.filter(([,rows])=>rows.length).map(([label,rows])=>{
+    const shown=rows.slice(0,compact?1:3);
+    return '<div class="map-work-group"><strong>'+label+' ('+rows.length+')</strong><ul>'+
+      shown.map(row=>'<li><span>'+escapeHTML(row.note)+'</span>'+
+        (row.observed_at?'<small>Observed '+escapeHTML(String(row.observed_at).slice(0,10))+'</small>':'')+
+        '</li>').join("")+'</ul>'+
+      (rows.length>shown.length?'<small>+'+(rows.length-shown.length)+' additional reports; see Progress Report</small>':'')+
+      '</div>';
+  }).join(""):'<p class="map-no-work">No source-attributed ongoing/done/held work observations are published for this site here.</p>';
+  return '<div class="map-work-summary"><strong>📊 Reported work overview</strong>'+
+    '<small class="map-source-note">Dated field observations'+date+' · not live instructions or engineer-accepted completion.</small>'+
+    content+'</div>';
+}
 function mapChecklistSummary(project){const code=project.legacy_project_code,tasks=personalChecklistForMap(code);return '<div class="map-quick-checklist"><strong>☑️ Today’s Site Checklist</strong>'+(tasks.length?'<ul>'+tasks.slice(0,3).map(t=>'<li>'+(t.done?"☑":"☐")+' '+escapeHTML(t.text)+'</li>').join("")+'</ul>'+(tasks.length>3?'<small>+'+(tasks.length-3)+' more reminders</small>':""):'<small>No tasks written on this browser today.</small>')+'</div>';}
 function projectPopupHTML(project){
-  const code=project.legacy_project_code,ops=state.siteReadinessByLegacyId.get(code),counts=publicWorkCounts(project);
+  const code=project.legacy_project_code,ops=state.siteReadinessByLegacyId.get(code);
   const readiness=ops?.readiness==="HOLD"?"⚠️ Reported HOLD — verify":ops?.readiness==="READY_WITH_CONDITION"?"⚠️ Conditional readiness":"Current readiness not verified";
   const links=code?'<a href="site-operations.html?project='+encodeURIComponent(code)+'">Checklist ↗</a><a href="resources/?project='+encodeURIComponent(code)+'">📐 Resources ↗</a><a href="site-operations/history.html?project='+encodeURIComponent(code)+'">Progress ↗</a>':"";
-  return '<div class="popup"><h3>'+escapeHTML(project.display_name)+'</h3><div class="popup-status">'+escapeHTML(readiness)+'</div>'+mapChecklistSummary(project)+'<div class="map-work-summary"><strong>Work overview</strong><small>'+(counts.total?counts.ongoing+' ongoing · '+counts.completed+' completed · '+counts.held+' held/blocked, from '+counts.total+' indexed public work items':'No verified public work-item statuses linked yet.')+'</small></div><div class="popup-actions">'+links+'<button type="button" data-view-project="'+escapeHTML(project.project_id)+'">More detail</button></div></div>';
+  return '<div class="popup"><h3>'+escapeHTML(project.display_name)+'</h3><div class="popup-status">'+escapeHTML(readiness)+(ops?.as_of?' · updated '+escapeHTML(ops.as_of):'')+'</div>'+mapChecklistSummary(project)+reportedWorkHTML(project,true)+'<div class="popup-actions">'+links+'<button type="button" data-view-project="'+escapeHTML(project.project_id)+'">Site snapshot</button></div></div>';
 }
 
 function pointKey(latitude, longitude) {
@@ -634,16 +670,17 @@ function renderOverview(project) {
   const resourceLink = project.legacy_project_code ? `<a class="detail-link" href="resources/?project=${encodeURIComponent(project.legacy_project_code)}">📐 Drawings &amp; Models</a>` : `<a class="detail-link" href="resources/">Browse project resources</a>`;
   const directionsLink = canShow(project, "show_coordinates") ? `<a class="detail-link primary" href="${directionsURL(project)}" target="_blank" rel="noopener">Directions</a>` : "";
 
-  const counts=publicWorkCounts(project),code=project.legacy_project_code,ops=state.siteReadinessByLegacyId.get(code);
+  const code=project.legacy_project_code,ops=state.siteReadinessByLegacyId.get(code);
   const actionLinks=code?'<a class="detail-link" href="site-operations.html?project='+encodeURIComponent(code)+'">☑️ Today’s Site Checklist</a><a class="detail-link" href="resources/?project='+encodeURIComponent(code)+'">📐 Drawing & Resource Library</a><a class="detail-link" href="site-operations/history.html?project='+encodeURIComponent(code)+'">📊 Progress Report</a><a class="detail-link" href="site-operations/coordination.html?project='+encodeURIComponent(code)+'">⚠️ Site Coordination</a>':'<a class="detail-link" href="resources/">📐 Browse Resources</a>';
   const siteReadiness=ops?.readiness==="HOLD"?"Reported HOLD — confirm affected work":ops?.readiness==="READY_WITH_CONDITION"?"Readiness with conditions":"Readiness not confirmed here";
   elements.overviewPanel.innerHTML = `
-    <div class="section-card"><h3>☑️ Checklist for today</h3>${mapChecklistSummary(project)}
-      <p class="map-note">Browser-local reminders for Nepal today; they are not shared work instructions or accepted progress.</p></div>
-    <div class="section-card"><h3>🏗️ Current work overview</h3>
+    <div class="section-card">${mapChecklistSummary(project)}
+      <p class="map-note">Personal browser-local notes for Nepal today. A tick does not confirm construction completion.</p></div>
+    <div class="section-card">
+      <h3>🏗️ Site reports &amp; holds</h3>
       <p class="map-readiness">${escapeHTML(siteReadiness)}${ops?.as_of?' · recorded '+escapeHTML(ops.as_of):''}</p>
-      <div class="map-counts"><span><strong>${counts.ongoing}</strong> Ongoing</span><span><strong>${counts.completed}</strong> Completed</span><span><strong>${counts.held}</strong> Held/blocked</span></div>
-      <p class="map-note">${counts.total?'Counts refer only to '+counts.total+' admitted public work-item records; not an all-site completion certificate.':'No admitted public work items with these statuses. Do not infer that the site is idle or completed.'}</p>
+      ${reportedWorkHTML(project)}
+      <p class="map-note">No new source evidence should be inferred from missing entries. Open Progress Report for the approved public-safe history.</p>
     </div>
     <div class="section-card"><h3>📂 Quick access</h3><div class="detail-actions">${actionLinks}${directionsLink}${projectDetailsLink}</div></div>
     <details class="map-technical"><summary>🧬 Technical project metadata (expand only if needed)</summary>
@@ -810,9 +847,12 @@ function renderProjectDetail(project) {
   const works = projectWorkItems(project.project_id);
   const components = (state.componentsByProjectId.get(project.project_id) || []).filter((c) => c.is_public);
   const materials = projectMaterials(project.project_id);
-  elements.detailCode.textContent = project.company_project_code;
-  elements.detailTitle.textContent = canShow(project, "show_project_name") ? project.display_name : project.company_project_code;
-  elements.detailSubtitle.textContent = [project.project_id, project.legacy_project_code ? `legacy ${project.legacy_project_code}` : "new normalized record"].join(" · ");
+  elements.detailCode.textContent = "📍 Site snapshot";
+  elements.detailTitle.textContent = canShow(project, "show_project_name") ? project.display_name : "Selected site";
+  elements.detailSubtitle.textContent = [
+    canShow(project,"show_ward_number")&&project.location_ward_number ? `Ward ${project.location_ward_number}` : "",
+    canShow(project,"show_executing_company_role") ? companyName(project) : ""
+  ].filter(Boolean).join(" · ") || "Daily notes · dated reports · source documents";
   elements.worksTabCount.textContent = String(works.length + components.length);
   elements.materialsTabCount.textContent = materialQuantitiesAllowed(project) ? String(materials.length) : "—";
   state.activeWorkFilter = "";
