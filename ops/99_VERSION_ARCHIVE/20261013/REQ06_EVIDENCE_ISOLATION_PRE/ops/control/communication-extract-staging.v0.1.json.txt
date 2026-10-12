@@ -1,0 +1,232 @@
+{
+  "schema_version": "0.1.0",
+  "control_id": "A9-CWO-DISCORD-SLACK-STAGING-ROUTING-001",
+  "status": "FOLDERS_VERIFIED__STAGING_PREPARED__RAW_INGESTION_NOT_CLAIMED",
+  "date_npt": "2026-10-12",
+  "purpose": "Existing Google Drive storage for permission-controlled Discord and Slack extracts, prior to approved project-subpage publication.",
+  "scope": [
+    "discord",
+    "slack"
+  ],
+  "canonical_google_drive_library": {
+    "id": "1yZ4IquFfd-9AmAsM1eaXAYFSBwONpn-c",
+    "label": "A9_Fabin_Gurung"
+  },
+  "staging_root": {
+    "id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+    "label": "A9_CWO_DAILY_TWO_CHANNELS",
+    "parent": "12_DISCORD_SYSTEM_AND_ARCHIVES",
+    "role": "COMBINED_WORKSTREAM_INDEX_AND_STAGING__NOT_NEW_RAW_PROVIDER_ARCHIVE",
+    "url": "https://drive.google.com/drive/folders/1mtTZUPlBHd7bDV715qSWACRS2i5MalT9"
+  },
+  "original_provider_authority": {
+    "discord": {
+      "folder_name": "12_DISCORD_SYSTEM_AND_ARCHIVES",
+      "drive_id": "1nTFR9xQXNwgkWRrAq1jJw7ph6rKg3C9X",
+      "coverage": "GOVERNED_DISCORD_EXTRACTION_ONLY__CURRENT_TWO_PARENT_CHANNEL_SCOPE_MAY_BE_PARTIAL"
+    },
+    "slack": {
+      "folder_name": "01_SLACK_IMPORTS",
+      "drive_id": "1K5Xv0zU9vE8cwmukA9VYcTX_IUiiLQbs",
+      "coverage": "EXISTING_SLACK_IMPORT_FOLDER__INGESTION_COMPLETENESS_NOT_CERTIFIED"
+    }
+  },
+  "categories": [
+    {
+      "index": "01",
+      "name": "RAW_JSONL",
+      "drive_id": "1Mw1a69cLCb-Mcsbm_SZ4qEh3SIe8wY4M",
+      "contents": "Discord capture JSONL for governed daily workstream; Slack raw extracts stay at their own provider original archive until specifically admitted; never overwrite original messages",
+      "formats": [
+        ".jsonl"
+      ],
+      "write_owner": "PROVIDER_COLLECTOR"
+    },
+    {
+      "index": "02",
+      "name": "ATTACHMENT_BYTES",
+      "drive_id": "1q1bv753JFoLP6ut_5-cqASG9QpTL0Dxk",
+      "contents": "Original Discord evidence bytes only when SHA-256 and source verified; never label derivatives ORIGINAL",
+      "formats": [
+        "binary"
+      ],
+      "write_owner": "PROVIDER_COLLECTOR"
+    },
+    {
+      "index": "03",
+      "name": "DERIVATIVE_BYTES",
+      "drive_id": "1pw0IlGInJnFvUX5SHyiDPWhdZONFGH0g",
+      "contents": "Unverified/downloaded provider derivatives; explicit fidelity state",
+      "formats": [
+        "binary"
+      ],
+      "write_owner": "PROVIDER_COLLECTOR"
+    },
+    {
+      "index": "04",
+      "name": "DAILY_INDEX_JSONL",
+      "drive_id": "1T6HI1DRb-LknO_M_wRSrRKuB0YcU2OK7",
+      "contents": "Per-run message/channel index and time window for supported sources",
+      "formats": [
+        ".jsonl"
+      ],
+      "write_owner": "PROVIDER_COLLECTOR"
+    },
+    {
+      "index": "05",
+      "name": "RUN_RECEIPTS",
+      "drive_id": "1C7tjzhG8JaZU2_RTaGO1zJCC9koP03he",
+      "contents": "Readback, SHA-256 manifest, row counts, cursors, failures, partial coverage, no duplicate ingestion",
+      "formats": [
+        ".json",
+        ".jsonl"
+      ],
+      "write_owner": "PROVIDER_COLLECTOR"
+    },
+    {
+      "index": "06",
+      "name": "CANDIDATES_JSONL",
+      "drive_id": "1FiKs8gqwMeUXrAHE80fwAtNbb3gk_xLk",
+      "contents": "Derived candidates from either provider, never accepted construction truth",
+      "formats": [
+        ".jsonl"
+      ],
+      "write_owner": "EVIDENCE_NORMALIZER"
+    },
+    {
+      "index": "07",
+      "name": "PROVIDER_SOURCE_POINTERS",
+      "drive_id": "1Gz4NxIxSKWgiFUI18SpBunVyHbfMJJ3x",
+      "contents": "Cross-provider pointer-only manifest; records Drive/source references without copying Slack originals into the Discord collector or publishing contents",
+      "formats": [
+        ".jsonl",
+        ".json"
+      ],
+      "write_owner": "EVIDENCE_INDEXER",
+      "new_20261012": true
+    },
+    {
+      "index": "08",
+      "name": "PROJECT_ASSOCIATION_STAGE",
+      "drive_id": "1z15BWBpxUulJFE0leb0f6RLD3B_Xy0M-",
+      "contents": "Future project-linked evidence bridge using stable project ID foreign keys, confidence and unresolved mapping status; no web publication",
+      "formats": [
+        ".jsonl",
+        ".json"
+      ],
+      "write_owner": "PROJECT_EVIDENCE_REVIEW",
+      "new_20261012": true
+    },
+    {
+      "index": "09",
+      "name": "QUARANTINE_UNMAPPED",
+      "drive_id": "1o4PhWqNM9x99zXCyDyGBoJn1yolsMwFQ",
+      "contents": "Unmapped projects, duplicate conflicts, missing attachment hashes, ambiguous statuses and access-sensitive rows; no guesses",
+      "formats": [
+        ".jsonl",
+        ".json"
+      ],
+      "write_owner": "EVIDENCE_QA",
+      "new_20261012": true
+    },
+    {
+      "index": "10",
+      "name": "PROGRESS_REPORT_MACHINE_STAGE",
+      "drive_id": "14xkUGf6WngV1uvVfe433lBtSzD3BrqOK",
+      "contents": "Existing source-attributed approved or awaiting-review normalized Progress Report stage; legacy 37-row seed is incomplete",
+      "formats": [
+        ".jsonl",
+        ".json"
+      ],
+      "write_owner": "PROGRESS_NORMALIZER_AND_REVIEW"
+    }
+  ],
+  "record_contract": {
+    "pk": "evidence_record_id",
+    "source_pk": "provider:channel_id:message_id",
+    "attachment_pk": "provider:message_id:attachment_id",
+    "fks": {
+      "project_id": "must resolve to canonical project master before being admitted",
+      "company_id": "must resolve to canonical company master",
+      "source_run_id": "must link to immutable RUN_RECEIPTS entry",
+      "source_record_id": "must link to provider RAW or archive source",
+      "attachment_ids": "must link to attachment fidelity ledger"
+    },
+    "mandatory_fields": [
+      "evidence_record_id",
+      "provider",
+      "source_run_id",
+      "source_channel_id",
+      "source_message_id",
+      "captured_at_utc",
+      "source_drive_file_id",
+      "source_sha256",
+      "project_id",
+      "project_mapping_state",
+      "evidence_type",
+      "claim_state",
+      "verification_state",
+      "access_classification",
+      "version",
+      "supersedes_id"
+    ],
+    "provider_enum": [
+      "DISCORD",
+      "SLACK"
+    ],
+    "project_mapping_states": [
+      "RESOLVED",
+      "UNMAPPED",
+      "AMBIGUOUS"
+    ],
+    "claim_states": [
+      "FIELD_REPORTED",
+      "NEEDS_INPUT",
+      "SITE_LEAD_CONFIRMED",
+      "ENGINEER_ACCEPTED",
+      "CONFLICTED",
+      "REJECTED"
+    ],
+    "evidence_types": [
+      "WORK_OBSERVATION",
+      "WORK_PLAN",
+      "HOLD_OR_BLOCKER",
+      "MATERIAL_STOCK",
+      "MATERIAL_USAGE",
+      "DRAWING_OR_MODEL_REFERENCE",
+      "SITE_DECISION",
+      "SAFETY",
+      "IMAGE_OR_FILE_EVIDENCE",
+      "GENERAL_COMMUNICATION"
+    ],
+    "attachment_fidelity_states": [
+      "ORIGINAL_VERIFIED",
+      "PREVIOUSLY_ARCHIVED_UNRECONFIRMED_SHA",
+      "PROVIDER_DERIVATIVE_UNVERIFIED_ORIGINAL",
+      "SOURCE_METADATA_ONLY",
+      "FAILED_SIZE_MISMATCH",
+      "NOT_YET_CHECKED"
+    ]
+  },
+  "storage_and_release_rules": [
+    "Google Drive originals remain in their existing original provider folders: do not move, delete, rename or duplicate them.",
+    "Only provider collectors may write RAW_JSONL and original bytes. Progress publisher and website pages must never write raw collector folders.",
+    "Re-use existing Drive IDs and provider identifiers; deduplicate source PK and SHA-256 before creating any derivative.",
+    "Do not infer project_id from message text alone when ambiguous: send to QUARANTINE_UNMAPPED.",
+    "All site/public project pages remain read-only; future project-specific evidence appears only as approved safe projection after provenance, privacy and engineering-claim review.",
+    "Never promote field-reported activities or checkbox reviews into accepted completion or certified quantities.",
+    "Do not commit private JSONL, direct restricted attachments, tokens, personnel data or signed provider URLs to public GitHub.",
+    "PRE snapshot, source hash, run receipt, POST readback and GitHub versioned change trail are compulsory.",
+    "Website Request 01 is a presentation-only update and cannot mutate provider storage, checklist local browser state or progress evidence."
+  ],
+  "future_site_contract": {
+    "current": "NO_PROJECT_SUBPAGE_INGESTION_AUTHORIZED_IN_THIS_STAGE",
+    "future": "A reviewed projection keyed by project_id and stable evidence_record_id may be surfaced as a linkable progress panel after explicit admission, with original Drive access independently permission-checked",
+    "separate_outputs": [
+      "DAILY_USER_LOCAL_CHECKLIST",
+      "HISTORICAL_SOURCE_ATTRIBUTED_PROGRESS",
+      "ENGINEERING_RESOURCE_POINTERS"
+    ]
+  },
+  "next_run": "Carry out explicit per-provider source inventory + classified staging by source PK and SHA-256, without replicating existing original bytes."
+}
