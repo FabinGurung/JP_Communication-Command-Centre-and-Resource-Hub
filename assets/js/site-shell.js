@@ -1,96 +1,131 @@
-/* JP AEC Request 01: shared, presentation-only six-section shell.
-   No data fetching, checklist mutations, provider ingestion or Drive writes. */
+/* JP AEC Request 02: six destinations, scoped contextual tools, preserved project selection.
+   Presentation-only. No provider/Drive reads, writes, local checklist updates or progress mutations. */
 (() => {
   "use strict";
-  const script = document.currentScript;
-  const root = new URL("../../", script.src);
-  const sectionRoutes = [
-    ["map", "🗺️ Map", "map.html"],
-    ["checklist", "☑️ Daily Checklist", "site-operations.html"],
-    ["progress", "📊 Progress Report", "site-operations/history.html"],
-    ["resources", "📐 Resources", "resources/"],
-    ["developer", "🛠️ Developer Workspace", "workspace/"],
-    ["guide", "📘 How-To", "guide/"]
+  const script=document.currentScript;
+  const root=new URL("../../",script.src);
+  const rootPath=root.pathname;
+  const base=new URL("index.html",root);
+  const pages=[
+    ["map","🗺️ Map","map.html"],
+    ["checklist","☑️ Daily Checklist","site-operations.html"],
+    ["progress","📊 Progress Report","site-operations/history.html"],
+    ["resources","📐 Resources","resources/"],
+    ["developer","🛠️ Developer Workspace","workspace/"],
+    ["guide","📘 How-To","guide/"]
   ];
-  const rootPath = root.pathname;
-  const relPath = decodeURI(location.pathname.startsWith(rootPath)
-    ? location.pathname.slice(rootPath.length) : location.pathname).replace(/\/+$/, "");
-  const section = relPath === "map.html" ? "map"
-    : relPath === "site-operations.html" || relPath.startsWith("site-operations/") && !relPath.startsWith("site-operations/history") ? "checklist"
-    : relPath.startsWith("site-operations/history") ? "progress"
-    : relPath.startsWith("resources") ? "resources"
-    : relPath.startsWith("workspace") || relPath.startsWith("controls") || relPath.startsWith("pending") ? "developer"
-    : relPath.startsWith("guide") ? "guide" : "overview";
-  const escapeHTML = value => String(value).replace(/[&<>"']/g, ch =>
-    ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-  const home = new URL("index.html", root).href;
-  const canonical = new Set(["", "index.html", ...sectionRoutes.flatMap(x => [x[2], x[2].replace(/\/$/, "/index.html")])]);
-  const route = href => {
-    try {
-      const u = new URL(href, location.href);
-      if (u.origin !== root.origin || !u.pathname.startsWith(rootPath)) return null;
-      const p = u.pathname.slice(rootPath.length);
-      if (canonical.has(p) || canonical.has(p.endsWith("/") ? p + "index.html" : p)) return null;
-      return u;
-    } catch { return null; }
-  };
-  const oldNav = document.querySelector("nav:not(.depth-nav)");
-  const contextLinks = [];
-  if (oldNav) {
-    const visited = new Set();
-    oldNav.querySelectorAll("a[href]").forEach(anchor => {
-      const u = route(anchor.getAttribute("href"));
-      if (!u) return;
-      const k = u.pathname + u.search;
-      if (visited.has(k)) return;
-      visited.add(k);
-      // Existing subpage links remain available, but not as duplicated main destinations.
-      if (contextLinks.length < 9) {
-        const site = new URLSearchParams(location.search).get("project");
-        if (site && !u.search && u.pathname.includes("/site-operations/")) u.searchParams.set("project",site);
-        contextLinks.push({url:u.href,label:anchor.textContent.trim().replace(/\s+/g," ")});
-      }
-    });
+  const url=new URL(location.href);
+  const path=decodeURI(url.pathname.startsWith(rootPath)?url.pathname.slice(rootPath.length):url.pathname).replace(/\/+$/,"");
+  const section=path==="map.html"?"map":
+    path==="site-operations/history.html"?"progress":
+    path==="site-operations.html"||path.startsWith("site-operations/")?"checklist":
+    path==="resources"||path.startsWith("resources/")?"resources":
+    path==="workspace"||path.startsWith("workspace/")||path==="pending"||path.startsWith("pending/")||path==="controls"||path.startsWith("controls/")?"developer":
+    path==="guide"||path.startsWith("guide/")?"guide":"overview";
+  const escapeHTML=x=>String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const local=href=>new URL(href,root).href;
+  const supportsProject=href=>[
+    "site-operations.html","site-operations/history.html","site-operations/coordination.html",
+    "site-operations/questions.html","site-operations/schedule.html","site-operations/project.html","resources/"
+  ].includes(href);
+  function selectedProject(){
+    const choice=document.getElementById("project");
+    const fromSelect=choice instanceof HTMLSelectElement?choice.value:"";
+    const fromQuery=url.searchParams.get("project")||"";
+    const fromPopup=(()=>{const a=document.querySelector('.leaflet-popup-content a[href*="project="]');try{
+      return a?new URL(a.href,location.href).searchParams.get("project"):"";
+    }catch{return "";}})();
+    const pid=fromSelect||fromQuery||fromPopup||"";
+    return /^P[0-9]{3,6}$/.test(pid)?pid:"";
   }
-  const header = document.createElement("jp-site-header");
-  header.setAttribute("data-section", section);
-  const shadow = header.attachShadow({mode:"open"});
-  const stylesheet = document.createElement("link");
-  stylesheet.rel="stylesheet";
-  stylesheet.href=new URL("assets/css/site-shell.css?v=1",root).href;
-  shadow.appendChild(stylesheet);
-  const primary = sectionRoutes.map(([key,label,href]) => {
-    const active = key === section;
-    return '<a class="jp-link'+(active?' active':'')+'" '+(active?'aria-current="page" ':'')+
-      'href="'+new URL(href,root).href+'">'+escapeHTML(label)+'</a>';
-  }).join("");
-  const related = contextLinks.length
-    ? '<details class="jp-related"><summary>More tools ▾</summary><div>'+
-      contextLinks.map(x=>'<a href="'+escapeHTML(x.url)+'">'+escapeHTML(x.label)+'</a>').join("")+
-      '</div></details>' : "";
-  const shell = document.createElement("div");
+  const choices={
+    overview:[],
+    map:[["🏗️ Site Coordination","site-operations/coordination.html"],["🗓️ Work & Holds","site-operations/schedule.html"]],
+    checklist:[["🏗️ Site Coordination","site-operations/coordination.html"],["🗓️ Work & Holds","site-operations/schedule.html"],["📝 Engineer Questions","site-operations/questions.html"]],
+    progress:[["🏗️ Site Coordination","site-operations/coordination.html"],["🗓️ Work & Holds","site-operations/schedule.html"]],
+    resources:[["🏗️ Site Coordination","site-operations/coordination.html"]],
+    developer:[["🗼 Control Towers","controls/"],["📌 Software Backlog","pending/"],["🧭 Storage Rules","controls/storage.html"],["🗃️ Archive Policy","controls/archive-formats.html"]],
+    guide:[["📄 Quick Start","guide/"],["📖 3-page walkthrough","guide/3-pages/"],["🗂️ 7-page routine","guide/7-pages/"],["📚 15-page reference","guide/15-pages/"]]
+  };
+  const oldNav=document.querySelector("nav:not(.depth-nav)");
+  const host=document.createElement("jp-site-header");
+  host.setAttribute("data-section",section);
+  const shadow=host.attachShadow({mode:"open"});
+  const styles=document.createElement("link");
+  styles.rel="stylesheet";
+  styles.href=local("assets/css/site-shell.css?v=2");
+  shadow.appendChild(styles);
+  const shell=document.createElement("div");
   shell.className="jp-frame";
-  shell.innerHTML = '<div class="jp-top"><a class="jp-brand" href="'+home+
+  const mainLinks=pages.map(([key,label,href])=>
+    '<a class="jp-link'+(key===section?' active':'')+'" data-jp-route="'+escapeHTML(href)+'"'+
+    (key===section?' aria-current="page"':'')+' href="'+local(href)+'">'+escapeHTML(label)+'</a>').join("");
+  shell.innerHTML='<div class="jp-top"><a class="jp-brand" href="'+base.href+
     '"><span aria-hidden="true">🏗️</span><span>JP AEC <small>Operations Hub</small></span></a>'+
-    '<nav aria-label="JP AEC six primary sections">'+primary+'</nav>'+related+'</div>';
+    '<nav aria-label="JP AEC six primary sections">'+mainLinks+'</nav>'+
+    '<div class="jp-more-slot"></div></div>';
   shadow.appendChild(shell);
-  const isHomepage = relPath === "" || relPath === "index.html";
-  if (isHomepage && document.querySelector("header.top")) {
-    document.querySelector("header.top").replaceWith(header);
-  } else if (oldNav) {
-    oldNav.before(header);
-    oldNav.dataset.jpLegacyPrimary = "1";
-    oldNav.hidden = true;
+  const more=shell.querySelector(".jp-more-slot");
+  function routeURL(target,pid){
+    const link=new URL(target,root);
+    if(pid&&supportsProject(target))link.searchParams.set("project",pid);
+    return link.href;
+  }
+  function syncRoutes(){
+    const pid=selectedProject();
+    shell.querySelectorAll("a[data-jp-route]").forEach(a=>{
+      a.href=routeURL(a.getAttribute("data-jp-route"),pid);
+    });
+    const options=[...choices[section]];
+    if(pid&&["map","checklist","progress","resources"].includes(section))
+      options.push(["🗂️ Project Brief","site-operations/project.html"]);
+    if(!options.length){more.replaceChildren();return;}
+    const state=more.querySelector("details")?.open||false;
+    const details=document.createElement("details");
+    details.className="jp-related";
+    details.open=state;
+    const summary=document.createElement("summary");
+    summary.textContent="More tools ▾";
+    const menu=document.createElement("div");
+    for(const [label,href]of options){
+      if(path===href.replace(/\/+$/,"")||path===href+"index.html")continue;
+      const link=document.createElement("a");
+      link.textContent=label;
+      link.href=routeURL(href,pid);
+      link.setAttribute("data-jp-route",href);
+      menu.appendChild(link);
+    }
+    if(!menu.childElementCount){more.replaceChildren();return;}
+    details.append(summary,menu);
+    more.replaceChildren(details);
+  }
+  const isHome=path===""||path==="index.html";
+  if(isHome&&document.querySelector("header.top")){
+    document.querySelector("header.top").replaceWith(host);
+  }else if(oldNav){
+    oldNav.before(host);
+    oldNav.dataset.jpLegacyPrimary="1";
+    oldNav.hidden=true;
     oldNav.setAttribute("aria-hidden","true");
     oldNav.style.setProperty("display","none","important");
-  } else {
-    document.body.prepend(header);
+  }else{
+    document.body.prepend(host);
   }
   document.body.dataset.jpSite="1";
   document.body.dataset.jpSection=section;
-  // Preserve printable guide, its 1/3/7/15 depth links and its entire guide DOM.
-  const pageStyle = document.createElement("link");
-  pageStyle.rel="stylesheet";
-  pageStyle.href=new URL("assets/css/site-shell.css?v=1",root).href;
-  document.head.appendChild(pageStyle);
+  const pageStyles=document.createElement("link");
+  pageStyles.rel="stylesheet";
+  pageStyles.href=local("assets/css/site-shell.css?v=2");
+  document.head.appendChild(pageStyles);
+  syncRoutes();
+  document.addEventListener("change",e=>{
+    if(e.target?.id==="project")syncRoutes();
+  },true);
+  // Refresh before mouse, touch and keyboard navigation, including deep links
+  // when project options were loaded asynchronously after this script.
+  shadow.addEventListener("pointerdown",syncRoutes,true);
+  shadow.addEventListener("focusin",syncRoutes,true);
+  shadow.addEventListener("click",e=>{
+    if(e.target?.closest("a"))syncRoutes();
+  },true);
 })();
