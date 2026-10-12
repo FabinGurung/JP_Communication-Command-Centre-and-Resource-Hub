@@ -15,6 +15,10 @@ identity=subprocess.run([sys.executable,str(ROOT/"scripts/project_identity_index
                         cwd=ROOT,capture_output=True,text=True)
 require(identity.returncode==0,
         "canonical project identities/FKs failed: "+identity.stdout+" "+identity.stderr)
+developer=subprocess.run([sys.executable,str(ROOT/"scripts/validate_developer_workspace.py")],
+                         cwd=ROOT,capture_output=True,text=True)
+require(developer.returncode==0,
+        "software-only Developer Workspace contract failed: "+developer.stdout+" "+developer.stderr)
 
 current=load("ops/data/current-works.json")
 site_ids={s["project_id"] for s in current["projects"]}
