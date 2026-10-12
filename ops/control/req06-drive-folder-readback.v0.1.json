@@ -1,0 +1,99 @@
+{
+  "schema_version": "0.1.0",
+  "readback_date_npt": "2026-10-13",
+  "status": "FOLDER_METADATA_READBACK_ONLY",
+  "method": "Authenticated Drive metadata reads and folder-children list checks; no original bytes read, moved or modified.",
+  "staging_root_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+  "verified_folders": [
+    {
+      "name": "RAW_JSONL",
+      "drive_id": "1Mw1a69cLCb-Mcsbm_SZ4qEh3SIe8wY4M",
+      "parent_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+      "folder_metadata_verified": true,
+      "observed_direct_children": 0
+    },
+    {
+      "name": "ATTACHMENT_BYTES",
+      "drive_id": "1q1bv753JFoLP6ut_5-cqASG9QpTL0Dxk",
+      "parent_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+      "folder_metadata_verified": true,
+      "observed_direct_children": null
+    },
+    {
+      "name": "DERIVATIVE_BYTES",
+      "drive_id": "1pw0IlGInJnFvUX5SHyiDPWhdZONFGH0g",
+      "parent_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+      "folder_metadata_verified": true,
+      "observed_direct_children": null
+    },
+    {
+      "name": "DAILY_INDEX_JSONL",
+      "drive_id": "1T6HI1DRb-LknO_M_wRSrRKuB0YcU2OK7",
+      "parent_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+      "folder_metadata_verified": true,
+      "observed_direct_children": null
+    },
+    {
+      "name": "RUN_RECEIPTS",
+      "drive_id": "1C7tjzhG8JaZU2_RTaGO1zJCC9koP03he",
+      "parent_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+      "folder_metadata_verified": true,
+      "observed_direct_children": 0
+    },
+    {
+      "name": "CANDIDATES_JSONL",
+      "drive_id": "1FiKs8gqwMeUXrAHE80fwAtNbb3gk_xLk",
+      "parent_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+      "folder_metadata_verified": true,
+      "observed_direct_children": 0
+    },
+    {
+      "name": "PROVIDER_SOURCE_POINTERS",
+      "drive_id": "1Gz4NxIxSKWgiFUI18SpBunVyHbfMJJ3x",
+      "parent_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+      "folder_metadata_verified": true,
+      "observed_direct_children": 0
+    },
+    {
+      "name": "PROJECT_ASSOCIATION_STAGE",
+      "drive_id": "1z15BWBpxUulJFE0leb0f6RLD3B_Xy0M-",
+      "parent_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+      "folder_metadata_verified": true,
+      "observed_direct_children": 0
+    },
+    {
+      "name": "QUARANTINE_UNMAPPED",
+      "drive_id": "1o4PhWqNM9x99zXCyDyGBoJn1yolsMwFQ",
+      "parent_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+      "folder_metadata_verified": true,
+      "observed_direct_children": 0
+    },
+    {
+      "name": "PROGRESS_REPORT_MACHINE_STAGE",
+      "drive_id": "14xkUGf6WngV1uvVfe433lBtSzD3BrqOK",
+      "parent_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+      "folder_metadata_verified": true,
+      "observed_direct_children": 6
+    }
+  ],
+  "observed_20261013": {
+    "progress_stage_direct_children": 6,
+    "progress_stage_previous_seed_rows": 37,
+    "pointer_stage_direct_children": 0,
+    "project_stage_direct_children": 0,
+    "quarantine_stage_direct_children": 0,
+    "raw_jsonl_stage_direct_children": 0,
+    "receipt_stage_direct_children": 0
+  },
+  "provider_originals_stay_at": {
+    "discord_archive_folder_id": "1nTFR9xQXNwgkWRrAq1jJw7ph6rKg3C9X",
+    "slack_archive_folder_id": "1K5Xv0zU9vE8cwmukA9VYcTX_IUiiLQbs"
+  },
+  "new_raw_provider_rows_certified": false,
+  "private_pointer_stage_populated": false,
+  "private_drive_permissions_independently_certified": false,
+  "latest_known_attachment_mismatches": 269,
+  "attachment_mismatch_freshly_reaudited": false,
+  "evidence_note": "Existing 37-row machine stage and legacy raw collection elsewhere are not proof of completed fresh ingestion. No record was promoted to public progress during this run.",
+  "next_authorized_input": "Read provenance and row hashes from existing provider-owned originals using authenticated access; stage new records idempotently and quarantine unresolved originals before separate human approval."
+}
