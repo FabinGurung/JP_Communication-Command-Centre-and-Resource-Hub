@@ -30,4 +30,4 @@ $("directory").innerHTML=markup||'<div class="empty">No indexed resources match.
 $("count").textContent=sites+' project(s) · '+total+' indexed resources';}
 async function load(){try{const r=await fetch("../ops/data/resource-catalog-normalized.v0.1.json",{cache:"no-store"});if(!r.ok)throw Error("HTTP "+r.status);data=await r.json();if(!data.sites||!data.priority_bands)throw Error("Invalid catalog");$("project").innerHTML='<option value="">All indexed projects</option>'+data.sites.map(s=>'<option value="'+esc(s.project_id)+'">'+esc(s.project_name)+'</option>').join("");const u=new URLSearchParams(location.search);if(data.sites.some(s=>s.project_id===u.get("project")))$("project").value=u.get("project");const k=u.get("type");if(k&&[...$("kind").options].some(o=>o.value===k))$("kind").value=k;render();}catch(e){$("count").textContent="Unavailable";$("directory").innerHTML='<div class="empty">'+esc(e.message)+'</div>';}}
 ["project","kind"].forEach(id=>$(id).addEventListener("change",render));$("search").addEventListener("input",render);load();})();
-</script></body></html>
+</script><script src="../assets/js/site-shell.js?v=20261012-1"></script></body></html>
