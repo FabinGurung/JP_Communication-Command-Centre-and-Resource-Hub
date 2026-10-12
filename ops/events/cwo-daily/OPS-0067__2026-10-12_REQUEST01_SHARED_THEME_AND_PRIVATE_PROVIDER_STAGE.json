@@ -1,0 +1,121 @@
+{
+  "event_id": "OPS-0067",
+  "date_npt": "2026-10-12",
+  "workstream": "JP AEC original website requirements",
+  "phase": "REQ01_OF_08",
+  "status": "REQ01_SHARED_THEME_IMPLEMENTED__BROWSER_MOBILE_AND_PRODUCTION_VERIFIED",
+  "repo": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "source_commit": "71eb0e3c7d79a4ee3565a7fc43571b8a19d078d9",
+  "pre_change_archive_commit": "d963f7ed267d1dab4554285d255415735d9fb451",
+  "pre_change_archive_root": "ops/99_VERSION_ARCHIVE/20261012/REQ01_SHARED_SITE_THEME_PRE",
+  "additional_pre_css_archive": "assets/css/99_VERSION_ARCHIVE/20261012/site-shell__PRE_GLOBAL_ACCENT_TOKENS.css.txt",
+  "additional_pre_workflow_archive": "ops/99_VERSION_ARCHIVE/20261012/REQ01_SHARED_SITE_THEME_PRE/workflows/field-ux-visual-qa.yml.txt",
+  "changed_page_count": 16,
+  "changed_page_paths": [
+    "index.html",
+    "map.html",
+    "site-operations.html",
+    "site-operations/history.html",
+    "site-operations/coordination.html",
+    "site-operations/project.html",
+    "site-operations/questions.html",
+    "site-operations/schedule.html",
+    "resources/index.html",
+    "workspace/index.html",
+    "guide/index.html",
+    "guide/3-pages/index.html",
+    "guide/7-pages/index.html",
+    "guide/15-pages/index.html",
+    "pending/index.html",
+    "controls/index.html"
+  ],
+  "source_files": [
+    {
+      "path": "assets/css/site-shell.css",
+      "sha": "49506afc7f9b9ef860eadbb2b3edbe83b5039426"
+    },
+    {
+      "path": "assets/js/site-shell.js",
+      "sha": "e0edec98080fbbee8b4a9e4e7ee5a9400ce933f7"
+    },
+    {
+      "path": "scripts/qa_field_ux_browser.py",
+      "sha": "4f9637c49a9a0157bed6f50c8e154f6597ff2642"
+    },
+    {
+      "path": ".github/workflows/field-ux-visual-qa.yml",
+      "sha": "70b31bed34ee83d204c7e1d5586adfe36b381195"
+    },
+    {
+      "path": "ops/control/communication-extract-staging.v0.1.json",
+      "sha": "12ccb6c18e62502ae5834e45a9d51d314caa0ddf"
+    },
+    {
+      "path": "ops/control/website-eight-request-roadmap.v0.1.json",
+      "sha": "18d4805ff76d656ca3c9f4c0f93e2ed55058a471"
+    }
+  ],
+  "browser_qa": {
+    "run_id": 38204135061,
+    "conclusion": "SUCCESS",
+    "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38204135061",
+    "checks": "six section navigation on all 16 routes; desktop+mobile; map/checklist/resources isolated; accessibility"
+  },
+  "production": {
+    "run_id": 38204135068,
+    "conclusion": "SUCCESS",
+    "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38204135068"
+  },
+  "lane_validation": {
+    "run_id": 38204135150,
+    "conclusion": "SUCCESS",
+    "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38204135150"
+  },
+  "private_drive": {
+    "reused_root_id": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+    "reused_existing_categories": 7,
+    "created_stage_folders": [
+      {
+        "name": "PROJECT_ASSOCIATION_STAGE",
+        "id": "1z15BWBpxUulJFE0leb0f6RLD3B_Xy0M-"
+      },
+      {
+        "name": "QUARANTINE_UNMAPPED",
+        "id": "1o4PhWqNM9x99zXCyDyGBoJn1yolsMwFQ"
+      },
+      {
+        "name": "PROVIDER_SOURCE_POINTERS",
+        "id": "1Gz4NxIxSKWgiFUI18SpBunVyHbfMJJ3x"
+      }
+    ],
+    "routing_contract": "ops/control/communication-extract-staging.v0.1.json",
+    "originals_moved": false,
+    "raw_records_ingested": false,
+    "private_evidence_published": false,
+    "folder_metadata_readback": true
+  },
+  "web_changes": {
+    "source_homepage_canvas_unchanged": true,
+    "public_renderers_unchanged": true,
+    "six_section_shared_header": "SHADOW_DOM",
+    "site_palette": "GREEN_CREAM",
+    "context_links": "MORE_TOOLS_DISCLOSURE"
+  },
+  "unchanged_domains": [
+    "ops/data/current-works.json",
+    "ops/data/progress-report-public.v0.2.jsonl",
+    "ops/data/resource-catalog-normalized.v0.1.json",
+    "provider collector originals",
+    "browser localStorage key",
+    "engineering acceptance states"
+  ],
+  "limitations": [
+    "This phase does not synchronize checklist data across users/devices.",
+    "Only 37 progress records in existing partial public-safe projection.",
+    "Only 46 normalized resource pointers; no full Drive ingestion.",
+    "Private staged folders do not imply missing Discord originals have been verified.",
+    "Source original and new parent permissions must be checked before any future multi-user or cross-provider ingestion."
+  ],
+  "next_stage": "REQ02: verify six-page destination behavior and contextual navigation, without source-data lane rewrites.",
+  "rollback": "Restore pre-change files from the exact archive blobs in a new governed commit; never force reset production and do not alter Drive originals."
+}
