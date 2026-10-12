@@ -2,7 +2,7 @@
 """Machine-checked separations: map/checklist, progress publication, resource originals and developer UI."""
 from pathlib import Path
 from collections import Counter
-import csv, json, re, subprocess
+import csv, json, re, subprocess, sys
 ROOT=Path(__file__).resolve().parent.parent
 def read(p): return (ROOT/p).read_text(encoding="utf-8")
 def load(p): return json.loads(read(p))
@@ -11,6 +11,11 @@ def require(x, msg):
     if not x: raise SystemExit("SITE_EXPERIENCE_CONTRACT_FAIL: "+msg)
 contract=load("ops/control/site-experience-and-pipeline-isolation.v0.1.json")
 require(contract["schema_version"]=="0.1.0","control contract version")
+identity=subprocess.run([sys.executable,str(ROOT/"scripts/project_identity_index.py"),"--check"],
+                        cwd=ROOT,capture_output=True,text=True)
+require(identity.returncode==0,
+        "canonical project identities/FKs failed: "+identity.stdout+" "+identity.stderr)
+
 current=load("ops/data/current-works.json")
 site_ids={s["project_id"] for s in current["projects"]}
 raw=load("ops/data/project-resources.json")
