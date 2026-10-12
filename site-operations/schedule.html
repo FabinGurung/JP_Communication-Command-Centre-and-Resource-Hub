@@ -41,4 +41,4 @@ $("snapshot").innerHTML='<b>Frozen evidence snapshot: '+esc(db.as_of_npt)+'</b> 
 $("footer").textContent="Read-only projection · Source: "+db.source_contracts.field_board+" + "+db.source_contracts.current_works+" · Private media not published · Engineering decisions require source admission.";render();
 }catch(e){$("snapshot").textContent="Could not load evidence projection: "+e.message;$("site-cards").innerHTML='<div class="empty">Source unavailable. No schedule is implied.</div>';}}
 ["project","scope","issue-filter"].forEach(id=>$(id).addEventListener("change",render));load();})();
-</script></body></html>
+</script><script src="../assets/js/site-shell.js?v=20261012-1"></script></body></html>
