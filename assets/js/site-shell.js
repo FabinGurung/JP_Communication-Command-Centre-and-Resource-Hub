@@ -24,7 +24,7 @@
   const escapeHTML = value => String(value).replace(/[&<>"']/g, ch =>
     ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
   const home = new URL("index.html", root).href;
-  const canonical = new Set(["index.html", ...sectionRoutes.map(x => x[2].replace(/\/$/, "/index.html"))]);
+  const canonical = new Set(["", "index.html", ...sectionRoutes.flatMap(x => [x[2], x[2].replace(/\/$/, "/index.html")])]);
   const route = href => {
     try {
       const u = new URL(href, location.href);
