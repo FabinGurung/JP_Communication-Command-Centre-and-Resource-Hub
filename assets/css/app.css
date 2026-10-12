@@ -218,3 +218,32 @@ h1 { margin-bottom: 2px; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.15;
 .jp-checklist-tooltip .map-quick-checklist{margin:4px 0;padding:5px 6px}
 .jp-checklist-tooltip .map-quick-checklist li{font-size:11px}
 @media(max-width:550px){.map-counts strong{font-size:18px}.map-quick-checklist{padding:9px}}
+
+
+/* Request 03 — engineer-first site snapshot: IDs remain available only in explicit metadata. */
+.project-item-head{align-items:center}
+.project-item .project-name{font-size:15px;font-weight:800;line-height:1.35}
+.project-item .project-meta{margin-top:4px}
+.map-work-summary{display:grid;gap:9px;margin:8px 0;color:#27553f}
+.map-work-summary > strong{font-size:13px}
+.map-work-summary .map-source-note{font-size:11px;color:#5a6b61;line-height:1.5}
+.map-work-group{padding:8px 10px;border:1px solid #dbe7dd;border-radius:9px;background:#fffdf9}
+.map-work-group > strong{display:block;color:#285743;font-size:12px;margin-bottom:5px}
+.map-work-group ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.map-work-group li{font-size:12px;line-height:1.48;overflow-wrap:anywhere}
+.map-work-group li span{display:block}
+.map-work-group li small,.map-work-group > small{display:block;margin-top:3px;color:#5c7064;font-size:10px}
+.map-no-work{font-size:12px;line-height:1.5;color:#576d60;margin:3px 0}
+.popup{max-width:100%;overflow-wrap:anywhere}
+.leaflet-popup-content .map-work-summary{gap:5px}
+.leaflet-popup-content .map-work-group{padding:6px 8px}
+.leaflet-popup-content .map-work-group li span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.leaflet-popup-content .map-quick-checklist li{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.leaflet-popup-content .popup-actions{flex-wrap:wrap}
+.map-technical summary{list-style:disclosure-closed}
+.map-technical[open] summary{list-style:disclosure-open}
+@media(max-width:550px){
+ .popup h3{font-size:15px}
+ .map-work-summary > strong{font-size:12px}
+ .map-work-group li{font-size:11px}
+}
