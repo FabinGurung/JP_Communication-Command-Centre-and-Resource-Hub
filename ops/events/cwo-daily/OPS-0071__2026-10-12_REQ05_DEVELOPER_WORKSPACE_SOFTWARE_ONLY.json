@@ -1,0 +1,116 @@
+{
+  "event_id": "OPS-0071",
+  "date_npt": "2026-10-12",
+  "workstream": "JP AEC original request 5 of 8",
+  "scope": "DEVELOPER_WORKSPACE_SOFTWARE_ONLY_IMPLEMENTATION_AND_BACKLOG",
+  "status": "CLOSED__VERIFIED_BROWSER_MOBILE_PRODUCTION_AND_BRANCH_REGISTRY",
+  "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "branch": "main",
+  "verified_source_commit": "6ec6586a7c50459288c97105f936b7bee51cc8f2",
+  "source_readback": [
+    {
+      "path": "workspace/index.html",
+      "git_blob_sha": "87b4f42208cb856430b211ca25fa6614d6ea4c29"
+    },
+    {
+      "path": "workspace/developer-links.v0.1.json",
+      "git_blob_sha": "e2ae96f01334d12d17f9a6235ce88ffc09393cc3"
+    },
+    {
+      "path": "workspace/backlog/index.html",
+      "git_blob_sha": "c59c7bf986ead4eaba382dac6b17fa9af20db05e"
+    },
+    {
+      "path": "workspace/developer-software-backlog.v0.1.json",
+      "git_blob_sha": "198fd80cba440021a9267323caa7268fdce7ca1e"
+    },
+    {
+      "path": "assets/js/site-shell.js",
+      "git_blob_sha": "b0cb931ca4ff6531ed440934c49c53248be36f71"
+    },
+    {
+      "path": "controls/index.html",
+      "git_blob_sha": "1c27c6cd1b65ad64f0426690ddd186fed194e5a4"
+    },
+    {
+      "path": "scripts/validate_developer_workspace.py",
+      "git_blob_sha": "5eacc9b8c60ef1cd8af6643d8f3ee6c5c4cc0ecd"
+    },
+    {
+      "path": "scripts/validate_site_experience_contract.py",
+      "git_blob_sha": "4da0b3acec138298f2646cc6796836b83a726abd"
+    },
+    {
+      "path": "scripts/qa_field_ux_browser.py",
+      "git_blob_sha": "1c1839be8a574dbcd6387cee52b571b09834410e"
+    },
+    {
+      "path": ".github/workflows/field-ux-visual-qa.yml",
+      "git_blob_sha": "8296df699fad9ebe94e5120b2590cc7a880b8223"
+    },
+    {
+      "path": "ops/control/website-eight-request-roadmap.v0.1.json",
+      "git_blob_sha": "33778ed7d447c76e7c3b9aaf43aa4d2289a64056"
+    }
+  ],
+  "pre_change_archives": [
+    {
+      "commit": "6ae0ebf05df397a010a8131522a62b6f86d0fa2a",
+      "root": "ops/99_VERSION_ARCHIVE/20261012/REQ05_DEVELOPER_SCOPE_PRE"
+    },
+    {
+      "commit": "b3fbdc755505de8627ab60ab13482e548667db56",
+      "description": "Control page and browser QA workflow exact old blobs"
+    },
+    {
+      "commit": "b8ec38563e2238c39b96d023282a8e7cee7ace49",
+      "description": "Roadmap and developer software backlog before closure"
+    },
+    {
+      "commit": "41fcdced7ac1de40135c20643d59a3c80d270007",
+      "description": "QA source before future-proofed state filter"
+    }
+  ],
+  "changes": [
+    "Developer landing separates architecture, actual technology stack, control towers, Git versions, CI, developer backlog and integration software contracts into six categories.",
+    "Added visual software-development flow: define rules, build/test, release/track; no construction project tasks or source records rendered.",
+    "Removed direct links to raw progress JSONL and normalized drawing/resource catalogue from developer directory.",
+    "Dedicated /workspace/backlog/ renders nine source-traced software tasks; status and provenance read through exact source IDs.",
+    "Excluded OPS-PEND-000004/000005/000006/000009, which are provider live execution, engineering source certification, operational reconciliation or field trade replies, preserving the original pending registry unchanged.",
+    "Developer More tools and Control Tower navigation open the dedicated software backlog, not the mixed operations pending register.",
+    "Added fail-closed developer-scope validator and source-change GitHub Actions and responsive browser regression coverage.",
+    "Roadmap Req05 and software backlog status updated atomically and checked against owning source records."
+  ],
+  "validation": {
+    "browser": {
+      "status": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38278902053"
+    },
+    "production": {
+      "status": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38278902110"
+    },
+    "branch_lane": {
+      "status": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38278902101"
+    },
+    "developer_contract": "python scripts/validate_developer_workspace.py",
+    "readback_status": "PASS"
+  },
+  "protected_domains": [
+    "private Google Drive originals and provider JSONL unchanged",
+    "ops/data/current-works.json unchanged",
+    "ops/data/progress-report-public.v0.2.jsonl unchanged",
+    "ops/data/resource-catalog-normalized.v0.1.json unchanged",
+    "site-operations.html and local checklist storage unchanged",
+    "projects.csv and engineering facts unchanged"
+  ],
+  "boundaries": [
+    "Developer Workspace and source links are publicly readable GitHub Pages, not authenticated admin functionality.",
+    "Original mixed operations pending register remains accessible through its old route and Git history; not imported into software backlog.",
+    "Developer pointers to code/governance can include references to systems, not private source bytes or site-specific operational tasks.",
+    "Req06 provider collection and publication gates are separate and not executed in this release."
+  ],
+  "next_phase": "REQ06_PROVIDER_EXTRACTION_ISOLATION_AND_APPROVED_PUBLIC_PROJECTION",
+  "rollback": "Reapply archived exact original blobs via a new traceable commit; never delete or force-reset history."
+}
