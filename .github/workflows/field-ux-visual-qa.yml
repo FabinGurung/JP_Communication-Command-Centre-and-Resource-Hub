@@ -6,8 +6,20 @@ on:
     branches:
       - main
     paths:
+      - 'index.html'
+      - 'assets/js/hero-field.js'
       - 'site-operations.html'
+      - 'site-operations/coordination.html'
+      - 'site-operations/history.html'
+      - 'site-operations/questions.html'
+      - 'site-operations/schedule.html'
       - 'site-operations/project.html'
+      - 'resources/index.html'
+      - 'ops/data/resource-catalog-normalized.v0.1.json'
+      - 'ops/data/progress-report-public.v0.2.jsonl'
+      - 'workspace/index.html'
+      - 'workspace/developer-links.v0.1.json'
+      - 'guide/**'
       - 'map.html'
       - 'assets/css/app.css'
       - 'assets/js/app.js'
