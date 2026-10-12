@@ -258,6 +258,8 @@ def run():
                 page.locator('#project-list .project-item').filter(has_text='Bishal').first.click()
                 popup=page.locator('.leaflet-popup-content .map-quick-checklist')
                 popup.wait_for(timeout=16000)
+                browser_checklist = page.evaluate("""() => Object.fromEntries(Object.keys(localStorage).filter(k=>k.startsWith('JPAEC:diy-checklist:v1:')).map(k=>[k,JSON.parse(localStorage.getItem(k) || '[]').map(r=>r.text)]))""")
+                print('MAP_CHECKLIST_DEBUG', 'selected', page.locator('#detail-title').inner_text(), 'popup', popup.inner_text(), 'browser_storage', browser_checklist, flush=True)
                 require("Confirm today's site toolbox instructions" in popup.inner_text(), 'Map popup did not show the same browser-local P001 daily checklist')
                 print('PASS: project map popup and engineer-authored local checklist use one key')
                 page.locator("#map-list-button").click()
