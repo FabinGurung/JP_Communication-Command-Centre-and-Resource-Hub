@@ -182,22 +182,23 @@
         "private_receipt_to_review": "scripts/preview_resource_intake.py",
         "regression": "scripts/test_resource_library.py",
         "scoped_direct_list_readback": "ops/control/req07-p004-scoped-folder-inventory-crosscheck.v0.1.json",
-        "registered_root_traversal": "ops/control/req07-registered-roots-metadata-traversal-20261013.v0.1.json"
+        "registered_root_traversal": "ops/control/req07-registered-roots-metadata-traversal-20261013.v0.1.json",
+        "indexed_source_parent_readback": "ops/control/req07-indexed-resource-parent-list-readback.v0.1.json"
       },
       "remaining": [
-        "Execute authenticated paginated direct Drive API scan across approved registered and verified alternate roots; persist private metadata JSONL, source run receipt, SHA-256, identity/parent readback and dedup coverage.",
-        "Resolve six known published resources' alternate source roots (P001/P002) and investigate incomplete registered-root mappings before full inventory signoff.",
-        "Review discovered candidate files for project FK, access, privacy, duplicate versions and approval before public-safe catalog admission.",
-        "Only then deploy approved incremental new-file capture/normalization and finish Request 7; Request 8 still deferred."
+        "Run independent authenticated and fully paginated Drive API inventory across all authorized registered plus reviewed alternate project roots; persist private row IDs, hash receipts and an auditable deduplicated candidate ledger.",
+        "Resolve six P001/P002 existing published resources' alternate-root/source ownership lineage before project full-scope signoff.",
+        "Conduct human project/access/privacy/revision/approval reviews of all newly discovered candidates and quarantine ambiguous records.",
+        "Implement authenticated incremental new-file collector and reviewed public admission; do not mark Request 7 complete until this is verified."
       ],
       "resume_execution_date_npt": "2026-10-13",
-      "resume_checkpoint_status": "ALL_NINE_REGISTERED_ROOTS_METADATA_TRAVERSED_215_FOLDERS_1309_ENTRIES__DIRECT_API_PROVENANCE_PENDING",
+      "resume_checkpoint_status": "NINE_ROOTS_TRAVERSED__1309_FILE_ENTRY_OBSERVATIONS__ALL_37_INDEXED_NONROOT_SOURCES_PARENT_LIST_MATCH__REVIEW_PENDING",
       "resume_findings": [
-        "Direct connector listing traversed all 9 registered Drive roots across 8 project IDs, visiting 215 folder nodes; aggregate 1309 returned file entries, not deduplicated or reviewed.",
-        "Three prior 100-entry folder results were re-queried at top_k 1000; returned 111 (P003) and 101/178 (P007) items, with extra directory metadata accounted for.",
-        "Six existing published source references on P001/P002 remain outside the registered roots within seven metadata ancestor hops. Current registered roots listed zero direct children; review alternate source ownership.",
-        "P003, P004, P005, P007, P020 registered folder trees were enumerated using the connector; new contents were not collected into a durable complete private manifest and direct API pagination still pending.",
-        "Current 46 public resource pointers, original filenames, Drive IDs, project FKs and engineering acceptance remain unchanged. No new unreviewed names/IDs were published."
+        "All 9 registered project roots were traversed with direct folder listing: 215 folder nodes and 1309 returned file entries (observational, not deduplicated or approved).",
+        "Three initial top_k=100 folder limits re-queried at 1000 entries; 111 P003 and 101/178 P007 items reported, with directory entries reflected in counts.",
+        "All 37 registered non-root resources individually verified against metadata-reported parent folder's direct list. All 9 registered project root folder IDs separately verified.",
+        "Six P001/P002 existing indexed sources match their direct Drive parents but their registered project-root ancestry remains unresolved within seven levels.",
+        "No new private file names/IDs admitted into public GitHub pages; no original Drive source bytes, moves, renames, or engineering approvals changed."
       ]
     },
     {
@@ -221,5 +222,5 @@
     "rollback": "COMMIT_WITH_EXACT_PRE_SOURCE_BLOBS",
     "no_discord_slack_collector_changes_during_theme_work": true
   },
-  "next_phase": "REQ07_PRIVATE_PAGINATED_PROVIDER_INVENTORY_AND_ALTERNATE_ROOT_REVIEW"
+  "next_phase": "REQ07_PRIVATE_SOURCE_LINEAGE_FULL_API_AND_REVIEW_ADMISSION"
 }
