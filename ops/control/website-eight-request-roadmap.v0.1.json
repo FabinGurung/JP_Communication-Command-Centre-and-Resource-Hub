@@ -181,22 +181,23 @@
         "hardened_collector": "scripts/collect_private_drive_resource_metadata.py",
         "private_receipt_to_review": "scripts/preview_resource_intake.py",
         "regression": "scripts/test_resource_library.py",
-        "scoped_direct_list_readback": "ops/control/req07-p004-scoped-folder-inventory-crosscheck.v0.1.json"
+        "scoped_direct_list_readback": "ops/control/req07-p004-scoped-folder-inventory-crosscheck.v0.1.json",
+        "registered_root_traversal": "ops/control/req07-registered-roots-metadata-traversal-20261013.v0.1.json"
       },
       "remaining": [
-        "Complete authenticated direct Google Drive API recursive metadata crawl with page tokens and independent by-ID source reconciliation for all approved roots.",
-        "Store private inventory and receipt in authorized storage, then resolve alternative source parents, project FKs, privacy, version and approval review for each eligible candidate.",
-        "Deploy a registered authenticated incremental collection/admission workflow after review; raw connector queries cannot substitute for source completeness proof.",
-        "No changes to existing 46 public source pointers, engineering acceptance or Drive originals."
+        "Execute authenticated paginated direct Drive API scan across approved registered and verified alternate roots; persist private metadata JSONL, source run receipt, SHA-256, identity/parent readback and dedup coverage.",
+        "Resolve six known published resources' alternate source roots (P001/P002) and investigate incomplete registered-root mappings before full inventory signoff.",
+        "Review discovered candidate files for project FK, access, privacy, duplicate versions and approval before public-safe catalog admission.",
+        "Only then deploy approved incremental new-file capture/normalization and finish Request 7; Request 8 still deferred."
       ],
       "resume_execution_date_npt": "2026-10-13",
-      "resume_checkpoint_status": "VERIFY46_UNCHANGED__P004_DIRECT_SCOPED_LIST_35__GLOBAL_AUTHORIZED_INVENTORY_OPEN",
+      "resume_checkpoint_status": "ALL_NINE_REGISTERED_ROOTS_METADATA_TRAVERSED_215_FOLDERS_1309_ENTRIES__DIRECT_API_PROVENANCE_PENDING",
       "resume_findings": [
-        "All 9 registered roots for 8 indexed projects checked by direct folder list. Some returned 0 direct children; that is not proof of empty project originals.",
-        "P004 scoped tree: direct list_folder observed 35 file entries across 21 folder nodes; parent-filtered search had returned only 11 file entries over the same nodes, omitting a known indexed DWG and 24 other entries.",
-        "P003 nested folder traversal remains incomplete, as do P001/P002/P005/P006/P007/P020 complete source trees and any alternate authorized roots.",
-        "Private direct API collector now verifies by-ID file metadata/parent consistency and fails if indexed known children are omitted; automatically derives registered root IDs including P007 alternatives.",
-        "SHA-256 verified private inventory → review candidate intake implemented. No newly discovered resources published."
+        "Direct connector listing traversed all 9 registered Drive roots across 8 project IDs, visiting 215 folder nodes; aggregate 1309 returned file entries, not deduplicated or reviewed.",
+        "Three prior 100-entry folder results were re-queried at top_k 1000; returned 111 (P003) and 101/178 (P007) items, with extra directory metadata accounted for.",
+        "Six existing published source references on P001/P002 remain outside the registered roots within seven metadata ancestor hops. Current registered roots listed zero direct children; review alternate source ownership.",
+        "P003, P004, P005, P007, P020 registered folder trees were enumerated using the connector; new contents were not collected into a durable complete private manifest and direct API pagination still pending.",
+        "Current 46 public resource pointers, original filenames, Drive IDs, project FKs and engineering acceptance remain unchanged. No new unreviewed names/IDs were published."
       ]
     },
     {
@@ -220,5 +221,5 @@
     "rollback": "COMMIT_WITH_EXACT_PRE_SOURCE_BLOBS",
     "no_discord_slack_collector_changes_during_theme_work": true
   },
-  "next_phase": "REQ07_DIRECT_API_RECURSIVE_INVENTORY_WITH_KNOWN_SOURCE_RECONCILIATION"
+  "next_phase": "REQ07_PRIVATE_PAGINATED_PROVIDER_INVENTORY_AND_ALTERNATE_ROOT_REVIEW"
 }
