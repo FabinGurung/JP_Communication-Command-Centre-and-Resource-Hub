@@ -49,5 +49,54 @@
     "coverage_validator": "scripts/collect_private_drive_resource_metadata.py",
     "private_candidate_preview": "scripts/preview_resource_intake.py",
     "regressions": "scripts/test_resource_library.py"
-  }
+  },
+  "registered_root_top_level_direct_list_readback": [
+    {
+      "project_id": "P001",
+      "registered_roots": 1,
+      "returned_children": 0,
+      "interpretation": "NOT_EVIDENCE_OF_EMPTY_PROJECT_ORIGINS"
+    },
+    {
+      "project_id": "P002",
+      "registered_roots": 1,
+      "returned_children": 0,
+      "interpretation": "NOT_EVIDENCE_OF_EMPTY_PROJECT_ORIGINS"
+    },
+    {
+      "project_id": "P003",
+      "registered_roots": 1,
+      "returned_children": 13
+    },
+    {
+      "project_id": "P004",
+      "registered_roots": 1,
+      "returned_children": 9
+    },
+    {
+      "project_id": "P005",
+      "registered_roots": 1,
+      "returned_children": 13
+    },
+    {
+      "project_id": "P006",
+      "registered_roots": 1,
+      "returned_children": 0,
+      "interpretation": "NOT_EVIDENCE_OF_EMPTY_PROJECT_ORIGINS"
+    },
+    {
+      "project_id": "P007",
+      "registered_roots": 2,
+      "returned_children_per_root": [
+        6,
+        12
+      ]
+    },
+    {
+      "project_id": "P020",
+      "registered_roots": 1,
+      "returned_children": 14
+    }
+  ],
+  "registered_root_top_level_disclaimer": "All nine registered source roots were queried by direct folder listing, but only P004 was traversed to terminal listed folders. Other project nested directories, alternate sources, permissions, and 100-item cap remain unverified."
 }
