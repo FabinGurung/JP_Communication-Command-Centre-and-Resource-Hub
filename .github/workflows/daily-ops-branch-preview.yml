@@ -594,6 +594,12 @@ jobs:
       - name: Test publication lane and private-source boundaries
         run: python scripts/test_publication_lanes.py
 
+      - name: Verify all 46 Drive source name receipts and resource category rules
+        run: python scripts/validate_resource_library.py
+
+      - name: Test document normalization and private future intake candidates
+        run: python scripts/test_resource_library.py
+
       - name: Validate developer/site/progress/resources isolation
         run: python scripts/validate_site_experience_contract.py
 
