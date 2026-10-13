@@ -180,22 +180,23 @@
         "live_drive_scan_coverage_gap": "ops/control/req07-drive-child-search-coverage-gap.v0.1.json",
         "hardened_collector": "scripts/collect_private_drive_resource_metadata.py",
         "private_receipt_to_review": "scripts/preview_resource_intake.py",
-        "regression": "scripts/test_resource_library.py"
+        "regression": "scripts/test_resource_library.py",
+        "scoped_direct_list_readback": "ops/control/req07-p004-scoped-folder-inventory-crosscheck.v0.1.json"
       },
       "remaining": [
-        "Direct authenticated Google Drive API full recursive inventory and readback remains unexecuted; connector folder listing demonstrably omits an existing known DWG.",
-        "Review project-root alternate paths and privately classify discovered files before possible catalog admission.",
-        "Future upload watcher / authenticated incremental Drive intake and human-approved catalog publication remains unimplemented.",
-        "All 46 published original pointers remain unchanged, with no certified drawing approvals."
+        "Complete authenticated direct Google Drive API recursive metadata crawl with page tokens and independent by-ID source reconciliation for all approved roots.",
+        "Store private inventory and receipt in authorized storage, then resolve alternative source parents, project FKs, privacy, version and approval review for each eligible candidate.",
+        "Deploy a registered authenticated incremental collection/admission workflow after review; raw connector queries cannot substitute for source completeness proof.",
+        "No changes to existing 46 public source pointers, engineering acceptance or Drive originals."
       ],
       "resume_execution_date_npt": "2026-10-13",
-      "resume_checkpoint_status": "VERIFIED_46_UNCHANGED__LIVE_FOLDER_LIST_INCONSISTENCY_FOUND__DIRECT_API_SCAN_REQUIRED",
+      "resume_checkpoint_status": "VERIFY46_UNCHANGED__P004_DIRECT_SCOPED_LIST_35__GLOBAL_AUTHORIZED_INVENTORY_OPEN",
       "resume_findings": [
-        "P004 registered original CAD/DWG by-ID metadata confirms its parent, but child-folder searches return no rows; enumerated child lists cannot prove full inventory.",
-        "P004 partial recursive folder traversal: 21 folder nodes queried, 11 file entries returned, no completeness certification.",
-        "P003 folder traversal partial; deeper branches and historical folders remain unexamined.",
-        "Direct authenticated Drive API collector now validates published known IDs against folder traversal and rejects missing known child entries.",
-        "Private JSONL inventory receipt can now feed a SHA-256-checked, nonpublishing review-candidate preview without manual conversion."
+        "All 9 registered roots for 8 indexed projects checked by direct folder list. Some returned 0 direct children; that is not proof of empty project originals.",
+        "P004 scoped tree: direct list_folder observed 35 file entries across 21 folder nodes; parent-filtered search had returned only 11 file entries over the same nodes, omitting a known indexed DWG and 24 other entries.",
+        "P003 nested folder traversal remains incomplete, as do P001/P002/P005/P006/P007/P020 complete source trees and any alternate authorized roots.",
+        "Private direct API collector now verifies by-ID file metadata/parent consistency and fails if indexed known children are omitted; automatically derives registered root IDs including P007 alternatives.",
+        "SHA-256 verified private inventory → review candidate intake implemented. No newly discovered resources published."
       ]
     },
     {
