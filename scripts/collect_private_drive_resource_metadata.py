@@ -146,24 +146,48 @@ def google_fetch_page():
 
 def main():
     ap=argparse.ArgumentParser()
-    ap.add_argument("--roots",type=Path,required=True,help="private JSON map of reviewed project_id to authorized Drive root id")
+    origin=ap.add_mutually_exclusive_group(required=True)
+    origin.add_argument("--roots",type=Path,help="private JSON map of project_id to authorized Drive root id(s)")
+    origin.add_argument("--registered-roots",action="store_true",
+                        help="read exact existing authorized project root IDs from GitHub's versioned source pointers")
+    ap.add_argument("--projects",help="optional comma-separated project IDs for --registered-roots; default all")
     ap.add_argument("--private-jsonl",type=Path,required=True)
     ap.add_argument("--receipt",type=Path,required=True)
     ap.add_argument("--max-rows",type=int,default=100000)
     a=ap.parse_args()
-    source=private_file(a.roots)
+    source=private_file(a.roots) if a.roots else None
     output=private_file(a.private_jsonl)
     receipt=private_file(a.receipt)
-    if output==receipt or output==source or receipt==source:raise ValueError("Input and output paths must differ")
+    if output==receipt or (source is not None and (output==source or receipt==source)):
+        raise ValueError("Input and output paths must differ")
     if output.exists() or receipt.exists():raise FileExistsError("No overwriting existing private inventories or receipts")
-    roots=json.loads(source.read_text(encoding="utf-8"))
-    if not isinstance(roots,dict) or not roots:raise ValueError("Private authorized root map required")
+    if source is not None:
+        if a.projects:raise ValueError("--projects applies only to --registered-roots")
+        roots=json.loads(source.read_text(encoding="utf-8"))
+    else:
+        registry=json.loads((ROOT/"ops/data/project-resources.json").read_text(encoding="utf-8"))
+        roots={}
+        selected=set(a.projects.split(",")) if a.projects else None
+        for project in registry["projects"]:
+            pid=project["project_id"]
+            if selected is not None and pid not in selected:continue
+            ids=[item["drive_file_id"] for item in project["resources"]
+                 if item["resource_type"]=="PROJECT_DRIVE_FOLDER"]
+            if not ids:raise ValueError("Project is missing an authoritative registered Drive root: "+pid)
+            roots[pid]=ids
+        if selected is not None and set(roots)!=selected:
+            raise ValueError("Unknown or unregistered project root in --projects filter")
     canon=json.loads((ROOT/"ops/data/project-identity-index.v0.1.json").read_text(encoding="utf-8"))
     known={r["legacy_project_code"] for r in canon["records"] if r["legacy_project_code"]}
     normalized_roots=normalize_roots(roots)
     if any(pid not in known for pid in normalized_roots):
         raise ValueError("Every root must have a verified project foreign key")
     fetch_page,fetch_meta=google_fetch_page()
+    for pid, ids in normalized_roots.items():
+        for root_id in ids:
+            m=fetch_meta(root_id)
+            if not m or m.get("trashed") or m.get("mimeType")!=FOLDER:
+                raise ValueError("Registered project Drive root metadata verification failed: "+pid)
     rows,visited=crawl(normalized_roots,fetch_page,max_rows=a.max_rows,return_visited=True)
     folders=len(visited)
     catalog=json.loads((ROOT/"ops/data/resource-catalog-normalized.v0.1.json").read_text(encoding="utf-8"))
@@ -174,7 +198,10 @@ def main():
         "status":"METADATA_COLLECTED_NOT_APPROVED_FOR_PUBLICATION__ALTERNATE_ROOTS_OPEN"
             if coverage["known_sources_outside_scanned_parents"] else
             "METADATA_COLLECTED_NOT_APPROVED_FOR_PUBLICATION",
-        "project_root_count":len(roots),"visited_folders":folders,
+        "project_root_count":sum(len(ids) for ids in normalized_roots.values()),
+        "indexed_project_count":len(normalized_roots),
+        "root_registry_source":"ops/data/project-resources.json" if a.registered_roots else "PRIVATE_EXTERNAL_REVIEWED_ROOT_MAP",
+        "visited_folders":folders,
         "files_and_folders":len(rows),"jsonl_sha256":hashlib.sha256(body).hexdigest(),
         "scope":"ONLY_REVIEWED_PROJECT_ROOTS",
         "duplicate_policy":"ONE_DRIVE_ID_ONE_PROJECT_OR_STOP",
