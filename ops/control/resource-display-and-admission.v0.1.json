@@ -1,0 +1,150 @@
+{
+  "schema_version": "0.1.0",
+  "control_id": "JP_AEC_RESOURCE_DIRECTORY_REQ07",
+  "status": "CURRENT_46_VERIFIED__COMPLETE_DRIVE_INVENTORY_OPEN",
+  "name_rule": "Display a human-readable discipline and file type before the original Drive title. Preserve exact original filename, Drive ID, original registry label, owning project FK and source link; never infer approved-for-construction status from FINAL/REVISED/ISSUED in a filename.",
+  "priority_bands": [
+    {
+      "id": "issued_reports",
+      "priority": 1,
+      "label": "📄 Drawing Sets & Technical Reports",
+      "format_scope": [
+        "PDF"
+      ],
+      "heading_px": 16,
+      "body_px": 13,
+      "examples": [
+        "Architecture drawing sets",
+        "Structure drawings",
+        "Soil reports",
+        "Building-system technical reports"
+      ],
+      "exclude": [
+        "Cost estimates",
+        "BOQ",
+        "Structural-detail calculations"
+      ]
+    },
+    {
+      "id": "source_models",
+      "priority": 2,
+      "label": "🧱 Editable Drawings & Models",
+      "format_scope": [
+        "DWG",
+        "DXF",
+        "IFC",
+        "SKP",
+        "RVT",
+        "E2K",
+        "EDB",
+        "S2K",
+        "SDB"
+      ],
+      "heading_px": 15,
+      "body_px": 12,
+      "examples": [
+        "Original CAD/DWG files",
+        "BIM/SketchUp/ETABS authoring models"
+      ]
+    },
+    {
+      "id": "calculations_and_support",
+      "priority": 3,
+      "label": "📊 Estimates, Calculations & Supporting Files",
+      "format_scope": [
+        "PDF",
+        "XLS",
+        "XLSX",
+        "ODS",
+        "CSV",
+        "DOCX"
+      ],
+      "heading_px": 15,
+      "body_px": 12,
+      "examples": [
+        "BOQ",
+        "Cost estimate PDF",
+        "Structural-detail calculation",
+        "Supporting spreadsheets"
+      ]
+    },
+    {
+      "id": "source_folders",
+      "priority": 4,
+      "label": "🗂️ Original Source Folders & Archives",
+      "format_scope": [
+        "FOLDER"
+      ],
+      "heading_px": 14,
+      "body_px": 11,
+      "examples": [
+        "Original source folders",
+        "Archive folder pointers"
+      ]
+    }
+  ],
+  "source_authority": {
+    "project_master": "projects.csv",
+    "original_resource_pointers": "ops/data/project-resources.json",
+    "metadata_provider": "GOOGLE_DRIVE_LIVE_AUTHENTICATED",
+    "readback_manifest": "ops/data/resource-drive-readback.v0.1.json",
+    "source_name_batches": "ops/data/resource-original-names/metadata-batch-01..04.v0.1.json",
+    "normalized_catalog": "ops/data/resource-catalog-normalized.v0.1.json",
+    "ui": "resources/index.html"
+  },
+  "future_admission": {
+    "private_preview_script": "scripts/preview_resource_intake.py",
+    "example": "python scripts/preview_resource_intake.py --input /private/provider-receipt.json --output /private/review-candidates-v1.json",
+    "source_export_structure": {
+      "source_export_receipt": "REQUIRED_PROVIDER_READBACK_REFERENCE",
+      "files": [
+        {
+          "drive_file_id": "SOURCE_DRIVE_FILE_ID",
+          "original_filename": "Exact Drive name",
+          "mime_type": "Provider-reported MIME",
+          "project_id": "Verified canonical alias",
+          "source_receipt_id": "SOURCE_READBACK_RECEIPT_ID",
+          "source_parent_verified": true
+        }
+      ]
+    },
+    "public_write_permission": "NONE_FROM_PREVIEW",
+    "approve_actions": [
+      "verify file identity and stable project foreign key",
+      "perform access classification and review sensitive document exclusions",
+      "verify source has not already been indexed",
+      "assign correct discipline and conservative normalized label",
+      "record authenticated source receipt, reviewer and readback hash",
+      "create reviewed source registry row and associated metadata batch before regenerating catalog",
+      "pass catalog/website CI and deployment"
+    ],
+    "quarantine_conditions": [
+      "potential personnel/land/legal/financial private files",
+      "unknown project or ambiguous folder ownership",
+      "duplicate Drive ID with conflicting metadata",
+      "unrecognized format",
+      "missing provider receipts or review"
+    ],
+    "no_auto_publish": true,
+    "no_modify_drive_originals": true
+  },
+  "snapshot": {
+    "verified_resource_count": 46,
+    "verified_project_count": 8,
+    "verified_exact_filename_count": 46,
+    "metadata_check_date_npt": "2026-10-13",
+    "known_additional_root_folders": true,
+    "recursive_inventory_complete": false
+  },
+  "limitations": [
+    "Current public catalog is an index of authorized pointers, not an exhaustive Drive inventory.",
+    "Drive permission inheritance and issue/revision approval must be checked in the owning provider.",
+    "New files are not automatically admitted by this public repo or by the private preview script.",
+    "Do not publish all files merely because a parent source folder is listed as a project source."
+  ],
+  "verification_tools": [
+    "scripts/validate_resource_library.py",
+    "scripts/test_resource_library.py",
+    "scripts/qa_field_ux_browser.py"
+  ]
+}
