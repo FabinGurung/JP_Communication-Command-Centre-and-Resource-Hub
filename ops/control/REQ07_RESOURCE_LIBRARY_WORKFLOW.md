@@ -80,6 +80,19 @@ python scripts/collect_private_drive_resource_metadata.py \
 
 Use \`--projects P004\` for an explicitly scoped validation, then expand to all registered project roots. This requires a separately authenticated Google Drive API environment with metadata-only permissions. Do not copy the private inventory into GitHub or declare Request 7 closed merely because a saved inventory file exists. The receipt remains flagged if an indexed source belongs to an unscanned/alternate parent.
 
+### Private inventory → review candidates (validated handoff)
+
+Once a properly authenticated direct-Drive metadata scan succeeds, convert its JSONL and matching SHA-256 receipt to a private candidate ledger:
+
+\`\`\`bash
+python scripts/preview_resource_intake.py \
+  --input /private/resource-inventory.jsonl \
+  --receipt /private/resource-inventory.receipt.json \
+  --output /private/resource-review-candidates.json
+\`\`\`
+
+The handoff checks the recorded SHA-256, entry count, source receipt and no-publication boundary. It does not treat folder placement as independently verified project ownership: newly discovered resources remain review-required or quarantined. This handoff is implemented and tested, but the **direct API collector has not been executed on all authorized Drive roots in this run**.
+
 **Outstanding before Request 07 can claim full inventory completion:** an authenticated, recursively paginated metadata-only inventory of all authorized project roots (including alternate originals), a private candidate review ledger with PK/FK/revision/privacy decisions, readback receipts, and a reviewed incremental publication process. Future Drive-event automation requires authenticated provider execution and explicit ownership of admission decisions.
 
 ## QA and trace
