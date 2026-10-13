@@ -1,0 +1,80 @@
+{
+  "event_id": "OPS-0074",
+  "date_npt": "2026-10-13",
+  "scope": "REQ07 RESUME — TRUSTWORTHY PRIVATE DRIVE INVENTORY, ORIGINAL RESOURCE NAME/FK COVERAGE",
+  "status": "P004_SCOPED_METADATA_SURVEYED__FULL_EIGHT_PROJECT_DIRECT_API_PRIVATE_INVENTORY_OPEN",
+  "source_commit": "f0ebd9fae52cae3d0be1d61d9a376e318e6544e6",
+  "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "changes": [
+    "Readback all nine registered project root IDs; full nested traversal of other project roots remains open.",
+    "Demonstrated parent-filter search omission: Yamuna registered CAD file found by metadata-by-ID despite zero results from child search.",
+    "Independent Drive list_folder showed 35 file entries over 21 P004 folders versus 11 reported by parent-filter query; no 100-entry response cap reached in scanned Yamuna folder scope.",
+    "New private direct API collector cross-checks every registered resource by file ID, exact original name, MIME and parent association; fails on absent registered child references.",
+    "Collector supports all project root IDs from canonical pointer source, multiple roots per project and repeated-page-token rejection.",
+    "Private scan receipt now SHA-256-verified before candidate preview; no claims of automatic review, privacy acceptance, construction approval or public publication.",
+    "Updated Request 7 roadmap with explicit coverage limits; preserved existing 46-resource catalog, Drive originals and read-only public UI."
+  ],
+  "source_readback": [
+    {
+      "path": "scripts/collect_private_drive_resource_metadata.py",
+      "blob_sha": "e052994b4e2c3c05ffebca00fefa86c52a31fec5"
+    },
+    {
+      "path": "scripts/preview_resource_intake.py",
+      "blob_sha": "08e7a777d7ac7dc0083d251111db24fef924fe20"
+    },
+    {
+      "path": "scripts/test_resource_library.py",
+      "blob_sha": "f530633c8952a7457a815822f2c051494f532dcd"
+    },
+    {
+      "path": "ops/control/req07-drive-child-search-coverage-gap.v0.1.json",
+      "blob_sha": "53500b15aa85fa955a2eb6fe1e2c45e8d1c57de3"
+    },
+    {
+      "path": "ops/control/req07-p004-scoped-folder-inventory-crosscheck.v0.1.json",
+      "blob_sha": "7e4647d59478214181e32f2b7eff4525927866fa"
+    },
+    {
+      "path": "ops/control/REQ07_RESOURCE_LIBRARY_WORKFLOW.md",
+      "blob_sha": "ce88986e755850e5b005182618af32a5657265c7"
+    },
+    {
+      "path": "ops/control/website-eight-request-roadmap.v0.1.json",
+      "blob_sha": "750894a1b6c40caf70be5568073e7b3b4007f145"
+    },
+    {
+      "path": "ops/data/resource-catalog-normalized.v0.1.json",
+      "blob_sha": "e8926bb1dc21b9887d1902d3e96746a3e0f68b28"
+    }
+  ],
+  "qa": {
+    "unit_and_production": {
+      "conclusion": "SUCCESS",
+      "run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38330796085"
+    },
+    "branch": {
+      "conclusion": "SUCCESS",
+      "run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38330796185"
+    },
+    "browser": {
+      "conclusion": "RUNNING_AT_AUDIT_TIME",
+      "run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38330796147"
+    },
+    "prechange_archive": "9f859afbd3025fab34024bade102323028a103f5",
+    "preview_prechange_archive": "c095f5296c81917d4f0ff03aa1096cf03819ff60"
+  },
+  "data_boundary": {
+    "files_existing_catalog": 46,
+    "files_newly_admitted": 0,
+    "private_originals_read_bytes": 0,
+    "Drive_files_moved_or_renamed": 0,
+    "unreviewed_private_filenames_exposed": 0
+  },
+  "remaining": [
+    "Run direct authenticated Drive API recursive scan with full pagination for authorized project roots and private receipt readback.",
+    "Review alternate source roots, new candidate privacy/PK-FK/revision and engineering approvals; quarantine mismatches.",
+    "Deploy approved incremental future-upload normalization/admission only after verifying provider receipts and preserving public boundary."
+  ],
+  "next": "REQ07_FULL_DIRECT_DRIVE_INVENTORY__NO_FALSE_COMPLETION"
+}
