@@ -1,0 +1,48 @@
+{
+  "schema_version": "0.1.0",
+  "checkpoint_id": "REQ07_LIVE_DRIVE_CHILD_LIST_COVERAGE_20261013",
+  "scope": "AUTHENTICATED_DRIVE_METADATA_ONLY__NO_PRIVATE_FILE_CONTENT",
+  "status": "CONNECTOR_FOLDER_LIST_INCOMPLETE__FULL_INVENTORY_CANNOT_BE_CERTIFIED",
+  "execution_date_npt": "2026-10-13",
+  "baseline_canonical_resource_count": 46,
+  "project_scans": [
+    {
+      "project_id": "P004",
+      "root_id": "1qM2koziyLpANUX2xcXr-D-RXYdbV5WWV",
+      "queried_folder_count": 21,
+      "returned_file_entry_count": 11,
+      "query_pages_reported_more": false,
+      "coverage_status": "SCOPE_VISITED__NOT_COMPLETE_INDEPENDENTLY"
+    },
+    {
+      "project_id": "P003",
+      "root_id": "1GW7s3Hr5hXU2aBdvcP73W44lzr_8jo43",
+      "coverage_status": "PARTIAL_FOLDER_METADATA_TRAVERSAL_ONLY__UNEXPLORED_NESTED_BRANCHES_EXIST"
+    }
+  ],
+  "observed_discrepancy": {
+    "resource_id": "RES-P004-ARCH-DWG-001",
+    "project_id": "P004",
+    "source_drive_file_id": "1pISZG16A_arsVr0_OoxU0_oftw8QmT9D",
+    "source_parent_folder_id": "1vv2dbl08HP31d2yMqNpQzQSATQ3mcmM2",
+    "individual_drive_file_metadata": "FOUND__EXACT_FILENAME_AND_MIME_MATCH__PARENT_MATCHES_LISTED_FOLDER",
+    "folder_children_filter": "NO_ROWS_RETURNED",
+    "repeat_folder_query_confirmation": "NO_ROWS_RETURNED",
+    "claim": "Connector folder-child query returned no entries despite independent by-ID metadata showing an indexed DWG assigned to that parent. No trustworthy whole-folder completeness assertion is possible from these result lists."
+  },
+  "remediation": {
+    "script": "scripts/collect_private_drive_resource_metadata.py",
+    "guard": "reconcile_indexed_sources rejects missing known resources whose independently fetched parent folders were visited",
+    "tests": "scripts/test_resource_library.py",
+    "private_execution_requirement": "Execute authenticated direct Drive API paginated recursive metadata reads with independent by-ID source reconciliation and reviewed project root/alternate root identities.",
+    "public_catalog_admission": "NONE_FROM_THIS_SCAN",
+    "private_metadata_export": "NOT_CREATED_OR_UPLOADED_IN_THIS_RUN",
+    "receipt_standard": "PRE/POST indexed FK, original name, MIME, parent IDs and private inventory hash/readback in authorized private Drive storage"
+  },
+  "protected_data": [
+    "Raw filenames of newly discovered unreviewed or potentially private files deliberately excluded from GitHub control record",
+    "No source files renamed/moved/read as bytes",
+    "No published resource pointers added or deleted"
+  ],
+  "next": "RUN_PRIVATE_AUTHORITATIVE_FULL_SCAN_THEN_REVIEW_CANDIDATES__DO_NOT_CLOSE_REQ07"
+}
