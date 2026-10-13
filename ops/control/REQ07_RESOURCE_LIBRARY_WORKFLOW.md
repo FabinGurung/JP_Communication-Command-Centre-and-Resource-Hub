@@ -93,6 +93,16 @@ python scripts/preview_resource_intake.py \
 
 The handoff checks the recorded SHA-256, entry count, source receipt and no-publication boundary. It does not treat folder placement as independently verified project ownership: newly discovered resources remain review-required or quarantined. This handoff is implemented and tested, but the **direct API collector has not been executed on all authorized Drive roots in this run**.
 
+### Second continuation: registered-root traversal — 2026-10-13
+
+All nine currently registered project root folders were traversed through the authenticated Drive connector using direct folder listing. **215 folder nodes and 1,309 file entries were returned across eight project aliases.** Results are folder-list observations, **not a durable private, unique-ID inventory** and not a source approval. The safe aggregate checkpoint is \`ops/control/req07-registered-roots-metadata-traversal-20261013.v0.1.json\`.
+
+Three folders that initially returned exactly 100 items were queried again with \`top_k=1000\`, returning **111, 101 and 178 items**. This removed the known 100-result cutoff within those three listings but does not substitute for Google Drive API page-token verification.
+
+**Independent project-root debt:** six existing, published resources under P001 and P002 are accessible by individual ID, yet their metadata ancestry did not reach the currently registered project root within seven levels. A root returning zero direct children does not mean an entire project's source archive is empty. Keep those six pointers unchanged until original owner and alternate-root provenance are resolved.
+
+**Publication boundary:** none of the newly encountered file IDs/names are added to the public GitHub Pages site. No original bytes were downloaded, moved or renamed. Direct Google Drive API recursion with exact project-root authority, independent by-ID parent reconciliation, a private deduplicated JSONL and SHA-256 readback is still the next execution gate; owner/privacy/approval reviews remain independent.
+
 **Outstanding before Request 07 can claim full inventory completion:** an authenticated, recursively paginated metadata-only inventory of all authorized project roots (including alternate originals), a private candidate review ledger with PK/FK/revision/privacy decisions, readback receipts, and a reviewed incremental publication process. Future Drive-event automation requires authenticated provider execution and explicit ownership of admission decisions.
 
 ## QA and trace
