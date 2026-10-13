@@ -20,6 +20,11 @@ developer=subprocess.run([sys.executable,str(ROOT/"scripts/validate_developer_wo
 require(developer.returncode==0,
         "software-only Developer Workspace contract failed: "+developer.stdout+" "+developer.stderr)
 
+resource_qa=subprocess.run([sys.executable,str(ROOT/"scripts/validate_resource_library.py")],
+                           cwd=ROOT,capture_output=True,text=True)
+require(resource_qa.returncode==0,
+        "resource directory hierarchy/original filenames/Drive receipts failed: "+resource_qa.stdout+" "+resource_qa.stderr)
+
 current=load("ops/data/current-works.json")
 site_ids={s["project_id"] for s in current["projects"]}
 raw=load("ops/data/project-resources.json")
