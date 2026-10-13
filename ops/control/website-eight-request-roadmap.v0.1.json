@@ -3,7 +3,7 @@
   "roadmap_id": "JP_AEC_ORIGINAL_REQUESTS_SEQUENTIAL_20261012",
   "date_npt": "2026-10-12",
   "policy": "ONE_USER_EXPERIENCE_REQUEST_AT_A_TIME__PRE_ARCHIVE__VALIDATE__POST_READBACK",
-  "status": "REQ01_THROUGH_REQ05_IMPLEMENTED_VERIFIED__REQ06_NEXT__REQ08_ORIGINAL_TEXT_EMPTY",
+  "status": "REQ01_THROUGH_REQ06_IMPLEMENTED_VERIFIED__REQ07_NEXT__REQ08_ORIGINAL_TEXT_EMPTY",
   "source": "User's original dated 2026-10-12 request, seven substantive numbered items and empty item 8; item 8 is a provisional site-wide QA/release closeout, not fabricated user content.",
   "completion_order": [
     {
@@ -125,7 +125,7 @@
     {
       "id": 6,
       "title": "Separate provider evidence extraction, project progress and resource/checklist lanes",
-      "status": "STORAGE_TREE_PREPARED__AUTOMATION_PENDING",
+      "status": "IMPLEMENTED_VERIFIED",
       "scope": "Drive holds source Discord/Slack evidence; verified normalized material remains privately staged until approved projection. The three public site lanes must not cross-write.",
       "contract": "ops/control/communication-extract-staging.v0.1.json",
       "acceptance": [
@@ -134,6 +134,26 @@
         "quarantine unmapped/failed media",
         "only approved source-linked public-safe summaries",
         "no cross-write CI violations"
+      ],
+      "completion_date_npt": "2026-10-13",
+      "implementation": "Provider originals remain in authorized private Google Drive; ten staging folders verified. GitHub now rejects mixed source data lanes, freezes the existing 37-row public Progress Report legacy seed, and rejects all newly published observations lacking explicit review/provenance/PK-FK metadata. Existing private append-only evidence schema, receipts, quarantine and attachment fidelity rules remain separately owned.",
+      "verification": {
+        "source_release_commit": "09b64b234f3202d6276406fcd2ba011d484ce58c",
+        "production": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38325066726",
+        "source_contract": "ops/control/REQ06_PROVIDER_TO_WEBSITE_ISOLATION.md",
+        "staging_readback": "ops/control/req06-drive-folder-readback.v0.1.json",
+        "publication_manifest": "ops/control/progress-publication-gate.v0.1.json",
+        "lane_test": "scripts/test_publication_lanes.py",
+        "lane_validator": "scripts/validate_publication_lanes.py",
+        "pre_change_archive": "336d1cac65df31f08a9f244c741cd77920cef40e",
+        "pre_close_archive": "a86a442a54569ccd243fe9d613c48bfca70cb178"
+      },
+      "limitations": [
+        "New raw Discord/Slack extraction was not run or certified in this phase.",
+        "Pointer/project-association/quarantine staging folders were observed empty; no new public progress rows were admitted.",
+        "The prior 269 attachment mismatches were not freshly resolved or reaudited.",
+        "Human source-review assertions and private provider permissions cannot be independently authenticated by public GitHub Actions.",
+        "Future accepted evidence requires independent authorized private staging and human review, not automatic website publication."
       ]
     },
     {
@@ -169,5 +189,5 @@
     "rollback": "COMMIT_WITH_EXACT_PRE_SOURCE_BLOBS",
     "no_discord_slack_collector_changes_during_theme_work": true
   },
-  "next_phase": "REQ06_PROVIDER_EXTRACTION_ISOLATION_AND_APPROVED_PUBLIC_PROJECTION"
+  "next_phase": "REQ07_PRIORITY_RESOURCE_LIBRARY_NORMALIZATION_AND_TEMPLATE"
 }

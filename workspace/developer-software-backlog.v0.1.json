@@ -53,13 +53,13 @@
       "software_task_id": "JP-AEC-REQ-06",
       "title": "Separate provider evidence extraction, project progress and resource/checklist lanes",
       "purpose": "Drive holds source Discord/Slack evidence; verified normalized material remains privately staged until approved projection. The three public site lanes must not cross-write.",
-      "status": "STORAGE_TREE_PREPARED__AUTOMATION_PENDING",
+      "status": "IMPLEMENTED_VERIFIED",
       "category": "SOURCE_PIPELINE_SOFTWARE",
       "source_ref": {
         "path": "ops/control/website-eight-request-roadmap.v0.1.json",
         "record_id": 6
       },
-      "source_status": "STORAGE_TREE_PREPARED__AUTOMATION_PENDING",
+      "source_status": "IMPLEMENTED_VERIFIED",
       "source_href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/control/website-eight-request-roadmap.v0.1.json"
     },
     {
