@@ -10,6 +10,7 @@ import sys
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 import validate_resource_library as validator
 import preview_resource_intake as intake
+import collect_private_drive_resource_metadata as collector
 
 class ResourcesTests(unittest.TestCase):
     def test_existing_metadata_and_tiers(self):
@@ -60,6 +61,37 @@ class ResourcesTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"conflicting duplicate"):
             intake.review_candidates(rows+[dict(rows[0],original_filename="different.pdf")],{},{"P007"})
         self.assertEqual(out,intake.review_candidates(rows,{},{"P007"}))
+    def test_recursive_private_drive_inventory_and_pagination(self):
+        calls=[]
+        def fetch(parent,token):
+            calls.append((parent,token))
+            if parent=="root-a" and token is None:
+                return ([{"id":"f01","name":"building.pdf","mimeType":"application/pdf",
+                          "parents":["root-a"]},
+                         {"id":"dir1","name":"01_SOURCE","mimeType":collector.FOLDER,
+                          "parents":["root-a"]}],"next")
+            if parent=="root-a" and token=="next":
+                return ([{"id":"f02","name":"estimated cost.pdf","mimeType":"application/pdf",
+                          "parents":["root-a"]}],None)
+            if parent=="dir1":
+                return ([{"id":"f03","name":"Private_data.pdf","mimeType":"application/pdf",
+                          "parents":["dir1"]}],None)
+            raise AssertionError("Unexpected pagination")
+        rows,visited=collector.crawl({"P007":"root-a"},fetch)
+        self.assertEqual(len(rows),4)
+        self.assertEqual(visited,2)
+        self.assertEqual(len(calls),3)
+        self.assertTrue(all(r["admission_status"]=="PRIVATE_METADATA_ONLY_REVIEW_REQUIRED" for r in rows))
+        self.assertEqual(collector.crawl({"P007":"root-a"},fetch)[0],rows)
+        with self.assertRaisesRegex(ValueError,"Max records"):
+            collector.crawl({"P007":"root-a"},fetch,max_rows=2)
+        def shared(parent,token):
+            if parent in {"root-a","root-b"}:
+                return ([{"id":"same","name":"same.pdf","mimeType":"application/pdf"}],None)
+            return ([],None)
+        with self.assertRaisesRegex(ValueError,"Cross-project"):
+            collector.crawl({"P001":"root-a","P002":"root-b"},shared)
+
     def test_no_candidate_writes_inside_public_repo(self):
         with self.assertRaisesRegex(ValueError,"public repository"):
             intake.private_path(intake.ROOT/"ops/data/danger.json")
