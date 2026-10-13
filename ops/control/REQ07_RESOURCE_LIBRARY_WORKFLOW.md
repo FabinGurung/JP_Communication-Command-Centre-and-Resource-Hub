@@ -48,6 +48,19 @@ It is deterministic for the same source rows: it deduplicates unchanged provider
 
 Before adding a new public record: verify the owning project and authorized Drive parent, source ID, name, MIME and receipt; classify privacy/revision/engineering approval; resolve duplicate Drive IDs; append the verified source registry and metadata record in the proper owning lane; rebuild the normalized catalog idempotently; run CI; archive/read back the change. Missing receipts or uncertain project association mean **no admission**.
 
+## Authenticated recursive inventory runner — prepared, not executed
+
+An independent metadata-only Drive collector is now available in \`scripts/collect_private_drive_resource_metadata.py\`. In a Google-authorized environment with \`google-auth\` and \`google-api-python-client\`, create a **private** JSON mapping like \`{"P001":"<verified-folder-id>","P007":"<verified-folder-id>"}\` for the roots actually authorized for collection, and run:
+
+\`\`\`bash
+python scripts/collect_private_drive_resource_metadata.py \
+  --roots /private/reviewed-project-roots.json \
+  --private-jsonl /private/source-inventory-20261013.jsonl \
+  --receipt /private/source-inventory-20261013.receipt.json
+\`\`\`
+
+The collector paginates through child folders without downloading bytes; refuses cross-project ID collisions, duplicate output paths and public-repo outputs; writes readback-verified SHA-256 and coverage totals. It never publishes new catalog items. It **has not been executed against the complete Drive tree as part of this checkpoint**, and therefore cannot establish whole-Drive completeness yet.
+
 ## 2026-10-13 inventory boundary
 
 Drive root and selected original-source-folder metadata were browsed for the eight indexed projects. Several contain additional nested archives, engineering sources and restricted legal/personal material not represented in the existing index. Direct-child searches and source-folder spot checks are **not a complete authorized recursive inventory**. Some returned zero items and that is not proof of folder completeness. Unexpected project-association records were not published. No sensitive original document names/IDs were copied into the public catalog.
