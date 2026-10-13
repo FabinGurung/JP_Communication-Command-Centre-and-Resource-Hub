@@ -65,6 +65,21 @@ The collector paginates through child folders without downloading bytes; refuses
 
 Drive root and selected original-source-folder metadata were browsed for the eight indexed projects. Several contain additional nested archives, engineering sources and restricted legal/personal material not represented in the existing index. Direct-child searches and source-folder spot checks are **not a complete authorized recursive inventory**. Some returned zero items and that is not proof of folder completeness. Unexpected project-association records were not published. No sensitive original document names/IDs were copied into the public catalog.
 
+### Resumed live Drive finding — 2026-10-13
+
+The connector-backed folder enumeration cannot currently be accepted as an exhaustive inventory: the approved indexed drawing \`RES-P004-ARCH-DWG-001\` was found by metadata ID, with its verified parent in Yamuna's original CAD folder, but repeated folder-child searches reported **zero**. A 21-folder / 11-file Yamuna query pass is therefore recorded as **coverage-limited**, not complete. Hari's branch traversal is also incomplete. The mismatch is registered in \`ops/control/req07-drive-child-search-coverage-gap.v0.1.json\` without exposing names of newly encountered private records.
+
+The authenticated collector now independently looks up each previously published source ID and its parent, compares original name/MIME, and **fails** if a source whose parent was visited is omitted by folder enumeration. It supports multiple registered roots per project, and root IDs can be derived directly from the governed resource registry without manually re-entering them:
+
+\`\`\`bash
+python scripts/collect_private_drive_resource_metadata.py \
+  --registered-roots \
+  --private-jsonl /private/resource-inventory.jsonl \
+  --receipt /private/resource-inventory.receipt.json
+\`\`\`
+
+Use \`--projects P004\` for an explicitly scoped validation, then expand to all registered project roots. This requires a separately authenticated Google Drive API environment with metadata-only permissions. Do not copy the private inventory into GitHub or declare Request 7 closed merely because a saved inventory file exists. The receipt remains flagged if an indexed source belongs to an unscanned/alternate parent.
+
 **Outstanding before Request 07 can claim full inventory completion:** an authenticated, recursively paginated metadata-only inventory of all authorized project roots (including alternate originals), a private candidate review ledger with PK/FK/revision/privacy decisions, readback receipts, and a reviewed incremental publication process. Future Drive-event automation requires authenticated provider execution and explicit ownership of admission decisions.
 
 ## QA and trace
