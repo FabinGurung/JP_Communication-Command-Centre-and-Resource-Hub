@@ -76,24 +76,60 @@ def review_candidates(rows,existing,known_projects):
         })
     return sorted(out,key=lambda r:(r["project_id"],r["drive_file_id"]))
 
+def read_private_metadata_export(source,receipt=None):
+    """Adapt the private recursive inventory into review candidates with SHA readback.
+
+    A receipt is required for JSONL output from collect_private_drive_resource_metadata.
+    Source parent verification remains FALSE for candidates until separately reviewed.
+    """
+    source=private_path(source)
+    if receipt is None:
+        result=json.loads(source.read_text(encoding="utf-8"))
+        require(isinstance(result,dict) and isinstance(result.get("files"),list),
+                "JSON metadata input must contain files[]")
+        return result
+    receipt=private_path(receipt)
+    require(receipt!=source,"receipt must be separate from the inventory")
+    record=json.loads(receipt.read_text(encoding="utf-8"))
+    raw=source.read_bytes()
+    require(record.get("type")=="PRIVATE_DRIVE_RECURSIVE_METADATA_INVENTORY",
+            "wrong private provider inventory receipt")
+    require(hashlib.sha256(raw).hexdigest()==record.get("jsonl_sha256"),
+            "PRIVATE_PROVIDER_READBACK_SHA256_MISMATCH")
+    rows=[json.loads(line) for line in raw.splitlines() if line.strip()]
+    require(len(rows)==record.get("files_and_folders"),
+            "private inventory row count does not match signed receipt")
+    require(record.get("public_admissions")==0 and record.get("byte_downloads")==0,
+            "input scan was incorrectly declared to have published or downloaded bytes")
+    receipt_id=record["jsonl_sha256"]
+    for row in rows:
+        row["source_receipt_id"]=receipt_id
+        # Parent in list is not independent parent/owner identity verification;
+        # Drive child listings may be incomplete (REQ07 documented failure).
+        row["source_parent_verified"]=False
+    return {"source_export_receipt":receipt_id,
+            "coverage_warning":record.get("status"),
+            "files":rows}
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--input",type=Path,required=True,help="authenticated Drive metadata JSON export kept outside public repository")
+    ap.add_argument("--receipt",type=Path,help="private SHA-256 JSON receipt for --input JSONL from recursive Drive scan")
     ap.add_argument("--output",type=Path,required=True,help="private review candidate JSON (must be outside public repository)")
     a=ap.parse_args()
     source=private_path(a.input)
     target=private_path(a.output)
-    require(source!=target,"output cannot overwrite input")
+    require(source!=target and (not a.receipt or target!=private_path(a.receipt)),
+            "output cannot overwrite provider scan or receipt")
     require(not target.exists(),"refusing to overwrite existing reviewed candidate batch")
-    payload=json.loads(source.read_text(encoding="utf-8"))
-    require(isinstance(payload,dict) and isinstance(payload.get("files"),list),
-            "input must contain files[] metadata export")
+    payload=read_private_metadata_export(source,a.receipt)
     catalog=json.loads(PUBLIC_CATALOG.read_text(encoding="utf-8"))
     existing={f["source_drive_file_id"]:f for s in catalog["sites"] for f in s["files"]}
     known={s["project_id"] for s in catalog["sites"]}
     candidates=review_candidates(payload["files"],existing,known)
     result={"schema_version":"0.1.0","type":"PRIVATE_METADATA_ADMISSION_PREVIEW",
             "source_export_receipt":payload.get("source_export_receipt"),
+            "coverage_warning":payload.get("coverage_warning"),
             "automatic_publication":False,"rows":candidates}
     target.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
     target.write_text(json.dumps(result,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
