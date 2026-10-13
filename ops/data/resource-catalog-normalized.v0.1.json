@@ -4,13 +4,13 @@
   "generated_from": "ops/data/project-resources.json",
   "drive_source_metadata_batches": "ops/data/resource-original-names/metadata-batch-01..04.v0.1.json",
   "truth_boundary": "NO_RENAME_OR_MOVE_SOURCE_ORIGINALS",
-  "name_rule": "normalized_name is human readable; original_drive_filename is separately preserved and verified from Drive metadata; do not lose resource_id or drive_file_id",
+  "name_rule": "Stable category + discipline + native format + conservative version wording. Never infer APPROVED/ISSUED from filenames (including FINAL). Always retain Drive original name, immutable source Drive ID and original registry caption.",
   "priority_bands": [
     {
       "rank": 1,
       "id": "issued_reports",
-      "label": "📄 Drawings & Reports",
-      "description": "Architectural/structural/analysis/geotechnical PDFs, reports and review copies. Presence is not approval.",
+      "label": "📄 Drawing Sets & Technical Reports",
+      "description": "Architecture, structure, geotechnical, MEP and analysis report/drawing PDFs; 'received' does not mean approved.",
       "font": "16px heading, 13px body"
     },
     {
@@ -23,8 +23,8 @@
     {
       "rank": 3,
       "id": "calculations_and_support",
-      "label": "📊 Estimates & Supporting Files",
-      "description": "Excel, calculations and other supporting files.",
+      "label": "📊 Estimates, Calculations & Supporting Files",
+      "description": "BOQ and cost-estimate spreadsheets/PDFs, structural detailing calculations and supporting documents. Not independently approved.",
       "font": "15px heading, 12px body"
     },
     {
@@ -420,31 +420,6 @@
           }
         },
         {
-          "resource_id": "RES-P005-COST-ESTIMATE-001",
-          "project_id": "P005",
-          "sort_priority": 1,
-          "category": "issued_reports",
-          "normalized_name": "📄 Cost estimate · PDF",
-          "discipline": "Cost estimate",
-          "format": "PDF",
-          "emoji": "📄",
-          "source_registry_label": "Cost Estimate — Dipti Giri — as received",
-          "original_drive_filename": "30_Sabitri_Giri__Cost_Estimate__Dipti_Giri__AS_RECEIVED.pdf",
-          "original_filename_verified": true,
-          "source_drive_file_id": "1N61cyx09L6RCAi1O2ZQLX5FPcf9tD7WW",
-          "source_drive_url": "https://drive.google.com/file/d/1N61cyx09L6RCAi1O2ZQLX5FPcf9tD7WW/view?usp=drivesdk",
-          "mime_type": "application/pdf",
-          "source_type": "COST_ESTIMATE_PDF",
-          "approval_status": "UNVERIFIED_AS_CURRENT_ISSUE",
-          "revision_note": "Issue/revision not independently certified",
-          "access_mode": "DRIVE_PERMISSION_GATED",
-          "provenance": {
-            "metadata_source": "LIVE_DRIVE_METADATA",
-            "record_id": "RES-P005-COST-ESTIMATE-001",
-            "original_registry_file": "ops/data/project-resources.json"
-          }
-        },
-        {
           "resource_id": "RES-P005-STRUCT-PDF-001",
           "project_id": "P005",
           "sort_priority": 1,
@@ -541,6 +516,31 @@
           "provenance": {
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P005-STRUCT-DWG-001",
+            "original_registry_file": "ops/data/project-resources.json"
+          }
+        },
+        {
+          "resource_id": "RES-P005-COST-ESTIMATE-001",
+          "project_id": "P005",
+          "sort_priority": 3,
+          "category": "calculations_and_support",
+          "normalized_name": "📊 Cost estimate · PDF · issue unverified",
+          "discipline": "Cost Estimate",
+          "format": "PDF",
+          "emoji": "📊",
+          "source_registry_label": "Cost Estimate — Dipti Giri — as received",
+          "original_drive_filename": "30_Sabitri_Giri__Cost_Estimate__Dipti_Giri__AS_RECEIVED.pdf",
+          "original_filename_verified": true,
+          "source_drive_file_id": "1N61cyx09L6RCAi1O2ZQLX5FPcf9tD7WW",
+          "source_drive_url": "https://drive.google.com/file/d/1N61cyx09L6RCAi1O2ZQLX5FPcf9tD7WW/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "source_type": "COST_ESTIMATE_PDF",
+          "approval_status": "UNVERIFIED_AS_CURRENT_ISSUE",
+          "revision_note": "Issue/revision not independently certified",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "provenance": {
+            "metadata_source": "LIVE_DRIVE_METADATA",
+            "record_id": "RES-P005-COST-ESTIMATE-001",
             "original_registry_file": "ops/data/project-resources.json"
           }
         },
@@ -884,7 +884,7 @@
           }
         },
         {
-          "resource_id": "RES-P007-20261009-SOURCES",
+          "resource_id": "RES-P007-20261009-ARCH-HISTORY",
           "project_id": "P007",
           "sort_priority": 4,
           "category": "source_folders",
@@ -892,19 +892,44 @@
           "discipline": "Source file folder",
           "format": "FOLDER",
           "emoji": "🗂️",
-          "source_registry_label": "Architecture, structure and other source originals",
-          "original_drive_filename": "01_SOURCE_ORIGINALS",
+          "source_registry_label": "Historical architecture DWG intake — review before construction",
+          "original_drive_filename": "99_RECEIVED_ARCHITECTURE_UNVERIFIED",
           "original_filename_verified": true,
-          "source_drive_file_id": "1WqL7n93Zc_UnsMPNaO9yCMetrreFXC1A",
-          "source_drive_url": "https://drive.google.com/drive/folders/1WqL7n93Zc_UnsMPNaO9yCMetrreFXC1A",
+          "source_drive_file_id": "1zEyFLMljsEyOpl3bIM_LgyGUI9plPBva",
+          "source_drive_url": "https://drive.google.com/drive/folders/1zEyFLMljsEyOpl3bIM_LgyGUI9plPBva",
           "mime_type": "application/vnd.google-apps.folder",
-          "source_type": "SOURCE_ORIGINALS_FOLDER",
+          "source_type": "HISTORICAL_SOURCE_FOLDER",
           "approval_status": "UNVERIFIED_AS_CURRENT_ISSUE",
           "revision_note": "Issue/revision not independently certified",
           "access_mode": "DRIVE_PERMISSION_GATED",
           "provenance": {
             "metadata_source": "LIVE_DRIVE_METADATA",
-            "record_id": "RES-P007-20261009-SOURCES",
+            "record_id": "RES-P007-20261009-ARCH-HISTORY",
+            "original_registry_file": "ops/data/project-resources.json"
+          }
+        },
+        {
+          "resource_id": "RES-P007-20261009-CANON-ROOT",
+          "project_id": "P007",
+          "sort_priority": 4,
+          "category": "source_folders",
+          "normalized_name": "🗂️ Source file folder",
+          "discipline": "Source file folder",
+          "format": "FOLDER",
+          "emoji": "🗂️",
+          "source_registry_label": "Canonical Narayani project folder (governed)",
+          "original_drive_filename": "Narayani_Parajuli_Residence",
+          "original_filename_verified": true,
+          "source_drive_file_id": "1mosr2gahKr4j7xj6BmrIjz4vdCxBYetF",
+          "source_drive_url": "https://drive.google.com/drive/folders/1mosr2gahKr4j7xj6BmrIjz4vdCxBYetF",
+          "mime_type": "application/vnd.google-apps.folder",
+          "source_type": "PROJECT_DRIVE_FOLDER",
+          "approval_status": "UNVERIFIED_AS_CURRENT_ISSUE",
+          "revision_note": "Issue/revision not independently certified",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "provenance": {
+            "metadata_source": "LIVE_DRIVE_METADATA",
+            "record_id": "RES-P007-20261009-CANON-ROOT",
             "original_registry_file": "ops/data/project-resources.json"
           }
         },
@@ -934,7 +959,7 @@
           }
         },
         {
-          "resource_id": "RES-P007-20261009-ARCH-HISTORY",
+          "resource_id": "RES-P007-20261009-SOURCES",
           "project_id": "P007",
           "sort_priority": 4,
           "category": "source_folders",
@@ -942,19 +967,19 @@
           "discipline": "Source file folder",
           "format": "FOLDER",
           "emoji": "🗂️",
-          "source_registry_label": "Historical architecture DWG intake — review before construction",
-          "original_drive_filename": "99_RECEIVED_ARCHITECTURE_UNVERIFIED",
+          "source_registry_label": "Architecture, structure and other source originals",
+          "original_drive_filename": "01_SOURCE_ORIGINALS",
           "original_filename_verified": true,
-          "source_drive_file_id": "1zEyFLMljsEyOpl3bIM_LgyGUI9plPBva",
-          "source_drive_url": "https://drive.google.com/drive/folders/1zEyFLMljsEyOpl3bIM_LgyGUI9plPBva",
+          "source_drive_file_id": "1WqL7n93Zc_UnsMPNaO9yCMetrreFXC1A",
+          "source_drive_url": "https://drive.google.com/drive/folders/1WqL7n93Zc_UnsMPNaO9yCMetrreFXC1A",
           "mime_type": "application/vnd.google-apps.folder",
-          "source_type": "HISTORICAL_SOURCE_FOLDER",
+          "source_type": "SOURCE_ORIGINALS_FOLDER",
           "approval_status": "UNVERIFIED_AS_CURRENT_ISSUE",
           "revision_note": "Issue/revision not independently certified",
           "access_mode": "DRIVE_PERMISSION_GATED",
           "provenance": {
             "metadata_source": "LIVE_DRIVE_METADATA",
-            "record_id": "RES-P007-20261009-ARCH-HISTORY",
+            "record_id": "RES-P007-20261009-SOURCES",
             "original_registry_file": "ops/data/project-resources.json"
           }
         },
@@ -980,31 +1005,6 @@
           "provenance": {
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-STRUCT-HISTORY",
-            "original_registry_file": "ops/data/project-resources.json"
-          }
-        },
-        {
-          "resource_id": "RES-P007-20261009-CANON-ROOT",
-          "project_id": "P007",
-          "sort_priority": 4,
-          "category": "source_folders",
-          "normalized_name": "🗂️ Source file folder",
-          "discipline": "Source file folder",
-          "format": "FOLDER",
-          "emoji": "🗂️",
-          "source_registry_label": "Canonical Narayani project folder (governed)",
-          "original_drive_filename": "Narayani_Parajuli_Residence",
-          "original_filename_verified": true,
-          "source_drive_file_id": "1mosr2gahKr4j7xj6BmrIjz4vdCxBYetF",
-          "source_drive_url": "https://drive.google.com/drive/folders/1mosr2gahKr4j7xj6BmrIjz4vdCxBYetF",
-          "mime_type": "application/vnd.google-apps.folder",
-          "source_type": "PROJECT_DRIVE_FOLDER",
-          "approval_status": "UNVERIFIED_AS_CURRENT_ISSUE",
-          "revision_note": "Issue/revision not independently certified",
-          "access_mode": "DRIVE_PERMISSION_GATED",
-          "provenance": {
-            "metadata_source": "LIVE_DRIVE_METADATA",
-            "record_id": "RES-P007-20261009-CANON-ROOT",
             "original_registry_file": "ops/data/project-resources.json"
           }
         },
@@ -1116,31 +1116,6 @@
           }
         },
         {
-          "resource_id": "RES-P020-STRUCT-DETAIL-001",
-          "project_id": "P020",
-          "sort_priority": 1,
-          "category": "issued_reports",
-          "normalized_name": "📄 Structure · PDF",
-          "discipline": "Structure",
-          "format": "PDF",
-          "emoji": "📄",
-          "source_registry_label": "Combined Footing Rebar Curtailment Detail",
-          "original_drive_filename": "STRUCTURAL_DETAIL_CALC__COMBINED_FOOTING_REBAR_CURTAILMENT__AS_RECEIVED.pdf",
-          "original_filename_verified": true,
-          "source_drive_file_id": "1vn3mnfmbHdfvjidUGwBgZGfJaADZpX-6",
-          "source_drive_url": "https://drive.google.com/file/d/1vn3mnfmbHdfvjidUGwBgZGfJaADZpX-6/view?usp=drivesdk",
-          "mime_type": "application/pdf",
-          "source_type": "STRUCTURAL_DETAIL_PDF",
-          "approval_status": "UNVERIFIED_AS_CURRENT_ISSUE",
-          "revision_note": "Issue/revision not independently certified",
-          "access_mode": "DRIVE_PERMISSION_GATED",
-          "provenance": {
-            "metadata_source": "LIVE_DRIVE_METADATA",
-            "record_id": "RES-P020-STRUCT-DETAIL-001",
-            "original_registry_file": "ops/data/project-resources.json"
-          }
-        },
-        {
           "resource_id": "RES-P020-STRUCT-PDF-001",
           "project_id": "P020",
           "sort_priority": 1,
@@ -1212,6 +1187,31 @@
           "provenance": {
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P020-ETABS-EDB-001",
+            "original_registry_file": "ops/data/project-resources.json"
+          }
+        },
+        {
+          "resource_id": "RES-P020-STRUCT-DETAIL-001",
+          "project_id": "P020",
+          "sort_priority": 3,
+          "category": "calculations_and_support",
+          "normalized_name": "📊 Structural detail calculation · PDF · issue unverified",
+          "discipline": "Structural Calculation",
+          "format": "PDF",
+          "emoji": "📊",
+          "source_registry_label": "Combined Footing Rebar Curtailment Detail",
+          "original_drive_filename": "STRUCTURAL_DETAIL_CALC__COMBINED_FOOTING_REBAR_CURTAILMENT__AS_RECEIVED.pdf",
+          "original_filename_verified": true,
+          "source_drive_file_id": "1vn3mnfmbHdfvjidUGwBgZGfJaADZpX-6",
+          "source_drive_url": "https://drive.google.com/file/d/1vn3mnfmbHdfvjidUGwBgZGfJaADZpX-6/view?usp=drivesdk",
+          "mime_type": "application/pdf",
+          "source_type": "STRUCTURAL_DETAIL_PDF",
+          "approval_status": "UNVERIFIED_AS_CURRENT_ISSUE",
+          "revision_note": "Issue/revision not independently certified",
+          "access_mode": "DRIVE_PERMISSION_GATED",
+          "provenance": {
+            "metadata_source": "LIVE_DRIVE_METADATA",
+            "record_id": "RES-P020-STRUCT-DETAIL-001",
             "original_registry_file": "ops/data/project-resources.json"
           }
         },
