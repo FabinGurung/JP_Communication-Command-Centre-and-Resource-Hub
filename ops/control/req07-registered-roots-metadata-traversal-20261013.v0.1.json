@@ -1,0 +1,127 @@
+{
+  "schema_version": "0.1.0",
+  "id": "REQ07_EIGHT_PROJECT_DRIVE_METADATA_SURVEY_20261013",
+  "checkpoint_date_npt": "2026-10-13",
+  "mode": "AUTHENTICATED_CONNECTOR_METADATA_ONLY_READ_ONLY",
+  "status": "REGISTERED_ROOT_TREES_TRAVERSED__INDEPENDENT_PAGINATED_API_AND_ALT_SOURCE_PARENT_AUDIT_OPEN",
+  "baseline_public_catalog": {
+    "source": "ops/data/resource-catalog-normalized.v0.1.json",
+    "indexed_resource_count": 46,
+    "project_count": 8,
+    "source_names_mime_ids_previously_verified": 46,
+    "new_public_resources_added": 0
+  },
+  "method": {
+    "initial": "Google Drive direct folder listing (top_k=100) for every registered root and nested folder; no source bytes fetched",
+    "cap_resolution": "Re-query three 100-return folders using top_k=1000. Results: 111, 101, and 178 entries respectively. None reached the 1000-entry request size.",
+    "limits": [
+      "Per-folder connector list results are not an independently signed/paginated Drive API crawl",
+      "Individual metadata-by-ID resolves six P001/P002 published references outside their registered root within the first seven ancestor levels",
+      "Folder count/file entries are observations, not deduplicated approved resources",
+      "Additional/alternate originals and inherited permissions still require authenticated independent review"
+    ]
+  },
+  "registered_root_count": 9,
+  "project_summaries": [
+    {
+      "project_id": "P001",
+      "registered_root_count": 1,
+      "queried_folder_nodes": 1,
+      "observed_file_entries": 0,
+      "known_public_resource_refs_outside_scanned_root": 3,
+      "verification": "ALTERNATE_PARENT_REVIEW_REQUIRED"
+    },
+    {
+      "project_id": "P002",
+      "registered_root_count": 1,
+      "queried_folder_nodes": 1,
+      "observed_file_entries": 0,
+      "known_public_resource_refs_outside_scanned_root": 3,
+      "verification": "ALTERNATE_PARENT_REVIEW_REQUIRED"
+    },
+    {
+      "project_id": "P003",
+      "registered_root_count": 1,
+      "queried_folder_nodes": 37,
+      "observed_file_entries": 244,
+      "highest_single_folder_count": 111,
+      "verification": "REGISTERED_ROOT_DESCENDANT_LISTS_TRAVERSED__API_READBACK_PENDING"
+    },
+    {
+      "project_id": "P004",
+      "registered_root_count": 1,
+      "queried_folder_nodes": 21,
+      "observed_file_entries": 35,
+      "verification": "DIRECT_LIST_TRAVERSAL__API_READBACK_PENDING",
+      "search_based_comparison": 11
+    },
+    {
+      "project_id": "P005",
+      "registered_root_count": 1,
+      "queried_folder_nodes": 37,
+      "observed_file_entries": 67,
+      "verification": "REGISTERED_ROOT_DESCENDANT_LISTS_TRAVERSED__API_READBACK_PENDING"
+    },
+    {
+      "project_id": "P006",
+      "registered_root_count": 1,
+      "queried_folder_nodes": 1,
+      "observed_file_entries": 0,
+      "verification": "EMPTY_REGISTERED_ROOT_LIST_IS_NOT_PROOF_OF_EMPTY_SOURCE"
+    },
+    {
+      "project_id": "P007",
+      "registered_root_count": 2,
+      "queried_folder_nodes": 94,
+      "observed_file_entries_canonical_root": 903,
+      "observed_file_entries_other_root_direct": 6,
+      "total_observed_file_entries": 909,
+      "highest_single_folder_count": 178,
+      "verification": "REGISTERED_ROOT_DESCENDANT_LISTS_TRAVERSED__API_READBACK_AND_DEDUP_PENDING"
+    },
+    {
+      "project_id": "P020",
+      "registered_root_count": 1,
+      "queried_folder_nodes": 23,
+      "observed_file_entries": 54,
+      "verification": "REGISTERED_ROOT_DESCENDANT_LISTS_TRAVERSED__API_READBACK_PENDING"
+    }
+  ],
+  "aggregate": {
+    "queried_folder_nodes": 215,
+    "observed_file_entries_in_returned_lists": 1309,
+    "distinct_file_ids_verified_in_full_inventory": false,
+    "unreviewed_entries_published": 0,
+    "raw_contents_downloaded": 0,
+    "source_files_renamed_or_moved": 0
+  },
+  "known_coverage_issues": [
+    {
+      "kind": "SEARCH_INDEX_OMISSION",
+      "source": "ops/control/req07-p004-scoped-folder-inventory-crosscheck.v0.1.json",
+      "explanation": "P004 search query returned 11 records across the scanned folder scope, compared with 35 direct-list records."
+    },
+    {
+      "kind": "REGISTERED_ROOT_DOES_NOT_COVER_EXISTING_INDEXED_FILE_ANCESTOR_WITHIN_7_HOPS",
+      "project_ids": [
+        "P001",
+        "P002"
+      ],
+      "affected_published_resource_count": 6,
+      "explanation": "By-ID file metadata remained accessible but their scanned ancestry did not reach the registered project root within seven hops. Review source roots; no automated reassignment."
+    },
+    {
+      "kind": "CURRENT_CONNECTOR_ENUMERATION_NOT_CERTIFIED_AGAINST_DIRECT_DRIVE_API",
+      "source": "scripts/collect_private_drive_resource_metadata.py",
+      "explanation": "Complete trusted inventory still requires paginated direct Google Drive API reads plus by-ID provenance reconciliation and private SHA receipt."
+    }
+  ],
+  "governance": {
+    "public_catalog_mutated": false,
+    "newly_discovered_drive_names_or_ids_published": false,
+    "private_archive_bytes_copied": false,
+    "source_revision_or_approval_claims_added": false,
+    "future_public_admission": "PRIVATE_PROJECT_FK_ACCESS_REVISION_REVIEW_THEN_VERSIONED_SOURCE_AND_READBACK",
+    "next": "EXECUTE_AUTHENTICATED_PAGINATED_DIRECT_DRIVE_API_IN_PRIVATE_RUNTIME__DEDUP__RESOLVE_ALT_PARENTS__REVIEW_PUBLIC_SAFETY"
+  }
+}
