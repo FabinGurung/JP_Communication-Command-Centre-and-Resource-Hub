@@ -1,0 +1,460 @@
+{
+  "schema_version": "0.1.0",
+  "checkpoint_id": "REQ07_RESOURCE_DRIVE_METADATA_READBACK_20261013",
+  "verified_at_npt": "2026-10-13",
+  "verification_method": "46 authenticated Google Drive file metadata lookups using registered file IDs, in four batches. Comparison against catalog original names and MIME types; no file bytes transferred or changed.",
+  "status": "ALL_46_EXISTING_POINTERS_METADATA_MATCH__FULL_RECURSIVE_INVENTORY_OPEN",
+  "source_catalog_path": "ops/data/resource-catalog-normalized.v0.1.json",
+  "source_catalog_blob_sha": "e8926bb1dc21b9887d1902d3e96746a3e0f68b28",
+  "matched_id_name_mime_count": 46,
+  "unmatched_count": 0,
+  "projects_indexed": 8,
+  "index_counts_by_project": [
+    {
+      "project_id": "P001",
+      "resource_count": 4
+    },
+    {
+      "project_id": "P002",
+      "resource_count": 4
+    },
+    {
+      "project_id": "P003",
+      "resource_count": 2
+    },
+    {
+      "project_id": "P004",
+      "resource_count": 3
+    },
+    {
+      "project_id": "P005",
+      "resource_count": 7
+    },
+    {
+      "project_id": "P006",
+      "resource_count": 1
+    },
+    {
+      "project_id": "P007",
+      "resource_count": 17
+    },
+    {
+      "project_id": "P020",
+      "resource_count": 8
+    }
+  ],
+  "verified_entries": [
+    {
+      "resource_id": "RES-P001-ARCH-DWG-20261011",
+      "project_id": "P001",
+      "source_drive_file_id": "16rUpvmH1JGyp_8hbU9BqispHfJNQzQh7",
+      "original_drive_filename": "Bishal (2) (4).dwg",
+      "mime_type": "application/dwg",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P001-STRUCT-DWG-20261011",
+      "project_id": "P001",
+      "source_drive_file_id": "1TzUCNxZ3WExD7H0mWYJ42KHsx11-A7BG",
+      "original_drive_filename": "Bishal Structure.dwg",
+      "mime_type": "application/dwg",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P001-ORIGINAL-CAD-FOLDER-20261011",
+      "project_id": "P001",
+      "source_drive_file_id": "1JalzFJBfyTbF00pMnDpJP69qY1aaA-rX",
+      "original_drive_filename": "04_CAD_DWG",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P001-ROOT",
+      "project_id": "P001",
+      "source_drive_file_id": "1EDXI_zuekEXXcjtYmN_LuY3Yv6eipgM6",
+      "original_drive_filename": "PRJ-000001__REB-001__14_Bishal_Paija",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P002-WORKING-DRAWING-001",
+      "project_id": "P002",
+      "source_drive_file_id": "1gfhTtWBinNvF0F6vjQnzxsSZW8grB8ID",
+      "original_drive_filename": "1489560950318039080__WORKING_DRAWING_OF_SAMIR_MAN_DAMSIDE.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P002-STRUCT-PDF-001",
+      "project_id": "P002",
+      "source_drive_file_id": "1zF_km0vVuDMbTK7BN7270a4IhQnRghsE",
+      "original_drive_filename": "1480453310745153656__sarita20guvaju20str20part.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P002-STRUCT-DWG-001",
+      "project_id": "P002",
+      "source_drive_file_id": "1pvCubGYJvfHOrNG1ynoxBrWFafZuooC6",
+      "original_drive_filename": "1463037585277587638__STRUCTURAL_GUVAJU_FINAL_DWG.dwg",
+      "mime_type": "image/vnd.dwg",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P002-ROOT",
+      "project_id": "P002",
+      "source_drive_file_id": "1BKOWoQqPl79D6tYzE_mVf3nBYN8KJj_1",
+      "original_drive_filename": "PRJ-000002__FBL-001__17_Samir_Man_Gubhaju",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P003-ARCH-PDF-001",
+      "project_id": "P003",
+      "source_drive_file_id": "1kOsBzMjS0Tdqh4mgF1PQx1UL0e4bmgGI",
+      "original_drive_filename": "SOURCE__Hari_Baral_Architectural_Drawing__A01-A05.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P003-ROOT",
+      "project_id": "P003",
+      "source_drive_file_id": "1GW7s3Hr5hXU2aBdvcP73W44lzr_8jo43",
+      "original_drive_filename": "PRJ-000003__FBL-002__13_Hari_Baral",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P004-ARCH-PDF-001",
+      "project_id": "P004",
+      "source_drive_file_id": "1yFUzhkCepNTm0xtaAbmtPmzErIeZ_0qq",
+      "original_drive_filename": "yamuana pun arch.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P004-ARCH-DWG-001",
+      "project_id": "P004",
+      "source_drive_file_id": "1pISZG16A_arsVr0_OoxU0_oftw8QmT9D",
+      "original_drive_filename": "Yamuna Pun 16 final (1)(1).dwg",
+      "mime_type": "application/dwg",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P004-ROOT",
+      "project_id": "P004",
+      "source_drive_file_id": "1qM2koziyLpANUX2xcXr-D-RXYdbV5WWV",
+      "original_drive_filename": "Yamuna_Pun_Residence",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P005-ARCH-PDF-001",
+      "project_id": "P005",
+      "source_drive_file_id": "1h6LAF9GLLKZe3fqnObrfhykr5FDw5qI7",
+      "original_drive_filename": "30_Sabitri_Giri__Architectural_Drawing__PRESENT_NEEDS_REVIEW__AS_RECEIVED.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P005-STRUCT-PDF-001",
+      "project_id": "P005",
+      "source_drive_file_id": "1M8d_ClWzpJj1cjlhNBwNM4hSI60t2A1k",
+      "original_drive_filename": "30_Sabitri_Giri__Structural_Drawing__PRESENT_NEEDS_REVIEW__AS_RECEIVED.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P005-ARCH-DWG-001",
+      "project_id": "P005",
+      "source_drive_file_id": "17yRvgDjdR5HWTinZTaCoIQLJTjGw1_TI",
+      "original_drive_filename": "30_Sabitri_Giri__Architectural_Drawing__PRESENT_NEEDS_REVIEW__AS_RECEIVED.dwg",
+      "mime_type": "application/dwg",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P005-ETABS-E2K-001",
+      "project_id": "P005",
+      "source_drive_file_id": "1Cy-iqEKtxzMuaHwHmPlM1Bmltp3-pLHt",
+      "original_drive_filename": "30_Sabitri_Giri__ETABS_Model__AS_RECEIVED.e2k",
+      "mime_type": "application/octet-stream",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P005-STRUCT-DWG-001",
+      "project_id": "P005",
+      "source_drive_file_id": "1CzA02nrmOJr2o9HdagFFKrAd5cT_hqcK",
+      "original_drive_filename": "30_Sabitri_Giri__Structural_Drawing__PRESENT_NEEDS_REVIEW__AS_RECEIVED.dwg",
+      "mime_type": "application/dwg",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P005-COST-ESTIMATE-001",
+      "project_id": "P005",
+      "source_drive_file_id": "1N61cyx09L6RCAi1O2ZQLX5FPcf9tD7WW",
+      "original_drive_filename": "30_Sabitri_Giri__Cost_Estimate__Dipti_Giri__AS_RECEIVED.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P005-ROOT",
+      "project_id": "P005",
+      "source_drive_file_id": "1BUzhlUNJvUCvEV8HVJHQCZERz8maupZJ",
+      "original_drive_filename": "Sabitri_Giri_Residence",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P006-ROOT",
+      "project_id": "P006",
+      "source_drive_file_id": "1OMhyxpmJBFlmAboCtkI9OAB7L08THyuI",
+      "original_drive_filename": "31_Sharada adhikari",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-ARCH-PDF",
+      "project_id": "P007",
+      "source_drive_file_id": "19AyrQbMaZ4ze59ixqKMlMlR0UZ-1jDcB",
+      "original_drive_filename": "narayni architecture drw revised(1).pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-SOIL-PDF",
+      "project_id": "P007",
+      "source_drive_file_id": "13y0b0v8BiL2ooMXy0BFn2dtdSHWNOg2N",
+      "original_drive_filename": "FINAL G R OF RESIDENTIAL BUILDING OF MRS. NARAYANI PARAJULI, RAMBAZAR, PMC-15, KASKI.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-SANITARY-PDF",
+      "project_id": "P007",
+      "source_drive_file_id": "1wi0Q9CsVMkbI76rPVbze7TV5GJm_OwvI",
+      "original_drive_filename": "RAMZAAR COMMERCIAL saniatary DRAWING.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-STRUCT-PDF",
+      "project_id": "P007",
+      "source_drive_file_id": "1zwmKrfwW9IN5ourLGFdfleJOCi7dcH2_",
+      "original_drive_filename": "narayani str drg revised plan(1).pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-SKETCHUP-COMMERCIAL",
+      "project_id": "P007",
+      "source_drive_file_id": "141zydR7qNIOvDS8ImLFU2wnw2FvUDNS_",
+      "original_drive_filename": "ram bazaar commercial.skp",
+      "mime_type": "application/x-koan",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-SKETCHUP-FINAL",
+      "project_id": "P007",
+      "source_drive_file_id": "1bRE1h5_n_iDWyUspmn-A3GNTUQ5SrnmU",
+      "original_drive_filename": "rambazar final.skp",
+      "mime_type": "application/x-koan",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-ARCH-DWG",
+      "project_id": "P007",
+      "source_drive_file_id": "1A0LfypGHlZcrEUB9MWIcQUpDDHjWOJnY",
+      "original_drive_filename": "narayni architecture drw revised(1).dwg",
+      "mime_type": "application/acad",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-ETABS-SLS",
+      "project_id": "P007",
+      "source_drive_file_id": "1XxzO4MGieQQakCjMI_4ffjyazrcRvX83",
+      "original_drive_filename": "NARAYANI_ETABS_SLS_MODEL_SOURCE__20260705.e2k",
+      "mime_type": "text/plain",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-ETABS-ULS",
+      "project_id": "P007",
+      "source_drive_file_id": "1FdTJ_DPzKU8GYBY5R-WXjWCdOc4c9yL3",
+      "original_drive_filename": "NARAYANI_ETABS_ULS_MODEL_SOURCE__20260705.e2k",
+      "mime_type": "text/plain",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-STRUCT-DWG",
+      "project_id": "P007",
+      "source_drive_file_id": "1OdmVYOAoz9chcccLl_4KsF8XffK6ScrE",
+      "original_drive_filename": "narayani str drg revised plan(1).dwg",
+      "mime_type": "application/acad",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-MEP-FOLDER",
+      "project_id": "P007",
+      "source_drive_file_id": "1J1vLPRJfSlnStTDKYrRAi2WGK8KQFhEC",
+      "original_drive_filename": "07_MEP",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-ARCH-HISTORY",
+      "project_id": "P007",
+      "source_drive_file_id": "1zEyFLMljsEyOpl3bIM_LgyGUI9plPBva",
+      "original_drive_filename": "99_RECEIVED_ARCHITECTURE_UNVERIFIED",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-CANON-ROOT",
+      "project_id": "P007",
+      "source_drive_file_id": "1mosr2gahKr4j7xj6BmrIjz4vdCxBYetF",
+      "original_drive_filename": "Narayani_Parajuli_Residence",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-ETABS-HISTORY",
+      "project_id": "P007",
+      "source_drive_file_id": "1p6L_ZAAH5xXBgaviluRVdcC6wlvnXKUH",
+      "original_drive_filename": "02_HISTORICAL_E2K_SOURCE",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-SOURCES",
+      "project_id": "P007",
+      "source_drive_file_id": "1WqL7n93Zc_UnsMPNaO9yCMetrreFXC1A",
+      "original_drive_filename": "01_SOURCE_ORIGINALS",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-20261009-STRUCT-HISTORY",
+      "project_id": "P007",
+      "source_drive_file_id": "1U-DlkGOGnSMIqmgpi7V1X6yYhmXR4GMl",
+      "original_drive_filename": "99_RECEIVED_STRUCTURE_UNVERIFIED",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P007-ROOT",
+      "project_id": "P007",
+      "source_drive_file_id": "1F1EgpEmwfi8Bm9cAraEg7Efu0gSJmsl0",
+      "original_drive_filename": "PRJ-000007__NARAYANI_PARAJULI",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P020-ARCH-PDF-001",
+      "project_id": "P020",
+      "source_drive_file_id": "1gG04rPHxuGoh8rRcS3iscfjUGojlb7Ti",
+      "original_drive_filename": "Pokhara Municipal.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P020-MUNICIPAL-001",
+      "project_id": "P020",
+      "source_drive_file_id": "1Qc7oCr5oRFIoj0HD4ENXvyYTqDN46CSP",
+      "original_drive_filename": "MUNICIPAL_REPORT__14_Kharika_Paudel__AS_RECEIVED.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P020-STRUCT-ANALYSIS-PDF-001",
+      "project_id": "P020",
+      "source_drive_file_id": "1uPYCoKK-n7J_o3flTUWOEgCQdYAjbfFt",
+      "original_drive_filename": "Safal_Revise_Residence_report[1]_PDF_2.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P020-STRUCT-PDF-001",
+      "project_id": "P020",
+      "source_drive_file_id": "1OilXeqjAFrf4TV9eqHPyCklo3iFrnbY_",
+      "original_drive_filename": "STRUCTURAL_DRAWING_SET__14_Kharika_Paudel__AS_RECEIVED.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P020-ARCH-DWG-001",
+      "project_id": "P020",
+      "source_drive_file_id": "1G7c-S_YmLtA_mkJHWi80xxL3OS8C4jPw",
+      "original_drive_filename": "ARCHITECTURAL_MUNICIPAL_DRAWING__14_Kharika_Paudel__AS_RECEIVED.dwg",
+      "mime_type": "application/dwg",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P020-ETABS-EDB-001",
+      "project_id": "P020",
+      "source_drive_file_id": "1QEHa3QzuJuwai9tUxlfkd26cFagPGyCa",
+      "original_drive_filename": "ETABS_MODEL__14_Kharika_Paudel__AS_RECEIVED.EDB",
+      "mime_type": "application/octet-stream",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P020-STRUCT-DETAIL-001",
+      "project_id": "P020",
+      "source_drive_file_id": "1vn3mnfmbHdfvjidUGwBgZGfJaADZpX-6",
+      "original_drive_filename": "STRUCTURAL_DETAIL_CALC__COMBINED_FOOTING_REBAR_CURTAILMENT__AS_RECEIVED.pdf",
+      "mime_type": "application/pdf",
+      "name_id_mime_match": true
+    },
+    {
+      "resource_id": "RES-P020-ROOT",
+      "project_id": "P020",
+      "source_drive_file_id": "1X7FIR9t_A7DTqTqogCq9o3y1g91f-e1D",
+      "original_drive_filename": "PRJ-000020__FBL-019__14_Kharika_Paudel",
+      "mime_type": "application/vnd.google-apps.folder",
+      "name_id_mime_match": true
+    }
+  ],
+  "scoped_directory_discovery": [
+    {
+      "project_id": "P001",
+      "root_returned_children": 0
+    },
+    {
+      "project_id": "P002",
+      "root_returned_children": 0
+    },
+    {
+      "project_id": "P003",
+      "root_returned_children": 13
+    },
+    {
+      "project_id": "P004",
+      "root_returned_children": 9
+    },
+    {
+      "project_id": "P005",
+      "root_returned_children": 13
+    },
+    {
+      "project_id": "P006",
+      "root_returned_children": 0
+    },
+    {
+      "project_id": "P007",
+      "root_returned_children": 6
+    },
+    {
+      "project_id": "P020",
+      "root_returned_children": 14
+    }
+  ],
+  "inventory_limits": [
+    "Direct child counts are only snapshots of the queried Drive folders; nested content, alternate source roots, inaccessible files and pagination beyond those queried are not certified.",
+    "Extra discovered archived, personal, land, tax or legal material is intentionally NOT imported into this public Resources catalog.",
+    "An observed source file in an unexpected project folder needs project-association review rather than assuming folder ownership.",
+    "File existence/metadata do not establish engineer approval, construction issue status, or revision currency."
+  ],
+  "provenance": "Provider metadata readback in this conversation; full authenticated Drive permission decisions remain provider-owned.",
+  "no_source_mutations": true,
+  "no_raw_file_bytes_retrieved": true,
+  "no_new_resources_admitted": true
+}
