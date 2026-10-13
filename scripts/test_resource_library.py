@@ -92,6 +92,69 @@ class ResourcesTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"Cross-project"):
             collector.crawl({"P001":"root-a","P002":"root-b"},shared)
 
+    def test_provider_search_hole_detected_by_file_parent_readback(self):
+        # Recreates the observed Drive discrepancy: folder search returns zero
+        # although metadata-by-ID confirms the DWG belongs in that parent.
+        pid="P004"
+        parent="source-folder"
+        file_id="known-dwg"
+        known={"sites":[{"project_id":pid,"files":[{
+            "resource_id":"RES-TEST-P004-DWG",
+            "source_drive_file_id":file_id,
+            "original_drive_filename":"Verified drawing.dwg",
+            "mime_type":"application/dwg",
+        }]}]}
+        def fetch(folder,token):
+            if folder=="root":
+                return ([{"id":parent,"name":"CAD","mimeType":collector.FOLDER,
+                          "parents":["root"]}],None)
+            if folder==parent: return ([],None)
+            raise AssertionError(folder)
+        rows,visited=collector.crawl({pid:"root"},fetch,return_visited=True)
+        self.assertEqual(len(rows),1)
+        def by_id(fid):
+            self.assertEqual(fid,file_id)
+            return {"id":fid,"name":"Verified drawing.dwg","mimeType":"application/dwg",
+                    "parents":[parent],"trashed":False}
+        with self.assertRaisesRegex(ValueError,"PARENT_LIST_COVERAGE_GAP"):
+            collector.reconcile_indexed_sources(
+                rows,visited,{pid:["root"]},by_id,known)
+        # A correctly enumerated known child is accepted.
+        def fixed_fetch(folder,token):
+            if folder==parent:
+                return ([{"id":file_id,"name":"Verified drawing.dwg","mimeType":"application/dwg",
+                          "parents":[parent]}],None)
+            return fetch(folder,token)
+        rows,visited=collector.crawl({pid:"root"},fixed_fetch,return_visited=True)
+        x=collector.reconcile_indexed_sources(rows,visited,{pid:["root"]},by_id,known)
+        self.assertEqual(x["covered_registered_sources"],1)
+        self.assertEqual(x["known_sources_outside_scanned_parents"],0)
+
+    def test_source_alternate_root_support_and_outside_parent_flag(self):
+        normalized=collector.normalize_roots({"P007":["alternate","canonical"]})
+        self.assertEqual(normalized["P007"],["alternate","canonical"])
+        with self.assertRaisesRegex(ValueError,"Same Drive root"):
+            collector.normalize_roots({"P001":"shared","P002":"shared"})
+        with self.assertRaisesRegex(ValueError,"Duplicate authorized"):
+            collector.normalize_roots({"P007":["same","same"]})
+        catalog={"sites":[{"project_id":"P007","files":[{
+            "resource_id":"OUTSIDE-1","source_drive_file_id":"unseen",
+            "original_drive_filename":"model.e2k","mime_type":"text/plain"
+        }]}]}
+        def meta(fid):
+            return {"id":fid,"name":"model.e2k","mimeType":"text/plain",
+                    "parents":["unscanned-parent"],"trashed":False}
+        x=collector.reconcile_indexed_sources([], {("P007","canonical")},
+                                             normalized,meta,catalog)
+        self.assertEqual(x["known_sources_outside_scanned_parents"],1)
+        self.assertEqual(x["uncovered_resource_ids"],["OUTSIDE-1"])
+
+    def test_cycle_pagination_denied(self):
+        def repeating(parent,token):
+            return ([],"repeated")
+        with self.assertRaisesRegex(ValueError,"Repeated provider page token"):
+            collector.crawl({"P004":"root"},repeating)
+
     def test_no_candidate_writes_inside_public_repo(self):
         with self.assertRaisesRegex(ValueError,"public repository"):
             intake.private_path(intake.ROOT/"ops/data/danger.json")
