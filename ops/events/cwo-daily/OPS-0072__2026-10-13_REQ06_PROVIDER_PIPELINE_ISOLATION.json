@@ -1,0 +1,105 @@
+{
+  "event_id": "OPS-0072",
+  "date_npt": "2026-10-13",
+  "scope": "JP AEC original website Request 6 of 8 — provider staging isolation and safe public projection control",
+  "status": "COMPLETE_FOR_ISOLATION_GATES__PRIVATE_INGESTION_INDEPENDENTLY_PENDING",
+  "source_verified_main": "d4cd98e9d8392f5bb25249a19801970fb04e1108",
+  "source_readback": [
+    {
+      "path": "scripts/validate_publication_lanes.py",
+      "git_blob_sha": "a3ab1b3c4a8a3ffa99007655419582ea263faecd"
+    },
+    {
+      "path": "scripts/test_publication_lanes.py",
+      "git_blob_sha": "b1c144edb2d358d9fcbb3d0add7673fdb03f22df"
+    },
+    {
+      "path": "ops/control/progress-publication-gate.v0.1.json",
+      "git_blob_sha": "152ac8ce23dc50b142326c9548771fbf51324bb9"
+    },
+    {
+      "path": "ops/control/req06-drive-folder-readback.v0.1.json",
+      "git_blob_sha": "eb62528669f0a5d6dcf156dc7b11a643c184fb75"
+    },
+    {
+      "path": "ops/control/REQ06_PROVIDER_TO_WEBSITE_ISOLATION.md",
+      "git_blob_sha": "8ce09812844a48c4902889d019b98d0d2b7ce9ec"
+    },
+    {
+      "path": ".github/workflows/daily-ops-branch-preview.yml",
+      "git_blob_sha": "be6c984e045348886ee6a8b4ef7b4dd9793b4dde"
+    },
+    {
+      "path": "ops/control/website-eight-request-roadmap.v0.1.json",
+      "git_blob_sha": "0cb5dc24e4360cea5eb468f72dab05738703a1c5"
+    },
+    {
+      "path": "workspace/developer-software-backlog.v0.1.json",
+      "git_blob_sha": "52e918ffd09d98b6f3635bdfcc0abc283452e26a"
+    }
+  ],
+  "archives": [
+    {
+      "commit": "336d1cac65df31f08a9f244c741cd77920cef40e",
+      "root": "ops/99_VERSION_ARCHIVE/20261013/REQ06_EVIDENCE_ISOLATION_PRE"
+    },
+    {
+      "commit": "a86a442a54569ccd243fe9d613c48bfca70cb178",
+      "root": "ops/99_VERSION_ARCHIVE/20261013/REQ06_PRE_CLOSE_"
+    }
+  ],
+  "live_drive_readback": {
+    "verified_root": "1mtTZUPlBHd7bDV715qSWACRS2i5MalT9",
+    "verified_category_folders": 10,
+    "private_staging_new_runs_approved": 0,
+    "progress_stage_existing_direct_files": 6,
+    "legacy_public_rows": 37,
+    "fresh_raw_ingestion_claimed": false,
+    "source_bytes_modified": false,
+    "previous_media_issues_unresolved": 269,
+    "machine_snapshot": "ops/control/req06-drive-folder-readback.v0.1.json"
+  },
+  "pipeline": {
+    "collector": "PRIVATE_ORIGINALS_IN_GOOGLE_DRIVE_ONLY",
+    "private_normalization": "APPEND_ONLY_PK_FK_HASH_RECEIPTS_AND_QUARANTINE",
+    "publication": "FROZEN_37_ROW_LEGACY_BASELINE__REVIEW_REQUIRED_FOR_NEW_RECORDS",
+    "checklist": "BROWSER_LOCAL_AUTHOR_NOT_PROGRESS_PUBLISHER",
+    "resources": "SOURCE_DRIVE_POINTERS_NOT_PROVIDER_COMMUNICATION_EVENTS",
+    "developer": "CODE_AND_GOVERNANCE_ONLY",
+    "ci_protection": "PUSH_RANGE_DATA_DOMAIN_ISOLATION_AND_PUBLICATION_META_GATE"
+  },
+  "verification": {
+    "production": {
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38325240482"
+    },
+    "browser_mobile": {
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38325240459"
+    },
+    "branch_lane": {
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38325240480"
+    },
+    "publication_unit_tests": "PASS_IN_PRODUCTION_WORKFLOW",
+    "provider_byte_origin_check": "METADATA_ONLY_NO_NEW_PROVIDER_RECEIPT_CLAIMED",
+    "human_review_caveat": "Metadata admission can be linted by public CI; authenticated human review still requires the owning private provider lane."
+  },
+  "untouched": [
+    "projects.csv",
+    "ops/data/current-works.json",
+    "ops/data/resource-catalog-normalized.v0.1.json",
+    "ops/data/project-resources.json",
+    "ops/data/progress-report-public.v0.2.jsonl",
+    "site-operations.html",
+    "original Slack/Discord Drive archives"
+  ],
+  "remaining_separate_work": [
+    "Authenticated, idempotent provider-specific raw capture and receiver-side readback",
+    "Private project association for new source events and quarantine disposition",
+    "Reverify prior media mismatch count and recover source original bytes where authorized",
+    "Review and approve future public projections before changing any progress record"
+  ],
+  "next_original_request": "REQ07__PRIORITIZED_RESOURCE_LIBRARY_NORMALIZATION_AND_TEMPLATE",
+  "rollback": "Reapply exact previous source blobs in new scoped commits; retain all Git and Drive history."
+}
