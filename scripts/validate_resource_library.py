@@ -47,6 +47,23 @@ def validate():
             "historical readback misrepresented as file mutation or new publication")
     require(receipt.get("status")=="ALL_46_EXISTING_POINTERS_METADATA_MATCH__FULL_RECURSIVE_INVENTORY_OPEN",
             "whole-Drive inventory cannot be claimed from 46 pointers")
+    display=load("ops/control/resource-display-and-admission.v0.1.json")
+    require(display["status"]=="CURRENT_46_VERIFIED__COMPLETE_DRIVE_INVENTORY_OPEN",
+            "resource directory misleadingly claims full Drive completion")
+    require(display["snapshot"]["recursive_inventory_complete"] is False,
+            "full recursive provider inventory asserted without complete inspection")
+    web=(ROOT/"resources/index.html").read_text(encoding="utf-8")
+    require("resource-drive-readback.v0.1.json" in web and
+            'id="priority"' in web and 'id="priority-order"' in web,
+            "resource UI lacks verified origin notice or document priority filters")
+    for expected in display["priority_bands"]:
+        rank=expected["priority"]
+        require(expected["id"] in TIER and TIER[expected["id"]]==rank,
+                "governed priority identifier drift")
+        require(f'.tier[data-priority="{rank}"] .file .label' in web,
+                "missing ranked heading selector "+str(rank))
+        require(f"font-size:{expected['heading_px']}px" in web,
+                "missing ranked font token "+str(rank))
     bands=catalog["priority_bands"]
     require([(x["id"],x["rank"]) for x in bands]==list(TIER.items()),"document tiers/order drift")
     require(len(source["projects"])==len(catalog["sites"])==8,"indexed-site FK count drift")
