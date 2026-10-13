@@ -2,6 +2,8 @@
 """Request 07 deterministic Tests: authenticated metadata receipt, safe priorities, quarantine."""
 from __future__ import annotations
 import copy
+import hashlib
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -154,6 +156,35 @@ class ResourcesTests(unittest.TestCase):
             return ([],"repeated")
         with self.assertRaisesRegex(ValueError,"Repeated provider page token"):
             collector.crawl({"P004":"root"},repeating)
+
+    def test_private_scan_to_review_preview_requires_hash_readback(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            row={
+                "project_id":"P004","drive_file_id":"source-new-one",
+                "original_filename":"unreviewed.pdf","mime_type":"application/pdf",
+                "parent_ids":["parent"],"admission_status":"PRIVATE_METADATA_ONLY_REVIEW_REQUIRED"
+            }
+            body=(json.dumps(row,sort_keys=True)+"\n").encode("utf-8")
+            scan=root/"scan.jsonl"
+            receipt=root/"receipt.json"
+            scan.write_bytes(body)
+            r={"type":"PRIVATE_DRIVE_RECURSIVE_METADATA_INVENTORY",
+               "jsonl_sha256":hashlib.sha256(body).hexdigest(),
+               "files_and_folders":1,"byte_downloads":0,"public_admissions":0,
+               "status":"METADATA_COLLECTED_NOT_APPROVED_FOR_PUBLICATION"}
+            receipt.write_text(json.dumps(r),encoding="utf-8")
+            payload=intake.read_private_metadata_export(scan,receipt)
+            self.assertEqual(payload["source_export_receipt"],r["jsonl_sha256"])
+            self.assertFalse(payload["files"][0]["source_parent_verified"])
+            self.assertEqual(payload["files"][0]["source_receipt_id"],r["jsonl_sha256"])
+            candidates=intake.review_candidates(payload["files"],{},{"P004"})
+            self.assertEqual(candidates[0]["review_status"],"REVIEW_REQUIRED")
+            self.assertIn("SOURCE_PARENT_PROJECT_UNVERIFIED",candidates[0]["flags"])
+            self.assertTrue(candidates[0]["publication_status"].startswith("BLOCKED"))
+            scan.write_bytes(body+b"extra\n")
+            with self.assertRaisesRegex(ValueError,"READBACK_SHA256_MISMATCH"):
+                intake.read_private_metadata_export(scan,receipt)
 
     def test_no_candidate_writes_inside_public_repo(self):
         with self.assertRaisesRegex(ValueError,"public repository"):
