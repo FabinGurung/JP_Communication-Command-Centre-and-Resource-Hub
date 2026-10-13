@@ -102,13 +102,14 @@
       "explanation": "P004 search query returned 11 records across the scanned folder scope, compared with 35 direct-list records."
     },
     {
-      "kind": "REGISTERED_ROOT_DOES_NOT_COVER_EXISTING_INDEXED_FILE_ANCESTOR_WITHIN_7_HOPS",
+      "kind": "REGISTERED_PROJECT_ROOT_NOT_FOUND_IN_COMPLETE_BY_ID_PARENT_ANCESTRY",
       "project_ids": [
         "P001",
         "P002"
       ],
       "affected_published_resource_count": 6,
-      "explanation": "By-ID file metadata remained accessible but their scanned ancestry did not reach the registered project root within seven hops. Review source roots; no automated reassignment."
+      "explanation": "Six existing P001/P002 published sources were traced individually through the complete metadata parent chain. All chains terminated without reaching the currently registered project root. Sources remain reachable and present in their true parent folder's list; root registry corrections require authorized review.",
+      "evidence": "ops/control/req07-p001-p002-source-root-ancestry-exceptions.v0.1.json"
     },
     {
       "kind": "CURRENT_CONNECTOR_ENUMERATION_NOT_CERTIFIED_AGAINST_DIRECT_DRIVE_API",
@@ -123,5 +124,8 @@
     "source_revision_or_approval_claims_added": false,
     "future_public_admission": "PRIVATE_PROJECT_FK_ACCESS_REVISION_REVIEW_THEN_VERSIONED_SOURCE_AND_READBACK",
     "next": "EXECUTE_AUTHENTICATED_PAGINATED_DIRECT_DRIVE_API_IN_PRIVATE_RUNTIME__DEDUP__RESOLVE_ALT_PARENTS__REVIEW_PUBLIC_SAFETY"
-  }
+  },
+  "registered_source_reconciliation": "ops/control/req07-indexed-resource-parent-list-readback.v0.1.json",
+  "independent_published_source_links_verified_by_parent_list": 37,
+  "individual_project_roots_metadata_verified": 9
 }
