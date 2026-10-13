@@ -261,6 +261,44 @@ def run():
                 audit_wcag(page,"drawings directory")
                 screenshot(page,"project-resources-desktop.png")
                 print("PASS: drawing index by project / DWG / E2K and permission-gated source links")
+                require("46 indexed originals" in page.locator("#coverage-note").inner_text() and
+                        "Full recursive Drive inventory" in page.locator("#coverage-note").inner_text(),
+                        "Indexed resources incorrectly claimed as exhaustive Drive inventory")
+                require(page.locator("#priority-order button[data-band]").count()==5,
+                        "Four document priorities and reset choice not rendered")
+                page.locator("#kind").select_option("")
+                page.locator("#project").select_option("P005")
+                page.locator("#priority").select_option("calculations_and_support")
+                require(page.locator("#directory .file").count()==1 and
+                        "Cost estimate" in page.locator("#directory .file .label").inner_text(),
+                        "Sabitri cost-estimate PDF incorrectly prioritized with drawing sets")
+                require(page.locator('.tier[data-priority="3"]').count()==1,
+                        "Cost PDF is not in supporting calculations priority")
+                require(page.locator('.tier[data-priority="3"] .file .label').first.evaluate(
+                    "(e) => getComputedStyle(e).fontSize")=="15px",
+                    "Rank 3 typography not applied")
+                page.locator("#project").select_option("P020")
+                require(page.locator("#directory .file").count()==1 and
+                        "Structural detail calculation" in page.locator("#directory .file .label").inner_text(),
+                        "Detail calculation PDF incorrectly categorized as issued drawing")
+                page.locator('#priority-order button[data-band="issued_reports"]').click()
+                require(page.locator("#priority").input_value()=="issued_reports" and
+                        page.locator('#priority-order button[data-band="issued_reports"]').get_attribute("aria-pressed")=="true",
+                        "Visual priority filter and form are out of sync")
+                require(page.locator('.tier[data-priority="1"] .file .label').first.evaluate(
+                    "(e) => getComputedStyle(e).fontSize")=="16px",
+                    "Drawing/report font hierarchy not applied")
+                page.locator('#priority-order button[data-band="source_folders"]').click()
+                require(page.locator('.tier[data-priority="4"] .file .label').first.evaluate(
+                    "(e) => getComputedStyle(e).fontSize")=="14px",
+                    "Original archive priority font not applied")
+                page.goto(BASE+"/resources/?project=P005&priority=calculations_and_support",
+                          wait_until="domcontentloaded",timeout=20000)
+                page.wait_for_function("() => document.querySelector('#priority')?.value === 'calculations_and_support'",
+                                       timeout=15000)
+                require(page.locator("#directory .file").count()==1,
+                        "Resource deep-link priority filter failed")
+                print("PASS: source-reconciled 46-file catalog, four priorities, correct PDF classifications and type hierarchy")
 
                 page.goto(BASE+"/site-operations/questions.html?project=P002",wait_until="domcontentloaded",timeout=20000)
                 page.locator("#board article.card").first.wait_for(timeout=18000)
