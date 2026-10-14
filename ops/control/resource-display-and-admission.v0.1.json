@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "control_id": "JP_AEC_RESOURCE_DIRECTORY_REQ07",
-  "status": "CURRENT_46_VERIFIED__COMPLETE_DRIVE_INVENTORY_OPEN",
+  "status": "CURRENT_46_PUBLIC__1519_REGISTERED_SCOPE_PRIVATE_CLASSIFIED__SIX_ALTERNATE_SOURCE_EXCEPTIONS_OPEN",
   "name_rule": "Display a human-readable discipline and file type before the original Drive title. Preserve exact original filename, Drive ID, original registry label, owning project FK and source link; never infer approved-for-construction status from FINAL/REVISED/ISSUED in a filename.",
   "priority_bands": [
     {
@@ -126,21 +126,34 @@
       "missing provider receipts or review"
     ],
     "no_auto_publish": true,
-    "no_modify_drive_originals": true
+    "no_modify_drive_originals": true,
+    "incremental_delta_tool": "scripts/reconcile_private_resource_inventory.py",
+    "private_authenticated_scan_cycle": "scripts/run_private_resource_cycle.py",
+    "approval_only_private_admission_stage": "scripts/stage_reviewed_resource_admission.py",
+    "synthetic_regression": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38656678749",
+    "owner_privacy_signed_evidence_required_for_publication": true
   },
   "snapshot": {
     "verified_resource_count": 46,
     "verified_project_count": 8,
     "verified_exact_filename_count": 46,
-    "metadata_check_date_npt": "2026-10-13",
+    "metadata_check_date_npt": "2026-10-15",
     "known_additional_root_folders": true,
-    "recursive_inventory_complete": false
+    "recursive_inventory_complete": false,
+    "registered_root_metadata_scan_complete": true,
+    "registered_root_metadata_scan_rows": 1519,
+    "private_engineering_related_candidate_count": 226,
+    "outside_scanned_project_root_source_exceptions": 6,
+    "private_catalog_url_publicly_exposed": false,
+    "authenticated_metadata_snapshot_sha256": "976a9782139ef1887af626f0d6af9e1beb8da34bc6ae6b97510827c171d9dbc9"
   },
   "limitations": [
     "Current public catalog is an index of authorized pointers, not an exhaustive Drive inventory.",
     "Drive permission inheritance and issue/revision approval must be checked in the owning provider.",
     "New files are not automatically admitted by this public repo or by the private preview script.",
-    "Do not publish all files merely because a parent source folder is listed as a project source."
+    "Do not publish all files merely because a parent source folder is listed as a project source.",
+    "All 1,519 entries within the registered Drive roots were classified privately; this is not a claim of globally complete alternate-root coverage.",
+    "Three P001 references have corroborated original company ancestry; three P002 references are held in an unrelated Discord archival hierarchy."
   ],
   "verification_tools": [
     "scripts/validate_resource_library.py",
