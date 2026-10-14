@@ -167,8 +167,8 @@
         "prioritized type taxonomy and template/font rules",
         "source revision/approval never invented"
       ],
-      "last_execution_npt": "2026-10-14",
-      "implementation": "Live Drive IDs, exact original names and MIME types for all 46 registered resources matched across eight sites. Ranked bands now contain 14 drawing/report PDFs, 15 native models, 2 estimate/calculation PDFs and 15 source folder links; searchable source-safe priority filters and correct type-specific fonts. CI validates existing originals and a private deduplicating/quarantined intake preview and recursive metadata collector are prepared.",
+      "last_execution_npt": "2026-10-15",
+      "implementation": "Live Drive IDs, exact original names and MIME types for all 46 registered resources matched across eight sites. Ranked bands now contain 14 drawing/report PDFs, 15 native models, 2 estimate/calculation PDFs and 15 source folder links; searchable source-safe priority filters and correct type-specific fonts. CI validates existing originals and a private deduplicating/quarantined intake preview and recursive metadata collector are prepared. Incremental Drive-ID change reconciler and authenticated private rescan runner are implemented with no public source ingestion; signed owner/privacy evidence staging gate and 11 synthetic delta/admission regressions passed. Live P001 original-source folder ancestry matches Rohini/Bishal (owner authorization not independently established); P002 source pointers come from unrelated Discord channel archive; private owner-only provenance record independently read back.",
       "verification": {
         "live_metadata_receipt": "ops/data/resource-drive-readback.v0.1.json",
         "display_contract": "ops/control/resource-display-and-admission.v0.1.json",
@@ -190,17 +190,24 @@
         "classifier_synthetic_tests": "scripts/test_private_resource_inventory_classifier.py",
         "classifier_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38583986408",
         "private_colab_runner": "ops/resource-inventory/A9_CWO_REQ07_PRIVATE_DRIVE_INVENTORY_v1.0.ipynb",
-        "private_classification_roadmap_prearchive": "ops/99_VERSION_ARCHIVE/20261014/REQ07_PRIVATE_CLASSIFICATION_PRE/website-eight-request-roadmap.v0.1.json"
+        "private_classification_roadmap_prearchive": "ops/99_VERSION_ARCHIVE/20261014/REQ07_PRIVATE_CLASSIFICATION_PRE/website-eight-request-roadmap.v0.1.json",
+        "incremental_tool": "scripts/reconcile_private_resource_inventory.py",
+        "private_authenticated_cycle": "scripts/run_private_resource_cycle.py",
+        "explicit_private_approval_gate": "scripts/stage_reviewed_resource_admission.py",
+        "incremental_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38656678749",
+        "private_live_provenance_check_npt": "2026-10-15",
+        "control_status": "ops/control/req07-20261015-incremental-and-provenance-control.v1.0.json",
+        "public_resource_validator_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38656842268"
       },
       "remaining": [
-        "Owner-authorize P001/P002 alternate original-source roots for 6 indexed references with exact project FK/ancestry evidence; do not auto-assume a parent folder implies ownership.",
-        "Keep private inventory and 226 engineering-related candidates gated pending per-file privacy and engineering revision/issuance verification.",
-        "Treat finance, staff, audit histories and metadata-unresolved resources as private, not public resource catalog entries.",
-        "Implement authenticated incremental intake and an approval-only public projection without exposing private IDs or filenames.",
-        "Complete Request 08 governed site-wide QA after Request 07 publication boundaries and approvals are verified."
+        "Run the new full authenticated Drive metadata refresh in an authorized Google OAuth runtime, comparing against the 1519-row private SHA-verified baseline; the public GitHub runner deliberately has no Drive credentials.",
+        "Obtain explicit owner provenance approval for the corroborated P001 alternate original-source folder before registering it as an authorized discovery root.",
+        "Find authoritative project-owned originals or a signed provenance determination for the three P002 documents in the unrelated Discord archive; do not auto-promote archive ancestor.",
+        "File-specific disclosure and engineering issue/revision decisions are required for any additional public resources; private 226 engineering-related candidates remain gated.",
+        "Complete final Request08 browser/mobile release QA; do not equate the authorized-root inventory with all Drive folders."
       ],
-      "resume_execution_date_npt": "2026-10-14",
-      "resume_checkpoint_status": "NINE_REGISTERED_ROOTS_PAGINATED_1519_UNIQUE_METADATA_ENTRIES__PRIVATE_CLASSIFICATION_PASSED__SIX_OUTSIDE_ROOT_POINTERS_PENDING",
+      "resume_execution_date_npt": "2026-10-15",
+      "resume_checkpoint_status": "PRIVATE_1519_CLASSIFIED_READBACK__P001_CORROBORATED_P002_UNRELATED_ARCHIVE__INCREMENTAL_AND_APPROVAL_TESTS_PASS",
       "resume_findings": [
         "Colab paginated Drive API metadata scan returned 1519 unique entries across 9 registered roots, 215 folders and 5 populated project aliases; SHA-256 verified.",
         "Local parent-chain closure to registered roots verified for all 1519 entries in the provider snapshot; no one has authorized project ownership from folder placement.",
@@ -248,7 +255,14 @@
         "GitHub Actions on intended commit",
         "PRE/POST source SHA and readback",
         "no false engineering claims"
-      ]
+      ],
+      "software_scope_readiness": "REQ01_TO_REQ07_EXISTING_PUBLIC_SITE_CAN_BE_TESTED_WITHOUT_PUBLISHING_PRIVATE_CANDIDATES",
+      "preview_qa_verification": {
+        "private_synthetic_tests": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38656678749",
+        "current_public_source_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38656842268",
+        "browser_sitewide_ci": "RUN_ON_THIS_ROADMAP_CHANGE",
+        "requested_user_text_for_item_8": "NONE__PROVISIONAL_QA_ONLY"
+      }
     }
   ],
   "change_contract": {
