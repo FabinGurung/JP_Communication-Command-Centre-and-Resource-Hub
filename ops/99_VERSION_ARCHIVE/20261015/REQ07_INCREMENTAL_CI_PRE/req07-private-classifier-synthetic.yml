@@ -1,0 +1,34 @@
+name: Req07 private classifier synthetic QA
+
+on:
+  push:
+    branches:
+      - main
+      - feature/daily-ops-current-work
+    paths:
+      - scripts/classify_private_resource_inventory.py
+      - scripts/test_private_resource_inventory_classifier.py
+      - .github/workflows/req07-private-classifier-synthetic.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-private-boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out versioned classifier
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run fail-closed synthetic classification tests
+        run: python scripts/test_private_resource_inventory_classifier.py
+      - name: Assert zero private provider exports in public repository
+        shell: bash
+        run: |
+          test ! -e ops/resource-inventory/registered_roots_metadata.jsonl
+          test ! -e ops/resource-inventory/private_candidate_review.json
+          test ! -e ops/resource-inventory/classified_private_registry.jsonl
