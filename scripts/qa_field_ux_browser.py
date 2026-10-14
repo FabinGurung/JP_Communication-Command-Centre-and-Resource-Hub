@@ -72,6 +72,22 @@ def no_wide_overflow(page, desc, tolerance=18):
     require(dims["html"] <= dims["window"]+tolerance, f"{desc} horizontal html overflow {dims}")
     intended=page.viewport_size["width"]
     require(dims["html"] <= intended+2, f"{desc} exceeds specified {intended}px viewport: {dims}")
+    # A clipped Leaflet pane can make body.scrollWidth larger than the viewport.
+    # Probe actual horizontal scroll reach rather than trusting body.scrollWidth.
+    scroll=page.evaluate("""() => {
+      const root=document.documentElement, body=document.body;
+      const prior={windowX:window.scrollX,rootX:root.scrollLeft,bodyX:body.scrollLeft,windowY:window.scrollY};
+      window.scrollTo(100000,prior.windowY);
+      root.scrollLeft=100000;
+      body.scrollLeft=100000;
+      const measured={windowX:window.scrollX,rootX:root.scrollLeft,bodyX:body.scrollLeft};
+      window.scrollTo(prior.windowX,prior.windowY);
+      root.scrollLeft=prior.rootX;
+      body.scrollLeft=prior.bodyX;
+      return measured;
+    }""")
+    print("SCROLL_REACH",desc,scroll)
+    require(max(scroll.values()) <= tolerance, f"{desc} allows unwanted horizontal page scrolling: {scroll}")
 
 def verify_shared_shell(page, section):
     host=page.locator("jp-site-header")
