@@ -72,7 +72,12 @@
   
     /* Mobile Leaflet panes can extend their internal paint bounds past the viewport.
        Preserve vertical page scroll and map panning but prevent horizontal body scrolling. */
-    @media (max-width:860px) { html, body { max-width:100%; overflow-x:clip; } }
+    @media (max-width:860px) {
+      html, body { width:100%; max-width:100%; overflow-x:clip; }
+      .app-shell { min-width:0; width:100%; max-width:100%; grid-template-columns:minmax(0,1fr); overflow-x:clip; }
+      .workspace, .workspace.detail-open, .workspace.list-collapsed, .map-stage, #map { min-width:0; max-width:100%; }
+      .workspace, .workspace.detail-open, .workspace.list-collapsed { grid-template-columns:minmax(0,1fr); }
+    }
   </style>
 </head>
 <body>
