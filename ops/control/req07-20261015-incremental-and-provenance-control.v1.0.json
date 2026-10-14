@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "control_id": "REQ07_20261015_LIVE_PROVENANCE_AND_INCREMENTAL_DELTA",
+  "status": "INCREMENTAL_SOFTWARE_VERIFIED__PRIVATE_SOURCE_RECONCILIATION_COMPLETE__PUBLIC_ADMISSION_HELD",
+  "authority": "AUTHENTICATED_GOOGLE_DRIVE_METADATA_PLUS_PRIVATE_SHA256_RECEIPT",
+  "source_baseline_run": "REQ07_20261014T052433Z",
+  "source_baseline_inventory_sha256": "976a9782139ef1887af626f0d6af9e1beb8da34bc6ae6b97510827c171d9dbc9",
+  "baseline_unique_rows": 1519,
+  "baseline_scanned_root_folders": 9,
+  "private_classification_buckets": 11,
+  "engineering_related_private_candidates": 226,
+  "currently_published_resources": 46,
+  "ancestry_exception_groups": [
+    {
+      "project_id": "P001",
+      "existing_references": 3,
+      "result": "ALTERNATE_ORIGINALS_DOMAIN_CORROBORATES_REGISTERED_PROJECT_AND_COMPANY",
+      "project_domain_mapping": "CORROBORATED_NOT_INDEPENDENTLY_OWNER_AUTHORIZED",
+      "resource_ids_and_provider_ancestry": "PRIVATE_ONLY"
+    },
+    {
+      "project_id": "P002",
+      "existing_references": 3,
+      "result": "SOURCE_POINTERS_IN_DISCORD_ARCHIVE_WITH_UNRELATED_CHANNEL_ANCESTRY",
+      "project_domain_mapping": "DO_NOT_ADOPT_ARCHIVE_ANCESTOR_AS_PROJECT_ROOT",
+      "resource_ids_and_provider_ancestry": "PRIVATE_ONLY"
+    }
+  ],
+  "private_durable_provenance_register": "GOOGLE_DRIVE_OWNER_ONLY_AND_READBACK_VERIFIED",
+  "new_software": [
+    "scripts/reconcile_private_resource_inventory.py",
+    "scripts/test_reconcile_private_resource_inventory.py",
+    "scripts/run_private_resource_cycle.py",
+    "scripts/stage_reviewed_resource_admission.py",
+    "scripts/test_stage_reviewed_resource_admission.py"
+  ],
+  "private_live_cycle_execution": "REQUIRES_AUTHENTICATED_DRIVE_RUNTIME__CANNOT_RUN_PAGINATED_GOOGLE_API_SCAN_FROM_GITHUB_PUBLIC_CI",
+  "private_delta_baseline_selfcheck": "1519_PREVIOUS_EQUAL_1519_CURRENT__ZERO_CHANGE__SIMULATION_NOT_LIVE_RESCAN",
+  "public_boundary": {
+    "new_admissions": 0,
+    "originals_moved": 0,
+    "current_engineering_issue_certifications": 0,
+    "no_private_provider_ids_published": true
+  },
+  "review_note": "Issue/revision and privacy permissions are independent of metadata presence. Source path names corroborate provenance but cannot authorize public publication.",
+  "remaining_external_authority": [
+    "P001 alternate original-folder authority needs signed project ownership or other independent owner instruction/evidence before root is expanded.",
+    "P002 source archived under unrelated channel; do not confuse archive location with governing project source.",
+    "Candidate publication requires per-file source owner and privacy clearance, not a global project permission."
+  ]
+}
