@@ -2,7 +2,7 @@
   "event_id": "OPS-0076",
   "date_npt": "2026-10-14",
   "scope": "A9_ROOT11_DEBT_RECONCILIATION_AND_REQ07_METADATA_COLLECTOR_LINEAGE_HARDENING",
-  "status": "SOURCE_CHANGE_COMMITTED__CI_READBACK_REQUIRED",
+  "status": "BOUNDED_COLLECTOR_FIX_CLOSED_PASS__REQ07_PRIVATE_PROVIDER_INVENTORY_OPEN",
   "authority": {
     "a9_local_library": "https://docs.google.com/spreadsheets/d/1o6vscSHReLe76w85y1XjpouvsANEauSowrArqrh_JhM/edit",
     "a9_main_library": "https://docs.google.com/spreadsheets/d/18NE0GIbw0lDDlrIcflGS3_VccDZ2LZn1FoPbebSc71o/edit",
@@ -57,5 +57,22 @@
       "Generate review ledger, verify privacy/approval, and admit only approved entries.",
       "Final Request 8 site-wide QA and release remains deferred."
     ]
+  },
+  "verification": {
+    "source_commit": "831be53cdad1bd62263896abac0161ffb128848b",
+    "source_file_readback_sha": "27f5e0a595ba7de3895a3f5dae3c7a2913285cd7",
+    "regression_file_readback_sha": "7a72cd18819432afffa138fbcb29c4b5c6b55bf0",
+    "event_pre_ci_blob_sha": "fce0d4bb568326a52e4590ee80bb6971e12f70c6",
+    "branch_registry_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38506749051",
+    "branch_registry_conclusion": "success",
+    "production_and_tests_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38506749065",
+    "production_conclusion": "success",
+    "resource_source_receipt_validation": "success",
+    "intake_and_overlapping_root_regression": "success",
+    "pipeline_isolation_validator": "success",
+    "pages_deployment": "success",
+    "git_main_readback": "MATCHED_831be53cdad1",
+    "full_direct_drive_scan": "NOT_RUN",
+    "acceptance": "ONLY_SOURCE_AND_SYNTHETIC_VERIFICATION__NO_NEW_DRIVE_ADMISSION"
   }
 }
