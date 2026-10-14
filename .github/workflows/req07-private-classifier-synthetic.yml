@@ -8,6 +8,9 @@ on:
     paths:
       - scripts/classify_private_resource_inventory.py
       - scripts/test_private_resource_inventory_classifier.py
+      - scripts/reconcile_private_resource_inventory.py
+      - scripts/test_reconcile_private_resource_inventory.py
+      - scripts/run_private_resource_cycle.py
       - .github/workflows/req07-private-classifier-synthetic.yml
   workflow_dispatch:
 
@@ -26,6 +29,10 @@ jobs:
           python-version: '3.11'
       - name: Run fail-closed synthetic classification tests
         run: python scripts/test_private_resource_inventory_classifier.py
+      - name: Run synthetic private incremental-delta tests
+        run: python scripts/test_reconcile_private_resource_inventory.py
+      - name: Compile live production runner (no provider credentials or records)
+        run: python -m py_compile scripts/run_private_resource_cycle.py scripts/reconcile_private_resource_inventory.py
       - name: Assert zero private provider exports in public repository
         shell: bash
         run: |
