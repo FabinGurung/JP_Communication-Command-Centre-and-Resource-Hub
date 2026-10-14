@@ -79,13 +79,13 @@
       "software_task_id": "JP-AEC-REQ-08",
       "title": "Final site-wide verification and governed release closeout",
       "purpose": "Original item 8 contained no substantive instruction. Treat only as a release check unless user supplies a separate requirement.",
-      "status": "PROVISIONAL_QA_GATE__NO_ORIGINAL_TEXT",
+      "status": "PROVISIONAL_QA_PUBLIC_SURFACE_PASSED__REQ07_SOURCE_AUTHORITY_REMAINS_OPEN",
       "category": "RELEASE_QA",
       "source_ref": {
         "path": "ops/control/website-eight-request-roadmap.v0.1.json",
         "record_id": 8
       },
-      "source_status": "PROVISIONAL_QA_GATE__NO_ORIGINAL_TEXT",
+      "source_status": "PROVISIONAL_QA_PUBLIC_SURFACE_PASSED__REQ07_SOURCE_AUTHORITY_REMAINS_OPEN",
       "source_href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/control/website-eight-request-roadmap.v0.1.json"
     },
     {
