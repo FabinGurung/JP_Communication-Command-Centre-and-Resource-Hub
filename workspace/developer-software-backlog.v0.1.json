@@ -66,13 +66,13 @@
       "software_task_id": "JP-AEC-REQ-07",
       "title": "Usable prioritized normalized project resource library",
       "purpose": "PDF architecture/structural/geotechnical reports first, native design/analysis models next, estimates/spreadsheets later; original filenames and Drive IDs must remain traceable.",
-      "status": "PARTIAL_VERIFIED_46__FULL_DRIVE_INVENTORY_AND_AUTO_ADMISSION_OPEN",
+      "status": "PRIVATE_1519_CLASSIFIED_VERIFIED__SIX_ROOT_EXCEPTIONS_OPEN__NO_PUBLIC_ADMISSION",
       "category": "RESOURCE_LIBRARY_SOFTWARE",
       "source_ref": {
         "path": "ops/control/website-eight-request-roadmap.v0.1.json",
         "record_id": 7
       },
-      "source_status": "PARTIAL_VERIFIED_46__FULL_DRIVE_INVENTORY_AND_AUTO_ADMISSION_OPEN",
+      "source_status": "PRIVATE_1519_CLASSIFIED_VERIFIED__SIX_ROOT_EXCEPTIONS_OPEN__NO_PUBLIC_ADMISSION",
       "source_href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/control/website-eight-request-roadmap.v0.1.json"
     },
     {
