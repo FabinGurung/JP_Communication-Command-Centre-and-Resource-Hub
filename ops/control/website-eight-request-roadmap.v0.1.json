@@ -3,7 +3,7 @@
   "roadmap_id": "JP_AEC_ORIGINAL_REQUESTS_SEQUENTIAL_20261012",
   "date_npt": "2026-10-12",
   "policy": "ONE_USER_EXPERIENCE_REQUEST_AT_A_TIME__PRE_ARCHIVE__VALIDATE__POST_READBACK",
-  "status": "REQ01_THROUGH_REQ06_IMPLEMENTED_VERIFIED__REQ07_INDEXED_SCOPE_PARTIAL__REQ08_DEFERRED",
+  "status": "REQ01_THROUGH_REQ06_IMPLEMENTED_VERIFIED__REQ07_PRIVATE_1519_CLASSIFIED__SIX_SOURCE_ROOT_EXCEPTIONS_AND_APPROVAL_OPEN__REQ08_DEFERRED",
   "source": "User's original dated 2026-10-12 request, seven substantive numbered items and empty item 8; item 8 is a provisional site-wide QA/release closeout, not fabricated user content.",
   "completion_order": [
     {
@@ -159,7 +159,7 @@
     {
       "id": 7,
       "title": "Usable prioritized normalized project resource library",
-      "status": "PARTIAL_VERIFIED_46__FULL_DRIVE_INVENTORY_AND_AUTO_ADMISSION_OPEN",
+      "status": "PRIVATE_1519_CLASSIFIED_VERIFIED__SIX_ROOT_EXCEPTIONS_OPEN__NO_PUBLIC_ADMISSION",
       "scope": "PDF architecture/structural/geotechnical reports first, native design/analysis models next, estimates/spreadsheets later; original filenames and Drive IDs must remain traceable.",
       "acceptance": [
         "complete authorized inventory, not only 46 file pointers",
@@ -167,7 +167,7 @@
         "prioritized type taxonomy and template/font rules",
         "source revision/approval never invented"
       ],
-      "last_execution_npt": "2026-10-13",
+      "last_execution_npt": "2026-10-14",
       "implementation": "Live Drive IDs, exact original names and MIME types for all 46 registered resources matched across eight sites. Ranked bands now contain 14 drawing/report PDFs, 15 native models, 2 estimate/calculation PDFs and 15 source folder links; searchable source-safe priority filters and correct type-specific fonts. CI validates existing originals and a private deduplicating/quarantined intake preview and recursive metadata collector are prepared.",
       "verification": {
         "live_metadata_receipt": "ops/data/resource-drive-readback.v0.1.json",
@@ -185,23 +185,57 @@
         "registered_root_traversal": "ops/control/req07-registered-roots-metadata-traversal-20261013.v0.1.json",
         "indexed_source_parent_readback": "ops/control/req07-indexed-resource-parent-list-readback.v0.1.json",
         "registered_source_parent_list": "ops/control/req07-indexed-resource-parent-list-readback.v0.1.json",
-        "project_source_root_ancestry_exceptions": "ops/control/req07-p001-p002-source-root-ancestry-exceptions.v0.1.json"
+        "project_source_root_ancestry_exceptions": "ops/control/req07-p001-p002-source-root-ancestry-exceptions.v0.1.json",
+        "classifier": "scripts/classify_private_resource_inventory.py",
+        "classifier_synthetic_tests": "scripts/test_private_resource_inventory_classifier.py",
+        "classifier_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38583986408",
+        "private_colab_runner": "ops/resource-inventory/A9_CWO_REQ07_PRIVATE_DRIVE_INVENTORY_v1.0.ipynb",
+        "private_classification_roadmap_prearchive": "ops/99_VERSION_ARCHIVE/20261014/REQ07_PRIVATE_CLASSIFICATION_PRE/website-eight-request-roadmap.v0.1.json"
       },
       "remaining": [
-        "Run independent authenticated and fully paginated Drive API inventory across all authorized registered plus reviewed alternate project roots; persist private row IDs, hash receipts and an auditable deduplicated candidate ledger.",
-        "Owner-authorize corrected/additional source root pointers for six existing P001/P002 resources after verifying project FK and chain provenance; preserve original resources.",
-        "Conduct human project/access/privacy/revision/approval reviews of all newly discovered candidates and quarantine ambiguous records.",
-        "Implement authenticated incremental new-file collector and reviewed public admission; do not mark Request 7 complete until this is verified."
+        "Owner-authorize P001/P002 alternate original-source roots for 6 indexed references with exact project FK/ancestry evidence; do not auto-assume a parent folder implies ownership.",
+        "Keep private inventory and 226 engineering-related candidates gated pending per-file privacy and engineering revision/issuance verification.",
+        "Treat finance, staff, audit histories and metadata-unresolved resources as private, not public resource catalog entries.",
+        "Implement authenticated incremental intake and an approval-only public projection without exposing private IDs or filenames.",
+        "Complete Request 08 governed site-wide QA after Request 07 publication boundaries and approvals are verified."
       ],
-      "resume_execution_date_npt": "2026-10-13",
-      "resume_checkpoint_status": "NINE_ROOTS_TRAVERSED__1309_FILE_ENTRY_OBSERVATIONS__ALL_37_INDEXED_NONROOT_SOURCES_PARENT_LIST_MATCH__REVIEW_PENDING",
+      "resume_execution_date_npt": "2026-10-14",
+      "resume_checkpoint_status": "NINE_REGISTERED_ROOTS_PAGINATED_1519_UNIQUE_METADATA_ENTRIES__PRIVATE_CLASSIFICATION_PASSED__SIX_OUTSIDE_ROOT_POINTERS_PENDING",
       "resume_findings": [
-        "All 9 registered project roots were traversed with direct folder listing: 215 folder nodes and 1309 returned file entries (observational, not deduplicated or approved).",
-        "Three initial top_k=100 folder limits re-queried at 1000 entries; 111 P003 and 101/178 P007 items reported, with directory entries reflected in counts.",
-        "All 37 registered non-root resources individually verified against metadata-reported parent folder's direct list. All 9 registered project root folder IDs separately verified.",
-        "Six existing P001/P002 source pointers were verified as present in their metadata-declared direct Drive parent folder, but the complete parent ancestry of each terminates without reaching the registered project root. This requires a reviewed alternate-root mapping, not source file relocation.",
-        "No new private file names/IDs admitted into public GitHub pages; no original Drive source bytes, moves, renames, or engineering approvals changed."
-      ]
+        "Colab paginated Drive API metadata scan returned 1519 unique entries across 9 registered roots, 215 folders and 5 populated project aliases; SHA-256 verified.",
+        "Local parent-chain closure to registered roots verified for all 1519 entries in the provider snapshot; no one has authorized project ownership from folder placement.",
+        "Private metadata-only classifier separated engineering candidates, protected finance/personnel, source folders, historical audits and automation files; owner-only Sheet saved with 1519 rows and 226 engineering subqueue rows.",
+        "The 31 already-indexed entries remain separate from the registered total of 46 pointers (31 scanned + 9 root folders + 6 outside-root exceptions).",
+        "Six source-root exceptions P001/P002 individually resolve by Drive metadata but remain owner/provenance/approval held.",
+        "Public 46-resource library and all source originals unchanged. GitHub stores code and safe counts only."
+      ],
+      "private_classification_20261014": {
+        "source_run": "REQ07_20261014T052433Z",
+        "source_receipt_sha256": "976a9782139ef1887af626f0d6af9e1beb8da34bc6ae6b97510827c171d9dbc9",
+        "total_unique_entries": 1519,
+        "reconciled_snapshot_parent_paths": 1519,
+        "authorized_owner_corrections": 0,
+        "review_summary": {
+          "ENGINEERING_DESIGN_CANDIDATE": 42,
+          "ENGINEERING_SUPPORT_PRIVATE": 184,
+          "SYSTEM_AUTOMATION_CONTROL": 355,
+          "HISTORICAL_VERSION_AND_AUDIT": 511,
+          "FOLDER_METADATA_ONLY": 180,
+          "SITE_OPERATIONS_PRIVATE": 77,
+          "FINANCE_COMMERCIAL_PRIVATE": 53,
+          "RESTRICTED_QUARANTINE": 57,
+          "MEDIA_EVIDENCE_PRIVATE": 21,
+          "EXISTING_CATALOG_REFERENCE": 31,
+          "UNRESOLVED_METADATA": 8
+        },
+        "private_google_sheet_owner_only_verified": true,
+        "private_google_sheet_rows_readback": 1519,
+        "private_engineering_queue_rows_readback": 226,
+        "private_exception_queue_rows_readback": 6,
+        "public_resource_admissions": 0,
+        "modified_original_drive_files": 0,
+        "note": "Detailed private filenames/Drive IDs live only inside authenticated owner-only Drive. Snapshot lineage does not prove project source ownership or engineer approval."
+      }
     },
     {
       "id": 8,
