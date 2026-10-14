@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "type": "REQ08_PROVISIONAL_SITE_WIDE_QA_CLOSEOUT",
+  "date_npt": "2026-10-15",
+  "source_policy": "REQUEST_08_HAS_NO_ORIGINAL_SUBSTANTIVE_TEXT__VALIDATE_CURRENT_PUBLIC_SURFACE_ONLY",
+  "status": "PROVISIONAL_PUBLIC_SURFACE_QA_PASS__REQ07_PRIVATE_ADMISSION_HELD",
+  "source_main_commit_tested": "107b4e9985373a70c85264f5935293442ae676de",
+  "browser_qa": {
+    "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38657245624",
+    "result": "SUCCESS",
+    "tested_routes": 20,
+    "primary_sections": 6,
+    "responsive_mobile_viewport_px": 390,
+    "map_mobile_html_width_px": 390,
+    "map_mobile_body_width_px": 390,
+    "map_mobile_window_horizontal_scroll_px": 0,
+    "map_mobile_root_horizontal_scroll_px": 0,
+    "map_mobile_body_horizontal_scroll_px": 0,
+    "map_mobile_wcag_audit_violations": 0,
+    "interaction_results": [
+      "site navigation",
+      "mobile map",
+      "project FK preservation",
+      "checklist local ownership",
+      "resource browser priorities",
+      "developer workspace boundary"
+    ],
+    "screenshots_artifact": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38657245624"
+  },
+  "production_ci": {
+    "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38657245720",
+    "result": "SUCCESS"
+  },
+  "private_intake_synthetic_ci": {
+    "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38656678749",
+    "result": "SUCCESS"
+  },
+  "public_resources": {
+    "total": 46,
+    "source_pointers_modified": 0,
+    "new_public_admissions": 0,
+    "private_data_exposed": false
+  },
+  "original_files": {
+    "moved": 0,
+    "renamed": 0,
+    "deleted": 0
+  },
+  "remaining_outside_site_qa": [
+    "Authenticated latest-drive refresh from independent authorized Google OAuth runtime",
+    "Three P001 alternate-root source owner permissions and three P002 archival provenance decisions",
+    "Per-file owner/privacy clearance before new public resource admissions"
+  ],
+  "release_statement": "The current site and 46 existing public resource pointers pass public-facing browser and CI smoke tests. This is NOT an approval of 226 private engineering candidates, unpublished source privacy, or current-issue revision status."
+}
