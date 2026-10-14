@@ -11,6 +11,8 @@ on:
       - scripts/reconcile_private_resource_inventory.py
       - scripts/test_reconcile_private_resource_inventory.py
       - scripts/run_private_resource_cycle.py
+      - scripts/stage_reviewed_resource_admission.py
+      - scripts/test_stage_reviewed_resource_admission.py
       - .github/workflows/req07-private-classifier-synthetic.yml
   workflow_dispatch:
 
@@ -31,8 +33,10 @@ jobs:
         run: python scripts/test_private_resource_inventory_classifier.py
       - name: Run synthetic private incremental-delta tests
         run: python scripts/test_reconcile_private_resource_inventory.py
+      - name: Run private approval gate tests
+        run: python scripts/test_stage_reviewed_resource_admission.py
       - name: Compile live production runner (no provider credentials or records)
-        run: python -m py_compile scripts/run_private_resource_cycle.py scripts/reconcile_private_resource_inventory.py
+        run: python -m py_compile scripts/run_private_resource_cycle.py scripts/reconcile_private_resource_inventory.py scripts/stage_reviewed_resource_admission.py
       - name: Assert zero private provider exports in public repository
         shell: bash
         run: |
