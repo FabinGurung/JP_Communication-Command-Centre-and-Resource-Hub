@@ -94,6 +94,27 @@ class ResourcesTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"Cross-project"):
             collector.crawl({"P001":"root-a","P002":"root-b"},shared)
 
+    def test_overlapping_authorized_roots_preserve_descendant_lineage(self):
+        """Nested root scans must attribute deeper files to both reviewed roots."""
+        calls=[]
+        def fetch(folder,token):
+            self.assertIsNone(token)
+            calls.append(folder)
+            children={
+                "root":[{"id":"nested","name":"Nested root","mimeType":collector.FOLDER,"parents":["root"]}],
+                "nested":[{"id":"deep","name":"Deeper","mimeType":collector.FOLDER,"parents":["nested"]},
+                          {"id":"first.pdf","name":"first.pdf","mimeType":"application/pdf","parents":["nested"]}],
+                "deep":[{"id":"second.dwg","name":"second.dwg","mimeType":"application/dwg","parents":["deep"]}],
+            }
+            return children[folder],None
+        rows,visited=collector.crawl({"P007":["root","nested"]},fetch,return_visited=True)
+        by_id={r["drive_file_id"]:r for r in rows}
+        for fid in ("first.pdf","second.dwg","deep"):
+            self.assertEqual(by_id[fid]["source_root_ids"],["nested","root"])
+        self.assertEqual(len(visited),3)  # Distinct Drive folders, not scope traversals
+        self.assertEqual(calls.count("deep"),2)  # Both authorized root paths verified
+        self.assertEqual(len(rows),4)  # Deduplicate the original Drive IDs
+
     def test_provider_search_hole_detected_by_file_parent_readback(self):
         # Recreates the observed Drive discrepancy: folder search returns zero
         # although metadata-by-ID confirms the DWG belongs in that parent.

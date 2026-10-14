@@ -41,14 +41,16 @@ def normalize_roots(roots):
 
 def crawl(roots, fetch_page, *, max_rows=100000, return_visited=False):
     rows={}
-    visited_folders=set()
+    visited_folders=set()  # Unique provider folders visited (reporting and source reconciliation)
+    visited_source_scopes=set()  # A folder may occur beneath two authorized roots
     for project_id,root_ids in sorted(normalize_roots(roots).items()):
         queue=[(root_id,root_id) for root_id in root_ids]
         while queue:
             folder,source_root=queue.pop(0)
-            key=(project_id,folder)
-            if key in visited_folders:continue
-            visited_folders.add(key)
+            key=(project_id,folder,source_root)
+            if key in visited_source_scopes:continue
+            visited_source_scopes.add(key)
+            visited_folders.add((project_id,folder))
             page_token=None
             page_tokens=set()
             while True:
@@ -68,6 +70,9 @@ def crawl(roots, fetch_page, *, max_rows=100000, return_visited=False):
                         if previous["original_filename"]!=name or previous["mime_type"]!=mime:
                             raise ValueError("Conflicting metadata for duplicate Drive ID")
                         previous["source_root_ids"]=sorted(set(previous["source_root_ids"]+[source_root]))
+                        # Even a previously indexed folder needs traversal for this
+                        # source root, or its descendants lose alternate-root lineage.
+                        if mime==FOLDER:queue.append((fid,source_root))
                         continue
                     rows[fid]={
                         "project_id":project_id,"source_root_ids":[source_root],
