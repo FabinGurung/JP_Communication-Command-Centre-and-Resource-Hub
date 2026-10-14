@@ -48,8 +48,14 @@ def validate():
     require(receipt.get("status")=="ALL_46_EXISTING_POINTERS_METADATA_MATCH__FULL_RECURSIVE_INVENTORY_OPEN",
             "whole-Drive inventory cannot be claimed from 46 pointers")
     display=load("ops/control/resource-display-and-admission.v0.1.json")
-    require(display["status"]=="CURRENT_46_VERIFIED__COMPLETE_DRIVE_INVENTORY_OPEN",
-            "resource directory misleadingly claims full Drive completion")
+    require(display["status"]=="CURRENT_46_PUBLIC__1519_REGISTERED_SCOPE_PRIVATE_CLASSIFIED__SIX_ALTERNATE_SOURCE_EXCEPTIONS_OPEN",
+            "resource directory classification/coverage status drift")
+    require(display["snapshot"].get("registered_root_metadata_scan_complete") is True and
+            display["snapshot"].get("registered_root_metadata_scan_rows")==1519 and
+            display["snapshot"].get("outside_scanned_project_root_source_exceptions")==6 and
+            display["snapshot"].get("private_engineering_related_candidate_count")==226 and
+            display["snapshot"].get("private_catalog_url_publicly_exposed") is False,
+            "private 1519-row inventory and public 46-resource projection boundary drift")
     require(display["snapshot"]["recursive_inventory_complete"] is False,
             "full recursive provider inventory asserted without complete inspection")
     web=(ROOT/"resources/index.html").read_text(encoding="utf-8")
@@ -122,4 +128,4 @@ if __name__=="__main__":
     counts=validate()
     print("RESOURCE_CATALOG_PASS: 46 source originals/metadata receipts verified; "
           +" / ".join(f"{key}={v}" for key,v in counts.items())
-          +"; full recursive Drive inventory remains open.")
+          +"; six outside-root source pointers remain unresolved; 1519 registered-scope items privately classified.")
