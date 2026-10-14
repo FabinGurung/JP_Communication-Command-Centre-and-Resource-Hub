@@ -247,7 +247,7 @@
     {
       "id": 8,
       "title": "Final site-wide verification and governed release closeout",
-      "status": "PROVISIONAL_QA_GATE__NO_ORIGINAL_TEXT",
+      "status": "PROVISIONAL_QA_PUBLIC_SURFACE_PASSED__REQ07_SOURCE_AUTHORITY_REMAINS_OPEN",
       "scope": "Original item 8 contained no substantive instruction. Treat only as a release check unless user supplies a separate requirement.",
       "acceptance": [
         "desktop/mobile/keyboard/WCAG smoke",
@@ -262,7 +262,21 @@
         "current_public_source_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38656842268",
         "browser_sitewide_ci": "RUN_ON_THIS_ROADMAP_CHANGE",
         "requested_user_text_for_item_8": "NONE__PROVISIONAL_QA_ONLY"
-      }
+      },
+      "verification": {
+        "browser_mobile_keyboard_wcag": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38657245624",
+        "source_validation_and_deployment": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38657245720",
+        "control_receipt": "ops/control/req08-provisional-sitewide-qa-20261015.v1.0.json",
+        "checked_public_routes": 20,
+        "primary_navigation_sections": 6,
+        "mobile_map_viewport_px": 390,
+        "mobile_map_html_and_body_width_px": 390,
+        "actual_horizontal_scroll_px": 0,
+        "public_resources_preserved": 46,
+        "new_private_resource_admissions": 0,
+        "status": "PASS_FOR_EXISTING_PUBLIC_SITE"
+      },
+      "remaining_dependency": "Six external source-root exceptions and independent file-specific authorization remain part of Request07; never invent owner or engineering approvals."
     }
   ],
   "change_contract": {
