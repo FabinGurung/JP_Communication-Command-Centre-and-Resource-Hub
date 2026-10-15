@@ -158,3 +158,11 @@ See [`ops/control/daily-slack-web-cycle.json`](ops/control/daily-slack-web-cycle
 ## A9-CWO — Communication & Web Operations
 
 **A9-CWO** supersedes the user-facing A9-SWO nickname. It represents a multi-source operating cycle (governed Slack, two-channel Discord Colab and future admitted providers), **not a new Discord/Slack bot account**. See the [pinned storage and daily pipeline](controls/storage.html), machine contract `ops/control/storage-routing-rules.json`, and [two-channel Discord Colab](ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb). An operator runs the Discord notebook before daily reconciliation and the run must report Discord `PASS/PARTIAL/NOT_RUN`. Full historical Discord server harvesting is out of scope. Storage assignment is by original evidence / normalized truth / binary file / human projection, not by channel brand.
+
+## A7 catalogue-only / operations ownership guard (staged on approved work lane)
+
+**Operations owns** its project-master and admitted Daily Ops data, field evidence, workflows, site guides and versioned source. A7 is a **read-only federated catalogue / repository index**: it holds discovery locations, module identifiers, pointers to statuses/commits and cross-module links, not operational fact records, CAD/AAD templates or specialist execution rules.
+
+**AI/automation MUST NOT mutate A7** as a consequence of Operations changes: no A7 commits, PRs, schema or template edits, history backfills, index repairs or website modifications. A7 mutation needs a separate, explicitly user-authorized A7 request. If the catalogue is stale, record a pending pointer fix locally; do not auto-synchronize. CAD/AAD drawing templates belong to `FabinGurung/JP_Computer-Aided-Drawings/governance/aad/`, not to A7.
+
+**Branch governance:** this documentation change is staged only in the registered `feature/daily-ops-current-work` lane. It **must not** be merged or promoted with unrelated operational commits until the branch registry, ahead/behind divergence, canonical data and CI validations are reconciled. Production `main` remains untouched by this staging step.
