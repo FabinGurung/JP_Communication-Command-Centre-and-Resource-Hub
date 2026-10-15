@@ -10,3 +10,9 @@ Never treat this public repository as the private A9 Main Library. Keep research
 A9 historical private governance remains binding until explicitly reconciled and safely migrated. Do not invent completion, copy private data or tokens into public GitHub, or silently bypass project-specific rules.
 
 This file is an agent instruction pointer; it does not change ChatGPT's account-wide/system instructions or guarantee a particular client auto-loads it.
+
+## A7 catalogue-only / Operations lane guard
+
+**NO A7 MUTATIONS AS A SIDE EFFECT.** A7 is read-only for Operations: an index of module identity, owner, website, release/status/history links and cross-module FK pointers; not a central data or template writer. Never create/update A7 code, policies, domain schemas, AAD/CAD templates, registry records or website content without a **separately explicit A7-scoped user request**. An outdated A7 link is a local pending discrepancy, not an automatic patch. Operations facts remain owned by this repo's `projects.csv`, `ops/data/current-works.json` and other canonical files; CAD/AAD templates by `JP_Computer-Aided-Drawings/governance/aad/`.
+
+This branch is only the existing authorized `feature/daily-ops-current-work` lane. Its main-vs-local divergence must be audited; do NOT open or merge a broad PR from this lane automatically. Preserve all previously listed branch-registry and operational validation constraints.
