@@ -48,14 +48,19 @@ def validate():
     require(receipt.get("status")=="ALL_46_EXISTING_POINTERS_METADATA_MATCH__FULL_RECURSIVE_INVENTORY_OPEN",
             "whole-Drive inventory cannot be claimed from 46 pointers")
     display=load("ops/control/resource-display-and-admission.v0.1.json")
-    require(display["status"]=="CURRENT_46_PUBLIC__1519_REGISTERED_SCOPE_PRIVATE_CLASSIFIED__SIX_ALTERNATE_SOURCE_EXCEPTIONS_OPEN",
+    require(display["status"]=="CURRENT_46_PUBLIC__1520_REGISTERED_SCOPE_PRIVATE_RECONCILED__SIX_ALTERNATE_SOURCE_EXCEPTIONS_OPEN",
             "resource directory classification/coverage status drift")
     require(display["snapshot"].get("registered_root_metadata_scan_complete") is True and
-            display["snapshot"].get("registered_root_metadata_scan_rows")==1519 and
+            display["snapshot"].get("registered_root_metadata_scan_rows")==1520 and
             display["snapshot"].get("outside_scanned_project_root_source_exceptions")==6 and
+            display["snapshot"].get("unchanged_prior_entries")==1519 and
+            display["snapshot"].get("new_private_candidates")==1 and
+            display["snapshot"].get("metadata_changed_rows")==0 and
+            display["snapshot"].get("project_fk_conflicts")==0 and
+            display["snapshot"].get("full_provider_cursor_exhaustion_certified") is False and
             display["snapshot"].get("private_engineering_related_candidate_count")==226 and
             display["snapshot"].get("private_catalog_url_publicly_exposed") is False,
-            "private 1519-row inventory and public 46-resource projection boundary drift")
+            "private 1520-row registered-root inventory and public 46-resource projection boundary drift")
     require(display["snapshot"]["recursive_inventory_complete"] is False,
             "full recursive provider inventory asserted without complete inspection")
     web=(ROOT/"resources/index.html").read_text(encoding="utf-8")
