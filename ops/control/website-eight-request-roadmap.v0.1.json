@@ -3,7 +3,7 @@
   "roadmap_id": "JP_AEC_ORIGINAL_REQUESTS_SEQUENTIAL_20261012",
   "date_npt": "2026-10-12",
   "policy": "ONE_USER_EXPERIENCE_REQUEST_AT_A_TIME__PRE_ARCHIVE__VALIDATE__POST_READBACK",
-  "status": "REQ01_THROUGH_REQ06_IMPLEMENTED_VERIFIED__REQ07_PRIVATE_1519_CLASSIFIED__SIX_SOURCE_ROOT_EXCEPTIONS_AND_APPROVAL_OPEN__REQ08_DEFERRED",
+  "status": "REQ01_TO_REQ06_IMPLEMENTED__REQ07_PRIVATE_1520_RECONCILED_AND_AUTHORITY_HELD__REQ08_SITE_QA_PASSED",
   "source": "User's original dated 2026-10-12 request, seven substantive numbered items and empty item 8; item 8 is a provisional site-wide QA/release closeout, not fabricated user content.",
   "completion_order": [
     {
@@ -159,7 +159,7 @@
     {
       "id": 7,
       "title": "Usable prioritized normalized project resource library",
-      "status": "PRIVATE_1519_CLASSIFIED_VERIFIED__SIX_ROOT_EXCEPTIONS_OPEN__NO_PUBLIC_ADMISSION",
+      "status": "PRIVATE_1520_RECONCILED__ONE_NEW_P007_CONTROL__SIX_PROVENANCE_EXCEPTIONS_OPEN__NO_PUBLIC_ADMISSION",
       "scope": "PDF architecture/structural/geotechnical reports first, native design/analysis models next, estimates/spreadsheets later; original filenames and Drive IDs must remain traceable.",
       "acceptance": [
         "complete authorized inventory, not only 46 file pointers",
@@ -197,17 +197,19 @@
         "incremental_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38656678749",
         "private_live_provenance_check_npt": "2026-10-15",
         "control_status": "ops/control/req07-20261015-incremental-and-provenance-control.v1.0.json",
-        "public_resource_validator_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38656842268"
+        "public_resource_validator_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38656842268",
+        "live_connected_drive_control": "ops/control/req07-20261015-live-connected-drive-readback.v1.0.json",
+        "live_connected_private_artifact": "OWNER_ONLY_DRIVE__REQ07_20261015_LIVE_CONNECTED_DRIVE_READBACK_V2"
       },
       "remaining": [
-        "Run the new full authenticated Drive metadata refresh in an authorized Google OAuth runtime, comparing against the 1519-row private SHA-verified baseline; the public GitHub runner deliberately has no Drive credentials.",
-        "Obtain explicit owner provenance approval for the corroborated P001 alternate original-source folder before registering it as an authorized discovery root.",
-        "Find authoritative project-owned originals or a signed provenance determination for the three P002 documents in the unrelated Discord archive; do not auto-promote archive ancestor.",
-        "File-specific disclosure and engineering issue/revision decisions are required for any additional public resources; private 226 engineering-related candidates remain gated.",
-        "Complete final Request08 browser/mobile release QA; do not equate the authorized-root inventory with all Drive folders."
+        "Resolve P001 three alternate original-source references with independent owner-authorized project root mapping; the existing company/project ancestry is corroborative but not authorization.",
+        "Resolve P002 three indexed drawing references stored in an unrelated Discord archive against actual project-owned issue documents; do not claim their channel path is an approved source.",
+        "Keep the 226 existing engineering-related private candidates and the single newly discovered P007 control document private until file-specific ownership, privacy and revision/engineering issue checks are documented.",
+        "Formally certify Google Drive provider pagination via the existing OAuth cursor-based engine if exhaustive provider page exhaustion is required; the connected 215-folder sweep reconciled all 1519 prior IDs and found one new file but did not expose pagination tokens.",
+        "Implement future authenticated reruns against the new 1520-row baseline and keep public resource catalog unchanged absent explicit approval."
       ],
       "resume_execution_date_npt": "2026-10-15",
-      "resume_checkpoint_status": "PRIVATE_1519_CLASSIFIED_READBACK__P001_CORROBORATED_P002_UNRELATED_ARCHIVE__INCREMENTAL_AND_APPROVAL_TESTS_PASS",
+      "resume_checkpoint_status": "CONNECTED_PROVIDER_215_FOLDERS_1520_PRIVATE_IDS__1519_UNCHANGED_1_NEW_P007_PRIVATE_DOCUMENT__NO_OTHER_CHANGES",
       "resume_findings": [
         "Colab paginated Drive API metadata scan returned 1519 unique entries across 9 registered roots, 215 folders and 5 populated project aliases; SHA-256 verified.",
         "Local parent-chain closure to registered roots verified for all 1519 entries in the provider snapshot; no one has authorized project ownership from folder placement.",
@@ -242,6 +244,28 @@
         "public_resource_admissions": 0,
         "modified_original_drive_files": 0,
         "note": "Detailed private filenames/Drive IDs live only inside authenticated owner-only Drive. Snapshot lineage does not prove project source ownership or engineer approval."
+      },
+      "private_refresh_20261015": {
+        "source_scope": "NINE_REGISTERED_DRIVE_ROOTS_ONLY",
+        "registered_folders_checked": 215,
+        "unique_metadata_entries": 1520,
+        "previous_unique": 1519,
+        "same_pk_name_mime_parent_mtime": 1519,
+        "new_private_document": 1,
+        "new_document_project_id": "P007",
+        "new_document_category": "SYSTEM_AUTOMATION_CONTROL",
+        "new_document_status": "PRIVATE_REVIEW_REQUIRED_NOT_PUBLIC",
+        "provider_missing": 0,
+        "other_modified_metadata": 0,
+        "cross_project_identity_conflicts": 0,
+        "public_resource_admissions": 0,
+        "original_provider_file_mutations": 0,
+        "private_owner_only_spreadsheet_readback_passed": true,
+        "jsonl_derivative_sha256": "b7a0929b56886683a7a5fb128276ec78fb64836e98b623c8edb1d821d0e707e7",
+        "live_spreadsheet_export_sha256": "3c3841303d1750f9ed8dc78cfdc60b06d7372530f7f7fe25ec5b7652bc2b53a1",
+        "provider_pagination_tokens_exposed": false,
+        "formal_full_google_drive_cursor_exhaustion_verified": false,
+        "six_prior_external_source_exceptions_unchanged": true
       }
     },
     {
