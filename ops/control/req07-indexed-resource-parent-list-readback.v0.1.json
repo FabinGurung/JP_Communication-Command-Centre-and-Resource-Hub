@@ -1,0 +1,75 @@
+{
+  "schema_version": "0.1.0",
+  "checkpoint_id": "REQ07_INDEXED_SOURCE_PARENT_LIST_READBACK_20261013",
+  "status": "ALL_46_REGISTERED_SOURCE_POINTERS_METADATA_EXIST__37_NON_ROOT_PARENT_LIST_MATCHED__FULL_INVENTORY_STILL_OPEN",
+  "date_npt": "2026-10-13",
+  "source": "ops/data/project-resources.json",
+  "verification": {
+    "non_root_resources_checked": 37,
+    "non_root_resources_found_in_metadata_declared_parent_list": 37,
+    "direct_folder_list_method": "mcp Google Drive list_folder top_k 1000, compared with independent get_file_metadata parent_ids by source file ID",
+    "registered_root_folders_separately_verified_by_id": 9,
+    "original_names_mime_ids_previously_verified": 46,
+    "project_counts": [
+      {
+        "project_id": "P001",
+        "checked_non_root": 3,
+        "parent_list_match": 3
+      },
+      {
+        "project_id": "P002",
+        "checked_non_root": 3,
+        "parent_list_match": 3
+      },
+      {
+        "project_id": "P003",
+        "checked_non_root": 1,
+        "parent_list_match": 1
+      },
+      {
+        "project_id": "P004",
+        "checked_non_root": 2,
+        "parent_list_match": 2
+      },
+      {
+        "project_id": "P005",
+        "checked_non_root": 6,
+        "parent_list_match": 6
+      },
+      {
+        "project_id": "P006",
+        "checked_non_root": 0,
+        "parent_list_match": 0
+      },
+      {
+        "project_id": "P007",
+        "checked_non_root": 15,
+        "parent_list_match": 15
+      },
+      {
+        "project_id": "P020",
+        "checked_non_root": 7,
+        "parent_list_match": 7
+      }
+    ]
+  },
+  "exceptions": [
+    {
+      "kind": "PROJECT_OWNERSHIP_ANCESTRY_UNRESOLVED",
+      "project_ids": [
+        "P001",
+        "P002"
+      ],
+      "registered_resource_count": 6,
+      "explanation": "Files are visible in their independent Drive parent folders, but their ancestor chain was not shown to reach the registered project root within seven parent hops."
+    },
+    {
+      "kind": "FULL_PRIVATE_SCAN_NOT_CREDENTIAL_EXECUTED",
+      "explanation": "Registered-root folder listing and by-ID source readback do not replace complete independent paginated API inventory, privacy review and a persistent private receipt."
+    }
+  ],
+  "source_modifications": 0,
+  "public_new_file_count": 0,
+  "privacy": "Does not publish any newly discovered source filenames, private provider file IDs, legal/personal document metadata or raw file bytes.",
+  "follow_up": "Authenticated direct API recursive inventory and SHA-256/private metadata receipt followed by alternate-root and privacy review."
+}

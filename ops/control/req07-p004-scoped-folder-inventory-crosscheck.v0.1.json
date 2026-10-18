@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.1.0",
+  "checkpoint_id": "REQ07_YAMUNA_SCOPED_ENUMERATION_CROSSCHECK_20261013",
+  "date_npt": "2026-10-13",
+  "project_id": "P004",
+  "project_root_drive_id": "1qM2koziyLpANUX2xcXr-D-RXYdbV5WWV",
+  "status": "DIRECT_FOLDER_LIST_SCOPED_CROSSCHECK__PRIVATE_REVIEW_NOT_PUBLISHED",
+  "source_methods": [
+    {
+      "method": "Drive search q parent in parents",
+      "queried_folder_count": 21,
+      "returned_file_entries": 11,
+      "folder_count": 21,
+      "page_token_exposed": false,
+      "completeness": "NOT_ACCEPTED__OMITTED_KNOWN_APPROVED_INDEXED_CHILD"
+    },
+    {
+      "method": "Drive list_folder direct",
+      "queried_folder_count": 21,
+      "returned_file_entries": 35,
+      "folder_count": 21,
+      "max_child_count_below_100": true,
+      "child_count_cap": 100,
+      "completeness": "SCOPE_ENUMERATION_COMPLETED_UNDER_CONNECTOR_RETURN_LIMIT__FULL_SOURCE_AUTHORITY_NOT_CERTIFIED"
+    }
+  ],
+  "gap": {
+    "missing_from_search_observed_file_entries": 24,
+    "known_stable_resource_id": "RES-P004-ARCH-DWG-001",
+    "known_drive_file_metadata_parent": "1vv2dbl08HP31d2yMqNpQzQSATQ3mcmM2",
+    "search_direct_children_for_parent": 0,
+    "list_folder_direct_children_for_parent": 2,
+    "approved_indexed_DWG_seen_by_list_folder": true,
+    "additional_unreviewed_native_DXF_seen": true
+  },
+  "governance": {
+    "new_public_catalog_rows": 0,
+    "original_files_read_as_bytes": 0,
+    "renames_or_moves": 0,
+    "private_review_required_for_all_unpublished_records": true,
+    "manual_approval_or_issue_revision_inferred": false,
+    "metadata_not_persisted_in_public_repo": "Names and Drive IDs for newly discovered/unreviewed files intentionally omitted from public checkpoint.",
+    "direct_api_full_eight_project_inventory_complete": false,
+    "next": "Re-run full authorized roots with direct paginated Drive API, independent by-ID parent reconciliation and a private SHA-256 receipt. Review owner, privacy, version and approval before admitting new catalog files."
+  },
+  "source_links": {
+    "catalog": "ops/data/resource-catalog-normalized.v0.1.json",
+    "originals": "ops/data/project-resources.json",
+    "coverage_validator": "scripts/collect_private_drive_resource_metadata.py",
+    "private_candidate_preview": "scripts/preview_resource_intake.py",
+    "regressions": "scripts/test_resource_library.py"
+  },
+  "registered_root_top_level_direct_list_readback": [
+    {
+      "project_id": "P001",
+      "registered_roots": 1,
+      "returned_children": 0,
+      "interpretation": "NOT_EVIDENCE_OF_EMPTY_PROJECT_ORIGINS"
+    },
+    {
+      "project_id": "P002",
+      "registered_roots": 1,
+      "returned_children": 0,
+      "interpretation": "NOT_EVIDENCE_OF_EMPTY_PROJECT_ORIGINS"
+    },
+    {
+      "project_id": "P003",
+      "registered_roots": 1,
+      "returned_children": 13
+    },
+    {
+      "project_id": "P004",
+      "registered_roots": 1,
+      "returned_children": 9
+    },
+    {
+      "project_id": "P005",
+      "registered_roots": 1,
+      "returned_children": 13
+    },
+    {
+      "project_id": "P006",
+      "registered_roots": 1,
+      "returned_children": 0,
+      "interpretation": "NOT_EVIDENCE_OF_EMPTY_PROJECT_ORIGINS"
+    },
+    {
+      "project_id": "P007",
+      "registered_roots": 2,
+      "returned_children_per_root": [
+        6,
+        12
+      ]
+    },
+    {
+      "project_id": "P020",
+      "registered_roots": 1,
+      "returned_children": 14
+    }
+  ],
+  "registered_root_top_level_disclaimer": "All nine registered source roots were queried by direct folder listing, but only P004 was traversed to terminal listed folders. Other project nested directories, alternate sources, permissions, and 100-item cap remain unverified."
+}

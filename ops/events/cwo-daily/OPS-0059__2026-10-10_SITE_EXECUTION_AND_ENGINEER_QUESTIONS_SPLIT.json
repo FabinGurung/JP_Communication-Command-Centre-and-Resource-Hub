@@ -1,0 +1,60 @@
+{
+  "event_id": "OPS-0059",
+  "event_type": "A9_CWO_SITE_OPERATIONS_EXECUTION_QUERY_SPLIT",
+  "record_date_npt": "2026-10-10",
+  "status": "GITHUB_PRODUCTION_CI_PASS",
+  "source_snapshot_npt": "2026-10-10",
+  "source_integrity": "DERIVED_PROJECTION_NO_ORIGINALS_MOVED",
+  "evidence_sources": [
+    "ops/data/field-three-day-board.json",
+    "ops/data/current-works.json"
+  ],
+  "new_paths": [
+    "site-operations/schedule.html",
+    "site-operations/questions.html",
+    "ops/data/site-execution-questions.v0.1.json",
+    "ops/control/site-execution-question-rules.v0.1.json"
+  ],
+  "updated_paths": [
+    "site-operations.html",
+    "site-operations/project.html",
+    "scripts/phase5_release_qa.py"
+  ],
+  "source_archives": [
+    "site-operations/99_VERSION_ARCHIVE/20261010/site-operations__PRE_SPLIT_WORK_QUESTIONS.html",
+    "scripts/99_VERSION_ARCHIVE/20261010/phase5_release_qa__PRE_IGNORE_ARCHIVES.py.txt"
+  ],
+  "release_qa_fix": "Historical 99_VERSION_ARCHIVE HTML is excluded from live-route audit but remains unchanged in Git.",
+  "counts": {
+    "sites": 8,
+    "approved_dated_work_assignments": 0,
+    "recorded_site_hold_readiness": 2,
+    "open_issues": 18,
+    "questions": 36,
+    "dated_field_reports": 5
+  },
+  "ui_distinctions": [
+    "AUTHORIZED_SCHEDULE",
+    "RECORDED_SITE_HOLD_NOT_PROOF_OF_ALL_SITE_IDLE",
+    "RECORDED_TASK_HOLD",
+    "UNRESOLVED_ISSUE_AGE_NOT_HOLD_DURATION",
+    "REPORTED_ACTIVITY_NOT_APPROVED",
+    "QUESTIONS_ARE_NOT_CREW_ASSIGNMENTS"
+  ],
+  "questions_mode": "LOCAL_DRAFT_CLIPBOARD_THEN_MANUAL_SLACK_REPLY_NOT_AUTOSUBMITTED",
+  "notes": [
+    "No 10 Oct crew tasks admitted without dated authorized source and readiness/crew detail.",
+    "MCQ answer is not engineering signoff.",
+    "No private Discord media published.",
+    "Core project-current-work canonical file unchanged."
+  ],
+  "production_workflow": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38036997718",
+  "production_conclusion": "success",
+  "verification": {
+    "github_file_readbacks": "PASS",
+    "branch_lane_validation": "PASS",
+    "github_actions_production": "PASS",
+    "rendered_site_independent_browser": "NOT_VERIFIED",
+    "field_desk_visual_QA": "IN_PROGRESS_AT_LAST_CHECK"
+  }
+}

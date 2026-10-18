@@ -1,0 +1,393 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_version": "0.1.0",
+  "projection_id": "A9-CWO-CHECKLIST-FOR-TODAY-20261010",
+  "as_of_npt": "2026-10-10",
+  "data_state": "SNAPSHOT_CARRY_FORWARD_NOT_DATED_APPROVED_WORK_PLAN",
+  "source_refs": [
+    "ops/data/current-works.json",
+    "ops/data/site-execution-questions.v0.1.json",
+    "ops/data/field-three-day-board.json"
+  ],
+  "raw_photo_storage": "EXISTING_PRIVATE_DRIVE_NO_PUBLIC_PHOTO_ORIGINALS",
+  "session_state": "BROWSER_MEMORY_ONLY_CHECKMARKS_CLEAR_ON_REFRESH",
+  "submission_state": "NO_AUTOMATIC_SLACK_SEND_OR_SAVED_ENGINEERING_SIGNOFF",
+  "checklist_guidance": "Check means engineer has reviewed or relayed a follow-up locally, not the requested work is finished; only source provider reconciliation updates canonical completion.",
+  "daily_plan_authority": "OFFLINE_OR_SCHEDULING_MODULE_RESPONSIBLE_ENGINEER_SIGNED_PLAN_NOT_IN_SOURCE_SNAPSHOT",
+  "sites": [
+    {
+      "project_id": "P001",
+      "display_name": "14 Bishal Paija",
+      "company": "Rohini Engineering and Builders Pvt Ltd",
+      "slack_channel_url": "https://jp09.slack.com/archives/C0C2DJNGARW",
+      "readiness_snapshot": "UNSET",
+      "source_cutoff": "2026-10-09",
+      "approved_daily_work_count": 0,
+      "unresolved_issues": 3,
+      "unanswered_queries": 4,
+      "checklist": [
+        {
+          "id": "CHECK-P001-PLAN",
+          "kind": "DAILY_ROUTINE",
+          "label": "Confirm today's work, crew and location with the responsible site engineer.",
+          "purpose": "Verify before relaying work instructions",
+          "source_question_id": null,
+          "source_link": null
+        },
+        {
+          "id": "CHECK-P001-ENGQ-P001-20261010-01",
+          "kind": "ENGINEER_DECISION",
+          "label": "Confirm crack/anchorage location and request the structural engineer’s assessment.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P001-20261010-01",
+          "source_link": "https://jp09.slack.com/archives/C0C2DJNGARW/p1791374216966389",
+          "source_severity": "ENGINEERING_DECISION"
+        },
+        {
+          "id": "CHECK-P001-ENGQ-P001-20261010-02",
+          "kind": "ENGINEER_DECISION",
+          "label": "Confirm external concealed-pipe route against approved wall and frame details.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P001-20261010-02",
+          "source_link": "https://discord.com/channels/682670494658330644/1548906581121306635/1556465865401045012",
+          "source_severity": "ENGINEERING_DECISION"
+        },
+        {
+          "id": "CHECK-P001-CLOSE",
+          "kind": "DAILY_ROUTINE",
+          "label": "Relay pending engineer decisions and material/vendor requirements; request dated updates.",
+          "purpose": "Request follow-up, not a purchase or construction authorization",
+          "source_question_id": null,
+          "source_link": null
+        }
+      ]
+    },
+    {
+      "project_id": "P002",
+      "display_name": "17 Samir Man Ghubaju",
+      "company": "Fishtail Builders Pvt Ltd",
+      "slack_channel_url": "https://jp09.slack.com/archives/C0C13SMN1QX",
+      "readiness_snapshot": "UNSET",
+      "source_cutoff": "2026-10-09",
+      "approved_daily_work_count": 0,
+      "unresolved_issues": 3,
+      "unanswered_queries": 6,
+      "checklist": [
+        {
+          "id": "CHECK-P002-PLAN",
+          "kind": "DAILY_ROUTINE",
+          "label": "Confirm today's work, crew and location with the responsible site engineer.",
+          "purpose": "Verify before relaying work instructions",
+          "source_question_id": null,
+          "source_link": null
+        },
+        {
+          "id": "CHECK-P002-ENGQ-P002-20261010-01",
+          "kind": "ENGINEER_DECISION",
+          "label": "Confirm beam shear-reinforcement fabrication progress; no QA approval inferred.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P002-20261010-01",
+          "source_link": "https://discord.com/channels/682670494658330644/1502154332878016673/1556525226144043058",
+          "source_severity": "ENGINEERING_DECISION"
+        },
+        {
+          "id": "CHECK-P002-ENGQ-P002-20261010-05",
+          "kind": "MATERIAL_VERIFICATION",
+          "label": "Correct brick-bill quantity and the ambiguous 7-bag PPC/OPC usage allocation.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P002-20261010-05",
+          "source_link": "https://jp09.slack.com/archives/C0C13SMN1QX/p1791175516166869",
+          "source_severity": "ROUTINE_CLARIFICATION"
+        },
+        {
+          "id": "CHECK-P002-CLOSE",
+          "kind": "DAILY_ROUTINE",
+          "label": "Relay pending engineer decisions and material/vendor requirements; request dated updates.",
+          "purpose": "Request follow-up, not a purchase or construction authorization",
+          "source_question_id": null,
+          "source_link": null
+        }
+      ]
+    },
+    {
+      "project_id": "P003",
+      "display_name": "13 Hari Baral",
+      "company": "Fishtail Builders Pvt Ltd",
+      "slack_channel_url": "https://jp09.slack.com/archives/C0C1NTR4CGL",
+      "readiness_snapshot": "READY_WITH_CONDITION",
+      "source_cutoff": "2026-10-09",
+      "approved_daily_work_count": 0,
+      "unresolved_issues": 0,
+      "unanswered_queries": 5,
+      "checklist": [
+        {
+          "id": "CHECK-P003-PLAN",
+          "kind": "DAILY_ROUTINE",
+          "label": "Confirm today's work, crew and location with the responsible site engineer.",
+          "purpose": "Verify before relaying work instructions",
+          "source_question_id": null,
+          "source_link": null
+        },
+        {
+          "id": "CHECK-P003-ENGQ-P003-20261010-01",
+          "kind": "FIELD_PROGRESS",
+          "label": "Confirm remaining washroom false-ceiling work (6 Oct report).",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P003-20261010-01",
+          "source_link": "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791285154551019",
+          "source_severity": "ROUTINE_CLARIFICATION"
+        },
+        {
+          "id": "CHECK-P003-ENGQ-P003-20261010-02",
+          "kind": "FIELD_PROGRESS",
+          "label": "Confirm whether ceiling openings for bulbs have been made.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P003-20261010-02",
+          "source_link": "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791282929197949",
+          "source_severity": "ROUTINE_CLARIFICATION"
+        },
+        {
+          "id": "CHECK-P003-CLOSE",
+          "kind": "DAILY_ROUTINE",
+          "label": "Relay pending engineer decisions and material/vendor requirements; request dated updates.",
+          "purpose": "Request follow-up, not a purchase or construction authorization",
+          "source_question_id": null,
+          "source_link": null
+        }
+      ]
+    },
+    {
+      "project_id": "P004",
+      "display_name": "16 Yamuna Pun Adai",
+      "company": "Fishtail Builders Pvt Ltd",
+      "slack_channel_url": "https://jp09.slack.com/archives/C0C13SSGULF",
+      "readiness_snapshot": "HOLD",
+      "source_cutoff": "2026-10-09",
+      "approved_daily_work_count": 0,
+      "unresolved_issues": 2,
+      "unanswered_queries": 3,
+      "checklist": [
+        {
+          "id": "CHECK-P004-PLAN",
+          "kind": "DAILY_ROUTINE",
+          "label": "Confirm today's work, crew and location with the responsible site engineer.",
+          "purpose": "Verify before relaying work instructions",
+          "source_question_id": null,
+          "source_link": null
+        },
+        {
+          "id": "CHECK-P004-HOLD",
+          "kind": "HOLD_CONFIRMATION",
+          "label": "Identify which work is held; obtain an explicit engineer decision before affected work proceeds.",
+          "purpose": "Confirm hold scope; this is not authorization to release",
+          "source_question_id": null,
+          "source_link": null
+        },
+        {
+          "id": "CHECK-P004-ENGQ-P004-20261010-01",
+          "kind": "ENGINEER_DECISION",
+          "label": "Locate and inspect top-water leakage; do not assume the cause from photographs.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P004-20261010-01",
+          "source_link": "https://jp09.slack.com/archives/C0C13SSGULF/p1790687986476779",
+          "source_severity": "HOLD_RELATED"
+        },
+        {
+          "id": "CHECK-P004-CLOSE",
+          "kind": "DAILY_ROUTINE",
+          "label": "Relay pending engineer decisions and material/vendor requirements; request dated updates.",
+          "purpose": "Request follow-up, not a purchase or construction authorization",
+          "source_question_id": null,
+          "source_link": null
+        }
+      ]
+    },
+    {
+      "project_id": "P005",
+      "display_name": "30 Sabitri Giri / Dipti Giri",
+      "company": "Fishtail Builders Pvt Ltd",
+      "slack_channel_url": "https://jp09.slack.com/archives/C0C2DJUS9EU",
+      "readiness_snapshot": "READY_WITH_CONDITION",
+      "source_cutoff": "2026-10-09",
+      "approved_daily_work_count": 0,
+      "unresolved_issues": 1,
+      "unanswered_queries": 3,
+      "checklist": [
+        {
+          "id": "CHECK-P005-PLAN",
+          "kind": "DAILY_ROUTINE",
+          "label": "Confirm today's work, crew and location with the responsible site engineer.",
+          "purpose": "Verify before relaying work instructions",
+          "source_question_id": null,
+          "source_link": null
+        },
+        {
+          "id": "CHECK-P005-ENGQ-P005-20261010-03",
+          "kind": "ENGINEER_DECISION",
+          "label": "Resolve front-design query and pre-pour checks before assuming acceptance.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P005-20261010-03",
+          "source_link": "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791518998071959",
+          "source_severity": "ENGINEERING_DECISION"
+        },
+        {
+          "id": "CHECK-P005-ENGQ-P005-20261010-02",
+          "kind": "MATERIAL_VERIFICATION",
+          "label": "Identify ordered second-floor slab materials, quantities, and proof of site receipt.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P005-20261010-02",
+          "source_link": "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791284186886889",
+          "source_severity": "ROUTINE_CLARIFICATION"
+        },
+        {
+          "id": "CHECK-P005-CLOSE",
+          "kind": "DAILY_ROUTINE",
+          "label": "Relay pending engineer decisions and material/vendor requirements; request dated updates.",
+          "purpose": "Request follow-up, not a purchase or construction authorization",
+          "source_question_id": null,
+          "source_link": null
+        }
+      ]
+    },
+    {
+      "project_id": "P006",
+      "display_name": "31 Sharada Adhikari",
+      "company": "Fishtail Builders Pvt Ltd",
+      "slack_channel_url": "https://jp09.slack.com/archives/C0C1H9Y96KG",
+      "readiness_snapshot": "HOLD",
+      "source_cutoff": "2026-10-09",
+      "approved_daily_work_count": 0,
+      "unresolved_issues": 4,
+      "unanswered_queries": 6,
+      "checklist": [
+        {
+          "id": "CHECK-P006-PLAN",
+          "kind": "DAILY_ROUTINE",
+          "label": "Confirm today's work, crew and location with the responsible site engineer.",
+          "purpose": "Verify before relaying work instructions",
+          "source_question_id": null,
+          "source_link": null
+        },
+        {
+          "id": "CHECK-P006-HOLD",
+          "kind": "HOLD_CONFIRMATION",
+          "label": "Identify which work is held; obtain an explicit engineer decision before affected work proceeds.",
+          "purpose": "Confirm hold scope; this is not authorization to release",
+          "source_question_id": null,
+          "source_link": null
+        },
+        {
+          "id": "CHECK-P006-ENGQ-P006-20261010-02",
+          "kind": "ENGINEER_DECISION",
+          "label": "Do not resume affected toilet plaster until door height and plumbing coordination are resolved.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P006-20261010-02",
+          "source_link": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791019309347959",
+          "source_severity": "HOLD_RELATED"
+        },
+        {
+          "id": "CHECK-P006-CLOSE",
+          "kind": "DAILY_ROUTINE",
+          "label": "Relay pending engineer decisions and material/vendor requirements; request dated updates.",
+          "purpose": "Request follow-up, not a purchase or construction authorization",
+          "source_question_id": null,
+          "source_link": null
+        }
+      ]
+    },
+    {
+      "project_id": "P007",
+      "display_name": "15 Narayani Parajuli",
+      "company": "Fishtail Builders Pvt Ltd",
+      "slack_channel_url": "https://jp09.slack.com/archives/C0C1M6AEL1X",
+      "readiness_snapshot": "UNSET",
+      "source_cutoff": "2026-10-09",
+      "approved_daily_work_count": 0,
+      "unresolved_issues": 3,
+      "unanswered_queries": 5,
+      "checklist": [
+        {
+          "id": "CHECK-P007-PLAN",
+          "kind": "DAILY_ROUTINE",
+          "label": "Confirm today's work, crew and location with the responsible site engineer.",
+          "purpose": "Verify before relaying work instructions",
+          "source_question_id": null,
+          "source_link": null
+        },
+        {
+          "id": "CHECK-P007-ENGQ-P007-20261010-02",
+          "kind": "ENGINEER_DECISION",
+          "label": "Obtain responsible engineer decision on CF1 chair/stirrup and missing column shear-key concerns.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P007-20261010-02",
+          "source_link": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1790993758768049",
+          "source_severity": "ENGINEERING_DECISION"
+        },
+        {
+          "id": "CHECK-P007-ENGQ-P007-20261010-03",
+          "kind": "ENGINEER_DECISION",
+          "label": "Resolve veranda level/water entry and junction-column detailing before changing execution.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P007-20261010-03",
+          "source_link": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791442304254949",
+          "source_severity": "ENGINEERING_DECISION"
+        },
+        {
+          "id": "CHECK-P007-CLOSE",
+          "kind": "DAILY_ROUTINE",
+          "label": "Relay pending engineer decisions and material/vendor requirements; request dated updates.",
+          "purpose": "Request follow-up, not a purchase or construction authorization",
+          "source_question_id": null,
+          "source_link": null
+        }
+      ]
+    },
+    {
+      "project_id": "P020",
+      "display_name": "Kharika Paudel",
+      "company": "Fishtail Builders Pvt Ltd",
+      "slack_channel_url": "https://jp09.slack.com/archives/C0C2LFV6XLM",
+      "readiness_snapshot": "UNSET",
+      "source_cutoff": "2026-10-09",
+      "approved_daily_work_count": 0,
+      "unresolved_issues": 2,
+      "unanswered_queries": 4,
+      "checklist": [
+        {
+          "id": "CHECK-P020-PLAN",
+          "kind": "DAILY_ROUTINE",
+          "label": "Confirm today's work, crew and location with the responsible site engineer.",
+          "purpose": "Verify before relaying work instructions",
+          "source_question_id": null,
+          "source_link": null
+        },
+        {
+          "id": "CHECK-P020-ENGQ-P020-20261010-02",
+          "kind": "ENGINEER_DECISION",
+          "label": "Confirm engineering disposition of cantilever, secondary beams and beam stirrup/BBS.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P020-20261010-02",
+          "source_link": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791159944934279",
+          "source_severity": "ENGINEERING_DECISION"
+        },
+        {
+          "id": "CHECK-P020-ENGQ-P020-20261010-01",
+          "kind": "FIELD_PROGRESS",
+          "label": "Confirm current slab shuttering stage and whether the team restarted.",
+          "purpose": "Relay or verify the unresolved source-linked question",
+          "source_question_id": "ENGQ-P020-20261010-01",
+          "source_link": "https://discord.com/channels/682670494658330644/1502093475984965835/1557551951493726280",
+          "source_severity": "ROUTINE_CLARIFICATION"
+        },
+        {
+          "id": "CHECK-P020-CLOSE",
+          "kind": "DAILY_ROUTINE",
+          "label": "Relay pending engineer decisions and material/vendor requirements; request dated updates.",
+          "purpose": "Request follow-up, not a purchase or construction authorization",
+          "source_question_id": null,
+          "source_link": null
+        }
+      ]
+    }
+  ]
+}

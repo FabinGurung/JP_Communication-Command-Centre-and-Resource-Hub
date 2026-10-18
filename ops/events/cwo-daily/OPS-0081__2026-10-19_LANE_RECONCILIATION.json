@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0081",
+  "date_npt": "2026-10-19",
+  "scope": "C_WEB_10_RECOVERY__CONTROLLED_MAIN_TO_FEATURE_MERGE",
+  "status": "FEATURE_RECONCILIATION_STAGED__CI_AND_PROVIDER_READBACK_REQUIRED",
+  "source_heads": {
+    "main": "7bc3edd7dc75a5e9ae614fbd2e85b1d7fe7b322c",
+    "feature": "a74729e6449e9734f0a0bbd0298d93d00eededde"
+  },
+  "source_tree_shas": {
+    "main": "7c60e374537095bc627fca950dbfd1a857a30771",
+    "feature": "7449f04796c3ce14bd09949ade5b6bc93e4ae585"
+  },
+  "policy": {
+    "target_branch": "feature/daily-ops-current-work",
+    "production_main_ref_unchanged": true,
+    "archive_pre_state": "IMMUTABLE_GIT_PARENT_COMMIT_SHA",
+    "versioning": "GIT_TWO_PARENT_MERGE_PRESERVES_BOTH_LINEAGES",
+    "no_new_branch_or_registry_topology": true,
+    "merge_tree_base": "MAIN_CURRENT_TREE",
+    "allowed_delta": [
+      "AGENTS.md",
+      "ops/events/cwo-daily/OPS-0081__2026-10-19_LANE_RECONCILIATION.json"
+    ],
+    "avoided_overwrites": [
+      "ops/data/current-works.json",
+      "ops/data/project-resources.json",
+      "ops/events/daily-ops-events.jsonl",
+      "ops/control/daily-communication-web-cycle.json",
+      "website frontend and project data",
+      "source Drive originals"
+    ],
+    "ownership_note": "Evidence engine and tests already present in main at identical Git blob hashes; retain stricter newer main contracts. Feature-only A7 no-mutation guard adapted into main AGENTS.md."
+  },
+  "outstanding": [
+    "Await branch-registry and production-workflow validation for merged feature",
+    "No promotion of feature branch to main yet",
+    "Request 07 resource provenance exceptions remain open",
+    "Actual Discord API and media recovery require credentialed collector runtime"
+  ],
+  "privacy": "NO_PRIVATE_EVIDENCE_ORIGINALS_PUBLISHED",
+  "observations": "Historical feature commits remain available as merge parents; previous feature tree is recoverable at recorded SHA."
+}

@@ -16,8 +16,14 @@ code = "".join(c04["source"])
 tree = ast.parse(code, filename="C04 BOUNDED DERIVATIVE PILOT")
 manifest = json.loads(Path("ops/discord/notebook-versions.json").read_text(encoding="utf-8"))
 
-assert manifest["current_revision"] == "20261009-007"
-assert notebook["metadata"]["a9_cwo_revision"]["version_id"] == "20261009-007"
+# C04 was introduced in revision 007 and must remain unchanged as the daily
+# notebook advances to later revisions. Verify both ledger identity and lineage.
+assert manifest["current_revision"] == notebook["metadata"]["a9_cwo_revision"]["version_id"]
+assert manifest["current_revision"] >= "20261009-007"
+c04_lineage = next(v for v in manifest["versions"] if v["revision"] == "20261009-007")
+assert c04_lineage["status"] == "ARCHIVED_PRE"
+assert c04_lineage["git_blob_sha"] == "cb8a4228ab4e9c59ffbfab680aaaac37d4734e22"
+assert c04_lineage["archive_path"].endswith("007__A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR__PRE_SEVEN_DAY_DAILY_INDEX.ipynb")
 assert "PROVIDER_DERIVATIVE_NOT_ORIGINAL" in code
 assert "UNVERIFIED_ORIGINAL_MEDIA_FAILURE_OPEN" in code
 assert "ONE_DERIVATIVE_SAVED_OR_READBACK_VERIFIED" in code

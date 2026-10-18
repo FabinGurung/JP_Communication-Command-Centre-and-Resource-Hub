@@ -1,0 +1,94 @@
+{
+  "event_id": "OPS-0075",
+  "date_npt": "2026-10-13",
+  "scope": "REQ07_RESUME_REGISTERED_DRIVE_ROOTS_METADATA_AND_REGISTERED_SOURCE_CROSSCHECK",
+  "status": "REGISTERED_ROOT_SURVEY_COMPLETED_WITH_CONNECTOR__FULL_PROVIDER_CERTIFIED_INVENTORY_AND_REVIEW_NOT_COMPLETE",
+  "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "branch": "main",
+  "verified_source_sha": "c3468e8985ac5951391672c628d6d0282099cf4e",
+  "project_root_metadata": {
+    "project_ids": 8,
+    "registered_folder_roots": 9,
+    "folder_nodes_queried": 215,
+    "observed_file_entries_not_distinct_or_approved": 1309,
+    "folder_queries_hitting_1000_limit": 0,
+    "prior_top100_limit_resolved_via_top1000": true
+  },
+  "registered_catalog_readback": {
+    "published_resource_count": 46,
+    "source_roots_by_id_verified": 9,
+    "non_root_indexed_sources": 37,
+    "non_root_direct_parent_folder_list_matches": 37,
+    "source_roots_missing_six_known_origin_chains": true,
+    "exceptions": [
+      "P001",
+      "P002"
+    ],
+    "verified_published_file_links_unchanged": true
+  },
+  "private_data_protection": {
+    "new_names_or_ids_from_unreviewed_files_published": 0,
+    "source_file_bytes_downloaded": 0,
+    "Drive_originals_moved_or_renamed": 0,
+    "public_resource_additions": 0,
+    "engineering_acceptance_or_revision_claims_changed": 0
+  },
+  "source_readback": [
+    {
+      "path": "ops/control/req07-registered-roots-metadata-traversal-20261013.v0.1.json",
+      "git_blob_sha": "f02cbd0de5fe96d93ba04c4551dd02e216100920"
+    },
+    {
+      "path": "ops/control/req07-indexed-resource-parent-list-readback.v0.1.json",
+      "git_blob_sha": "83213bc040b6665a5c326fa67dcb40fd5002b00d"
+    },
+    {
+      "path": "ops/control/req07-p001-p002-source-root-ancestry-exceptions.v0.1.json",
+      "git_blob_sha": "a88361f443bdf654f4269d867b69378b7bd8ecda"
+    },
+    {
+      "path": "ops/control/website-eight-request-roadmap.v0.1.json",
+      "git_blob_sha": "3f026eba8f826261649f9e8bef4270881852e752"
+    },
+    {
+      "path": "ops/control/REQ07_RESOURCE_LIBRARY_WORKFLOW.md",
+      "git_blob_sha": "694ebbfa9b6d90ce1cdf8c72b347f1bf34483564"
+    },
+    {
+      "path": "ops/data/resource-catalog-normalized.v0.1.json",
+      "git_blob_sha": "e8926bb1dc21b9887d1902d3e96746a3e0f68b28"
+    },
+    {
+      "path": "ops/data/project-resources.json",
+      "git_blob_sha": "afa0fc0633e431f56f5bea6ad52256eea915d6f3"
+    },
+    {
+      "path": "scripts/collect_private_drive_resource_metadata.py",
+      "git_blob_sha": "e052994b4e2c3c05ffebca00fefa86c52a31fec5"
+    },
+    {
+      "path": "scripts/preview_resource_intake.py",
+      "git_blob_sha": "08e7a777d7ac7dc0083d251111db24fef924fe20"
+    },
+    {
+      "path": "scripts/test_resource_library.py",
+      "git_blob_sha": "f530633c8952a7457a815822f2c051494f532dcd"
+    }
+  ],
+  "verification": {
+    "production": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38334329456",
+    "visual": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38334299017",
+    "branch": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38334329422",
+    "originals_preclose_archive_commit": "690535d3045f56957fc42f2ef3c55ffbe1030b8c",
+    "registered_scope_metadata": "ops/control/req07-registered-roots-metadata-traversal-20261013.v0.1.json",
+    "source_parent_metadata": "ops/control/req07-indexed-resource-parent-list-readback.v0.1.json",
+    "ancestry_evidence": "ops/control/req07-p001-p002-source-root-ancestry-exceptions.v0.1.json"
+  },
+  "remaining_blockers": [
+    "Direct authenticated Drive API paginated inventory and a private, persistently stored SHA-256 manifest with distinct file IDs/coverage check.",
+    "Approved alternate project-root mapping for six existing P001/P002 resources whose parent ancestry terminates before the registered project root.",
+    "Owner access/privacy/revision/duplicate and engineering approval decisions for new candidate files before public admission.",
+    "Authenticated incremental new-upload detection and review-gated catalog publication; Request 8 closeout remains deferred."
+  ],
+  "rollback": "Restore prior blobs by scoped traceable commit; preserve all originals and published 46-pointer catalog."
+}

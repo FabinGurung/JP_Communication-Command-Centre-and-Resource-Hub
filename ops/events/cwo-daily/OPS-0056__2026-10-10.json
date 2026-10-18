@@ -1,0 +1,40 @@
+{
+  "event_id": "OPS-0056",
+  "event_type": "A9_CWO_DAILY_COMMUNICATION_AND_WEB_OPERATIONS",
+  "date_npt": "2026-10-10",
+  "execution_status": "PARTIAL_10_OF_11_COMMUNICATIONS",
+  "evidence_id": "1HXOjV7CpYOQw6mGwK_n_SDAQBYmqOjE5",
+  "machine_index_manifest_id": "19yXv6LJexxmp9BaIifSXmj6W9Fwf9LnJ",
+  "facts": {
+    "source_messages": 89,
+    "source_channels": 21,
+    "sha256_manifest_partitions_pass": 6,
+    "photo_original_failures": 269,
+    "site_projects_with_new_oct09_caption": 5,
+    "site_completion_claims_promoted": 0
+  },
+  "outbound": {
+    "project_targets": 9,
+    "project_delivered": 8,
+    "company_targeted": 2,
+    "company_delivered": 2,
+    "undelivered_project": "P002",
+    "undelivered_reason": "PLATFORM_SAFETY_BLOCK"
+  },
+  "website": {
+    "path": "ops/data/field-three-day-board.json",
+    "date_npt": "2026-10-10",
+    "status": "GITHUB_PRODUCTION_CI_SUCCESS",
+    "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38015248835"
+  },
+  "precursor_snapshot": "ops/data/99_VERSION_ARCHIVE/20261010/field-three-day-board__PRE_20261010.json",
+  "canonical_daily_receipt": "ops/data/communication-web-daily/2026-10-10.json",
+  "persisted_construction_truth_unchanged": true,
+  "incomplete": [
+    "269_ORIGINAL_MEDIA_MISMATCH",
+    "V2_SCOPED_HISTORY_NOT_YET_RUN",
+    "P002_COMMUNICATION_BLOCKED",
+    "GOOGLE_SHEETS_NOT_SYNCED_THIS_CYCLE",
+    "ENGINEER_REPLIES_NOT_RECEIVED"
+  ]
+}

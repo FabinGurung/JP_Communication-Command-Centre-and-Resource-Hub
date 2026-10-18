@@ -1,0 +1,45 @@
+{
+  "event_id": "OPS-0058",
+  "event_type": "A9_CWO_20261010_LINK_CORRECTION_REPLY_AUDIT",
+  "date_npt": "2026-10-10",
+  "source": "POST_SEND_11_CHANNEL_READBACK_AUDIT",
+  "prior_original_messages_with_link": 7,
+  "prior_original_messages_without_link": 4,
+  "correction_replies_sent_and_provider_readback": 4,
+  "original_messages_unchanged": true,
+  "website_link_coverage_after_reply": "11_OF_11_THREAD_CONVERSATIONS_HAVE_LINK",
+  "corrections": [
+    {
+      "destination": "REB_ONE_BAY",
+      "parent_link": "https://jp09.slack.com/archives/C0C38VAP05A/p1791597253739289",
+      "reply_link": "https://jp09.slack.com/archives/C0C38VAP05A/p1791603464746289?thread_ts=1791597253.739289&cid=C0C38VAP05A",
+      "website_path": "site-operations.html",
+      "provider_readback": "PASS",
+      "dedicated_page_status": "UNVERIFIED_DO_NOT_INVENT"
+    },
+    {
+      "destination": "P006",
+      "parent_link": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791597368063359",
+      "reply_link": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791603471373339?thread_ts=1791597368.063359&cid=C0C1H9Y96KG",
+      "website_path": "site-operations/project.html?project=P006",
+      "provider_readback": "PASS"
+    },
+    {
+      "destination": "REB_ROLLUP",
+      "parent_link": "https://jp09.slack.com/archives/C0C2DJMMY4Q/p1791597313882069",
+      "reply_link": "https://jp09.slack.com/archives/C0C2DJMMY4Q/p1791603478500079?thread_ts=1791597313.882069&cid=C0C2DJMMY4Q",
+      "website_path": "index_and_site-operations.html",
+      "provider_readback": "PASS"
+    },
+    {
+      "destination": "FBL_ROLLUP",
+      "parent_link": "https://jp09.slack.com/archives/C0C1M63E5AM/p1791597319227739",
+      "reply_link": "https://jp09.slack.com/archives/C0C1M63E5AM/p1791603490046949?thread_ts=1791597319.227739&cid=C0C1M63E5AM",
+      "website_path": "index_and_site-operations.html",
+      "provider_readback": "PASS"
+    }
+  ],
+  "new_workstream_contract": "ops/control/a9-cwo-evidence-registry-workstream.v0.1.json",
+  "raw_drive_mutations": 0,
+  "engineering_claims_added": 0
+}

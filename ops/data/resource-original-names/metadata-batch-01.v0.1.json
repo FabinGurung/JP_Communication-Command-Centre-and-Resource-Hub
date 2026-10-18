@@ -1,0 +1,98 @@
+[
+  {
+    "pid": "P001",
+    "id": "RES-P001-ROOT",
+    "fileId": "1EDXI_zuekEXXcjtYmN_LuY3Yv6eipgM6",
+    "name": "PRJ-000001__REB-001__14_Bishal_Paija",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P001",
+    "id": "RES-P001-ORIGINAL-CAD-FOLDER-20261011",
+    "fileId": "1JalzFJBfyTbF00pMnDpJP69qY1aaA-rX",
+    "name": "04_CAD_DWG",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P001",
+    "id": "RES-P001-ARCH-DWG-20261011",
+    "fileId": "16rUpvmH1JGyp_8hbU9BqispHfJNQzQh7",
+    "name": "Bishal (2) (4).dwg",
+    "mime": "application/dwg",
+    "verified": true
+  },
+  {
+    "pid": "P001",
+    "id": "RES-P001-STRUCT-DWG-20261011",
+    "fileId": "1TzUCNxZ3WExD7H0mWYJ42KHsx11-A7BG",
+    "name": "Bishal Structure.dwg",
+    "mime": "application/dwg",
+    "verified": true
+  },
+  {
+    "pid": "P002",
+    "id": "RES-P002-ROOT",
+    "fileId": "1BKOWoQqPl79D6tYzE_mVf3nBYN8KJj_1",
+    "name": "PRJ-000002__FBL-001__17_Samir_Man_Gubhaju",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P002",
+    "id": "RES-P002-WORKING-DRAWING-001",
+    "fileId": "1gfhTtWBinNvF0F6vjQnzxsSZW8grB8ID",
+    "name": "1489560950318039080__WORKING_DRAWING_OF_SAMIR_MAN_DAMSIDE.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P002",
+    "id": "RES-P002-STRUCT-PDF-001",
+    "fileId": "1zF_km0vVuDMbTK7BN7270a4IhQnRghsE",
+    "name": "1480453310745153656__sarita20guvaju20str20part.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P002",
+    "id": "RES-P002-STRUCT-DWG-001",
+    "fileId": "1pvCubGYJvfHOrNG1ynoxBrWFafZuooC6",
+    "name": "1463037585277587638__STRUCTURAL_GUVAJU_FINAL_DWG.dwg",
+    "mime": "image/vnd.dwg",
+    "verified": true
+  },
+  {
+    "pid": "P003",
+    "id": "RES-P003-ROOT",
+    "fileId": "1GW7s3Hr5hXU2aBdvcP73W44lzr_8jo43",
+    "name": "PRJ-000003__FBL-002__13_Hari_Baral",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P003",
+    "id": "RES-P003-ARCH-PDF-001",
+    "fileId": "1kOsBzMjS0Tdqh4mgF1PQx1UL0e4bmgGI",
+    "name": "SOURCE__Hari_Baral_Architectural_Drawing__A01-A05.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P004",
+    "id": "RES-P004-ROOT",
+    "fileId": "1qM2koziyLpANUX2xcXr-D-RXYdbV5WWV",
+    "name": "Yamuna_Pun_Residence",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P004",
+    "id": "RES-P004-ARCH-PDF-001",
+    "fileId": "1yFUzhkCepNTm0xtaAbmtPmzErIeZ_0qq",
+    "name": "yamuana pun arch.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  }
+]

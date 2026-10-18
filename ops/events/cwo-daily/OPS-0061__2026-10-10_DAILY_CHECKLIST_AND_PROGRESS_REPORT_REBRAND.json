@@ -1,0 +1,48 @@
+{
+  "event_id": "OPS-0061",
+  "event_type": "SITE_OPERATIONS_COMPACT_DAILY_CHECKLIST_UX_AND_PROGRESS_REPORT",
+  "date_npt": "2026-10-10",
+  "routes": {
+    "daily_checklist": "site-operations.html",
+    "consolidated_coordination": "site-operations/coordination.html",
+    "progress_report": "site-operations/history.html",
+    "unchanged_legacy_schedule": "site-operations/schedule.html",
+    "unchanged_legacy_questions": "site-operations/questions.html",
+    "unchanged_project_detail": "site-operations/project.html"
+  },
+  "machine_sources": {
+    "daily_checklist": "ops/data/site-daily-checklist.v0.1.json",
+    "daily_questions_and_issues": "ops/data/site-execution-questions.v0.1.json",
+    "progress_history": "ops/data/progress-history-public.v0.1.jsonl",
+    "view_contract": "ops/control/site-operations-view-contract.v0.1.json",
+    "progress_workstream": "ops/control/a9-cwo-evidence-registry-workstream.v0.1.json"
+  },
+  "scope": {
+    "sites": 8,
+    "checklist_checks": 32,
+    "hold_contexts": 2,
+    "open_issues": 18,
+    "questions": 36,
+    "public_history_observations": 5,
+    "verified_completed_daily_assignments": 0,
+    "discord_original_photo_failure_count": 269
+  },
+  "non_claims": [
+    "CHECKBOX_REVIEWED_LOCALLY_NOT_WORK_EXECUTED",
+    "NO_PERSISTENT_AUTHENTICATED_CHECK_OFF",
+    "NO_AUTOMATED_SLACK_SEND",
+    "NO_SIGNOFF_FROM_HISTORIC_DISCORD_CAPTION",
+    "PARTIAL_PROGRESS_REPORT_NOT_FULL_INGESTION"
+  ],
+  "preservation": [
+    "EXISTING_SITE_PAGE_URL",
+    "EXISTING_SCHEDULE_QUESTIONS_AND_PROJECT_URLS",
+    "GOOGLE_DRIVE_ORIGINALS_READ_ONLY",
+    "PRE_CHANGE_GITHUB_ARCHIVE_AND_POST_READBACK"
+  ],
+  "visual_qa": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38062929974",
+  "production_qa": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38062929921",
+  "root_archived_at": "site-operations/99_VERSION_ARCHIVE/20261010/site-operations__PRE_CHECKLIST_REBRAND.html.txt",
+  "progress_chat_title_recommendation": "A9-CWO Progress Report",
+  "chat_rename_performed": false
+}

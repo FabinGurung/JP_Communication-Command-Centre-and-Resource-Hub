@@ -1,0 +1,144 @@
+{
+  "schema": "a9-cwo-communication-web-daily-v1",
+  "date_npt": "2026-10-10",
+  "run_id": "A9-CWO-20261010-DAILY-COMM-WEB-001",
+  "authority": "DERIVED_PUBLIC_SAFE_PROVENANCE_RECEIPT_NOT_SOURCE_OR_CONSTRUCTION_TRUTH",
+  "source": {
+    "provider": "DISCORD",
+    "guild_id": "682670494658330644",
+    "source_run_id": "20261010T005617Z",
+    "source_receipt_drive_id": "1HXOjV7CpYOQw6mGwK_n_SDAQBYmqOjE5",
+    "manifest_drive_id": "19yXv6LJexxmp9BaIifSXmj6W9Fwf9LnJ",
+    "scoped_parent_channels": [
+      "1463826087841890417",
+      "1492168056858738809"
+    ],
+    "scanned_sources": 21,
+    "new_or_changed_messages": 89,
+    "media_original_failures": 269,
+    "original_media_certification": "PARTIAL",
+    "manifest_partitions": 6,
+    "manifest_sha_verified_partitions": 6,
+    "manifest_rows_verified": 89,
+    "backfill_status": "NEW_TWO_PARENT_V2_NOT_YET_RUN",
+    "unsafe_overbroad_guild_archive": "FULL_HISTORY_ARCHIVE_V1_QUARANTINED_NO_PUBLICATION"
+  },
+  "communications": {
+    "destination_count": 11,
+    "posted_and_provider_readback": 10,
+    "blocked": 1,
+    "delivery_state": "PARTIAL_10_OF_11",
+    "project_channels_targeted": 9,
+    "project_messages_readback": 8,
+    "company_rollups_readback": 2,
+    "project_messages": [
+      {
+        "project": "P001",
+        "status": "SENT_AND_PROVIDER_READBACK",
+        "link": "https://jp09.slack.com/archives/C0C2DJNGARW/p1791597248284409",
+        "discord_message_id": "1556465865401045012"
+      },
+      {
+        "project": "REB_ONE_BAY",
+        "status": "SENT_AND_PROVIDER_READBACK",
+        "link": "https://jp09.slack.com/archives/C0C38VAP05A/p1791597253739289",
+        "discord_message_id": "1556832876106879027"
+      },
+      {
+        "project": "P002",
+        "status": "PLATFORM_SAFETY_BLOCKED_NOT_SENT",
+        "link": null,
+        "discord_message_id": "1558011137088290856"
+      },
+      {
+        "project": "P003",
+        "status": "SENT_AND_PROVIDER_READBACK",
+        "link": "https://jp09.slack.com/archives/C0C1NTR4CGL/p1791597264131769",
+        "discord_message_id": "1556556059706130492"
+      },
+      {
+        "project": "P004",
+        "status": "SENT_AND_PROVIDER_READBACK",
+        "link": "https://jp09.slack.com/archives/C0C13SSGULF/p1791597269328459",
+        "discord_message_id": null
+      },
+      {
+        "project": "P005",
+        "status": "SENT_AND_PROVIDER_READBACK",
+        "link": "https://jp09.slack.com/archives/C0C2DJUS9EU/p1791597274650669",
+        "discord_message_id": "1558037146491822090"
+      },
+      {
+        "project": "P006",
+        "status": "SENT_AND_PROVIDER_READBACK",
+        "link": "https://jp09.slack.com/archives/C0C1H9Y96KG/p1791597368063359",
+        "discord_message_id": "1558074035290771557"
+      },
+      {
+        "project": "P007",
+        "status": "SENT_AND_PROVIDER_READBACK",
+        "link": "https://jp09.slack.com/archives/C0C1M6AEL1X/p1791597284702339",
+        "discord_message_id": "1558018639146262598"
+      },
+      {
+        "project": "P020",
+        "status": "SENT_AND_PROVIDER_READBACK",
+        "link": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1791597290000299",
+        "discord_message_id": "1558010652046532708"
+      },
+      {
+        "project": "REB_ROLLUP",
+        "status": "SENT_AND_PROVIDER_READBACK",
+        "link": "https://jp09.slack.com/archives/C0C2DJMMY4Q/p1791597313882069",
+        "discord_message_id": null
+      },
+      {
+        "project": "FBL_ROLLUP",
+        "status": "SENT_AND_PROVIDER_READBACK",
+        "link": "https://jp09.slack.com/archives/C0C1M63E5AM/p1791597319227739",
+        "discord_message_id": null
+      }
+    ],
+    "no_new_slack_channels_created": true
+  },
+  "website": {
+    "projection": "ops/data/field-three-day-board.json",
+    "public_paths": [
+      "site-operations/project.html?project=P001",
+      "site-operations/project.html?project=P002",
+      "site-operations/project.html?project=P003",
+      "site-operations/project.html?project=P004",
+      "site-operations/project.html?project=P005",
+      "site-operations/project.html?project=P006",
+      "site-operations/project.html?project=P007",
+      "site-operations/project.html?project=P020"
+    ],
+    "report_dates": [
+      "2026-10-09",
+      "2026-10-10",
+      "2026-10-11"
+    ],
+    "field_observations_oct09_project_count": 5,
+    "policy": "SOURCE_CAPTION_ONLY_NOT_COMPLETION_OR_APPROVED_WORK_SCHEDULE",
+    "current_works_not_mutated": true,
+    "repository_release_status": "COMMIT_CREATED_DEPLOYMENT_QA_PENDING"
+  },
+  "gates": {
+    "admission": "CAPTION_AS_REPORT_ONLY; DO_NOT_PROMOTE_TO_MATERIAL_QUANTITIES_OR_ENGINEERING_SIGNOFF",
+    "source_archive_media": "PARTIAL",
+    "historical_backfill": "NOT_COMPLETE",
+    "incomplete_project_mapping": "REB_ONE_BAY_MAINTAIN_CURRENT_PLANNED_IDENTITY_UNCHANGED",
+    "discord_old_edits_outside_7d": "NOT_DETECTED_AUTOMATICALLY",
+    "website_factual_completion": "NO_NEW_COMPLETIONS_ADMITTED",
+    "site_sensitive_data": "PRIVATE_OR_OMITTED",
+    "unresolved_communication": "P002_SAMIR_PLATFORM_BLOCKED"
+  },
+  "pre_evidence_archive": "ops/data/99_VERSION_ARCHIVE/20261010/field-three-day-board__PRE_20261010.json",
+  "next_actions": [
+    "Resolve 269 Discord original-media byte mismatches without substituting derivative bytes",
+    "Complete V2 two-parent historical backfill + C08 private indexed coverage and C09 control gate",
+    "Obtain today site lead/engineer replies and update actual truth in owning Drive controls",
+    "Reattempt blocked Samir provider delivery only when allowed; do not represent as sent",
+    "Reconcile 9 Oct unlabeled Narayani photo batch and One Bay activity captions"
+  ]
+}

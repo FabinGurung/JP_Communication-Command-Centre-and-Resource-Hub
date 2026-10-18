@@ -6,11 +6,25 @@ on:
     paths:
       - "projects.csv"
       - "map-config.json"
+      - "ops/data/current-works.json"
+      - "ops/data/project-identity-index.v0.1.json"
+      - "ops/data/project-resources.json"
+      - "ops/data/resource-catalog-normalized.v0.1.json"
+      - "ops/data/progress-report-public.v0.2.jsonl"
+      - "scripts/project_identity_index.py"
+      - "scripts/validate_site_experience_contract.py"
       - ".github/workflows/validate-projects.yml"
   pull_request:
     paths:
       - "projects.csv"
       - "map-config.json"
+      - "ops/data/current-works.json"
+      - "ops/data/project-identity-index.v0.1.json"
+      - "ops/data/project-resources.json"
+      - "ops/data/resource-catalog-normalized.v0.1.json"
+      - "ops/data/progress-report-public.v0.2.jsonl"
+      - "scripts/project_identity_index.py"
+      - "scripts/validate_site_experience_contract.py"
       - ".github/workflows/validate-projects.yml"
 
 permissions:
@@ -22,6 +36,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Verify generated human labels, canonical PK/FK links and sources
+        run: python scripts/project_identity_index.py --check
 
       - name: Validate canonical project master
         shell: python

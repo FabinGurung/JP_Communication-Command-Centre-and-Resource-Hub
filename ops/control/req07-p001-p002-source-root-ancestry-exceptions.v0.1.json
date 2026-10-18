@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.1.0",
+  "checkpoint_id": "REQ07_P001_P002_SOURCE_ROOT_ANCESTRY_20261013",
+  "date_npt": "2026-10-13",
+  "status": "SIX_EXISTING_SOURCE_POINTERS_PROVEN_OUTSIDE_REGISTERED_PROJECT_ROOTS__CORRECTION_REQUIRES_OWNER_REVIEW",
+  "authority": "LIVE_GOOGLE_DRIVE_METADATA",
+  "method": "Get each indexed file's Drive parent IDs, follow the unique parent chain until no parent remains or registered root is reached; no file bytes downloaded.",
+  "project_summaries": [
+    {
+      "project_id": "P001",
+      "published_resource_references_checked": 3,
+      "registered_root_reached": 0,
+      "terminating_before_registered_root": 3,
+      "maximum_ancestor_hops_observed": 10
+    },
+    {
+      "project_id": "P002",
+      "published_resource_references_checked": 3,
+      "registered_root_reached": 0,
+      "terminating_before_registered_root": 3,
+      "maximum_ancestor_hops_observed": 10
+    }
+  ],
+  "source_registry": "ops/data/project-resources.json",
+  "verified_additional_facts": [
+    "Each of the six source file IDs exists and resolves by Drive metadata.",
+    "Each source ID appears in its actual direct parent's Drive folder listing.",
+    "No ancestry chain reaches the source registry's recorded project root folder before Drive reports no further parent.",
+    "Project/source association and ownership must be reviewed independently; absence of ancestry alone does not prove the original file was assigned to the wrong project."
+  ],
+  "prohibited_automatic_actions": [
+    "Do not move, rename or duplicate any source file",
+    "Do not modify the six existing published source URLs or canonical resource IDs",
+    "Do not substitute an arbitrary parent as the new project root",
+    "Do not publish additional private ancestor folder names/IDs in GitHub"
+  ],
+  "resolution": "Owner-authorized project source root mapping with original Drive pointers preserved, explicit reviewed alternative root IDs privately, FK verification, safe readback and archive."
+}

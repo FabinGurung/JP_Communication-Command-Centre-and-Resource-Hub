@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.1.0",
+  "audit_type": "POST_SHA256_GITHUB_PROVIDER_READBACK",
+  "date_npt": "2026-10-10",
+  "run_id": "20261010T005617Z",
+  "status": "P0_P1_PASS_P2_CODE_ONLY",
+  "pre_snapshot_git_sha": "548568fcc298f608ec4f6491162496fc148372d5",
+  "scoped_main_promotion_git_sha": "7dd039395da5b2268c966da396bd108cb60bc3f7",
+  "append_only_audit_commit": "SELF_COMMIT_NOT_EMBEDDED",
+  "readback_scope": "MAIN_CURRENT_FILES_AT_PROMOTION_COMMIT",
+  "readback_file_count": 11,
+  "readback": [
+    {
+      "path": "ops/evidence/schema/evidence-record.v0.1.schema.json",
+      "sha256": "8e00f538a5d915551b0a97b00d0167e398314af99205cebb890148b973455147"
+    },
+    {
+      "path": "ops/evidence/schema/attachment-fidelity.v0.1.schema.json",
+      "sha256": "a02b93e22e9862006a807228839916a6a1089f2046c94b252f4937f6d4fcf92f"
+    },
+    {
+      "path": "ops/evidence/control/publication-policy.v0.1.json",
+      "sha256": "dad64fcecd34c5dde4db5b8d8ca1a2bd55b8966067a7c84fefd346d2f249de9a"
+    },
+    {
+      "path": "ops/evidence/control/project-source-map.v0.1.json",
+      "sha256": "4059a529f5f60562d0ab807f088181271770f65b79d0e3b9843500b7b525a46c"
+    },
+    {
+      "path": "ops/evidence/inventory/20261010T005617Z.public-summary.json",
+      "sha256": "2d4ae966edf4c701719c841fb015ddcfa6add8cd7e9dc125edb9ef1e241d93c4"
+    },
+    {
+      "path": "ops/evidence/sql/evidence-registry.v0.1.sql",
+      "sha256": "dee3971412212d3211c76e7646186c3aa5ab624751905949e0560cde0380a96e"
+    },
+    {
+      "path": "ops/evidence/README.md",
+      "sha256": "e8acb928de013d9941b1827cd32585513b545b59c677a0cb211f44b4de7d636c"
+    },
+    {
+      "path": "scripts/cwo_evidence_engine.py",
+      "sha256": "136d98357c653b9501fa5dfa177d489d1c469dfc68376f1bf0c44405f2603da5"
+    },
+    {
+      "path": "scripts/test_cwo_evidence_engine.py",
+      "sha256": "f5b7f796adbacb81245d7ec394684c59e43a4ce98345d5979a803c44e0440183"
+    },
+    {
+      "path": ".github/workflows/daily-ops-branch-preview.yml",
+      "sha256": "698a612859a9c104d9f9b28383542bd70ba99fed927f9ba6014cb24bf9e24bac"
+    },
+    {
+      "path": "ops/evidence/audit/20261010T005617Z.PRE.json",
+      "sha256": "ae6ec6a399635e0fc96736825725a884509fc97dc1836df12aad8f506a9e0899"
+    }
+  ],
+  "readback_all_pass": true,
+  "source_receipt_drive_id": "1HXOjV7CpYOQw6mGwK_n_SDAQBYmqOjE5",
+  "source_manifest_drive_id": "19yXv6LJexxmp9BaIifSXmj6W9Fwf9LnJ",
+  "source_receipt_sha256": "0ae2e3ffd911617bb0cc93bd6ef3e9b899e553a4f616d51c71cee2767acef0eb",
+  "source_manifest_sha256": "b9c45ab3f3eb73785ffedf1d27b754f86e60bea7305349a22d234f5f8ae47e92",
+  "source_partitions_sha256_verified": 6,
+  "source_messages_index_verified": 89,
+  "source_message_key_duplicates": 0,
+  "source_scope_count": 21,
+  "attachment_status_total": 459,
+  "attachment_original_byte_failures_unresolved": 269,
+  "archived_threads_covered": false,
+  "original_drive_files_changed": false,
+  "private_normalized_evidence_records_written": 0,
+  "source_project_binding_verification": "NO_PROVIDER_CHANNEL_BINDINGS_ADMITTED",
+  "evidence_admission": "NONE",
+  "public_website_evidence_detail": "BLOCKED_BY_POLICY",
+  "ci": {
+    "branch_lane_registry_run": 38029878966,
+    "branch_lane_registry_conclusion": "success",
+    "production_run": 38029878954,
+    "production_conclusion": "success"
+  },
+  "pre_archive_refs": [
+    "ops/evidence/sql/99_VERSION_ARCHIVE/evidence-registry.v0.1__PRE_STRICT_SIZE_GUARD.sql",
+    ".github/99_VERSION_ARCHIVE/20261010/daily-ops-branch-preview__PRE_MAIN_CWO_EVIDENCE_QA.yml"
+  ],
+  "rollback_rule": "Use git revert of scoped main promotion; source Drive originals unchanged; audit is immutable."
+}

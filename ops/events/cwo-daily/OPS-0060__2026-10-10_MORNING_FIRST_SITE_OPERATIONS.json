@@ -1,0 +1,75 @@
+{
+  "event_id": "OPS-0060",
+  "event_type": "SITE_OPERATIONS_MORNING_FIRST_INFORMATION_ARCHITECTURE",
+  "run_date_npt": "2026-10-10",
+  "status": "PRODUCTION_AND_VISUAL_QA_PASS",
+  "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "scope": "CONCISE_ENGINEER_MORNING_BRIEF_SEPARATE_FROM_HISTORICAL_PROGRESS",
+  "source_authority": [
+    "ops/data/current-works.json",
+    "ops/data/field-three-day-board.json",
+    "ops/data/site-execution-questions.v0.1.json",
+    "private_GDRIVE_originals_NOT_MOVED"
+  ],
+  "routes": {
+    "morning": "site-operations.html",
+    "work_holds": "site-operations/schedule.html",
+    "questions": "site-operations/questions.html",
+    "progress_history": "site-operations/history.html",
+    "legacy_project_detail": "site-operations/project.html?project=P002"
+  },
+  "new_machine_assets": [
+    "ops/data/progress-history-public.v0.1.jsonl",
+    "ops/control/site-operations-view-contract.v0.1.json"
+  ],
+  "history_projection": {
+    "seed_records": 5,
+    "source_run_id": "20261010T005617Z",
+    "media_original_failures_unresolved": 269,
+    "full_historical_backfill_complete": false,
+    "accepted_cement_quantity_in_history": false,
+    "live_automated_connector": false
+  },
+  "morning_projection": {
+    "sites": 8,
+    "documented_site_readiness_HOLD": 2,
+    "unresolved_source_issue_records": 18,
+    "open_questions_from_last_snapshot": 36,
+    "authorized_dated_crew_task_records": 0,
+    "action_list_classification": "FOLLOWUP_NOT_EXECUTION_ORDER",
+    "shows_snapshot_staleness": true
+  },
+  "preservation": {
+    "existing_site_operations_url": true,
+    "existing_project_url": true,
+    "legacy_three_day_view": "COLLAPSED_IN_PLACE",
+    "drawings_and_resources_unchanged": true,
+    "source_drive_files_mutated": false,
+    "site_master_mutated": false,
+    "raw_messages_publicly_uploaded": false
+  },
+  "archived_pre_edits": [
+    "site-operations/99_VERSION_ARCHIVE/20261010/site-operations__PRE_MORNING_FIRST_REORG.html.txt",
+    "site-operations/99_VERSION_ARCHIVE/20261010/site-operations__PRE_WCAG_TOUCH_TARGET.html.txt",
+    "site-operations/99_VERSION_ARCHIVE/20261010/schedule__PRE_HISTORY_NAV.html.txt",
+    "site-operations/99_VERSION_ARCHIVE/20261010/questions__PRE_HISTORY_NAV.html.txt",
+    "site-operations/99_VERSION_ARCHIVE/20261010/project__PRE_HISTORY_NAV.html.txt",
+    "site-operations/99_VERSION_ARCHIVE/20261010/history__PRE_PROJECT_FILTER.html.txt",
+    "scripts/99_VERSION_ARCHIVE/20261010/qa_field_ux_browser__PRE_MORNING_FIRST.py.txt"
+  ],
+  "verification": {
+    "source_file_readback": "PASS",
+    "machine_public_history_index": "PASS",
+    "machine_view_contract": "PASS",
+    "github_workflow_branch_validation": "SUCCESS",
+    "github_workflow_production": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38056786969",
+    "github_workflow_browser_desktop_mobile_accessibility": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38056786980",
+    "independent_web_browser_render": "NOT_AVAILABLE_IN_THIS_SESSION"
+  },
+  "remaining": [
+    "Full two-parent private archived Discord history and all photo originals remain separately governed by Evidence Registry workstream",
+    "Future approved dated work order must be sourced from responsible engineer or scheduling-module authority",
+    "Authenticated engineer responses and source reconciliation not yet implemented",
+    "Source progress index only five approved-for-public-projection observations—not entire archive"
+  ]
+}

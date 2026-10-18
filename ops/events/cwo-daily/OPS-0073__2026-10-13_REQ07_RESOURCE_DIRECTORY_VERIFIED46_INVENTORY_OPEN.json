@@ -1,0 +1,141 @@
+{
+  "event_id": "OPS-0073",
+  "date_npt": "2026-10-13",
+  "scope": "ORIGINAL_REQUEST_07_RESOURCE_LIBRARY_PRIORITY_AND_DRIVE_SOURCE_METADATA_QA",
+  "status": "INDEXED_46_VALIDATED__FULL_RECURSIVE_DRIVE_INVENTORY_OPEN",
+  "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "branch": "main",
+  "source_commit": "8c9f4ec8a00d84585d078a89428d706384e6c3db",
+  "snapshot_and_versioning": {
+    "pre_change_commit": "ecb9751605c14f67d63e47b5458c6b5a8b6f1f6e",
+    "pre_change_archive": "ops/99_VERSION_ARCHIVE/20261013/REQ07_RESOURCE_DIRECTORY_PRE",
+    "pre_ci_workflow_archive_commit": "8d27fc9602c799a2fffe549f22e0d6ee1b01f056",
+    "source_files": [
+      {
+        "path": "resources/index.html",
+        "git_blob_sha": "179d79f07bb71462122429fbcb08dffff37272de"
+      },
+      {
+        "path": "ops/data/resource-catalog-normalized.v0.1.json",
+        "git_blob_sha": "e8926bb1dc21b9887d1902d3e96746a3e0f68b28"
+      },
+      {
+        "path": "ops/data/resource-drive-readback.v0.1.json",
+        "git_blob_sha": "52f23852697e6b8b47def40f4f926ab3b289df1a"
+      },
+      {
+        "path": "ops/control/resource-display-and-admission.v0.1.json",
+        "git_blob_sha": "9b34d94d4592eb17e22975cefea726df092acd75"
+      },
+      {
+        "path": "ops/control/REQ07_RESOURCE_LIBRARY_WORKFLOW.md",
+        "git_blob_sha": "e6c2c68eed9a5c4817c182d115cb18ef4d0356f6"
+      },
+      {
+        "path": "scripts/validate_resource_library.py",
+        "git_blob_sha": "25f7225ddbdb9e78143492837408667514717788"
+      },
+      {
+        "path": "scripts/test_resource_library.py",
+        "git_blob_sha": "df673419372fc52e21361b6fb25d0aba336f6470"
+      },
+      {
+        "path": "scripts/preview_resource_intake.py",
+        "git_blob_sha": "ffb7a6b6602925684a71cde57fb636d2ef9397c8"
+      },
+      {
+        "path": "scripts/collect_private_drive_resource_metadata.py",
+        "git_blob_sha": "f7f0220afec85dbb5863e6830b9b19ec0a6966f0"
+      },
+      {
+        "path": "scripts/qa_field_ux_browser.py",
+        "git_blob_sha": "0f5a631803dcd354c52dec496104cdc9f4008ff2"
+      },
+      {
+        "path": "scripts/validate_site_experience_contract.py",
+        "git_blob_sha": "3d5f93f660ba9318b739a0171dda9955253086a8"
+      },
+      {
+        "path": ".github/workflows/daily-ops-branch-preview.yml",
+        "git_blob_sha": "1ab4e4137b759df11a38740af5d38af2a49372cb"
+      },
+      {
+        "path": "ops/control/website-eight-request-roadmap.v0.1.json",
+        "git_blob_sha": "0c607116e9de3e437145006b109c009a437e1df5"
+      },
+      {
+        "path": "workspace/developer-software-backlog.v0.1.json",
+        "git_blob_sha": "be9f22fcb3af7d6925fdb461f67bc680aeb60180"
+      }
+    ]
+  },
+  "live_drive_metadata": {
+    "queried_registered_file_ids": 46,
+    "matched_exact_drive_id": 46,
+    "matched_original_filename": 46,
+    "matched_mime_type": 46,
+    "resource_sites": 8,
+    "stored_readback": "ops/data/resource-drive-readback.v0.1.json",
+    "downloaded_source_bytes": 0,
+    "renamed_originals": 0,
+    "removed_files": 0,
+    "authored_new_source_records": 0,
+    "indexed_root_inventory_complete": false,
+    "additional_unindexed_source_folders": "OBSERVED__NOT_PUBLICLY_ADMITTED",
+    "potential_restricted_and_cross_project_records": "EXCLUDED_PENDING_PRIVATE_REVIEW__NO_SOURCE_IDS_PUBLISHED"
+  },
+  "catalog": {
+    "total": 46,
+    "drawings_and_reports": 14,
+    "native_models": 15,
+    "estimates_and_calculations": 2,
+    "source_folders_and_archives": 15,
+    "corrected_category_resource_ids": [
+      "RES-P005-COST-ESTIMATE-001",
+      "RES-P020-STRUCT-DETAIL-001"
+    ],
+    "preserved_source_properties": [
+      "resource_id",
+      "project_id",
+      "source_drive_file_id",
+      "source_drive_url",
+      "original_drive_filename",
+      "source_registry_label",
+      "mime_type",
+      "approval_status"
+    ],
+    "approval_claim": "UNVERIFIED_AS_CURRENT_ISSUE",
+    "visual_changes": [
+      "Four category filter chips and dropdown",
+      "Rank-specific headings/body fonts",
+      "Source metadata verification notice and explicit incomplete inventory disclaimer",
+      "Existing project/site search, type filter and Drive links preserved"
+    ]
+  },
+  "future_safe_intake": {
+    "review_preview": "scripts/preview_resource_intake.py",
+    "authorized_recursive_collector": "scripts/collect_private_drive_resource_metadata.py",
+    "automated_publication_deployed": false,
+    "authenticated_complete_inventory_executed": false,
+    "private_metadata_output_only": true
+  },
+  "qa": {
+    "browser_mobile": {
+      "result": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38328870252"
+    },
+    "production": {
+      "result": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38328869998"
+    },
+    "branch": {
+      "result": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38328870162"
+    },
+    "validator": "scripts/validate_resource_library.py",
+    "tests": "scripts/test_resource_library.py"
+  },
+  "next_phase": "REQ07_AUTHENTICATED_RECURSIVE_PRIVATE_INVENTORY_REVIEW_AND_IDEMPOTENT_ADMISSION",
+  "deferred": "REQ08_RELEASE_CLOSEOUT_UNTIL_REQ07_IS_FULLY_CLOSED",
+  "rollback": "Use exact archived Git blobs with a scoped new commit. Preserve Drive originals and prior published code/history."
+}

@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS cwo_attachment_versions (
  CHECK (fidelity_status <> 'ORIGINAL_VERIFIED' OR
   (original_sha256 IS NOT NULL AND archived_sha256 IS NOT NULL
    AND original_sha256=archived_sha256 AND archive_ref IS NOT NULL
+   AND declared_bytes IS NOT NULL AND observed_bytes IS NOT NULL
    AND declared_bytes=observed_bytes))
 );
 CREATE TABLE IF NOT EXISTS cwo_evidence_attachment_links(

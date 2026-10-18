@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="A field-first briefing for verified construction work, site decisions, and drawings.">
+<title>Morning Action Desk · Site Operations · JP AEC</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap');
+:root{--ink:#20352f;--muted:#496054;--paper:#f5f5ef;--white:#fffefa;--line:#dfe4da;--pine:#174d42;--mint:#e8f4eb;--amber:#99622a;--red:#9d4943;--shadow:0 12px 34px rgba(21,51,37,.055);color-scheme:light}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 "Nunito Sans",Verdana,sans-serif}
+a{color:inherit}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e6a54f;outline-offset:3px}
+.shell{max-width:1210px;margin:auto;padding:0 22px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:19px 0}
+.brand{font-weight:800;font-size:14px;letter-spacing:.03em;text-decoration:none}.brand span{display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;background:#e1ece5;border-radius:9px;margin-right:8px}
+.nav{display:flex;gap:8px;flex-wrap:wrap}.nav a{text-decoration:none;font-size:12px;font-weight:700;padding:8px 12px;border-radius:22px;color:#50665d}.nav a[aria-current="page"]{background:#d9ede0;color:#145548}.nav a:hover{background:#e8eee7}
+.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#183d37 1%,#286d54 90%);color:#fff9ed;border-radius:24px;min-height:256px;display:grid;grid-template-columns:1fr 220px;align-items:center;padding:42px 46px;box-shadow:0 19px 36px #1b534524}
+.hero:after{content:"";position:absolute;right:-115px;bottom:-175px;width:440px;height:440px;border:1px solid #ffffff19;border-radius:50%;box-shadow:0 0 0 70px #ffffff08,0 0 0 130px #ffffff06;pointer-events:none}
+.eyebrow{font-size:11px;font-weight:850;letter-spacing:.17em;text-transform:uppercase;color:#c8e3d1}
+h1{font:600 clamp(33px,4.3vw,58px)/1.07 "Fraunces",Georgia,serif;letter-spacing:-.025em;margin:13px 0}.hero p{color:#e0ede5;max-width:700px;font-size:14px;line-height:1.7;margin:0}
+.site-date{display:inline-flex;gap:7px;margin-top:18px;padding:8px 11px;border:1px solid #ffffff52;border-radius:22px;font-size:12px;color:#f1ffed;background:#ffffff12}
+.art{font-size:110px;filter:drop-shadow(0 12px 20px #102d273b);text-align:center;transform-origin:center;animation:float 5s ease-in-out infinite;position:relative;z-index:1}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-9px) rotate(3deg)}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0 12px}.metric{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:15px 19px;box-shadow:var(--shadow)}
+.metric b{display:block;font:650 29px/1.1 "Fraunces",Georgia,serif;color:#214b3d}.metric span{display:block;font-size:12px;color:var(--muted);margin-top:5px}
+.stale{background:#fff6e7;border:1px solid #ecd5ac;color:#725326;padding:11px 15px;border-radius:12px;font-size:12px;margin:10px 0 22px;display:none}
+.section-title{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin:29px 0 14px}
+.section-title h2{font:650 clamp(23px,3vw,32px)/1.2 "Fraunces",Georgia,serif;margin:0}.section-title p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.tools input,.tools select{padding:11px 13px;border:1px solid #cbdace;background:#fff;border-radius:11px;font-size:13px;color:var(--ink);min-height:43px}.tools input{width:min(270px,80vw)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.project{border:1px solid var(--line);background:var(--white);border-radius:18px;padding:19px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.project-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.project h3{font:650 21px/1.17 "Fraunces",Georgia,serif;margin:0 0 5px}.micro{color:var(--muted);font-size:11px}
+.flag{font-size:11px;font-weight:800;padding:5px 9px;border-radius:20px;white-space:nowrap;background:#f2f0e8;color:#4e675d;border:1px solid #e6e3d8}
+.flag[data-tone="red"]{background:#fff0ea;color:#964336;border-color:#f3ccc3}.flag[data-tone="amber"]{background:#fff5e5;color:#96601c;border-color:#f0d9ae}.flag[data-tone="green"]{background:#e9f5e8;color:#266846;border-color:#c4dfcd}
+.kicker{font-size:10px;color:#496b58;letter-spacing:.12em;font-weight:850;text-transform:uppercase;margin-bottom:4px}
+.workline{font-size:13px;line-height:1.55;margin:0;max-height:83px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.answer{border-radius:11px;background:#f2f6f0;padding:12px 13px;font-size:12px;line-height:1.5}
+.answer strong{display:block;color:#245e48;font-size:11px;margin-bottom:4px}.answer p{margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:11px;margin-top:auto;padding-top:7px;border-top:1px solid #e7ece5}
+.foot small{font-size:11px;color:var(--muted)}.foot a{text-decoration:none;font-size:12px;font-weight:850;color:#125b49;padding:8px 0}.foot a:hover{text-decoration:underline}
+.empty{border:1px dashed #bdcbbf;background:#fff;border-radius:12px;padding:20px;color:var(--muted)}
+.below{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin:27px 0 34px}.tile{padding:20px;background:#e7efe5;border:1px solid #d0e2d3;border-radius:18px}.tile:nth-child(2){background:#f9f3e6;border-color:#eadebd}
+.tile b{font:700 19px Georgia,serif}.tile p{color:#5a6e60;font-size:12px;line-height:1.6}.tile a{font-size:12px;font-weight:850;color:#145a49}
+footer{padding:15px 0 32px;color:#52685c;font-size:11px}
+@media(max-width:820px){.hero{grid-template-columns:1fr 92px;padding:27px 22px;min-height:215px}.art{font-size:73px}.grid{grid-template-columns:1fr}.below{grid-template-columns:1fr}.shell{padding:0 13px}}
+@media(max-width:490px){.hero{grid-template-columns:1fr}.art{position:absolute;right:10px;top:12px;opacity:.25;font-size:74px}.hero h1{max-width:290px}.summary{gap:7px}.metric{padding:12px}.metric b{font-size:24px}.metric span{font-size:10px}.tools{width:100%}.tools input{flex:1;min-width:160px}.project{padding:17px}}
+
+.site-days{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 22px}
+.site-day{border:1px solid #dee8dc;background:#fffefa;border-radius:16px;padding:17px 18px}
+.site-day.today{background:#e9f3e8;border-color:#acd3b7}.site-day h2{font:650 20px "Fraunces",Georgia,serif;margin:0 0 5px}.site-day .date{font-size:11px;color:#54705d;font-weight:850}.site-day p{font-size:12px;color:#476252;line-height:1.6;margin:8px 0 0}
+.day-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.day-strip>div{background:#f4f6f0;border-radius:9px;padding:9px 10px}.day-strip>div:nth-child(2){background:#eaf3e8}
+.day-strip b{font:750 10px "Nunito Sans",sans-serif;text-transform:uppercase;display:block;color:#56725c}.day-strip span{font-size:12px;display:block;margin-top:4px;font-weight:700;color:#365a47}
+.trade-preview{margin:0;padding-left:18px;display:grid;gap:4px;min-height:68px}
+.trade-preview li{font-size:12px;color:#325947}.trade-preview small{color:#3f5f4b}
+.project .answer{display:none}.project .workline{display:none}
+.project .foot small{color:#587363}
+@media(max-width:700px){.site-days{grid-template-columns:1fr}.day-strip{grid-template-columns:repeat(3,minmax(0,1fr))}.site-day{padding:12px 14px}}
+
+.split-entry{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.split-card{display:grid;gap:7px;border-radius:15px;padding:18px 19px;background:#fffefa;border:1px solid #dce4d7;color:#1c533d;text-decoration:none;box-shadow:0 8px 22px #173c2409}.split-card:hover{border-color:#91bda2;background:#f4fbf4}.split-card strong{font-size:16px}.split-card span{font-size:12px;line-height:1.55;color:#526658}@media(max-width:690px){.split-entry{grid-template-columns:1fr}}
+
+/* Morning-first information architecture: preserve field desk theme and legacy board collapsed. */
+.hero{min-height:225px}.split-entry{grid-template-columns:repeat(3,minmax(0,1fr))}.split-card{padding:14px 16px}.split-card strong{font-size:14px}.split-card span{font-size:11px}
+.morning-actions{background:#fffefa;border:1px solid #dce6db;border-radius:18px;padding:18px 20px;box-shadow:var(--shadow);margin-top:14px}
+.morning-heading{display:flex;gap:12px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}.morning-heading h2{font:650 26px/1.2 "Fraunces",serif;margin:0}.morning-heading p{margin:4px 0;color:#567061;font-size:12px}.morning-filter{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.morning-filter label{font-size:11px;font-weight:800}.morning-filter select,.morning-filter input{background:white;min-height:38px;border:1px solid #bccdc2;padding:8px 9px;border-radius:9px;font-size:12px;max-width:210px;color:var(--ink)}
+.morning-note{background:#fff7e8;border-left:4px solid #c88c27;border-radius:8px;padding:10px 12px;font-size:12px;line-height:1.5;margin-bottom:13px}
+.morning-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:12px}.morning-metrics>div{padding:10px 12px;background:#f1f6f0;border:1px solid #e0e9df;border-radius:11px;display:flex;flex-direction:column}.morning-metrics b{font:650 23px "Fraunces",serif}.morning-metrics span{font-size:11px;color:#526a5a}
+.morning-rows{display:grid;gap:6px}.morning-row{border:1px solid #e3e9df;border-radius:11px;padding:11px 12px;display:grid;grid-template-columns:minmax(170px,.9fr) minmax(250px,2fr) minmax(130px,.6fr);gap:12px;align-items:center}.morning-row:nth-child(even){background:#fbfcf8}.morning-row h3{font-size:14px;margin:0 0 3px}.morning-row .minor{color:#63776b;font-size:11px;line-height:1.4}.morning-row .task{font-size:12px;line-height:1.4;display:flex;gap:5px;margin-bottom:4px}.morning-row .task:last-child{margin-bottom:0}.morning-row .task strong{flex-shrink:0;color:#8c652e}.morning-row .stack{display:grid;gap:5px}.morning-row .tiny{font-size:11px;font-weight:740;line-height:1.3}.morning-row .tiny.hold{color:#a14034}.morning-row .tiny.warn{color:#825e21}.morning-row a{color:#176048;font-size:11px;font-weight:770;text-decoration:none}.morning-row a:hover{text-decoration:underline}.morning-actions-footer{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:13px;font-size:12px}.morning-actions-footer button{border:0;padding:10px 13px;background:#175c45;color:white;border-radius:9px;font:750 12px system-ui;cursor:pointer}.morning-actions-footer a{margin-left:auto}.morning-actions-footer #copy-result{color:#526b5e}
+.legacy-brief{border:1px solid #e1e8dc;border-radius:12px;background:#f7f9f4;padding:11px 15px;margin:20px 0}.legacy-brief>summary{font-size:12px;font-weight:800;cursor:pointer;color:#53675b}.legacy-intro{font-size:12px;color:#607366;margin:15px 0}.below{margin-top:12px}
+@media(max-width:980px){.split-entry{grid-template-columns:1fr 1fr}.morning-row{grid-template-columns:minmax(150px,1fr) minmax(200px,2fr)}.morning-row .stack{grid-column:1/-1;grid-template-columns:repeat(2,1fr)}}
+@media(max-width:670px){.split-entry{grid-template-columns:1fr}.morning-actions{padding:14px 11px}.morning-row{display:block}.morning-row>*{margin:5px 0}.morning-row .stack{display:flex;flex-wrap:wrap;gap:10px}.morning-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.morning-filter input{min-width:0;width:100%;max-width:100%}}
+</style></head><body>
+<div class="shell"><header class="topbar"><a class="brand" href="index.html"><span aria-hidden="true">🏗️</span> JP AEC / Field Desk</a><nav class="nav" aria-label="Main"><a aria-current="page" href="site-operations.html">Today · Action Desk</a><a href="site-operations/schedule.html">Work &amp; Holds</a><a href="site-operations/questions.html">Engineer Questions</a><a href="site-operations/history.html">Progress History</a><a href="map.html">🗺️ Map</a><a href="workspace/">Workspace</a><a href="controls/archive-formats.html">Evidence standard</a></nav></header>
+<section class="hero" aria-labelledby="hero-title"><div><div class="eyebrow">Site Operations / Morning action desk</div><h1 id="hero-title">What needs attention<br>today?</h1><p>Engineer-first: outstanding decisions, recorded holds and the checks to make before ordering crews or vendors. <strong>Source reports are not approved work orders.</strong> Historical progress lives separately.</p><div class="site-date" id="record-date">📅 Loading site records…</div></div><div class="art" aria-hidden="true">👷🏽‍♂️</div></section>
+<section class="split-entry" aria-label="Site operations workspaces">
+<a class="split-card" href="site-operations/schedule.html"><strong>🗓️ Work &amp; Holds ↗</strong><span>Authorized work, recorded holds and full pending issue details.</span></a>
+<a class="split-card" href="site-operations/questions.html"><strong>📋 Engineer Questions ↗</strong><span>Specific technical questions and source-linked reply drafts.</span></a>
+<a class="split-card" href="site-operations/history.html"><strong>🗄️ Progress History ↗</strong><span>Past work reports, evidence links and chronological project records.</span></a>
+</section>
+<section class="morning-actions" aria-labelledby="morning-title">
+<div class="morning-heading"><div><h2 id="morning-title">Morning briefing</h2><p>One concise line per project. Follow up or authorize only after checking the actual site and responsible engineer.</p></div><div class="morning-filter"><label for="morning-company">Company</label><select id="morning-company"><option value="">All</option><option value="Fishtail">Fishtail</option><option value="Rohini">Rohini</option></select><label for="morning-search">Find site</label><input id="morning-search" type="search" placeholder="Project / issue / trade" autocomplete="off"></div></div>
+<div class="morning-note" id="morning-note" role="status">Loading machine projection for morning briefing…</div>
+<div class="morning-metrics" aria-label="Morning briefing metrics">
+<div><b id="morning-sites">—</b><span>Sites to review</span></div><div><b id="morning-holds">—</b><span>Recorded HOLD readiness</span></div><div><b id="morning-issues">—</b><span>Outstanding issue records</span></div><div><b id="morning-approved">—</b><span>Authorized dated tasks</span></div>
+</div>
+<div id="morning-rows" class="morning-rows" aria-live="polite"><p class="empty">Loading priority checks…</p></div>
+<div class="morning-actions-footer"><button id="copy-morning" type="button">Copy morning follow-up checklist</button><span id="copy-result" role="status"></span><a href="site-operations/schedule.html">Detailed holds / schedule ↗</a></div>
+</section>
+<details class="legacy-brief" id="legacy-three-day"><summary>Previous three-day workboard (historical compatibility view; not a daily work order)</summary><p class="legacy-intro">This earlier source projection is retained for continuity. The primary morning board above is the action index; the <a href="site-operations/history.html">Progress History</a> page contains the dedicated dated evidence stream.</p>
+<div class="summary" aria-label="Portfolio metrics"><div class="metric"><b id="count-projects">—</b><span>Tracked sites</span></div><div class="metric"><b id="count-holds">—</b><span>Sites on HOLD</span></div><div class="metric"><b id="count-queries">—</b><span>Site workboards needing replies</span></div></div>
+<div class="stale" id="date-warning" role="status"></div>
+<section class="site-days" aria-label="Three-day work status">
+  <article class="site-day"><div class="date" id="ydate">8 Oct 2026</div><h2>↩ Yesterday</h2><p id="yesterday-overview">Reported work or issues, not assumed completion.</p></article>
+  <article class="site-day today"><div class="date" id="tdate">9 Oct 2026</div><h2>⚠ Questions to confirm</h2><p id="today-overview">Not a crew schedule. These items are unresolved confirmations.</p></article>
+  <article class="site-day"><div class="date" id="ndate">10 Oct 2026</div><h2>↪ Next-day plan status</h2><p id="tomorrow-overview">No dated authorized tasks in the current snapshot.</p></article>
+</section>
+<section aria-labelledby="projects-heading"><div class="section-title"><div><h2 id="projects-heading">Site workboards</h2><p>This original 3-day view is a sourced briefing, not an execution order. Use Work & Holds for schedule status or Engineer Questions to respond.</p></div><div class="tools"><label for="site-search" class="micro">Find a site</label><input id="site-search" type="search" placeholder="Name, code, task…" autocomplete="off"><label for="company-filter" class="micro">Company</label><select id="company-filter"><option value="">All companies</option><option value="FBL">Fishtail</option><option value="REB">Rohini</option></select></div></div><div class="grid" id="projects" aria-live="polite"><div class="empty">Loading field records…</div></div></section>
+</details>
+<section class="below" aria-label="Other useful tools"><article class="tile"><b>🗺️ Find the site on the map</b><p>Locations first, with extended records behind a click. The full list and filters stay hidden until requested.</p><a href="map.html">Open project map →</a></article><article class="tile"><b>🗄️ Need the full audit trail?</b><p>Archive formats, raw source provenance, history and technical governance are kept outside the engineer's daily briefing.</p><a href="controls/archive-formats.html">View preservation rules →</a></article></section>
+<details class="site-help" style="font-size:12px;margin:15px 0;color:#56766a"><summary style="cursor:pointer;font-weight:700">Help, guidance &amp; data sources</summary><p><a href="guide/">Field guide</a> · <a href="ops/data/project-resources.json">Governed resource links (machine-readable)</a> · <a href="ops/data/current-works.json">Recorded site facts</a>. This material is not required for the daily field briefing.</p></details>
+<footer>Read-only engineer briefing derived from GitHub machine records. Check snapshot date, project permissions and actual engineering approvals before dispatch. Historical reports and images are not today's work orders.</footer></div>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=v=>String(v||"").replaceAll("_"," ").toLowerCase().replace(/^./,c=>c.toUpperCase());
+let all=[],board={projects:[]},trades=[];
+function classify(p){
+ const o=p.daily_ops||{}, b=o.blockers||[], hold=["HOLD","NOT_READY"].includes(o.overall_readiness);
+ if(hold)return {label:"Stop / review",tone:"red",priority:4};
+ if(o.conflict_state==="UNRESOLVED")return {label:"Verify conflict",tone:"red",priority:3};
+ if(b.length||o.overall_readiness==="UNSET")return {label:"Needs confirmation",tone:"amber",priority:2};
+ return {label:"Conditionally ready",tone:"green",priority:1};
+}
+function render(){
+ const search=$("site-search").value.trim().toLowerCase(),co=$("company-filter").value;
+ const rows=all.filter(p=>(!co||String(p.company_project_code||"").startsWith(co))&&(!search||[p.display_name,p.project_id,p.company_project_code,...(p.daily_ops?.todays_work||[]).map(w=>w.activity)].join(" ").toLowerCase().includes(search)));
+ const emoji=x=>(trades.find(t=>t.id===x)||{}).emoji||"🦺";
+ const tname=x=>(trades.find(t=>t.id===x)||{}).name||x;
+ $("projects").innerHTML=rows.length?rows.map(p=>{
+  const o=p.daily_ops||{},c=classify(p),r=board.projects.find(x=>x.project_id===p.project_id)||{yesterday:[],today:[],tomorrow:[]};
+  const y=r.yesterday||[],t=r.today||[],n=r.tomorrow||[];
+  const unique=[...new Set(t.map(x=>x.trade_id))];
+  const preview=unique.slice(0,4).map(tag=>'<li>'+esc(emoji(tag))+' '+esc(tname(tag))+'</li>').join("");
+  return '<article class="project"><div class="project-head"><div><h3>'+esc(p.display_name)+'</h3><div class="micro">'+esc(p.company_project_code||p.project_id)+' · Report cutoff '+esc(o.date||"Not specified")+'</div></div><span class="flag" data-tone="'+c.tone+'">'+esc(c.label)+'</span></div>'+
+  '<div class="day-strip"><div><b>Yesterday</b><span>'+y.length+(y.length===1?" item":" items")+'</span></div><div><b>Today</b><span>'+t.length+' to check</span></div><div><b>Tomorrow</b><span>'+(n.length?n.length+" proposed":"Awaiting plan")+'</span></div></div>'+
+  '<div><div class="kicker">Trades needing updates</div>'+(preview?'<ul class="trade-preview">'+preview+(unique.length>4?'<li><small>+'+(unique.length-4)+' other trades</small></li>':'')+'</ul>':'<p class="micro">No categorized tasks yet.</p>')+'</div>'+
+  '<div class="foot"><small>'+esc((o.blockers||[]).length)+' decision / issue item(s)</small><a href="site-operations/project.html?project='+encodeURIComponent(p.project_id)+'">View evidence snapshot ↗</a></div></article>';
+ }).join(""):'<div class="empty">No site matches the search. Clear the filter.</div>';
+}
+async function load(){
+ try{
+ const [response,bResponse,tResponse]=await Promise.all([fetch("ops/data/current-works.json?v="+Date.now(),{cache:"no-store"}),fetch("ops/data/field-three-day-board.json?v="+Date.now(),{cache:"no-store"}),fetch("ops/control/field-trade-taxonomy.json?v="+Date.now(),{cache:"no-store"})]);
+ if(!response.ok||!bResponse.ok||!tResponse.ok)throw Error("Field records or trade catalog unavailable.");
+ const [doc,b,c]=await Promise.all([response.json(),bResponse.json(),tResponse.json()]);
+ if(!Array.isArray(doc.projects)||!Array.isArray(b.projects))throw Error("Unexpected project data.");
+ board=b;trades=c.trades||[];
+ $("ydate").textContent=b.date_yesterday;$("tdate").textContent=b.date_today;$("ndate").textContent=b.date_tomorrow;
+ $("yesterday-overview").textContent=b.projects.filter(p=>p.yesterday.length).length+" of 8 sites have a dated report. Silence does not mean no work.";
+ $("today-overview").textContent=b.projects.reduce((n,p)=>n+p.today.length,0)+" source-linked trade questions need actual engineer responses, not inferred assignments.";
+ $("tomorrow-overview").textContent=b.projects.reduce((n,p)=>n+p.tomorrow.length,0)+" confirmed entries. Awaiting the engineers’ next-day schedules.";
+ all=doc.projects.sort((a,b)=>classify(b).priority-classify(a).priority||a.display_name.localeCompare(b.display_name));
+ const dates=[...new Set(all.map(p=>p.daily_ops?.date).filter(Boolean))].sort();const latest=dates.at(-1)||"unknown";
+ $("record-date").textContent="📅 Latest admitted report: "+latest+" · Nepal project records";
+ $("count-projects").textContent=all.length;
+ $("count-holds").textContent=all.filter(p=>["HOLD","NOT_READY"].includes(p.daily_ops?.overall_readiness)).length;
+ $("count-queries").textContent=all.filter(p=>classify(p).priority>=2).length;
+ const current=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Kathmandu",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+ // Use explicit date parts for locale-independent ISO ordering.
+ const fmt=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Kathmandu",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+ const val=k=>fmt.find(x=>x.type===k)?.value;
+ const today=[val("year"),val("month"),val("day")].join("-");
+ if(latest!=="unknown"&&latest!==today){$("date-warning").style.display="block";$("date-warning").textContent="⚠️ The latest site reports are dated "+latest+"; today in Nepal is "+today+". Treat these as carry-forward records, not new instructions or confirmation of today's completion.";}
+ render();
+ }catch(e){$("projects").innerHTML='<div class="empty">'+esc(e.message)+'</div>';$("record-date").textContent="Data unavailable";}
+}
+$("site-search").addEventListener("input",render);$("company-filter").addEventListener("change",render);load();
+})();
+</script>
+<script>
+(()=>{"use strict";const $=id=>document.getElementById(id),esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));let data=null,shown=[];
+function age(date){if(!/^\d{4}-\d{2}-\d{2}$/.test(date||""))return null;const n=(Date.parse(data.as_of_npt+"T00:00:00Z")-Date.parse(date+"T00:00:00Z"))/86400000;return Number.isFinite(n)&&n>=0?Math.floor(n):null;}
+const rank=q=>q.severity==="HOLD_RELATED"?0:q.question_kind==="ENGINEER_DECISION"?1:q.question_kind==="MATERIAL_VERIFICATION"?2:3;
+function visible(){let company=$("morning-company").value,search=$("morning-search").value.toLowerCase().trim();return data.sites.filter(s=>(!company||s.company.includes(company))&&(!search||[s.display_name,s.project_id,...data.engineer_questions.filter(x=>x.project_id===s.project_id).map(x=>x.question)].join(" ").toLowerCase().includes(search)));}
+function row(s){const questions=data.engineer_questions.filter(q=>q.project_id===s.project_id).sort((a,b)=>rank(a)-rank(b)),issues=data.open_issues.filter(x=>x.project_id===s.project_id),oldest=Math.max(-1,...issues.map(i=>age(i.first_recorded_date)??-1)),hold=s.readiness_snapshot==="HOLD";
+const today=questions.slice(0,2),preview=today.length?today.map(q=>'<div class="task"><strong>CHECK ·</strong><span>'+esc(q.question)+'</span></div>').join(""):'<span class="minor">No verified action briefing available. Request a dated site update.</span>';
+const pill=hold?'<span class="tiny hold">⛔ Recorded site HOLD — confirm scope</span>':s.readiness_snapshot==="READY_WITH_CONDITION"?'<span class="tiny warn">⚠ Conditional readiness</span>':'<span class="tiny warn">⚠ Readiness unconfirmed</span>';
+const date=oldest>=7?oldest+" days since oldest unresolved observation":oldest>=0?"Oldest open issue: "+oldest+" day(s)":"No aged issue date";
+return '<article class="morning-row"><div><h3>'+esc(s.display_name)+'</h3><div class="minor">'+esc(s.project_id)+' · Project record '+esc(s.latest_project_truth_date)+'</div>'+pill+'</div><div>'+preview+'<div class="minor">Source snapshot '+esc(data.as_of_npt)+' · No dated crew order verified.</div></div><div class="stack"><span class="tiny">'+issues.length+' unresolved issue(s) · '+esc(date)+'</span><a href="site-operations/questions.html?project='+encodeURIComponent(s.project_id)+'">Answer / clarify '+questions.length+' ↗</a><a href="site-operations/schedule.html?project='+encodeURIComponent(s.project_id)+'">Work &amp; Holds ↗</a></div></article>';}
+function render(){if(!data)return;shown=visible().sort((a,b)=>Number(b.readiness_snapshot==="HOLD")-Number(a.readiness_snapshot==="HOLD")||data.open_issues.filter(x=>x.project_id===b.project_id).length-data.open_issues.filter(x=>x.project_id===a.project_id).length||a.display_name.localeCompare(b.display_name));$("morning-rows").innerHTML=shown.length?shown.map(row).join(""):'<div class="empty">No project matches these filters.</div>';}
+async function copy(){if(!data)return;const lines=["SITE OPERATIONS — MORNING FOLLOW-UP (not a crew work order)","Source snapshot: "+data.as_of_npt,"No approved daily crew assignments recorded in this snapshot. Verify site conditions and engineering authorization.",""];for(const s of shown){lines.push(s.display_name+" ["+s.project_id+"] — "+s.readiness_snapshot);const qs=data.engineer_questions.filter(q=>q.project_id===s.project_id).sort((a,b)=>rank(a)-rank(b));for(let i=0;i<Math.min(2,qs.length);i++)lines.push(" • Confirm: "+qs[i].question);lines.push(" • Pending issues: "+data.open_issues.filter(x=>x.project_id===s.project_id).length," • Slack: "+s.slack_channel_url,"");}const msg=lines.join("\n");try{if(navigator.clipboard?.writeText)await navigator.clipboard.writeText(msg);else{const t=document.createElement("textarea");t.value=msg;document.body.appendChild(t);t.select();if(!document.execCommand("copy"))throw Error("Not available");t.remove();}$("copy-result").textContent="Checklist copied — no message was sent.";}catch(e){$("copy-result").textContent="Clipboard unavailable; please copy manually from the site records.";}}
+async function load(){try{const resp=await fetch("ops/data/site-execution-questions.v0.1.json?v="+Date.now(),{cache:"no-store"});if(!resp.ok)throw Error("HTTP "+resp.status);data=await resp.json();if(!Array.isArray(data.sites)||!Array.isArray(data.open_issues)||!Array.isArray(data.engineer_questions))throw Error("Bad machine projection");
+$("morning-sites").textContent=data.sites.length;$("morning-holds").textContent=data.sites.filter(x=>x.readiness_snapshot==="HOLD").length;$("morning-issues").textContent=data.open_issues.length;$("morning-approved").textContent=data.sites.reduce((n,x)=>n+x.approved_daily_work.length,0);
+const parts=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Kathmandu",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date()),get=k=>parts.find(p=>p.type===k)?.value,today=[get("year"),get("month"),get("day")].join("-");
+$("morning-note").textContent="Evidence snapshot: "+data.as_of_npt+" · Nepal today: "+today+". "+(today!==data.as_of_npt?"STALE SNAPSHOT — recheck today’s field position before giving instructions. ":"")+"No engineer-authorized crew plan is recorded. Listed checks are follow-ups, not work orders.";render();}
+catch(e){$("morning-note").textContent="Morning projection unavailable: "+e.message+". Do not infer a daily schedule.";$("morning-rows").innerHTML='<div class="empty">Unable to load actions; no work is automatically authorized.</div>';}}
+$("morning-company").addEventListener("change",render);$("morning-search").addEventListener("input",render);$("copy-morning").addEventListener("click",copy);load();})();
+</script>
+</body></html>

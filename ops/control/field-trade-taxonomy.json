@@ -1,0 +1,308 @@
+{
+  "schema_version": "1.0.0",
+  "id": "A9-CWO-TRADE-WORK-INVENTORY-v1.0",
+  "date_npt": "2026-10-09",
+  "authority": "VOCABULARY_ONLY_NOT_EXECUTION_FACTS",
+  "description": "Trade/crew taxonomy for 3-day site reporting. Catalog entries define work categories, not actual site tasks or inferred manpower numbers. Project-specific activity requires dated site-engineer confirmation with source links.",
+  "trades": [
+    {
+      "id": "SITE",
+      "name": "Site coordination",
+      "emoji": "🦺",
+      "indicators": [
+        "site",
+        "cleaning",
+        "curing",
+        "safety",
+        "labor",
+        "manpower"
+      ]
+    },
+    {
+      "id": "EARTHWORK",
+      "name": "Excavation & earthwork",
+      "emoji": "🚜",
+      "indicators": [
+        "excavation",
+        "earthwork",
+        "backfill",
+        "soil soling"
+      ]
+    },
+    {
+      "id": "SURVEY",
+      "name": "Survey, layout & setting out",
+      "emoji": "📐",
+      "indicators": [
+        "layout",
+        "setting out",
+        "level check",
+        "grid marking"
+      ]
+    },
+    {
+      "id": "PCC_RCC",
+      "name": "PCC / RCC & concreting",
+      "emoji": "🏗️",
+      "indicators": [
+        "pcc",
+        "rcc",
+        "concrete",
+        "casting",
+        "slab pour",
+        "footing casting"
+      ]
+    },
+    {
+      "id": "REBAR",
+      "name": "Rebar, fixing & BBS",
+      "emoji": "🔩",
+      "indicators": [
+        "reinforcement",
+        "rebar",
+        "stirrup",
+        "bbs",
+        "chair",
+        "anchorage",
+        "shear key",
+        "cantilever"
+      ]
+    },
+    {
+      "id": "FORMWORK",
+      "name": "Shuttering & centring",
+      "emoji": "🪚",
+      "indicators": [
+        "shuttering",
+        "centring",
+        "formwork",
+        "ply",
+        "deshuttering"
+      ]
+    },
+    {
+      "id": "BRICKWORK",
+      "name": "Brick & block masonry",
+      "emoji": "🧱",
+      "indicators": [
+        "brickwork",
+        "brick masonry",
+        "brick",
+        "block masonry",
+        "wall masonry",
+        "lintel"
+      ]
+    },
+    {
+      "id": "STONE_MASONRY",
+      "name": "Stone masonry",
+      "emoji": "🪨",
+      "indicators": [
+        "stone masonry",
+        "stone wall",
+        "stonework"
+      ]
+    },
+    {
+      "id": "PLASTER",
+      "name": "Plastering & surface prep",
+      "emoji": "🧱",
+      "indicators": [
+        "plaster",
+        "render",
+        "surface prep",
+        "ghola"
+      ]
+    },
+    {
+      "id": "PLUMBING",
+      "name": "Plumbing & sanitary",
+      "emoji": "🚰",
+      "indicators": [
+        "plumbing",
+        "plumber",
+        "sanitary",
+        "pipe",
+        "toilet fixture",
+        "tap",
+        "bathroom"
+      ]
+    },
+    {
+      "id": "ELECTRICAL",
+      "name": "Electrical",
+      "emoji": "⚡",
+      "indicators": [
+        "electrician",
+        "electrical",
+        "wiring",
+        "bulb",
+        "socket",
+        "panel",
+        "board replacement"
+      ]
+    },
+    {
+      "id": "WATERPROOF",
+      "name": "Waterproofing & seepage review",
+      "emoji": "💧",
+      "indicators": [
+        "waterproof",
+        "leakage",
+        "seepage",
+        "leak",
+        "membrane",
+        "water penetration"
+      ]
+    },
+    {
+      "id": "UPVC",
+      "name": "UPVC / doors / glazing",
+      "emoji": "🪟",
+      "indicators": [
+        "upvc",
+        "window",
+        "glazing",
+        "door fit",
+        "door height"
+      ]
+    },
+    {
+      "id": "CEILING",
+      "name": "False ceiling",
+      "emoji": "🪜",
+      "indicators": [
+        "false ceiling",
+        "ceiling"
+      ]
+    },
+    {
+      "id": "PAINT",
+      "name": "Painting & putty",
+      "emoji": "🎨",
+      "indicators": [
+        "painting",
+        "paint",
+        "putty",
+        "primer",
+        "final coat"
+      ]
+    },
+    {
+      "id": "CARPENTRY",
+      "name": "Carpentry & joinery",
+      "emoji": "🪵",
+      "indicators": [
+        "carpentry",
+        "joinery",
+        "cabinet"
+      ]
+    },
+    {
+      "id": "METAL",
+      "name": "Steel fabrication & railings",
+      "emoji": "🔧",
+      "indicators": [
+        "railing",
+        "metal fabrication",
+        "steel fabrication",
+        "welding",
+        "grill"
+      ]
+    },
+    {
+      "id": "TILE",
+      "name": "Tiling, granite & flooring",
+      "emoji": "🧩",
+      "indicators": [
+        "tile",
+        "granite",
+        "skirting",
+        "parquet",
+        "flooring"
+      ]
+    },
+    {
+      "id": "ROOF",
+      "name": "Roofing",
+      "emoji": "🏠",
+      "indicators": [
+        "roofing",
+        "roof covering",
+        "truss",
+        "dekkra"
+      ]
+    },
+    {
+      "id": "ENGINEERING",
+      "name": "Engineer review / design decision",
+      "emoji": "📏",
+      "indicators": [
+        "design",
+        "drawing",
+        "engineering",
+        "structural detail",
+        "approved method",
+        "dimension"
+      ]
+    },
+    {
+      "id": "PROCUREMENT",
+      "name": "Materials procurement & store",
+      "emoji": "📦",
+      "indicators": [
+        "stock",
+        "bill",
+        "order",
+        "delivery",
+        "cement usage",
+        "quantity",
+        "estimate",
+        "receipt"
+      ]
+    }
+  ],
+  "report_contract": {
+    "day_buckets": [
+      "YESTERDAY_REPORTED",
+      "TODAY_REPORTED_OR_RECONFIRM",
+      "TOMORROW_PROPOSED_PENDING_SIGNOFF"
+    ],
+    "required_from_engineer": [
+      "site_project_id",
+      "work_date_npt",
+      "trade_id",
+      "specific_activity",
+      "location",
+      "status",
+      "source_message_id"
+    ],
+    "use_if_known": [
+      "quantity",
+      "unit",
+      "crew_count",
+      "assigned_role",
+      "blocking_decision",
+      "material_needed",
+      "tools_needed",
+      "PPE_exception"
+    ],
+    "statuses": [
+      "DONE_REPORTED",
+      "ONGOING_REPORTED",
+      "PLANNED_NOT_APPROVED",
+      "BLOCKED",
+      "ENGINEER_HOLD",
+      "AWAITING_REPORT",
+      "NEEDS_CONFIRMATION"
+    ],
+    "rules": [
+      "Never infer an assigned worker, crew size, ready status or approved plan from a work category.",
+      "PPE/tools/materials appear only when relevant to a concrete work item; unknown fields do not render as generic HOLD.",
+      "Work done yesterday, work to do today and tomorrow's tentative plan require distinct dated evidence.",
+      "Engineer approval and source reference are required before lifting a HOLD.",
+      "No public private personnel/contact data or raw Slack/Discord evidence. Preserve restricted originals in Drive.",
+      "Classifying a mixed-language note using lexical indicators is provisional until a site engineer confirms the trade."
+    ]
+  }
+}

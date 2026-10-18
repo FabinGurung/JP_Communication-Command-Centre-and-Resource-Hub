@@ -1,0 +1,95 @@
+{
+  "event_id": "OPS-0066",
+  "date_npt": "2026-10-12",
+  "type": "DEVELOPER_WORKSPACE_GUIDE_ROLE_ALIGNMENT",
+  "scope": "ONE_TASK__FIX_OUTDATED_OWNER_WORKSPACE_LABELS_AND_HOW_TO_REFERENCES",
+  "status": "VERIFIED_SOURCE_AND_GITHUB_ACTIONS_SUCCESS",
+  "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "branch": "main",
+  "baseline_commit": "0c69a2e2837e5cefbf96c40233ba984966e10f27",
+  "pre_change_archive_commit": "def66abbee59c614d8ee990519711c6dee5096dc",
+  "pre_change_archive_root": "ops/99_VERSION_ARCHIVE/20261012/DEVELOPER_WORKSPACE_DOC_SCOPE_PRE",
+  "verified_implementation_commit": "b75a533402abec8d4cf60c0e0c0986a596da81f3",
+  "changed_files": [
+    {
+      "path": "site-operations/history.html",
+      "verified_git_blob_sha": "0cf7cde27ee868b0c7c7c8a23dd656f0ccf59735"
+    },
+    {
+      "path": "site-operations/coordination.html",
+      "verified_git_blob_sha": "3d86c749450e58460cff72b76f8aec5f6fe1cd98"
+    },
+    {
+      "path": "site-operations/project.html",
+      "verified_git_blob_sha": "0f0e1c3e92e09a457d009b9f12204038d2e12c5f"
+    },
+    {
+      "path": "guide/index.html",
+      "verified_git_blob_sha": "9dc9d619c319b929bfcc5ab82ebef9dec4785d88"
+    },
+    {
+      "path": "guide/3-pages/index.html",
+      "verified_git_blob_sha": "d74a63774552e87fe6d4dba6da3218ce9e3c852e"
+    },
+    {
+      "path": "guide/7-pages/index.html",
+      "verified_git_blob_sha": "50d1bab643678f6038d3d793752318f7a41690b8"
+    },
+    {
+      "path": "guide/15-pages/index.html",
+      "verified_git_blob_sha": "18e9f5974b1b1ef1007a9a766ff497d291bce4c7"
+    },
+    {
+      "path": "guide/guide.js",
+      "verified_git_blob_sha": "8b78846e4cbefa680463a2060149538f27e5ccf6"
+    },
+    {
+      "path": "guide/image-manifest.json",
+      "verified_git_blob_sha": "1230462c6977b4a54c444969c01815333377b38a"
+    },
+    {
+      "path": "guide/images/01-workspace.svg",
+      "verified_git_blob_sha": "7b0eb74cc6f1f3935b8ab07f54d3debd19cd30a5"
+    },
+    {
+      "path": "scripts/qa_field_ux_browser.py",
+      "verified_git_blob_sha": "0ea5eee09a57fe981b46060b94054814481d8b6c"
+    }
+  ],
+  "changes": [
+    "Relabel three secondary site views from Owner Workspace to Developer Workspace",
+    "Point all four illustrated-guide return links to the Operations Hub homepage",
+    "Clarify the developer-only Workspace in 1/3/7/15-page tutorial text",
+    "Update first-guide illustrations and the developer-only workspace SVG without changing the old image URL",
+    "Reconcile image-manifest use and add browser regression checks for developer ownership and guide navigation"
+  ],
+  "verification": {
+    "branch_lane": {
+      "conclusion": "success",
+      "run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38197911913"
+    },
+    "browser_mobile": {
+      "conclusion": "success",
+      "run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38197911940"
+    },
+    "production": {
+      "conclusion": "success",
+      "run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38197912031"
+    },
+    "post_change_source_readback": "PASS",
+    "pre_change_archive": "EXACT_ORIGINAL_GIT_BLOB_REFS",
+    "release_scope": "DOCS_LABELS_AND_QA_ONLY"
+  },
+  "excluded": {
+    "raw_discord_slack_ingestion": "UNCHANGED",
+    "engineering_records": "UNCHANGED",
+    "resource_originals": "UNCHANGED",
+    "daily_checklist_storage": "UNCHANGED",
+    "private_drive_files": "UNCHANGED"
+  },
+  "rollback": "Read prior source bytes at pre_change_archive_root in pre_change_archive_commit; restore through a new versioned commit; do not reset published Git history.",
+  "remaining_out_of_scope": [
+    "Complete How-To technical narrative accuracy review beyond developer ownership",
+    "Authenticated access and automatic future-resource normalization are separate workstreams"
+  ]
+}

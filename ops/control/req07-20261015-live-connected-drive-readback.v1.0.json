@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "control_id": "REQ07_AUTHENTICATED_CONNECTED_DRIVE_REFRESH_20261015",
+  "date_npt": "2026-10-15",
+  "authority": "LIVE_AUTHENTICATED_GOOGLE_DRIVE_PROVIDER_METADATA",
+  "phase": "VERIFIED_REGISTERED_ROOT_REFRESH__P001_P002_EXTERNAL_PROVENANCE_PENDING",
+  "prior": {
+    "run": "REQ07_20261014T052433Z",
+    "rows": 1519,
+    "sha256": "976a9782139ef1887af626f0d6af9e1beb8da34bc6ae6b97510827c171d9dbc9"
+  },
+  "current": {
+    "rows": 1520,
+    "project_roots": 9,
+    "scanned_source_folders": 215,
+    "observed_source_folder_rows": 206,
+    "unique_drive_ids": 1520,
+    "scan_failed_folders": 0,
+    "max_observed_direct_children": 178,
+    "normalized_private_jsonl_sha256": "b7a0929b56886683a7a5fb128276ec78fb64836e98b623c8edb1d821d0e707e7",
+    "private_sheet_export_sha256": "3c3841303d1750f9ed8dc78cfdc60b06d7372530f7f7fe25ec5b7652bc2b53a1",
+    "privacy": "owner-only Google Drive folder and spreadsheet; provider originals not uploaded publicly"
+  },
+  "delta": {
+    "unchanged": 1519,
+    "new_private_candidates": 1,
+    "deleted": 0,
+    "metadata_changes": 0,
+    "absent_from_current_scope": 0,
+    "project_fk_conflicts": 0,
+    "new_classification": "SYSTEM_AUTOMATION_CONTROL__PRIVATE_REVIEW_REQUIRED",
+    "new_project_fk": "P007",
+    "new_public_admissions": 0
+  },
+  "per_project_counts": {
+    "P003": 280,
+    "P004": 55,
+    "P005": 103,
+    "P007": 1006,
+    "P020": 76
+  },
+  "method": {
+    "source": "Connected Google Drive list_folder direct-child enumeration; recursively followed each folder link",
+    "listing_max_results": 1000,
+    "largest_observed_child_listing": 178,
+    "provider_next_page_token_exposed": false,
+    "independently_exhaustive_google_api_pagination_certified": false,
+    "strong_consistency_evidence": "All 1519 prior unique Drive file IDs, original names, MIME types, direct parents and modified timestamps reconcile unchanged. Exactly one additional private P007 control document."
+  },
+  "external_source_exceptions": {
+    "count": 6,
+    "p001": "Corroborated alternate Rohini project source location; not independently approved",
+    "p002": "Old attachments in unrelated Discord channel archive; cannot authorize project root",
+    "permissions_unverified": true,
+    "source_registry_not_mutated": true
+  },
+  "immutability": {
+    "public_catalog_total": 46,
+    "public_resource_catalog_changed": false,
+    "source_originals_moved": 0,
+    "source_originals_renamed": 0,
+    "source_originals_deleted": 0,
+    "private_file_name_or_provider_id_published": false
+  },
+  "next_gate": [
+    "Independent P001 alternate-source root authority and P002 project-owned source resolution",
+    "File-specific privacy and design revision/engineering issue approval for any new public pointer",
+    "Optionally rerun versioned Colab native Google API cursor-pagination collector to assert absolute provider page exhaustion."
+  ],
+  "reproducibility": {
+    "source_control_contract": "ops/control/website-eight-request-roadmap.v0.1.json",
+    "versioned_private_scan_engine": "scripts/run_private_resource_cycle.py",
+    "versioned_delta_engine": "scripts/reconcile_private_resource_inventory.py",
+    "source_originals_authoritative_in": "GOOGLE_DRIVE"
+  },
+  "statement": "Live registered-root scope metadata is reconciled. No source-owner approval, engineering issue, nor public disclosure is inferred from file metadata."
+}

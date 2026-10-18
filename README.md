@@ -34,9 +34,12 @@ Project and Daily Ops truth are maintained as canonical machine-readable files, 
 
 See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for source-of-truth rules, [`ops/PLATFORM_MODULES.md`](ops/PLATFORM_MODULES.md) for JP AEC Platform module naming, [`CHANGELOG.md`](CHANGELOG.md) for version history, and [`docs/releases/v2.0.0.md`](docs/releases/v2.0.0.md) for the current release notes.
 
-## Start here if you are the owner or manager
+## Start here: field users and website developers
 
-- [`workspace/`](workspace/) — searchable owner/manager directory: projects, Daily Ops, data sources, Sheets, specialist modules, governance and storage/database status.
+- [`site-operations.html`](site-operations.html) — personal daily checklist for the site engineer (browser-local, not shared or authoritative progress).
+- [`site-operations/history.html`](site-operations/history.html) — source-attributed public-safe progress projection (partial archive, not engineer acceptance).
+- [`resources/`](resources/) — original Drive drawing/model links and authenticated source filenames; check revision and permission before use.
+- [`workspace/`](workspace/) — **developer-only** source-code, architecture, Git history, control tower and deployment directory; not a site or owner project dashboard.
 - [`guide/`](guide/) — canonical multi-depth operating guide: 1-page quick start, 3-page walkthrough, 7-page routine and 15-page reference. `how-to.html` is retained only as a compatibility redirect.
 
 The design follows the same principle as the Pilates owner/member tooling: the human should not need to understand the repository tree just to operate the system.
@@ -80,7 +83,7 @@ The working lane `feature/daily-ops-current-work` remains available for governed
 ## Files
 
 - `index.html` — Operations Hub landing page
-- `workspace/` — canonical Paila-style owner/manager resource directory (`index.html`, `links.json`, `workspace.css`, `workspace.js`)
+- `workspace/` — developer-only navigation (`index.html`, `developer-links.v0.1.json`); legacy workspace data files remain preserved for provenance but are not the current developer landing-page source.
 - `workspace.html` — backward-compatible redirect to `/workspace/`
 - `guide/` — canonical Phase-2 1/3/7/15-page guide framework with shared CSS/JS, print support and image manifest
 - `how-to.html` — backward-compatible redirect to `/guide/`
@@ -139,9 +142,9 @@ GitHub Pages deployment initialized.
 The canonical `/guide/` hierarchy now includes 15 public-safe, version-controlled SVG workflow diagrams. The diagrams are mapped across the 1-page, 3-page, 7-page and 15-page guide depths through `guide/guide.js`, inventoried in `guide/image-manifest.json`, validated as accessible SVG XML in CI, and designed to explain workflows without publishing private project data.
 
 
-## Phase 4 live Workspace layer
+## Historical Phase 4 Workspace layer (superseded by developer-only scope on 2026-10-11)
 
-The canonical `/workspace/` is now a live read-only orientation console rather than only a static resource directory. It joins `projects.csv` with `ops/data/current-works.json` for current project/status cards, while preserving `workspace/links.json` as the independent fallback/navigation registry.
+The following describes an earlier owner-facing Phase 4 implementation and is retained as a historical engineering record. **It no longer describes the current `/workspace/` landing page**, which is strictly developer-focused and reads `workspace/developer-links.v0.1.json`. Site records and resources are available through Map, Checklist, Progress Report and Project Resources.
 
 Phase 4 also adds:
 
@@ -158,11 +161,3 @@ See [`ops/control/daily-slack-web-cycle.json`](ops/control/daily-slack-web-cycle
 ## A9-CWO — Communication & Web Operations
 
 **A9-CWO** supersedes the user-facing A9-SWO nickname. It represents a multi-source operating cycle (governed Slack, two-channel Discord Colab and future admitted providers), **not a new Discord/Slack bot account**. See the [pinned storage and daily pipeline](controls/storage.html), machine contract `ops/control/storage-routing-rules.json`, and [two-channel Discord Colab](ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb). An operator runs the Discord notebook before daily reconciliation and the run must report Discord `PASS/PARTIAL/NOT_RUN`. Full historical Discord server harvesting is out of scope. Storage assignment is by original evidence / normalized truth / binary file / human projection, not by channel brand.
-
-## A7 catalogue-only / operations ownership guard (staged on approved work lane)
-
-**Operations owns** its project-master and admitted Daily Ops data, field evidence, workflows, site guides and versioned source. A7 is a **read-only federated catalogue / repository index**: it holds discovery locations, module identifiers, pointers to statuses/commits and cross-module links, not operational fact records, CAD/AAD templates or specialist execution rules.
-
-**AI/automation MUST NOT mutate A7** as a consequence of Operations changes: no A7 commits, PRs, schema or template edits, history backfills, index repairs or website modifications. A7 mutation needs a separate, explicitly user-authorized A7 request. If the catalogue is stale, record a pending pointer fix locally; do not auto-synchronize. CAD/AAD drawing templates belong to `FabinGurung/JP_Computer-Aided-Drawings/governance/aad/`, not to A7.
-
-**Branch governance:** this documentation change is staged only in the registered `feature/daily-ops-current-work` lane. It **must not** be merged or promoted with unrelated operational commits until the branch registry, ahead/behind divergence, canonical data and CI validations are reconciled. Production `main` remains untouched by this staging step.

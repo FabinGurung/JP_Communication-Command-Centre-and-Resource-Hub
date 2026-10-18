@@ -1,0 +1,55 @@
+{
+  "event_id": "OPS-0077",
+  "date_npt": "2026-10-14",
+  "scope": "REQ07_P001_P002_PRIVATE_SOURCE_REVIEW_AND_AUTHENTICATED_INVENTORY_RUNNER",
+  "authority": {
+    "code": "GITHUB_MAIN",
+    "originals": "GOOGLE_DRIVE",
+    "a9_root11_sync": "READBACK_PREVIOUS_51_OF_51_NO_NEW_SEQUENCE"
+  },
+  "execution": {
+    "baseline_commit": "8bca0f69de702665994ca67f2584251cde6b9d8e",
+    "runner_commit": "0271f50848920ed6203705cfbefaa2d13e3fb8c4",
+    "notebook": "ops/resource-inventory/A9_CWO_REQ07_PRIVATE_DRIVE_INVENTORY_v1.0.ipynb",
+    "notebook_source_sha": "a5cf324fa09618982972394d5f94e5583148de32",
+    "notebook_cells": 7,
+    "private_review_record": {
+      "created": true,
+      "google_drive_shared": false,
+      "owner_only_permissions_observed": true,
+      "not_stored_as_public_link": true
+    },
+    "live_drive_scope": {
+      "P001_registered_root_immediate_items": 0,
+      "P001_source_folder_immediate_items": 2,
+      "P001_expected_drawing_matches": 2,
+      "P002_registered_root_immediate_items": 0,
+      "P002_source_folder_immediate_items": 19,
+      "P002_expected_drawing_matches": 3,
+      "all6_existing_resource_ids_resolved_by_metadata": true
+    },
+    "private_colab_execution": "USER_GOOGLE_AUTH_REQUIRED_NOT_EXECUTED",
+    "full_direct_api_receipt": "NOT_AVAILABLE",
+    "public_resource_additions": 0,
+    "original_bytes_downloaded": 0,
+    "original_files_modified": 0,
+    "registered_source_root_mappings_changed": 0
+  },
+  "governance": {
+    "no_new_original_source_filenames_or_ancestor_drive_ids_published": true,
+    "no_private_drive_documents_published": true,
+    "notebook_requires_google_colab_user_auth_and_private_drive_mount": true,
+    "source_collision_and_page_token_integrity_checks": "EXISTING_COLLECTOR",
+    "caveat": "No full coverage/approval claimed until authenticated Google Drive API pages produce private JSONL, SHA256 receipt and reviewed ownership/privacy decisions."
+  },
+  "remaining": [
+    "Execute notebook with owner's Google authorization; receipt must be verified against exact paginated Drive API metadata.",
+    "Review and authorize six P001/P002 source-root exceptions without moving sources.",
+    "Quarantine all unreviewed candidates and admit only separately approved public-safe records.",
+    "REQ08 site-wide closeout remains deferred."
+  ],
+  "rollback": {
+    "new_notebook_absent_at": "8bca0f69de702665994ca67f2584251cde6b9d8e",
+    "preserve_current_46_public_resources": true
+  }
+}

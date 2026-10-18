@@ -12,7 +12,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 HTML_FILES = sorted(ROOT.rglob("*.html"))
-IGNORE_DIRS = {".git", "node_modules"}
+IGNORE_DIRS = {".git", "node_modules", "99_VERSION_ARCHIVE"}  # Historical snapshots are evidence, not routable live pages.
 
 
 def ignored(path: Path) -> bool:

@@ -1,109 +1,46 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="JP AEC Operations Hub Daily Site Operations dashboard">
-  <title>Site Operations — JP AEC Operations Hub</title>
-  <style>
-    :root{--bg:#f4f6f8;--panel:#fff;--text:#172033;--muted:#667085;--line:#dfe4ea;--blue:#175cd3;--green:#067647;--amber:#b54708;--red:#b42318;--soft:#eef4ff;--shadow:0 8px 24px rgba(15,23,42,.07)}
-    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}a{color:inherit}.shell{max-width:1180px;margin:auto;padding:16px}
-    .nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.nav a{text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:750}.nav a.active{background:var(--soft);border-color:#b2ccff;color:var(--blue)}
-    .hero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.eyebrow{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.07em;text-transform:uppercase}h1{margin:4px 0 5px;font-size:clamp(26px,5vw,40px)}.meta{color:var(--muted);font-size:13px;line-height:1.5}
-    .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:15px}.kpi{border:1px solid var(--line);border-radius:11px;padding:10px 11px;background:#f8fafc}.kpi strong,.kpi span{display:block}.kpi strong{font-size:20px}.kpi span{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;margin-top:3px}
-    .toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:15px 0 10px;flex-wrap:wrap}.toolbar h2{font-size:17px;margin:0}.legend{font-size:11px;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);transition:.15s transform,.15s border-color}.card:hover{transform:translateY(-1px);border-color:#b2ccff}.card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.card h3{font-size:16px;margin:0 0 4px}.code{font-size:11px;color:var(--muted)}.badge{border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:10px;font-weight:800;white-space:nowrap;background:#f8fafc}.badge[data-tone="red"]{background:#fef3f2;border-color:#fecdca;color:var(--red)}.badge[data-tone="amber"]{background:#fffaeb;border-color:#fedf89;color:var(--amber)}.badge[data-tone="green"]{background:#ecfdf3;border-color:#abefc6;color:var(--green)}
-    .focus{margin-top:11px;font-size:13px;line-height:1.45}.stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.stat{font-size:10px;color:var(--muted);background:#f8fafc;border-radius:999px;padding:4px 7px}.open{margin-top:11px;color:var(--blue);font-size:12px;font-weight:800}.footer{padding:17px 2px;color:var(--muted);font-size:11px;line-height:1.5}.empty{border:1px dashed #cfd6df;border-radius:12px;padding:16px;color:var(--muted);background:#fff}
-    @media(max-width:760px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.shell{padding:11px}}
-  </style>
-</head>
-<body>
-<div class="shell">
-  <nav class="nav" aria-label="JP AEC Operations Hub sections">
-    <a href="index.html">Overview</a>
-    <a href="map.html">Project map</a>
-    <a class="active" href="site-operations.html">Site operations</a>
-    <a href="workspace/">Workspace</a>
-    <a href="pending/">Pending work</a>
-    <a href="guide/">Guide</a>
-  </nav>
-
-  <section class="hero">
-    <div class="eyebrow">Daily Site Operations</div>
-    <h1>Operations dashboard</h1>
-    <div class="meta">A concise portfolio view. Projects are ordered by <b>operational attention</b> — unresolved blockers/readiness first, then active work, then projects awaiting updates. This is not a commercial or strategic ranking.</div>
-    <div class="kpis">
-      <div class="kpi"><strong id="kpi-projects">0</strong><span>Projects</span></div>
-      <div class="kpi"><strong id="kpi-attention">0</strong><span>Need attention</span></div>
-      <div class="kpi"><strong id="kpi-active">0</strong><span>Active</span></div>
-      <div class="kpi"><strong id="kpi-awaiting">0</strong><span>Awaiting update</span></div>
-    </div>
-  </section>
-
-  <div class="toolbar">
-    <h2>Attention order</h2>
-    <div class="legend">Open a project for full materials, progress, blockers, readiness, evidence and engineering files.</div>
-  </div>
-  <main class="grid" id="project-grid"></main>
-  <div class="footer">Machine-readable sources: <code>ops/data/current-works.json</code> + <code>ops/data/project-resources.json</code>. Slack remains the short human interaction layer; this dashboard carries the detail.</div>
-</div>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="User-authored daily site engineer checklist. No historical communications are auto-added.">
+<title>Checklist for Today · JP AEC Site Operations</title>
+<style>
+:root{--bg:#f6f9f4;--paper:#fff;--ink:#193c2e;--muted:#536c60;--green:#1c684d;--line:#dce9df;--warn:#8d631e}*{box-sizing:border-box}body{background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}a{color:var(--green)}:focus-visible{outline:3px solid #e7aa37;outline-offset:2px}.shell{max-width:800px;margin:auto;padding:12px 16px 50px}
+nav{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:10px}nav a{text-decoration:none;color:#4b6858;padding:9px 10px;min-height:40px;display:inline-flex;align-items:center;font-size:12px;font-weight:750;border-radius:9px}nav a[aria-current=page]{background:#dfefe1;color:#15573f}
+.heading{margin:24px 0 15px}.heading h1{font-size:clamp(25px,4vw,34px);letter-spacing:-.04em;line-height:1.2;margin:0}.heading p{font-size:12px;color:var(--muted);margin:5px 0 0}
+.main{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 28px #10321c0a;padding:17px 18px}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:16px}.top select{border:1px solid #c5d6ca;border-radius:9px;background:white;color:var(--ink);font:inherit;padding:10px 12px;min-height:44px;max-width:100%;min-width:230px}.top label{display:block;font-size:12px;font-weight:760;margin-bottom:5px}.date{padding:7px 10px;border-radius:8px;background:#eaf4eb;font-size:12px;font-weight:780;color:#24563e}
+.form{display:flex;gap:8px;margin-bottom:15px;align-items:stretch}.form input{min-width:0;flex:1;border:1px solid #c7d8cb;border-radius:10px;padding:11px 12px;min-height:44px;font:inherit;color:var(--ink)}button{cursor:pointer;font:750 12px system-ui;border:0;border-radius:9px;min-height:42px;padding:10px 15px;background:var(--green);color:white}button:hover{filter:brightness(.95)}
+.counter{font-weight:800;color:#52705e;font-size:12px;margin:10px 0}.items{list-style:none;padding:0;margin:0}.items li{display:flex;align-items:flex-start;gap:11px;border-bottom:1px solid #eef1eb;padding:12px 0}.items li:last-child{border:0}.items input{flex-shrink:0;accent-color:var(--green);width:21px;height:21px;margin:0;cursor:pointer}.items .task-text{font-size:13px;flex:1;overflow-wrap:anywhere}.items li.checked .task-text{text-decoration:line-through;color:#496457}.items .remove{min-width:32px;min-height:32px;padding:5px;background:#f1f4ef;border:1px solid #dfe8de;color:#5b6d60;font-size:12px;align-self:center}
+.empty{padding:23px 10px;color:var(--muted);text-align:center;font-size:13px;background:#f8faf6;border:1px dashed #c9d8cd;border-radius:10px}
+.footer{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:14px}.footer button{background:#e7f1e8;color:#1b6447}.footer span{font-size:11px;color:var(--muted)}
+.explain{margin-top:15px;font-size:12px;color:#786238;background:#fff8e9;border-left:3px solid #c59b43;border-radius:7px;padding:10px 12px}
+.references{margin-top:17px;font-size:12px;color:var(--muted)}.references summary{cursor:pointer;font-weight:800;min-height:36px;padding:8px 0}.references div{display:flex;gap:11px;flex-wrap:wrap;padding:10px 0}.references a{font-weight:740;min-height:32px;display:inline-flex;align-items:center}
+@media(max-width:600px){.shell{padding:10px 11px 28px}.main{padding:13px 12px}.form input{font-size:13px}.form button{padding:10px 12px}.top select{width:100%;min-width:0}.top>div:first-child{width:100%}.date{font-size:11px}}
+</style></head><body><div class="shell">
+<nav aria-label="Site Operations"><a href="index.html">JP AEC</a><a href="site-operations.html" aria-current="page">Daily Checklist</a><a href="site-operations/coordination.html">Site Coordination</a><a href="site-operations/history.html">Progress Report</a><a href="map.html">Map</a><a href="resources/">Drawings &amp; Models</a><a href="workspace/">Developer Workspace</a></nav>
+<main><header class="heading"><h1>Checklist for Today</h1><p>Your list, written by you. No previous Discord or Slack questions are added automatically.</p></header>
+<section class="main" aria-label="Personal site checklist"><div class="top"><div><label for="project">Project</label><select id="project"><option value="">Loading projects…</option></select></div><div class="date" id="date">Nepal · …</div></div>
+<form class="form" id="add-form"><input id="new-task" type="text" placeholder="Write today's task or reminder…" maxlength="450" aria-label="New site reminder" required><button type="submit">Add</button></form>
+<div class="counter" id="count">No tasks yet</div><ul class="items" id="tasks" aria-live="polite"></ul>
+<div class="footer"><button id="copy" type="button">Copy checklist</button><span id="copy-status" role="status"></span></div>
+<div class="explain" id="note">Entries are saved only in this browser, separately for each project and Nepal date. They are <strong>not synchronized with your team or Google Drive</strong>. A tick means reviewed locally, not that construction is complete.</div>
+</section>
+<details class="references"><summary>Progress records and project references</summary><div><a href="site-operations/history.html">Progress Report ↗</a><a href="site-operations/coordination.html">Site Coordination ↗</a><a href="resources/">All project drawings &amp; models ↗</a><a href="site-operations/project.html?project=P001">Project details ↗</a><a href="ops/data/current-works.json">Project machine state ↗</a><a href="ops/data/project-resources.json">Project resources ↗</a><a href="workspace/">Developer tools ↗</a><a href="guide/">Guide ↗</a></div></details>
+</main></div>
 <script>
-(function(){
-"use strict";
-const $=id=>document.getElementById(id);
-const esc=v=>String(v==null?"":v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
-const params=new URLSearchParams(location.search);
-const requested=params.get("project");
-if(requested){ location.replace("site-operations/project.html?project="+encodeURIComponent(requested)); return; }
-
-function classify(p){
-  const o=p.daily_ops||{}, blockers=o.blockers||[], progress=o.progress||[];
-  if(o.conflict_state==="UNRESOLVED"||["HOLD","NOT_READY"].includes(o.overall_readiness)) return {label:"Hold / review",tone:"red",rank:400};
-  if(blockers.length) return {label:"Needs attention",tone:"amber",rank:300+Math.min(blockers.length,9)};
-  if(progress.some(x=>x.status==="ONGOING")) return {label:"Active",tone:"green",rank:200};
-  if(o.overall_readiness==="UNSET") return {label:"Awaiting update",tone:"amber",rank:100};
-  return {label:"Current",tone:"green",rank:0};
-}
-function focus(p){
-  const o=p.daily_ops||{};
-  if((o.blockers||[]).length) return o.blockers[0].blocker||"Open blocker needs follow-up.";
-  const ongoing=(o.progress||[]).find(x=>x.status==="ONGOING");
-  if(ongoing) return ongoing.note||ongoing.activity||"Work is in progress.";
-  const latest=(o.progress||[])[0];
-  if(latest) return latest.note||latest.activity||"Latest progress recorded.";
-  const mat=(o.materials||[])[0];
-  if(mat) return [mat.material_name||mat.material,mat.note].filter(Boolean).join(" — ");
-  return "No new verified site fact yet.";
-}
-async function load(){
-  const root=$("project-grid");
-  try{
-    const bust=Date.now();
-    const [r,rr]=await Promise.all([
-      fetch("ops/data/current-works.json?v="+bust,{cache:"no-store"}),
-      fetch("ops/data/project-resources.json?v="+bust,{cache:"no-store"})
-    ]);
-    if(!r.ok) throw new Error("Daily Ops state unavailable.");
-    const data=await r.json();
-    const resourceData=rr.ok?await rr.json():{projects:[]};
-    const resourceByProject=new Map((resourceData.projects||[]).map(x=>[x.project_id,x]));
-    const rows=data.projects.map(p=>({p,c:classify(p)})).sort((a,b)=>b.c.rank-a.c.rank||a.p.display_name.localeCompare(b.p.display_name));
-    $("kpi-projects").textContent=rows.length;
-    $("kpi-attention").textContent=rows.filter(x=>x.c.rank>=300).length;
-    $("kpi-active").textContent=rows.filter(x=>x.c.label==="Active").length;
-    $("kpi-awaiting").textContent=rows.filter(x=>x.c.label==="Awaiting update").length;
-    root.innerHTML=rows.map(({p,c})=>{
-      const o=p.daily_ops||{}, rs=resourceByProject.get(p.project_id)||{root_resolution:"UNRESOLVED",resources:[]}, counts={b:(o.blockers||[]).length,m:(o.materials||[]).length,pr:(o.progress||[]).length,e:(o.evidence||[]).length,r:(rs.resources||[]).filter(x=>x.is_current!==false).length};
-      return '<a class="card" href="site-operations/project.html?project='+encodeURIComponent(p.project_id)+'">'+
-        '<div class="card-head"><div><h3>'+esc(p.display_name)+'</h3><div class="code">'+esc(p.project_id+' · '+p.company_project_code+' · '+(o.date||"No date"))+'</div></div><span class="badge" data-tone="'+c.tone+'">'+esc(c.label)+'</span></div>'+
-        '<div class="focus">'+esc(focus(p))+'</div>'+
-        '<div class="stats"><span class="stat">'+counts.b+' blockers</span><span class="stat">'+counts.pr+' progress</span><span class="stat">'+counts.m+' materials</span><span class="stat">'+counts.e+' evidence</span><span class="stat">'+(rs.root_resolution==="VERIFIED"?counts.r+" files/links":"Drive unresolved")+'</span></div>'+
-        '<div class="open">Open project →</div></a>';
-    }).join("");
-  }catch(e){root.innerHTML='<div class="empty">'+esc(e.message)+'</div>';}
-}
-load();
-})();
-</script>
-</body>
-</html>
+(()=>{"use strict";const $=id=>document.getElementById(id),esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));let projects=[],day="",storageOK=true;
+function nepDate(){const x=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Kathmandu",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date()),v=k=>x.find(z=>z.type===k)?.value;return [v("year"),v("month"),v("day")].join("-");}
+const project=()=>projects.find(p=>p.project_id===$("project").value);
+function key(){return "JPAEC:diy-checklist:v1:"+day+":"+$("project").value;}
+function read(){try{const v=JSON.parse(localStorage.getItem(key())||"[]");return Array.isArray(v)?v.filter(x=>typeof x.text==="string"&&typeof x.id==="string").slice(0,300):[];}catch(e){storageOK=false;return [];}}
+function save(rows){try{localStorage.setItem(key(),JSON.stringify(rows));storageOK=true;return true;}catch(e){storageOK=false;$("copy-status").textContent="Browser storage unavailable. Use Copy checklist to keep your text.";return false;}}
+function render(){const rows=read();$("count").textContent=rows.length?rows.filter(x=>x.done).length+" / "+rows.length+" reviewed":"No tasks yet — add the first item";
+$("tasks").innerHTML=rows.length?rows.map((r,i)=>'<li class="'+(r.done?"checked":"")+'"><input type="checkbox" aria-label="Mark task '+(i+1)+' reviewed" data-index="'+i+'" '+(r.done?"checked":"")+'><span class="task-text">'+esc(r.text)+'</span><button class="remove" type="button" data-remove="'+i+'" aria-label="Remove task '+(i+1)+'" title="Remove local draft">×</button></li>').join(""):'<li class="empty">Your checklist is empty. Add only tasks you want the site engineer to remember today.</li>';}
+$("add-form").addEventListener("submit",e=>{e.preventDefault();const text=$("new-task").value.trim();if(!text)return;const r=read();r.push({id:String(Date.now())+"-"+r.length,text,done:false});if(save(r)){$("new-task").value="";render();}});
+$("tasks").addEventListener("change",e=>{const i=Number(e.target.dataset.index);if(!Number.isInteger(i))return;const rows=read();if(rows[i]){rows[i].done=e.target.checked;if(save(rows))render();}});
+$("tasks").addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(!b)return;const i=Number(b.dataset.remove),rows=read();if(rows[i]&&window.confirm("Remove this locally written checklist item?")){rows.splice(i,1);if(save(rows))render();}});
+$("project").addEventListener("change",render);
+$("copy").addEventListener("click",async()=>{const rows=read(),p=project();const message=["SITE ENGINEER DAILY CHECKLIST","Date (Nepal): "+day,"Site: "+(p?.display_name||"Unknown"),"",...rows.map((x,i)=>(x.done?"[x] ":"[ ] ")+(i+1)+". "+x.text),"","Author/approval: Not established by this copied draft"].join("\n");try{await navigator.clipboard.writeText(message);$("copy-status").textContent="Copied. Nothing was sent.";}catch(e){$("copy-status").textContent="Clipboard unavailable; select your items manually.";}})
+async function load(){day=nepDate();$("date").textContent="Nepal · "+day;try{const resp=await fetch("ops/data/current-works.json?v="+Date.now(),{cache:"no-store"});if(!resp.ok)throw Error("HTTP "+resp.status);const obj=await resp.json();projects=obj.projects||[];if(!projects.length)throw Error("Project list unavailable");
+$("project").innerHTML=projects.map(p=>'<option value="'+esc(p.project_id)+'">'+esc(p.display_name)+'</option>').join("");const choose=new URLSearchParams(location.search).get("project");if(choose&&projects.some(p=>p.project_id===choose))$("project").value=choose;render();}
+catch(e){$("count").textContent="Project data unavailable";$("tasks").innerHTML='<li class="empty">Could not load the project list; tasks were not assumed.</li>';}}
+load();})();
+</script><script src="assets/js/site-shell.js?v=20261012-1"></script></body></html>

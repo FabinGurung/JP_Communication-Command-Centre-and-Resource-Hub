@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0080",
+  "date_npt": "2026-10-15",
+  "scope": "A9_CWO_REQ07_REGISTERED_ROOTS_AUTHENTICATED_GOOGLE_DRIVE_DELTA_AND_REQ08_REVALIDATION",
+  "status": "REGISTERED_ROOTS_LIVE_RECONCILED__PRIVATE_DELTA_ONE__PUBLIC_SITE_QA_PASS__AUTHORITY_HOLDS_OPEN",
+  "previous_audit": "ops/events/cwo-daily/OPS-0079__2026-10-15_REQ07_INCREMENTAL_REQ08_SITE_QA.json",
+  "prior_versioned_git_sha": "93eee449a1a0ecba25c277e7fd3199afe0cf415d",
+  "provider_readback": {
+    "root_count": 9,
+    "visited_folders": 215,
+    "folder_errors": 0,
+    "observed_source_folder_rows": 206,
+    "prev_entries": 1519,
+    "prev_sha256": "976a9782139ef1887af626f0d6af9e1beb8da34bc6ae6b97510827c171d9dbc9",
+    "current_entries": 1520,
+    "current_unique_ids": 1520,
+    "current_derived_private_jsonl_sha256": "b7a0929b56886683a7a5fb128276ec78fb64836e98b623c8edb1d821d0e707e7",
+    "current_private_sheet_export_sha256": "3c3841303d1750f9ed8dc78cfdc60b06d7372530f7f7fe25ec5b7652bc2b53a1",
+    "unchanged_prior_file_id_name_mime_parent_mtime": 1519,
+    "new_private_candidates": 1,
+    "new_private_candidate_project": "P007",
+    "new_private_candidate_classification": "SYSTEM_AUTOMATION_CONTROL__NO_PUBLIC_ADMISSION",
+    "altered_prior_metadata": 0,
+    "not_seen_from_previous_scope": 0,
+    "project_fk_conflicts": 0,
+    "maximum_observed_children_per_parent": 178,
+    "provider_page_size_requested": 1000,
+    "provider_page_tokens_available": false,
+    "formal_pagination_complete_proof": false,
+    "owner_only_private_staging": "GOOGLE_DRIVE_OWNER_ONLY_VERIFIED__PRIVATE_LINK_NOT_COMMITTED",
+    "source_originals_modified": 0,
+    "public_resource_admissions": 0
+  },
+  "public_projection": {
+    "current_public_resources": 46,
+    "new_public_entries": 0,
+    "original_resource_urls_changed": 0,
+    "public_catalog_blob_unchanged": "e8926bb1dc21b9887d1902d3e96746a3e0f68b28"
+  },
+  "version_control": {
+    "branch": "main",
+    "new_control": "ops/control/req07-20261015-live-connected-drive-readback.v1.0.json",
+    "roadmap": "ops/control/website-eight-request-roadmap.v0.1.json",
+    "backlog": "workspace/developer-software-backlog.v0.1.json",
+    "publication_gate": "ops/control/resource-display-and-admission.v0.1.json",
+    "source_qa": "scripts/validate_resource_library.py",
+    "pre_change_archives": [
+      "ops/99_VERSION_ARCHIVE/20261015/REQ07_LIVE_V2_READBACK_PRE/resource-display-and-admission.v0.1.json",
+      "ops/99_VERSION_ARCHIVE/20261015/REQ07_LIVE_V2_READBACK_PRE/validate_resource_library.py",
+      "ops/99_VERSION_ARCHIVE/20261015/REQ07_SCOPED_REFRESH_ROADMAP_PRE/website-eight-request-roadmap.v0.1.json",
+      "ops/99_VERSION_ARCHIVE/20261015/REQ07_SCOPED_REFRESH_BACKLOG_PRE/developer-software-backlog.v0.1.json"
+    ]
+  },
+  "latest_verified_qa": {
+    "branch_registry": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38668325656",
+    "production": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38668325668",
+    "browser_mobile": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38668325673",
+    "results": [
+      "SUCCESS",
+      "SUCCESS",
+      "SUCCESS"
+    ]
+  },
+  "outstanding_authorizations": [
+    "P001 three historical references under corroborated Rohini source-original hierarchy lack independent owner-approved alternate source root.",
+    "P002 three historical references stored in unrelated Discord archive do not become approved project drawings merely because filenames match.",
+    "File-specific privacy authorization and engineering revision/issue state are independent and required for any newly published resource.",
+    "Connector shows no next_page_token; formal native OAuth cursor-pagination certification is separate if absolute provider page-exhaustion proof is required."
+  ],
+  "audit_notes": "Original Google Drive files and 46 public source links unchanged. Reconciliation is of all 9 registered roots, not all of My Drive. No claimant authority was fabricated. Private file IDs and filenames are excluded from this public-safe event."
+}

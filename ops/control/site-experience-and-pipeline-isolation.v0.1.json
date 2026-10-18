@@ -1,0 +1,231 @@
+{
+  "schema_version": "0.1.0",
+  "contract_id": "JP_AEC_CWO_UI_AND_PIPELINE_ISOLATION_20261011",
+  "purpose": "Human-centered site interface with versioned machine evidence and strict write-scope boundaries.",
+  "public_pages": [
+    {
+      "name": "🗺️ Project Map",
+      "path": "map.html",
+      "who": "Site engineers and managers",
+      "owns": "LOCATION_SELECTION_AND_QUICK_CHECKLIST_PREVIEW",
+      "machine_sources": [
+        "projects.csv",
+        "public map component data",
+        "browser local checklist"
+      ],
+      "may_write_to": []
+    },
+    {
+      "name": "☑️ Today's Site Checklist",
+      "path": "site-operations.html",
+      "who": "Site engineer",
+      "owns": "USER_AUTHORED_DAILY_NOTES",
+      "machine_sources": [
+        "ops/data/current-works.json for list of sites"
+      ],
+      "may_write_to": [
+        "own browser localStorage"
+      ]
+    },
+    {
+      "name": "📊 Progress Report",
+      "path": "site-operations/history.html",
+      "who": "Managers and shareholders",
+      "owns": "SOURCE_LINKED_ARCHIVED_OBSERVATIONS",
+      "machine_sources": [
+        "ops/data/progress-report-public.v0.2.jsonl"
+      ],
+      "may_write_to": []
+    },
+    {
+      "name": "📐 Project Resources",
+      "path": "resources/index.html",
+      "who": "Site engineers clients and shareholders",
+      "owns": "READ_ONLY_DRAWING_LINKS_AND_RANKED_HUMAN_LABELS",
+      "machine_sources": [
+        "ops/data/resource-catalog-normalized.v0.1.json"
+      ],
+      "may_write_to": []
+    },
+    {
+      "name": "🧑‍💻 Developer Workspace",
+      "path": "workspace/index.html",
+      "who": "Website developer",
+      "owns": "REPO_CONTROL_VERSIONS_CI_DOCS_DEVELOPMENT_BACKLOG",
+      "machine_sources": [
+        "workspace/developer-links.v0.1.json"
+      ],
+      "may_write_to": []
+    },
+    {
+      "name": "📘 How-To",
+      "path": "guide/index.html",
+      "who": "All site users",
+      "owns": "DOCUMENTATION",
+      "may_write_to": []
+    }
+  ],
+  "secondary_views": [
+    "site-operations/coordination.html",
+    "site-operations/project.html",
+    "site-operations/questions.html",
+    "site-operations/schedule.html",
+    "controls/index.html",
+    "pending/index.html"
+  ],
+  "human_identifiers": {
+    "display_names": {
+      "project_id": "Project",
+      "resource_id": "Drawing/File ID",
+      "source_message_id": "Original Message",
+      "source_provider": "Reported Via",
+      "event_id": "Progress Record"
+    },
+    "referential_relationships": [
+      {
+        "parent": "projects.csv:project_id",
+        "children": [
+          "ops/data/current-works.json:project_id",
+          "ops/data/progress-report-public.v0.2.jsonl:project_id",
+          "ops/data/resource-catalog-normalized.v0.1.json:sites[].project_id"
+        ],
+        "rule": "All project children must map to the same globally stable project identity; web pages show display_name."
+      },
+      {
+        "parent": "ops/data/project-resources.json:resources[].resource_id",
+        "child": "ops/data/resource-catalog-normalized.v0.1.json:sites[].files[].resource_id",
+        "rule": "Normalized file label must not change source ID, Drive file ID or original filename."
+      },
+      {
+        "parent": "private Drive transcription ledger:event_id",
+        "child": "ops/data/progress-report-public.v0.2.jsonl:record_id",
+        "rule": "Only reviewed public-safe admitted projections. Provider, message URL, source time, claim status immutable."
+      }
+    ]
+  },
+  "file_display_template": {
+    "priority_order": [
+      "PDF_ARCHITECTURE_STRUCTURE_ANALYSIS_GEOTECH_AND_REPORTS",
+      "NATIVE_DWG_E2K_EDB_SKP_REVIT_LUMION_SAP",
+      "SPREADSHEETS_ESTIMATES_CALCULATIONS",
+      "RAW_SOURCE_FOLDERS_HISTORIC"
+    ],
+    "original_filename": "NEVER_REPLACE; separate verified Drive metadata field",
+    "normalized_name": "HUMAN_LABEL_ONLY_DO_NOT_RENAME_DRIVE_BYTES",
+    "font_pixels": {
+      "page_title": 40,
+      "section_title": 21,
+      "file_group_title": 16,
+      "file_card_title": 13,
+      "body": 12,
+      "source_metadata": 11
+    },
+    "do_not_assume_document_approval": true
+  },
+  "write_boundaries": {
+    "discord_slack_collector": {
+      "write": [
+        "private Google Drive raw source and readback receipt"
+      ],
+      "deny": [
+        "site-operations.html",
+        "ops/data/resource-catalog-normalized.v0.1.json",
+        "ops/data/current-works.json",
+        "ops/data/progress-report-public.v0.2.jsonl directly"
+      ]
+    },
+    "progress_normalizer": {
+      "write": [
+        "authenticated private Google Drive transcribed JSONL and hash manifests"
+      ],
+      "deny": [
+        "user daily checklist",
+        "CAD file registry",
+        "site coordination truth"
+      ]
+    },
+    "progress_publisher": {
+      "write": [
+        "ops/data/progress-report-public.v0.2.jsonl only after validated Drive staging",
+        "site-operations/history.html template with review"
+      ],
+      "deny": [
+        "site-operations.html",
+        "resources/index.html",
+        "ops/data/resource-catalog-normalized.v0.1.json",
+        "projects.csv",
+        "map.html",
+        "workspace/index.html"
+      ]
+    },
+    "checklist_owner": {
+      "write": [
+        "browser-only date+project personal tasks"
+      ],
+      "deny": [
+        "progress event stream",
+        "Drive originals",
+        "drawing metadata",
+        "approved schedule"
+      ]
+    },
+    "resource_librarian": {
+      "write": [
+        "ops/data/resource-catalog-normalized.v0.1.json",
+        "resources/index.html",
+        "ops/data/project-resources.json only with authenticated Drive metadata"
+      ],
+      "deny": [
+        "source file bytes",
+        "progress report rows",
+        "local checklist values"
+      ]
+    },
+    "map_ui": {
+      "write": [
+        "map.html",
+        "assets/js/app.js",
+        "assets/css/app.css"
+      ],
+      "deny": [
+        "provider raw evidence",
+        "source Drive bytes",
+        "approved progress facts",
+        "Daily Ops attendance"
+      ]
+    },
+    "developer_workspace": {
+      "write": [
+        "workspace/index.html",
+        "workspace/developer-links.v0.1.json",
+        "developer docs only"
+      ],
+      "deny": [
+        "engineering facts",
+        "progress events",
+        "daily engineer reminders"
+      ]
+    }
+  },
+  "branch_and_release": {
+    "versioning": "PRE_ARCHIVE_POST_GIT_SHA_AND_READBACK",
+    "ci_lane_tests": [
+      "no_cross_domain_writes",
+      "resource_referential_integrity",
+      "progress_provider_provenance",
+      "site_checklist_browser_only",
+      "route_presence",
+      "mobile_accessibility_and_reduced_motion"
+    ],
+    "promotion": "REVIEWED_MACHINE_PROJECTION_AND_SUCCESSFUL_CI_BEFORE_PRODUCTION",
+    "same_file_conflict": "ONE_WRITER_PER_PATH_AND_SOURCE_SHA_CHECK",
+    "rollback": "restore archive on failing verification; do not alter private Drive originals",
+    "privacy": "public GitHub Pages has NO authentication; do not render restricted project materials/photos or private raw messages"
+  },
+  "known_gaps": [
+    "checklist remains local browser only and cannot be shared between devices without authenticated backend",
+    "progress report is a partial 37-item public-safe projection and not all Slack/Discord history",
+    "map work status counts depend on admitted public work items; no inferred completion",
+    "resources normalized catalog includes 46 known indexed pointers, not a complete Drive inventory"
+  ]
+}

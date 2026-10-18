@@ -1,0 +1,98 @@
+[
+  {
+    "pid": "P004",
+    "id": "RES-P004-ARCH-DWG-001",
+    "fileId": "1pISZG16A_arsVr0_OoxU0_oftw8QmT9D",
+    "name": "Yamuna Pun 16 final (1)(1).dwg",
+    "mime": "application/dwg",
+    "verified": true
+  },
+  {
+    "pid": "P005",
+    "id": "RES-P005-ROOT",
+    "fileId": "1BUzhlUNJvUCvEV8HVJHQCZERz8maupZJ",
+    "name": "Sabitri_Giri_Residence",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P005",
+    "id": "RES-P005-ETABS-E2K-001",
+    "fileId": "1Cy-iqEKtxzMuaHwHmPlM1Bmltp3-pLHt",
+    "name": "30_Sabitri_Giri__ETABS_Model__AS_RECEIVED.e2k",
+    "mime": "application/octet-stream",
+    "verified": true
+  },
+  {
+    "pid": "P005",
+    "id": "RES-P005-ARCH-PDF-001",
+    "fileId": "1h6LAF9GLLKZe3fqnObrfhykr5FDw5qI7",
+    "name": "30_Sabitri_Giri__Architectural_Drawing__PRESENT_NEEDS_REVIEW__AS_RECEIVED.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P005",
+    "id": "RES-P005-STRUCT-PDF-001",
+    "fileId": "1M8d_ClWzpJj1cjlhNBwNM4hSI60t2A1k",
+    "name": "30_Sabitri_Giri__Structural_Drawing__PRESENT_NEEDS_REVIEW__AS_RECEIVED.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P005",
+    "id": "RES-P005-ARCH-DWG-001",
+    "fileId": "17yRvgDjdR5HWTinZTaCoIQLJTjGw1_TI",
+    "name": "30_Sabitri_Giri__Architectural_Drawing__PRESENT_NEEDS_REVIEW__AS_RECEIVED.dwg",
+    "mime": "application/dwg",
+    "verified": true
+  },
+  {
+    "pid": "P005",
+    "id": "RES-P005-STRUCT-DWG-001",
+    "fileId": "1CzA02nrmOJr2o9HdagFFKrAd5cT_hqcK",
+    "name": "30_Sabitri_Giri__Structural_Drawing__PRESENT_NEEDS_REVIEW__AS_RECEIVED.dwg",
+    "mime": "application/dwg",
+    "verified": true
+  },
+  {
+    "pid": "P005",
+    "id": "RES-P005-COST-ESTIMATE-001",
+    "fileId": "1N61cyx09L6RCAi1O2ZQLX5FPcf9tD7WW",
+    "name": "30_Sabitri_Giri__Cost_Estimate__Dipti_Giri__AS_RECEIVED.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P006",
+    "id": "RES-P006-ROOT",
+    "fileId": "1OMhyxpmJBFlmAboCtkI9OAB7L08THyuI",
+    "name": "31_Sharada adhikari",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-ROOT",
+    "fileId": "1F1EgpEmwfi8Bm9cAraEg7Efu0gSJmsl0",
+    "name": "PRJ-000007__NARAYANI_PARAJULI",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-CANON-ROOT",
+    "fileId": "1mosr2gahKr4j7xj6BmrIjz4vdCxBYetF",
+    "name": "Narayani_Parajuli_Residence",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-SOURCES",
+    "fileId": "1WqL7n93Zc_UnsMPNaO9yCMetrreFXC1A",
+    "name": "01_SOURCE_ORIGINALS",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  }
+]

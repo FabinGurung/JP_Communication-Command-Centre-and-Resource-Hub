@@ -94,9 +94,9 @@
     },
     {
       "pending_id": "OPS-PEND-000004",
-      "title": "A9-CWO two-channel Discord daily intake activation",
-      "short_title": "Discord daily Colab pilot",
-      "status": "PARTIAL_PROVIDER_RUN_RECOVERY_REQUIRED",
+      "title": "A9-CWO seven-day Discord collector and private machine-index execution",
+      "short_title": "Run Discord C01 → C02 → C05",
+      "status": "R20261010_001_TWO_PARENT_HISTORICAL_SCOPE_FIXED_LIVE_EXECUTION_PENDING",
       "priority": "NEXT_OPERATIONAL",
       "category": "COMMUNICATION_INTAKE",
       "owner_module_id": "MOD-OPS-001",
@@ -106,15 +106,16 @@
         "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
       },
       "why": "Two-channel Discord message/attachment data now exists in a provider-verified partial Drive receipt. Media fidelity is unresolved and must not be counted as a completed daily backup.",
-      "recommendation": "C04 is a strictly bounded one-JPEG source-CDN derivative pilot, not bulk attachment recovery or proof of original fidelity. In a valid C01/C03 runtime, execute C04 to archive only one image in private DERIVATIVE_BYTES + immutable sidecar with exact provider readback. Avoid running full C02 while original-byte mismatch persists. Update project-group coverage before proposing new channels.",
-      "when_to_build": "Use the next authorized Colab execution, review per-source media mismatch diagnostics and verify new Drive receipt.",
-      "proposed_first_gate": "Completed user-reported C03 sample; next make original-vs-provider-derivative classification explicit, test one small targeted recovery without advancing incomplete source cursor, and record evidence/receipt before broad media retry.",
-      "implementation_status": "USER_REPORTED_C03_DONE_C04_BOUNDED_PILOT_STAGED_UNRUN",
-      "current_boundary": "Oct 9: 174 Discord messages reconciled into eight Daily Ops project records, with 7 new Discord evidence admissions; 11 Slack trackers/rollups sent with readback. 749 original byte mismatches remain. Notebook revision 20261009-007 includes optional single-file C04 provenance-labelled derivative pilot, NOT YET EXECUTED. Await user C01/C03/C04 then sanitized receipt; no C02 rerun.",
+      "recommendation": "Run authorized C01/C06 backfill repeatedly, C07 original-media recovery until all native bytes verified, C08 private SQLite generation and C09 strict data gate. Then reconcile identities and publish approved public safe records; do not send Slack or update website until provenance and release gates pass.",
+      "when_to_build": "Next user-authorized Google Colab runtime with Discord bot credential and Drive OAuth; do not pretend GitHub Actions can access the bot or run Discord itself.",
+      "proposed_first_gate": "Run C01 → C02 live preview. Verify live parent/thread roster and every NPT cutoff; type COLLECT; verify new frozen C02 receipt and then execute C05. Do not attempt unsupported whole-guild/archived-thread collection.",
+      "implementation_status": "SCOPE_R001_FIXED_C06_ONLY_TWO_PARENTS;V1_GUILD_OVERBROAD_CAPTURE_ISOLATED_UNMODIFIED;V2_SCOPED_HISTORY_NOT_RUN;C08_PARTIAL_PRIVATE_SQLITE_ALLOWED;C09_GRACEFUL_QUERY_ABSENT_BLOCKED;LATE_EDIT_DETECTION_OUTSIDE_7_DAY_WINDOW_OPEN",
+      "current_boundary": "Today C02 r013 CONFIRMED PARTIAL: 21 parent/active-thread sources, 89 changed messages, 269 media mismatches; C05 private daily index 89 rows written. Today overbroad C06 r013 discovered 1574 guild sources, captured 8 pages and C07 original media recovery succeeded 0/11; C08/C09 errors were due unfinished history and absent query directory. Revised 20261010-001 scopes C06 to only the 2 company picture parents plus child threads, writes isolated TWO_PARENT_HISTORY_ARCHIVE_V2. Needs real Colab re-run; historical edits outside replay and downstream website syncing still pending.",
       "related_canonical_sources": [
         "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
         "ops/control/storage-routing-rules.json",
-        "ops/control/daily-communication-web-cycle.json"
+        "ops/control/daily-communication-web-cycle.json",
+        "ops/discord/DAILY_7_DAY_MACHINE_ARCHIVE_RUNBOOK.md"
       ],
       "collector_notebook_url": "https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
       "security_invariants": [
@@ -124,17 +125,15 @@
         "Do not claim provider capture DONE until first real Discord API and Drive readback"
       ],
       "last_provider_run": {
-        "run_id": "20261009T020256Z",
-        "status": "PARTIAL",
-        "at_npt": "2026-10-09T07:54:30+05:45",
-        "sources": 26,
-        "passed_sources": 17,
-        "partial_sources": 9,
-        "messages_new_or_changed": 174,
-        "attachment_failures": 749,
-        "previously_archived_attachments": 207,
-        "receipt_drive_id": "1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3",
-        "handoff_drive_id": "1QUZRvXuW3Z7z4UD1BkoI_jJD2ZWkZQN4"
+        "date_npt": "2026-10-10",
+        "daily_run_id": "20261010T005617Z",
+        "daily_receipt_drive_id": "1HXOjV7CpYOQw6mGwK_n_SDAQBYmqOjE5",
+        "daily_index_manifest_drive_id": "19yXv6LJexxmp9BaIifSXmj6W9Fwf9LnJ",
+        "history_r013_run_id": "20261010T011528Z",
+        "history_receipt_id": "1bmOa0t3zaRI_-pHp5_TIZte8cy8J27cc",
+        "history_scope": "OVERBROAD_1574_DISCOVERED_8_PAGES_ARCHIVED_11_MEDIA_RECOVERY_ATTEMPTS_0_SUCCESS",
+        "history_archive": "FULL_HISTORY_ARCHIVE_V1",
+        "current_revision_history_archive": "TWO_PARENT_HISTORY_ARCHIVE_V2_NOT_RUN"
       },
       "probe": {
         "cell_id": "a9-cwo-c03-cdn-probe",
@@ -177,13 +176,206 @@
           "revision": "20261009-007",
           "cell_id": "a9-cwo-c04-derivative-pilot",
           "published_in_feature_branch": true,
-          "execution_status": "NOT_RUN",
+          "execution_status": "ONE_DERIVATIVE_SAVED_READBACK_VERIFIED_ORIGINAL_NOT_CERTIFIED",
           "size_limit_bytes": 26214400,
           "admission": "PROVIDER_DERIVATIVE_NOT_ORIGINAL",
           "writes": "ONE_DRIVE_DERIVATIVE_PLUS_SIDECAR",
-          "cursors": "UNCHANGED"
+          "cursors": "UNCHANGED",
+          "derivative_drive_id": "1HBLKmpQV5yCD_90_v9iHEIbiTw3VduPw",
+          "receipt_drive_id": "1ftkzIKyqUhVvCCWYAw5ka_YfKlDg2tVi"
         }
+      },
+      "last_source_revision": "20261010-001",
+      "static_qa_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37922352759",
+      "machine_contracts": [
+        "ops/discord/schemas/daily-message-index-v1.schema.json",
+        "ops/discord/schemas/daily-run-index-manifest-v1.schema.json",
+        "ops/discord/DAILY_7_DAY_MACHINE_ARCHIVE_RUNBOOK.md"
+      ],
+      "preview_contract": {
+        "revision": "20261010-001",
+        "stage": "C02 BEFORE ANY ARCHIVE WRITES",
+        "operator_confirmation": "COLLECT",
+        "scope": "two parents and currently active child threads only",
+        "per_source": "kind,name,id,parent,Discord link,cursor,actual planned cutoff NPT/UTC,seven-day or catch-up",
+        "no_confirmation": "preview only, no receipt, no state mutation",
+        "live_provider_confirmation": "NOT_RUN",
+        "c05_safe_only_when": "SAME_RUNTIME_CONFIRMED_C02_RUN_AND_RECEIPT_MATCH",
+        "additional_history_scope": "ONLY_TWO_PARENT_PICTURE_CHANNELS_AND_DISCOVERABLE_ACTIVE_AND_ARCHIVED_THREADS",
+        "after_history": "C07_REPAIR_MEDIA_THEN_C08_SQLITE_THEN_C09_PASS_BEFORE_PUBLICATION"
+      },
+      "source_qc": {
+        "revision": "20261010-001",
+        "source_commit": "e5f354ad47939ca1bec6e0a9870c04326230a76a",
+        "provider_runtime": "OLDER_R013_RUN_ONLY_R001_UNEXECUTED",
+        "publication": "NONE_FROM_THIS_BROADER_SOURCE"
       }
+    },
+    {
+      "pending_id": "OPS-PEND-000005",
+      "title": "Narayani source-version certification and A9 Local/Main closeout",
+      "short_title": "Narayani engineering import QA",
+      "status": "IMPORTED_INDEXED_REVIEW_GATES_OPEN",
+      "priority": "HIGH",
+      "category": "ENGINEERING_DOCUMENT_GOVERNANCE",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "google_drive",
+        "file_id": "18M_KYt7U-zqwni2OvE1kcUg3TAyfP45OssdWJgu3ex8",
+        "title": "Source import manifest — 13 files copied, 16 CWO resources linked",
+        "url": "https://docs.google.com/document/d/18M_KYt7U-zqwni2OvE1kcUg3TAyfP45OssdWJgu3ex8/edit"
+      },
+      "why": "Maintain clear, verified lineage between the external Rambazar/Narayani source account and the governed kaksaveksaka project while preventing legacy 2025 models from being mistaken for approved 2026 drawings.",
+      "proposed_first_gate": "Confirm engineer-approved drawing/model revision IDs and independent SHA-256 source-vs-copy equality; register source→copy edges in the existing project file index, owning Local Library and Main Library without duplicates.",
+      "implementation_status": "13_SOURCE_FILES_COPIED_PROVIDER_METADATA_READBACK_PASS;P007_16_DRIVE_LINKS_REGISTERED;SOURCE_SHA256_AND_A9_LIBRARY_ACK_PENDING",
+      "current_boundary": "Never delete old source or replace revised 2026 drawings without engineer QC. No direct claim of byte-hash match or engineering design approval.",
+      "related_canonical_sources": [
+        "ops/data/project-resources.json",
+        "ops/events/daily-ops-events.jsonl",
+        "ops/control/storage-routing-rules.json"
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000006",
+      "title": "Legacy materials/progress/Slack source-of-truth consolidation audit",
+      "short_title": "Legacy-to-CWO event reconciliation",
+      "status": "READ_ONLY_COMPARISON_PENDING",
+      "priority": "HIGH",
+      "category": "A9_AUTHORITY_RECONCILIATION",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Retain legacy material/progress ledgers until exact event/provider/project crosswalk is verified",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://drive.google.com/drive/folders/1-ZPGmjfO5Hw8K0-JOFdZSyx2x12YRUQo"
+      },
+      "why": "Legacy September Nexus JSONL/SQLite and provider events are not comprehensively linked to current CWO event IDs; preserve material-accounting truth and avoid double Slack reminders or duplicate transactions.",
+      "proposed_first_gate": "READ ONLY: compare older FBL/REB event IDs, Slack ProviderEvents, current CWO events and Sheets, then issue fact-level authority matrix and unmigrated-ID list; obtain separate approval before data/schema mutation or legacy chat retirement.",
+      "implementation_status": "LEGACY_LEDGERS_RETAINED_IN_DRIVE;AUDIT_NOT_YET_COMPLETE",
+      "current_boundary": "No independent new ledger, provider send, retirement mutation or replacement of live quantitative Sheets before certified migration.",
+      "related_canonical_sources": [
+        "ops/events/daily-ops-events.jsonl",
+        "ops/data/current-works.json",
+        "ops/CANONICAL_DATA_AUTHORITY.md"
+      ],
+      "recommendation": "Legacy September Nexus JSONL/SQLite and provider events are not comprehensively linked to current CWO event IDs; preserve material-accounting truth and avoid double Slack reminders or duplicate transactions.",
+      "when_to_build": "READ ONLY: compare older FBL/REB event IDs, Slack ProviderEvents, current CWO events and Sheets, then issue fact-level authority matrix and unmigrated-ID list; obtain separate approval before data/schema mutation or legacy chat retirement.",
+      "security_invariants": [
+        "No independent new ledger, provider send, retirement mutation or replacement of live quantitative Sheets before certified migration."
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000007",
+      "title": "Multi-provider archive completeness and optional AI query indexes",
+      "short_title": "AI archive indexes and coverage",
+      "status": "STANDARD_PUBLISHED_IMPLEMENTATION_PARTIAL",
+      "priority": "NEXT_3",
+      "category": "EVIDENCE_ARCHITECTURE",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Pinned archive formats reference",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/controls/archive-formats.html"
+      },
+      "why": "Keep one durable, lossless private provider archive and derive efficient AI search indexes without misclassifying missing Discord originals, archived threads or private Slack history as complete.",
+      "proposed_first_gate": "Certify provider raw source coverage/cursors and 749 Discord original byte mismatches; only then pilot rebuildable SQLite/DuckDB and reversible compressed partitions on private verified data. Treat Parquet as optional.",
+      "implementation_status": "SEVEN_FORMAT_MACHINE_POLICY_AND_WEBSITE_LIVE;JSONL_RECEIPTS_EXIST;PARQUET_DUCKDB_NOT_DEPLOYED",
+      "current_boundary": "Private evidence stays in Drive. No original overwrite, false archive certification or public raw-message publication.",
+      "related_canonical_sources": [
+        "ops/control/storage-routing-rules.json",
+        "ops/control/daily-communication-web-cycle.json",
+        "ops/events/daily-ops-events.jsonl"
+      ],
+      "recommendation": "Keep one durable, lossless private provider archive and derive efficient AI search indexes without misclassifying missing Discord originals, archived threads or private Slack history as complete.",
+      "when_to_build": "Certify provider raw source coverage/cursors and 749 Discord original byte mismatches; only then pilot rebuildable SQLite/DuckDB and reversible compressed partitions on private verified data. Treat Parquet as optional.",
+      "security_invariants": [
+        "Private evidence stays in Drive. No original overwrite, false archive certification or public raw-message publication."
+      ]
+    },
+    {
+      "pending_id": "OPS-PEND-000008",
+      "title": "Site Operations visual QA and user-centred UX v2",
+      "short_title": "Dashboard UX v2",
+      "status": "CLOSED_TECHNICAL_QA_PASS",
+      "priority": "COMPLETED",
+      "category": "FRONTEND_UX",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Site Operations portfolio",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/site-operations.html"
+      },
+      "why": "The first mobile-friendly style, search and P007 grouped document changes are deployed; validate end-user usability, responsive layouts, PDF previews and permission-gated links across actual browsers.",
+      "proposed_first_gate": "COMPLETED: GitHub Actions browser run 37916264367; branch registry 37916264531; desktop/mobile screenshots and interaction QA. Future design refinements must be separately scoped and versioned.",
+      "implementation_status": "FIELD_DESK_HERO_V2_LIVE;PROJECT_BRIEF_DISCLOSURES;MAP_FIRST_CLUSTERED_TOUCH;CHROME_DESKTOP_MOBILE_QA_PASS;ZERO_AXE_WCAG_AA_DETECTED_VIOLATIONS_FOUR_VIEWS;P007_16_DRIVE_LINKS_PRIVATE_PROVIDER_VERIFIED;PRODUCTION_DEPLOYMENT_VALIDATION_PASS",
+      "current_boundary": "Technical browser/keyboard/automated accessibility smoke and 16 P007 Drive permission checks passed; not blanket certification of all WCAG criteria, account-specific link access, human aesthetic acceptance, or engineering revision approval. Continue to preserve raw evidence outside public GitHub.",
+      "related_canonical_sources": [
+        "site-operations.html",
+        "site-operations/project.html",
+        "ops/data/project-resources.json"
+      ],
+      "recommendation": "Completed: field-engineer-oriented hero, dated state, action-first cards, drawings and deferred history; map-first layout with tap-sized clustered locations and accessible disclosures.",
+      "when_to_build": "Completed on 2026-10-09. A new user-requested design iteration may reopen separately.",
+      "security_invariants": [
+        "Do not show restricted provider messages or original file bytes publicly, and do not present historic received drawings as approved construction versions."
+      ],
+      "qa_evidence": {
+        "run_id": 37916264367,
+        "run_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/37916264367",
+        "script_path": "scripts/qa_field_ux_browser.py",
+        "workflow_path": ".github/workflows/field-ux-visual-qa.yml",
+        "browser": "Playwright/Chrome",
+        "viewports": [
+          "1440x900",
+          "390x844"
+        ],
+        "screenshots": 6,
+        "wcag_automated_violations": {
+          "field_desk": 0,
+          "project_brief": 0,
+          "map_desktop": 0,
+          "map_mobile": 0
+        },
+        "mobile_horizontal_overflow": "NONE_DOCUMENT_WIDTH_390PX",
+        "source_evidence_admission": "NOT_MODIFIED",
+        "narayani_drive_links_permissions": "16_OF_16_RESTRICTED_READBACK_PASS",
+        "manual_human_acceptance": "NOT_CLAIMED"
+      }
+    },
+    {
+      "pending_id": "OPS-PEND-000009",
+      "title": "Engineer-confirmed three-day trade reports and daily CWO projection",
+      "short_title": "3-day trade-report replies → verified workboard",
+      "status": "AWAITING_SITE_ENGINEER_REPLIES",
+      "priority": "HIGH",
+      "category": "SITE_FIELD_DATA_RECONCILIATION",
+      "owner_module_id": "MOD-OPS-001",
+      "proposal": {
+        "provider": "operations_pending_registry",
+        "title": "Eight project 3-day engineer reply intake",
+        "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json",
+        "supporting_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/site-operations.html"
+      },
+      "why": "The public field-workboard is an explicit, source-linked projection for 8-10 Oct. Missing yesterday/next-day or crew confirmations must come from each site engineer, not automatic 'UNKNOWN' checklists or assumptions.",
+      "proposed_first_gate": "Collect dated trade rows from the eight existing project Slack tracker threads, confirm author/project/time, admit corrections via the owning private provider records, then update field-three-day-board.json with PRE/POST and release readback. Move tomorrow's plan to current work only when engineering authorization exists.",
+      "recommendation": "Maintain one three-day trade workboard, with clear statuses and source IDs; work trade catalog is vocabulary only. No parallel material, attendance, finance or construction schedule authority.",
+      "when_to_build": "As soon as site engineers provide real replies or a separately approved daily projection adapter is ready.",
+      "implementation_status": "THREE_DAY_PUBLIC_DISPLAY_DEPLOYED;21_TRADE_VOCABULARY_CREATED;8_PROJECT_SLACK_REQUESTS_SENT_AND_PROVIDER_READBACK_PASS;ENGINEER_REPLIES_UNCONFIRMED;AUTO_ADAPTER_NOT_IMPLEMENTED",
+      "current_boundary": "No automatic future-day work assignment, manpower counts, specific PPE/tool readiness assumption, or blanket HOLD. Private Slack/Discord bytes remain gated in Drive. Engineer approval required to lift hold.",
+      "related_canonical_sources": [
+        "ops/data/current-works.json",
+        "ops/data/field-three-day-board.json",
+        "ops/control/field-trade-taxonomy.json",
+        "ops/events/daily-ops-events.jsonl"
+      ],
+      "security_invariants": [
+        "DO_NOT_FABRICATE_TASKS_OR_CREWS",
+        "HOLD_REQUIRES_ENGINEER_RELEASE",
+        "DUPLICATE_MESSAGES_DEDUPED_BY_PROVIDER_IDS",
+        "SOURCE_PROVIDER_PRIVATE"
+      ]
     }
   ],
   "archived_items": [

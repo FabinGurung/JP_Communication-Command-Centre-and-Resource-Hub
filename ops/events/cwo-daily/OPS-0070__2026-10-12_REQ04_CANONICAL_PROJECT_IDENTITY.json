@@ -1,0 +1,90 @@
+{
+  "event_id": "OPS-0070",
+  "date_npt": "2026-10-12",
+  "scope": "JP_AEC_ORIGINAL_REQUEST_04_HUMAN_READABLE_PROJECT_IDENTITIES",
+  "status": "CLOSED__IDENTITY_CI_BROWSER_MOBILE_AND_PRODUCTION_SUCCESS",
+  "repo": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "branch": "main",
+  "verified_source_release_commit": "6318e37b2a820623f1d2219ed81985e6b97f0f7f",
+  "last_scoped_roadmap_commit": "f2d6d2bf3b3cd737c1e2ec2ce8a48ba0517abaef",
+  "pre_change_archive_commit": "67a5038752ee1f4445e6a55902875298a6c07809",
+  "pre_change_archive_root": "ops/99_VERSION_ARCHIVE/20261012/REQ04_PROJECT_IDENTITY_PRE",
+  "pre_change_workflow_archive_commit": "83953c03f069da5910258c8b69f228ccfb94a42e",
+  "source_readback": [
+    {
+      "path": "projects.csv",
+      "blob_sha": "240addc16ab1ae1d16c7150929cae2ffcd5c6aae"
+    },
+    {
+      "path": "ops/data/project-identity-index.v0.1.json",
+      "blob_sha": "69b754c7d97031060eb09c67a2146dfd1b0960da"
+    },
+    {
+      "path": "scripts/project_identity_index.py",
+      "blob_sha": "1f72998b955a9563a04867f39b757e1543fd1d8d"
+    },
+    {
+      "path": "resources/index.html",
+      "blob_sha": "da9569ce71318ad742577ccc66b60044c11ca976"
+    },
+    {
+      "path": "site-operations/project.html",
+      "blob_sha": "1ccd80d224580c6a53dd9c9e6a3060943ed228cb"
+    },
+    {
+      "path": "scripts/validate_site_experience_contract.py",
+      "blob_sha": "cec7d12151cd172fec4bb9b15dcc476a4ea0aaaf"
+    },
+    {
+      "path": "scripts/qa_field_ux_browser.py",
+      "blob_sha": "7743a299e83b174ab88c79194e0f08f2a26b95af"
+    },
+    {
+      "path": ".github/workflows/validate-projects.yml",
+      "blob_sha": "acf531aa6e3ea416cc5977b5acf32716390a66ad"
+    },
+    {
+      "path": "ops/control/website-eight-request-roadmap.v0.1.json",
+      "blob_sha": "c411aa290b09ed65c0fb158b6dfd145b91a508a7"
+    }
+  ],
+  "governance": {
+    "single_identity_authority": "projects.csv",
+    "derived_projection": "ops/data/project-identity-index.v0.1.json",
+    "reproduction_and_integrity_guard": "python scripts/project_identity_index.py --check",
+    "source_git_blob_sha": "240addc16ab1ae1d16c7150929cae2ffcd5c6aae",
+    "main_project_count": 28,
+    "linked_operational_site_count": 8,
+    "progress_evidence_fk_count": 37,
+    "unaliased_project_count": 20,
+    "unaliased_rule": "No fabricated site aliases; only canonical master project names shown on map."
+  },
+  "interface_changes": [
+    "Resource category and project selectors display canonical human names while machine site codes remain invisible in normal summary view.",
+    "Resources expand optional Source Record with canonical project/global ID, company code, site FK and original projects.csv provenance.",
+    "Project Brief keeps client/site name, contractor and report date prominent while placing stable project identity and slug in optional disclosure.",
+    "Map human-first presentation unchanged from Request 3; other operational views remain source-linked to verified current-works names.",
+    "No raw Drive/Slack/Discord records, source drawing bytes, published progress claims or checklist localStorage data changed."
+  ],
+  "qa": {
+    "identity": {
+      "result": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38258065851"
+    },
+    "browser": {
+      "result": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38258142975"
+    },
+    "production": {
+      "result": "SUCCESS",
+      "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/38258142881"
+    }
+  },
+  "limitations": [
+    "The source is published on public GitHub Pages. Collapsing IDs does not privatize them.",
+    "Only eight of 28 map projects are linked to the operational-site projections.",
+    "Separate authenticated stakeholder access and remaining data-source ingestion are not part of Request 4."
+  ],
+  "next_stage": "REQ05_DEVELOPER_WORKSPACE_ONLY_SOFTWARE_DEV_CONTROL_AND_BACKLOG",
+  "rollback": "Use exact source archives and Git blob hashes in a new scoped revert commit; never reset or remove original records."
+}

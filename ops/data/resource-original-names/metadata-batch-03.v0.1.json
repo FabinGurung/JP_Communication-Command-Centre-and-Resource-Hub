@@ -1,0 +1,98 @@
+[
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-ARCH-PDF",
+    "fileId": "19AyrQbMaZ4ze59ixqKMlMlR0UZ-1jDcB",
+    "name": "narayni architecture drw revised(1).pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-ARCH-DWG",
+    "fileId": "1A0LfypGHlZcrEUB9MWIcQUpDDHjWOJnY",
+    "name": "narayni architecture drw revised(1).dwg",
+    "mime": "application/acad",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-STRUCT-PDF",
+    "fileId": "1zwmKrfwW9IN5ourLGFdfleJOCi7dcH2_",
+    "name": "narayani str drg revised plan(1).pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-STRUCT-DWG",
+    "fileId": "1OdmVYOAoz9chcccLl_4KsF8XffK6ScrE",
+    "name": "narayani str drg revised plan(1).dwg",
+    "mime": "application/acad",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-ETABS-ULS",
+    "fileId": "1FdTJ_DPzKU8GYBY5R-WXjWCdOc4c9yL3",
+    "name": "NARAYANI_ETABS_ULS_MODEL_SOURCE__20260705.e2k",
+    "mime": "text/plain",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-ETABS-SLS",
+    "fileId": "1XxzO4MGieQQakCjMI_4ffjyazrcRvX83",
+    "name": "NARAYANI_ETABS_SLS_MODEL_SOURCE__20260705.e2k",
+    "mime": "text/plain",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-SKETCHUP-FINAL",
+    "fileId": "1bRE1h5_n_iDWyUspmn-A3GNTUQ5SrnmU",
+    "name": "rambazar final.skp",
+    "mime": "application/x-koan",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-SKETCHUP-COMMERCIAL",
+    "fileId": "141zydR7qNIOvDS8ImLFU2wnw2FvUDNS_",
+    "name": "ram bazaar commercial.skp",
+    "mime": "application/x-koan",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-SOIL-PDF",
+    "fileId": "13y0b0v8BiL2ooMXy0BFn2dtdSHWNOg2N",
+    "name": "FINAL G R OF RESIDENTIAL BUILDING OF MRS. NARAYANI PARAJULI, RAMBAZAR, PMC-15, KASKI.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-MEP-FOLDER",
+    "fileId": "1J1vLPRJfSlnStTDKYrRAi2WGK8KQFhEC",
+    "name": "07_MEP",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-SANITARY-PDF",
+    "fileId": "1wi0Q9CsVMkbI76rPVbze7TV5GJm_OwvI",
+    "name": "RAMZAAR COMMERCIAL saniatary DRAWING.pdf",
+    "mime": "application/pdf",
+    "verified": true
+  },
+  {
+    "pid": "P007",
+    "id": "RES-P007-20261009-ARCH-HISTORY",
+    "fileId": "1zEyFLMljsEyOpl3bIM_LgyGUI9plPBva",
+    "name": "99_RECEIVED_ARCHITECTURE_UNVERIFIED",
+    "mime": "application/vnd.google-apps.folder",
+    "verified": true
+  }
+]

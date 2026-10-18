@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0.0",
+  "control_id": "OPS-DAILY-COMM-WEB-CYCLE-001",
+  "operation_name": "A9-CWO",
+  "display_name": "Communication & Web Operations",
+  "effective_from_npt": "2026-10-08",
+  "status": "ACTIVE_GOVERNED_PROCESS_CONTRACT",
+  "scope": "A9-CWO intake: full retrievable, bot-authorized Discord guild message history in an archive-first separate C06 lane; two-parent seven-day C02 maintenance; private Slack source archives and later registered providers. Public site/Slack derivation only after verified Drive provenance, SQLite query gate and current send policies.",
+  "source_providers": [
+    {
+      "provider": "SLACK",
+      "adapter": "ops/control/daily-slack-web-cycle.json",
+      "collection": "Provider per-channel cursor with replies and readback",
+      "status": "ADAPTER_EXISTS_SOURCE_CAPTURE_COMPLETENESS_UNVERIFIED"
+    },
+    {
+      "provider": "DISCORD",
+      "guild_id": "682670494658330644",
+      "channel_ids": [
+        "1463826087841890417",
+        "1492168056858738809"
+      ],
+      "active_child_threads_only": true,
+      "archive_root_drive_id": "1nTFR9xQXNwgkWRrAq1jJw7ph6rKg3C9X",
+      "runner": "USER_OPERATED_COLAB",
+      "notebook": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
+      "handoff": "A9_CWO_DAILY_TWO_CHANNELS/handoff_current.json",
+      "status": "R013_ARCHIVE_FIRST_SOURCE_READY_NO_LIVE_GUILD_BACKFILL",
+      "last_frozen_run": {
+        "run_id": "20261009T020256Z",
+        "receipt_drive_id": "1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3",
+        "handoff_drive_id": "1QUZRvXuW3Z7z4UD1BkoI_jJD2ZWkZQN4",
+        "status": "PARTIAL",
+        "sources_total": 26,
+        "sources_pass": 17,
+        "sources_partial": 9,
+        "messages_new_or_changed": 174,
+        "attachments_failed": 749,
+        "attachments_previously_archived": 207
+      },
+      "next_gate": "Operator: C01 → C06 FULL_HISTORY repeatedly → C07 REPAIR_MEDIA until all originals verified → C08 BUILD_SQLITE → C09 publication gate. Do not publish from incomplete raw Drive coverage. C02/C05 remain rolling update lane, NOT historical completion.",
+      "c03_result": {
+        "status": "USER_REPORTED_COMPLETED",
+        "native_provider_receipt": "NOT_AVAILABLE",
+        "sample_declared_bytes": 1103988,
+        "source_cdn_bytes": 8830415,
+        "proxy_cdn_bytes": 1943867,
+        "both_jpeg_valid_and_same_dimensions": true,
+        "both_fail_exact_byte_identity": true,
+        "classified_original": false
+      },
+      "scan_contract": {
+        "rolling_lookback_days": 7,
+        "catchup_if_stale_cursor": true,
+        "catchup_overlap_days": 1,
+        "archived_child_threads": false,
+        "last_completed_provider_collection_run": "20261009T020256Z",
+        "revision": "20261009-013",
+        "runtime_execution_of_revision": "NOT_RUN",
+        "machine_day_index_schema": "ops/discord/schemas/daily-message-index-v1.schema.json",
+        "machine_run_manifest_schema": "ops/discord/schemas/daily-run-index-manifest-v1.schema.json",
+        "runbook": "ops/discord/DAILY_7_DAY_MACHINE_ARCHIVE_RUNBOOK.md",
+        "preflight": "LIVE_READ_ONLY_ROSTER_AND_FROZEN_NPT_WINDOW_OPERATOR_COLLECT_REQUIRED",
+        "preflight_scope_limit": "TWO_REGISTERED_PARENTS_PLUS_ACTIVELY_DISCOVERED_CHILD_THREADS",
+        "c05_same_runtime_confirmed_c02_required": true,
+        "full_history": "C06_ALL_ACCESSIBLE_GUILD_MESSAGES_AND_DISCOVERABLE_ARCHIVED_THREADS",
+        "original_media": "C07_RETRY_FAILURES_NATIVE_BYTES_OR_REUSE_ONLY_AFTER_PROVIDER_ORIGINAL_SIZE_AND_DRIVE_SHA256_PARITY",
+        "private_query": "C08_SQLITE_GENERATED_FROM_DRIVE_VERIFIED_IMMUTABLE_GZIP_JSONL",
+        "publication_gate": "C09_PASS_DATA_VERIFIED_ONLY_AND_PUBLIC_SAFETY_RECONCILIATION",
+        "incremental_limitation": "C02_ONLY_2_PARENT_CHANNELS_UNTIL_FULL_GUILD_DELTA_EXTENSION"
+      },
+      "c04_result": {
+        "status": "ONE_PROVIDER_DERIVATIVE_DRIVE_READBACK_PASS",
+        "derivative_drive_id": "1HBLKmpQV5yCD_90_v9iHEIbiTw3VduPw",
+        "receipt_drive_id": "1ftkzIKyqUhVvCCWYAw5ka_YfKlDg2tVi",
+        "original_certified": false
+      }
+    }
+  ],
+  "precondition": "BEFORE ANY NEW DERIVATIVE/PUBLICATION: complete the Discord full-history archive for target guild, preserve exact source JSONL and original attachments in private Drive, read back SHA manifests, build private query indexes, run C09 gate; then reconcile project identities and only publish approved public-safe website/authorized Slack facts. C02 seven-day replay is not total history.",
+  "ingest_order": [
+    "DISCOVER_DISCORD_FULL_GUILD_AND_ARCHIVED_THREAD_SCOPE",
+    "RUN_C06_HISTORICAL_ARCHIVE_TO_OWNING_DRIVE_UNTIL_SOURCE_COVERAGE_PASS",
+    "RUN_C07_ORIGINAL_MEDIA_RECOVERY_AND_MANIFEST_READBACK",
+    "BUILD_C08_PRIVATE_SQLITE_FROM_VERIFIED_JSONL",
+    "CHECK_C09_PUBLISH_DATA_GATE_OR_BLOCK",
+    "READ_SLACK_PRIVATE_ARCHIVES_AND_CAPTURE_VERIFIED_SOURCE_DELTAS",
+    "NORMALIZE_PRIVATE_CANDIDATES_WITH_PROVENANCE",
+    "RECONCILE_PROJECT_COMPANY_IDENTITY_AND_CONFLICTS",
+    "ADMIT_ONLY_APPROVED_PUBLIC_SAFE_GITHUB_FACTS",
+    "VALIDATE_AND_DEPLOY_WEBSITE",
+    "SEND_AUTHORIZED_SLACK_SUMMARIES_WITH_MESSAGELOG_RECEIPTS",
+    "REGISTER_POST_RELEASE_SHA_AND_UNRESOLVED_GAPS"
+  ],
+  "storage_policy": "ops/control/storage-routing-rules.json",
+  "source_processing": {
+    "originals": "PRIVATE Google Drive source archive first: immutable full-fidelity JSONL gzip pages, exact original media when retrievable, explicit byte mismatch/coverage debt, all source IDs/cursor/receipt SHA provenance",
+    "facts": "Private normalized indexed SQLite from verified Drive original JSONL first, then approved public-safe GitHub JSON/JSONL/CSV projections/SQL schema",
+    "website": "Only after C09 data gate + source provenance, approved public-safe facts, code validation and deployment",
+    "messages": "Only after C09 data gate and governing Slack send permissions; post source-grounded project/REB/FBL summaries and read back receipts"
+  },
+  "project_truth": "Do not equate uploaded image or message with DONE; classify as observed/requested/planned/completed only when source-grounded.",
+  "company_routing": "Use authorized A9 registry for REB/FBL and governed projects; both company rollups are required targets when send gate allows.",
+  "safety_and_accuracy": "Do not store Discord/Slack bot secrets in GitHub, logs, exports or notebook outputs. Guild-wide archive only with explicitly authorized bot for verified guild, exact source roster/permissions and FULL_HISTORY confirmation; no unrestricted other-guild or DM harvest. Never invent messages/cursors or skip incompleteness. Preserve stricter live A9 source controls where they apply. Full historical backfill precedes a seven-day incremental-only routine; when metadata/media completeness is partial, do not claim history PASS or issue new downstream publications based on missing source evidence.",
+  "daily_closeout": [
+    "PRIVATE_SQLITE_ARCHIVE_RECONSTRUCTION_VERIFIED_OR_NOT_RUN",
+    "HISTORICAL_ARCHIVE_SOURCE_AND_MEDIA_PASS_OR_PUBLICATION_BLOCKED",
+    "DISCORD_RECEIPT_PASS_PARTIAL_NOT_RUN",
+    "SLACK_SCAN_PER_CHANNEL_WINDOW",
+    "DRIVE_ARCHIVE_READBACK",
+    "GITHUB_COMMIT_OR_NO_DELTA",
+    "WEBSITE_DEPLOYMENT",
+    "SLACK_REPLIES_SENT_OR_DRAFT",
+    "UNRESOLVED_PROJECT_IDENTITIES",
+    "SHEETS_PROJECTION_STATUS"
+  ],
+  "user_facing_name_change": {
+    "new": "A9-CWO",
+    "old": "A9-SWO",
+    "meaning": "Operational rename only, no new bot token or Slack account"
+  },
+  "discord_slack_channel_coverage_20261009": {
+    "assessment_date_npt": "2026-10-09",
+    "source_run_id": "20261009T020256Z",
+    "scope": "two Discord parent channels + 24 currently active children, not server-wide",
+    "total_source_channel_records": 26,
+    "active_project_media_threads_with_messages": 9,
+    "active_reb_project_media_threads": 2,
+    "active_fbl_project_media_threads": 7,
+    "matching_existing_slack_project_channels": 9,
+    "missing_slack_project_channels_for_active_media_threads": 0,
+    "new_slack_groups_created": 0,
+    "recommendation": "REUSE_EXISTING_SLACK_CHANNELS_NO_NEW_PROJECT_DISCUSSION_GROUPS_PROVEN_NECESSARY",
+    "underused_existing_channel": "REB One Bay: already existed, no site messages in examined week before 9 Oct tracker; needs caption/work classification and governed public project-master admission",
+    "other_identity_gap": "REB Ashok existing Slack channel, no new Discord source messages in frozen 7-day window, stable public Operations project-master identity unresolved",
+    "silent_source_caution": "Other inactive/empty current Discord threads have no 7-day activity and do not justify Slack group creation; reassess on real field traffic with verified company membership",
+    "coverage_receipt_status": "DISCORD_PARTIAL_749_MEDIA_MISMATCHES_SLACK_WEEKLY_READ_NOT_FULL_PRIVATE_RAW_ARCHIVE_CERTIFICATION",
+    "rollup_readback": {
+      "reb": "https://jp09.slack.com/archives/C0C2DJMMY4Q/p1791519039137009",
+      "fbl": "https://jp09.slack.com/archives/C0C1M63E5AM/p1791519041452929"
+    }
+  },
+  "daily_run_20261009": {
+    "date_npt": "2026-10-09",
+    "status": "PARTIAL_UNCLOSED_MEDIA_ARCHIVE_AND_WEBSITE_RELEASE",
+    "operational_communications": "11_MESSAGES_SENT_AND_READ_BACK",
+    "project_trackers_sent": 9,
+    "company_rollups_sent": 2,
+    "discord_message_window": {
+      "source_run_id": "20261009T020256Z",
+      "messages_new_or_changed": 174,
+      "source_channels_total": 26,
+      "source_channels_pass": 17,
+      "source_channels_partial_media": 9,
+      "attachment_original_size_mismatches": 749,
+      "previously_archived_original_attachments": 207,
+      "full_archive_certification": "PARTIAL"
+    },
+    "github_machine_records": "PROMOTED_IN_MAIN_COMMIT_268b05336018842bb2b4e15aceb4c3eabd2a7110",
+    "spreadsheets": {
+      "status": "PROVIDER_READBACK_PASS_8_PROJECT_ROWS",
+      "fbl": {
+        "sheet": "Daily Readiness",
+        "range": "A32:W38",
+        "url": "https://docs.google.com/spreadsheets/d/1YshLrDAJDg3CO8F1jmIr2Eucy0-TKwiviVNF5tiAfT0/edit"
+      },
+      "reb": {
+        "sheet": "Daily Readiness",
+        "range": "A10:W10",
+        "url": "https://docs.google.com/spreadsheets/d/11Dpvqm_joE4ZnySYSkGObMIya-ILHRdZf4GC3ZlRoj0/edit"
+      }
+    },
+    "release_status": {
+      "github_main": "DONE_GIT_READBACK",
+      "github_pages": "DEPLOYMENT_READBACK_UNVERIFIED",
+      "c04_pilot": "ONE_PRIVATE_DERIVATIVE_VERIFIED_NOT_ORIGINAL",
+      "slack_raw_incremental_archive": "NOT_CERTIFIED"
+    },
+    "unresolved": [
+      "749 DISCORD ATTACHMENT ORIGINAL BYTE FIDELITY MISMATCHES",
+      "C04 SINGLE DERIVATIVE VERIFIED; ORIGINAL BYTE CERTIFICATION REMAINS UNRESOLVED",
+      "GOOGLE_PAGES_LATEST_DEPLOY_READBACK_UNVERIFIED",
+      "REB_ONE_BAY_PUBLIC_IDENTITY_OR_SITE_STATUS_NOT_IN_OPS_MASTER",
+      "REB_ASHOK_STABLE_PUBLIC_IDENTITY_UNRESOLVED",
+      "SLACK_PRIVATE_RAW_INCREMENTAL_CAPTURE_AND_THREAD_CURSORS_UNVERIFIED",
+      "RESPONSIBLE_ENGINEER_SITE_HOLDS_PENDING"
+    ]
+  }
+}

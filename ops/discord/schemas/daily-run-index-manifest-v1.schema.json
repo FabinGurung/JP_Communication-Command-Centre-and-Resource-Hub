@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/schemas/daily-run-index-manifest-v1.schema.json",
+  "title": "A9-CWO Discord Immutable Private Daily Index Run Manifest v1",
+  "description": "Index manifest for messages changed in one collector run, grouping their creation date in NPT; does not certify all Discord history or engineering facts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "run_id",
+    "run_npt_date",
+    "source_receipt_drive_id",
+    "source_receipt_status",
+    "scan_rule",
+    "source_scope",
+    "rows_indexed",
+    "partitions",
+    "media_completeness",
+    "data_admission"
+  ],
+  "properties": {
+    "schema": {
+      "const": "a9-cwo-discord-daily-index-manifest-v1"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[0-9]{8}T[0-9]{6}Z$"
+    },
+    "run_npt_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "source_receipt_drive_id": {
+      "type": "string",
+      "minLength": 10
+    },
+    "source_receipt_status": {
+      "enum": [
+        "PASS",
+        "PARTIAL"
+      ]
+    },
+    "scan_rule": {
+      "const": "ROLLING_SEVEN_DAYS_WITH_CATCHUP_EXTENSION"
+    },
+    "source_scope": {
+      "type": "object",
+      "required": [
+        "guild_id",
+        "parent_channel_ids",
+        "active_children_only",
+        "archived_threads_covered"
+      ],
+      "properties": {
+        "guild_id": {
+          "type": "string"
+        },
+        "parent_channel_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "active_children_only": {
+          "const": true
+        },
+        "archived_threads_covered": {
+          "const": false
+        }
+      }
+    },
+    "rows_indexed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "partitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "date_npt",
+          "rows",
+          "drive_id",
+          "sha256"
+        ],
+        "properties": {
+          "date_npt": {
+            "type": "string",
+            "format": "date"
+          },
+          "rows": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "drive_id": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "media_completeness": {
+      "enum": [
+        "PASS",
+        "PARTIAL",
+        "NOT_CERTIFIED"
+      ]
+    },
+    "data_admission": {
+      "const": "INDEX_ONLY_NOT_CONSTRUCTION_TRUTH"
+    }
+  }
+}

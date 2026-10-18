@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_version": "0.1.0",
+  "registry_id": "A9-CWO-EVIDENCE-REGISTRY-WORKSTREAM-001",
+  "status": "WORKSTREAM_BOOTSTRAP_DESIGN_ONLY",
+  "date_npt": "2026-10-10",
+  "workstream": "A9-CWO Evidence Registry & Projection Engine",
+  "role": "POST_CAPTURE_NORMALIZATION_CATALOG_QA_AND_PUBLIC_SAFE_PROJECTION",
+  "owns": [
+    "provider_row_normalization",
+    "stable_project_source_identity_map",
+    "append_only_evidence_catalog",
+    "attachment_fidelity_ledger",
+    "evidence_admission_decisions",
+    "website_projection_manifest",
+    "projection_QA_and_citation_trail"
+  ],
+  "excludes": [
+    "discord_or_slack_provider_ingestion_runtime",
+    "replacing_or_moving_private_drive_originals",
+    "unapproved_public_media_exposure",
+    "editing_project_lifecycle_without_owner",
+    "engineering_completion_or_qty_assertions_without_acceptance",
+    "mass_slack_dispatch"
+  ],
+  "precedence": [
+    "ops/control/control-system.json",
+    "ops/control/branch-lane-registry.json",
+    "ops/CANONICAL_DATA_AUTHORITY.md",
+    "ops/control/storage-routing-rules.json",
+    "ops/control/daily-communication-web-cycle.json"
+  ],
+  "authority": {
+    "raw_evidence_bytes": "EXISTING_PERMISSION_GATED_A9_DRIVE_ARCHIVE",
+    "provider_messages": "SOURCE_ARCHIVED_JSONL_PLUS_PROVIDER_RECEIPTS",
+    "normalized_catalog": "GITHUB_VERSIONED_MACHINE_REGISTRY",
+    "admitted_project_truth": [
+      "projects.csv",
+      "ops/data/current-works.json",
+      "ops/data/project-resources.json",
+      "ops/events/daily-ops-events.jsonl"
+    ],
+    "public_site": "GITHUB_PAGES_DERIVED_READ_ONLY"
+  },
+  "latest_input": {
+    "daily_run_id": "20261010T005617Z",
+    "verified_partition_count": 6,
+    "indexed_message_count": 89,
+    "scoped_source_count": 21,
+    "attachment_record_count": 459,
+    "archived_or_reused_attachment_count": 190,
+    "original_verification_failed_count": 269,
+    "media_status": "PARTIAL",
+    "source_run_receipt_ref": "ops/data/communication-web-daily/2026-10-10.json",
+    "archived_child_threads": "NOT_FULLY_COVERED"
+  },
+  "machine_contract": {
+    "format": [
+      "json-schema",
+      "jsonl",
+      "sql",
+      "json_projection"
+    ],
+    "proposed_files": {
+      "catalog_schema": "ops/evidence/schema/evidence-record.v0.1.schema.json",
+      "evidence_rows": "ops/evidence/private-gated/evidence-index.v0.1.jsonl",
+      "attachment_qa": "ops/evidence/private-gated/attachment-fidelity.v0.1.jsonl",
+      "project_map": "ops/evidence/control/project-source-map.v0.1.json",
+      "projection_policy": "ops/evidence/control/publication-policy.v0.1.json",
+      "website_projection": "ops/data/evidence-public-summary.json",
+      "events": "ops/events/cwo-daily/"
+    },
+    "note": "PROPOSED_FILES_ARE_NOT_YET_IMPLEMENTED. Do not commit private evidence rows, secrets, signed CDN URLs or private file contents to a public GitHub repository. Use local/private staging or authenticated storage for private-gated paths."
+  },
+  "mandatory_record_fields": [
+    "record_id",
+    "provider",
+    "provider_message_id",
+    "provider_channel_id",
+    "captured_at_utc",
+    "project_id",
+    "company_id",
+    "source_run_id",
+    "source_receipt_id",
+    "source_content_sha256",
+    "evidence_kind",
+    "caption_or_text",
+    "observation_date",
+    "claim_state",
+    "verification_state",
+    "attachment_ids",
+    "access_classification",
+    "source_uri_ref",
+    "version",
+    "supersedes_id"
+  ],
+  "pk_fk_rules": {
+    "pk": "record_id",
+    "source_message_key": "provider:provider_channel_id:provider_message_id",
+    "attachment_key": "provider:provider_message_id:attachment_id",
+    "project_fk": "project_id_MUST_RESOLVE_AGAINST_EXISTING_PROJECT_MASTER",
+    "ambiguous_mapping": "QUARANTINE_UNMAPPED_NOT_INFERRED",
+    "versions": "APPEND_NEW_VERSION_NEVER_OVERWRITE_OR_DROP_OLDER_PROVENANCE"
+  },
+  "fidelity_states": [
+    "ORIGINAL_VERIFIED",
+    "PREVIOUSLY_ARCHIVED_UNRECONFIRMED_SHA",
+    "PROVIDER_DERIVATIVE_UNVERIFIED_ORIGINAL",
+    "SOURCE_METADATA_ONLY",
+    "FAILED_SIZE_MISMATCH",
+    "NOT_YET_CHECKED"
+  ],
+  "claim_states": [
+    "FIELD_REPORTED",
+    "SITE_LEAD_CONFIRMED",
+    "ENGINEER_ACCEPTED",
+    "NEEDS_INPUT",
+    "CONFLICTED",
+    "REJECTED"
+  ],
+  "publication": {
+    "gate": "DENY_BY_DEFAULT",
+    "allowed": "SANITIZED_SOURCE_LINKED_PROJECT_SUMMARIES_AFTER_ADMISSION",
+    "not_allowed": [
+      "PRIVATE_DRIVE_BINARY",
+      "SIGNED_DISCORD_CDN_URL",
+      "EMPLOYEE_IDENTIFIERS",
+      "UNVERIFIED_ORIGINAL_AS_ORIGINAL",
+      "ENGINEERING_SIGNOFF_INFERRED_FROM_IMAGES",
+      "RAW_PRIVATE_JSONL"
+    ],
+    "private_media_access": "REQUIRES_AUTHENTICATED_BACKEND_OR_PERMISSIONS",
+    "website_can_render": "JSON_PUBLIC_SAFE_PROJECTION_NOT_RAW_DRIVE_OR_PRIVATE_INDEX",
+    "automatic_rebuild": "ON_APPROVED_PROJECTION_COMMIT_AND_ACTIONS_PASS"
+  },
+  "phases": [
+    {
+      "id": "P0",
+      "name": "inventory_and_link_authorities",
+      "writes": "NONE",
+      "verify": "receipt counts, source scopes, archived media folder tree"
+    },
+    {
+      "id": "P1",
+      "name": "schema_and_lineage",
+      "writes": "GITHUB_CODE_ONLY",
+      "verify": "schema validation and stable identity tests"
+    },
+    {
+      "id": "P2",
+      "name": "normalize_and_reconcile",
+      "writes": "PRIVATE_STAGING_AND_REVIEWED_MACHINE_REGISTRY",
+      "verify": "duplicate detection, PK/FK, byte/hash diagnostics, project/company boundaries"
+    },
+    {
+      "id": "P3",
+      "name": "review_and_admit",
+      "writes": "ONLY_OWNING_CANONICAL_FILES",
+      "verify": "construction truth unchanged unless substantiated"
+    },
+    {
+      "id": "P4",
+      "name": "public_safe_site_projection",
+      "writes": "PROJECTION_JSON_AND_WEBSITE_UI",
+      "verify": "privacy gate + browser/keyboard/mobile QA + CI + provider readback"
+    },
+    {
+      "id": "P5",
+      "name": "incremental_idempotent_operation",
+      "writes": "NEW_RECEIPTS_AND_APPEND_ONLY_EVENTS",
+      "verify": "PRE/archive, same-path updates, POST/readback, SHA256, Git commit, missing-source ledger"
+    }
+  ],
+  "handoff": {
+    "start_instruction": "Read precedence files and 10 Oct source receipt first, then implement P0→P1 before any mass source transformation.",
+    "first_output": "Machine-readable schema + identity mapping + 269-item failure classification manifest, no unverified downloads certified as originals.",
+    "chat_creation": "User opens a separate ChatGPT conversation and references this machine workstream contract; chat creation is not a GitHub operation."
+  }
+}
