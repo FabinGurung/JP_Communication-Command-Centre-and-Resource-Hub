@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0082",
+  "date_npt": "2026-10-19",
+  "scope": "C_WEB_10_RECOVERY__MERGE_AWARE_PUBLICATION_GUARD_REMEDIATION",
+  "status": "GUARD_FIX_STAGED__CI_PENDING",
+  "feature_merge_sha": "9acbb16e34a1c2f1512d23984708e37a80e9e97a",
+  "observed_failure": {
+    "run_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39177211521",
+    "cause": "OLD_FEATURE_TO_MERGED_MAIN_DIFFERENCE_SPANNED_MULTIPLE_DATA_LANES_WITHOUT_ANY_MAIN_TREE_DATA_CHANGES",
+    "action": "VALIDATE_REAL_MERGE_DELTA_AGAINST_CURRENT_MAIN_SECOND_PARENT"
+  },
+  "guard": [
+    "Require exact two-parent merge and push before SHA equals first parent",
+    "Require second merge parent equals fetched origin/main",
+    "Use second-parent-to-merge diff for lane guard",
+    "Reject any protected cross-owner data changes in selected tree",
+    "Preserve existing privacy and publication admission tests"
+  ],
+  "production_main_unchanged": true,
+  "source_file_changes": [
+    "scripts/validate_publication_lanes.py",
+    "scripts/test_publication_lanes.py"
+  ],
+  "private_source_mutations": 0
+}

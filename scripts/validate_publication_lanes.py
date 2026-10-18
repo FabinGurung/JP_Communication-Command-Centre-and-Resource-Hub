@@ -54,6 +54,15 @@ def changed_files():
         base=git("merge-base",after,"origin/"+os.environ["GITHUB_BASE_REF"])
     elif re.fullmatch(r"[a-f0-9]{40}",before) and set(before)!={"0"}:
         base=before
+        # A reconciliation merge can change many lanes relative to the OLD
+        # feature tip solely because it incorporates the already-validated main
+        # tree. Test its real output against the exact main parent instead.
+        parents=git("rev-list","--parents","-n","1",after).split()
+        if len(parents)==3 and parents[1]==before:
+            main_parent=parents[2]
+            require(git("rev-parse","refs/remotes/origin/main")==main_parent,
+                    "merge second parent differs from current production main")
+            base=main_parent
     else:
         base=git("rev-parse",after+"^")
     return [x for x in git("diff","--name-only","--no-renames",base,after).splitlines() if x]

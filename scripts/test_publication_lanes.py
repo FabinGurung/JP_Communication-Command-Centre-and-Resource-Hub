@@ -35,6 +35,35 @@ class PublicationLaneTests(unittest.TestCase):
             with self.subTest(changes=changes),self.assertRaises(lane.GateError):
                 lane.audit_change_lanes(changes)
 
+    def test_main_parent_reconciliation_only_checks_actual_merge_delta(self):
+        main="b"*40
+        before="a"*40
+        after="c"*40
+        calls=[]
+        def fake_git(*args):
+            calls.append(args)
+            if args==("rev-list","--parents","-n","1",after):
+                return " ".join((after,before,main))
+            if args==("rev-parse","refs/remotes/origin/main"):
+                return main
+            if args[:3]==("diff","--name-only","--no-renames"):
+                self.assertEqual(args[3:],(main,after))
+                return "AGENTS.md\\nops/events/cwo-daily/OPS-0081.json"
+            raise AssertionError("Unexpected git invocation: "+repr(args))
+        env={"GITHUB_SHA":after,"GITHUB_EVENT_BEFORE":before,"GITHUB_EVENT_NAME":"push"}
+        with patch.dict(lane.os.environ,env,clear=True),patch.object(lane,"git",side_effect=fake_git):
+            self.assertEqual(lane.audit_change_lanes(lane.changed_files()),set())
+        self.assertEqual(len(calls),3)
+
+    def test_main_parent_mismatch_fails_closed(self):
+        before="a"*40
+        after="c"*40
+        with patch.dict(lane.os.environ,{"GITHUB_SHA":after,"GITHUB_EVENT_BEFORE":before,"GITHUB_EVENT_NAME":"push"},clear=True):
+            with patch.object(lane,"git",side_effect=lambda *args: (
+                " ".join((after,before,"b"*40)) if args[0]=="rev-list" else "d"*40)):
+                with self.assertRaisesRegex(lane.GateError,"differs from current production main"):
+                    lane.changed_files()
+
     def test_original_binary_or_raw_folder_denied(self):
         for item in (
             "ops/data/raw_jsonl/archive.jsonl",
