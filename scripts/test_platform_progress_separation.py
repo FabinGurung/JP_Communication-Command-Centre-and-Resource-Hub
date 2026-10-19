@@ -31,7 +31,7 @@ def verify():
     assert project["historical_progress_stream_changed"] is False
     cases=project["records"]
     assert len(cases)==3 and {c["project_id"] for c in cases}=={"P001","P002","P007"}
-    assert len({c["record_id"] for c in cases})==2
+    assert len({c["record_id"] for c in cases})==3
     siteids={p["project_id"] for p in current["projects"]}
     assert set(c["project_id"] for c in cases)<=siteids
     assert all(c["issuer_confirmation"] is False and c["verification_state"]=="OPEN_PROJECT_RECORD_NOT_SOFTWARE_BLOCKER" for c in cases)
