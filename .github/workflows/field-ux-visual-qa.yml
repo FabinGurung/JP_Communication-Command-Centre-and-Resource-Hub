@@ -6,6 +6,9 @@ on:
     branches:
       - main
     paths:
+      - 'VERSION'
+      - 'docs/releases/**'
+      - 'ops/control/milestone-v2.1.0.json'
       - 'index.html'
       - 'assets/js/hero-field.js'
       - 'assets/js/site-shell.js'
