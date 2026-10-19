@@ -59,16 +59,20 @@ def run():
     assert p4["status"]=="ON_HOLD_USER_REQUEST_20261019"
     assert p4["hold"]["resume_condition"]=="NEW_EXPLICIT_USER_INSTRUCTION_TO_RESUME"
     assert "resource-review-dispositions-public.v1.0.json" in (ROOT/"resources/index.html").read_text()
-    assert "ON HOLD by user" in (ROOT/"workspace/index.html").read_text()
+    assert status["communication"]["collector_operational_mode"]=="ON_HOLD_BY_USER"
+    assert "source-readiness-public.v1.0.json" not in (ROOT/"workspace/index.html").read_text()
     for banned in ("1gfhTtWBinNvF0F6vjQnzxsSZW8grB8ID","1pvCubGYJvfHOrNG1ynoxBrWFafZuooC6","1TzUCNxZ3WExD7H0mWYJ42KHsx11-A7BG"):
         assert banned not in json.dumps(review)
     raw=json.dumps(status)
     for forbidden in ("archive_root_drive_id","guild_id","channel_ids","provider_message_id","private_file_id","source_parent_id","discord_bot_token"):
         assert forbidden not in raw, "Private provider metadata exposed: "+forbidden
-    for path in ("resources/index.html","workspace/index.html"):
-        html=(ROOT/path).read_text(encoding="utf-8")
-        assert "source-readiness-public.v1.0.json" in html
-        assert "not a live" in html.lower() or "not a new collector run" in html.lower()
-    print("PUBLIC_SOURCE_READINESS_PASS: 46 indexed links, six source exceptions held; latest private scan 1520; Discord last provider receipt partial.")
+    resource_page=(ROOT/"resources/index.html").read_text(encoding="utf-8")
+    developer_page=(ROOT/"workspace/index.html").read_text(encoding="utf-8")
+    assert "source-readiness-public.v1.0.json" in resource_page
+    assert "not a live" in resource_page.lower()
+    assert "c-web11-post-alias-roadmap.v1.0.json" in developer_page
+    assert "source-readiness-public.v1.0.json" not in developer_page
+    assert "not a live" in developer_page.lower()
+    print("PUBLIC_SOURCE_READINESS_PASS: 46 indexed links, six project-linked source exceptions operationally tracked; platform software remains independent; Discord paused.")
 if __name__=="__main__":
     run()
