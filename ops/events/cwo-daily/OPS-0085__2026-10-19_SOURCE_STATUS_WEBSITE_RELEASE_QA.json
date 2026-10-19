@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0085",
+  "date_npt": "2026-10-19",
+  "type": "C_WEB_10_RECOVERY_SOURCE_READINESS_WEBSITE_PRODUCTION_QA_CLOSEOUT",
+  "status": "WEBSITE_SOURCE_STATUS_RELEASED__PROVIDER_EXECUTION_HELD",
+  "pre_source_main": "e9dbe7ba6d056d55bf01f7948ca3c562a09dce0a",
+  "released_source_commit": "0fc417a1a96b4a768c6c168268c50bfda95d3589",
+  "changes": [
+    "New read-only public-safe source-readiness projection dated 2026-10-19",
+    "Resources page source verification disclosure",
+    "Developer Workspace resource/communication pipeline status",
+    "Machine source snapshot regression test added to production workflow"
+  ],
+  "validation": {
+    "feature_production_workflow": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39185263294",
+    "main_production_workflow": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39185320967",
+    "main_production_validation": "SUCCESS",
+    "main_deploy_job": "SUCCESS",
+    "visual_qa": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39185321023",
+    "visual_qa_status": "SUCCESS",
+    "branch_registry": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39185321047",
+    "branch_registry_status": "SUCCESS",
+    "direct_external_http_readback": "NOT_AVAILABLE_IN_THIS_RUNTIME"
+  },
+  "resource_gate": {
+    "existing_public_refs": 46,
+    "extra_public_resource_admissions": 0,
+    "private_metadata_baseline": 1520,
+    "private_inventory_date_npt": "2026-10-15",
+    "source_root_holds": 6,
+    "file_specific_issue_and_privacy_authorization": "NOT_VERIFIED",
+    "actual_original_drive_mutations": 0
+  },
+  "discord_gate": {
+    "last_source_receipt": "2026-10-10",
+    "provider_status": "PARTIAL",
+    "unverified_original_media_count": 269,
+    "scoped_v2_auth_run": "NOT_EXECUTED_IN_THIS_SESSION",
+    "synthetic_ci_does_not_assert_live_collection": true
+  },
+  "next_step": "Authenticated Colab/provider scoped run and file-specific P001/P002 source issue/permission authority; no new public admission without per-file validation",
+  "privacy": "PUBLIC_AGGREGATES_ONLY__NO_PRIVATE_PROVIDER_FILE_IDS"
+}
