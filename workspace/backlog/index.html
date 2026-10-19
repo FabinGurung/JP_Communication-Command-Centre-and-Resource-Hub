@@ -30,21 +30,21 @@ h1{font-size:clamp(26px,4.7vw,42px);line-height:1.15;margin:8px 0}
 <main>
 <header class="hero"><div class="eyebrow">Website developer · source-linked software work</div>
 <h1>📌 Software Development Backlog</h1>
-<p>What needs implementation, testing, versioning, access architecture or control-system improvement in this website. Technical scope only: no site instructions, approved work schedules or project engineering case files.</p>
+<p>What needs implementation, testing, versioning, access architecture or control-system improvement in this website. Technical scope only. Drawing approvals, unanswered engineer questions and field work are project Progress data—not platform build tasks.</p>
 <p><a href="../">← Developer Workspace</a> · <a href="https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/issues" target="_blank" rel="noopener noreferrer">GitHub issues ↗</a></p></header>
 <div class="notice">Read-only. Every item links to the existing governing source. This page never edits Google Drive, sends provider messages, changes a project record or marks a task completed.</div>
 <div class="filters"><label>Find software task<input id="search" type="search" placeholder="e.g. CI, access, archive, resource naming" autocomplete="off"></label>
 <label>Implementation state<select id="state"><option value="">All states</option><option value="open">Open / pending</option><option value="complete">Previously verified</option></select></label></div>
 <p class="count" id="count">Loading software backlog…</p>
 <div class="grid" id="tasks" aria-live="polite"><div class="empty">Loading versioned source pointers…</div></div>
-<p class="foot">Read underlying versions before making decisions. The eight-request roadmap’s item 8 was an empty original instruction and is only a provisional QA gate. Original mixed operations proposals remain in their original registry but are not imported into this software screen.</p>
+<p class="foot">Read underlying versions before making decisions. The eight-request roadmap’s item 8 was an empty original instruction and is only a provisional QA gate. Mixed operational proposals remain with their owner registries; project-level issues appear in Progress and never delay a tested website deployment.</p>
 </main>
 <script>
 (()=>{"use strict";
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 let backlog;
-const complete=s=>s==="IMPLEMENTED_VERIFIED"||s.startsWith("CLOSED_");
+const complete=s=>s==="IMPLEMENTED_VERIFIED"||s.startsWith("CLOSED_")||s.startsWith("PUBLIC_SITE_QA_PASSED__");
 function render(){
  if(!backlog)return;const q=$("search").value.trim().toLowerCase(),state=$("state").value;
  const items=backlog.items.filter(x=>(!state||(state==="complete"?complete(x.status):!complete(x.status)))&&

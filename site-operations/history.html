@@ -13,6 +13,7 @@
 .carry-grid{display:grid;gap:9px}.carry-project{border:1px solid var(--line);border-radius:9px;background:#fff;padding:10px 12px}.carry-project summary{font-size:13px;font-weight:800;cursor:pointer;min-height:40px}
 .carry-record{font-size:12px;border-top:1px solid #e7eee6;padding:10px 0;display:grid;gap:3px}.carry-record .state{font-size:10px;color:#866134;font-weight:750}.carry-record a{font-size:11px;font-weight:750;display:inline-flex;min-height:30px;align-items:center;text-decoration:none}
 .entry h3{font-size:14px}.entry{padding:12px 15px}.metric b{font-size:25px}
+.doc-status-shelf{border:1px solid var(--line);border-radius:14px;padding:15px 17px;background:#fffefa;margin:17px 0}.doc-status-shelf h2{font-size:18px;margin:0 0 5px}.doc-status-shelf .doc-intro{font-size:12px;color:var(--muted);margin:0 0 10px}.doc-status-rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.doc-status-card{background:#f8fbf6;border:1px solid #e0ebdf;border-radius:10px;padding:12px}.doc-status-card h3{font-size:14px;margin:0 0 5px}.doc-status-card p{font-size:12px;margin:0 0 9px;color:var(--muted)}.doc-status-card b{font-size:11px;color:#855c21}@media(max-width:700px){.doc-status-rows{grid-template-columns:1fr}}
 </style></head><body><main class="shell">
 <nav class="nav" aria-label="Site Operations pages"><a href="../site-operations.html">Daily Checklist</a><a href="coordination.html">Site Coordination</a><a class="active" aria-current="page" href="history.html">Progress Report</a><a href="../resources/">Drawings &amp; Models</a><a href="../workspace/">🛠️ Developer Workspace</a><a href="../index.html">Overview</a></nav>
 <header class="hero"><div class="eyebrow">Site Operations · evidence archive</div><h1>Progress Report</h1>
@@ -23,6 +24,7 @@
 <div class="metric"><b id="count-pending">—</b><span>Legacy checklist carryovers</span></div>
 <div class="metric"><b id="count-sites">—</b><span>Projects included</span></div>
 </section>
+<section class="doc-status-shelf" aria-labelledby="doc-status-heading"><h2 id="doc-status-heading">Project document status</h2><p class="doc-intro">Unanswered engineering checks are tracked under their projects, not as unfinished platform/software tasks. These records never certify construction or create new work orders.</p><div id="doc-status-count" class="doc-intro">Loading project document status…</div><div class="doc-status-rows" id="doc-status-rows" aria-live="polite"><div class="empty">Loading project-specific reviews…</div></div></section>
 <div class="bar"><div><h2>Reported site activities</h2><p class="muted">Dated field observations only. No completion, engineering acceptance or material quantity is implied.</p></div>
 <div class="filters"><label for="project">Project</label><select id="project"><option value="">All projects</option></select><label for="search">Find</label><input id="search" type="search" placeholder="Search work, issue or trade" autocomplete="off"></div></div>
 <section class="grid" id="history" aria-live="polite"><div class="empty">Loading sourced progress records…</div></section>
@@ -57,4 +59,4 @@ $("notice").textContent="Google Drive machine staging read back: 37 records (5 r
 $("footer").textContent="Public-safe derivation from Google Drive A9_CWO_DAILY_TWO_CHANNELS / PROGRESS_REPORT_MACHINE_STAGE, normalized 2026-10-11. Approved quantities and engineering signoffs are not present.";render();
 }catch(e){$("notice").textContent="Progress source unavailable: "+e.message;$("history").innerHTML='<div class="empty">Nothing is inferred without the verified projection.</div>';$("carryover-records").innerHTML='<div class="empty">Carry-over index unavailable.</div>';}}
 $("project").addEventListener("change",render);$("search").addEventListener("input",render);load();})();
-</script><script src="../assets/js/site-shell.js?v=20261012-1"></script></body></html>
+</script><script src="../assets/js/project-document-status.js?v=20261019-1"></script><script src="../assets/js/site-shell.js?v=20261012-1"></script></body></html>

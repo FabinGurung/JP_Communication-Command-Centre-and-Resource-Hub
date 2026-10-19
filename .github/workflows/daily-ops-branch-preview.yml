@@ -600,6 +600,9 @@ jobs:
       - name: Test document normalization and private future intake candidates
         run: python scripts/test_resource_library.py
 
+      - name: Verify platform backlog and project Progress are separated
+        run: python scripts/test_platform_progress_separation.py
+
       - name: Check six project-scoped resource name aliases and normalized relational keys
         run: python scripts/test_scoped_resource_aliases.py
 

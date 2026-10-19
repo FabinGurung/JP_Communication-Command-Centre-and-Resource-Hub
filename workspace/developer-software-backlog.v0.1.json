@@ -2,7 +2,7 @@
   "schema_version": "0.1.0",
   "id": "JP_AEC_DEVELOPER_SOFTWARE_ONLY_BACKLOG",
   "scope": "WEBSITE_AND_SYSTEM_SOFTWARE_DEVELOPMENT_ONLY",
-  "notice": "Public read-only software-development index. Technical states are copied from their versioned source registries; not a site workboard, construction progress schedule or private admin area.",
+  "notice": "Platform engineering only. A missing engineer response is project Progress state, not an incomplete software build or a blocker to website deployment.",
   "source_contract": [
     {
       "path": "ops/control/website-eight-request-roadmap.v0.1.json",
@@ -65,27 +65,27 @@
     {
       "software_task_id": "JP-AEC-REQ-07",
       "title": "Usable prioritized normalized project resource library",
-      "purpose": "PDF architecture/structural/geotechnical reports first, native design/analysis models next, estimates/spreadsheets later; original filenames and Drive IDs must remain traceable.",
-      "status": "PRIVATE_1520_RECONCILED__ONE_NEW_P007_CONTROL__SIX_PROVENANCE_EXCEPTIONS_OPEN__NO_PUBLIC_ADMISSION",
+      "purpose": "Build and test a repeatable resource library, source-ID normalization, ingestion and QA. Existing public library works; provider pagination and automated private indexing remain technical improvements, never a wait for engineers.",
+      "status": "RESOURCE_LIBRARY_SOFTWARE_IMPLEMENTED_VERIFIED__PRIVATE_FULL_INVENTORY_SYNC_NOT_CERTIFIED",
       "category": "RESOURCE_LIBRARY_SOFTWARE",
       "source_ref": {
         "path": "ops/control/website-eight-request-roadmap.v0.1.json",
         "record_id": 7
       },
-      "source_status": "PRIVATE_1520_RECONCILED__ONE_NEW_P007_CONTROL__SIX_PROVENANCE_EXCEPTIONS_OPEN__NO_PUBLIC_ADMISSION",
+      "source_status": "RESOURCE_LIBRARY_SOFTWARE_IMPLEMENTED_VERIFIED__PRIVATE_FULL_INVENTORY_SYNC_NOT_CERTIFIED",
       "source_href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/control/website-eight-request-roadmap.v0.1.json"
     },
     {
       "software_task_id": "JP-AEC-REQ-08",
       "title": "Final site-wide verification and governed release closeout",
-      "purpose": "Original item 8 contained no substantive instruction. Treat only as a release check unless user supplies a separate requirement.",
-      "status": "PROVISIONAL_QA_PUBLIC_SURFACE_PASSED__REQ07_SOURCE_AUTHORITY_REMAINS_OPEN",
+      "purpose": "The site's recorded production and browser QA passed; future platform integrations have independent tests, and engineer confirmations are project Progress data.",
+      "status": "PUBLIC_SITE_QA_PASSED__FUTURE_PLATFORM_CAPABILITIES_SEPARATE",
       "category": "RELEASE_QA",
       "source_ref": {
         "path": "ops/control/website-eight-request-roadmap.v0.1.json",
         "record_id": 8
       },
-      "source_status": "PROVISIONAL_QA_PUBLIC_SURFACE_PASSED__REQ07_SOURCE_AUTHORITY_REMAINS_OPEN",
+      "source_status": "PUBLIC_SITE_QA_PASSED__FUTURE_PLATFORM_CAPABILITIES_SEPARATE",
       "source_href": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/control/website-eight-request-roadmap.v0.1.json"
     },
     {
@@ -160,6 +160,8 @@
     "OPS-PEND-000006",
     "OPS-PEND-000009"
   ],
-  "exclusion_reason": "Provider execution, construction engineering documents, legacy field reconciliation and engineer trade-report tasks are not website/software-development backlog records.",
-  "source_write_policy": "REFERENCE_ONLY__OWNER_REGISTRIES_UNMODIFIED__NO_OPERATIONAL_DATA_DUPLICATION"
+  "exclusion_reason": "Project-specific drawings, engineer approvals, site reports, field material observations and the explicitly paused Discord provider collector are NOT platform milestones; they remain in project Progress and their owning workstreams.",
+  "source_write_policy": "REFERENCE_ONLY__OWNER_REGISTRIES_UNMODIFIED__NO_OPERATIONAL_DATA_DUPLICATION",
+  "operational_status_owner": "ops/data/project-document-review-public.v1.0.json",
+  "platform_roadmap": "ops/control/c-web11-post-alias-roadmap.v1.0.json"
 }

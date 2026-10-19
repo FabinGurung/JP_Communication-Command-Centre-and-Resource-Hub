@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0088",
+  "date_npt": "2026-10-19",
+  "kind": "PLATFORM_VS_PROJECT_PROGRESS_OWNERSHIP_CORRECTION",
+  "status": "STAGED_FOR_CI",
+  "authority": "USER_DIRECT_20261019",
+  "reason": "User is building and testing the platform; engineer confirmations are project-record states, never uncompleted software milestones.",
+  "pre_commit": "a1f6591fa65b029294c74daa2b71a770aa59fa0c",
+  "platform_truth": {
+    "github_pages": "PUBLISHED_PREVIOUS_RELEASE_QA_PASSED",
+    "software_engine": "VERSIONED_JSON_RELATIONAL_DDL_AND_PYTHON_CI",
+    "live_postgres": false,
+    "full_automated_google_drive_sheets_pipeline": false,
+    "field_engineer_approval_blocking_software": false
+  },
+  "changes": {
+    "source_roadmaps": [
+      "ops/control/c-web11-post-alias-roadmap.v1.0.json",
+      "ops/control/website-eight-request-roadmap.v0.1.json"
+    ],
+    "developer_index": "workspace/developer-software-backlog.v0.1.json",
+    "progress_view": "site-operations/history.html",
+    "project_progress_projection": "ops/data/project-document-review-public.v1.0.json",
+    "separate_client_side_logic": "assets/js/project-document-status.js",
+    "workspace": "workspace/index.html",
+    "technical_regression": "scripts/test_platform_progress_separation.py"
+  },
+  "project_issues": {
+    "project_ids": [
+      "P001",
+      "P002",
+      "P007"
+    ],
+    "issue_records": 3,
+    "reference_drawings": 5,
+    "engineer_approval_still_unverified": true,
+    "source_associations_existing_aliases_preserved": true,
+    "site_progress_not_project_work_achievement": true
+  },
+  "preservation": {
+    "frozen_existing_progress_history_rows": 37,
+    "no_originals_moved": true,
+    "no_private_raw_evidence_published": true,
+    "discord_collector_paused": true,
+    "original_governance_audit_backlinks_preserved": true
+  },
+  "next_platform_milestones": [
+    "QA authenticated repeatable Drive provider sync and cursor readback",
+    "Implement idempotent GitHub→Sheets projections",
+    "Complete Control Tower synchronization",
+    "Deepen UI/access and archive-query integration only when scoped"
+  ],
+  "release_acceptance": "CI + branch registry + full visual QA, then main fast-forward with rollback parent retained"
+}

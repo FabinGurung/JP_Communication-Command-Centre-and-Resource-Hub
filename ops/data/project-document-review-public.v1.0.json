@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "PUBLIC_SAFE_PROJECT_DOCUMENT_PROGRESS",
+  "source_review": "ops/data/resource-review-dispositions-public.v1.0.json",
+  "association_registry": "ops/data/resource-project-name-aliases.v1.0.json",
+  "review_date_npt": "2026-10-19",
+  "scope": "PROJECT_OPERATIONAL_STATUS_ONLY__NOT_PLATFORM_MILESTONE",
+  "software_release_blocker": false,
+  "drawings_count": 5,
+  "source_folder_count": 1,
+  "records": [
+    {
+      "record_id": "PROG-DOC-P001-20261019",
+      "project_id": "P001",
+      "issue_kind": "PROJECT_DOCUMENT_ISSUE",
+      "current_status": "REVISION_AND_ISSUE_NOT_VERIFIED",
+      "dated_on_npt": "2026-10-19",
+      "title": "Bishal Paija — drawing revision / issue register",
+      "description": "The project association is confirmed. Architectural and structural DWG issue/revision and engineer acceptance are not recorded. Track under the project when a verified revision is available.",
+      "drawing_resource_ids": [
+        "RES-P001-ARCH-DWG-20261011",
+        "RES-P001-STRUCT-DWG-20261011"
+      ],
+      "source_folder_ref": "RES-P001-ORIGINAL-CAD-FOLDER-20261011",
+      "verification_state": "OPEN_PROJECT_RECORD_NOT_SOFTWARE_BLOCKER",
+      "issuer_confirmation": false
+    },
+    {
+      "record_id": "PROG-DOC-P002-20261019",
+      "project_id": "P002",
+      "issue_kind": "PROJECT_DOCUMENT_ISSUE",
+      "current_status": "REVISION_AND_ISSUE_NOT_VERIFIED",
+      "dated_on_npt": "2026-10-19",
+      "title": "Samir Man Gubhaju — project-linked drawings",
+      "description": "All three files are mapped to P002 as instructed, including the differently named title-block drawing. Their engineering issue revisions remain unverified. No global person identity has been merged.",
+      "drawing_resource_ids": [
+        "RES-P002-WORKING-DRAWING-001",
+        "RES-P002-STRUCT-PDF-001",
+        "RES-P002-STRUCT-DWG-001"
+      ],
+      "source_folder_ref": null,
+      "verification_state": "OPEN_PROJECT_RECORD_NOT_SOFTWARE_BLOCKER",
+      "issuer_confirmation": false
+    },
+    {
+      "record_id": "PROG-DOC-P007-20261019",
+      "project_id": "P007",
+      "issue_kind": "PROJECT_DOCUMENT_VERSION_STATUS",
+      "current_status": "SOURCE_REVISION_ISSUE_NOT_VERIFIED",
+      "dated_on_npt": "2026-10-19",
+      "title": "Narayani Parajuli — source version register",
+      "description": "Imported project drawing references are indexed, but the latest authoritative engineering drawing issue and revision are not established in the recorded workstream. Track any later issue here; it is not a software backlog item.",
+      "drawing_resource_ids": [],
+      "source_folder_ref": null,
+      "verification_state": "OPEN_PROJECT_RECORD_NOT_SOFTWARE_BLOCKER",
+      "issuer_confirmation": false,
+      "related_provider_register": "ops/data/pending-works.json#OPS-PEND-000005"
+    }
+  ],
+  "derived_only": true,
+  "raw_provider_content_included": false,
+  "source_gating": "ENGINEERING_ISSUE_REVIEW_FUTURE_OPERATIONAL_INPUT",
+  "historical_progress_stream_changed": false
+}

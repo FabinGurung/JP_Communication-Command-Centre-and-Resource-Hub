@@ -3,7 +3,7 @@
   "roadmap_id": "JP_AEC_ORIGINAL_REQUESTS_SEQUENTIAL_20261012",
   "date_npt": "2026-10-12",
   "policy": "ONE_USER_EXPERIENCE_REQUEST_AT_A_TIME__PRE_ARCHIVE__VALIDATE__POST_READBACK",
-  "status": "REQ01_TO_REQ06_IMPLEMENTED__REQ07_PRIVATE_1520_RECONCILED_AND_AUTHORITY_HELD__REQ08_SITE_QA_PASSED",
+  "status": "REQ01_TO_REQ06_VERIFIED__REQ07_PUBLIC_LIBRARY_IMPLEMENTED_PRIVATE_SYNC_PARTIAL__REQ08_TECHNICAL_QA_PASSED",
   "source": "User's original dated 2026-10-12 request, seven substantive numbered items and empty item 8; item 8 is a provisional site-wide QA/release closeout, not fabricated user content.",
   "completion_order": [
     {
@@ -159,7 +159,7 @@
     {
       "id": 7,
       "title": "Usable prioritized normalized project resource library",
-      "status": "PRIVATE_1520_RECONCILED__ONE_NEW_P007_CONTROL__SIX_PROVENANCE_EXCEPTIONS_OPEN__NO_PUBLIC_ADMISSION",
+      "status": "RESOURCE_LIBRARY_SOFTWARE_IMPLEMENTED_VERIFIED__PRIVATE_FULL_INVENTORY_SYNC_NOT_CERTIFIED",
       "scope": "PDF architecture/structural/geotechnical reports first, native design/analysis models next, estimates/spreadsheets later; original filenames and Drive IDs must remain traceable.",
       "acceptance": [
         "complete authorized inventory, not only 46 file pointers",
@@ -202,11 +202,9 @@
         "live_connected_private_artifact": "OWNER_ONLY_DRIVE__REQ07_20261015_LIVE_CONNECTED_DRIVE_READBACK_V2"
       },
       "remaining": [
-        "Resolve P001 three alternate original-source references with independent owner-authorized project root mapping; the existing company/project ancestry is corroborative but not authorization.",
-        "Resolve P002 three indexed drawing references stored in an unrelated Discord archive against actual project-owned issue documents; do not claim their channel path is an approved source.",
-        "Keep the 226 existing engineering-related private candidates and the single newly discovered P007 control document private until file-specific ownership, privacy and revision/engineering issue checks are documented.",
-        "Formally certify Google Drive provider pagination via the existing OAuth cursor-based engine if exhaustive provider page exhaustion is required; the connected 215-folder sweep reconciled all 1519 prior IDs and found one new file but did not expose pagination tokens.",
-        "Implement future authenticated reruns against the new 1520-row baseline and keep public resource catalog unchanged absent explicit approval."
+        "Verify end-to-end authenticated Google Drive cursor pagination and fresh inventory readback in authorized runtime (code and synthetic tests already exist).",
+        "Improve repeatable private metadata classification/routing and batch QA; don't treat manual project approvals as platform test failures.",
+        "Provide clear provider sync health and stale-data reporting without asserting live automation."
       ],
       "resume_execution_date_npt": "2026-10-15",
       "resume_checkpoint_status": "CONNECTED_PROVIDER_215_FOLDERS_1520_PRIVATE_IDS__1519_UNCHANGED_1_NEW_P007_PRIVATE_DOCUMENT__NO_OTHER_CHANGES",
@@ -266,12 +264,29 @@
         "provider_pagination_tokens_exposed": false,
         "formal_full_google_drive_cursor_exhaustion_verified": false,
         "six_prior_external_source_exceptions_unchanged": true
-      }
+      },
+      "previous_status": "PRIVATE_1520_RECONCILED__ONE_NEW_P007_CONTROL__SIX_PROVENANCE_EXCEPTIONS_OPEN__NO_PUBLIC_ADMISSION",
+      "project_progress_redirect": "ops/data/project-document-review-public.v1.0.json",
+      "current_software_scope": "Existing 46-link categorized resource library, immutable Drive pointers, six project FK-scoped name equivalences, private intake runner and CI gates implemented. Full provider cursor pagination and automated private inventory coverage remain engineering/platform integration work independent of any site's drawing sign-off.",
+      "project_decisions_not_software_milestones": true,
+      "project_progress_tracking": [
+        "ENGINEERING_DRAWING_ISSUES",
+        "P002_ARCHIVE_PRESERVATION"
+      ],
+      "historical_private_review_detail_unchanged": true,
+      "historical_remaining_record_from_20261015": [
+        "Resolve P001 three alternate original-source references with independent owner-authorized project root mapping; the existing company/project ancestry is corroborative but not authorization.",
+        "Resolve P002 three indexed drawing references stored in an unrelated Discord archive against actual project-owned issue documents; do not claim their channel path is an approved source.",
+        "Keep the 226 existing engineering-related private candidates and the single newly discovered P007 control document private until file-specific ownership, privacy and revision/engineering issue checks are documented.",
+        "Formally certify Google Drive provider pagination via the existing OAuth cursor-based engine if exhaustive provider page exhaustion is required; the connected 215-folder sweep reconciled all 1519 prior IDs and found one new file but did not expose pagination tokens.",
+        "Implement future authenticated reruns against the new 1520-row baseline and keep public resource catalog unchanged absent explicit approval."
+      ],
+      "historical_remaining_is_not_current_platform_backlog": true
     },
     {
       "id": 8,
       "title": "Final site-wide verification and governed release closeout",
-      "status": "PROVISIONAL_QA_PUBLIC_SURFACE_PASSED__REQ07_SOURCE_AUTHORITY_REMAINS_OPEN",
+      "status": "PUBLIC_SITE_QA_PASSED__FUTURE_PLATFORM_CAPABILITIES_SEPARATE",
       "scope": "Original item 8 contained no substantive instruction. Treat only as a release check unless user supplies a separate requirement.",
       "acceptance": [
         "desktop/mobile/keyboard/WCAG smoke",
@@ -300,7 +315,8 @@
         "new_private_resource_admissions": 0,
         "status": "PASS_FOR_EXISTING_PUBLIC_SITE"
       },
-      "remaining_dependency": "Six external source-root exceptions and independent file-specific authorization remain part of Request07; never invent owner or engineering approvals."
+      "remaining_dependency": "No engineering or project-specific approval blocks platform QA; future technical integrations have independent acceptance tests.",
+      "previous_status": "PROVISIONAL_QA_PUBLIC_SURFACE_PASSED__REQ07_SOURCE_AUTHORITY_REMAINS_OPEN"
     }
   ],
   "change_contract": {
@@ -310,5 +326,13 @@
     "rollback": "COMMIT_WITH_EXACT_PRE_SOURCE_BLOBS",
     "no_discord_slack_collector_changes_during_theme_work": true
   },
-  "next_phase": "REQ07_PRIVATE_DIRECT_API_READBACK_AND_SIX_SOURCE_ROOT_CORRECTIONS"
+  "next_phase": "PLATFORM_SOFTWARE_INTEGRATIONS_AND_REPRODUCIBLE_E2E_TESTS__PROJECT_STATUS_ON_PROGRESS_PAGE",
+  "current_platform_scope_correction": {
+    "date_npt": "2026-10-19",
+    "authority": "USER_DIRECTIVE",
+    "software_release_blocked_by_project_confirmations": false,
+    "project_status_projection": "ops/data/project-document-review-public.v1.0.json",
+    "active_platform_roadmap": "ops/control/c-web11-post-alias-roadmap.v1.0.json",
+    "historical_provenance_retained": true
+  }
 }

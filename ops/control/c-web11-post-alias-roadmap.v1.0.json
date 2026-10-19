@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "roadmap_id": "C_WEB_11_POST_ALIAS_SCOPED_BACKLOG_20261019",
   "reviewed_on_npt": "2026-10-19",
-  "scope": "JP_AEC_OPERATIONS_HUB_AND_REQ07",
+  "scope": "JP_AEC_PLATFORM_DEVELOPMENT_ONLY_WITH_PROJECT_QUESTIONS_LINKED_TO_PROGRESS",
   "completed": [
     {
       "key": "GIT_RECONCILIATION",
@@ -27,81 +27,60 @@
   ],
   "now_open": [
     {
-      "key": "ENGINEERING_DRAWING_ISSUES",
-      "priority": 1,
-      "owner": "RESPONSIBLE_ENGINEER_AND_DESIGN_ISSUER",
-      "status": "OPEN_EXTERNAL_SIGNOFF",
-      "description": "Five existing drawing files require verified issue/revision, signed engineering acceptance and permitted intended use. User project association does NOT certify construction."
-    },
-    {
       "key": "REQ07_PROVIDER_PAGINATION",
-      "priority": 2,
+      "priority": 1,
       "owner": "AUTHORIZED_GOOGLE_DRIVE_API_RUNTIME",
       "status": "NOT_CERTIFIED",
-      "description": "Re-run registered-root private inventory with reliable page token exhaustion/readback; previously 1520 records across 215 folder scans, independent cursor exhaustion unproven."
+      "description": "Re-run registered-root private inventory with reliable page token exhaustion/readback; previously 1520 records across 215 folder scans, independent cursor exhaustion unproven.",
+      "blocker_type": "SOFTWARE_OR_INTEGRATION_ONLY"
     },
     {
       "key": "REQ07_CANDIDATE_TRIAGE",
-      "priority": 3,
+      "priority": 2,
       "owner": "SOURCE_LIBRARY_QA",
       "status": "OPEN_PRIVATE",
-      "description": "Classify/review 226 engineering-related private candidates and enforce privacy/scope before any additional public resource admissions."
-    },
-    {
-      "key": "P002_ARCHIVE_PRESERVATION",
-      "priority": 4,
-      "owner": "RESOURCE_CONTROL",
-      "status": "PROVENANCE_OPEN_NONBLOCKING_FOR_PROJECT_ALIAS",
-      "description": "Keep unrelated archive ancestry as recorded source history. Find native project-owned authoritative transmittal when convenient; do not relabel archive as canonical project folder."
-    },
-    {
-      "key": "P007_ENGINEERING_SOURCE_CERTIFICATION",
-      "priority": 5,
-      "owner": "CAD_AAD_ENGINEERING_SOURCE_OWNER",
-      "status": "OPEN",
-      "description": "Narayani existing linked source hashes/revisions and A9 Main/Local closure still pending."
+      "description": "Classify/review 226 engineering-related private candidates and enforce privacy/scope before any additional public resource admissions.",
+      "blocker_type": "SOFTWARE_OR_INTEGRATION_ONLY"
     },
     {
       "key": "LEGACY_DATA_RECONCILIATION",
-      "priority": 6,
+      "priority": 3,
       "owner": "OPS_CWO",
       "status": "OPEN_READONLY_COMPARE",
-      "description": "Reconcile existing materials/progress and legacy provider ledgers without inferring unreported site work."
-    },
-    {
-      "key": "ENGINEER_TRADE_REPORTS",
-      "priority": 7,
-      "owner": "SITE_ENGINEERS",
-      "status": "AWAITING_RESPONSES",
-      "description": "Resolve actual trade progress, dated observations, quantity and source replies before updating canonical work."
+      "description": "Reconcile existing materials/progress and legacy provider ledgers without inferring unreported site work.",
+      "blocker_type": "SOFTWARE_OR_INTEGRATION_ONLY"
     },
     {
       "key": "GOOGLE_SHEETS_PROJECTIONS",
-      "priority": 8,
+      "priority": 4,
       "owner": "OPS_TECH",
       "status": "PROPOSAL_READY_ON_HOLD",
-      "description": "Idempotent canonical GitHub->Sheets materialization and readback, no reverse authority."
+      "description": "Idempotent canonical GitHub->Sheets materialization and readback, no reverse authority.",
+      "blocker_type": "SOFTWARE_OR_INTEGRATION_ONLY"
     },
     {
       "key": "CONTROL_TOWER_SYNC",
-      "priority": 9,
+      "priority": 5,
       "owner": "OPS_CONTROL",
       "status": "PARTIAL_PILOT",
-      "description": "Automate GitHub/Drive control index comparison while keeping A7 separate read-only scope."
+      "description": "Automate GitHub/Drive control index comparison while keeping A7 separate read-only scope.",
+      "blocker_type": "SOFTWARE_OR_INTEGRATION_ONLY"
     },
     {
       "key": "ARCHIVE_QUERY_ENGINE",
-      "priority": 10,
+      "priority": 6,
       "owner": "OPS_TECH",
       "status": "PARTIAL",
-      "description": "Machine seven-format standard active; Parquet/DuckDB optional work not deployed. Do not restart Discord under this item."
+      "description": "Machine seven-format standard active; Parquet/DuckDB optional work not deployed. Do not restart Discord under this item.",
+      "blocker_type": "SOFTWARE_OR_INTEGRATION_ONLY"
     },
     {
       "key": "PROJECT_VISIBILITY_ACCESS",
-      "priority": 11,
+      "priority": 7,
       "owner": "PLATFORM",
       "status": "FUTURE",
-      "description": "Optional authenticated company/project access instead of public admin."
+      "description": "Optional authenticated company/project access instead of public admin.",
+      "blocker_type": "SOFTWARE_OR_INTEGRATION_ONLY"
     }
   ],
   "on_hold": [
@@ -114,13 +93,75 @@
     }
   ],
   "completed_release_request_position": {
-    "requests_1_to_6": "IMPLEMENTED",
-    "request_7": "SIX_ASSOCIATIONS_CONFIRMED_NEW_CANDIDATES_AND_ISSUES_OPEN",
-    "request_8": "PREVIOUS_VISUAL_QA_PASS_FINAL_RESOURCE_DATA_CLOSEOUT_NOT_COMPLETE"
+    "requests_1_to_6": "IMPLEMENTED_VERIFIED",
+    "request_7": "SOFTWARE_LIBRARY_DELIVERED_FOR_CURRENT_PUBLIC_46__PRIVATE_INVENTORY_RESCAN_AUTOMATION_NOT_YET_CERTIFIED",
+    "request_8": "GITHUB_ACTIONS_AND_BROWSER_QA_PASSED_FOR_IMPLEMENTED_WEBSITE__NOT_DEPENDENT_ON_FIELD_APPROVAL"
   },
   "boundaries": {
     "no_production_schema_deployed": true,
     "relational_contract_is_text_ddl": true,
-    "release_does_not_modify_drive_source_files": true
+    "release_does_not_modify_drive_source_files": true,
+    "project_engineering_decisions_are_release_blockers": false,
+    "project_review_status_projection": "ops/data/project-document-review-public.v1.0.json",
+    "historical_progress_jsonl_unmodified": true,
+    "discord_collector_user_paused": true
+  },
+  "project_progress_tracked": [
+    {
+      "key": "ENGINEERING_DRAWING_ISSUES",
+      "category": "PROJECT_DOCUMENT_APPROVAL",
+      "projects": [
+        "P001",
+        "P002"
+      ],
+      "status": "TRACK_IN_PROGRESS",
+      "software_release_blocker": false,
+      "related_record_ids": [
+        "PROG-DOC-P001-20261019",
+        "PROG-DOC-P002-20261019"
+      ],
+      "note": "Five drawing records have not been marked issued for construction; this is project data, not a developer milestone."
+    },
+    {
+      "key": "P002_ARCHIVE_PRESERVATION",
+      "category": "PROJECT_SOURCE_PROVENANCE",
+      "projects": [
+        "P002"
+      ],
+      "status": "RECORDED_NONBLOCKING",
+      "software_release_blocker": false,
+      "note": "Original archive ancestry is preserved; source-to-project association confirmed without falsely claiming native folder migration."
+    },
+    {
+      "key": "P007_ENGINEERING_SOURCE_CERTIFICATION",
+      "category": "PROJECT_DOCUMENT_APPROVAL",
+      "projects": [
+        "P007"
+      ],
+      "status": "TRACK_IN_PROJECT_PROGRESS",
+      "software_release_blocker": false,
+      "note": "Narayani drawings/revisions and project-specific source confirmations belong to field/project tracking; software FK engine status is separate."
+    },
+    {
+      "key": "ENGINEER_TRADE_REPORTS",
+      "category": "PROJECT_FIELD_PROGRESS",
+      "projects": [],
+      "status": "WAITING_FOR_FIELD_INPUT_AS_OPERATIONAL_DATA",
+      "software_release_blocker": false,
+      "note": "Unanswered trade questions are data to be recorded in Progress rather than items blocking website deployment."
+    }
+  ],
+  "goal": "BUILD_AND_VALIDATE_REPRODUCIBLE_SOFTWARE_PLATFORM_NOT_CERTIFY_CONSTRUCTION_PROJECTS",
+  "status": "PLATFORM_RELEASE_PASSED__PLATFORM_INTEGRATIONS_PARTIAL__PROJECT_APPROVALS_TRACKED_SEPARATELY",
+  "platform_health": {
+    "main_commit_verified": "a1f6591fa65b029294c74daa2b71a770aa59fa0c",
+    "last_recorded_production_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39190079895",
+    "last_recorded_visual_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39190079873",
+    "production_ci_status": "PASSED_AS_OF_2026_10_19",
+    "web_implementation": "STATIC_GITHUB_PAGES_WITH_VERSIONED_JSON_AND_TESTED_PYTHON_CONTRACTS",
+    "continuous_backend_service": "NONE",
+    "live_postgres_service": "NOT_DEPLOYED",
+    "production_feature_status": "PUBLISHED_SCOPE_PASSED__NOT_END_TO_END_AUTOMATED_INTEGRATIONS",
+    "software_release_blocked_by_project_approval": false
   }
 }
