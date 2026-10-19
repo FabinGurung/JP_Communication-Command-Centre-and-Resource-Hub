@@ -7,7 +7,9 @@
     "resource_inventory": "ops/control/req07-20261015-live-connected-drive-readback.v1.0.json",
     "source_root_review": "ops/control/req07-20261015-incremental-and-provenance-control.v1.0.json",
     "communication_cycle": "ops/control/daily-communication-web-cycle.json",
-    "latest_checked_resource_event": "ops/events/cwo-daily/OPS-0083__2026-10-19_GIT_CLOSEOUT_REQ07_READBACK.json"
+    "latest_checked_resource_event": "ops/events/cwo-daily/OPS-0083__2026-10-19_GIT_CLOSEOUT_REQ07_READBACK.json",
+    "private_file_specific_review_document": "OWNER_ONLY_DRIVE_SOURCE_REVIEW__REQ07_20261019",
+    "public_file_specific_dispositions": "ops/data/resource-review-dispositions-public.v1.0.json"
   },
   "resources": {
     "inventory_date_npt": "2026-10-15",
@@ -25,7 +27,17 @@
     "file_specific_engineer_acceptance": "NOT_CERTIFIED",
     "source_ownership_approval": "PENDING_INDEPENDENT_PROJECT_OWNER_EVIDENCE",
     "full_provider_cursor_exhaustion": "NOT_CERTIFIED",
-    "original_drive_files_modified": 0
+    "original_drive_files_modified": 0,
+    "file_specific_review": {
+      "reviewed_references": 6,
+      "project_corroborated_p001": 3,
+      "archival_source_location_unresolved_p002": 3,
+      "individual_drawings": 5,
+      "engineer_issued_for_construction": 0,
+      "source_root_independent_authorization": 0,
+      "decision": "REVIEW_COMPLETE_APPROVAL_PENDING",
+      "review_date_npt": "2026-10-19"
+    }
   },
   "communication": {
     "last_provider_receipt_date_npt": "2026-10-10",
@@ -35,7 +47,10 @@
     "collector_scope": "TWO_REGISTERED_DISCORD_PARENT_CHANNELS_AND_CHILDREN",
     "scoped_full_history_v2_live_execution": "NOT_VERIFIED",
     "new_authenticated_collector_run_certified": false,
-    "github_actions": "OFFLINE_SCHEMA_AND_SYNTHETIC_QA_ONLY"
+    "github_actions": "OFFLINE_SCHEMA_AND_SYNTHETIC_QA_ONLY",
+    "collector_operational_mode": "ON_HOLD_BY_USER",
+    "collector_hold_effective_date_npt": "2026-10-19",
+    "user_resume_required": true
   },
   "restrictions": [
     "Existing public links are not proof of permission, revision currency or engineer acceptance.",

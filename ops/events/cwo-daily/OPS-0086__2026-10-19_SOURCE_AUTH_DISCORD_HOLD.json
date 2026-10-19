@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0086",
+  "date_npt": "2026-10-19",
+  "scope": "C_WEB_10_P001_P002_AUTHORIZATION_REVIEW_AND_DISCORD_PAUSE",
+  "status": "SIX_EXISTING_REFERENCE_REVIEWS_COMPLETE__FIVE_DRAWING_APPROVALS_PENDING__DISCORD_PAUSED",
+  "review_document_provider": "GOOGLE_DRIVE_PRIVATE_EXISTING_REQ07_P001_P002_SOURCE_ROOT_REVIEW",
+  "review_id": "REQ07-AUTH-20261019-001",
+  "source_reference_counts": {
+    "P001": 3,
+    "P002": 3,
+    "total": 6
+  },
+  "engineer_approved_for_construction": 0,
+  "source_binding_summary": {
+    "P001": "THREE_CORROBORATED_PROJECT_FOLDER_ASSOCIATIONS_UNSIGNOFF",
+    "P002": "THREE_UNRELATED_ARCHIVE_ASSOCIATIONS_UNRESOLVED"
+  },
+  "critical_engineering_conflict": "P002_STRUCTURAL_PDF_TITLEBLOCK_CLIENT_DIFFERS_FROM_PROJECT_MASTER; NO_ENGINEER_SIGNOFF",
+  "discord": {
+    "mode": "PAUSED_EXPLICIT_USER_20261019",
+    "prior_collector_receipt_date": "2026-10-10",
+    "historical_media_debt_preserved": true,
+    "restart_requires_explicit_user_instruction": true
+  },
+  "data_policy": {
+    "originals_modified": 0,
+    "public_resource_links_added": 0,
+    "existing_source_urls_replaced": 0,
+    "public_disclosure": "RESOURCE_IDS_AND_SAFE_CLASSIFICATIONS_ONLY"
+  },
+  "future_gate": "INDIVIDUAL_SOURCE_OWNER_AUTHORITY_AND_RESPONSIBLE_ENGINEER_ISSUE_WITH_PROJECT_IDENTITY_REVISION_AND_PERMISSION_RECEIPT"
+}

@@ -36,6 +36,28 @@ def run():
     assert c["media_fidelity_mismatches"]==receipt["attachments_failed"]
     assert c["new_authenticated_collector_run_certified"] is False
     assert c["scoped_full_history_v2_live_execution"]=="NOT_VERIFIED"
+
+    review=read("ops/data/resource-review-dispositions-public.v1.0.json")
+    pending=read("ops/data/pending-works.json")
+    assert review["kind"]=="PUBLIC_SAFE_EXISTING_RESOURCE_DISPOSITIONS"
+    assert review["totals"]=={"reviewed":6,"folders":1,"drawings":5,"engineer_approved":0,"existing_catalog_links_preserved":46}
+    assert len(review["items"])==len({x["resource_id"] for x in review["items"]})==6
+    fkeys={f["resource_id"] for site in resources["sites"] for f in site["files"]}
+    assert all(i["resource_id"] in fkeys and i["engineering_use"]!="APPROVED_FOR_CONSTRUCTION" for i in review["items"])
+    assert set((i["project_id"] for i in review["items"]))=={"P001","P002"}
+    assert status["resources"]["file_specific_review"]["reviewed_references"]==6
+    assert status["resources"]["file_specific_review"]["engineer_issued_for_construction"]==0
+    assert status["communication"]["collector_operational_mode"]=="ON_HOLD_BY_USER"
+    assert status["communication"]["user_resume_required"] is True
+    assert discord["status"]=="ON_HOLD_BY_USER_20261019"
+    assert discord["execution_hold"]["run_discord_apis"] is False
+    p4=next(x for x in pending["items"] if x["pending_id"]=="OPS-PEND-000004")
+    assert p4["status"]=="ON_HOLD_USER_REQUEST_20261019"
+    assert p4["hold"]["resume_condition"]=="NEW_EXPLICIT_USER_INSTRUCTION_TO_RESUME"
+    assert "resource-review-dispositions-public.v1.0.json" in (ROOT/"resources/index.html").read_text()
+    assert "ON HOLD by user" in (ROOT/"workspace/index.html").read_text()
+    for banned in ("1gfhTtWBinNvF0F6vjQnzxsSZW8grB8ID","1pvCubGYJvfHOrNG1ynoxBrWFafZuooC6","1TzUCNxZ3WExD7H0mWYJ42KHsx11-A7BG"):
+        assert banned not in json.dumps(review)
     raw=json.dumps(status)
     for forbidden in ("archive_root_drive_id","guild_id","channel_ids","provider_message_id","private_file_id","source_parent_id","discord_bot_token"):
         assert forbidden not in raw, "Private provider metadata exposed: "+forbidden

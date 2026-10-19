@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "PUBLIC_SAFE_EXISTING_RESOURCE_DISPOSITIONS",
+  "reviewed_on_npt": "2026-10-19",
+  "basis": "EXISTING_AUTHENTICATED_DRIVE_METADATA_AND_DERIVED_SOURCE_REVIEW_NOT_ENGINEERING_CERTIFICATION",
+  "status": "SIX_REFERENCES_REVIEWED_ZERO_DRAWINGS_AUTHORIZED",
+  "source_registry": "ops/data/project-resources.json",
+  "private_review": "GOOGLE_DRIVE_OWNER_ONLY_EXISTING_REVIEW_DOCUMENT",
+  "items": [
+    {
+      "resource_id": "RES-P001-ORIGINAL-CAD-FOLDER-20261011",
+      "project_id": "P001",
+      "resource_kind": "SOURCE_FOLDER",
+      "source_binding": "CORROBORATED_NAMED_PROJECT_FOLDER",
+      "engineering_use": "NOT_APPLICABLE_FOLDER",
+      "blocker": "INDEPENDENT_OWNER_AUTHORIZATION_MISSING",
+      "public_note": "Source folder association supported; do not expand project root without source-owner confirmation."
+    },
+    {
+      "resource_id": "RES-P001-ARCH-DWG-20261011",
+      "project_id": "P001",
+      "resource_kind": "DRAWING_DWG",
+      "source_binding": "CORROBORATED_NAMED_PROJECT_FOLDER",
+      "engineering_use": "NOT_APPROVED_FOR_CONSTRUCTION",
+      "blocker": "REVISION_AND_ISSUER_NOT_VERIFIED",
+      "public_note": "Source found; engineering design issue/revision not authorized."
+    },
+    {
+      "resource_id": "RES-P001-STRUCT-DWG-20261011",
+      "project_id": "P001",
+      "resource_kind": "DRAWING_DWG",
+      "source_binding": "CORROBORATED_NAMED_PROJECT_FOLDER",
+      "engineering_use": "NOT_APPROVED_FOR_CONSTRUCTION",
+      "blocker": "ENGINEER_SIGNED_ISSUE_NOT_VERIFIED",
+      "public_note": "Source found; structural drawing engineer issue/revision not authorized."
+    },
+    {
+      "resource_id": "RES-P002-WORKING-DRAWING-001",
+      "project_id": "P002",
+      "resource_kind": "DRAWING_PDF",
+      "source_binding": "UNRELATED_COMMUNICATION_ARCHIVE",
+      "engineering_use": "NOT_APPROVED_FOR_CONSTRUCTION",
+      "blocker": "ROOT_AND_ISSUE_DISCREPANCIES",
+      "public_note": "Drawing names site, but archive root/issue authority not established."
+    },
+    {
+      "resource_id": "RES-P002-STRUCT-PDF-001",
+      "project_id": "P002",
+      "resource_kind": "DRAWING_PDF",
+      "source_binding": "UNRELATED_COMMUNICATION_ARCHIVE",
+      "engineering_use": "NOT_APPROVED_FOR_CONSTRUCTION",
+      "blocker": "DOCUMENT_OWNER_MISMATCH",
+      "public_note": "Structural PDF client/title block differs from project master; engineer reconciliation required."
+    },
+    {
+      "resource_id": "RES-P002-STRUCT-DWG-001",
+      "project_id": "P002",
+      "resource_kind": "DRAWING_DWG",
+      "source_binding": "UNRELATED_COMMUNICATION_ARCHIVE",
+      "engineering_use": "NOT_APPROVED_FOR_CONSTRUCTION",
+      "blocker": "ISSUE_AND_NATIVE_DWG_RELATION_UNVERIFIED",
+      "public_note": "Filename FINAL does not establish engineer approval; archive root unresolved."
+    }
+  ],
+  "totals": {
+    "reviewed": 6,
+    "folders": 1,
+    "drawings": 5,
+    "engineer_approved": 0,
+    "existing_catalog_links_preserved": 46
+  },
+  "prohibited": [
+    "NO_PRIVATE_DRIVE_FILE_IDS_OR_ANCESTOR_NAMES",
+    "NO_NEW_PUBLIC_FILES_OR_SOURCE_ROOTS",
+    "NO_ENGINEER_CERTIFICATION_WITHOUT_SIGNED_ISSUE",
+    "NO_FABRICATED_PROVIDER_APPROVAL"
+  ]
+}

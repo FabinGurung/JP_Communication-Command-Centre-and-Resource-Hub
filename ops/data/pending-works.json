@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "registry_id": "OPS-PENDING-WORK-001",
-  "updated": "2026-10-09",
+  "updated": "2026-10-19",
   "timezone": "Asia/Kathmandu",
   "authority": "Operations repository planning registry. Entries are pending decisions/work, not completed implementation claims.",
   "items": [
@@ -96,8 +96,8 @@
       "pending_id": "OPS-PEND-000004",
       "title": "A9-CWO seven-day Discord collector and private machine-index execution",
       "short_title": "Run Discord C01 → C02 → C05",
-      "status": "R20261010_001_TWO_PARENT_HISTORICAL_SCOPE_FIXED_LIVE_EXECUTION_PENDING",
-      "priority": "NEXT_OPERATIONAL",
+      "status": "ON_HOLD_USER_REQUEST_20261019",
+      "priority": "USER_PAUSED",
       "category": "COMMUNICATION_INTAKE",
       "owner_module_id": "MOD-OPS-001",
       "proposal": {
@@ -106,8 +106,8 @@
         "url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/data/pending-works.json"
       },
       "why": "Two-channel Discord message/attachment data now exists in a provider-verified partial Drive receipt. Media fidelity is unresolved and must not be counted as a completed daily backup.",
-      "recommendation": "Run authorized C01/C06 backfill repeatedly, C07 original-media recovery until all native bytes verified, C08 private SQLite generation and C09 strict data gate. Then reconcile identities and publish approved public safe records; do not send Slack or update website until provenance and release gates pass.",
-      "when_to_build": "Next user-authorized Google Colab runtime with Discord bot credential and Drive OAuth; do not pretend GitHub Actions can access the bot or run Discord itself.",
+      "recommendation": "PAUSED at user's instruction. Do not initiate C01/C02/C05/C06/C07/C08/C09, notebook execution, automated Discord polling, or historical backfill until user explicitly resumes. Preserve existing private receipts and all outstanding media debt.",
+      "when_to_build": "AFTER_EXPLICIT_USER_RESUME_ONLY; authorized Google Colab runtime with Discord credentials and Drive OAuth",
       "proposed_first_gate": "Run C01 → C02 live preview. Verify live parent/thread roster and every NPT cutoff; type COLLECT; verify new frozen C02 receipt and then execute C05. Do not attempt unsupported whole-guild/archived-thread collection.",
       "implementation_status": "SCOPE_R001_FIXED_C06_ONLY_TWO_PARENTS;V1_GUILD_OVERBROAD_CAPTURE_ISOLATED_UNMODIFIED;V2_SCOPED_HISTORY_NOT_RUN;C08_PARTIAL_PRIVATE_SQLITE_ALLOWED;C09_GRACEFUL_QUERY_ABSENT_BLOCKED;LATE_EDIT_DETECTION_OUTSIDE_7_DAY_WINDOW_OPEN",
       "current_boundary": "Today C02 r013 CONFIRMED PARTIAL: 21 parent/active-thread sources, 89 changed messages, 269 media mismatches; C05 private daily index 89 rows written. Today overbroad C06 r013 discovered 1574 guild sources, captured 8 pages and C07 original media recovery succeeded 0/11; C08/C09 errors were due unfinished history and absent query directory. Revised 20261010-001 scopes C06 to only the 2 company picture parents plus child threads, writes isolated TWO_PARENT_HISTORY_ARCHIVE_V2. Needs real Colab re-run; historical edits outside replay and downstream website syncing still pending.",
@@ -209,6 +209,15 @@
         "source_commit": "e5f354ad47939ca1bec6e0a9870c04326230a76a",
         "provider_runtime": "OLDER_R013_RUN_ONLY_R001_UNEXECUTED",
         "publication": "NONE_FROM_THIS_BROADER_SOURCE"
+      },
+      "pre_hold_status": "R20261010_001_TWO_PARENT_HISTORICAL_SCOPE_FIXED_LIVE_EXECUTION_PENDING",
+      "hold": {
+        "requested_on_npt": "2026-10-19",
+        "authority": "DIRECT_USER_INSTRUCTION",
+        "operational_mode": "NO_DISCORD_COLLECTOR_RUNS",
+        "resume_condition": "NEW_EXPLICIT_USER_INSTRUCTION_TO_RESUME",
+        "frozen_last_authenticated_receipt": "20261010T005617Z",
+        "previous_provider_evidence_preserved": true
       }
     },
     {

@@ -25,7 +25,7 @@
       "runner": "USER_OPERATED_COLAB",
       "notebook": "ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb",
       "handoff": "A9_CWO_DAILY_TWO_CHANNELS/handoff_current.json",
-      "status": "R001_TWO_PARENT_SCOPE_RESTORED_PRIVATE_ARCHIVE_PROVIDER_NOT_RUN",
+      "status": "ON_HOLD_BY_USER_20261019",
       "last_frozen_run": {
         "run_id": "20261010T005617Z",
         "receipt_drive_id": "1HXOjV7CpYOQw6mGwK_n_SDAQBYmqOjE5",
@@ -37,7 +37,7 @@
         "attachments_failed": 269,
         "daily_index_manifest_id": "19yXv6LJexxmp9BaIifSXmj6W9Fwf9LnJ"
       },
-      "next_gate": "Load notebook 20261010-001 → C01 → C06 FULL_HISTORY confirms ONLY the two parent channel IDs; V2 will start fresh scoped raw history, independent of preserved unrelated V1. Re-run C06 boundedly; C07 scoped original-media retries; C08 private partial SQLite allowed; C09 shows explicit BLOCKED until full verification. C02 seven-day replay reuses persisted version digest and raw/attachments, does not delete old data.",
+      "next_gate": "PAUSED: await a new explicit user instruction to resume; preserve frozen receipt and remaining media discrepancies",
       "c03_result": {
         "status": "USER_REPORTED_COMPLETED",
         "native_provider_receipt": "NOT_AVAILABLE",
@@ -75,6 +75,17 @@
         "derivative_drive_id": "1HBLKmpQV5yCD_90_v9iHEIbiTw3VduPw",
         "receipt_drive_id": "1ftkzIKyqUhVvCCWYAw5ka_YfKlDg2tVi",
         "original_certified": false
+      },
+      "pre_hold_status": "R001_TWO_PARENT_SCOPE_RESTORED_PRIVATE_ARCHIVE_PROVIDER_NOT_RUN",
+      "pre_hold_next_gate": "Load notebook 20261010-001 → C01 → C06 FULL_HISTORY confirms ONLY the two parent channel IDs; V2 will start fresh scoped raw history, independent of preserved unrelated V1. Re-run C06 boundedly; C07 scoped original-media retries; C08 private partial SQLite allowed; C09 shows explicit BLOCKED until full verification. C02 seven-day replay reuses persisted version digest and raw/attachments, does not delete old data.",
+      "execution_hold": {
+        "state": "PAUSED",
+        "effective_on_npt": "2026-10-19",
+        "authority": "EXPLICIT_USER",
+        "run_colab": false,
+        "run_discord_apis": false,
+        "archive_read_only": true,
+        "resume_only_on_explicit_user_instruction": true
       }
     }
   ],
