@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "PUBLIC_SAFE_SOURCE_READINESS_SNAPSHOT",
+  "reviewed_on_npt": "2026-10-19",
+  "scope": "GOVERNED_READ_ONLY_PROJECTION_NOT_LIVE_PROVIDER_COLLECTION",
+  "sources": {
+    "resource_inventory": "ops/control/req07-20261015-live-connected-drive-readback.v1.0.json",
+    "source_root_review": "ops/control/req07-20261015-incremental-and-provenance-control.v1.0.json",
+    "communication_cycle": "ops/control/daily-communication-web-cycle.json",
+    "latest_checked_resource_event": "ops/events/cwo-daily/OPS-0083__2026-10-19_GIT_CLOSEOUT_REQ07_READBACK.json"
+  },
+  "resources": {
+    "inventory_date_npt": "2026-10-15",
+    "private_metadata_records": 1520,
+    "registered_project_roots": 9,
+    "folders_reviewed": 215,
+    "existing_public_resource_links": 46,
+    "existing_reference_metadata_accessible": 6,
+    "source_root_exceptions": {
+      "count": 6,
+      "P001": 3,
+      "P002": 3
+    },
+    "new_public_links_admitted": 0,
+    "file_specific_engineer_acceptance": "NOT_CERTIFIED",
+    "source_ownership_approval": "PENDING_INDEPENDENT_PROJECT_OWNER_EVIDENCE",
+    "full_provider_cursor_exhaustion": "NOT_CERTIFIED",
+    "original_drive_files_modified": 0
+  },
+  "communication": {
+    "last_provider_receipt_date_npt": "2026-10-10",
+    "last_receipt_status": "PARTIAL",
+    "messages_new_or_changed": 89,
+    "media_fidelity_mismatches": 269,
+    "collector_scope": "TWO_REGISTERED_DISCORD_PARENT_CHANNELS_AND_CHILDREN",
+    "scoped_full_history_v2_live_execution": "NOT_VERIFIED",
+    "new_authenticated_collector_run_certified": false,
+    "github_actions": "OFFLINE_SCHEMA_AND_SYNTHETIC_QA_ONLY"
+  },
+  "restrictions": [
+    "Existing public links are not proof of permission, revision currency or engineer acceptance.",
+    "A general instruction to proceed is not a file-specific disclosure or issued-for-construction decision.",
+    "Do not publish private Drive identifiers, original evidence, source folder ancestry, raw communications, or credentials.",
+    "Do not interpret synthetic GitHub CI as a live Discord collector run."
+  ]
+}

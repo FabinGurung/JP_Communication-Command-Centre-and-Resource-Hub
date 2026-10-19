@@ -600,6 +600,9 @@ jobs:
       - name: Test document normalization and private future intake candidates
         run: python scripts/test_resource_library.py
 
+      - name: Validate public source readiness snapshot and safe website disclosure
+        run: python scripts/test_source_readiness_public.py
+
       - name: Validate developer/site/progress/resources isolation
         run: python scripts/validate_site_experience_contract.py
 

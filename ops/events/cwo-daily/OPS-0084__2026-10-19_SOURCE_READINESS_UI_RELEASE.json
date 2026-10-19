@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0084",
+  "date_npt": "2026-10-19",
+  "type": "C_WEB_10_RECOVERY_RESOURCE_AND_PIPELINE_READINESS_RELEASE",
+  "status": "STAGED__PRODUCTION_QA_PENDING",
+  "pre_release_commit": "e9dbe7ba6d056d55bf01f7948ca3c562a09dce0a",
+  "governed_scope": "WEBSITE_PUBLIC_SAFE_DISCLOSURE_AND_SOFTWARE_QA_ONLY",
+  "user_authorization": "APPROVED_EXECUTION_2026_10_19",
+  "new_public_read_only_projection": "ops/data/source-readiness-public.v1.0.json",
+  "snapshot_references": [
+    "ops/control/req07-20261015-live-connected-drive-readback.v1.0.json",
+    "ops/control/daily-communication-web-cycle.json"
+  ],
+  "website_update": [
+    "resources/index.html",
+    "workspace/index.html"
+  ],
+  "qa_added": "scripts/test_source_readiness_public.py",
+  "qa_workflow": ".github/workflows/daily-ops-branch-preview.yml",
+  "private_source_originals_modified": 0,
+  "existing_public_resource_rows_modified": 0,
+  "source_ownership_or_engineering_issue_reclassified": 0,
+  "communication_live_provider_run": "NOT_EXECUTED_THIS_RELEASE",
+  "pending": [
+    "Six existing P001/P002 source-root reviews require independent file-specific validation",
+    "New scoped Discord capture needs authorized Colab runtime, credentials and original-byte fidelity",
+    "Pagination tokens were not available in the last provider source snapshot"
+  ]
+}
