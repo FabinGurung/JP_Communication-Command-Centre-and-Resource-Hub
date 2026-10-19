@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0.0",
+  "registry_id": "REQ07_PROJECT_SCOPED_SOURCE_NAME_ALIAS_20261019",
+  "status": "USER_CONFIRMED_SIX_ASSOCIATIONS__NOT_ENGINEERING_SIGNOFF",
+  "authority": {
+    "type": "EXPLICIT_USER_INSTRUCTION",
+    "confirmed_on_npt": "2026-10-19",
+    "private_full_label_authority": "GOOGLE_DRIVE_OWNER_ONLY_REQ07_P001_P002_REVIEW_20261019",
+    "source_resource_registry": "ops/data/project-resources.json",
+    "ddl_contract": "ops/schema/daily-ops-postgres.sql",
+    "permission_boundary": "SOURCE_LINKS_UNCHANGED_DRIVE_ACCESS_GATED"
+  },
+  "semantics": {
+    "equality": "EXACT_RESOURCE_ID_TO_SPECIFIC_PROJECT_ONLY",
+    "not_equivalent": [
+      "TWO_DIFFERENT_PEOPLE_ARE_LEGALLY_IDENTICAL",
+      "PROJECT_NAMES_REPLACED_GLOBALLY",
+      "ENGINEER_APPROVED_ISSUE_OR_REVISION",
+      "NEW_PUBLIC_ACCESS_TO_SOURCE_FILES",
+      "ALTERNATE_ARCHIVE_IS_CANONICAL_ROOT"
+    ],
+    "allowed_projects": [
+      "P001",
+      "P002"
+    ],
+    "allowed_global_project_ids": [
+      "PRJ-000001",
+      "PRJ-000002"
+    ],
+    "association_closure": "EXPLICIT_SIX_ROWS_ONLY"
+  },
+  "project_pairs": [
+    {
+      "project_id": "P001",
+      "global_project_id": "PRJ-000001",
+      "company_project_code": "REB-001",
+      "source_organization": "ORG-000002"
+    },
+    {
+      "project_id": "P002",
+      "global_project_id": "PRJ-000002",
+      "company_project_code": "FBL-001",
+      "source_organization": "ORG-000001"
+    }
+  ],
+  "rows": [
+    {
+      "alias_id": "RPA-P001-01",
+      "project_id": "P001",
+      "resource_id": "RES-P001-ORIGINAL-CAD-FOLDER-20261011",
+      "observed_label_key": "P001_CAD_SOURCE_FOLDER_NAME",
+      "label_role": "SOURCE_FOLDER_NAME",
+      "association_state": "USER_CONFIRMED_PROJECT_RESOURCE_ASSOCIATION",
+      "authority_ref": "REQ07-PROJECT-ALIAS-USER-20261019",
+      "association_date": "2026-10-19",
+      "identity_scope": "RESOURCE_TO_PROJECT_ONLY",
+      "same_legal_person_asserted": false,
+      "engineering_issue_state": "NOT_CERTIFIED",
+      "archive_location_unmodified": true,
+      "public_disclosure_additional_authorized": false
+    },
+    {
+      "alias_id": "RPA-P001-02",
+      "project_id": "P001",
+      "resource_id": "RES-P001-ARCH-DWG-20261011",
+      "observed_label_key": "P001_ARCHITECTURAL_DWG_FILENAME",
+      "label_role": "SOURCE_FILENAME",
+      "association_state": "USER_CONFIRMED_PROJECT_RESOURCE_ASSOCIATION",
+      "authority_ref": "REQ07-PROJECT-ALIAS-USER-20261019",
+      "association_date": "2026-10-19",
+      "identity_scope": "RESOURCE_TO_PROJECT_ONLY",
+      "same_legal_person_asserted": false,
+      "engineering_issue_state": "NOT_CERTIFIED",
+      "archive_location_unmodified": true,
+      "public_disclosure_additional_authorized": false
+    },
+    {
+      "alias_id": "RPA-P001-03",
+      "project_id": "P001",
+      "resource_id": "RES-P001-STRUCT-DWG-20261011",
+      "observed_label_key": "P001_STRUCTURAL_DWG_FILENAME",
+      "label_role": "SOURCE_FILENAME",
+      "association_state": "USER_CONFIRMED_PROJECT_RESOURCE_ASSOCIATION",
+      "authority_ref": "REQ07-PROJECT-ALIAS-USER-20261019",
+      "association_date": "2026-10-19",
+      "identity_scope": "RESOURCE_TO_PROJECT_ONLY",
+      "same_legal_person_asserted": false,
+      "engineering_issue_state": "NOT_CERTIFIED",
+      "archive_location_unmodified": true,
+      "public_disclosure_additional_authorized": false
+    },
+    {
+      "alias_id": "RPA-P002-01",
+      "project_id": "P002",
+      "resource_id": "RES-P002-WORKING-DRAWING-001",
+      "observed_label_key": "P002_SITE_WORKING_DRAWING_FILENAME",
+      "label_role": "SOURCE_FILENAME",
+      "association_state": "USER_CONFIRMED_PROJECT_RESOURCE_ASSOCIATION",
+      "authority_ref": "REQ07-PROJECT-ALIAS-USER-20261019",
+      "association_date": "2026-10-19",
+      "identity_scope": "RESOURCE_TO_PROJECT_ONLY",
+      "same_legal_person_asserted": false,
+      "engineering_issue_state": "NOT_CERTIFIED",
+      "archive_location_unmodified": true,
+      "public_disclosure_additional_authorized": false
+    },
+    {
+      "alias_id": "RPA-P002-02",
+      "project_id": "P002",
+      "resource_id": "RES-P002-STRUCT-PDF-001",
+      "observed_label_key": "P002_ALTERNATE_TITLEBLOCK_CLIENT_NAME",
+      "label_role": "SOURCE_TITLEBLOCK_CLIENT",
+      "association_state": "USER_CONFIRMED_PROJECT_RESOURCE_ASSOCIATION",
+      "authority_ref": "REQ07-PROJECT-ALIAS-USER-20261019",
+      "association_date": "2026-10-19",
+      "identity_scope": "RESOURCE_TO_PROJECT_ONLY",
+      "same_legal_person_asserted": false,
+      "engineering_issue_state": "NOT_CERTIFIED",
+      "archive_location_unmodified": true,
+      "public_disclosure_additional_authorized": false
+    },
+    {
+      "alias_id": "RPA-P002-03",
+      "project_id": "P002",
+      "resource_id": "RES-P002-STRUCT-DWG-001",
+      "observed_label_key": "P002_STRUCTURAL_DWG_FILENAME",
+      "label_role": "SOURCE_FILENAME",
+      "association_state": "USER_CONFIRMED_PROJECT_RESOURCE_ASSOCIATION",
+      "authority_ref": "REQ07-PROJECT-ALIAS-USER-20261019",
+      "association_date": "2026-10-19",
+      "identity_scope": "RESOURCE_TO_PROJECT_ONLY",
+      "same_legal_person_asserted": false,
+      "engineering_issue_state": "NOT_CERTIFIED",
+      "archive_location_unmodified": true,
+      "public_disclosure_additional_authorized": false
+    }
+  ],
+  "count": 6
+}

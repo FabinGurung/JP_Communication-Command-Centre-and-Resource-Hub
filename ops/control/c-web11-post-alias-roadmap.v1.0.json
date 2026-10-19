@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0.0",
+  "roadmap_id": "C_WEB_11_POST_ALIAS_SCOPED_BACKLOG_20261019",
+  "reviewed_on_npt": "2026-10-19",
+  "scope": "JP_AEC_OPERATIONS_HUB_AND_REQ07",
+  "completed": [
+    {
+      "key": "GIT_RECONCILIATION",
+      "status": "PASS",
+      "description": "Production and working branches reconciled; previous feature/main history retained"
+    },
+    {
+      "key": "RESOURCE_ALIAS_SCOPE",
+      "status": "USER_CONFIRMED_IMPLEMENTED",
+      "description": "Six existing resource IDs linked to exactly P001/P002 via FK; alternate title block does not change global client identity"
+    },
+    {
+      "key": "RESOURCE_PROVIDER_METADATA",
+      "status": "PASS_SCOPED",
+      "description": "Six existing file metadata entries and earlier 46 source links verified; protected originals unchanged"
+    },
+    {
+      "key": "SITE_WEB_UX",
+      "status": "PASS",
+      "description": "Website main nav, Resources, Map, Field Desk, Developer Workspace and visual QA production previously passed"
+    }
+  ],
+  "now_open": [
+    {
+      "key": "ENGINEERING_DRAWING_ISSUES",
+      "priority": 1,
+      "owner": "RESPONSIBLE_ENGINEER_AND_DESIGN_ISSUER",
+      "status": "OPEN_EXTERNAL_SIGNOFF",
+      "description": "Five existing drawing files require verified issue/revision, signed engineering acceptance and permitted intended use. User project association does NOT certify construction."
+    },
+    {
+      "key": "REQ07_PROVIDER_PAGINATION",
+      "priority": 2,
+      "owner": "AUTHORIZED_GOOGLE_DRIVE_API_RUNTIME",
+      "status": "NOT_CERTIFIED",
+      "description": "Re-run registered-root private inventory with reliable page token exhaustion/readback; previously 1520 records across 215 folder scans, independent cursor exhaustion unproven."
+    },
+    {
+      "key": "REQ07_CANDIDATE_TRIAGE",
+      "priority": 3,
+      "owner": "SOURCE_LIBRARY_QA",
+      "status": "OPEN_PRIVATE",
+      "description": "Classify/review 226 engineering-related private candidates and enforce privacy/scope before any additional public resource admissions."
+    },
+    {
+      "key": "P002_ARCHIVE_PRESERVATION",
+      "priority": 4,
+      "owner": "RESOURCE_CONTROL",
+      "status": "PROVENANCE_OPEN_NONBLOCKING_FOR_PROJECT_ALIAS",
+      "description": "Keep unrelated archive ancestry as recorded source history. Find native project-owned authoritative transmittal when convenient; do not relabel archive as canonical project folder."
+    },
+    {
+      "key": "P007_ENGINEERING_SOURCE_CERTIFICATION",
+      "priority": 5,
+      "owner": "CAD_AAD_ENGINEERING_SOURCE_OWNER",
+      "status": "OPEN",
+      "description": "Narayani existing linked source hashes/revisions and A9 Main/Local closure still pending."
+    },
+    {
+      "key": "LEGACY_DATA_RECONCILIATION",
+      "priority": 6,
+      "owner": "OPS_CWO",
+      "status": "OPEN_READONLY_COMPARE",
+      "description": "Reconcile existing materials/progress and legacy provider ledgers without inferring unreported site work."
+    },
+    {
+      "key": "ENGINEER_TRADE_REPORTS",
+      "priority": 7,
+      "owner": "SITE_ENGINEERS",
+      "status": "AWAITING_RESPONSES",
+      "description": "Resolve actual trade progress, dated observations, quantity and source replies before updating canonical work."
+    },
+    {
+      "key": "GOOGLE_SHEETS_PROJECTIONS",
+      "priority": 8,
+      "owner": "OPS_TECH",
+      "status": "PROPOSAL_READY_ON_HOLD",
+      "description": "Idempotent canonical GitHub->Sheets materialization and readback, no reverse authority."
+    },
+    {
+      "key": "CONTROL_TOWER_SYNC",
+      "priority": 9,
+      "owner": "OPS_CONTROL",
+      "status": "PARTIAL_PILOT",
+      "description": "Automate GitHub/Drive control index comparison while keeping A7 separate read-only scope."
+    },
+    {
+      "key": "ARCHIVE_QUERY_ENGINE",
+      "priority": 10,
+      "owner": "OPS_TECH",
+      "status": "PARTIAL",
+      "description": "Machine seven-format standard active; Parquet/DuckDB optional work not deployed. Do not restart Discord under this item."
+    },
+    {
+      "key": "PROJECT_VISIBILITY_ACCESS",
+      "priority": 11,
+      "owner": "PLATFORM",
+      "status": "FUTURE",
+      "description": "Optional authenticated company/project access instead of public admin."
+    }
+  ],
+  "on_hold": [
+    {
+      "key": "DISCORD_COLLECTOR",
+      "status": "ON_HOLD_EXPLICIT_USER_20261019",
+      "resume_requires": "NEW_EXPLICIT_USER_INSTRUCTION",
+      "historical_media_mismatches": 269,
+      "description": "Preserve evidence; no collector executions, history backfill or new Discord API reads."
+    }
+  ],
+  "completed_release_request_position": {
+    "requests_1_to_6": "IMPLEMENTED",
+    "request_7": "SIX_ASSOCIATIONS_CONFIRMED_NEW_CANDIDATES_AND_ISSUES_OPEN",
+    "request_8": "PREVIOUS_VISUAL_QA_PASS_FINAL_RESOURCE_DATA_CLOSEOUT_NOT_COMPLETE"
+  },
+  "boundaries": {
+    "no_production_schema_deployed": true,
+    "relational_contract_is_text_ddl": true,
+    "release_does_not_modify_drive_source_files": true
+  }
+}

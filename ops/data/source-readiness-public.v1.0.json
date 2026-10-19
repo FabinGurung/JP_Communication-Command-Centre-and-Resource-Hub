@@ -9,7 +9,8 @@
     "communication_cycle": "ops/control/daily-communication-web-cycle.json",
     "latest_checked_resource_event": "ops/events/cwo-daily/OPS-0083__2026-10-19_GIT_CLOSEOUT_REQ07_READBACK.json",
     "private_file_specific_review_document": "OWNER_ONLY_DRIVE_SOURCE_REVIEW__REQ07_20261019",
-    "public_file_specific_dispositions": "ops/data/resource-review-dispositions-public.v1.0.json"
+    "public_file_specific_dispositions": "ops/data/resource-review-dispositions-public.v1.0.json",
+    "project_alias_crosswalk": "ops/data/resource-project-name-aliases.v1.0.json"
   },
   "resources": {
     "inventory_date_npt": "2026-10-15",
@@ -21,11 +22,12 @@
     "source_root_exceptions": {
       "count": 6,
       "P001": 3,
-      "P002": 3
+      "P002": 3,
+      "interpretation": "SIX_ORIGINAL_SOURCE_POINTERS_OUTSIDE_REGISTERED_ROOT_PHYSICAL_ANCESTRY_UNCHANGED__PROJECT_ASSOCIATION_CONFIRMED"
     },
     "new_public_links_admitted": 0,
     "file_specific_engineer_acceptance": "NOT_CERTIFIED",
-    "source_ownership_approval": "PENDING_INDEPENDENT_PROJECT_OWNER_EVIDENCE",
+    "source_ownership_approval": "PROJECT_SOURCE_ASSOCIATION_USER_CONFIRMED__INDEPENDENT_ENGINEER_ISSUE_PENDING",
     "full_provider_cursor_exhaustion": "NOT_CERTIFIED",
     "original_drive_files_modified": 0,
     "file_specific_review": {
@@ -35,8 +37,10 @@
       "individual_drawings": 5,
       "engineer_issued_for_construction": 0,
       "source_root_independent_authorization": 0,
-      "decision": "REVIEW_COMPLETE_APPROVAL_PENDING",
-      "review_date_npt": "2026-10-19"
+      "decision": "PROJECT_ALIASES_CONFIRMED__ENGINEERING_ISSUES_PENDING",
+      "review_date_npt": "2026-10-19",
+      "project_associations_user_confirmed": 6,
+      "titleblock_person_identity_equivalence_asserted": false
     }
   },
   "communication": {
@@ -56,6 +60,7 @@
     "Existing public links are not proof of permission, revision currency or engineer acceptance.",
     "A general instruction to proceed is not a file-specific disclosure or issued-for-construction decision.",
     "Do not publish private Drive identifiers, original evidence, source folder ancestry, raw communications, or credentials.",
-    "Do not interpret synthetic GitHub CI as a live Discord collector run."
+    "Do not interpret synthetic GitHub CI as a live Discord collector run.",
+    "Six aliases assert project/resource association only; different named clients are NOT asserted to be the same legal person."
   ]
 }

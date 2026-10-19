@@ -24,7 +24,7 @@ def run():
     assert r["new_public_links_admitted"]==inv["delta"]["new_public_admissions"]==0
     assert sum(r["source_root_exceptions"][x] for x in ("P001","P002"))==6
     assert r["file_specific_engineer_acceptance"]=="NOT_CERTIFIED"
-    assert r["source_ownership_approval"].startswith("PENDING_")
+    assert r["source_ownership_approval"]=="PROJECT_SOURCE_ASSOCIATION_USER_CONFIRMED__INDEPENDENT_ENGINEER_ISSUE_PENDING"
     assert r["full_provider_cursor_exhaustion"]=="NOT_CERTIFIED"
     assert r["original_drive_files_modified"]==0
     discord=next(p for p in cycle["source_providers"] if p["provider"]=="DISCORD")
@@ -40,8 +40,12 @@ def run():
     review=read("ops/data/resource-review-dispositions-public.v1.0.json")
     pending=read("ops/data/pending-works.json")
     assert review["kind"]=="PUBLIC_SAFE_EXISTING_RESOURCE_DISPOSITIONS"
-    assert review["totals"]=={"reviewed":6,"folders":1,"drawings":5,"engineer_approved":0,"existing_catalog_links_preserved":46}
+    assert review["totals"]=={"reviewed":6,"folders":1,"drawings":5,"engineer_approved":0,"existing_catalog_links_preserved":46,"project_associations_user_confirmed":6}
     assert len(review["items"])==len({x["resource_id"] for x in review["items"]})==6
+    assert all(i["project_association"]=="USER_CONFIRMED_SCOPED_20261019" for i in review["items"])
+    assert status["resources"]["file_specific_review"]["project_associations_user_confirmed"]==6
+    assert status["resources"]["file_specific_review"]["engineer_issued_for_construction"]==0
+    assert status["resources"]["file_specific_review"]["titleblock_person_identity_equivalence_asserted"] is False
     fkeys={f["resource_id"] for site in resources["sites"] for f in site["files"]}
     assert all(i["resource_id"] in fkeys and i["engineering_use"]!="APPROVED_FOR_CONSTRUCTION" for i in review["items"])
     assert set((i["project_id"] for i in review["items"]))=={"P001","P002"}

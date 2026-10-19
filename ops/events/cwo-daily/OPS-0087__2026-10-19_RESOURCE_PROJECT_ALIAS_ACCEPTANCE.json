@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0087",
+  "date_npt": "2026-10-19",
+  "type": "REQ07_SCOPED_RESOURCE_NAME_ALIAS_EQUIVALENCE",
+  "status": "STAGED__CI_PENDING",
+  "user_instruction": "USER_CONFIRMED_ALTERNATE_DOCUMENT_LABELS_MATCH_THESE_SPECIFIC_PROJECTS",
+  "authority_scope": "EXACT_SIX_RESOURCE_IDS_TO_P001_P002_ONLY",
+  "global_person_name_equivalence": false,
+  "engineering_approval_implied": false,
+  "source_files_published": 0,
+  "source_originals_modified": 0,
+  "existing_catalog_links_preserved": 46,
+  "source_organization_master_unchanged": true,
+  "projects": [
+    {
+      "legacy": "P001",
+      "global": "PRJ-000001",
+      "company": "REB-001",
+      "aliases": 3
+    },
+    {
+      "legacy": "P002",
+      "global": "PRJ-000002",
+      "company": "FBL-001",
+      "aliases": 3
+    }
+  ],
+  "documents": [
+    "ops/data/resource-project-name-aliases.v1.0.json",
+    "ops/schema/daily-ops-postgres.sql",
+    "ops/schema/resource-project-name-alias-seed.v1.0.sql",
+    "ops/control/c-web11-post-alias-roadmap.v1.0.json",
+    "ops/data/resource-review-dispositions-public.v1.0.json",
+    "ops/data/source-readiness-public.v1.0.json"
+  ],
+  "private_name_map": "EXISTING_GOOGLE_DRIVE_OWNER_ONLY_P001_P002_REVIEW__USER_APPROVAL_ADDENDUM_READBACK",
+  "qa": "scripts/test_scoped_resource_aliases.py",
+  "known_outstanding": "FIVE_DRAWINGS_STILL_LACK_SIGNED_ENGINEERING_CONSTRUCTION_ISSUE; LEGAL_IDENTITY_NOT_MERGED; ARCHIVE_PROVENANCE_PRESERVED",
+  "discord_collector": "ON_HOLD_BY_USER_20261019",
+  "previous_stable_main": "9ac0da4357f7fb23382ff0c87236f9ded447f7de",
+  "no_live_postgres_db_claimed": true
+}

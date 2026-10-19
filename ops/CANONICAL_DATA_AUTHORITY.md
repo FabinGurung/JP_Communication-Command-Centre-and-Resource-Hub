@@ -12,6 +12,7 @@ The goal is simple: **edit a fact once at its owning canonical layer, then deriv
 | Project-master current values | `projects.csv` | Project identity, company/legacy codes, lifecycle/status, coordinates and public project attributes. |
 | Daily Ops current values | `ops/data/current-works.json` | Today's work, readiness, materials, blockers, progress, evidence references and projection state. |
 | Project resource links | `ops/data/project-resources.json` | Normalized project → Google Drive folder/file relationships. Drive remains authority for the actual file bytes and access permissions. |
+| Scoped resource-name equivalences | `ops/data/resource-project-name-aliases.v1.0.json` + `ops_project_resource_name_aliases` in `ops/schema/daily-ops-postgres.sql` | Exactly six user-confirmed `resource_id` ↔ `project_id` labels for P001/P002, not person-name equality or construction approval. |
 | Append-only history | `ops/events/daily-ops-events.jsonl` | Operational and governance events. Existing events are not rewritten. |
 | Controlled map configuration | `map-config.json` | Allowed public map statuses and presentation configuration. |
 

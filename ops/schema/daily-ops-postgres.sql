@@ -224,3 +224,51 @@ CREATE TABLE IF NOT EXISTS ops_project_resources (
 
 CREATE INDEX IF NOT EXISTS idx_ops_project_resources_project
   ON ops_project_resources(project_id, is_current);
+
+
+-- REQ07 user-scoped project/source name crosswalk; intentionally NOT a person-identity
+-- equivalence table. Existing ops_projects and ops_project_resources remain authority.
+-- Source originals, formal drawing issues and permissions remain Drive/engineer-owned.
+CREATE UNIQUE INDEX IF NOT EXISTS idx_ops_project_resources_compound_identity
+  ON ops_project_resources(project_id, resource_id);
+
+CREATE TABLE IF NOT EXISTS ops_project_resource_name_aliases (
+  alias_id text PRIMARY KEY,
+  project_id text NOT NULL REFERENCES ops_projects(project_id),
+  resource_id text NOT NULL,
+  observed_label_key text NOT NULL,
+  label_role text NOT NULL CHECK (
+    label_role IN ('SOURCE_FOLDER_NAME','SOURCE_FILENAME','SOURCE_TITLEBLOCK_CLIENT')
+  ),
+  association_state text NOT NULL CHECK (
+    association_state = 'USER_CONFIRMED_PROJECT_RESOURCE_ASSOCIATION'
+  ),
+  authority_ref text NOT NULL,
+  association_date date NOT NULL,
+  identity_scope text NOT NULL DEFAULT 'RESOURCE_TO_PROJECT_ONLY' CHECK (
+    identity_scope = 'RESOURCE_TO_PROJECT_ONLY'
+  ),
+  same_legal_person_asserted boolean NOT NULL DEFAULT false CHECK (
+    same_legal_person_asserted = false
+  ),
+  engineering_issue_state text NOT NULL DEFAULT 'NOT_CERTIFIED' CHECK (
+    engineering_issue_state = 'NOT_CERTIFIED'
+  ),
+  archive_location_unmodified boolean NOT NULL DEFAULT true CHECK (
+    archive_location_unmodified = true
+  ),
+  public_disclosure_additional_authorized boolean NOT NULL DEFAULT false CHECK (
+    public_disclosure_additional_authorized = false
+  ),
+  FOREIGN KEY (project_id, resource_id)
+    REFERENCES ops_project_resources(project_id, resource_id)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
+  UNIQUE (project_id, resource_id, observed_label_key),
+  CHECK (project_id IN ('P001','P002'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_ops_project_resource_aliases_join
+  ON ops_project_resource_name_aliases(project_id, resource_id);
+
+-- Only these six already-registered resource IDs are admitted by this user
+-- authority. Additional projects or resources require a new scoped decision.
