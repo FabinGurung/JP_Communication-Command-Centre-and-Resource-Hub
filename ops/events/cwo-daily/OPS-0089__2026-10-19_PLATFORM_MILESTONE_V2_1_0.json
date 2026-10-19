@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0089",
+  "date_npt": "2026-10-19",
+  "scope": "C_WEB_11_PLATFORM_RELEASE_MILESTONE_V2_1_0",
+  "authority": "USER_REQUEST_TAG_RELEASE_AND_CLOSE_SOFTWARE_DEBT",
+  "pre_release_main": "5d4219a8924fb4a31a9575cfbeb791bc92876d97",
+  "target_tag": "v2.1.0",
+  "status": "STAGED__EXACT_RELEASE_TAG_AND_GITHUB_RELEASE_AFTER_MAIN_CI",
+  "release_notes": "docs/releases/v2.1.0.md",
+  "milestone_packet": "ops/control/milestone-v2.1.0.json",
+  "software_completed": [
+    "PLATFORM_PROJECT_PROGRESS_SEPARATION",
+    "SIX_RESOURCES_EXACT_PROJECT_FK",
+    "PRODUCTION_CI_AND_BROWSER_QA",
+    "BRANCH_RECONCILIATION"
+  ],
+  "closed_release_housekeeping": [
+    "VERSION_FIELD_OUTDATED",
+    "RELEASE_NOTES_MISSING",
+    "CHANGELOG_MISSING_V2_1_0",
+    "NO_DEDICATED_MILESTONE_RELEASE_GATE"
+  ],
+  "future_not_release_blocking": [
+    "DRIVE_COMPLETE_PROVIDER_PAGINATION",
+    "GOOGLE_SHEETS_IDEMPOTENT_PROJECTIONS",
+    "PRIVATE_CANDIDATE_ROUTING",
+    "CONTROL_TOWER_SYNC",
+    "OPTIONAL_AUTH_AND_QUERY_BACKEND"
+  ],
+  "project_data_not_software_milestones": [
+    "P001/P002/P007_ENGINEER_APPROVAL_RECORDS"
+  ],
+  "discord_hold": "DO_NOT_RESUME",
+  "original_drive_mutations": 0,
+  "source_data_mutations": 0,
+  "force_push": false,
+  "rollback_commit": "5d4219a8924fb4a31a9575cfbeb791bc92876d97",
+  "no_live_db_claim": true
+}

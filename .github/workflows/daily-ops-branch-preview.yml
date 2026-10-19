@@ -612,6 +612,9 @@ jobs:
       - name: Validate developer/site/progress/resources isolation
         run: python scripts/validate_site_experience_contract.py
 
+      - name: Validate v2.1.0 milestone release controls
+        run: python scripts/validate_release_milestone_v2_1.py
+
       - name: Phase 5 release QA
         run: python scripts/phase5_release_qa.py
 

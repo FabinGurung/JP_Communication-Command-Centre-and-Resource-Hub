@@ -2,6 +2,23 @@
 
 All notable changes to the JP AEC Operations Hub are recorded here.
 
+## [v2.1.0] — 2026-10-19
+
+### Platform milestone
+
+- Froze tested GitHub Pages/Actions platform baseline, six primary routes, resource library, source-aware Progress, software-only Developer Workspace and stable main/feature reconciliation.
+- Kept engineer/document issue approvals in project Progress, not the developer software release backlog.
+- Preserved 46 permission-gated resource links, 37 frozen progress observations, and six scoped P001/P002 resource-name aliases with FK/negative-join tests.
+- Kept the Discord collector explicitly paused; no new provider harvest or construction acceptance claimed.
+- Added deterministic release governance/notes, immutable tag and GitHub Release automation gated on a successful production deployment.
+
+### Deferred integrations (not release blockers)
+
+- Authenticated repeatable Google Drive full-pagination refresh and private candidate intake.
+- GitHub-to-Sheets projections, Control Tower sync, optional query architecture and role-based backend.
+
+See [`docs/releases/v2.1.0.md`](docs/releases/v2.1.0.md).
+
 ## [v2.0.0] — 2026-10-06
 
 ### Added

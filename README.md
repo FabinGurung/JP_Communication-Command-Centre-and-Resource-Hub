@@ -18,9 +18,11 @@ The registry maps the **Main Library** to `main`, the **Local Library** to `feat
 
 ## Current stable version
 
-**v2.0.0 — JP AEC Operations Hub**
+**v2.1.0 — JP AEC Operations Hub · Governed Platform Baseline**
 
-v2.0.0 is the governed production release that expands the former data-driven project-map baseline into the Operations Hub: Project Map, Daily Ops, Site Operations, per-project pages, Workspace, Guide, Drive-resource linking and specialist-module routing.
+The v2.1.0 milestone freezes the tested platform, branch/CI governance and project-scope isolation. Project drawing/engineer approvals appear in **Progress** and do not block software releases. The Discord collector is explicitly on hold. Future Drive, Sheets and Control Tower automation are separate platform features, not current release failures. See [v2.1.0 release notes](docs/releases/v2.1.0.md) and [platform-only roadmap](ops/control/c-web11-post-alias-roadmap.v1.0.json).
+
+The original v2.0.0 release expanded the former data-driven project-map baseline into the Operations Hub: Project Map, Daily Ops, Site Operations, per-project pages, Workspace, Guide, Drive-resource linking and specialist-module routing.
 
 Project and Daily Ops truth are maintained as canonical machine-readable files, separate from the application:
 
@@ -32,7 +34,7 @@ Project and Daily Ops truth are maintained as canonical machine-readable files, 
 - `map-config.json` — controlled map statuses and presentation configuration
 - HTML / GitHub Pages / Google Sheets / Slack — downstream projections or interaction surfaces, never competing truth stores
 
-See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for source-of-truth rules, [`ops/PLATFORM_MODULES.md`](ops/PLATFORM_MODULES.md) for JP AEC Platform module naming, [`CHANGELOG.md`](CHANGELOG.md) for version history, and [`docs/releases/v2.0.0.md`](docs/releases/v2.0.0.md) for the current release notes.
+See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for source-of-truth rules, [`ops/PLATFORM_MODULES.md`](ops/PLATFORM_MODULES.md) for JP AEC Platform module naming, [`CHANGELOG.md`](CHANGELOG.md) for version history, and [`docs/releases/v2.1.0.md`](docs/releases/v2.1.0.md) for the current release notes.
 
 ## Start here: field users and website developers
 

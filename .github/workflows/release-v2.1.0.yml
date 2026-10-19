@@ -1,0 +1,90 @@
+name: Publish JP AEC v2.1.0 milestone
+
+on:
+  workflow_run:
+    workflows:
+      - Operations Hub production
+    types:
+      - completed
+    branches:
+      - main
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  publish-fixed-milestone:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout precisely deployed source commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Check immutable release packet and source boundaries
+        run: python scripts/validate_release_milestone_v2_1.py
+
+      - name: Wait for same-commit visual and branch governance checks
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_SHA: ${{ github.event.workflow_run.head_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          test "$(git rev-parse HEAD)" = "$TARGET_SHA"
+          test "$(git rev-parse origin/main)" = "$TARGET_SHA" || { echo 'Main changed after successful production deployment; not tagging stale commit'; exit 1; }
+          PASSED=no
+          for attempt in $(seq 1 40); do
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs?head_sha=${TARGET_SHA}&per_page=100" > "$RUNNER_TEMP/release-actions.json"
+            set +e
+            python - "$RUNNER_TEMP/release-actions.json" <<'PY'
+          import json,sys
+          with open(sys.argv[1],encoding='utf-8') as f: entries=json.load(f)['workflow_runs']
+          expected=('Operations Hub production','Field Desk and Map visual QA','Validate branch and lane registry')
+          for name in expected:
+              runs=[x for x in entries if x['name']==name and x.get('head_branch')=='main']
+              if not runs: sys.exit(2)
+              results=[x.get('conclusion') for x in runs if x.get('status')=='completed']
+              if 'success' in results: continue
+              if any(x in {'failure','cancelled','timed_out'} for x in results):
+                  print('Release gate failed:',name,results);sys.exit(1)
+              sys.exit(2)
+          print('RELEASE_CHECKS_PASS: production, visual QA, branch governance at exact commit')
+          PY
+            result=$?
+            set -e
+            if [ "$result" -eq 0 ]; then PASSED=yes; break; fi
+            if [ "$result" -eq 1 ]; then exit 1; fi
+            sleep 15
+          done
+          test "$PASSED" = yes || { echo 'Timeout waiting for release gates'; exit 1; }
+
+      - name: Create or verify exact immutable v2.1.0 tag and GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_SHA: ${{ github.event.workflow_run.head_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG=v2.1.0
+          test "$(git rev-parse HEAD)" = "$TARGET_SHA"
+          test "$(git rev-parse origin/main)" = "$TARGET_SHA"
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            git fetch --no-tags origin "refs/tags/$TAG:refs/tags/$TAG"
+            test "$(git rev-parse "refs/tags/$TAG^{}")" = "$TARGET_SHA" || { echo 'Existing release tag points elsewhere'; exit 1; }
+            echo 'Existing tag verified, no mutation performed'
+          else
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' tag -a "$TAG" "$TARGET_SHA" -m 'JP AEC Operations Hub v2.1.0 — Governed Platform Baseline'
+            git push origin "refs/tags/$TAG"
+          fi
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'Existing GitHub Release verified, no duplicate release'
+          else
+            gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --verify-tag --title 'JP AEC Operations Hub v2.1.0 — Governed Platform Baseline' --notes-file docs/releases/v2.1.0.md
+          fi
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json tagName,targetCommitish,url --jq '{tag:.tagName,target:.targetCommitish,url:.url}'

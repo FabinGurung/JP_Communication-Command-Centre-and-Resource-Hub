@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "milestone_id": "JP-AEC-PLATFORM-v2.1.0",
+  "version": "2.1.0",
+  "tag": "v2.1.0",
+  "release_title": "JP AEC Operations Hub v2.1.0 — Governed Platform Baseline",
+  "requested_on_npt": "2026-10-19",
+  "source_baseline_commit": "5d4219a8924fb4a31a9575cfbeb791bc92876d97",
+  "release_state": "AWAITING_MAIN_ACTIONS_SUCCESS_AND_IMMUTABLE_GIT_TAG",
+  "release_document": "docs/releases/v2.1.0.md",
+  "prod_workflow": "Operations Hub production",
+  "backend_claim": "STATIC_PAGES_NO_PERSISTENT_POSTGRES_BACKEND",
+  "required_gates": [
+    "MAIN_FAST_FORWARD",
+    "PRODUCTION_VALIDATE_SUCCESS",
+    "PAGES_DEPLOY_SUCCESS",
+    "BRANCH_REGISTRY_SUCCESS",
+    "FIELD_MAP_VISUAL_QA_SUCCESS",
+    "SIX_ALIAS_PK_FK_VALIDATION",
+    "PLATFORM_PROJECT_PROGRESS_ISOLATION",
+    "NO_NEW_PRIVATE_ORIGINAL_PUBLICATION",
+    "DISCORD_HOLD_PRESERVED"
+  ],
+  "frozen_canonical_objects": [
+    "projects.csv",
+    "ops/data/current-works.json",
+    "ops/data/project-resources.json",
+    "ops/events/daily-ops-events.jsonl",
+    "ops/data/progress-report-public.v0.2.jsonl"
+  ],
+  "no_engineer_signoff_requirement": true,
+  "workflow_name": "release-v2.1.0.yml",
+  "post_release_authority": "GITHUB_TAG_AND_GITHUB_RELEASE_AT_EXACT_DEPLOYED_COMMIT",
+  "rollback_pre_release_commit": "5d4219a8924fb4a31a9575cfbeb791bc92876d97",
+  "future_software_tasks_separate": true
+}

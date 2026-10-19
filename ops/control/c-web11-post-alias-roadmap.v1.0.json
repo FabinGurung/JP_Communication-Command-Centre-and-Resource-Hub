@@ -154,14 +154,17 @@
   "goal": "BUILD_AND_VALIDATE_REPRODUCIBLE_SOFTWARE_PLATFORM_NOT_CERTIFY_CONSTRUCTION_PROJECTS",
   "status": "PLATFORM_RELEASE_PASSED__PLATFORM_INTEGRATIONS_PARTIAL__PROJECT_APPROVALS_TRACKED_SEPARATELY",
   "platform_health": {
-    "main_commit_verified": "a1f6591fa65b029294c74daa2b71a770aa59fa0c",
-    "last_recorded_production_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39190079895",
-    "last_recorded_visual_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39190079873",
-    "production_ci_status": "PASSED_AS_OF_2026_10_19",
+    "main_commit_verified": "5d4219a8924fb4a31a9575cfbeb791bc92876d97",
+    "last_recorded_production_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39211276126",
+    "last_recorded_visual_ci": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39211276078",
+    "production_ci_status": "PASSED_PRE_MILESTONE_RELEASE_2026_10_19",
     "web_implementation": "STATIC_GITHUB_PAGES_WITH_VERSIONED_JSON_AND_TESTED_PYTHON_CONTRACTS",
     "continuous_backend_service": "NONE",
     "live_postgres_service": "NOT_DEPLOYED",
     "production_feature_status": "PUBLISHED_SCOPE_PASSED__NOT_END_TO_END_AUTOMATED_INTEGRATIONS",
-    "software_release_blocked_by_project_approval": false
+    "software_release_blocked_by_project_approval": false,
+    "milestone_release_version": "v2.1.0",
+    "milestone_status": "RELEASE_CANDIDATE__EXACT_SHA_TAG_CREATED_ONLY_AFTER_MAIN_DEPLOY_QA",
+    "next_engineering_scope": "PLATFORM_INTEGRATIONS_AFTER_V2_1_0_FREEZE"
   }
 }
