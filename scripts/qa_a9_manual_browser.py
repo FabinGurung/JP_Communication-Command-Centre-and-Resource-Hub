@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Playwright smoke for new A9 departments and project/manual status on mobile/desktop."""
+import os
+import shutil
 import pathlib
 import subprocess
 import time
@@ -22,7 +24,11 @@ try:
             time.sleep(.15)
     else: raise AssertionError("Local site server failed")
     with sync_playwright() as p:
-        browser=p.chromium.launch(headless=True)
+        binary=os.environ.get("CHROME_BIN") or shutil.which("google-chrome") or shutil.which("google-chrome-stable") or shutil.which("chromium")
+        check(binary is not None,"Installed system Chromium unavailable")
+        options={"executable_path":binary,"headless":True,"args":["--no-sandbox","--disable-dev-shm-usage","--disable-gpu"]}
+        if os.environ.get("JP_QA_PROXY"): options["proxy"]={"server":os.environ["JP_QA_PROXY"],"bypass":"127.0.0.1,localhost"}
+        browser=p.chromium.launch(**options)
         for width in (390,1440):
             page=browser.new_page(viewport={"width":width,"height":850},device_scale_factor=1)
             errors=[]
