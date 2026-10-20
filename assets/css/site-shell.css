@@ -122,3 +122,4 @@ body[data-jp-site="1"] :is(.route p,.foot,.footer) {color:var(--jp-muted);}
 
 /* Keep 30px map symbols centered in practical 44px interactive hit areas. */
 body[data-jp-section="map"] .jp-div-icon {display:grid;place-items:center;}
+body[data-jp-site="1"] .depth-nav a.active {background:var(--jp-green-soft);border-color:var(--jp-line-strong);color:var(--jp-green);}

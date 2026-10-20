@@ -138,6 +138,7 @@ def after(browser):
                 require(not unexpected,f'{name}/{width}: failed assets {unexpected}')
                 if name=='map':
                     page.wait_for_function("document.querySelectorAll('img.leaflet-tile-loaded').length>=3",timeout=20000)
+                    page.wait_for_load_state('networkidle')
                 if name in PRIMARY and width in (390,768,1440):capture(page,'after',name,width)
                 if width in (390,1440):audit_wcag(page,f'{name}/{width}')
                 results.append({'route':route,'width':width,'result':'PASS'})
