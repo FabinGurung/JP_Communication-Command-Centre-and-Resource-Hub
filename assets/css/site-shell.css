@@ -15,7 +15,8 @@ body[data-jp-site="1"] :is(.main,.card,.entry,.poster) {background:var(--jp-pape
 body[data-jp-site="1"] :is(button,select,input[type="text"],input[type="search"],input[type="date"],.button,.btn,.cta) {min-height:44px;border-radius:var(--jp-radius-sm);font-family:var(--jp-font);max-width:100%;}
 body[data-jp-site="1"] :is(select,input[type="text"],input[type="search"],input[type="date"]) {border:1px solid var(--jp-line-strong);color:var(--jp-ink);background:var(--jp-surface);}
 body[data-jp-site="1"] :is(.button,.btn) {display:inline-flex;align-items:center;justify-content:center;}
-body[data-jp-site="1"] :is(.button,.btn):not(.secondary):not(.alt):not(.button-primary):not(.primary) {color:var(--jp-green);border-color:var(--jp-line-strong);}
+body[data-jp-site="1"] :is(.button,.btn) {background:var(--jp-green);color:#fff;border-color:var(--jp-green);}
+body[data-jp-site="1"] :is(.button,.btn).secondary {background:var(--jp-paper);color:var(--jp-green);border-color:var(--jp-line-strong);}
 body[data-jp-site="1"] :is(.button-primary,.btn.primary) {background:var(--jp-green);color:#fff;border-color:var(--jp-green);}
 body[data-jp-site="1"] :is(a,button,input,select,textarea,summary):focus-visible {outline:3px solid var(--jp-warning);outline-offset:3px;}
 body[data-jp-site="1"] .items .remove {min-width:44px;min-height:44px;}
@@ -113,3 +114,8 @@ body[data-jp-section="map"] .map-layer-control label {min-height:44px;align-item
 }
 /* Long work-type names and repository slugs must wrap inside guide step grids. */
 body[data-jp-site="1"] .steps,body[data-jp-site="1"] .steps li {min-width:0;overflow-wrap:anywhere;}
+
+/* Archive status cards use a soft accent surface, not the action accent color. */
+body[data-jp-site="1"] .status article {background:var(--jp-leaf-pale);}
+body[data-jp-site="1"] .hero .tag {color:var(--jp-green);border-color:var(--jp-line-strong);}
+body[data-jp-site="1"] :is(.route p,.foot,.footer) {color:var(--jp-muted);}

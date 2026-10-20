@@ -69,11 +69,15 @@
       "unchanged_from_baseline": true
     }
   ],
-  "qa_status": "PRODUCTION_SOURCE_CHECKS_PASSED__FIELD_MAP_BROWSER_SUITE_PASSED__RESPONSIVE_MATRIX_IN_PROGRESS",
+  "qa_status": "GOVERNED_BRANCH_VALIDATION_IN_PROGRESS",
   "workflow_artifacts": "field-ux-screenshots (field-ux/ and botanical-theme/ before, after, results.json)",
   "specification": "docs/design/botanical-workspace-v1.md",
   "modified_files": [
+    ".github/workflows/field-ux-visual-qa.yml",
+    ".github/workflows/release-v2.1.0.yml",
     ".gitignore",
+    "CHANGELOG.md",
+    "README.md",
     "assets/botanical/corner-sprig.svg",
     "assets/botanical/empty-garden.svg",
     "assets/botanical/garden-left.svg",
@@ -81,26 +85,24 @@
     "assets/botanical/tree-silhouette.svg",
     "assets/css/jp-botanical.css",
     "assets/css/jp-theme-tokens.css",
-    "docs/design/botanical-workspace-v1.md",
-    "scripts/qa_botanical_theme.py",
-    ".github/workflows/field-ux-visual-qa.yml",
-    ".github/workflows/release-v2.1.0.yml",
-    "CHANGELOG.md",
-    "README.md",
     "assets/css/site-shell.css",
+    "assets/js/app.js",
     "assets/js/site-shell.js",
     "controls/archive-formats.html",
     "controls/index.html",
     "controls/memory-wall.html",
     "controls/storage.html",
+    "docs/design/botanical-workspace-v1.md",
     "guide/15-pages/index.html",
     "guide/3-pages/index.html",
     "guide/7-pages/index.html",
     "guide/index.html",
     "index.html",
     "map.html",
+    "ops/control/botanical-workspace-arc.v1.0.json",
     "pending/index.html",
     "resources/index.html",
+    "scripts/qa_botanical_theme.py",
     "scripts/qa_field_ux_browser.py",
     "site-operations.html",
     "site-operations/coordination.html",
@@ -109,8 +111,12 @@
     "site-operations/questions.html",
     "site-operations/schedule.html",
     "workspace/backlog/index.html",
-    "workspace/index.html",
-    "ops/control/botanical-workspace-arc.v1.0.json"
+    "workspace/index.html"
   ],
-  "remaining_scope": "Future provider integrations remain in the existing software roadmap; project approvals remain Progress data; Discord remains on hold."
+  "remaining_scope": "Future provider integrations remain in the existing software roadmap; project approvals remain Progress data; Discord remains on hold.",
+  "regression_repairs": [
+    "Wrap long guide step text at 320px",
+    "Keep mobile markers clear of 44px map controls",
+    "Bridge legacy control footer and status-card contrast"
+  ]
 }

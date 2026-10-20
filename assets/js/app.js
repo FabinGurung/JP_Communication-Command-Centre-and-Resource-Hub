@@ -582,7 +582,13 @@ function renderMapMarkers({ fitBounds = false } = {}) {
   renderSelectedComponents(state.activeProjectId);
   if (fitBounds && bounds.length) {
     state.map.invalidateSize({ pan: false });
-    state.map.fitBounds(bounds, { padding: [state.config.fit_bounds_padding, state.config.fit_bounds_padding], maxZoom: 15 });
+    const padding = state.config.fit_bounds_padding;
+    // Keep site targets clear of the phone's 44px zoom/layer/list controls.
+    const framing = window.matchMedia("(max-width: 860px)").matches
+      ? { paddingTopLeft: [Math.max(padding, 64), Math.max(padding, 112)],
+          paddingBottomRight: [Math.max(padding, 64), Math.max(padding, 76)] }
+      : { padding: [padding, padding] };
+    state.map.fitBounds(bounds, { ...framing, maxZoom: 15 });
   }
   window.setTimeout(updateProjectTooltips, 50);
 }
