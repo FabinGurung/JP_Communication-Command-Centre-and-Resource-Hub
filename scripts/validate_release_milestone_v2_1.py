@@ -15,7 +15,8 @@ def main():
     pending=load("ops/data/pending-works.json")
     cycle=load("ops/control/daily-communication-web-cycle.json")
     aliases=load("ops/data/resource-project-name-aliases.v1.0.json")
-    assert version=="2.1.0" and packet["version"]==version
+    # The v2.1.0 packet/tag remain frozen; later platform releases have their own validators.
+    assert version in ("2.1.0","2.2.0") and packet["version"]=="2.1.0"
     assert packet["tag"]=="v2.1.0" and packet["milestone_id"]=="JP-AEC-PLATFORM-v2.1.0"
     assert packet["source_baseline_commit"]==packet["rollback_pre_release_commit"]
     assert len(packet["source_baseline_commit"])==40

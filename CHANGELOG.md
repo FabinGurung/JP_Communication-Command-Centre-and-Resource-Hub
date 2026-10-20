@@ -2,14 +2,17 @@
 
 All notable changes to the JP AEC Operations Hub are recorded here.
 
-## [Unreleased] — Botanical workspace arc · 2026-10-20
+## [v2.2.0] — Botanical workspace and mobile harmonization · 2026-10-20
 
 - Shared light botanical tokens and components across 20 active routes; archived HTML and three compatibility redirects preserved.
 - Moved the Shadow DOM navigation outside narrow content columns; added compact Menu, Escape and skip-to-content behavior with preserved project context.
 - Added five small local garden SVGs, calm checklist empty state, responsive gutter planting and print/reduced-motion rules.
 - Added eight-width, 20-route theme QA and before/after artifacts alongside existing field/map regression tests; validate the governed working lane before production.
-- Made the frozen milestone workflow skip later development commits instead of attempting to retag v2.1.0.
+- Kept the frozen v2.1.0 milestone workflow immutable and added exact-commit v2.2.0 tagging/Release automation gated on production, browser QA and branch validation.
 - Preserved project data, all resource relationships, field/progress scope and the Discord hold.
+- Release housekeeping updates the version, README, release notes and CI guards; does not change frontend implementation.
+
+See [`docs/releases/v2.2.0.md`](docs/releases/v2.2.0.md).
 
 ## [v2.1.0] — 2026-10-19
 

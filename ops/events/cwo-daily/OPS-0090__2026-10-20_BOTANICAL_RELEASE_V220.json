@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0090",
+  "date_npt": "2026-10-20",
+  "scope": "JP_AEC_BOTANICAL_MOBILE_PLATFORM_RELEASE_V220",
+  "status": "RELEASE_CANDIDATE__CI_AND_PAGES_TAG_PENDING",
+  "release_tag": "v2.2.0",
+  "implementation_commit": "599e487c6dceb52d620405f085c48912260d4755",
+  "previous_immutable_release_tag": "v2.1.0",
+  "previous_release_commit": "d2963c2380c359dff3ea2f23f4a702c6074cb642",
+  "user_authorization": "2026-10-20_EXPLICIT_TAG_AND_GITHUB_RELEASE",
+  "release_scope": "THEME_NORMALIZATION_BOTANICAL_UI_MOBILE_HARMONIZATION",
+  "source_evidence": [
+    "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39350038441",
+    "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39350038422",
+    "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39350038478"
+  ],
+  "route_viewport_tests_previously_verified": 160,
+  "release_commit": "RESOLVE_FROM_SUCCESSFUL_MAIN_DEPLOY_WORKFLOW_THEN_IMMUTABLE_TAG",
+  "expected_tag_type": "ANNOTATED",
+  "release_notes": "docs/releases/v2.2.0.md",
+  "previous_release_preserved": true,
+  "original_engineering_assets_unchanged": true,
+  "project_approvals_not_release_gates": true,
+  "discord_pause_enforced": true,
+  "pending_release_dependencies": [
+    "NEW_WORKING_LANE_CI",
+    "FAST_FORWARD_MAIN",
+    "NEW_MAIN_PRODUCTION_VISUAL_BRANCH_GATES",
+    "EXACT_SHA_ANNOTATED_TAG",
+    "PUBLISHED_GITHUB_RELEASE_READBACK"
+  ],
+  "genuine_future_software_work": [
+    "AUTH_DRIVE_PAGINATION",
+    "GITHUB_TO_SHEETS_PROJECTION",
+    "CONTROL_TOWER_SYNC",
+    "OPTIONAL_AUTH"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "milestone_id": "JP-AEC-BOTANICAL-UI-v2.2.0",
+  "version": "2.2.0",
+  "tag": "v2.2.0",
+  "release_title": "JP AEC Operations Hub v2.2.0 — Botanical UI & Mobile Harmonization",
+  "scope": "RELEASE_HOUSEKEEPING_FOR_COMPLETED_FRONTEND_ARC_ONLY",
+  "reviewed_on_npt": "2026-10-20",
+  "implementation_sha": "599e487c6dceb52d620405f085c48912260d4755",
+  "pre_release_main_sha": "599e487c6dceb52d620405f085c48912260d4755",
+  "previous_release_tag": "v2.1.0",
+  "previous_release_peeled_sha": "d2963c2380c359dff3ea2f23f4a702c6074cb642",
+  "release_state": "AWAITING_SUCCESSFUL_MAIN_DEPLOY_AND_SAME_COMMIT_VISUAL_BRANCH_QA",
+  "evidence": {
+    "implementation_production_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39350038441",
+    "implementation_visual_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39350038422",
+    "implementation_branch_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39350038478",
+    "responsive_route_viewport_count": 160,
+    "active_routes": 20,
+    "viewport_widths": [
+      320,
+      375,
+      390,
+      430,
+      768,
+      1024,
+      1440,
+      1920
+    ],
+    "artifact_id": 12232303621,
+    "artifact_name": "field-ux-screenshots",
+    "qa_not_rerun_by_release_packet": true
+  },
+  "source_spec": "docs/design/botanical-workspace-v1.md",
+  "arc_manifest": "ops/control/botanical-workspace-arc.v1.0.json",
+  "release_notes": "docs/releases/v2.2.0.md",
+  "release_workflow": ".github/workflows/release-v2.2.0.yml",
+  "validator": "scripts/validate_release_milestone_v2_2.py",
+  "immutable_tags": [
+    "v2.1.0",
+    "v2.2.0"
+  ],
+  "allowed_housekeeping_paths": [
+    "VERSION",
+    "README.md",
+    "CHANGELOG.md",
+    "docs/releases/v2.2.0.md",
+    ".github/workflows/daily-ops-branch-preview.yml",
+    ".github/workflows/release-v2.2.0.yml",
+    "scripts/validate_release_milestone_v2_1.py",
+    "scripts/validate_release_milestone_v2_2.py",
+    "ops/control/milestone-v2.2.0.json",
+    "ops/events/cwo-daily/OPS-0090__2026-10-20_BOTANICAL_RELEASE_V220.json"
+  ],
+  "mandatory_gates": [
+    "REGISTERED_WORKING_LANE_VALIDATE_SUCCESS",
+    "MAIN_FAST_FORWARD",
+    "MAIN_PRODUCTION_VALIDATE_AND_PAGES_SUCCESS",
+    "MAIN_VISUAL_160_ROUTE_VIEWPORT_QA_SUCCESS",
+    "MAIN_BRANCH_REGISTRY_SUCCESS",
+    "ANALYZE_RELEASE_ONLY_DIFF_FROM_IMPLEMENTATION",
+    "TAG_ANNOTATED_TO_EXACT_DEPLOYED_SHA",
+    "PUBLISHED_RELEASE_NOT_DRAFT",
+    "DISCORD_HOLD_PRESERVED"
+  ],
+  "future_integrations_separate": true,
+  "project_progress_not_blocking_software": true,
+  "originals_modified": 0,
+  "discord_collector_paused": true
+}

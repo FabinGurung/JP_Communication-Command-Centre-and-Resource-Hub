@@ -615,6 +615,9 @@ jobs:
       - name: Validate v2.1.0 milestone release controls
         run: python scripts/validate_release_milestone_v2_1.py
 
+      - name: Verify v2.2.0 annotated release candidate and source boundaries
+        run: python scripts/validate_release_milestone_v2_2.py
+
       - name: Phase 5 release QA
         run: python scripts/phase5_release_qa.py
 

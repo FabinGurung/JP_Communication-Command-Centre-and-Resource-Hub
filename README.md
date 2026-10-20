@@ -18,11 +18,15 @@ The registry maps the **Main Library** to `main`, the **Local Library** to `feat
 
 ## Current interface development arc
 
-The botanical workspace theme shares tokens, navigation and responsive rules across all 20 active pages. See the [design-system specification](docs/design/botanical-workspace-v1.md) for ownership, SVG usage, mobile/print rules and repeatable visual QA. The immutable v2.1.0 release remains the rollback baseline; this arc creates no new release tag.
+The botanical workspace theme ships as **v2.2.0** after release-commit validation, sharing tokens, navigation and responsive rules across all 20 active pages. See the [design-system specification](docs/design/botanical-workspace-v1.md) for SVG ownership, mobile/print rules and repeatable visual QA. Immutable **v2.1.0** remains the previous-release rollback baseline.
 
 ## Current stable version
 
-**v2.1.0 — JP AEC Operations Hub · Governed Platform Baseline**
+**v2.2.0 — JP AEC Operations Hub · Botanical UI & Mobile Harmonization**
+
+The v2.2.0 release freezes the tested botanical theme across 20 active routes, the shared navigation/mobile behavior, five local botanical SVG assets and the documented browser QA. Project engineer approvals are shown in Progress only. The Discord collector remains on hold. See the [v2.2.0 release notes](docs/releases/v2.2.0.md).
+
+**Previous stable release:** **v2.1.0 — JP AEC Operations Hub · Governed Platform Baseline**
 
 The v2.1.0 milestone freezes the tested platform, branch/CI governance and project-scope isolation. Project drawing/engineer approvals appear in **Progress** and do not block software releases. The Discord collector is explicitly on hold. Future Drive, Sheets and Control Tower automation are separate platform features, not current release failures. See [v2.1.0 release notes](docs/releases/v2.1.0.md) and [platform-only roadmap](ops/control/c-web11-post-alias-roadmap.v1.0.json).
 
@@ -38,7 +42,7 @@ Project and Daily Ops truth are maintained as canonical machine-readable files, 
 - `map-config.json` — controlled map statuses and presentation configuration
 - HTML / GitHub Pages / Google Sheets / Slack — downstream projections or interaction surfaces, never competing truth stores
 
-See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for source-of-truth rules, [`ops/PLATFORM_MODULES.md`](ops/PLATFORM_MODULES.md) for JP AEC Platform module naming, [`CHANGELOG.md`](CHANGELOG.md) for version history, and [`docs/releases/v2.1.0.md`](docs/releases/v2.1.0.md) for the current release notes.
+See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for source-of-truth rules, [`ops/PLATFORM_MODULES.md`](ops/PLATFORM_MODULES.md) for JP AEC Platform module naming, [`CHANGELOG.md`](CHANGELOG.md) for version history, and [`docs/releases/v2.2.0.md`](docs/releases/v2.2.0.md) for the current release notes.
 
 ## Start here: field users and website developers
 
