@@ -436,7 +436,7 @@ function projectMarkerIcon(project) {
   return L.divIcon({
     className: "jp-div-icon",
     html: `<div class="function-marker marker-shape-${escapeHTML(style.shape)}" style="--marker-color:${escapeHTML(statusStyle.color)}" title="${escapeHTML(style.label)}"><span>${escapeHTML(style.symbol)}</span></div>`,
-    iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -16], tooltipAnchor: [0, -16],
+    iconSize: [44, 44], iconAnchor: [22, 22], popupAnchor: [0, -16], tooltipAnchor: [0, -16],
   });
 }
 
@@ -535,7 +535,7 @@ function renderSupplementalMarkers(bounds) {
     state.projectOpportunities.filter((row) => row.is_public && row.latitude !== null && row.longitude !== null).forEach((row) => {
       const position = state.displayPositionByKey.get(`opportunity:${row.opportunity_id}`) || [row.latitude, row.longitude];
       const marker = L.marker(position, {
-        icon: L.divIcon({ className: "jp-div-icon", html: `<div class="supplemental-marker opportunity-marker"><span>?</span></div>`, iconSize: [30, 30], iconAnchor: [15, 15] }),
+        icon: L.divIcon({ className: "jp-div-icon", html: `<div class="supplemental-marker opportunity-marker"><span>?</span></div>`, iconSize: [44, 44], iconAnchor: [22, 22] }),
       }).bindPopup(supplementalPopup(row.opportunity_name, [
         ["Type", "Opportunity"], ["Status", humanLabel(row.status)], ["Ward", row.location_ward_number],
       ], row.data_quality_issue, directionsURL(row))).addTo(state.supplementalLayer);
@@ -547,7 +547,7 @@ function renderSupplementalMarkers(bounds) {
       const organization = state.organizationById.get(row.organization_id);
       const position = state.displayPositionByKey.get(`location:${row.organization_location_id}`) || [row.latitude, row.longitude];
       L.marker(position, {
-        icon: L.divIcon({ className: "jp-div-icon", html: `<div class="supplemental-marker office-marker"><span>O</span></div>`, iconSize: [30, 30], iconAnchor: [15, 15] }),
+        icon: L.divIcon({ className: "jp-div-icon", html: `<div class="supplemental-marker office-marker"><span>O</span></div>`, iconSize: [44, 44], iconAnchor: [22, 22] }),
       }).bindPopup(supplementalPopup(row.location_name, [
         ["Organization", organization?.organization_name || ""], ["Type", humanLabel(row.location_type)], ["Ward", row.location_ward_number],
       ], row.data_quality_issue, directionsURL(row))).addTo(state.supplementalLayer);

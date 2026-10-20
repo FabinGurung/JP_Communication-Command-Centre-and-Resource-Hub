@@ -143,6 +143,17 @@ def after(browser):
                 results.append({'route':route,'width':width,'result':'PASS'})
             require(max(header_heights[width])-min(header_heights[width])<=1,f'{width}: inconsistent header heights')
             print('RESPONSIVE_PASS',width,len(ROUTES),'routes',flush=True)
+        # Phone landscape: navigation and content remain reachable with a short viewport.
+        page.set_viewport_size({'width':844,'height':390})
+        for name in PRIMARY:
+            page.goto(BASE+'/'+ROUTES[name],wait_until='networkidle',timeout=60000)
+            settled(page,name)
+            require(page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),f'{name}: landscape overflow')
+            host=page.locator('jp-site-header')
+            host.locator('.jp-menu-toggle').click()
+            require(host.locator('nav').is_visible(),f'{name}: landscape menu inaccessible')
+            host.locator('.jp-menu-toggle').press('Escape')
+        page.set_viewport_size({'width':1440,'height':900})
         # Native keyboard focus crosses the shadow boundary through skip-to-content.
         page.goto(BASE+'/site-operations.html?project=P004',wait_until='networkidle')
         settled(page,'checklist')

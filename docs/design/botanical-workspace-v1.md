@@ -23,7 +23,7 @@ Use forest-green text on warm white surfaces, pale sage backgrounds, 10/14/20px 
 
 The header is a direct body child, independent of each content column. Its six route links remain in one row on wide screens. At narrower widths, Menu opens a grid with all six links; Escape closes it and returns focus. More tools is independently accessible. Selected project IDs follow supported field routes; developer pages do not inherit that context. Skip to content crosses the Shadow DOM boundary and focuses the main content. A ResizeObserver requests map reflow when the header changes size.
 
-The personal checklist retains its 800px content measure; wider pages use a 1200px outer measure. Primary buttons and inputs have a 44px minimum height. Map zoom, filter, list and layer controls also receive practical touch areas. Mobile fit-bounds reserves space around these controls so site markers remain reachable. Tables retain local horizontal scrolling where needed rather than stretching the document.
+The personal checklist retains its 800px content measure; wider pages use a 1200px outer measure. Primary buttons and inputs have a 44px minimum height. Map zoom, filter, list and layer controls also receive practical touch areas. Site symbols are centered in 44px interactive hit areas. Mobile fit-bounds reserves space around these controls so site markers remain reachable. Tables retain local horizontal scrolling where needed rather than stretching the document.
 
 Garden assets:
 

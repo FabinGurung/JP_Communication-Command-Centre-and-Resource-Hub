@@ -15,7 +15,11 @@
         },
         {
           "label": "🎨 Green design tokens",
-          "href": "../assets/css/site-shell.css"
+          "href": "../assets/css/jp-theme-tokens.css"
+        },
+        {
+          "label": "🌿 Botanical theme specification",
+          "href": "../docs/design/botanical-workspace-v1.md"
         },
         {
           "label": "🎬 Canvas hero renderer",

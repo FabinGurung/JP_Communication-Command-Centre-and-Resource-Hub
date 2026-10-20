@@ -6,6 +6,7 @@ on GitHub runners) is driven by Playwright; private Drive bytes are never
 downloaded or included in screenshot artifacts.
 """
 import os
+import json
 import pathlib
 import re
 import urllib.error
@@ -55,6 +56,10 @@ def audit_wcag(page, label):
     for v in report:
         print("WCAG_FINDING",label,v["id"],v["impact"],str(v["nodes"])[:280])
     fatal=[v for v in report if v["impact"] in {"critical","serious"}]
+    if fatal:
+        key="".join(c if c.isalnum() else "-" for c in label)
+        (OUT/(key+"-accessibility.json")).write_text(json.dumps(report,indent=2))
+        page.screenshot(path=str(OUT/(key+"-accessibility-failure.png")),full_page=True)
     require(not fatal, f"{label}: serious or critical WCAG errors: {[x['id'] for x in fatal]}")
     return report
 

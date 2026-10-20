@@ -69,7 +69,7 @@
       "unchanged_from_baseline": true
     }
   ],
-  "qa_status": "GOVERNED_BRANCH_VALIDATION_IN_PROGRESS",
+  "qa_status": "REQUIRED_CHECKS_ENFORCED_IN_GITHUB_ACTIONS",
   "workflow_artifacts": "field-ux-screenshots (field-ux/ and botanical-theme/ before, after, results.json)",
   "specification": "docs/design/botanical-workspace-v1.md",
   "modified_files": [
@@ -111,6 +111,7 @@
     "site-operations/questions.html",
     "site-operations/schedule.html",
     "workspace/backlog/index.html",
+    "workspace/developer-links.v0.1.json",
     "workspace/index.html"
   ],
   "remaining_scope": "Future provider integrations remain in the existing software roadmap; project approvals remain Progress data; Discord remains on hold.",
@@ -118,5 +119,11 @@
     "Wrap long guide step text at 320px",
     "Keep mobile markers clear of 44px map controls",
     "Bridge legacy control footer and status-card contrast"
-  ]
+  ],
+  "validation_commands": [
+    "scripts/qa_field_ux_browser.py",
+    "scripts/qa_botanical_theme.py",
+    ".github/workflows/daily-ops-branch-preview.yml validate job"
+  ],
+  "qa_receipt_rule": "Use exact-commit GitHub Actions conclusions and artifacts; this manifest does not self-certify a future deployment."
 }

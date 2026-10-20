@@ -119,3 +119,6 @@ body[data-jp-site="1"] .steps,body[data-jp-site="1"] .steps li {min-width:0;over
 body[data-jp-site="1"] .status article {background:var(--jp-leaf-pale);}
 body[data-jp-site="1"] .hero .tag {color:var(--jp-green);border-color:var(--jp-line-strong);}
 body[data-jp-site="1"] :is(.route p,.foot,.footer) {color:var(--jp-muted);}
+
+/* Keep 30px map symbols centered in practical 44px interactive hit areas. */
+body[data-jp-section="map"] .jp-div-icon {display:grid;place-items:center;}
