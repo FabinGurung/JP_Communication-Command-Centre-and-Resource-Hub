@@ -5,6 +5,8 @@ Stdlib-only so the same checks run in GitHub Actions and local release QA.
 """
 from __future__ import annotations
 
+import json
+
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
