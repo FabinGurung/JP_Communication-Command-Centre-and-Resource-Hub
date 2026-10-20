@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="../assets/css/jp-theme-tokens.css?v=botanical-1">
 <link rel="stylesheet" href="../assets/css/site-shell.css?v=botanical-1">
 <link rel="stylesheet" href="../assets/css/jp-botanical.css?v=botanical-1">
-</head><body data-jp-site="1"><main class="shell">
+<link rel="stylesheet" href="../assets/css/a9-ui-extensions.css?v=a9-1"></head><body data-jp-site="1"><main class="shell">
 <nav class="nav" aria-label="Site Operations pages"><a href="../site-operations.html">Daily Checklist</a><a href="coordination.html">Site Coordination</a><a class="active" aria-current="page" href="history.html">Progress Report</a><a href="../resources/">Drawings &amp; Models</a><a href="../workspace/">🛠️ Developer Workspace</a><a href="../index.html">Overview</a></nav>
 <header class="hero"><div class="eyebrow">Site Operations · evidence archive</div><h1>Progress Report</h1>
 <p>Construction history derived from normalized communication evidence preserved in Google Drive. Field reports and the former daily checklist are distinct. <strong>No historical reminder is an instruction to start work.</strong></p>
@@ -29,6 +29,7 @@
 <div class="metric"><b id="count-pending">—</b><span>Legacy checklist carryovers</span></div>
 <div class="metric"><b id="count-sites">—</b><span>Projects included</span></div>
 </section>
+<section class="a9-panel" aria-label="Additional manually reviewed progress events"><h2>🗒️ Additional reviewed field updates</h2><p class="a9-muted">These appear only after user-triggered source reconciliation and public-safe publication. The existing 37 historical events remain untouched and independently displayed below.</p><p class="a9-status-note" id="a9-manual-progress-count" role="status">Reading additional review ledger…</p><div id="a9-manual-progress" aria-live="polite"></div></section>
 <section class="doc-status-shelf" aria-labelledby="doc-status-heading"><h2 id="doc-status-heading">Project document status</h2><p class="doc-intro">Unanswered engineering checks are tracked under their projects, not as unfinished platform/software tasks. These records never certify construction or create new work orders.</p><div id="doc-status-count" class="doc-intro">Loading project document status…</div><div class="doc-status-rows" id="doc-status-rows" aria-live="polite"><div class="empty">Loading project-specific reviews…</div></div></section>
 <div class="bar"><div><h2>Reported site activities</h2><p class="muted">Dated field observations only. No completion, engineering acceptance or material quantity is implied.</p></div>
 <div class="filters"><label for="project">Project</label><select id="project"><option value="">All projects</option></select><label for="search">Find</label><input id="search" type="search" placeholder="Search work, issue or trade" autocomplete="off"></div></div>
@@ -64,4 +65,4 @@ $("notice").textContent="Google Drive machine staging read back: 37 records (5 r
 $("footer").textContent="Public-safe derivation from Google Drive A9_CWO_DAILY_TWO_CHANNELS / PROGRESS_REPORT_MACHINE_STAGE, normalized 2026-10-11. Approved quantities and engineering signoffs are not present.";render();
 }catch(e){$("notice").textContent="Progress source unavailable: "+e.message;$("history").innerHTML='<div class="empty">Nothing is inferred without the verified projection.</div>';$("carryover-records").innerHTML='<div class="empty">Carry-over index unavailable.</div>';}}
 $("project").addEventListener("change",render);$("search").addEventListener("input",render);load();})();
-</script><script src="../assets/js/project-document-status.js?v=20261019-1"></script><script src="../assets/js/site-shell.js?v=botanical-1"></script></body></html>
+</script><script src="../assets/js/a9-manual-progress.js?v=a9-1"></script><script src="../assets/js/project-document-status.js?v=20261019-1"></script><script src="../assets/js/site-shell.js?v=botanical-1"></script></body></html>

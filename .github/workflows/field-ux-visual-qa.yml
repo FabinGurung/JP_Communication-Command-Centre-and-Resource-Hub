@@ -30,6 +30,12 @@ on:
       - 'site-operations/schedule.html'
       - 'site-operations/project.html'
       - 'resources/index.html'
+      - 'resources/field/**'
+      - 'assets/js/a9-*.js'
+      - 'assets/css/a9-ui-extensions.css'
+      - 'ops/data/a9-*.json'
+      - 'ops/control/a9-page-section-registry.v1.0.json'
+      - 'scripts/qa_a9_manual_browser.py'
       - 'ops/data/resource-catalog-normalized.v0.1.json'
       - 'ops/data/progress-report-public.v0.2.jsonl'
       - 'workspace/index.html'
@@ -73,6 +79,9 @@ jobs:
         run: python scripts/qa_field_ux_browser.py
       - name: Botanical theme matrix, keyboard, print and before/after QA
         run: python scripts/qa_botanical_theme.py
+      - name: A9 field, checklist, progress and memory mobile browser smoke
+        run: python scripts/qa_a9_manual_browser.py
+
       - name: Archive desktop and mobile screenshots for visual inspection
         if: always()
         uses: actions/upload-artifact@v4

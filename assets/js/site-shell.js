@@ -49,7 +49,8 @@
     developer:[["🗼 Control Towers","controls/"],["📌 Software Backlog","workspace/backlog/"],["🧭 Storage Rules","controls/storage.html"],["🗃️ Archive Policy","controls/archive-formats.html"]],
     guide:[["📄 Quick Start","guide/"],["📖 3-page walkthrough","guide/3-pages/"],["🗂️ 7-page routine","guide/7-pages/"],["📚 15-page reference","guide/15-pages/"]]
   };
-  const oldNav=document.querySelector("nav:not(.depth-nav), .shell.nav");
+  // Department-level navigation must remain visible; replace only the old page-level navigation.
+  const oldNav=document.querySelector("nav:not(.depth-nav):not(.a9-subnav), .shell.nav");
   const host=document.createElement("jp-site-header");
   host.setAttribute("data-section",section);
   const shadow=host.attachShadow({mode:"open"});

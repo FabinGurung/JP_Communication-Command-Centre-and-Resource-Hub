@@ -609,6 +609,9 @@ jobs:
       - name: Validate public source readiness snapshot and safe website disclosure
         run: python scripts/test_source_readiness_public.py
 
+      - name: Validate A9 manual data views and 21-page site registry
+        run: python scripts/test_a9_manual_surfaces.py
+
       - name: Validate developer/site/progress/resources isolation
         run: python scripts/validate_site_experience_contract.py
 

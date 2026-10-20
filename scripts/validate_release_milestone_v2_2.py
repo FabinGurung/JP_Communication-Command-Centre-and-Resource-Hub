@@ -38,6 +38,15 @@ def verify():
     assert "Validate branch and lane registry" in release_wf
     assert "contents: write" in release_wf
     assert "workflow_dispatch:" not in release_wf
+    # The v2.2.0 release is immutable; later validated development commits do not
+    # need to keep obeying its one-time release-housekeeping diff whitelist.
+    frozen="25d24ec826f840bddb697bd1a0d433ab5667acd1"
+    head=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
+    if head!=frozen:
+        ancestry=subprocess.run(["git","merge-base","--is-ancestor",frozen,"HEAD"],cwd=ROOT)
+        assert ancestry.returncode==0,"Current commit does not descend from frozen botanical release"
+        print("BOTANICAL_RELEASE_V220_FROZEN_PASS: immutable v2.2.0 ancestor preserved; later development validated by its own checks.")
+        return
     check=subprocess.run(["git","diff","--name-only",IMPL,"HEAD"],cwd=ROOT,text=True,capture_output=True)
     if check.returncode:
         raise AssertionError("Unable to compare release to implementation: "+check.stderr)

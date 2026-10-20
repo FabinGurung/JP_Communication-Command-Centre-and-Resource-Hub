@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0.0",
+  "registry_id": "A9-FIELD-RESOURCE-SOURCE-CATALOG-PUBLIC-20261020",
+  "kind": "PUBLIC_SAFE_SOURCE_CATEGORY_INDEX",
+  "reviewed_on_npt": "2026-10-20",
+  "authority": "TEN_ORIGINAL_GOOGLE_SHEETS__PRIVATE_URLS_AND_BYTES_RETAINED_IN_SOURCE_PROVIDER",
+  "purpose": "DISCOVERY_ONLY_NOT_A_LIVE_SHEET_MIRROR",
+  "sheets_count": 10,
+  "published_rows": 0,
+  "public_source_file_ids_included": false,
+  "source_read_mode": "MANUAL_USER_TRIGGERED_NO_BACKGROUND_SCANS",
+  "sources": [
+    {
+      "source_key": "SRC-01",
+      "title": "Rohini contact directory",
+      "department": "Contacts",
+      "company": "Rohini",
+      "access": "PRIVATE_DIRECTORY",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Searchable company-scoped contacts require authenticated viewing; no numbers or person rows in the public site."
+    },
+    {
+      "source_key": "SRC-02",
+      "title": "Fishtail contact directory",
+      "department": "Contacts",
+      "company": "Fishtail",
+      "access": "PRIVATE_DIRECTORY",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Searchable company-scoped contacts require authenticated viewing."
+    },
+    {
+      "source_key": "SRC-03",
+      "title": "A9 normalized contacts (6NF)",
+      "department": "Contacts",
+      "company": "Shared",
+      "access": "PRIVATE_MASTER",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Master tables for person IDs, roles, organizations and project memberships; never mirror full records publicly."
+    },
+    {
+      "source_key": "SRC-04",
+      "title": "Sharada project issue register",
+      "department": "Issues",
+      "company": "Fishtail",
+      "access": "RESTRICTED_ISSUES",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Only verified public-safe issue status can be projected; potential backcharges are not approved debt."
+    },
+    {
+      "source_key": "SRC-05",
+      "title": "Narayani team attendance",
+      "department": "Attendance",
+      "company": "Fishtail",
+      "access": "PRIVATE_ATTENDANCE",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Worker/date details restricted; future aggregate only after separate public-projection authorization."
+    },
+    {
+      "source_key": "SRC-06",
+      "title": "Shared cement, materials and site diary",
+      "department": "Materials",
+      "company": "Fishtail",
+      "access": "PROJECT_OPERATIONS",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "PPC/OPC, movements, stock and daily progress remain distinct; planned quantities are not receipts."
+    },
+    {
+      "source_key": "SRC-07",
+      "title": "Field team A visits and expenses",
+      "department": "Visits",
+      "company": "Fishtail",
+      "access": "PRIVATE_PERSONNEL_FINANCE",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Individual attendance and expenses require restricted access; no employee rows exposed."
+    },
+    {
+      "source_key": "SRC-08",
+      "title": "Field team B visits and expenses",
+      "department": "Visits",
+      "company": "Fishtail",
+      "access": "PRIVATE_PERSONNEL_FINANCE",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Individual attendance and expenses require restricted access; no employee rows exposed."
+    },
+    {
+      "source_key": "SRC-09",
+      "title": "Fishtail project location register",
+      "department": "Locations",
+      "company": "Fishtail",
+      "access": "PROJECT_GEO",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Canonical project IDs join existing public map; verify coordinates and publication scope."
+    },
+    {
+      "source_key": "SRC-10",
+      "title": "Rohini project location register",
+      "department": "Locations",
+      "company": "Rohini",
+      "access": "PROJECT_GEO",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Canonical project IDs join existing public map; verify coordinates and publication scope."
+    }
+  ],
+  "public_visibility_rule": "ONLY_SEPARATELY_APPROVED_NON_IDENTIFYING_PROJECTIONS",
+  "hold": {
+    "discord_collector": "ON_HOLD_BY_USER",
+    "scheduler": "NOT_CONFIGURED"
+  }
+}

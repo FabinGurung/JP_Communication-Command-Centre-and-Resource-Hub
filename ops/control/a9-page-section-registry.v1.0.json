@@ -1,0 +1,408 @@
+{
+  "schema_version": "1.0.0",
+  "registry_id": "A9_PUBLIC_WEBSITE_PAGE_SECTION_TREE_20261020",
+  "scope": "ACTIVE_21_PUBLIC_HTML_ROUTES_PLUS_3_LEGACY_COMPATIBILITY_URLS",
+  "baseline_release": "v2.2.0",
+  "development_arc": "A9_MANUAL_COMMUNICATION_AND_FIELD_RESOURCE_STRUCTURE",
+  "status": "ACTIVE_DEVELOPMENT__RELEASE_TAG_V2_2_0_IMMUTABLE",
+  "project_authority": "projects.csv",
+  "website_theme": [
+    "assets/css/jp-theme-tokens.css",
+    "assets/css/site-shell.css",
+    "assets/css/jp-botanical.css",
+    "assets/js/site-shell.js"
+  ],
+  "levels": [
+    {
+      "level": "L0",
+      "name": "SITE",
+      "meaning": "Entire JP AEC Pages deployment: do not delete without release/branch controls"
+    },
+    {
+      "level": "L1",
+      "name": "PRIMARY_DESTINATION",
+      "meaning": "Homepage plus six primary navigation sections; shared nav owns their link routing"
+    },
+    {
+      "level": "L2",
+      "name": "DEPARTMENT_OR_CHILD_PAGE",
+      "meaning": "Desk/Field, project screens, guides, control tools and backlog"
+    },
+    {
+      "level": "L3",
+      "name": "PAGE_SECTION",
+      "meaning": "Independent page panels with section_id and CSS/HTML anchor"
+    },
+    {
+      "level": "L4",
+      "name": "UI_COMPONENT",
+      "meaning": "Search, filter, card, map marker, poster embed, published feed renderer"
+    },
+    {
+      "level": "L5",
+      "name": "DATA_CONTRACT",
+      "meaning": "Source-of-truth identity, reviewed public projections, CSS/JS/schema and QA ownership"
+    }
+  ],
+  "pages": [
+    {
+      "page_id": "A9-PAGE-HOME",
+      "path": "index.html",
+      "nav_group": "HOME",
+      "page_role": "LANDING",
+      "data_owner": "homepage",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-MAP",
+      "path": "map.html",
+      "nav_group": "MAP",
+      "page_role": "PRIMARY",
+      "data_owner": "map",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-CHECKLIST",
+      "path": "site-operations.html",
+      "nav_group": "CHECKLIST",
+      "page_role": "PRIMARY",
+      "data_owner": "checklist",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-PROGRESS",
+      "path": "site-operations/history.html",
+      "nav_group": "PROGRESS",
+      "page_role": "PRIMARY",
+      "data_owner": "progress",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-RESOURCES_DESK",
+      "path": "resources/index.html",
+      "nav_group": "RESOURCES",
+      "page_role": "DEPARTMENT_DESK",
+      "data_owner": "resource_library",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-RESOURCES_FIELD",
+      "path": "resources/field/index.html",
+      "nav_group": "RESOURCES",
+      "page_role": "DEPARTMENT_FIELD",
+      "data_owner": "safe_field_catalog",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-DEV_WORKSPACE",
+      "path": "workspace/index.html",
+      "nav_group": "WORKSPACE",
+      "page_role": "PRIMARY",
+      "data_owner": "developer_controls",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-DEV_BACKLOG",
+      "path": "workspace/backlog/index.html",
+      "nav_group": "WORKSPACE",
+      "page_role": "SECONDARY",
+      "data_owner": "developer_backlog",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-HOWTO",
+      "path": "guide/index.html",
+      "nav_group": "HOWTO",
+      "page_role": "PRIMARY",
+      "data_owner": "guide",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-HOWTO_3",
+      "path": "guide/3-pages/index.html",
+      "nav_group": "HOWTO",
+      "page_role": "SECONDARY",
+      "data_owner": "guide",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-HOWTO_7",
+      "path": "guide/7-pages/index.html",
+      "nav_group": "HOWTO",
+      "page_role": "SECONDARY",
+      "data_owner": "guide",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-HOWTO_15",
+      "path": "guide/15-pages/index.html",
+      "nav_group": "HOWTO",
+      "page_role": "SECONDARY",
+      "data_owner": "guide",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-OPS_COORDINATION",
+      "path": "site-operations/coordination.html",
+      "nav_group": "OPERATIONS",
+      "page_role": "SECONDARY",
+      "data_owner": "field_communication",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-OPS_QUESTIONS",
+      "path": "site-operations/questions.html",
+      "nav_group": "OPERATIONS",
+      "page_role": "SECONDARY",
+      "data_owner": "field_questions",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-OPS_SCHEDULE",
+      "path": "site-operations/schedule.html",
+      "nav_group": "OPERATIONS",
+      "page_role": "SECONDARY",
+      "data_owner": "field_schedule",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-OPS_PROJECT",
+      "path": "site-operations/project.html",
+      "nav_group": "OPERATIONS",
+      "page_role": "SECONDARY",
+      "data_owner": "project_context",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-CONTROL_TOWER",
+      "path": "controls/index.html",
+      "nav_group": "WORKSPACE",
+      "page_role": "SECONDARY",
+      "data_owner": "governance",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-CONTROL_MEMORY",
+      "path": "controls/memory-wall.html",
+      "nav_group": "WORKSPACE",
+      "page_role": "EMBEDDED",
+      "data_owner": "memory_wall",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-CONTROL_STORAGE",
+      "path": "controls/storage.html",
+      "nav_group": "WORKSPACE",
+      "page_role": "SECONDARY",
+      "data_owner": "storage_docs",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-CONTROL_ARCHIVE",
+      "path": "controls/archive-formats.html",
+      "nav_group": "WORKSPACE",
+      "page_role": "SECONDARY",
+      "data_owner": "archive_docs",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-PENDING",
+      "path": "pending/index.html",
+      "nav_group": "WORKSPACE",
+      "page_role": "SECONDARY",
+      "data_owner": "pending_registry",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
+    }
+  ],
+  "sections": [
+    {
+      "section_id": "A9-RES-01",
+      "location": "Resources/Desk",
+      "path": "resources/index.html",
+      "anchor": "#desk-resources",
+      "purpose": "Desk drawings & calculations",
+      "data_contract": "ops/data/resource-catalog-normalized.v0.1.json",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-RES-02",
+      "location": "Resources/Field",
+      "path": "resources/field/index.html",
+      "anchor": "#field-sources",
+      "purpose": "Field source categories",
+      "data_contract": "ops/data/a9-field-source-catalog-public.v1.0.json",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-CHK-01",
+      "location": "Checklist/published",
+      "path": "site-operations.html",
+      "anchor": "#a9-published-instructions",
+      "purpose": "Manually published instructions",
+      "data_contract": "ops/data/a9-published-checklist-public.v1.0.json",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-CHK-02",
+      "location": "Checklist/personal",
+      "path": "site-operations.html",
+      "anchor": "section.main",
+      "purpose": "Browser-local personal notes",
+      "data_contract": "JPAEC:diy-checklist:v1:*",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-PRG-01",
+      "location": "Progress/manual-updates",
+      "path": "site-operations/history.html",
+      "anchor": "#a9-manual-progress",
+      "purpose": "Manually reviewed additional events",
+      "data_contract": "ops/data/a9-reviewed-progress-public.v1.0.json",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-PRG-02",
+      "location": "Progress/historical",
+      "path": "site-operations/history.html",
+      "anchor": "#history",
+      "purpose": "Frozen public evidence history",
+      "data_contract": "ops/data/progress-report-public.v0.2.jsonl",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-PRG-03",
+      "location": "Progress/project-docs",
+      "path": "site-operations/history.html",
+      "anchor": "#doc-status-rows",
+      "purpose": "Project document issue states",
+      "data_contract": "ops/data/project-document-review-public.v1.0.json",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-DEV-01",
+      "location": "Workspace/health",
+      "path": "workspace/index.html",
+      "anchor": "#readiness-heading",
+      "purpose": "Platform integrations and CI",
+      "data_contract": "ops/control/c-web11-post-alias-roadmap.v1.0.json",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-DEV-02",
+      "location": "Workspace/memory-board",
+      "path": "workspace/index.html",
+      "anchor": "#memory-poster-board",
+      "purpose": "Embedded historical Memory Wall",
+      "data_contract": "controls/memory-wall.html",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-DEV-03",
+      "location": "Workspace/backlog",
+      "path": "workspace/backlog/index.html",
+      "anchor": "main",
+      "purpose": "Software-only milestones",
+      "data_contract": "workspace/developer-software-backlog.v0.1.json",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-MAP-01",
+      "location": "Map/locations",
+      "path": "map.html",
+      "anchor": "#map",
+      "purpose": "Public geolocated projects",
+      "data_contract": "projects.csv",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-HOW-01",
+      "location": "HowTo/guides",
+      "path": "guide/index.html",
+      "anchor": "main",
+      "purpose": "Guidance and 3/7/15 page variants",
+      "data_contract": "guide/*/index.html",
+      "status": "ACTIVE"
+    }
+  ],
+  "legacy_compatibility": [
+    {
+      "path": "current-works.html",
+      "status": "LEGACY_COMPATIBILITY_NOT_PRIMARY_NAV"
+    },
+    {
+      "path": "how-to.html",
+      "status": "LEGACY_COMPATIBILITY_NOT_PRIMARY_NAV"
+    },
+    {
+      "path": "workspace.html",
+      "status": "LEGACY_COMPATIBILITY_REDIRECT"
+    }
+  ],
+  "archive_policy": {
+    "protected_prefixes": [
+      "ops/99_VERSION_ARCHIVE/",
+      "site-operations/99_VERSION_ARCHIVE/",
+      "assets/css/99_VERSION_ARCHIVE/",
+      "assets/js/99_VERSION_ARCHIVE/"
+    ],
+    "delete_existing_archives": false,
+    "hide_from_nav_instead_of_delete": true
+  },
+  "release_policy": {
+    "main": "main",
+    "working": "feature/daily-ops-current-work",
+    "frozen_tag": "v2.2.0",
+    "no_force_push": true,
+    "github_pages_public": true
+  },
+  "operations": {
+    "manual_only": true,
+    "discord_collector": "ON_HOLD",
+    "no_automations": true,
+    "private_originals": "GOOGLE_DRIVE",
+    "public_field_data": "NO_ROW_ADMISSIONS_YET"
+  },
+  "edit_command_template": "In JP AEC website, edit A9-PAGE-<ID> / A9-<SECTION-ID> at L3 or L4; describe change, retain L5 data source and v2.2 botanical theme, audit links, commit to registered working lane, validate and promote. To uninstall: remove from navigation/rendered layout; retain source and Git history."
+}

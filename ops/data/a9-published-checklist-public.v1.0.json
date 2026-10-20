@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "MANUALLY_PUBLISHED_DAILY_CHECKLIST",
+  "publisher": "A9_MANUAL_USER_TRIGGERED_RECONCILIATION",
+  "status": "EMPTY_AWAITING_EXPLICIT_SLACK_SOURCE_AND_PUBLICATION_REVIEW",
+  "reviewed_on_npt": "2026-10-20",
+  "time_zone": "Asia/Kathmandu",
+  "rows": [],
+  "count": 0,
+  "semantics": {
+    "date_key": "YYYY-MM-DD_NPT",
+    "project_key": "CURRENT_WORKS_PROJECT_ID",
+    "source_key": "ORIGINAL_PROVIDER_MESSAGE_ID_IN_RESTRICTED_LEDGER",
+    "stage": "USER_AUTHORED_INSTRUCTION_NOT_ENGINEER_APPROVED",
+    "completion": "LOCAL_CHECKMARK_NOT_CONSTRUCTION_COMPLETION"
+  },
+  "dedupe": "project_id+date_npt+source_digest+task_ordinal",
+  "private_raw_message_bytes_included": false,
+  "automatic_polling": false,
+  "discord_collection_paused": true
+}

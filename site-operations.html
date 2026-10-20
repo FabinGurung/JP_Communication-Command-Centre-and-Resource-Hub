@@ -19,9 +19,10 @@ nav{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border-bottom:1px sol
 <link rel="stylesheet" href="assets/css/jp-theme-tokens.css?v=botanical-1">
 <link rel="stylesheet" href="assets/css/site-shell.css?v=botanical-1">
 <link rel="stylesheet" href="assets/css/jp-botanical.css?v=botanical-1">
-</head><body data-jp-site="1"><div class="shell">
+<link rel="stylesheet" href="assets/css/a9-ui-extensions.css?v=a9-1"></head><body data-jp-site="1"><div class="shell">
 <nav aria-label="Site Operations"><a href="index.html">JP AEC</a><a href="site-operations.html" aria-current="page">Daily Checklist</a><a href="site-operations/coordination.html">Site Coordination</a><a href="site-operations/history.html">Progress Report</a><a href="map.html">Map</a><a href="resources/">Drawings &amp; Models</a><a href="workspace/">Developer Workspace</a></nav>
-<main><header class="heading"><h1>Checklist for Today</h1><p>Your list, written by you. No previous Discord or Slack questions are added automatically.</p></header>
+<main><header class="heading"><h1>Checklist for Today</h1><p>Keep your personal browser checklist below. A separate, manually reviewed Slack-authored project checklist appears above it when explicitly published. Nothing is collected automatically.</p></header>
+<section class="a9-panel" aria-label="Manually published Slack checklist" id="a9-published-instructions"><h2>📌 Published site instructions · Slack-authored</h2><p class="a9-muted">User-written Slack instructions can be read and formatted by ChatGPT on demand, after project/date attribution and privacy review. A published instruction is not engineer approval or evidence of completed work.</p><p class="a9-status-note" id="a9-published-count" role="status">Reading manually approved instruction feed…</p><div id="a9-published-checklist" aria-live="polite"></div></section>
 <section class="main" aria-label="Personal site checklist"><div class="top"><div><label for="project">Project</label><select id="project"><option value="">Loading projects…</option></select></div><div class="date" id="date">Nepal · …</div></div>
 <form class="form" id="add-form"><input id="new-task" type="text" placeholder="Write today's task or reminder…" maxlength="450" aria-label="New site reminder" required><button type="submit">Add</button></form>
 <div class="counter" id="count">No tasks yet</div><ul class="items" id="tasks" aria-live="polite"></ul>
@@ -48,4 +49,4 @@ async function load(){day=nepDate();$("date").textContent="Nepal · "+day;try{co
 $("project").innerHTML=projects.map(p=>'<option value="'+esc(p.project_id)+'">'+esc(p.display_name)+'</option>').join("");const choose=new URLSearchParams(location.search).get("project");if(choose&&projects.some(p=>p.project_id===choose))$("project").value=choose;render();}
 catch(e){$("count").textContent="Project data unavailable";$("tasks").innerHTML='<li class="empty">Could not load the project list; tasks were not assumed.</li>';}}
 load();})();
-</script><script src="assets/js/site-shell.js?v=botanical-1"></script></body></html>
+</script><script src="assets/js/a9-published-checklist.js?v=a9-1"></script><script src="assets/js/site-shell.js?v=botanical-1"></script></body></html>

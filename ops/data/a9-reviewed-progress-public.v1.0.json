@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "MANUALLY_REVIEWED_PROGRESS_PUBLICATION_QUEUE",
+  "status": "NO_NEW_PUBLICLY_ADMITTED_EVENTS",
+  "reviewed_on_npt": "2026-10-20",
+  "source_authority": "PRIVATE_DRIVE_OR_PROVIDER_ORIGINALS",
+  "historical_public_stream": "ops/data/progress-report-public.v0.2.jsonl",
+  "historical_records_preserved": 37,
+  "published_new_record_count": 0,
+  "records": [],
+  "allowed_states": [
+    "PLAN",
+    "INSTRUCTION",
+    "REPORTED",
+    "OBSERVED",
+    "VERIFIED",
+    "APPROVED",
+    "BLOCKED",
+    "UNKNOWN"
+  ],
+  "admission_rule": "SOURCE_HASH_FK_PRIVACY_REVIEW_BEFORE_PUBLIC_PROJECTION",
+  "privacy": "NO_RAW_CHAT_ORIGINAL_MEDIA_OR_PERSONAL_DATA",
+  "discord_collector": "ON_HOLD_BY_USER",
+  "automatic_polling": false
+}

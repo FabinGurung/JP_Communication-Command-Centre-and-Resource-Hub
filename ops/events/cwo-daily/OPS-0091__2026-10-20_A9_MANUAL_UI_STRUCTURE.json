@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0091",
+  "date_npt": "2026-10-20",
+  "scope": "A9_MANUAL_COMMUNICATION_AND_FIELD_RESOURCES_HIERARCHY",
+  "status": "STAGED_FOR_BRANCH_CI__PRODUCTION_PENDING",
+  "baseline_main": "25d24ec826f840bddb697bd1a0d433ab5667acd1",
+  "frozen_release": "v2.2.0",
+  "work_scope": [
+    "RESOURCES_DESK_FIELD_SPLIT",
+    "CHECKLIST_USER_TRIGGERED_PUBLISHED_LAYER",
+    "PROGRESS_OPTIONAL_REVIEWED_DELTA_LAYER",
+    "WORKSPACE_EMBED_MEMORY_POSTERS",
+    "21_ROUTE_TYPED_PAGE_REGISTRY_AND_HIERARCHY"
+  ],
+  "sources_verified": "2026-10-20_TEN_GOOGLE_SHEET_TAB_METADATA_AND_BOUNDED_HEADERS",
+  "originals_changed": 0,
+  "google_sheets_changed": 0,
+  "slack_messages_sent": 0,
+  "discord_run_count": 0,
+  "schedule_created": false,
+  "source_ingestion_count": 0,
+  "published_new_checklist_tasks": 0,
+  "published_new_progress_events": 0,
+  "existing_public_resource_links_preserved": 46,
+  "existing_historical_progress_rows_preserved": 37,
+  "private_original_sheet_ids_committed": 0,
+  "project_data_modified": false,
+  "theme_preserved": true,
+  "field_private_records_published": 0,
+  "review_status": "MANUAL_PUBLICATION_REQUIRES_USER_SELECTED_MESSAGES_AND_SEPARATE_PRIVACY_APPROVAL",
+  "source_files": [
+    "ops/data/a9-field-source-catalog-public.v1.0.json",
+    "ops/data/a9-published-checklist-public.v1.0.json",
+    "ops/data/a9-reviewed-progress-public.v1.0.json"
+  ],
+  "structure": [
+    "docs/website/A9_SITE_TREE_AND_EDIT_LEVELS.v1.md",
+    "ops/control/a9-page-section-registry.v1.0.json"
+  ],
+  "browser_qa": "scripts/qa_a9_manual_browser.py",
+  "validation": "scripts/test_a9_manual_surfaces.py",
+  "branch": "feature/daily-ops-current-work",
+  "next_review": "Only approved non-identifying projections or authenticated private portal; manual Slack checklist publication on user's specific source selection"
+}
