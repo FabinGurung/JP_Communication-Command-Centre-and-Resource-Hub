@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "registry_id": "A9_FIELD_SOURCE_LINKS_PUBLIC_20261021",
+  "status": "PUBLISHED_LINK_REFERENCES_ONLY",
+  "authorizing_request": "2026-10-21_USER_EXPLICIT_LINKS_IN_L3_PANELS",
+  "description": "Ten Google Sheets direct URLs explicitly approved for display as outbound references inside Field Resources. These URLs are public but Sheet contents remain protected by Google Drive permissions.",
+  "source_count": 10,
+  "source_records_copied": 0,
+  "sharing_permissions_changed": false,
+  "urls_publicly_visible": true,
+  "google_sheet_urls": [
+    {
+      "source_key": "SRC-01",
+      "dashboard_id": "A9-FIELD-01",
+      "title": "Rohini Contact Directory",
+      "url": "https://docs.google.com/spreadsheets/d/1Cyuj0uti-IN7ddDNVdAd1kM0NNpATdTnNabfcY7P1cw/edit",
+      "permission_note": "Google access permissions required; not a public data mirror"
+    },
+    {
+      "source_key": "SRC-02",
+      "dashboard_id": "A9-FIELD-02",
+      "title": "Fishtail Builders Contact Directory",
+      "url": "https://docs.google.com/spreadsheets/d/15szptLz7q3-Rote1SnNuIqdcrxrm0z2m0k7yx9j51c4/edit",
+      "permission_note": "Google access permissions required; not a public data mirror"
+    },
+    {
+      "source_key": "SRC-03",
+      "dashboard_id": "A9-FIELD-03",
+      "title": "A9 Master Contact Directory (6NF)",
+      "url": "https://docs.google.com/spreadsheets/d/10l4F1ZShkPKt7L8HBT1BJ3K0rjkJ6GktXRZdI4k35Bg/edit",
+      "permission_note": "Google access permissions required; not a public data mirror"
+    },
+    {
+      "source_key": "SRC-04",
+      "dashboard_id": "A9-FIELD-04",
+      "title": "Sharada 31 Site Issues",
+      "url": "https://docs.google.com/spreadsheets/d/1j_866LE1heYTozkUheH3kU55TV8ZXuLzTwTCZzZNbqw/edit",
+      "permission_note": "Google access permissions required; not a public data mirror"
+    },
+    {
+      "source_key": "SRC-05",
+      "dashboard_id": "A9-FIELD-05",
+      "title": "Hari Chaudhary Team Attendance",
+      "url": "https://docs.google.com/spreadsheets/d/1FuFvccGvDwlszfzGL7_TP4qChBptA8Pil7eq6O5qlPw/edit",
+      "permission_note": "Google access permissions required; not a public data mirror"
+    },
+    {
+      "source_key": "SRC-06",
+      "dashboard_id": "A9-FIELD-06",
+      "title": "Fishtail Materials and Daily Progress",
+      "url": "https://docs.google.com/spreadsheets/d/1YshLrDAJDg3CO8F1jmIr2Eucy0-TKwiviVNF5tiAfT0/edit",
+      "permission_note": "Google access permissions required; not a public data mirror"
+    },
+    {
+      "source_key": "SRC-07",
+      "dashboard_id": "A9-FIELD-07",
+      "title": "Paras Pariyar Attendance and Expenses",
+      "url": "https://docs.google.com/spreadsheets/d/1HSmklPhqSPo6-N-7tbidOzwsZleJHrHlIyR34h7GgtI/edit",
+      "permission_note": "Google access permissions required; not a public data mirror"
+    },
+    {
+      "source_key": "SRC-08",
+      "dashboard_id": "A9-FIELD-08",
+      "title": "Shiv Narayan Chaudhary Site Visits and Expenses",
+      "url": "https://docs.google.com/spreadsheets/d/11uTBk0DDF_OkpNpmgbee4zXNGhAOQK0DS-ao8Qw0-uc/edit",
+      "permission_note": "Google access permissions required; not a public data mirror"
+    },
+    {
+      "source_key": "SRC-09",
+      "dashboard_id": "A9-FIELD-09",
+      "title": "Fishtail Project Site Locations",
+      "url": "https://docs.google.com/spreadsheets/d/10uW7hxagyvcNCUVDXTmwHopJgUbbqGBOxjjYjogQd_E/edit",
+      "permission_note": "Google access permissions required; not a public data mirror"
+    },
+    {
+      "source_key": "SRC-10",
+      "dashboard_id": "A9-FIELD-10",
+      "title": "Rohini Project Site Locations",
+      "url": "https://docs.google.com/spreadsheets/d/1wC5KRv45UCmRhSesO2WcwN8fNGdC5gSjvjqlR9USsdM/edit",
+      "permission_note": "Google access permissions required; not a public data mirror"
+    }
+  ]
+}

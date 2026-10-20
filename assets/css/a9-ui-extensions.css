@@ -26,3 +26,8 @@
 .a9-verbatim-message{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffefa;border-left:3px solid #89ae91;padding:10px 13px;color:var(--jp-ink,#193d2e);font:inherit;line-height:1.65}
 
 .a9-blueprint{margin-top:12px;border-top:1px dashed #b9d3bc;padding-top:9px}.a9-blueprint summary{cursor:pointer;color:var(--jp-green,#17664a);font-size:12px;font-weight:850;min-height:42px}.a9-blueprint ul{margin:7px 0;padding-left:20px}.a9-blueprint li{font-size:12px;padding:2px 0}.a9-blueprint .a9-muted{font-size:11px;margin:9px 0}
+
+/* Original Google Sheet links are publicly listed, not raw rows or embedded private content. */
+.a9-source-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:12px;padding:10px 15px;border-radius:var(--jp-radius-pill,999px);background:var(--jp-green,#17664a);color:#fff!important;border:1px solid var(--jp-green-deep,#104b36);text-decoration:none;font-size:12px;font-weight:800;line-height:1.3}
+.a9-source-link:hover{background:var(--jp-green-deep,#104b36)}
+.a9-source-link:focus-visible{outline:3px solid var(--jp-gold,#c8974f);outline-offset:3px}

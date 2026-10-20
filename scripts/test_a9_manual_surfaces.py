@@ -48,6 +48,18 @@ def test():
     assert plan["individual_sheet_count"]==10 and len(plan["dashboards"])==10
     assert plan["record_level_data_included"] is False and plan["private_source_urls_included"] is False
     assert plan["worksheet_policy"]["hide_tab_count_this_change"]==0
+    source_links=data("ops/data/a9-field-source-links-public.v1.0.json")
+    assert source_links["registry_id"]=="A9_FIELD_SOURCE_LINKS_PUBLIC_20261021"
+    assert source_links["source_count"]==len(source_links["google_sheet_urls"])==10
+    assert source_links["source_records_copied"]==0 and source_links["sharing_permissions_changed"] is False
+    assert source_links["urls_publicly_visible"] is True
+    link_keys={x["source_key"] for x in source_links["google_sheet_urls"]}
+    assert link_keys=={x["source_key"] for x in catalog["sources"]}
+    assert len({x["url"] for x in source_links["google_sheet_urls"]})==10
+    assert all(x["url"].startswith("https://docs.google.com/spreadsheets/d/") and x["url"].endswith("/edit") and x["dashboard_id"]=="A9-FIELD-"+x["source_key"][-2:] for x in source_links["google_sheet_urls"])
+    assert "a9-field-source-links-public.v1.0.json" in read("assets/js/a9-field-resources.js")
+    assert 'a.target="_blank"' in read("assets/js/a9-field-resources.js")
+    assert 'a.rel="noopener noreferrer"' in read("assets/js/a9-field-resources.js")
     assert len([l for l in read("ops/data/progress-report-public.v0.2.jsonl").splitlines() if l.strip()])==37
     originals=data("ops/data/resource-catalog-normalized.v0.1.json")
     assert sum(len(site["files"]) for site in originals["sites"])==46
