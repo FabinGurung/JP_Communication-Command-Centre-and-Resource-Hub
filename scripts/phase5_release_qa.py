@@ -194,8 +194,22 @@ def audit_pages_owner():
         errors.append(f"{rel}: production workflow does not trigger on main")
     if "feature/daily-ops-current-work" not in text:
         errors.append(f"{rel}: feature validation lane missing")
-    if "if: github.ref == 'refs/heads/main'" not in text:
-        errors.append(f"{rel}: deploy job is not gated to refs/heads/main")
+    policy_path = ROOT / "ops/control/pages-publication-lane.v0.1.json"
+    if not policy_path.exists():
+        return errors + ["Missing explicit Pages publication-lane control record"]
+    policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    registry = json.loads((ROOT / "ops/control/branch-lane-registry.json").read_text(encoding="utf-8"))
+    allowed = {b["branch_name"] for b in registry["active_branches"] if b["status"] == "ACTIVE" and b["allowed_for_work"]}
+    deploy_lane = policy["pages_publication_branch"]
+    if policy["canonical_branch"] != "main" or deploy_lane not in allowed:
+        errors.append("Pages policy points to an unauthorized branch or changes canonical main")
+    expected_guard = "if: github.ref == 'refs/heads/" + deploy_lane + "'"
+    if expected_guard not in text:
+        errors.append(f"{rel}: deploy job is not restricted to registered Pages lane {deploy_lane}")
+    if text.count("actions/deploy-pages@") != 1:
+        errors.append(f"{rel}: more than one Pages deploy owner is not allowed")
+    if policy.get("allow_other_branch_deploy") is not False:
+        errors.append("Pages policy must fail closed for all unregistered branch deployments")
     return errors
 
 
@@ -239,7 +253,7 @@ def main():
     print(
         f"PHASE5_QA_PASS: html_pages={pages}; internal_refs={links}; "
         "accessibility_basics=PASS; guide_print_contract=PASS; "
-        "single_pages_owner=main; release_metadata=PASS"
+        "single_pages_owner=registered_publication_lane; release_metadata=PASS"
     )
 
 

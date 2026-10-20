@@ -114,7 +114,7 @@ def verify_shared_shell(page, section):
       };
     }""")
     require(len(details["labels"])==7, "Shared shell does not have six routes: "+str(details))
-    require(len(set(details["paths"]))==6, "Shared shell has duplicate routes")
+    require(len(set(details["paths"]))==7, "Shared shell has duplicate routes")
     require(details["developer"] and details["shadowStyle"] and details["sourceTheme"],
             "Developer route or theme stylesheet missing")
     require(not details["oldVisible"], "Two competing primary navigations visible")

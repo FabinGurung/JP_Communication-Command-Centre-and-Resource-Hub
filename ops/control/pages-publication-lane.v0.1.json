@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "OPS_GITHUB_PAGES_REGISTERED_TEST_LANE_20261020",
+  "requested_mode": "ITERATIVE_SITE_PUBLISH_WITHOUT_MAIN_FF",
+  "canonical_branch": "main",
+  "pages_publication_branch": "feature/daily-ops-current-work",
+  "workflow": ".github/workflows/daily-ops-branch-preview.yml",
+  "published_on": "GITHUB_ACTIONS_VALIDATE_SUCCESS",
+  "immutables": [
+    "v2.1.0",
+    "v2.2.0"
+  ],
+  "allow_other_branch_deploy": false,
+  "rollback_commit": "25d24ec826f840bddb697bd1a0d433ab5667acd1",
+  "manual_publication_approval": "USER_DIRECT_20261020",
+  "original_google_drive_authority_unchanged": true,
+  "notes": "The Pages URL is associated with the Actions deployment, not whichever Git branch was most recently committed. The canonical main branch stays unchanged while a governed test branch may deploy the website after all registered tests pass. Release tagging still follows explicit release procedures."
+}
