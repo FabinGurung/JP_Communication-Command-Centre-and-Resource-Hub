@@ -23,7 +23,7 @@ L0 JP AEC Operations Hub  [ROOT /]
 |    +-- L3 A9-CHK-02        Personal browser-local checklist (unchanged)
 |
 +-- L1 PROGRESS             A9-PAGE-PROGRESS          /site-operations/history.html
-|    +-- L3 A9-PRG-01        Additional reviewed progress feed (empty until admitted)
+|    +-- L3 A9-PRG-01        Verbatim source-message feed (derived review only on explicit user prompt)
 |    +-- L3 A9-PRG-02        Existing 37-source historical report (preserved)
 |    +-- L3 A9-PRG-03        Project-specific drawing / revision status
 |
@@ -42,10 +42,13 @@ L0 JP AEC Operations Hub  [ROOT /]
 |    +-- L3 A9-DEV-02        Embedded Memory Poster Board (historical / Discord hold warning)
 |    +-- L2 BACKLOG         A9-PAGE-DEV_BACKLOG        /workspace/backlog/
 |    +-- L2 CONTROL TOWER   A9-PAGE-CONTROL_TOWER     /controls/
-|         +-- A9-PAGE-CONTROL_MEMORY    /controls/memory-wall.html
+|         +-- Memory Poster also has an independent L1 destination
 |         +-- A9-PAGE-CONTROL_STORAGE   /controls/storage.html
 |         +-- A9-PAGE-CONTROL_ARCHIVE   /controls/archive-formats.html
 |    +-- L2 PENDING          A9-PAGE-PENDING           /pending/
+|
++-- L1 MEMORY POSTER        A9-PAGE-CONTROL_MEMORY    /controls/memory-wall.html
+|    +-- L3 A9-MEM-01        L0–L5 colorful hierarchy poster
 |
 +-- L1 HOW-TO               A9-PAGE-HOWTO             /guide/
 |    +-- L2 3-page guide    A9-PAGE-HOWTO_3           /guide/3-pages/
@@ -73,7 +76,7 @@ ARCHIVED CONTENT (frozen / never uninstall by deleting):
 | Level | Defines | How to request a change |
 |---|---|---|
 | **L0** Website deployment | Domain, Pages, theme, branch governance | “Change L0 theme shell without changing project facts.” |
-| **L1** Primary navigation | Home + Map, Checklist, Progress, Resources, Developer Workspace, How-To | “Move A9-PAGE-PROGRESS from main nav to More Tools.” |
+| **L1** Primary navigation | Home + Map, Checklist, Progress, Resources, Developer Workspace, Memory Poster, How-To | “Move A9-PAGE-PROGRESS from main nav to More Tools.” |
 | **L2** Departments and child pages | Desk/Field, Guides, Control Towers, project views | “Uninstall the navigation link to A9-PAGE-OPS_SCHEDULE; keep its code and source.” |
 | **L3** Named sections inside a page | A9-CHK-01, A9-PRG-02, A9-RES-02, etc. | “Replace the empty state in A9-CHK-01, preserving CHK-02.” |
 | **L4** Specific UI components | cards, filters, forms, buttons, map marker, embedded poster | “Change the mobile selector in A9-RES-02 at L4, no other page.” |
@@ -119,3 +122,10 @@ GitHub repository and versioned main branch
 This page registry is a **post-v2.2.0 development change**, not a new release. Do not modify frozen `v2.2.0`. The latest working branch is validated, fast-forwarded to `main` and the Git SHA verified before treating the new route as deployed.
 
 Original botanical theme, source IDs, current-works and original 46 resource pointers remain preserved. Historical Discord/poster instructions are labelled as legacy and never used as active collection instructions.
+
+## Revised L1 poster and ten L3 Field dashboards (20 October 2026)
+
+- Memory Poster is now an L1 navigation destination, not only an L2 Control Tower link; L3 panel `A9-MEM-01` is the colorful visual level-tree.
+- Field Resources is L2; every Sheet has its own named L3 dashboard blueprint `A9-FLD-01` to `A9-FLD-10`; L4 are calendars, charts, filters and detail drawers. See `ops/control/a9-field-visualization-plan.v1.0.json` for all display choices. L5 remains the original Sheet and normalized hidden fact tables.
+- Progress `A9-PRG-01` displays reviewed, approved-public *verbatim source messages*. Interpretation and summary require a later explicit user request; the 37-entry historical projection is retained unchanged.
+- Publication is separate from source branch identity: Actions may deploy from the governed testing lane to the **same** Pages URL, but un-deployed branches do not change the public website automatically.

@@ -31,7 +31,7 @@ ROUTES={
  'project':'site-operations/project.html?project=P007', 'controls':'controls/',
  'storage':'controls/storage.html','archive':'controls/archive-formats.html',
  'memory':'controls/memory-wall.html','pending':'pending/'}
-PRIMARY=('home','map','checklist','progress','resources','developer','guide')
+PRIMARY=('home','map','checklist','progress','resources','developer','memory','guide')
 
 def serve(folder):
     server=subprocess.Popen([sys.executable,'-m','http.server','8879','--bind','127.0.0.1','--directory',str(folder)],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
@@ -112,7 +112,7 @@ def after(browser):
                     garden:document.querySelector('.jp-garden')?.getAttribute('aria-hidden'),
                     oldVisible:[...document.querySelectorAll('[data-jp-legacy-primary]')].some(n=>getComputedStyle(n).display!=='none')};}''')
                 require(d['parent']=='BODY' and d['x']==0 and abs(d['width']-width)<2,f'{name}/{width}: narrow header {d}')
-                require(d['links']==6 and not d['oldVisible'],f'{name}: competing or missing navigation')
+                require(d['links']==7 and not d['oldVisible'],f'{name}: competing or missing navigation')
                 require(not d['overflow'],f'{name}/{width}: document overflow')
                 require(d['canvas']=='rgb(243, 248, 242)',f'{name}: inconsistent canvas')
                 require(d['garden']=='true',f'{name}: decorative accessibility missing')
@@ -123,7 +123,7 @@ def after(browser):
                     require(toggle.get_attribute('aria-expanded')=='false','Menu must start collapsed')
                     toggle.click()
                     require(host.locator('nav').is_visible(),'Mobile menu failed to open')
-                    require(host.locator('nav a').count()==6,'Mobile links missing')
+                    require(host.locator('nav a').count()==7,'Mobile links missing')
                     for link in host.locator('nav a').all():
                         box=link.bounding_box()
                         require(box['height']>=44 and box['x']>=0 and box['x']+box['width']<=width+1,'Mobile link clipped / small')

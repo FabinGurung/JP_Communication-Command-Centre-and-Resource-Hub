@@ -101,7 +101,7 @@ def verify_shared_shell(page, section):
     host.wait_for(timeout=12000)
     details=host.evaluate("""e => {
       const root=e.shadowRoot;
-      const links=[...root.querySelectorAll('nav[aria-label="JP AEC six primary sections"] a')];
+      const links=[...root.querySelectorAll('nav[aria-label="JP AEC primary destinations"] a')];
       return {
         labels:links.map(a=>a.innerText.trim()),
         active:links.filter(a=>a.getAttribute("aria-current")==="page").map(a=>a.textContent.trim()),
@@ -113,7 +113,7 @@ def verify_shared_shell(page, section):
             getComputedStyle(n).display !== "none")
       };
     }""")
-    require(len(details["labels"])==6, "Shared shell does not have six routes: "+str(details))
+    require(len(details["labels"])==7, "Shared shell does not have six routes: "+str(details))
     require(len(set(details["paths"]))==6, "Shared shell has duplicate routes")
     require(details["developer"] and details["shadowStyle"] and details["sourceTheme"],
             "Developer route or theme stylesheet missing")

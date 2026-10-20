@@ -22,3 +22,7 @@
 .a9-empty{padding:14px;border:1px dashed var(--jp-line-strong,#bad3be);background:var(--jp-surface-soft,#f7faf5);border-radius:12px;color:var(--jp-muted,#587365);font-size:13px}
 @media(max-width:700px){.a9-card-grid{grid-template-columns:1fr}.a9-memory-frame{height:62vh;min-height:370px}.a9-subnav a{flex:1 1 140px;justify-content:center}}
 @media print{.a9-memory-frame,.a9-field-filters{display:none!important}.a9-panel{box-shadow:none;break-inside:avoid}}
+
+.a9-verbatim-message{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffefa;border-left:3px solid #89ae91;padding:10px 13px;color:var(--jp-ink,#193d2e);font:inherit;line-height:1.65}
+
+.a9-blueprint{margin-top:12px;border-top:1px dashed #b9d3bc;padding-top:9px}.a9-blueprint summary{cursor:pointer;color:var(--jp-green,#17664a);font-size:12px;font-weight:850;min-height:42px}.a9-blueprint ul{margin:7px 0;padding-left:20px}.a9-blueprint li{font-size:12px;padding:2px 0}.a9-blueprint .a9-muted{font-size:11px;margin:9px 0}

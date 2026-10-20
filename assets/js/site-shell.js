@@ -1,4 +1,4 @@
-/* JP AEC Request 02: six destinations, scoped contextual tools, preserved project selection.
+/* JP AEC Request 02: seven destinations, scoped contextual tools, preserved project selection.
    Presentation-only. No provider/Drive reads, writes, local checklist updates or progress mutations. */
 (() => {
   "use strict";
@@ -12,6 +12,7 @@
     ["progress","📊 Progress Report","site-operations/history.html"],
     ["resources","📐 Resources","resources/"],
     ["developer","🛠️ Developer Workspace","workspace/"],
+    ["memory","🧠 Memory Poster","controls/memory-wall.html"],
     ["guide","📘 How-To","guide/"]
   ];
   const url=new URL(location.href);
@@ -20,6 +21,7 @@
     path==="site-operations/history.html"?"progress":
     path==="site-operations.html"||path.startsWith("site-operations/")?"checklist":
     path==="resources"||path.startsWith("resources/")?"resources":
+    path==="controls/memory-wall.html"?"memory":
     path==="workspace"||path.startsWith("workspace/")||path==="controls"||path.startsWith("controls/")?"developer":
     path==="guide"||path.startsWith("guide/")?"guide":"overview";
   const escapeHTML=x=>String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -46,6 +48,7 @@
     checklist:[["🏗️ Site Coordination","site-operations/coordination.html"],["🗓️ Work & Holds","site-operations/schedule.html"],["📝 Engineer Questions","site-operations/questions.html"]],
     progress:[["🏗️ Site Coordination","site-operations/coordination.html"],["🗓️ Work & Holds","site-operations/schedule.html"]],
     resources:[["🏗️ Site Coordination","site-operations/coordination.html"]],
+    memory:[["🧭 Developer Workspace","workspace/"],["📚 Editing hierarchy","docs/website/A9_SITE_TREE_AND_EDIT_LEVELS.v1.md"]],
     developer:[["🗼 Control Towers","controls/"],["📌 Software Backlog","workspace/backlog/"],["🧭 Storage Rules","controls/storage.html"],["🗃️ Archive Policy","controls/archive-formats.html"]],
     guide:[["📄 Quick Start","guide/"],["📖 3-page walkthrough","guide/3-pages/"],["🗂️ 7-page routine","guide/7-pages/"],["📚 15-page reference","guide/15-pages/"]]
   };
@@ -65,7 +68,7 @@
     (key===section?' aria-current="page"':'')+' href="'+local(href)+'">'+escapeHTML(label)+'</a>').join("");
   shell.innerHTML='<a class="jp-skip" href="#jp-main">Skip to content</a><div class="jp-top" data-menu-open="false"><a class="jp-brand" href="'+base.href+
     '"><span aria-hidden="true">🏗️</span><span>JP AEC <small>Operations Hub</small></span></a>'+
-    '<button class="jp-menu-toggle" type="button" aria-expanded="false" aria-controls="jp-primary-nav">Menu ☰</button><nav class="jp-nav" id="jp-primary-nav" aria-label="JP AEC six primary sections">'+mainLinks+'</nav>'+
+    '<button class="jp-menu-toggle" type="button" aria-expanded="false" aria-controls="jp-primary-nav">Menu ☰</button><nav class="jp-nav" id="jp-primary-nav" aria-label="JP AEC primary destinations">'+mainLinks+'</nav>'+
     '<div class="jp-more-slot"></div></div>';
   shadow.appendChild(shell);
   const more=shell.querySelector(".jp-more-slot");

@@ -1,8 +1,17 @@
-(()=>{"use strict";const holder=document.getElementById("a9-manual-progress"),count=document.getElementById("a9-manual-progress-count"),project=document.getElementById("project"),search=document.getElementById("search");let rows=[];
-const mk=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=String(text);if(cls)e.className=cls;return e;};
-function paint(){if(!holder)return;const p=project?.value||"",q=(search?.value||"").trim().toLowerCase(),show=rows.filter(x=>(!p||x.project_id===p)&&(!q||[x.title,x.status,x.project_id,x.description].join(" ").toLowerCase().includes(q)));holder.replaceChildren();count.textContent=show.length+" additional reviewed public updates";
-if(!show.length){holder.append(mk("p","No additional source-reviewed public events have been admitted beyond the existing historical Progress report. Slack/Discord sources are not polled automatically.","a9-empty"));return;}
-for(const item of show){const box=mk("article",undefined,"a9-source-card");box.append(mk("div",item.date_npt+" · "+item.project_id+" · "+item.status,"a9-type"),mk("h3",item.title),mk("p",item.description));holder.append(box);}}
-async function load(){try{const r=await fetch("../ops/data/a9-reviewed-progress-public.v1.0.json",{cache:"no-store"});if(!r.ok)throw Error("missing");const s=await r.json();if(s.kind!=="MANUALLY_REVIEWED_PROGRESS_PUBLICATION_QUEUE"||!Array.isArray(s.records)||s.published_new_record_count!==s.records.length||s.automatic_polling!==false||s.historical_records_preserved!==37)throw Error("invalid feed");if(s.records.some(x=>!x.record_id||!x.project_id||!x.date_npt||!x.title||!x.status||!s.allowed_states.includes(x.status)||!x.review_receipt_id))throw Error("unreviewed source");rows=s.records;paint();}catch(e){count.textContent="Additional feed unavailable";holder.replaceChildren(mk("p","New public updates unavailable; existing 37-entry historical report remains separate and unchanged.","a9-empty"));}}
+(()=>{"use strict";
+const holder=document.getElementById("a9-manual-progress"),count=document.getElementById("a9-manual-progress-count");
+const project=document.getElementById("project"),search=document.getElementById("search");let rows=[];
+const el=(tag,text,className)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(className)n.className=className;return n;};
+function paint(){if(!holder)return;const pid=project?.value||"",q=(search?.value||"").trim().toLowerCase();
+const filtered=rows.filter(x=>(!pid||x.project_id===pid)&&(!q||[x.project_id,x.source_provider,x.verbatim_text].join(" ").toLowerCase().includes(q)));
+holder.replaceChildren();count.textContent=filtered.length+" reviewed, verbatim public message(s) · no automatic derivation";
+if(!filtered.length){holder.append(el("p","No new source messages are publicly admitted. Originals remain in their authorized Slack/Discord or private Drive records; automatic interpretation is off.","a9-empty"));return;}
+for(const x of filtered){const card=el("article",undefined,"a9-source-card");card.append(el("div",x.date_npt+" · "+x.project_id+" · "+x.source_provider+" · reviewed verbatim","a9-type"));
+const body=el("p",x.verbatim_text,"a9-verbatim-message");card.append(body);
+card.append(el("small","Source receipt: "+x.source_receipt_key+" · recorded wording, not verified completion","a9-type"));holder.append(card);}}
+async function load(){try{const r=await fetch("../ops/data/a9-reviewed-progress-public.v1.0.json",{cache:"no-store"});if(!r.ok)throw Error("no approved feed");
+const s=await r.json();if(s.kind!=="MANUALLY_REVIEWED_PROGRESS_PUBLICATION_QUEUE"||s.render_mode!=="VERBATIM_FIRST_NO_AUTO_DERIVATION"||s.derived_data_requires_explicit_new_user_prompt!==true||s.automatic_polling!==false||s.historical_records_preserved!==37||!Array.isArray(s.records)||s.records.length!==s.published_new_record_count)throw Error("invalid review contract");
+if(s.records.some(x=>!x.record_id||!/^P[0-9]{3,6}$/.test(x.project_id)||!x.date_npt||!x.source_provider||!x.source_receipt_key||typeof x.verbatim_text!=="string"||!x.privacy_review_id||x.public_verbatim_approved!==true))throw Error("unapproved raw message");rows=s.records;paint();
+}catch{count.textContent="Public verbatim feed unavailable";holder.replaceChildren(el("p","Verbatim public projection unavailable; historical records remain unchanged.","a9-empty"));}}
 project?.addEventListener("change",paint);search?.addEventListener("input",paint);load();
 })();

@@ -10,6 +10,38 @@ a{color:#164eaa}.shell{max-width:1150px;padding:0 20px;margin:auto}.nav{display:
 table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #e3eaf0;text-align:left;padding:10px 8px;vertical-align:top}th{color:#597087;font-size:12px}.current{color:#20714c;font-weight:850}.muted{color:var(--muted)}.footer{padding:30px 0 38px;color:#60758b;font-size:12px}
 @media(max-width:800px){.panels{grid-template-columns:1fr}.poster.full{grid-column:auto}.flow{grid-template-columns:1fr 1fr}.shell{padding:0 14px}.poster{padding:18px}}
 @media print{@page{size:A4;margin:12mm}body{background:white}.nav,.actions{display:none!important}.hero{background:#132e51!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.hero .shell{padding:18px 0 20px}.hero h1{font-size:30pt}.panels{gap:11px}.poster{break-inside:avoid;box-shadow:none;padding:14px}.poster h2{font-size:18pt}.poster .rule{font-size:24pt}.footer{padding:12px 0}.step{background:#edf5ff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* A9 scoped level-map poster: colorful information architecture, independent of provider data. */
+.hierarchy-poster{background:linear-gradient(140deg,#f1fff4 0%,#fff7e9 46%,#f1f2ff 100%);border-color:#badbcb;position:relative;overflow:hidden}
+.hierarchy-poster::before{content:"🌸 🌿 🌼";position:absolute;right:15px;top:9px;opacity:.5;font-size:25px;letter-spacing:9px;pointer-events:none}
+.hierarchy-poster .hierarchy-intro{max-width:820px}
+.hierarchy-tree{display:grid;gap:13px}
+.hierarchy-roof{padding:16px;border-radius:16px;text-align:center;background:linear-gradient(120deg,#154d3f,#27765c);color:white;box-shadow:0 8px 23px #135c4133}
+.hierarchy-roof .node-id{font-size:12px;color:#e4f8dd;font-weight:800;letter-spacing:.1em}
+.hierarchy-roof strong{display:block;font-size:21px}
+.hierarchy-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.hierarchy-node{border-radius:14px;padding:14px 11px;min-width:0;border:1px solid #c5daca;text-decoration:none;color:#1b4834;background:#fff;font-weight:850;text-align:center;box-shadow:0 3px 9px #204c380c}
+.hierarchy-node span{display:block;font-size:22px;margin-bottom:5px}
+.hierarchy-node small{display:block;font-size:10px;color:#506858;margin-top:4px;font-weight:650}
+.hierarchy-node:nth-child(7n+1){background:#e2f6e2;border-color:#b5dfbb}
+.hierarchy-node:nth-child(7n+2){background:#e4f2fc;border-color:#b2d8f1}
+.hierarchy-node:nth-child(7n+3){background:#fff1d7;border-color:#efd3a0}
+.hierarchy-node:nth-child(7n+4){background:#f9e6f4;border-color:#e6c4dc}
+.hierarchy-node:nth-child(7n+5){background:#e8e6ff;border-color:#c7c1ed}
+.hierarchy-node:nth-child(7n+6){background:#dff4f0;border-color:#afe0cf}
+.hierarchy-node:nth-child(7n){background:#fceacb;border-color:#f0d2a0}
+.hierarchy-desc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.hierarchy-card{border:1px solid #d2e1d3;background:#ffffffd9;border-radius:14px;padding:14px}
+.hierarchy-card b{display:block;font-size:13px;color:#153d30}
+.hierarchy-card p{margin:4px 0;color:#4d665a;font-size:12px}
+.hierarchy-card .tag{display:inline-flex;padding:4px 9px;border-radius:12px;background:#eaf2df;font-size:11px;color:#234a37;font-weight:850}
+.hierarchy-card:nth-child(3n+2) .tag{background:#e9e5fc;color:#4c3c7f}
+.hierarchy-card:nth-child(3n+3) .tag{background:#ffe7d7;color:#834e2b}
+.hierarchy-stem{text-align:center;font-size:24px;color:#5b8975;line-height:1}
+.hierarchy-usage{border-radius:12px;background:#e9f8e8;padding:11px;color:#294c36;font-size:13px}
+@media(max-width:800px){.hierarchy-links{grid-template-columns:repeat(2,minmax(0,1fr))}.hierarchy-desc{grid-template-columns:1fr}}
+@media(max-width:370px){.hierarchy-links{gap:6px}.hierarchy-node{padding:10px 7px;font-size:12px}}
+@media print{.hierarchy-poster{background:#fff!important}.hierarchy-links{grid-template-columns:repeat(4,minmax(0,1fr))}.hierarchy-roof{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 </style>
 <!-- Shared light botanical theme; page-local layout remains below its owner. -->
 <link rel="stylesheet" href="../assets/css/jp-theme-tokens.css?v=botanical-1">
@@ -17,9 +49,39 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px
 <link rel="stylesheet" href="../assets/css/jp-botanical.css?v=botanical-1">
 </head><body data-jp-site="1">
 <div class="shell nav"><a href="../">← JP AEC Operations</a><span><a href="./">Control Towers</a> · <a href="storage.html">Storage Rules</a> · <a href="../guide/">How-To</a></span></div>
-<header class="hero"><div class="shell"><div class="eyebrow">PINNED · A9 Communication &amp; Web Operations</div><h1>Memory Wall</h1><p>Quick-reference posters to keep our rules visible and repeatable—like a study flashcard, job aid or reminder pinned by the desk or door.</p><small>Permanent working link · Versioned source · Evidence-based daily operations</small>
-<div class="actions"><a class="btn primary" href="https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb" target="_blank" rel="noopener">Open permanent Colab ↗</a><button class="btn" type="button" id="print">Print / Save as PDF</button><a class="btn" href="../ops/discord/notebook-versions.json">Machine-readable version ledger ↗</a></div></div></header>
-<main class="shell"><div class="panels"><section class="poster full" id="discord-coverage-status" aria-label="Discord source coverage checkpoint"><b class="k">Verified source coverage · 09 Oct 2026</b><h2>Discord capture remains PARTIAL — C03 probe completed; C04 derivative pilot staged on feature branch</h2><p>Frozen Drive provider run <code>20261009T020256Z</code>: <strong>26 sources</strong> (17 PASS, 9 PARTIAL), <strong>174 new/changed messages</strong>, <strong>749 failed attachment verifications</strong>, and <strong>207 previously archived attachments</strong>. Message archive success does not certify failed originals. Archived threads and embed-only images remain outside this collector.</p><div class="notice"><strong>Completed user-reported C03 (09 Oct):</strong> Fresh metadata declared <code>1,103,988</code> bytes; source CDN supplied <code>8,830,415</code> bytes and media proxy supplied <code>1,943,867</code> bytes. Both returned HTTP 200, decodable JPEG at 4284×5712, but had different hashes and neither matched metadata. The user supplied the sanitized runtime output; no independent native C03 execution receipt exists. Do not label either response as verified original. <strong>Next:</strong> small provenance-labelled original/derivative recovery test; preserve source cursors and prior evidence. Do not rerun C02 wholesale.</div><p style="margin-top:12px"><a href="https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view">Frozen receipt ↗</a> · <a href="../ops/data/pending-works.json">Outstanding debt registry ↗</a></p></section>
+<header class="hero"><div class="shell"><div class="eyebrow">PINNED · A9 Communication &amp; Web Operations</div><h1>Memory Poster Board</h1><p>Quick-reference posters to keep our rules visible and repeatable—like a study flashcard, job aid or reminder pinned by the desk or door.</p><small>Permanent working link · Versioned source · Evidence-based daily operations</small>
+<div class="actions"><a class="btn primary" href="https://colab.research.google.com/github/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/blob/main/ops/discord/A9_CWO_DISCORD_TWO_CHANNEL_DAILY_COLLECTOR_v1.0.ipynb" target="_blank" rel="noopener">Historical Colab notebook · paused ↗</a><button class="btn" type="button" id="print">Print / Save as PDF</button><a class="btn" href="../ops/discord/notebook-versions.json">Machine-readable version ledger ↗</a></div></div></header>
+<main class="shell"><div class="panels">
+<section class="poster full hierarchy-poster" id="website-level-tree" aria-labelledby="hierarchy-heading">
+<b class="k">PINNED MEMORY POSTER · LEVEL 0 → LEVEL 5 · SYSTEM MAP</b>
+<h2 id="hierarchy-heading">🌳 The website grows like a tree</h2>
+<p class="hierarchy-intro">Use these six levels to locate anything before you ask to install, move, hide or change it. The botanical website theme stays the same. <strong>L1 is a destination; L2 is a department; L3 is a panel; L4 is an interactive control; L5 is its data source.</strong></p>
+<div class="hierarchy-tree">
+<div class="hierarchy-roof"><div class="node-id">LEVEL 0 · L0 · ROOT</div><strong>🏡 JP AEC Operations Hub</strong><div>The entire GitHub Pages website · theme · navigation · governance</div></div>
+<div class="hierarchy-stem" aria-hidden="true">⇣</div>
+<p style="margin:0;font-weight:850;color:#285442">L1 · Main destinations (homepage plus seven navigation rooms)</p>
+<div class="hierarchy-links">
+<a class="hierarchy-node" href="../"><span>🏡</span>Home<small>Overview</small></a>
+<a class="hierarchy-node" href="../map.html"><span>🗺️</span>Map<small>Project locations</small></a>
+<a class="hierarchy-node" href="../site-operations.html"><span>☑️</span>Daily Checklist<small>Instructions</small></a>
+<a class="hierarchy-node" href="../site-operations/history.html"><span>📊</span>Progress<small>Source messages</small></a>
+<a class="hierarchy-node" href="../resources/"><span>📂</span>Resources<small>Desk + Field</small></a>
+<a class="hierarchy-node" href="../workspace/"><span>🛠️</span>Workspace<small>Software</small></a>
+<a class="hierarchy-node" aria-current="page" href="memory-wall.html"><span>🧠</span>Memory Poster<small>You are here</small></a>
+<a class="hierarchy-node" href="../guide/"><span>📘</span>How-To<small>Instructions</small></a>
+</div>
+<div class="hierarchy-stem" aria-hidden="true">⇣</div>
+<div class="hierarchy-desc">
+<div class="hierarchy-card"><span class="tag">LEVEL 2 · DEPARTMENTS</span><b>🌿 Rooms inside rooms</b><p>Example: Resources → Desk / Field; Workspace → Software Backlog; How-To → 3/7/15-page guides.</p></div>
+<div class="hierarchy-card"><span class="tag">LEVEL 3 · SECTIONS</span><b>🌸 Named panels on a page</b><p>Example: A9-CHK-01 published instructions; A9-PRG-01 original messages; A9-RES-02 Field sources.</p></div>
+<div class="hierarchy-card"><span class="tag">LEVEL 4 · COMPONENTS</span><b>🪴 Individual controls</b><p>Search, select, calendar, chart, table, card, map pin or a poster embed. Change one without changing its room.</p></div>
+<div class="hierarchy-card"><span class="tag">LEVEL 5 · DATA / SOURCE</span><b>🗄️ Where the information lives</b><p>Canonical project IDs, private Google Sheets, original Slack/Discord source records, public-reviewed projections and PK/FK contracts.</p></div>
+</div>
+<div class="hierarchy-usage"><strong>How to prompt:</strong> “At L1 Resources → L2 Field → L3 Attendance → L4 Calendar, improve mobile grouping; preserve L5 Sheet authority.” To uninstall a panel, hide it without deleting its history or source.</div>
+</div>
+<p><a href="../docs/website/A9_SITE_TREE_AND_EDIT_LEVELS.v1.md">Read the full developer tree and human-language hierarchy ↗</a></p>
+</section>
+<section class="poster full"><b class="k">CURRENT OPERATING HOLD</b><h2>⏸ Discord collector is paused</h2><p>Any collector instructions, counts or Colab links further down this poster are historical reference only. Do not execute the notebook or restart message collection unless the user explicitly resumes it.</p></section><section class="poster full" id="discord-coverage-status" aria-label="Discord source coverage checkpoint"><b class="k">Verified source coverage · 09 Oct 2026</b><h2>Discord capture remains PARTIAL — C03 probe completed; C04 derivative pilot staged on feature branch</h2><p>Frozen Drive provider run <code>20261009T020256Z</code>: <strong>26 sources</strong> (17 PASS, 9 PARTIAL), <strong>174 new/changed messages</strong>, <strong>749 failed attachment verifications</strong>, and <strong>207 previously archived attachments</strong>. Message archive success does not certify failed originals. Archived threads and embed-only images remain outside this collector.</p><div class="notice"><strong>Completed user-reported C03 (09 Oct):</strong> Fresh metadata declared <code>1,103,988</code> bytes; source CDN supplied <code>8,830,415</code> bytes and media proxy supplied <code>1,943,867</code> bytes. Both returned HTTP 200, decodable JPEG at 4284×5712, but had different hashes and neither matched metadata. The user supplied the sanitized runtime output; no independent native C03 execution receipt exists. Do not label either response as verified original. <strong>Next:</strong> small provenance-labelled original/derivative recovery test; preserve source cursors and prior evidence. Do not rerun C02 wholesale.</div><p style="margin-top:12px"><a href="https://drive.google.com/file/d/1rOQO9Q7i8vZVeQAGOuZsj8OM3W4RXYA3/view">Frozen receipt ↗</a> · <a href="../ops/data/pending-works.json">Outstanding debt registry ↗</a></p></section>
 <section class="poster"><b class="k">Poster 01 · Non-negotiable</b><h2>Keep the working link unchanged</h2><div class="rule">One stable URL.<br>Every edit, a new revision.</div><p>Maintain the exact GitHub-backed Colab file path. Do not make the operator copy/paste into a different notebook or switch links just because the code changed.</p><div class="chips"><span class="chip">SAME GITHUB PATH</span><span class="chip">NO BLIND OVERWRITE</span></div></section>
 <section class="poster"><b class="k">Poster 02 · Version discipline</b><h2>Date first. Number everything.</h2><div class="rule">YYYYMMDD-NNN</div><p>Use Nepal creation date; increase the three-digit ordinal for <strong>every change</strong>—including one typo, markdown comment, bugfix, or cell metadata edit. Never reuse old numbers.</p><div class="notice">Current working revision: <strong id="current">Loading registry…</strong>. Past revisions are archived by source-creation date. Archive creation time is separately recorded.</div></section>
 <section class="poster full"><b class="k">Poster 03 · Immutable edit sequence</b><h2>No change without a PRE snapshot</h2><div class="flow"><div class="step"><strong>1. READ</strong><span>Get current GitHub SHA and notebook bytes</span></div><div class="step"><strong>2. PRE</strong><span>Duplicate into a new numbered archive</span></div><div class="step"><strong>3. EDIT</strong><span>Update the original working path</span></div><div class="step"><strong>4. POST</strong><span>Validate, compare and provider-readback</span></div><div class="step"><strong>5. REGISTER</strong><span>Append revision to JSON manifest &amp; publish</span></div></div><p style="margin-top:15px"><strong>Preserve:</strong> Git commits, prior notebook bytes, archive links, revision dates and machine manifest. A Github-backed Colab URL is <em>not</em> a Google Drive `/drive/` ID—do not claim a Drive-native same-ID copy.</p></section>

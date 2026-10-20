@@ -16,7 +16,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-production-${{ github.ref }}
+  group: pages-production
   cancel-in-progress: true
 
 jobs:
@@ -625,7 +625,9 @@ jobs:
         run: python scripts/phase5_release_qa.py
 
   deploy:
-    if: github.ref == 'refs/heads/main'
+    # Test-first Pages lane: successful feature commits publish to the existing URL.
+    # main and immutable v2.2.0 remain untouched by rapid website iterations.
+    if: github.ref == 'refs/heads/feature/daily-ops-current-work'
     needs: validate
     runs-on: ubuntu-latest
     environment:
@@ -642,6 +644,6 @@ jobs:
         with:
           path: .
 
-      - name: Deploy main to GitHub Pages
+      - name: Deploy validated test branch to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

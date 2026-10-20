@@ -17,3 +17,7 @@
 ## Prompt to use manually
 
 > A9 manual reconciliation. Selected provider sources: [Slack messages/channel or authorized existing Discord export]. Period: [Nepal date range]. Project IDs: [specific IDs]. Mode: DRY_RUN. Read current source and existing private ledger. Identify net-new messages by provider ID/hash, separate explicit user-written checklist instructions from reported site evidence, and stage only normalized, privacy-safe fields with canonical project FK. Preserve originals in their owning provider; never duplicate. Show proposed checklist and Progress changes, privacy exclusions, source links and validation counts. Wait for explicit publication permission. No scheduler, no Discord collector, no Slack outbound messages.
+
+## Source-first rule (2026-10-20)
+
+Default Progress operation is **verbatim preservation**, not interpretation. Preserve exact original provider message ID/bytes in the authorized private source/Drive ledger without duplicating them. Only separately reviewed privacy-safe text may be displayed verbatim on a public page; always retain immutable source receipt, project link and date. Do not paraphrase, infer quantities, change work status or classify a source as approved until a new explicit user prompt requests a derived review. Derived views should use distinct IDs and provenance links and must never overwrite original source messages. This does not retroactively change the frozen 37-entry historical projection.

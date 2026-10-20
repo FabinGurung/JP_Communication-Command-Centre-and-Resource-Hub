@@ -17,6 +17,11 @@ def test():
     assert routes["schema_version"]=="1.0.0"
     listed=routes["pages"]
     assert len(arc["active_pages"])==20 and len(listed)==21
+    assert routes["memory_poster_level"]=="L1"
+    assert "MEMORY" in routes["primary_destinations"] and len(routes["primary_destinations"])==7
+    assert next(x for x in listed if x["page_id"]=="A9-PAGE-CONTROL_MEMORY")["page_role"]=="PRIMARY"
+    assert "A9-MEM-01" in {s["section_id"] for s in routes["sections"]}
+    assert len([s for s in routes["sections"] if s["section_id"].startswith("A9-FLD-")])==10
     paths={x["path"] for x in listed}
     assert paths==set(arc["active_pages"])|{"resources/field/index.html"}
     assert len({x["page_id"] for x in listed})==len(paths)
@@ -37,6 +42,12 @@ def test():
     assert progress["kind"]=="MANUALLY_REVIEWED_PROGRESS_PUBLICATION_QUEUE"
     assert progress["published_new_record_count"]==len(progress["records"])==0
     assert progress["historical_records_preserved"]==37 and progress["automatic_polling"] is False
+    assert progress["render_mode"]=="VERBATIM_FIRST_NO_AUTO_DERIVATION"
+    assert progress["derived_data_requires_explicit_new_user_prompt"] is True
+    plan=data("ops/control/a9-field-visualization-plan.v1.0.json")
+    assert plan["individual_sheet_count"]==10 and len(plan["dashboards"])==10
+    assert plan["record_level_data_included"] is False and plan["private_source_urls_included"] is False
+    assert plan["worksheet_policy"]["hide_tab_count_this_change"]==0
     assert len([l for l in read("ops/data/progress-report-public.v0.2.jsonl").splitlines() if l.strip()])==37
     originals=data("ops/data/resource-catalog-normalized.v0.1.json")
     assert sum(len(site["files"]) for site in originals["sites"])==46
@@ -75,6 +86,9 @@ def test():
         assert "fetch(" in source and "textContent" in source
         assert "setInterval" not in source and "setTimeout" not in source and "innerHTML" not in source
     assert "No schedule" in read("docs/operations/a9-manual-source-reconciliation-v1.md")
+    assert "VERBATIM_FIRST_NO_AUTO_DERIVATION" in read("assets/js/a9-manual-progress.js")
+    assert "website-level-tree" in read("controls/memory-wall.html")
+    assert "🧠 Memory Poster" in read("assets/js/site-shell.js")
     print("A9_MANUAL_SURFACES_PASS: 21 active routes, 10 metadata-only Sheets, 0 unpublished checklist/progress rows, 37 legacy events, 46 preserved resources, collector on hold.")
 if __name__=="__main__":
     test()

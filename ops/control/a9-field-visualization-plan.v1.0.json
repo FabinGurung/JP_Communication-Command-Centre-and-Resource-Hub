@@ -1,0 +1,247 @@
+{
+  "schema_version": "1.0.0",
+  "plan_id": "A9_FIELDS_ALL_TEN_SHEET_WEB_VIEW_CATALOG_20261020",
+  "status": "VIEW_SPECIFICATIONS_ONLY__NO_PRIVATE_DATA_ADMITTED",
+  "basis": "LIVE_GOOGLE_SHEETS_TAB_METADATA_20261020",
+  "public_safe": true,
+  "individual_sheet_count": 10,
+  "dashboards": [
+    {
+      "dashboard_id": "A9-FIELD-01",
+      "source_key": "SRC-01",
+      "title": "Rohini Contact Directory",
+      "group": "Contacts",
+      "source_tab_groups": [
+        "PEOPLE_DIRECTORY",
+        "BY_PROJECT",
+        "HOW_TO_USE"
+      ],
+      "visualization_options": [
+        "Searchable directory by company",
+        "Project-linked people/roles",
+        "Private contact detail and audit/source provenance"
+      ],
+      "access": "AUTHENTICATED_CONTACTS",
+      "implementation": "PLANNED_AFTER_AUTH_AND_PROJECTION_REVIEW",
+      "published_rows": 0
+    },
+    {
+      "dashboard_id": "A9-FIELD-02",
+      "source_key": "SRC-02",
+      "title": "Fishtail Contact Directory",
+      "group": "Contacts",
+      "source_tab_groups": [
+        "PEOPLE_DIRECTORY",
+        "BY_PROJECT",
+        "HOW_TO_USE"
+      ],
+      "visualization_options": [
+        "Searchable directory by company",
+        "Project-linked people/roles",
+        "Private contact detail and audit/source provenance"
+      ],
+      "access": "AUTHENTICATED_CONTACTS",
+      "implementation": "PLANNED_AFTER_AUTH_AND_PROJECTION_REVIEW",
+      "published_rows": 0
+    },
+    {
+      "dashboard_id": "A9-FIELD-03",
+      "source_key": "SRC-03",
+      "title": "A9 Master 6NF Contact Directory",
+      "group": "Contacts",
+      "source_tab_groups": [
+        "HUMAN_VIEW_ALL",
+        "PERSON",
+        "PERSON_NAME_FACT",
+        "PERSON_PHONE_FACT",
+        "ORGANIZATION",
+        "PROJECT",
+        "ROLE",
+        "PERSON_ORG_ROLE",
+        "PERSON_PROJECT_ROLE",
+        "PERSON_RELATIONSHIP",
+        "PERSON_EXTERNAL_ID",
+        "SOURCE",
+        "ORGANIZATION_PHONE_FACT",
+        "ORGANIZATION_PROJECT_ROLE"
+      ],
+      "visualization_options": [
+        "Unified searchable master directory",
+        "Person ↔ organization ↔ project role graph",
+        "Contact history, source/provenance and duplicates",
+        "Normalized relationships and lineage explorer"
+      ],
+      "access": "AUTHENTICATED_CONTACTS",
+      "implementation": "PLANNED_AFTER_AUTH_AND_PROJECTION_REVIEW",
+      "published_rows": 0
+    },
+    {
+      "dashboard_id": "A9-FIELD-04",
+      "source_key": "SRC-04",
+      "title": "Sharada Site Issues & Backcharge",
+      "group": "Issues",
+      "source_tab_groups": [
+        "ISSUE_REGISTER"
+      ],
+      "visualization_options": [
+        "Open/pending/resolved issue board",
+        "Dates, locations and evidence links",
+        "Backcharge candidates separated from approved debt",
+        "Issue ageing and closure timeline"
+      ],
+      "access": "PROJECT_RESTRICTED",
+      "implementation": "PLANNED_AFTER_AUTH_AND_PROJECTION_REVIEW",
+      "published_rows": 0
+    },
+    {
+      "dashboard_id": "A9-FIELD-05",
+      "source_key": "SRC-05",
+      "title": "Hari Team Attendance",
+      "group": "Attendance",
+      "source_tab_groups": [
+        "Attendance Entry",
+        "CAL_*",
+        "Attendance",
+        "Summary",
+        "Status Entry",
+        "_FACT_ATTENDANCE_CURRENT",
+        "_FACT_CALENDAR_ATTENDANCE"
+      ],
+      "visualization_options": [
+        "Team calendar and per-worker attendance heatmap",
+        "Date/project/site attendance table",
+        "Team totals, absences and status distribution",
+        "Worker-level provenance and correction audit"
+      ],
+      "access": "AUTHENTICATED_PERSONNEL",
+      "implementation": "PLANNED_AFTER_AUTH_AND_PROJECTION_REVIEW",
+      "published_rows": 0
+    },
+    {
+      "dashboard_id": "A9-FIELD-06",
+      "source_key": "SRC-06",
+      "title": "Fishtail Shared Cement & Materials",
+      "group": "Materials",
+      "source_tab_groups": [
+        "Cement PPC",
+        "Cement OPC",
+        "Daily Progress",
+        "Summary",
+        "Material Movements",
+        "Material Stock",
+        "Daily Readiness",
+        "_FACT_CEMENT_PPC_CURRENT",
+        "_FACT_CEMENT_OPC_CURRENT"
+      ],
+      "visualization_options": [
+        "PPC and OPC separate time-series by site",
+        "Material receipt/issue/movement ledger",
+        "Stock balance and discrepancy alerts",
+        "Daily progress and readiness timeline",
+        "Summary by project, date and material"
+      ],
+      "access": "PROJECT_RESTRICTED",
+      "implementation": "PLANNED_AFTER_AUTH_AND_PROJECTION_REVIEW",
+      "published_rows": 0
+    },
+    {
+      "dashboard_id": "A9-FIELD-07",
+      "source_key": "SRC-07",
+      "title": "Paras Attendance & Expenses",
+      "group": "Visits",
+      "source_tab_groups": [
+        "Attendance",
+        "Expenses",
+        "Expense Summary",
+        "Calendar",
+        "Summary",
+        "_FACT_SITE_VISIT_CURRENT",
+        "_FACT_SITE_VISIT_ALL_SITES",
+        "_EXPENSE_FACT",
+        "_SLACK_ATTENDANCE_EVIDENCE"
+      ],
+      "visualization_options": [
+        "Site-visit calendar and attendance by project",
+        "Daily/weekly attendance frequency",
+        "Expense ledger, categories and period summaries",
+        "Audit trail and source-backed attendance claims"
+      ],
+      "access": "AUTHENTICATED_PERSONNEL_FINANCE",
+      "implementation": "PLANNED_AFTER_AUTH_AND_PROJECTION_REVIEW",
+      "published_rows": 0
+    },
+    {
+      "dashboard_id": "A9-FIELD-08",
+      "source_key": "SRC-08",
+      "title": "Shiv Attendance, Visits & Expenses",
+      "group": "Visits",
+      "source_tab_groups": [
+        "Attendance",
+        "Calendar",
+        "Summary",
+        "Expenses",
+        "Expense Summary",
+        "Cement PPC",
+        "Cement OPC",
+        "_FACT_SITE_VISIT_CURRENT",
+        "_FACT_SITE_VISIT_ALL_SITES",
+        "_EXPENSE_FACT"
+      ],
+      "visualization_options": [
+        "Visit calendar and project/date attendance",
+        "Private expenses and expense summaries",
+        "Legacy cement tab lineage versus shared master",
+        "Status corrections and source audit"
+      ],
+      "access": "AUTHENTICATED_PERSONNEL_FINANCE",
+      "implementation": "PLANNED_AFTER_AUTH_AND_PROJECTION_REVIEW",
+      "published_rows": 0
+    },
+    {
+      "dashboard_id": "A9-FIELD-09",
+      "source_key": "SRC-09",
+      "title": "Fishtail Project Site Locations",
+      "group": "Locations",
+      "source_tab_groups": [
+        "Project Sites"
+      ],
+      "visualization_options": [
+        "Project-ID-linked map markers",
+        "Location directory with company/project filters",
+        "Coordinate completeness and duplicate-position QA",
+        "Map navigation and site overview"
+      ],
+      "access": "PUBLIC_AFTER_COORDINATE_REVIEW",
+      "implementation": "PLANNED_AFTER_AUTH_AND_PROJECTION_REVIEW",
+      "published_rows": 0
+    },
+    {
+      "dashboard_id": "A9-FIELD-10",
+      "source_key": "SRC-10",
+      "title": "Rohini Project Site Locations",
+      "group": "Locations",
+      "source_tab_groups": [
+        "Project Sites"
+      ],
+      "visualization_options": [
+        "Project-ID-linked map markers",
+        "Location directory with company/project filters",
+        "Coordinate completeness and duplicate-position QA",
+        "Map navigation and site overview"
+      ],
+      "access": "PUBLIC_AFTER_COORDINATE_REVIEW",
+      "implementation": "PLANNED_AFTER_AUTH_AND_PROJECTION_REVIEW",
+      "published_rows": 0
+    }
+  ],
+  "worksheet_policy": {
+    "canonical_entry_and_6nf_fact_tabs": "KEEP_AS_SOURCE_AUTHORITY",
+    "calendars_and_summary_tabs": "MIGRATE_DISPLAY_TO_WEBSITE_ONLY_AFTER_AUTHENTICATED_EQUIVALENCE_QA_AND_DEPENDENCY_AUDIT",
+    "frozen_historical_tabs": "KEEP_HIDDEN_ARCHIVED__DO_NOT_DELETE",
+    "ai_query_and_audit_tabs": "KEEP_HIDDEN_AND_AVAILABLE_TO_SYSTEM",
+    "delete_tab_count": 0,
+    "hide_tab_count_this_change": 0
+  },
+  "private_source_urls_included": false,
+  "record_level_data_included": false
+}

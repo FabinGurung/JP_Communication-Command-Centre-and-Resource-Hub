@@ -21,5 +21,20 @@
   "admission_rule": "SOURCE_HASH_FK_PRIVACY_REVIEW_BEFORE_PUBLIC_PROJECTION",
   "privacy": "NO_RAW_CHAT_ORIGINAL_MEDIA_OR_PERSONAL_DATA",
   "discord_collector": "ON_HOLD_BY_USER",
-  "automatic_polling": false
+  "automatic_polling": false,
+  "render_mode": "VERBATIM_FIRST_NO_AUTO_DERIVATION",
+  "derived_data_requires_explicit_new_user_prompt": true,
+  "original_message_storage": "ORIGINAL_PROVIDER_OR_PRIVATE_DRIVE__NEVER_PUBLIC_RAW_MEDIA_ARCHIVE",
+  "public_text_rule": "ONLY_SEPARATELY_REVIEWED_SAFE_VERBATIM_TEXT_WITH_SOURCE_RECEIPT",
+  "verbatim_record_schema": [
+    "record_id",
+    "project_id",
+    "date_npt",
+    "source_provider",
+    "source_receipt_key",
+    "verbatim_text",
+    "privacy_review_id",
+    "public_verbatim_approved"
+  ],
+  "description": "Existing 37-entry legacy historical projection remains as previously frozen. New messages, if separately approved for publication, appear verbatim first. Summaries, status classification and derived quantities are generated only after explicit later user instruction."
 }

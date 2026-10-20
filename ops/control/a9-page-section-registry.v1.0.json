@@ -21,7 +21,7 @@
     {
       "level": "L1",
       "name": "PRIMARY_DESTINATION",
-      "meaning": "Homepage plus six primary navigation sections; shared nav owns their link routing"
+      "meaning": "Homepage plus seven primary navigation destinations: Map, Checklist, Progress, Resources, Workspace, Memory Poster and How-To"
     },
     {
       "level": "L2",
@@ -218,8 +218,8 @@
     {
       "page_id": "A9-PAGE-CONTROL_MEMORY",
       "path": "controls/memory-wall.html",
-      "nav_group": "WORKSPACE",
-      "page_role": "EMBEDDED",
+      "nav_group": "MEMORY",
+      "page_role": "PRIMARY",
       "data_owner": "memory_wall",
       "status": "ACTIVE",
       "theme": "V2_2_BOTANICAL",
@@ -298,7 +298,7 @@
       "location": "Progress/manual-updates",
       "path": "site-operations/history.html",
       "anchor": "#a9-manual-progress",
-      "purpose": "Manually reviewed additional events",
+      "purpose": "Approved public-safe source messages verbatim by default; derivations require explicit new user prompt",
       "data_contract": "ops/data/a9-reviewed-progress-public.v1.0.json",
       "status": "ACTIVE"
     },
@@ -364,6 +364,105 @@
       "purpose": "Guidance and 3/7/15 page variants",
       "data_contract": "guide/*/index.html",
       "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-MEM-01",
+      "location": "Memory Poster/level-tree",
+      "path": "controls/memory-wall.html",
+      "anchor": "#website-level-tree",
+      "purpose": "Colorful visual L0–L5 hierarchy and examples",
+      "data_contract": "ops/control/a9-page-section-registry.v1.0.json",
+      "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-FLD-01",
+      "location": "Resources/Field/Sheet-01",
+      "path": "resources/field/index.html",
+      "anchor": "#field-src-01",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-01",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+    },
+    {
+      "section_id": "A9-FLD-02",
+      "location": "Resources/Field/Sheet-02",
+      "path": "resources/field/index.html",
+      "anchor": "#field-src-02",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-02",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+    },
+    {
+      "section_id": "A9-FLD-03",
+      "location": "Resources/Field/Sheet-03",
+      "path": "resources/field/index.html",
+      "anchor": "#field-src-03",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-03",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+    },
+    {
+      "section_id": "A9-FLD-04",
+      "location": "Resources/Field/Sheet-04",
+      "path": "resources/field/index.html",
+      "anchor": "#field-src-04",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-04",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+    },
+    {
+      "section_id": "A9-FLD-05",
+      "location": "Resources/Field/Sheet-05",
+      "path": "resources/field/index.html",
+      "anchor": "#field-src-05",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-05",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+    },
+    {
+      "section_id": "A9-FLD-06",
+      "location": "Resources/Field/Sheet-06",
+      "path": "resources/field/index.html",
+      "anchor": "#field-src-06",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-06",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+    },
+    {
+      "section_id": "A9-FLD-07",
+      "location": "Resources/Field/Sheet-07",
+      "path": "resources/field/index.html",
+      "anchor": "#field-src-07",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-07",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+    },
+    {
+      "section_id": "A9-FLD-08",
+      "location": "Resources/Field/Sheet-08",
+      "path": "resources/field/index.html",
+      "anchor": "#field-src-08",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-08",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+    },
+    {
+      "section_id": "A9-FLD-09",
+      "location": "Resources/Field/Sheet-09",
+      "path": "resources/field/index.html",
+      "anchor": "#field-src-09",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-09",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+    },
+    {
+      "section_id": "A9-FLD-10",
+      "location": "Resources/Field/Sheet-10",
+      "path": "resources/field/index.html",
+      "anchor": "#field-src-10",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-10",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
     }
   ],
   "legacy_compatibility": [
@@ -404,5 +503,18 @@
     "private_originals": "GOOGLE_DRIVE",
     "public_field_data": "NO_ROW_ADMISSIONS_YET"
   },
-  "edit_command_template": "In JP AEC website, edit A9-PAGE-<ID> / A9-<SECTION-ID> at L3 or L4; describe change, retain L5 data source and v2.2 botanical theme, audit links, commit to registered working lane, validate and promote. To uninstall: remove from navigation/rendered layout; retain source and Git history."
+  "edit_command_template": "In JP AEC website, edit A9-PAGE-<ID> / A9-<SECTION-ID> at L3 or L4; describe change, retain L5 data source and v2.2 botanical theme, audit links, commit to registered working lane, validate and promote. To uninstall: remove from navigation/rendered layout; retain source and Git history.",
+  "field_visualization_plan": "ops/control/a9-field-visualization-plan.v1.0.json",
+  "progress_publication_default": "VERBATIM_FIRST_NO_DERIVATION",
+  "memory_poster_level": "L1",
+  "primary_destinations": [
+    "MAP",
+    "CHECKLIST",
+    "PROGRESS",
+    "RESOURCES",
+    "WORKSPACE",
+    "MEMORY",
+    "HOWTO"
+  ],
+  "publishing_lane_policy": "TEST_BRANCH_DEPLOY_CAN_PUBLISH_AFTER_CI_WITHOUT_MAIN_PROMOTION__MAIN_AND_V2_2_FROZEN"
 }
