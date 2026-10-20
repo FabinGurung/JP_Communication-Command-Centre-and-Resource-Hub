@@ -25,10 +25,28 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
+      # v2.1.0 is immutable. Subsequent development deployments must not retag it.
+      - name: Detect whether this commit is the frozen milestone
+        id: milestone
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --tags origin refs/tags/v2.1.0 >/dev/null 2>&1; then
+            git fetch --no-tags origin refs/tags/v2.1.0:refs/tags/v2.1.0
+            if [ "$(git rev-parse 'refs/tags/v2.1.0^{}')" != "$(git rev-parse HEAD)" ]; then
+              echo 'Frozen v2.1.0 already exists; this deployment is a later development arc.'
+              echo 'publish=false' >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          echo 'publish=true' >> "$GITHUB_OUTPUT"
+
       - name: Check immutable release packet and source boundaries
+        if: steps.milestone.outputs.publish == 'true'
         run: python scripts/validate_release_milestone_v2_1.py
 
       - name: Wait for same-commit visual and branch governance checks
+        if: steps.milestone.outputs.publish == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TARGET_SHA: ${{ github.event.workflow_run.head_sha }}
@@ -65,6 +83,7 @@ jobs:
           test "$PASSED" = yes || { echo 'Timeout waiting for release gates'; exit 1; }
 
       - name: Create or verify exact immutable v2.1.0 tag and GitHub Release
+        if: steps.milestone.outputs.publish == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TARGET_SHA: ${{ github.event.workflow_run.head_sha }}

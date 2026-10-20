@@ -79,8 +79,13 @@
       .workspace, .workspace.detail-open, .workspace.list-collapsed { grid-template-columns:minmax(0,1fr); }
     }
   </style>
+
+<!-- Shared light botanical theme; page-local layout remains below its owner. -->
+<link rel="stylesheet" href="assets/css/jp-theme-tokens.css?v=botanical-1">
+<link rel="stylesheet" href="assets/css/site-shell.css?v=botanical-1">
+<link rel="stylesheet" href="assets/css/jp-botanical.css?v=botanical-1">
 </head>
-<body>
+<body data-jp-site="1">
   <div class="app-shell">
     <nav class="jp-subnav" aria-label="Map navigation">
       <a href="index.html">Overview</a><a href="map.html" class="active" aria-current="page">🗺️ Project Map</a><a href="workspace/">🛠️ Developer Workspace</a><a href="resources/">📐 Drawings &amp; Models</a><a href="site-operations.html">Daily Checklist</a><a href="site-operations/coordination.html">Site Coordination</a><a href="site-operations/history.html">Progress Report</a><details class="map-more"><summary>More ▾</summary><div><a href="pending/">Pending Work</a><a href="guide/">How-To Guide</a><a href="controls/">Control Towers</a></div></details>
@@ -209,5 +214,5 @@
           crossorigin></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script type="module" src="assets/js/app.js?v=1.2.0-dev-20260803-1"></script>
-<script src="assets/js/site-shell.js?v=20261012-1"></script></body>
+<script src="assets/js/site-shell.js?v=botanical-1"></script></body>
 </html>

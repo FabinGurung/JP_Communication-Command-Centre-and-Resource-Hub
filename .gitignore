@@ -1,0 +1,5 @@
+# Reproducible browser dependencies and generated QA output
+node_modules/
+artifacts/
+__pycache__/
+*.pyc

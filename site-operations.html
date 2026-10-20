@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="User-authored daily site engineer checklist. No historical communications are auto-added.">
 <title>Checklist for Today · JP AEC Site Operations</title>
 <style>
@@ -14,7 +14,12 @@ nav{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border-bottom:1px sol
 .explain{margin-top:15px;font-size:12px;color:#786238;background:#fff8e9;border-left:3px solid #c59b43;border-radius:7px;padding:10px 12px}
 .references{margin-top:17px;font-size:12px;color:var(--muted)}.references summary{cursor:pointer;font-weight:800;min-height:36px;padding:8px 0}.references div{display:flex;gap:11px;flex-wrap:wrap;padding:10px 0}.references a{font-weight:740;min-height:32px;display:inline-flex;align-items:center}
 @media(max-width:600px){.shell{padding:10px 11px 28px}.main{padding:13px 12px}.form input{font-size:13px}.form button{padding:10px 12px}.top select{width:100%;min-width:0}.top>div:first-child{width:100%}.date{font-size:11px}}
-</style></head><body><div class="shell">
+</style>
+<!-- Shared light botanical theme; page-local layout remains below its owner. -->
+<link rel="stylesheet" href="assets/css/jp-theme-tokens.css?v=botanical-1">
+<link rel="stylesheet" href="assets/css/site-shell.css?v=botanical-1">
+<link rel="stylesheet" href="assets/css/jp-botanical.css?v=botanical-1">
+</head><body data-jp-site="1"><div class="shell">
 <nav aria-label="Site Operations"><a href="index.html">JP AEC</a><a href="site-operations.html" aria-current="page">Daily Checklist</a><a href="site-operations/coordination.html">Site Coordination</a><a href="site-operations/history.html">Progress Report</a><a href="map.html">Map</a><a href="resources/">Drawings &amp; Models</a><a href="workspace/">Developer Workspace</a></nav>
 <main><header class="heading"><h1>Checklist for Today</h1><p>Your list, written by you. No previous Discord or Slack questions are added automatically.</p></header>
 <section class="main" aria-label="Personal site checklist"><div class="top"><div><label for="project">Project</label><select id="project"><option value="">Loading projects…</option></select></div><div class="date" id="date">Nepal · …</div></div>
@@ -43,4 +48,4 @@ async function load(){day=nepDate();$("date").textContent="Nepal · "+day;try{co
 $("project").innerHTML=projects.map(p=>'<option value="'+esc(p.project_id)+'">'+esc(p.display_name)+'</option>').join("");const choose=new URLSearchParams(location.search).get("project");if(choose&&projects.some(p=>p.project_id===choose))$("project").value=choose;render();}
 catch(e){$("count").textContent="Project data unavailable";$("tasks").innerHTML='<li class="empty">Could not load the project list; tasks were not assumed.</li>';}}
 load();})();
-</script><script src="assets/js/site-shell.js?v=20261012-1"></script></body></html>
+</script><script src="assets/js/site-shell.js?v=botanical-1"></script></body></html>

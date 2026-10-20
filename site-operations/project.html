@@ -105,8 +105,13 @@ html,body{font-family:var(--ui)}.hero h1,.section-heading h2,.resource-group h3,
  .identity-details dt{color:#516a5f}.identity-details dd{margin:0;overflow-wrap:anywhere}
  @media(max-width:520px){.identity-details dl{grid-template-columns:1fr;gap:2px}.identity-details dd{margin-bottom:5px}}
 </style>
+
+<!-- Shared light botanical theme; page-local layout remains below its owner. -->
+<link rel="stylesheet" href="../assets/css/jp-theme-tokens.css?v=botanical-1">
+<link rel="stylesheet" href="../assets/css/site-shell.css?v=botanical-1">
+<link rel="stylesheet" href="../assets/css/jp-botanical.css?v=botanical-1">
 </head>
-<body>
+<body data-jp-site="1">
 <div class="shell">
   <nav class="nav" aria-label="Main navigation">
     <a href="../site-operations.html">← Daily Checklist</a>
@@ -340,5 +345,5 @@ async function load(){
 load();
 })();
 </script>
-<script src="../assets/js/site-shell.js?v=20261012-1"></script></body>
+<script src="../assets/js/site-shell.js?v=botanical-1"></script></body>
 </html>

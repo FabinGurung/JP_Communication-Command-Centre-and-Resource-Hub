@@ -7,6 +7,8 @@ downloaded or included in screenshot artifacts.
 """
 import os
 import pathlib
+import re
+import urllib.error
 import shutil
 import subprocess
 import sys
@@ -116,19 +118,45 @@ def verify_shared_shell(page, section):
     else:
         require(len(details["active"])==0, "Homepage must not mark an unrelated department active")
 
+def browser_options():
+    binary=os.environ.get("CHROME_BIN") or shutil.which("google-chrome") or shutil.which("google-chrome-stable") or shutil.which("chromium")
+    require(binary is not None, "Chromium/Chrome is not installed")
+    options=dict(executable_path=binary, headless=True,
+                 args=["--no-sandbox","--disable-dev-shm-usage","--disable-gpu"], timeout=30000)
+    if os.environ.get("JP_QA_PROXY"):
+        options["proxy"]={"server":os.environ["JP_QA_PROXY"], "bypass":"127.0.0.1,localhost"}
+    return options
+
+def configure_network(context):
+    """Optional local sandbox transport, with actual remote CDN / OSM bytes.
+
+    An explicit proxy may route loopback URLs through itself. Relay only the
+    local static QA server through Python; external assets still use Chrome's
+    real network. Normal GitHub runners need no relay.
+    """
+    if not os.environ.get("JP_QA_PROXY"):
+        return
+    def local(route):
+        try:
+            with urllib.request.urlopen(route.request.url, timeout=5) as response:
+                route.fulfill(status=response.status,
+                              content_type=response.headers.get("Content-Type","application/octet-stream"),
+                              body=response.read())
+        except Exception as exc:
+            print("LOCAL_QA_ASSET_FAILED",route.request.url,str(exc),flush=True)
+            route.abort()
+    context.route(re.compile(r"http://127\.0\.0\.1:887[89]/"),local)
+
 def run():
     server=subprocess.Popen([sys.executable,"-m","http.server","8878","--bind","127.0.0.1"],
                             stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     try:
         ready(server)
         with sync_playwright() as pw:
-            binary=shutil.which("google-chrome") or shutil.which("google-chrome-stable") or shutil.which("chromium")
-            require(binary is not None, "Chromium/Chrome is not installed")
-            browser=pw.chromium.launch(executable_path=binary, headless=True, args=[
-                "--no-sandbox","--disable-dev-shm-usage","--disable-gpu"
-            ],timeout=30000)
+            browser=pw.chromium.launch(**browser_options())
             try:
-                desktop=browser.new_context(viewport={"width":1440,"height":900}, reduced_motion="reduce")
+                desktop=browser.new_context(viewport={"width":1440,"height":900}, reduced_motion="reduce", ignore_https_errors=bool(os.environ.get("JP_QA_PROXY")))
+                configure_network(desktop)
                 page=desktop.new_page()
                 page.goto(BASE+"/",wait_until="domcontentloaded",timeout=20000)
                 page.locator("#field-hero-canvas").wait_for(timeout=12000)
@@ -450,7 +478,8 @@ def run():
 
 
                 mobile=browser.new_context(viewport={"width":390,"height":844},device_scale_factor=1,
-                                            is_mobile=True,has_touch=True,reduced_motion="reduce")
+                                            is_mobile=True,has_touch=True,reduced_motion="reduce",ignore_https_errors=bool(os.environ.get("JP_QA_PROXY")))
+                configure_network(mobile)
                 m=mobile.new_page()
                 m.goto(BASE+"/",wait_until="domcontentloaded",timeout=20000)
                 m.locator("#field-hero-canvas").wait_for(timeout=12000)

@@ -49,22 +49,22 @@
     developer:[["🗼 Control Towers","controls/"],["📌 Software Backlog","workspace/backlog/"],["🧭 Storage Rules","controls/storage.html"],["🗃️ Archive Policy","controls/archive-formats.html"]],
     guide:[["📄 Quick Start","guide/"],["📖 3-page walkthrough","guide/3-pages/"],["🗂️ 7-page routine","guide/7-pages/"],["📚 15-page reference","guide/15-pages/"]]
   };
-  const oldNav=document.querySelector("nav:not(.depth-nav)");
+  const oldNav=document.querySelector("nav:not(.depth-nav), .shell.nav");
   const host=document.createElement("jp-site-header");
   host.setAttribute("data-section",section);
   const shadow=host.attachShadow({mode:"open"});
   const styles=document.createElement("link");
   styles.rel="stylesheet";
-  styles.href=local("assets/css/site-shell.css?v=2");
+  styles.href=local("assets/css/site-shell.css?v=botanical-1");
   shadow.appendChild(styles);
   const shell=document.createElement("div");
   shell.className="jp-frame";
   const mainLinks=pages.map(([key,label,href])=>
     '<a class="jp-link'+(key===section?' active':'')+'" data-jp-route="'+escapeHTML(href)+'"'+
     (key===section?' aria-current="page"':'')+' href="'+local(href)+'">'+escapeHTML(label)+'</a>').join("");
-  shell.innerHTML='<div class="jp-top"><a class="jp-brand" href="'+base.href+
+  shell.innerHTML='<a class="jp-skip" href="#jp-main">Skip to content</a><div class="jp-top" data-menu-open="false"><a class="jp-brand" href="'+base.href+
     '"><span aria-hidden="true">🏗️</span><span>JP AEC <small>Operations Hub</small></span></a>'+
-    '<nav aria-label="JP AEC six primary sections">'+mainLinks+'</nav>'+
+    '<button class="jp-menu-toggle" type="button" aria-expanded="false" aria-controls="jp-primary-nav">Menu ☰</button><nav class="jp-nav" id="jp-primary-nav" aria-label="JP AEC six primary sections">'+mainLinks+'</nav>'+
     '<div class="jp-more-slot"></div></div>';
   shadow.appendChild(shell);
   const more=shell.querySelector(".jp-more-slot");
@@ -105,23 +105,59 @@
     more.replaceChildren(details);
   }
   const isHome=path===""||path==="index.html";
-  if(isHome&&document.querySelector("header.top")){
-    document.querySelector("header.top").replaceWith(host);
-  }else if(oldNav){
-    oldNav.before(host);
+  if(isHome)document.querySelector("header.top")?.remove();
+  if(oldNav && oldNav.isConnected){
     oldNav.dataset.jpLegacyPrimary="1";
     oldNav.hidden=true;
     oldNav.setAttribute("aria-hidden","true");
     oldNav.style.setProperty("display","none","important");
-  }else{
-    document.body.prepend(host);
   }
+  // The header belongs to the viewport shell, never a page's narrow content column.
+  document.body.prepend(host);
   document.body.dataset.jpSite="1";
   document.body.dataset.jpSection=section;
-  const pageStyles=document.createElement("link");
-  pageStyles.rel="stylesheet";
-  pageStyles.href=local("assets/css/site-shell.css?v=2");
-  document.head.appendChild(pageStyles);
+  const garden=document.createElement("div");
+  garden.className="jp-garden";
+  garden.setAttribute("aria-hidden","true");
+  document.body.appendChild(garden);
+  const content=document.querySelector("main")||document.querySelector(".app-shell,.shell,.wrap");
+  if(content){
+    if(!content.id)content.id="jp-main";
+    content.tabIndex=-1;
+    shadow.querySelector(".jp-skip").addEventListener("click",e=>{
+      e.preventDefault(); content.focus(); content.scrollIntoView({block:"start"});
+    });
+  }
+  const menuToggle=shadow.querySelector(".jp-menu-toggle");
+  const top=shadow.querySelector(".jp-top");
+  function closeMenu(restoreFocus=false){
+    top.dataset.menuOpen="false";
+    menuToggle.setAttribute("aria-expanded","false");
+    if(restoreFocus)menuToggle.focus();
+  }
+  menuToggle.addEventListener("click",()=>{
+    const open=top.dataset.menuOpen!=="true";
+    top.dataset.menuOpen=String(open);
+    menuToggle.setAttribute("aria-expanded",String(open));
+  });
+  shadow.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){
+      const related=shadow.querySelector(".jp-related[open]");
+      if(related){related.open=false;related.querySelector("summary").focus();}
+      else closeMenu(true);
+    }
+  });
+  document.addEventListener("click",e=>{
+    if(!e.composedPath().includes(host)){
+      closeMenu();
+      const related=shadow.querySelector(".jp-related");
+      if(related)related.open=false;
+    }
+  });
+  // Reflow the map when the mobile menu or header changes height.
+  if(section==="map"&&typeof ResizeObserver!=="undefined"){
+    new ResizeObserver(()=>window.dispatchEvent(new Event("resize"))).observe(host);
+  }
   syncRoutes();
   const projectChoice=document.getElementById("project");
   if(projectChoice){

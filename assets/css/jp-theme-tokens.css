@@ -1,0 +1,30 @@
+/* JP AEC · Botanical workspace. Canonical visual tokens; no domain data. */
+:root {
+  color-scheme: light;
+  --jp-canvas:#f3f8f2; --jp-paper:#fffefa; --jp-surface:#fff;
+  --jp-surface-soft:#f7faf5; --jp-cream:#fff8ea;
+  --jp-ink:#193d2e; --jp-ink-soft:#355e4d; --jp-muted:#587365;
+  --jp-green:#17664a; --jp-green-deep:#104b36; --jp-green-soft:#e0f0e0;
+  --jp-sage:#d6e9d4; --jp-leaf:#7da88a; --jp-leaf-pale:#edf5e9;
+  --jp-blossom:#e9b7b6; --jp-flower-cream:#f6e6c5; --jp-gold:#c8974f;
+  --jp-success:#26744e; --jp-warning:#8d631e; --jp-danger:#a84239;
+  --jp-line:#d3e4d6; --jp-line-strong:#bad3be;
+  --jp-shadow-sm:0 3px 12px rgb(28 62 43 / 5%);
+  --jp-shadow-md:0 12px 30px rgb(28 62 43 / 8%);
+  --jp-radius-sm:10px; --jp-radius-md:14px; --jp-radius-lg:20px; --jp-radius-pill:999px;
+  --jp-space-1:4px; --jp-space-2:8px; --jp-space-3:12px; --jp-space-4:16px;
+  --jp-space-6:24px; --jp-space-8:32px; --jp-space-12:48px;
+  --jp-content-wide:1200px; --jp-content-reading:900px; --jp-content-narrow:800px;
+  --jp-motion-fast:150ms; --jp-motion-normal:240ms; --jp-motion-slow:600ms;
+  --jp-font:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+/* Inherited aliases bridge page-local :root palettes and the shadow header. */
+body[data-jp-site="1"] {
+  --bg:var(--jp-canvas); --page:var(--jp-canvas); --paper:var(--jp-paper);
+  --panel:var(--jp-paper); --panel-soft:var(--jp-surface-soft); --white:var(--jp-paper);
+  --ink:var(--jp-ink); --text:var(--jp-ink); --muted:var(--jp-muted);
+  --line:var(--jp-line); --line-strong:var(--jp-line-strong);
+  --green:var(--jp-green); --blue:var(--jp-green); --accent:var(--jp-green);
+  --accent-dark:var(--jp-green-deep); --accent-soft:var(--jp-green-soft);
+  --soft:var(--jp-leaf-pale); --shadow:var(--jp-shadow-md);
+}

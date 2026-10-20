@@ -1,0 +1,116 @@
+{
+  "arc_id": "JP-AEC-BOTANICAL-WORKSPACE-20261020",
+  "baseline_commit": "d2963c2380c359dff3ea2f23f4a702c6074cb642",
+  "rollback_tag": "v2.1.0",
+  "new_release_tag": null,
+  "working_lane": "feature/daily-ops-current-work",
+  "publication_lane": "main",
+  "active_pages": [
+    "controls/archive-formats.html",
+    "controls/index.html",
+    "controls/memory-wall.html",
+    "controls/storage.html",
+    "guide/15-pages/index.html",
+    "guide/3-pages/index.html",
+    "guide/7-pages/index.html",
+    "guide/index.html",
+    "index.html",
+    "map.html",
+    "pending/index.html",
+    "resources/index.html",
+    "site-operations/coordination.html",
+    "site-operations/history.html",
+    "site-operations/project.html",
+    "site-operations/questions.html",
+    "site-operations/schedule.html",
+    "site-operations.html",
+    "workspace/backlog/index.html",
+    "workspace/index.html"
+  ],
+  "protected_records": [
+    {
+      "path": "projects.csv",
+      "sha256": "dfac98967a6d240d1965f52c2242fde23c8f97ea9cda694c6482b588d9734fd3",
+      "unchanged_from_baseline": true
+    },
+    {
+      "path": "ops/data/current-works.json",
+      "sha256": "6a8cc9eb50f97f6209f8845798dd4020e59381da05f641096c4f65ebbddadaa3",
+      "unchanged_from_baseline": true
+    },
+    {
+      "path": "ops/data/project-resources.json",
+      "sha256": "7bcb6fe9258e4edb3c3e4704f8ab37a7905925d9a979014bd6dbfa2156a70bcf",
+      "unchanged_from_baseline": true
+    },
+    {
+      "path": "ops/data/resource-catalog-normalized.v0.1.json",
+      "sha256": "a053ba5430f579e340a845083c3e9daad5bc7e6955416eea30bec2b9ff733503",
+      "unchanged_from_baseline": true
+    },
+    {
+      "path": "ops/data/resource-project-name-aliases.v1.0.json",
+      "sha256": "e8c31e96c88a062494966a13afec6bf4c414d0c53d19fb5044dd9a3f8c120dbe",
+      "unchanged_from_baseline": true
+    },
+    {
+      "path": "ops/data/progress-report-public.v0.2.jsonl",
+      "sha256": "88205337645fd56a0332ea6e26d0ab6d22d37b65e0339dccccf1a50c3aa153ba",
+      "unchanged_from_baseline": true
+    },
+    {
+      "path": "ops/data/project-document-review-public.v1.0.json",
+      "sha256": "405438716643d5b6acf72044ce58113ce68d5502fca9563df3b420a8c85fd4af",
+      "unchanged_from_baseline": true
+    },
+    {
+      "path": "ops/control/daily-communication-web-cycle.json",
+      "sha256": "e49c0c6e3cd9c19b9253bf6df913f67226af62793439cd0ed6a4c14aa7b5d4e0",
+      "unchanged_from_baseline": true
+    }
+  ],
+  "qa_status": "PRODUCTION_SOURCE_CHECKS_PASSED__FIELD_MAP_BROWSER_SUITE_PASSED__RESPONSIVE_MATRIX_IN_PROGRESS",
+  "workflow_artifacts": "field-ux-screenshots (field-ux/ and botanical-theme/ before, after, results.json)",
+  "specification": "docs/design/botanical-workspace-v1.md",
+  "modified_files": [
+    ".gitignore",
+    "assets/botanical/corner-sprig.svg",
+    "assets/botanical/empty-garden.svg",
+    "assets/botanical/garden-left.svg",
+    "assets/botanical/garden-right.svg",
+    "assets/botanical/tree-silhouette.svg",
+    "assets/css/jp-botanical.css",
+    "assets/css/jp-theme-tokens.css",
+    "docs/design/botanical-workspace-v1.md",
+    "scripts/qa_botanical_theme.py",
+    ".github/workflows/field-ux-visual-qa.yml",
+    ".github/workflows/release-v2.1.0.yml",
+    "CHANGELOG.md",
+    "README.md",
+    "assets/css/site-shell.css",
+    "assets/js/site-shell.js",
+    "controls/archive-formats.html",
+    "controls/index.html",
+    "controls/memory-wall.html",
+    "controls/storage.html",
+    "guide/15-pages/index.html",
+    "guide/3-pages/index.html",
+    "guide/7-pages/index.html",
+    "guide/index.html",
+    "index.html",
+    "map.html",
+    "pending/index.html",
+    "resources/index.html",
+    "scripts/qa_field_ux_browser.py",
+    "site-operations.html",
+    "site-operations/coordination.html",
+    "site-operations/history.html",
+    "site-operations/project.html",
+    "site-operations/questions.html",
+    "site-operations/schedule.html",
+    "workspace/backlog/index.html",
+    "workspace/index.html",
+    "ops/control/botanical-workspace-arc.v1.0.json"
+  ],
+  "remaining_scope": "Future provider integrations remain in the existing software roadmap; project approvals remain Progress data; Discord remains on hold."
+}

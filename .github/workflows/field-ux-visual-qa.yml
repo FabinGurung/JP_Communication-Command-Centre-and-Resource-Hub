@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - feature/daily-ops-current-work
     paths:
       - 'VERSION'
       - 'docs/releases/**'
@@ -13,6 +14,10 @@ on:
       - 'assets/js/hero-field.js'
       - 'assets/js/site-shell.js'
       - 'assets/css/site-shell.css'
+      - 'assets/css/jp-*.css'
+      - 'assets/botanical/**'
+      - 'controls/**'
+      - 'scripts/qa_botanical_theme.py'
       - 'pending/index.html'
       - 'controls/index.html'
       - 'guide/3-pages/index.html'
@@ -49,10 +54,12 @@ permissions:
 jobs:
   field-ux-visual:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 18
     steps:
       - name: Check out published project source
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -64,11 +71,15 @@ jobs:
           command -v google-chrome || command -v google-chrome-stable || command -v chromium
       - name: Browser field and map user journey QA
         run: python scripts/qa_field_ux_browser.py
+      - name: Botanical theme matrix, keyboard, print and before/after QA
+        run: python scripts/qa_botanical_theme.py
       - name: Archive desktop and mobile screenshots for visual inspection
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: field-ux-screenshots
-          path: artifacts/field-ux/
+          path: |
+            artifacts/field-ux/
+            artifacts/botanical-theme/
           if-no-files-found: warn
           retention-days: 30

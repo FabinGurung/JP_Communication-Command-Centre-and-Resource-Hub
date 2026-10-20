@@ -16,6 +16,10 @@ Before ChatGPT, automation or a human starts a repository mutation:
 
 The registry maps the **Main Library** to `main`, the **Local Library** to `feature/daily-ops-current-work`, and the **Lane Library** to the branch registry itself. Archive refs under `archive/*` are frozen. Historical non-archive aliases are marked **DO_NOT_USE** and resolve to their archive equivalents.
 
+## Current interface development arc
+
+The botanical workspace theme shares tokens, navigation and responsive rules across all 20 active pages. See the [design-system specification](docs/design/botanical-workspace-v1.md) for ownership, SVG usage, mobile/print rules and repeatable visual QA. The immutable v2.1.0 release remains the rollback baseline; this arc creates no new release tag.
+
 ## Current stable version
 
 **v2.1.0 — JP AEC Operations Hub · Governed Platform Baseline**

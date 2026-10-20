@@ -1,66 +1,115 @@
-/* JP AEC Request 01 — shared color/type system and six-section navigation */
-:root {
-  --jp-paper:#fffefa; --jp-canvas:#f3f8f2; --jp-ink:#193d2e;
-  --jp-green:#17664a; --jp-soft:#e0f0e0; --jp-line:#d3e4d6;
+/* Shared presentation primitives and Shadow DOM navigation. Tokens inherit through host. */
+html:has(body[data-jp-site="1"]) {background:var(--jp-canvas);}
+body[data-jp-site="1"] {background:var(--jp-canvas);color:var(--jp-ink);font-family:var(--jp-font);isolation:isolate;min-height:100dvh;line-height:1.55;}
+body[data-jp-site="1"] *,body[data-jp-site="1"] *::before,body[data-jp-site="1"] *::after {box-sizing:border-box;}
+body[data-jp-site="1"] > :is(.shell,.wrap), body[data-jp-site="1"] > main.shell {max-width:var(--jp-content-wide);padding:24px max(20px,env(safe-area-inset-right)) 40px max(20px,env(safe-area-inset-left));margin-inline:auto;}
+body[data-jp-site="1"]:has(#add-form) > .shell {max-width:var(--jp-content-narrow);}
+body[data-jp-site="1"] :is(h1,h2,h3) {font-family:var(--jp-font);color:var(--jp-ink);letter-spacing:-.025em;overflow-wrap:break-word;}
+body[data-jp-site="1"] h1 {font-size:clamp(28px,3vw,42px);line-height:1.12;font-weight:780;}
+body[data-jp-site="1"] :is(.hero,.cover,.heading) {border:1px solid var(--jp-line);border-radius:var(--jp-radius-lg);box-shadow:var(--jp-shadow-sm);padding:28px;margin:0 0 24px;color:var(--jp-ink);}
+body[data-jp-site="1"] .hero:has(.hero-art) {padding:0;}
+body[data-jp-site="1"] :is(.hero,.cover,.heading) p {color:var(--jp-ink-soft);line-height:1.65;}
+body[data-jp-site="1"] :is(.eyebrow,.kicker) {color:var(--jp-green);font-size:11px;letter-spacing:.1em;}
+body[data-jp-site="1"] :is(.card,.main,.entry,.metric,.poster,.readiness,.doc-status-shelf) {border-color:var(--jp-line);border-radius:var(--jp-radius-md);box-shadow:var(--jp-shadow-sm);}
+body[data-jp-site="1"] :is(.main,.card,.entry,.poster) {background:var(--jp-paper);}
+body[data-jp-site="1"] :is(button,select,input[type="text"],input[type="search"],input[type="date"],.button,.btn,.cta) {min-height:44px;border-radius:var(--jp-radius-sm);font-family:var(--jp-font);max-width:100%;}
+body[data-jp-site="1"] :is(select,input[type="text"],input[type="search"],input[type="date"]) {border:1px solid var(--jp-line-strong);color:var(--jp-ink);background:var(--jp-surface);}
+body[data-jp-site="1"] :is(.button,.btn) {display:inline-flex;align-items:center;justify-content:center;}
+body[data-jp-site="1"] :is(.button,.btn):not(.secondary):not(.alt):not(.button-primary):not(.primary) {color:var(--jp-green);border-color:var(--jp-line-strong);}
+body[data-jp-site="1"] :is(.button-primary,.btn.primary) {background:var(--jp-green);color:#fff;border-color:var(--jp-green);}
+body[data-jp-site="1"] :is(a,button,input,select,textarea,summary):focus-visible {outline:3px solid var(--jp-warning);outline-offset:3px;}
+body[data-jp-site="1"] .items .remove {min-width:44px;min-height:44px;}
+body[data-jp-site="1"] summary {cursor:pointer;}
+body[data-jp-site="1"] :is(.filters,.filter,.bar,.toolbar,.top) {min-width:0;}
+body[data-jp-site="1"] :is(.filters,.filter,.bar,.toolbar) > * {min-width:0;max-width:100%;}
+body[data-jp-site="1"] :is(.grid,.panels,.development-map) > * {min-width:0;}
+body[data-jp-site="1"] :is(code,pre,.file,.resource-card,.card,.poster,.item) {overflow-wrap:anywhere;}
+body[data-jp-site="1"] pre {overflow-x:auto;}
+/* Legacy control pages used navy banners; use the same readable light surface. */
+body[data-jp-site="1"] .hero .shell {padding-top:10px;padding-bottom:10px;}
+body[data-jp-site="1"] .hero :is(small,.eyebrow) {color:var(--jp-green);}
+body[data-jp-site="1"] .top:has(.kicker) {background:var(--jp-leaf-pale);color:var(--jp-ink);border-bottom:1px solid var(--jp-line);padding:28px;}
+body[data-jp-site="1"] .top:has(.kicker) .lead {color:var(--jp-ink-soft);}
+body[data-jp-site="1"] :is(.poster b.k,.rule,.chip,.step strong) {color:var(--jp-green);}
+body[data-jp-site="1"] :is(.step,.chip) {background:var(--jp-leaf-pale);border-color:var(--jp-line);}
+/* Map intentionally retains a viewport workspace instead of a reading column. */
+body[data-jp-section="map"] {height:100dvh;display:flex;flex-direction:column;overflow:hidden;}
+body[data-jp-section="map"] .app-shell {flex:1;min-height:0;height:auto;grid-template-rows:auto minmax(0,1fr);}
+body[data-jp-section="map"] .app-header {background:linear-gradient(112deg,#e7f3e5,#fcf9ed);color:var(--jp-ink);box-shadow:none;border-bottom:1px solid var(--jp-line);}
+body[data-jp-section="map"] .app-header h1 {font-size:clamp(27px,3vw,38px);}
+body[data-jp-section="map"] .app-header :is(.eyebrow,.control label,.metric span) {color:var(--jp-ink-soft);}
+body[data-jp-section="map"] .app-header .metric {color:var(--jp-ink);background:var(--jp-paper);border-color:var(--jp-line);}
+body[data-jp-section="map"] .app-header .controls {border-top-color:var(--jp-line);}
+body[data-jp-section="map"] :is(.filter-toggle,.map-list-button,.map-layer-control summary,.leaflet-control-zoom a) {min-height:44px;}
+body[data-jp-section="map"] .leaflet-control-zoom a {width:44px;line-height:44px;}
+body[data-jp-section="map"] .map-layer-control label {min-height:44px;align-items:center;}
+/* Shadow stylesheet: only .jp-* selectors, never generic nav/anchor rules. */
+:host {display:block;flex-shrink:0;position:relative;z-index:1600;isolation:isolate;width:100%;color:var(--jp-ink,#193d2e);font-family:var(--jp-font,system-ui,sans-serif);}
+.jp-frame,.jp-frame * {box-sizing:border-box;}
+.jp-frame {background:var(--jp-surface-soft,#f7faf5);border-bottom:1px solid var(--jp-line,#d3e4d6);box-shadow:var(--jp-shadow-sm);}
+.jp-top {max-width:var(--jp-content-wide,1200px);margin:auto;min-height:76px;padding:10px max(20px,env(safe-area-inset-right)) 10px max(20px,env(safe-area-inset-left));display:flex;align-items:center;gap:16px;}
+.jp-brand {display:flex;align-items:center;gap:9px;color:var(--jp-green,#17664a);text-decoration:none;font-size:15px;font-weight:850;line-height:1.15;white-space:nowrap;flex-shrink:0;min-height:44px;}
+.jp-brand > span:first-child {display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--jp-line,#d3e4d6);border-radius:12px;background:var(--jp-green-soft,#e0f0e0);font-size:19px;}
+.jp-brand small {display:block;font-size:10px;font-weight:650;letter-spacing:.025em;margin-top:3px;color:var(--jp-muted,#587365);}
+.jp-nav {min-width:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;flex:1;}
+.jp-link {min-height:44px;padding:10px 9px;display:inline-flex;align-items:center;justify-content:center;gap:5px;border-radius:var(--jp-radius-sm,10px);font-size:12px;font-weight:750;line-height:1.3;text-decoration:none;color:var(--jp-ink-soft,#355e4d);white-space:nowrap;}
+.jp-link:hover {background:var(--jp-leaf-pale,#edf5e9);}
+.jp-link.active {background:var(--jp-green-soft,#e0f0e0);color:var(--jp-green-deep,#104b36);box-shadow:inset 0 0 0 1px var(--jp-line-strong,#bad3be);}
+.jp-menu-toggle {display:none;min-height:44px;min-width:76px;border:1px solid var(--jp-line-strong,#bad3be);border-radius:10px;background:var(--jp-paper,#fffefa);color:var(--jp-green,#17664a);font:750 12px var(--jp-font,system-ui);cursor:pointer;padding:10px 12px;}
+.jp-related {position:relative;flex:0 0 auto;font-size:12px;color:var(--jp-ink-soft,#355e4d);}
+.jp-related summary {cursor:pointer;white-space:nowrap;border:1px solid var(--jp-line,#d3e4d6);border-radius:10px;background:var(--jp-paper,#fffefa);padding:12px 10px;min-height:44px;list-style:none;font-weight:750;}
+.jp-related summary::-webkit-details-marker {display:none;}
+.jp-related > div {position:absolute;right:0;top:50px;z-index:10;display:grid;gap:3px;min-width:210px;max-width:min(85vw,315px);max-height:65dvh;overflow-y:auto;background:var(--jp-paper,#fffefa);border:1px solid var(--jp-line,#d3e4d6);border-radius:14px;padding:8px;box-shadow:var(--jp-shadow-md);}
+.jp-related a {display:flex;align-items:center;min-height:44px;padding:10px;border-radius:8px;font-size:12px;color:var(--jp-ink,#193d2e);text-decoration:none;font-weight:650;}
+.jp-related a:hover {background:var(--jp-leaf-pale,#edf5e9);}
+.jp-frame :is(a,button,summary):focus-visible {outline:3px solid var(--jp-warning,#8d631e);outline-offset:3px;}
+.jp-skip {position:absolute;left:16px;top:-120px;background:var(--jp-paper,#fffefa);color:var(--jp-ink,#193d2e);padding:12px;z-index:20;border:2px solid var(--jp-green,#17664a);border-radius:8px;}
+.jp-skip:focus {top:8px;}
+@media(max-width:1120px){
+ .jp-top {gap:10px;min-height:70px;flex-wrap:wrap;}
+ .jp-brand {flex:1;}
+ .jp-menu-toggle {display:block;}
+ .jp-nav {display:none;order:4;flex-basis:100%;width:100%;grid-template-columns:repeat(3,minmax(0,1fr));padding-top:8px;border-top:1px solid var(--jp-line,#d3e4d6);}
+ .jp-top[data-menu-open="true"] .jp-nav {display:grid;}
+ .jp-link {white-space:normal;text-align:center;min-height:48px;}
 }
-body[data-jp-site="1"] {
-  background:var(--jp-canvas);
-  color:var(--jp-ink);
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
-  --blue:#17664a;--accent:#17664a;--soft:#e4f2e5;--page:#f3f8f2;
+@media(max-width:767px){
+ body[data-jp-site="1"] > :is(.shell,.wrap),body[data-jp-site="1"] > main.shell {padding:18px max(14px,env(safe-area-inset-right)) 24px max(14px,env(safe-area-inset-left));}
+ body[data-jp-site="1"] :is(.hero,.cover,.heading) {padding:22px 18px;margin-bottom:18px;}
+ body[data-jp-site="1"] .hero:has(.hero-art) {padding:0;}
+ body[data-jp-site="1"] :is(.filters,.bar,.toolbar) :is(select,input) {width:100%;min-width:0;}
+ body[data-jp-site="1"] :is(.filters,.bar,.toolbar) > :is(label,.filter,.filters) {width:100%;}
+ body[data-jp-site="1"] :is(.depth-nav,.links,.actions) a {min-height:44px;display:inline-flex;align-items:center;}
+ body[data-jp-site="1"] :is(.main,.poster) {padding:16px;}
+ .jp-top {padding-inline:max(12px,env(safe-area-inset-left));gap:8px;min-height:70px;}
+ .jp-brand {font-size:14px;}
+ .jp-more-slot {order:3;}
+ .jp-related summary {font-size:11px;padding:12px 8px;}
+ .jp-menu-toggle {min-width:64px;}
+ .jp-nav {grid-template-columns:repeat(2,minmax(0,1fr));}
+ .jp-link {justify-content:flex-start;text-align:left;padding:12px;font-size:12px;}
 }
-body[data-jp-site="1"] .cover {
-  background:linear-gradient(112deg,#e7f5e7 0%,#fffdf1 100%);
-  border-color:#d2e5d6;
+@media(max-width:860px){
+ body[data-jp-section="map"] {height:auto;min-height:100dvh;overflow:visible;}
+ body[data-jp-section="map"] .app-shell {min-height:calc(100dvh - 70px);flex:none;}
 }
-body[data-jp-site="1"] .cover .eyebrow{color:#215f45;}
-body[data-jp-site="1"] .top:has(.kicker){background:#173e32;}
-body[data-jp-site="1"] .top:has(.kicker) .kicker{color:#caead1;}
-body[data-jp-site="1"] .top:has(.kicker) .lead{color:#e4f2e8;}
-
-body[data-jp-site="1"] h1,
-body[data-jp-site="1"] h2 { font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif; }
-body[data-jp-site="1"][data-jp-section="checklist"] .heading {
-  background:linear-gradient(110deg,#e6f5e7 0%,#fcf9ec 100%);
-  border:1px solid var(--jp-line);
-  border-radius:18px;
-  padding:22px 24px;
-  margin-top:20px;
+@media(prefers-reduced-motion:reduce){
+ html:has(body[data-jp-site="1"]) {scroll-behavior:auto;}
+ body[data-jp-site="1"] *,body[data-jp-site="1"] *::before,body[data-jp-site="1"] *::after {animation:none!important;transition:none!important;scroll-behavior:auto!important;}
 }
-body[data-jp-site="1"][data-jp-section="checklist"] .heading h1{color:#123e30;}
-body[data-jp-site="1"] :is(a,button,input,select,summary):focus-visible {
-  outline:3px solid #cc8d2a;outline-offset:3px;
+@media print {
+ jp-site-header {display:none!important;}
+ body[data-jp-site="1"] {background:#fff;color:#000;display:block;height:auto;overflow:visible;}
+ body[data-jp-site="1"] > :is(.shell,.wrap) {max-width:none;padding:0;}
+ body[data-jp-site="1"] :is(.card,.main,.poster,.hero,.cover,.heading) {box-shadow:none;}
 }
-:host {display:block;position:relative;z-index:1600;isolation:isolate;width:100%;
-  color:#193d2e;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;}
-.jp-frame {background:#f7faf5;border-bottom:1px solid #d1e3d5;box-shadow:0 2px 14px #2446320c;}
-.jp-top {max-width:1160px;margin:0 auto;min-height:64px;padding:9px 16px;
- display:flex;align-items:center;gap:12px;}
-.jp-brand {flex:0 0 auto;display:flex;align-items:center;gap:7px;color:#1e5b44;
- text-decoration:none;font-size:14px;font-weight:900;line-height:1.14;white-space:nowrap;}
-.jp-brand span:first-child{font-size:20px}.jp-brand small{display:block;font-size:10px;
- color:#566f60;font-weight:700;letter-spacing:.015em;}
-nav {min-width:0;flex:1 1 auto;display:flex;align-items:center;gap:3px;
- overflow-x:auto;scrollbar-width:thin;scroll-padding:0 14px;padding:5px 0;}
-.jp-link{flex-shrink:0;min-height:42px;padding:10px 11px;display:inline-flex;
- align-items:center;justify-content:center;border-radius:11px;font-size:12px;
- font-weight:790;text-decoration:none;color:#355e4d;white-space:nowrap;}
-.jp-link:hover{background:#e9f2e9;color:#124b37;}
-.jp-link.active{background:#dceee0;color:#104d37;box-shadow:inset 0 0 0 1px #c3dec9;}
-.jp-related{position:relative;flex:0 0 auto;font-size:12px;color:#315a47;}
-.jp-related summary{cursor:pointer;white-space:nowrap;border:1px solid #ccdccc;
- border-radius:10px;background:#fffefa;padding:11px 9px;min-height:42px;list-style:none;font-weight:800;}
-.jp-related summary::-webkit-details-marker{display:none;}
-.jp-related > div{position:absolute;right:0;top:46px;z-index:10;display:grid;gap:3px;
- min-width:200px;max-width:min(80vw,315px);max-height:60vh;overflow-y:auto;
- background:#fffefa;border:1px solid #d4e4d6;border-radius:12px;padding:9px;
- box-shadow:0 13px 30px #18412928;}
-.jp-related a{display:block;padding:9px 11px;border-radius:8px;font-size:12px;
- color:#214d3b;text-decoration:none;font-weight:700;}
-.jp-related a:hover{background:#e5f1e5}
-a:focus-visible,summary:focus-visible{outline:3px solid #bc811e;outline-offset:2px;}
-@media(max-width:850px){.jp-top{flex-wrap:wrap;gap:4px;padding:6px 12px 4px}
- .jp-brand{flex:1 1 auto}.jp-related{order:1}
- nav{order:2;flex:1 1 100%;width:100%;padding-bottom:7px;}
- .jp-link{font-size:12px;padding:8px 11px;min-height:43px;}}
-@media(prefers-reduced-motion:reduce){.jp-link{scroll-behavior:auto}}
+@media(max-width:380px){
+ .jp-top {gap:6px;}
+ .jp-brand {gap:6px;font-size:12px;}
+ .jp-brand > span:first-child {width:30px;height:30px;font-size:17px;}
+ .jp-brand small {font-size:9px;}
+ .jp-menu-toggle {min-width:56px;padding:10px 8px;}
+ .jp-related summary {font-size:10px;padding:12px 6px;}
+}
+/* Long work-type names and repository slugs must wrap inside guide step grids. */
+body[data-jp-site="1"] .steps,body[data-jp-site="1"] .steps li {min-width:0;overflow-wrap:anywhere;}

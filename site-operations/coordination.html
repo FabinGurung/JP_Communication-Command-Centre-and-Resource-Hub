@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Detailed site holds, unresolved issues and engineer questions in one place.">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Detailed site holds, unresolved issues and engineer questions in one place.">
 <title>Site Coordination · Site Operations</title>
 <style>
 :root{--bg:#f5f8f2;--paper:#fffefa;--ink:#1e4031;--muted:#567063;--line:#dbe7dc;--green:#206a4d;--amber:#965f22;--red:#9b4337}*{box-sizing:border-box}
@@ -14,7 +14,12 @@ h1{font-size:clamp(24px,3vw,31px);letter-spacing:-.025em;margin:21px 0 3px}.intr
 .tag{font-size:10px;font-weight:850;border-radius:20px;padding:3px 8px;background:#fff1e3;color:#845b2b;margin-right:6px;display:inline-flex}.tag.hold{background:#ffeee9;color:var(--red)}
 .blank{color:var(--muted);font-size:12px;padding:12px 0}.foot{font-size:12px;color:var(--muted);line-height:1.5;margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}.foot a{font-weight:800;text-decoration:none}
 @media(max-width:670px){.shell{padding:9px 12px 30px}.toolbar select{flex:1;min-width:170px}.panel>summary{font-size:14px;padding:12px}.item b{font-size:12px}}
-</style></head><body><main class="shell">
+</style>
+<!-- Shared light botanical theme; page-local layout remains below its owner. -->
+<link rel="stylesheet" href="../assets/css/jp-theme-tokens.css?v=botanical-1">
+<link rel="stylesheet" href="../assets/css/site-shell.css?v=botanical-1">
+<link rel="stylesheet" href="../assets/css/jp-botanical.css?v=botanical-1">
+</head><body data-jp-site="1"><main class="shell">
 <nav aria-label="Site Operations"><a href="../site-operations.html">Daily Checklist</a><a aria-current="page" href="coordination.html">Site Coordination</a><a href="history.html">Progress Report</a><a href="../map.html">Map</a><a href="../resources/">Drawings &amp; Models</a><a href="../workspace/">🛠️ Developer Workspace</a></nav>
 <h1>Site Coordination</h1><p class="intro">This page holds unresolved site issues, reported HOLD conditions, decisions awaiting clarification, and engineer/site questions linked back to Slack or Discord. It does not store drawing originals or certify work completion. Use the resource directory for DWG, SKP, E2K and PDFs.</p>
 <div class="toolbar"><label for="project">Project</label><select id="project"><option value="">All sites</option></select><a id="deep-question-link" href="questions.html">Open answer form ↗</a></div>
@@ -37,4 +42,4 @@ let pre=new URLSearchParams(location.search).get("project");if(pre&&data.sites.s
 $("notice").textContent="Last source reconciliation: "+data.as_of_npt+" · "+data.open_issues.length+" unresolved issues and "+data.engineer_questions.length+" questions across "+data.sites.length+" sites. Site status requires fresh review.";render();}
 catch(e){$("notice").textContent="Source unavailable; no hold or approval status can be inferred.";$("issues").innerHTML='<div class="blank">Source not loaded.</div>';$("questions").innerHTML='<div class="blank">Source not loaded.</div>';}}
 $("project").addEventListener("change",render);load();})();
-</script><script src="../assets/js/site-shell.js?v=20261012-1"></script></body></html>
+</script><script src="../assets/js/site-shell.js?v=botanical-1"></script></body></html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Dated construction progress and source evidence: a historical timeline distinct from daily site instructions.">
 <title>Progress Report · Site Operations</title>
 <style>
@@ -14,7 +14,12 @@
 .carry-record{font-size:12px;border-top:1px solid #e7eee6;padding:10px 0;display:grid;gap:3px}.carry-record .state{font-size:10px;color:#866134;font-weight:750}.carry-record a{font-size:11px;font-weight:750;display:inline-flex;min-height:30px;align-items:center;text-decoration:none}
 .entry h3{font-size:14px}.entry{padding:12px 15px}.metric b{font-size:25px}
 .doc-status-shelf{border:1px solid var(--line);border-radius:14px;padding:15px 17px;background:#fffefa;margin:17px 0}.doc-status-shelf h2{font-size:18px;margin:0 0 5px}.doc-status-shelf .doc-intro{font-size:12px;color:var(--muted);margin:0 0 10px}.doc-status-rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.doc-status-card{background:#f8fbf6;border:1px solid #e0ebdf;border-radius:10px;padding:12px}.doc-status-card h3{font-size:14px;margin:0 0 5px}.doc-status-card p{font-size:12px;margin:0 0 9px;color:var(--muted)}.doc-status-card b{font-size:11px;color:#855c21}@media(max-width:700px){.doc-status-rows{grid-template-columns:1fr}}
-</style></head><body><main class="shell">
+</style>
+<!-- Shared light botanical theme; page-local layout remains below its owner. -->
+<link rel="stylesheet" href="../assets/css/jp-theme-tokens.css?v=botanical-1">
+<link rel="stylesheet" href="../assets/css/site-shell.css?v=botanical-1">
+<link rel="stylesheet" href="../assets/css/jp-botanical.css?v=botanical-1">
+</head><body data-jp-site="1"><main class="shell">
 <nav class="nav" aria-label="Site Operations pages"><a href="../site-operations.html">Daily Checklist</a><a href="coordination.html">Site Coordination</a><a class="active" aria-current="page" href="history.html">Progress Report</a><a href="../resources/">Drawings &amp; Models</a><a href="../workspace/">🛠️ Developer Workspace</a><a href="../index.html">Overview</a></nav>
 <header class="hero"><div class="eyebrow">Site Operations · evidence archive</div><h1>Progress Report</h1>
 <p>Construction history derived from normalized communication evidence preserved in Google Drive. Field reports and the former daily checklist are distinct. <strong>No historical reminder is an instruction to start work.</strong></p>
@@ -59,4 +64,4 @@ $("notice").textContent="Google Drive machine staging read back: 37 records (5 r
 $("footer").textContent="Public-safe derivation from Google Drive A9_CWO_DAILY_TWO_CHANNELS / PROGRESS_REPORT_MACHINE_STAGE, normalized 2026-10-11. Approved quantities and engineering signoffs are not present.";render();
 }catch(e){$("notice").textContent="Progress source unavailable: "+e.message;$("history").innerHTML='<div class="empty">Nothing is inferred without the verified projection.</div>';$("carryover-records").innerHTML='<div class="empty">Carry-over index unavailable.</div>';}}
 $("project").addEventListener("change",render);$("search").addEventListener("input",render);load();})();
-</script><script src="../assets/js/project-document-status.js?v=20261019-1"></script><script src="../assets/js/site-shell.js?v=20261012-1"></script></body></html>
+</script><script src="../assets/js/project-document-status.js?v=20261019-1"></script><script src="../assets/js/site-shell.js?v=botanical-1"></script></body></html>
