@@ -21,7 +21,8 @@ def test():
     assert "MEMORY" in routes["primary_destinations"] and len(routes["primary_destinations"])==7
     assert next(x for x in listed if x["page_id"]=="A9-PAGE-CONTROL_MEMORY")["page_role"]=="PRIMARY"
     assert "A9-MEM-01" in {s["section_id"] for s in routes["sections"]}
-    assert len([s for s in routes["sections"] if s["section_id"].startswith("A9-FLD-")])==10
+    assert len([s for s in routes["sections"] if s["section_id"].startswith("A9-FLD-") and s["section_id"][-2:].isdigit()])==10
+    assert len([s for s in routes["sections"] if s["section_id"]=="A9-FLD-CONTACTS"])==1
     paths={x["path"] for x in listed}
     assert paths==set(arc["active_pages"])|{"resources/field/index.html","resources/field/contacts/index.html"}
     assert len({x["page_id"] for x in listed})==len(paths)
