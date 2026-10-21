@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "table": "organization_locations",
+  "origin": "PRIVATE_GOOGLE_SHEET_MANUAL_REVIEWED_SNAPSHOT",
+  "source_spreadsheet_name": "JP_AEC__PROJECT_MAP_14_TABLES__v1.0__LIVE",
+  "source_worksheet": "organization_locations",
+  "projection_scope": "BASELINE_IDENTICAL_TO_EXISTING_PUBLIC_CSV",
+  "row_count": 1,
+  "columns": [
+    "organization_location_id",
+    "organization_id",
+    "source_group_id",
+    "location_name",
+    "location_type",
+    "location_ward_number",
+    "latitude",
+    "longitude",
+    "is_public",
+    "data_quality_status",
+    "data_quality_issue",
+    "remarks"
+  ],
+  "records": [
+    {
+      "organization_location_id": "OLOC-000001",
+      "organization_id": "ORG-000001",
+      "source_group_id": "GRP006",
+      "location_name": "Fishtail Builders Office",
+      "location_type": "OFFICE",
+      "location_ward_number": "4",
+      "latitude": "28.225246",
+      "longitude": "83.987354",
+      "is_public": "TRUE",
+      "data_quality_status": "VALID",
+      "data_quality_issue": "",
+      "remarks": "Office coordinate corrected from user-verified location on 2026-08-07; prior provisional coordinate replaced"
+    }
+  ]
+}

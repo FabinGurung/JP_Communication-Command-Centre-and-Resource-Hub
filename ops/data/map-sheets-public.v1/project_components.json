@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0.0",
+  "table": "project_components",
+  "origin": "PRIVATE_GOOGLE_SHEET_MANUAL_REVIEWED_SNAPSHOT",
+  "source_spreadsheet_name": "JP_AEC__PROJECT_MAP_14_TABLES__v1.0__LIVE",
+  "source_worksheet": "project_components",
+  "projection_scope": "BASELINE_IDENTICAL_TO_EXISTING_PUBLIC_CSV",
+  "row_count": 5,
+  "columns": [
+    "component_id",
+    "project_id",
+    "source_group_id",
+    "component_type",
+    "component_name",
+    "sequence_no",
+    "latitude",
+    "longitude",
+    "status",
+    "is_public",
+    "remarks"
+  ],
+  "records": [
+    {
+      "component_id": "PCO-000001",
+      "project_id": "PRJ-000011",
+      "source_group_id": "GRP004",
+      "component_type": "WORK_COMPONENT",
+      "component_name": "Road Works",
+      "sequence_no": "1",
+      "latitude": "28.2283378",
+      "longitude": "83.9817348",
+      "status": "Completed",
+      "is_public": "TRUE",
+      "remarks": "Part of one combined Firke Pool Road and Drain contract"
+    },
+    {
+      "component_id": "PCO-000002",
+      "project_id": "PRJ-000011",
+      "source_group_id": "GRP004",
+      "component_type": "WORK_COMPONENT",
+      "component_name": "Drain Works",
+      "sequence_no": "2",
+      "latitude": "28.2283378",
+      "longitude": "83.9817348",
+      "status": "Completed",
+      "is_public": "TRUE",
+      "remarks": "Part of one combined Firke Pool Road and Drain contract"
+    },
+    {
+      "component_id": "PCO-000003",
+      "project_id": "PRJ-000024",
+      "source_group_id": "GRP023",
+      "component_type": "ROAD_SEGMENT",
+      "component_name": "Bhalam 200 m Road Segment 1",
+      "sequence_no": "1",
+      "latitude": "28.251966",
+      "longitude": "83.995884",
+      "status": "Completed",
+      "is_public": "TRUE",
+      "remarks": "One parent project with three road segments"
+    },
+    {
+      "component_id": "PCO-000004",
+      "project_id": "PRJ-000024",
+      "source_group_id": "GRP024",
+      "component_type": "ROAD_SEGMENT",
+      "component_name": "Bhalam 200 m Road Segment 2",
+      "sequence_no": "2",
+      "latitude": "28.252861",
+      "longitude": "83.996621",
+      "status": "Completed",
+      "is_public": "TRUE",
+      "remarks": "One parent project with three road segments"
+    },
+    {
+      "component_id": "PCO-000005",
+      "project_id": "PRJ-000024",
+      "source_group_id": "GRP025",
+      "component_type": "ROAD_SEGMENT",
+      "component_name": "Bhalam 200 m Road Segment 3",
+      "sequence_no": "3",
+      "latitude": "28.247575",
+      "longitude": "83.999227",
+      "status": "Completed",
+      "is_public": "TRUE",
+      "remarks": "One parent project with three road segments"
+    }
+  ]
+}

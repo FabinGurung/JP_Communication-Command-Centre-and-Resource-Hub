@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "updated": "2026-10-07",
+  "updated": "2026-10-21",
   "title": "What do I edit?",
   "note": "Owner-facing edit-routing registry. Routes people to the canonical owner of a fact or capability; it does not grant write permission.",
   "routes": [
@@ -16,11 +16,11 @@
     {
       "id": "project-master",
       "question": "Project name, location, lifecycle/status, coordinates or public project attributes",
-      "owner": "projects.csv",
+      "owner": "GOOGLE_SHEETS_MAP_MASTER__projects_WORKSHEET",
       "type": "canonical_file",
-      "target": "../projects.csv",
+      "target": "https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit#gid=1001",
       "module_id": "operations",
-      "rule": "Edit the project-master row only. Do not fix this fact in HTML or a downstream Sheet."
+      "rule": "Edit the owning native Google Sheet, then manually validate and publish its reviewed public JSON projection. Legacy projects.csv is frozen rollback and is not a separate editor."
     },
     {
       "id": "daily-current",

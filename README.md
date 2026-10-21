@@ -16,6 +16,10 @@ Before ChatGPT, automation or a human starts a repository mutation:
 
 The registry maps the **Main Library** to `main`, the **Local Library** to `feature/daily-ops-current-work`, and the **Lane Library** to the branch registry itself. Archive refs under `archive/*` are frozen. Historical non-archive aliases are marked **DO_NOT_USE** and resolve to their archive equivalents.
 
+## Google Sheets map data authority (2026-10-21)
+
+The map's 14 former CSV reference tables are now maintained in one [native Google Sheets workbook](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit). The browser loads 14 reviewed public JSON projections from `ops/data/map-sheets-public.v1/`, **not runtime CSV files**. These public projections require an explicit refresh and validation after Sheet edits; the private workbook is not anonymously fetched by Pages. Legacy CSV versions remain unchanged as rollback. See `docs/operations/MAP_GOOGLE_SHEETS_SOURCE_AND_PUBLICATION_v1.md`.
+
 ## Current interface development arc
 
 The botanical workspace theme ships as **v2.2.0** after release-commit validation, sharing tokens, navigation and responsive rules across all 20 active pages. See the [design-system specification](docs/design/botanical-workspace-v1.md) for SVG ownership, mobile/print rules and repeatable visual QA. Immutable **v2.1.0** remains the previous-release rollback baseline.

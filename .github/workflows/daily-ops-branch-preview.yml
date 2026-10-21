@@ -608,6 +608,8 @@ jobs:
 
       - name: Validate public source readiness snapshot and safe website disclosure
         run: python scripts/test_source_readiness_public.py
+      - name: Validate Google Sheets map source and reviewed JSON projections
+        run: python scripts/test_map_sheets_migration.py
 
       - name: Validate A9 manual data views and 21-page site registry
         run: python scripts/test_a9_manual_surfaces.py

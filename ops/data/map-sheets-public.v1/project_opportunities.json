@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "table": "project_opportunities",
+  "origin": "PRIVATE_GOOGLE_SHEET_MANUAL_REVIEWED_SNAPSHOT",
+  "source_spreadsheet_name": "JP_AEC__PROJECT_MAP_14_TABLES__v1.0__LIVE",
+  "source_worksheet": "project_opportunities",
+  "projection_scope": "BASELINE_IDENTICAL_TO_EXISTING_PUBLIC_CSV",
+  "row_count": 1,
+  "columns": [
+    "opportunity_id",
+    "source_group_id",
+    "opportunity_name",
+    "location_ward_number",
+    "project_sector",
+    "funding_type",
+    "status",
+    "latitude",
+    "longitude",
+    "awarded_company_id",
+    "is_public",
+    "data_quality_status",
+    "data_quality_issue",
+    "remarks"
+  ],
+  "records": [
+    {
+      "opportunity_id": "OPP-000001",
+      "source_group_id": "GRP028",
+      "opportunity_name": "Bachi and Ama Foundation",
+      "location_ward_number": "26",
+      "project_sector": "PRIVATE",
+      "funding_type": "PRIVATE",
+      "status": "NOT_AWARDED",
+      "latitude": "28.181302",
+      "longitude": "84.033216",
+      "awarded_company_id": "",
+      "is_public": "TRUE",
+      "data_quality_status": "VALID",
+      "data_quality_issue": "",
+      "remarks": "Public opportunity record and not an active awarded project; coordinates corrected from user-verified location on 2026-08-07"
+    }
+  ]
+}

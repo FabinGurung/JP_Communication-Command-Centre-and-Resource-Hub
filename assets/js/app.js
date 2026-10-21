@@ -1,4 +1,4 @@
-import { parseBoolean, parseCSV, parseOptionalNumber } from "./csv.js";
+import { parseBoolean, parseOptionalNumber } from "./csv.js";
 
 const state = {
   config: null,
@@ -144,10 +144,20 @@ function directionsURL(item) {
   )}`;
 }
 
-async function loadCSV(path, cacheBust) {
+// GitHub Pages serves reviewed JSON projections generated from the private
+// Google Sheets master. It does not request private Sheets or CSV at runtime.
+async function loadMapTable(path, cacheBust) {
   const response = await fetch(`${path}?${cacheBust}`, { cache: "no-store" });
-  if (!response.ok) throw new Error(`Could not load ${path} (${response.status})`);
-  return parseCSV(await response.text());
+  if (!response.ok) throw new Error(`Could not load reviewed Sheet projection ${path} (${response.status})`);
+  const payload = await response.json();
+  const expected = path.split("/").pop().slice(0, -5);
+  if (payload.schema_version !== "1.0.0" || payload.table !== expected ||
+      payload.row_count !== payload.records?.length ||
+      !Array.isArray(payload.columns) || !Array.isArray(payload.records) ||
+      payload.origin !== "PRIVATE_GOOGLE_SHEET_MANUAL_REVIEWED_SNAPSHOT") {
+    throw new Error(`Invalid Google Sheets publication contract for ${path}`);
+  }
+  return payload.records;
 }
 
 async function loadWorkingProjectIds(cacheBust) {
@@ -1079,11 +1089,11 @@ async function loadApplication() {
     state.config = await configResponse.json();
     const files = state.config.data_files;
     const [rawProjects, organizations, people, projectParties, projectFunding, workCatalog, rawWorkItems, materialsMaster, rawInventory, rawComponents, sourceLinks, rawOpportunities, rawLocations, rawPublication] = await Promise.all([
-      loadCSV(files.projects, cacheBust), loadCSV(files.organizations, cacheBust), loadCSV(files.people, cacheBust),
-      loadCSV(files.project_parties, cacheBust), loadCSV(files.project_funding, cacheBust), loadCSV(files.work_catalog, cacheBust),
-      loadCSV(files.project_work_items, cacheBust), loadCSV(files.materials_master, cacheBust), loadCSV(files.project_material_inventory, cacheBust),
-      loadCSV(files.project_components, cacheBust), loadCSV(files.project_source_links, cacheBust), loadCSV(files.project_opportunities, cacheBust),
-      loadCSV(files.organization_locations, cacheBust), loadCSV(files.project_publication_settings, cacheBust),
+      loadMapTable(files.projects, cacheBust), loadMapTable(files.organizations, cacheBust), loadMapTable(files.people, cacheBust),
+      loadMapTable(files.project_parties, cacheBust), loadMapTable(files.project_funding, cacheBust), loadMapTable(files.work_catalog, cacheBust),
+      loadMapTable(files.project_work_items, cacheBust), loadMapTable(files.materials_master, cacheBust), loadMapTable(files.project_material_inventory, cacheBust),
+      loadMapTable(files.project_components, cacheBust), loadMapTable(files.project_source_links, cacheBust), loadMapTable(files.project_opportunities, cacheBust),
+      loadMapTable(files.organization_locations, cacheBust), loadMapTable(files.project_publication_settings, cacheBust),
     ]);
 
     state.organizations = organizations.filter((row) => parseBoolean(row.is_public, true));

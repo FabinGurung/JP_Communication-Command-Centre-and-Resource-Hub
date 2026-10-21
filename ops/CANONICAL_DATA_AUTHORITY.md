@@ -1,5 +1,8 @@
 # Canonical Data Authority
 
+> **Map data source migration (2026-10-21):** The 14 map reference tables were imported, cell-by-cell verified and are now owned for human editing by the private [Google Sheets map workbook](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit). The public website renders reviewed JSON projections at `ops/data/map-sheets-public.v1/*.json` instead of fetching the 14 legacy CSV files. This publication is **not** an automatic Google Sheets sync: edited rows need an explicit review and re-projection. The root CSV files remain frozen rollback/baseline inputs, not new-edit authority. This does not change the separate Daily Ops canonical JSON, PK/FK DDL, original engineering files or event history. See `docs/operations/MAP_GOOGLE_SHEETS_SOURCE_AND_PUBLICATION_v1.md`.
+
+
 This repository is the canonical machine-data home for the JP Ecosystem Project Map and Daily Ops system.
 
 The goal is simple: **edit a fact once at its owning canonical layer, then derive every presentation/projection from it.**
@@ -9,7 +12,7 @@ The goal is simple: **edit a fact once at its owning canonical layer, then deriv
 | Layer | Canonical file | Owns |
 | --- | --- | --- |
 | Relational / relationship authority | `ops/schema/daily-ops-postgres.sql` | PK/FK relationships, normalized table structure, constraints and lifecycle/readiness separation. This is text DDL; no live PostgreSQL server is required. |
-| Project-master current values | `projects.csv` | Project identity, company/legacy codes, lifecycle/status, coordinates and public project attributes. |
+| Project-master current values | Google Sheets map workbook → `projects` worksheet | Project identity, company/legacy codes, lifecycle/status, coordinates and public project attributes. Published projection: `ops/data/map-sheets-public.v1/projects.json`; `projects.csv` retained as legacy rollback. |
 | Daily Ops current values | `ops/data/current-works.json` | Today's work, readiness, materials, blockers, progress, evidence references and projection state. |
 | Project resource links | `ops/data/project-resources.json` | Normalized project → Google Drive folder/file relationships. Drive remains authority for the actual file bytes and access permissions. |
 | Scoped resource-name equivalences | `ops/data/resource-project-name-aliases.v1.0.json` + `ops_project_resource_name_aliases` in `ops/schema/daily-ops-postgres.sql` | Exactly six user-confirmed `resource_id` ↔ `project_id` labels for P001/P002, not person-name equality or construction approval. |
@@ -38,7 +41,7 @@ For a project-master correction such as:
 - company project code
 - public project attributes
 
-edit **`projects.csv` only**.
+edit the **`projects` worksheet** of the linked Google Sheets map master. Before publishing, run source PK/FK, publication and website validation and update its reviewed JSON projection. The old `projects.csv` must not be edited as a new data source.
 
 For Daily Ops current state, edit/admit into **`ops/data/current-works.json`** and append the corresponding event to **`ops/events/daily-ops-events.jsonl`**.
 

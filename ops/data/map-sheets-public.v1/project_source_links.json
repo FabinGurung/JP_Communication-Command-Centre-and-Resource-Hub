@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "table": "project_source_links",
+  "origin": "PRIVATE_GOOGLE_SHEET_MANUAL_REVIEWED_SNAPSHOT",
+  "source_spreadsheet_name": "JP_AEC__PROJECT_MAP_14_TABLES__v1.0__LIVE",
+  "source_worksheet": "project_source_links",
+  "projection_scope": "BASELINE_IDENTICAL_TO_EXISTING_PUBLIC_CSV",
+  "row_count": 4,
+  "columns": [
+    "project_source_link_id",
+    "source_group_id",
+    "project_id",
+    "source_alias",
+    "link_type",
+    "verification_status",
+    "is_public",
+    "remarks"
+  ],
+  "records": [
+    {
+      "project_source_link_id": "PSL-000001",
+      "source_group_id": "GRP014",
+      "project_id": "PRJ-000005",
+      "source_alias": "Suke Plain",
+      "link_type": "SOURCE_ALIAS",
+      "verification_status": "VERIFIED",
+      "is_public": "TRUE",
+      "remarks": "Same project as FBL-004 30 Sabitri Giri / Dipti Giri"
+    },
+    {
+      "project_source_link_id": "PSL-000002",
+      "source_group_id": "GRP016",
+      "project_id": "PRJ-000003",
+      "source_alias": "Hari Baral",
+      "link_type": "SOURCE_MATCH",
+      "verification_status": "VERIFIED",
+      "is_public": "TRUE",
+      "remarks": "Same project as FBL-002"
+    },
+    {
+      "project_source_link_id": "PSL-000003",
+      "source_group_id": "GRP020",
+      "project_id": "PRJ-000007",
+      "source_alias": "Narayani Parajuli",
+      "link_type": "SOURCE_MATCH",
+      "verification_status": "VERIFIED",
+      "is_public": "TRUE",
+      "remarks": "Same project as FBL-006"
+    },
+    {
+      "project_source_link_id": "PSL-000004",
+      "source_group_id": "GRP021",
+      "project_id": "PRJ-000004",
+      "source_alias": "Yamuna Pun Adai",
+      "link_type": "SOURCE_MATCH",
+      "verification_status": "VERIFIED",
+      "is_public": "TRUE",
+      "remarks": "Same project as FBL-003"
+    }
+  ]
+}

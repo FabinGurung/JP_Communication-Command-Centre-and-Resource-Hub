@@ -1,6 +1,6 @@
 {
   "app_version": "1.2.0-dev",
-  "data_schema_version": "2.0.0",
+  "data_schema_version": "2.1.0",
   "site_title": "JP Ecosystem Operational Project Map",
   "site_subtitle": "Public project locations and approved operational updates in Pokhara, Nepal",
   "public_notice": "Public data only. Files in this public repository are downloadable even when a row is hidden from the interface. Never enter private contacts, detailed internal finance, confidential BOQ rates, supplier balances, or restricted stock information here.",
@@ -14,20 +14,20 @@
   "tile_url": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
   "tile_attribution": "&copy; OpenStreetMap contributors",
   "data_files": {
-    "projects": "projects.csv",
-    "organizations": "organizations.csv",
-    "people": "people.csv",
-    "project_parties": "project_parties.csv",
-    "project_funding": "project_funding.csv",
-    "work_catalog": "work_catalog.csv",
-    "project_work_items": "project_work_items.csv",
-    "materials_master": "materials_master.csv",
-    "project_material_inventory": "project_material_inventory.csv",
-    "project_components": "project_components.csv",
-    "project_source_links": "project_source_links.csv",
-    "project_opportunities": "project_opportunities.csv",
-    "organization_locations": "organization_locations.csv",
-    "project_publication_settings": "project_publication_settings.csv"
+    "projects": "ops/data/map-sheets-public.v1/projects.json",
+    "organizations": "ops/data/map-sheets-public.v1/organizations.json",
+    "people": "ops/data/map-sheets-public.v1/people.json",
+    "project_parties": "ops/data/map-sheets-public.v1/project_parties.json",
+    "project_funding": "ops/data/map-sheets-public.v1/project_funding.json",
+    "work_catalog": "ops/data/map-sheets-public.v1/work_catalog.json",
+    "project_work_items": "ops/data/map-sheets-public.v1/project_work_items.json",
+    "materials_master": "ops/data/map-sheets-public.v1/materials_master.json",
+    "project_material_inventory": "ops/data/map-sheets-public.v1/project_material_inventory.json",
+    "project_components": "ops/data/map-sheets-public.v1/project_components.json",
+    "project_source_links": "ops/data/map-sheets-public.v1/project_source_links.json",
+    "project_opportunities": "ops/data/map-sheets-public.v1/project_opportunities.json",
+    "organization_locations": "ops/data/map-sheets-public.v1/organization_locations.json",
+    "project_publication_settings": "ops/data/map-sheets-public.v1/project_publication_settings.json"
   },
   "controlled_values": {
     "project_sectors": [
@@ -396,5 +396,14 @@
       "organization_locations": false
     },
     "rule": "The first map view shows only projects registered in current Daily Ops. Users may explicitly switch to all public projects."
+  },
+  "data_provider": {
+    "type": "GOOGLE_SHEETS_PRIVATE_SOURCE__REVIEWED_GITHUB_JSON_PROJECTION",
+    "master_workbook_title": "JP_AEC__PROJECT_MAP_14_TABLES__v1.0__LIVE",
+    "projection_root": "ops/data/map-sheets-public.v1/",
+    "source_table_count": 14,
+    "refresh_mode": "USER_TRIGGERED_VALIDATION_AND_GITHUB_PAGES_DEPLOYMENT",
+    "no_live_browser_google_credentials": true,
+    "original_csv_fallback": "Preserved at repository root; map does not load those files"
   }
 }
