@@ -151,5 +151,36 @@
     "engineering_approvals_unverified": true,
     "source_worksheet": "project_work_items",
     "does_not_write_daily_ops": true
+  },
+  "normalized_owner_routing_v1": {
+    "introduced": "2026-10-22",
+    "source_of_truth": "PRIVATE_INDIVIDUAL_OWNER_WORKBOOKS",
+    "owner_categories": [
+      "PEOPLE",
+      "PROJECTS_AND_LOCATIONS",
+      "ORGANIZATIONS",
+      "WORK_CATALOG"
+    ],
+    "linked_master_tabs": [
+      "people",
+      "projects",
+      "organizations",
+      "organization_locations",
+      "work_catalog"
+    ],
+    "resolver": "Private Google Sheets master tab _SOURCE_ROUTER (identifiers restricted; not copied into public GitHub)",
+    "access_grant_tab": "_AUTHORIZE_IMPORTS",
+    "master_implementation": "ARRAYFORMULA(IFERROR(IMPORTRANGE, HIDDEN_DATED_ROLLBACK_TAB))",
+    "authorization_status": "PENDING_DESKTOP_ALLOW_ACCESS_FOUR_DISTINCT_OWNER_FILES",
+    "safe_fallback_verified": true,
+    "base_master_tab_rows_preserved": true,
+    "private_people_roster_records": 23,
+    "attendance_mapping": "4_PERSON_ID_MAPPING in existing Chaudhary attendance workbook",
+    "attendance_operational_source_unchanged": true,
+    "people_attendance_auto_sync": "NOT_ENABLED_DUE_PRIVATE_SOURCE_TO_SHARED_DESTINATION_ACCESS_BOUNDARY",
+    "public_people_projection": "UNCHANGED_EMPTY__NO_PRIVATE_WORKERS_PUBLISHED",
+    "owner_direct_edit_only": true,
+    "public_map_republication": "SEPARATE_MANUAL_SAFE_JSON_REVIEW_AND_GITHUB_ACTIONS",
+    "immutable_original_public_csv": true
   }
 }

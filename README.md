@@ -9,9 +9,11 @@ Public [GitHub Pages website](https://fabingurung.github.io/JP_Communication-Com
 ## What is live
 
 - **Website:** botanical responsive operations hub, project map, Daily Ops, site/project pages, resources, workspace and multi-depth guide. Current stable release **v2.2.0**, previous frozen **v2.1.0**.
-- **Map data:** 14 editable tables / 162 baseline records in the [private native [Google Sheets master](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit)](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit); public reviewed JSON in `ops/data/map-sheets-public.v1/`. Browser runtime does **not** load CSV or authenticate to private Sheets. **Sheet changes are not auto-synchronized**: validate, review publication, regenerate JSON, commit and verify Pages deploy. Root CSV files remain frozen rollback.
+- **Map data:** 14 table schemas / 162 initial-migration records, with 3 subsequently reviewed work rows in the [private native Google Sheets master](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit); public reviewed JSON in `ops/data/map-sheets-public.v1/`. Browser runtime does **not** load CSV or authenticate to private Sheets. **Sheet changes are not auto-synchronized**: validate, review publication, regenerate JSON, commit and verify Pages deploy. Root CSV files remain frozen rollback.
 - **Daily Ops:** `ops/data/current-works.json` owns current state; `ops/events/daily-ops-events.jsonl` owns append-only history; `ops/data/project-resources.json` owns governed Drive resource links. SQL PK/FK declaration: `ops/schema/daily-ops-postgres.sql`.
 - **Discord collection:** on hold; no scheduled collection or unapproved public source ingestion.
+
+**Normalized ownership:** Since 2026-10-22, five JP master tabs (`people`, `projects`, `organizations`, `organization_locations`, `work_catalog`) are **read-only `IMPORTRANGE` mirrors**, using hidden rollback values until Google Sheets grants each source connection. Four private editable owner workbooks are indexed in the master `_SOURCE_ROUTER`; authorize private connections in `_AUTHORIZE_IMPORTS` on desktop (one-time). The Chaudhary attendance workbook has a worker/person-ID mapping, but its original roster and history are unchanged until a permission-safe roster-only feed exists. Public map snapshots are unchanged by these private rearrangements. Details: [owner routing](docs/operations/JP_SOURCE_OWNER_ROUTING_20261022.md).
 
 ## Read only what you need
 
