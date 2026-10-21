@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "authority_id": "JP_AEC_MAP_GOOGLE_SHEETS_SOURCE_20261021",
-  "status": "IMPORTED_AND_CELLWISE_READBACK_VERIFIED__PUBLIC_JSON_RUNTIME_CUTOVER_STAGED",
+  "status": "VERIFIED_DEPLOYED__SHEETS_MASTER__MANUAL_PUBLIC_JSON_REFRESH",
   "owner": "JP AEC Operations Hub",
   "master_file_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
   "master_url": "https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit",
@@ -120,5 +120,9 @@
       "source_csv_rollback": "project_publication_settings.csv",
       "public_projection": "ops/data/map-sheets-public.v1/project_publication_settings.json"
     }
-  ]
+  ],
+  "initial_migration_deployment_sha": "076185d76bc32d3c650dc5eccb7a5d38508df763",
+  "initial_migration_validation_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39584244489",
+  "initial_migration_visual_qa_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39584244611",
+  "deployment_proof": "GitHub Actions validate + deploy jobs both completed successfully at initial migration SHA; new Sheet values are not auto-synchronized to Pages"
 }
