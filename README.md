@@ -39,12 +39,12 @@ The original v2.0.0 release expanded the former data-driven project-map baseline
 Project and Daily Ops truth are maintained as canonical machine-readable files, separate from the application:
 
 - `ops/schema/daily-ops-postgres.sql` — canonical relational/relationship authority (text DDL; no live database required)
-- `projects.csv` — canonical project-master current values: IDs, lifecycle, coordinates, public project attributes
+- [Google Sheets map master](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit) — canonical editable values for the 14 map reference datasets; `projects.csv` is frozen rollback evidence
 - `ops/data/current-works.json` — canonical Daily Ops current state
 - `ops/data/project-resources.json` — canonical structured project → permission-gated Google Drive resource links; Drive owns the actual files
 - `ops/events/daily-ops-events.jsonl` — canonical append-only Daily Ops event/history stream
 - `map-config.json` — controlled map statuses and presentation configuration
-- HTML / GitHub Pages / Google Sheets / Slack — downstream projections or interaction surfaces, never competing truth stores
+- HTML / GitHub Pages / published JSON / Slack — downstream projections or interaction surfaces, never competing truth stores; the dedicated native map workbook is the exception for the 14 migrated map datasets
 
 See [`ops/CANONICAL_DATA_AUTHORITY.md`](ops/CANONICAL_DATA_AUTHORITY.md) for source-of-truth rules, [`ops/PLATFORM_MODULES.md`](ops/PLATFORM_MODULES.md) for JP AEC Platform module naming, [`CHANGELOG.md`](CHANGELOG.md) for version history, and [`docs/releases/v2.2.0.md`](docs/releases/v2.2.0.md) for the current release notes.
 
@@ -68,31 +68,33 @@ A hosted PostgreSQL service such as Neon becomes useful later if the system requ
 ## Live architecture
 
 ```text
-index.html
-├── loads map-config.json
-├── loads projects.csv
-├── creates filters, project list, markers and popups
-└── downloads filtered data as GeoJSON
+Private native Google Sheets map master (14 tables)
+   └── explicit source review + PK/FK / publication validation
+       └── ops/data/map-sheets-public.v1/*.json (14 reviewed public snapshots)
+           └── map-config.json → assets/js/app.js → map.html
+               └── map markers, filters, project details and GeoJSON download
+
+Independent Daily Ops authority: ops/data/current-works.json
 ```
 
-The live website no longer stores project records inside `index.html`.
+GitHub Pages never fetches private Sheets or original CSV files from the map browser. Sheet changes require a reviewed JSON refresh and successful Actions publication; refresh is not automatic.
 
 ## Where to edit
 
-Edit the canonical file that owns the fact. Do **not** manually maintain the same fact in HTML or Google Sheets.
+Edit the owning canonical source, never the rendered HTML or reviewed JSON directly. **For the 14 migrated map datasets only, edit the native Google Sheets master**; Google Sheets is not merely a downstream display in that scope.
 
 | Fact | Canonical edit location |
 | --- | --- |
-| Project identity, lifecycle/status, coordinates, public project attributes | `projects.csv` |
+| Project identity, lifecycle/status, coordinates, public project attributes | Google Sheets map master → `projects` worksheet |
 | Daily work, readiness, blockers, materials, current operational state | `ops/data/current-works.json` |
 | Project engineering resource links | `ops/data/project-resources.json` |
 | Append-only operational/governance history | `ops/events/daily-ops-events.jsonl` |
 | Relationships, PK/FK structure and data contract | `ops/schema/daily-ops-postgres.sql` |
 | Allowed map statuses / visual configuration | `map-config.json` |
 
-GitHub Pages reads these canonical files and is a downstream presentation layer. Google Sheets is also a downstream projection; it is not where project-master truth should be edited.
+GitHub Pages loads only validated public JSON projections of the private map workbook and other independently governed public JSON. For map-master edits, validate and republish the projection; do not edit the frozen CSV rollback files.
 
-The working lane `feature/daily-ops-current-work` remains available for governed validation, but production GitHub Pages deployment is owned by `main` only. Feature-lane runs validate and skip deployment; production changes reach Pages only after an explicit fast-forward release to `main`.
+The registered `feature/daily-ops-current-work` lane is authorized to validate and deploy to the existing GitHub Pages URL after the production workflow succeeds. `main` remains the canonical branch; promotion to `main` is separately governed and is not required for each test-lane deployment. See `ops/control/pages-publication-lane.v0.1.json`.
 
 ## Files
 
@@ -103,7 +105,7 @@ The working lane `feature/daily-ops-current-work` remains available for governed
 - `how-to.html` — backward-compatible redirect to `/guide/`
 - `docs/WORKSPACE_GUIDE_ROADMAP.md` — five-phase Workspace + Guide parity plan
 - `map.html` — map interface and logic
-- `projects.csv` — live public project dataset
+- `ops/data/map-sheets-public.v1/*.json` — 14 reviewed public map data projections; legacy `projects.csv` is retained solely for rollback
 - `map-config.json` — title, map settings and status colours
 - `.github/workflows/validate-projects.yml` — automatic validation
 - `MOBILE_EDITING_GUIDE.md` — iPhone editing instructions
@@ -111,7 +113,7 @@ The working lane `feature/daily-ops-current-work` remains available for governed
 
 ## Coordinate rules
 
-- CSV columns: `latitude` and `longitude`
+- Map-master and JSON field names: `latitude` and `longitude`
 - Leaflet uses `[latitude, longitude]`
 - GeoJSON uses `[longitude, latitude]`
 
@@ -135,19 +137,18 @@ The status must exactly match a key in `map-config.json`:
 
 ## Public/private rule
 
-GitHub Pages and this repository are public. Only public information belongs in `projects.csv`.
+GitHub Pages and this repository are public. Only approved public information belongs in published JSON projections. The native source workbook stays private.
 
-`is_public=FALSE` hides a record from the map, but does not secure it because the CSV remains public. Remove genuinely sensitive information from the public repository.
+`is_public=FALSE` hides a record from the map interface, **not** from any public GitHub JSON file. Enforce the publication boundary before projection; never treat a UI filter as access control. The legacy public CSV rollback files must likewise never contain confidential information.
 
 ## Safe change workflow
 
-1. Edit the owning canonical data file, not the rendered page or a downstream Sheet.
-2. Validate the project identity / PK-FK relationship against the SQL contract.
-3. Commit on the governed working branch.
-4. Require GitHub Actions validation to pass.
-5. Let Pages update from the canonical files.
-6. Project into Google Sheets only as a downstream view when that projection is configured.
-7. Promote to `main` only through an explicit governed release.
+1. Edit the owning source: the private native Google Sheets master for the 14 map tables; the relevant governed JSON/JSONL file for independent Daily Ops records.
+2. Validate source identity, values, PK/FK relationships, and publication controls; reject private data before constructing the reviewed public projection.
+3. Regenerate the reviewed `ops/data/map-sheets-public.v1/*.json` files from the approved native Sheet values; never treat CSV rollback files as the new source.
+4. Commit on the registered `feature/daily-ops-current-work` working lane and require GitHub Actions validation and visual QA to pass.
+5. Verify Pages deployed the precise validated SHA before reporting a published change. A Sheet edit alone does **not** refresh Pages.
+6. Promote to `main` only when separately governed and approved.
 
 GitHub Pages deployment initialized.
 
