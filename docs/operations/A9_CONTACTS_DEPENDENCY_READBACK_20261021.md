@@ -23,3 +23,7 @@
 ## Security and refresh
 
 The original 3 Sheets remain restricted Google documents. Public Pages exposes **only** name, role, project and source-status labels for the two selected company tables. The projection is a dated manual snapshot. The user must request a refresh when Gemini updates the worksheets; no background polling or automations configured.
+
+## User's new request and archive recommendation
+
+The directory detail page now publishes the 26 source phone values explicitly requested, via a dated static public projection, not Google Drive `IMPORTRANGE`. The two company Sheets remain editable independently. The normalized A9 master should **not** be retired solely because the website does not read it: its `CDP-*` stable person IDs, role foreign keys, identity facts and provenance remain semantically authoritative. Historical Drive snapshots and registry artifacts show prior governed use. Bound Apps Scripts, private repos, exports and all external consumers were not exhaustively audited, so no safe-to-retire certificate exists. A copy already exists in archive, but the *live original* is unchanged.

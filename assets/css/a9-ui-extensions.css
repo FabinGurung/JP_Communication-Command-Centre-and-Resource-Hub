@@ -43,3 +43,19 @@
 .a9-contact-table th:first-child,.a9-contact-table td:first-child{position:sticky;left:0;background:var(--jp-surface-soft,#f7faf5);font-weight:700}
 .a9-contact-table tbody tr:hover td{background:var(--jp-leaf-pale,#edf5e9)}
 @media(max-width:700px){.a9-contact-card{grid-column:auto}.a9-contact-table{min-width:610px}.a9-contact-table-wrap{max-width:calc(100vw - 65px)}}
+
+/* Dedicated company contact detail pages. Underlying phone records are explicitly public. */
+.a9-panel-title-link{color:var(--jp-green-deep,#104b36);text-decoration:none;border-bottom:1px solid #a5cbb0}
+.a9-panel-title-link:hover{text-decoration:underline}
+.a9-panel-title-link:focus-visible,.a9-view-directory:focus-visible,.a9-person-phone:focus-visible{outline:3px solid var(--jp-gold,#c8974f);outline-offset:3px}
+.a9-view-directory{display:inline-flex;min-height:44px;align-items:center;padding:9px 12px;margin-top:12px;border:1px solid #8eae94;border-radius:12px;color:var(--jp-green-deep,#104b36);font-weight:800;text-decoration:none;background:#e7f6e8}
+.a9-source-card .a9-source-link{margin-left:0;margin-right:8px}
+.a9-person-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:14px}
+.a9-person-card{min-width:0;background:var(--jp-paper,#fffefa);border:1px solid var(--jp-line,#d3e4d6);border-radius:15px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 9px #183e2910}
+.a9-person-card h3{font-size:17px;line-height:1.35;color:var(--jp-green-deep,#104b36);margin:0}
+.a9-person-role{font-weight:700;margin:0;color:var(--jp-ink,#193d2e)}
+.a9-person-project{margin:0;color:var(--jp-muted,#587365);overflow-wrap:anywhere;font-size:13px}
+.a9-person-phone{display:inline-flex;align-self:start;min-height:44px;align-items:center;border-radius:999px;padding:9px 15px;background:#e2f1e8;color:#154a36;text-decoration:none;font-weight:850;letter-spacing:.02em}
+.a9-person-phone:hover{background:#cae7d7}
+.a9-person-card small{margin-top:auto;font-size:11px;overflow-wrap:anywhere}
+@media(max-width:700px){.a9-person-grid{grid-template-columns:1fr}.a9-person-card{padding:14px}}

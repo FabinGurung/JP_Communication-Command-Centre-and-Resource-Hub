@@ -1,0 +1,19 @@
+(()=>{"use strict";
+const source=new URLSearchParams(location.search).get("source");const title=document.getElementById("directory-title"),list=document.getElementById("contact-results"),count=document.getElementById("contact-count"),q=document.getElementById("contact-query"),role=document.getElementById("contact-role"),fresh=document.getElementById("directory-freshness"),orig=document.getElementById("directory-original");let records=[];
+const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=String(text);if(cls)x.className=cls;return x;};
+const allowed=["SRC-01","SRC-02"];
+function render(){const term=q.value.trim().toLocaleLowerCase(),chosen=role.value;const matches=records.filter(x=>(!chosen||x.role===chosen)&&(!term||[x.name,x.role,x.projects].join(" ").toLocaleLowerCase().includes(term)));count.textContent=matches.length+" of "+records.length+" contacts";list.replaceChildren();
+if(!matches.length){list.append(el("p","No matches. Try another name, role or project.","a9-empty"));return;}
+for(const x of matches){const card=el("article",undefined,"a9-person-card"),name=el("h3",x.name);card.append(name,el("p",x.role||"Role not specified","a9-person-role"));const project=el("p",undefined,"a9-person-project");project.append(el("strong","Project(s): "),document.createTextNode(x.projects||"Not assigned"));card.append(project);
+const tel=el("a",x.phone,"a9-person-phone");tel.href="tel:"+x.phone;tel.setAttribute("aria-label","Call "+x.name);card.append(tel);
+card.append(el("small","Source status: "+(x.verification||"Not stated")+" · worksheet row "+x.source_row,"a9-muted"));list.append(card);}}
+async function init(){try{if(!allowed.includes(source))throw Error("Unknown company source");const [a,b]=await Promise.all([fetch("../../../ops/data/a9-contact-directories-public-v0.1.json",{cache:"no-store"}),fetch("../../../ops/data/a9-field-source-links-public.v1.0.json",{cache:"no-store"})]);if(!a.ok||!b.ok)throw Error("Contact sources unavailable");
+const data=await a.json(),refs=await b.json();if(data.projection_id!=="A9_PUBLIC_DIRECT_CONTACT_PAGES_20261021"||data.source_count!==2||data.published_records!==26||data.directories?.length!==2||data.withheld_fields?.join("|")!=="Notes"||data.refresh_mode!=="MANUAL_STATIC_SNAPSHOT_NOT_LIVE_SHEET_INTEGRATION")throw Error("Unverified public snapshot");
+const d=data.directories.find(x=>x.source_key===source),link=refs.google_sheet_urls?.find(x=>x.source_key===source);if(!d||!link||d.records.length!==d.source_record_count||!/^https:\/\/docs\.google\.com\/spreadsheets\/d\/[A-Za-z0-9_-]+\/edit$/.test(link.url)||d.records.some(x=>!x.name||!/^\+977\d{10}$/.test(x.phone)))throw Error("Invalid source linkage or phone");
+title.textContent=d.company+" · Contacts";document.title=d.company+" · JP AEC Contacts";document.getElementById("directory-list-heading").textContent="People · "+d.company;fresh.textContent="Manual snapshot · "+data.read_date_npt+" · "+d.records.length+" public phone contacts · Source "+source;
+orig.href=link.url;orig.target="_blank";orig.rel="noopener noreferrer";orig.referrerPolicy="no-referrer";orig.textContent="Open "+d.company+" source Google Sheet ↗";
+document.getElementById(source==="SRC-01"?"dir-rohini":"dir-fishtail").setAttribute("aria-current","page");
+records=d.records;const roles=[...new Set(records.map(x=>x.role).filter(Boolean))].sort((a,b)=>a.localeCompare(b));for(const value of roles){const option=el("option",value);option.value=value;role.append(option);}render();
+}catch{count.textContent="Directory unavailable";list.replaceChildren(el("p","Unable to load the verified contact directory. No contact data has been inferred.","a9-empty"));fresh.textContent="No approved current source rendered";}}
+q.addEventListener("input",render);role.addEventListener("change",render);init();
+})();

@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0095",
+  "date_npt": "2026-10-21",
+  "purpose": "Move company preview out of Field Resources overview into L3 detail route with public searchable phone numbers",
+  "working_branch": "feature/daily-ops-current-work",
+  "source_read": "CURRENT_NATIVE_SHEETS_2_PEOPLE_DIRECTORY",
+  "rohini_source": "SRC-01",
+  "fishtail_source": "SRC-02",
+  "source_count": 2,
+  "contact_rows": 26,
+  "published_phone_rows": 26,
+  "phone_visibility": "PUBLIC_GITHUB_PAGES_USER_EXPLICIT_REQUEST",
+  "privacy_warned": true,
+  "private_notes_published": 0,
+  "source_sheets_changed": false,
+  "map_source_inspection": {
+    "project_data": "projects.csv",
+    "organization_data": "organization_locations.csv",
+    "opportunities": "project_opportunities.csv",
+    "config": "map-config.json",
+    "google_sheet_live_sync": false
+  },
+  "master_6nf_archive": "NOT_PERFORMED_DEPENDENCY_REVIEW_RECOMMENDED",
+  "historic_data_unchanged": true,
+  "v2_2_tag_unchanged": true,
+  "discord_collector": "ON_HOLD",
+  "no_schedules": true,
+  "status": "STAGED_PENDING_CI"
+}

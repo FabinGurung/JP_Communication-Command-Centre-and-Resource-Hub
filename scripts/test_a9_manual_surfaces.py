@@ -16,14 +16,14 @@ def test():
     projects={x["project_id"] for x in data("ops/data/current-works.json")["projects"]}
     assert routes["schema_version"]=="1.0.0"
     listed=routes["pages"]
-    assert len(arc["active_pages"])==20 and len(listed)==21
+    assert len(arc["active_pages"])==20 and len(listed)==22
     assert routes["memory_poster_level"]=="L1"
     assert "MEMORY" in routes["primary_destinations"] and len(routes["primary_destinations"])==7
     assert next(x for x in listed if x["page_id"]=="A9-PAGE-CONTROL_MEMORY")["page_role"]=="PRIMARY"
     assert "A9-MEM-01" in {s["section_id"] for s in routes["sections"]}
     assert len([s for s in routes["sections"] if s["section_id"].startswith("A9-FLD-")])==10
     paths={x["path"] for x in listed}
-    assert paths==set(arc["active_pages"])|{"resources/field/index.html"}
+    assert paths==set(arc["active_pages"])|{"resources/field/index.html","resources/field/contacts/index.html"}
     assert len({x["page_id"] for x in listed})==len(paths)
     assert all((ROOT/x).is_file() for x in paths)
     assert all((ROOT/x["path"]).exists() and x["status"]=="ACTIVE" for x in listed)
@@ -72,7 +72,24 @@ def test():
             assert set(item)=={"source_row","name","role","projects","verification"}
             assert item["name"] and isinstance(item["source_row"],int)
             assert not re.search(r"\+977\d+|\b\d{10}\b|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",str(item))
-    assert "a9-company-contacts-public-preview.v0.1.json" in read("assets/js/a9-field-resources.js")
+    assert "a9-company-contacts-public-preview.v0.1.json" not in read("assets/js/a9-field-resources.js")
+    public_data=data("ops/data/a9-contact-directories-public-v0.1.json")
+    assert public_data["projection_id"]=="A9_PUBLIC_DIRECT_CONTACT_PAGES_20261021"
+    assert public_data["source_count"]==2 and public_data["published_records"]==26
+    assert public_data["withheld_fields"]==["Notes"]
+    assert public_data["refresh_mode"]=="MANUAL_STATIC_SNAPSHOT_NOT_LIVE_SHEET_INTEGRATION"
+    assert [(x["source_key"],x["source_record_count"]) for x in public_data["directories"]]==[("SRC-01",7),("SRC-02",19)]
+    assert all(len(x["records"])==x["source_record_count"] for x in public_data["directories"])
+    import re
+    for directory in public_data["directories"]:
+        for record in directory["records"]:
+            assert set(record)=={"source_row","name","phone","role","projects","verification"}
+            assert record["name"] and re.fullmatch(r"\+977[0-9]{10}",record["phone"])
+    assert "a9-contact-directories-public-v0.1.json" in read("assets/js/a9-company-directory.js")
+    assert "a9-contact-directories-public-v0.1.json" not in read("assets/js/a9-field-resources.js")
+    assert "contacts/?source=" in read("assets/js/a9-field-resources.js")
+    assert "phone numbers" in read("resources/field/contacts/index.html")
+    assert len(routes["pages"])==22 and routes["contact_view"]["published_phone_numbers"] is True
     assert "a9-field-source-links-public.v1.0.json" in read("assets/js/a9-field-resources.js")
     assert 'a.target="_blank"' in read("assets/js/a9-field-resources.js")
     assert 'a.rel="noopener noreferrer"' in read("assets/js/a9-field-resources.js")
@@ -85,6 +102,7 @@ def test():
     page_data={
         "resources/index.html":["href=\"field/\"","id=\"desk-resources\""],
         "resources/field/index.html":["field-sources","a9-field-resources.js","a9-ui-extensions.css"],
+        "resources/field/contacts/index.html":["contact-query","contact-role","contact-results","a9-company-directory.js"],
         "site-operations.html":["id=\"a9-published-instructions\"","a9-published-checklist.js","JPAEC:diy-checklist:v1:"],
         "site-operations/history.html":["id=\"a9-manual-progress\"","a9-manual-progress.js","progress-report-public.v0.2.jsonl"],
         "workspace/index.html":["id=\"memory-poster-board\"","controls/memory-wall.html","A9_SITE_TREE_AND_EDIT_LEVELS.v1.md"]
@@ -117,6 +135,6 @@ def test():
     assert "VERBATIM_FIRST_NO_AUTO_DERIVATION" in read("assets/js/a9-manual-progress.js")
     assert "website-level-tree" in read("controls/memory-wall.html")
     assert "🧠 Memory Poster" in read("assets/js/site-shell.js")
-    print("A9_MANUAL_SURFACES_PASS: 21 active routes, 10 metadata-only Sheets, 0 unpublished checklist/progress rows, 37 legacy events, 46 preserved resources, collector on hold.")
+    print("A9_MANUAL_SURFACES_PASS: 22 active routes including dedicated company contacts, 26 public phone contacts by explicit user request, 10 original Sheets, 37 historical events, 46 resources, collector on hold.")
 if __name__=="__main__":
     test()

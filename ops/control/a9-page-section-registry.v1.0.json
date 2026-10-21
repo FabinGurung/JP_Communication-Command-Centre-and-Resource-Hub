@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "registry_id": "A9_PUBLIC_WEBSITE_PAGE_SECTION_TREE_20261020",
-  "scope": "ACTIVE_21_PUBLIC_HTML_ROUTES_PLUS_3_LEGACY_COMPATIBILITY_URLS",
+  "scope": "ACTIVE_22_PUBLIC_HTML_ROUTES_PLUS_3_LEGACY_COMPATIBILITY_URLS",
   "baseline_release": "v2.2.0",
   "development_arc": "A9_MANUAL_COMMUNICATION_AND_FIELD_RESOURCE_STRUCTURE",
   "status": "ACTIVE_DEVELOPMENT__RELEASE_TAG_V2_2_0_IMMUTABLE",
@@ -254,6 +254,16 @@
       "status": "ACTIVE",
       "theme": "V2_2_BOTANICAL",
       "archive": false
+    },
+    {
+      "page_id": "A9-PAGE-FIELD_CONTACTS",
+      "path": "resources/field/contacts/index.html",
+      "nav_group": "RESOURCES",
+      "page_role": "L3_CONTACT_DIRECTORY",
+      "data_owner": "A9_PUBLIC_DIRECT_CONTACT_PAGES_20261021",
+      "status": "ACTIVE",
+      "theme": "V2_2_BOTANICAL",
+      "archive": false
     }
   ],
   "sections": [
@@ -379,18 +389,18 @@
       "location": "Resources/Field/Sheet-01",
       "path": "resources/field/index.html",
       "anchor": "#field-src-01",
-      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
-      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-01",
-      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+      "purpose": "Click L3 company card title to open dedicated searchable contacts with public phone numbers, role and project",
+      "data_contract": "ops/data/a9-contact-directories-public-v0.1.json",
+      "status": "ACTIVE_DETAIL_VIEW_PUBLIC_PHONE"
     },
     {
       "section_id": "A9-FLD-02",
       "location": "Resources/Field/Sheet-02",
       "path": "resources/field/index.html",
       "anchor": "#field-src-02",
-      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
-      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-02",
-      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+      "purpose": "Click L3 company card title to open dedicated searchable contacts with public phone numbers, role and project",
+      "data_contract": "ops/data/a9-contact-directories-public-v0.1.json",
+      "status": "ACTIVE_DETAIL_VIEW_PUBLIC_PHONE"
     },
     {
       "section_id": "A9-FLD-03",
@@ -463,6 +473,15 @@
       "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
       "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-10",
       "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
+    },
+    {
+      "section_id": "A9-FLD-CONTACTS",
+      "location": "Resources/Field/CompanyContacts",
+      "path": "resources/field/contacts/index.html",
+      "anchor": "#contact-results",
+      "purpose": "One controlled L3 route with SRC-01/SRC-02 queries and L4 role/name/project filter and public phone cards",
+      "data_contract": "ops/data/a9-contact-directories-public-v0.1.json",
+      "status": "ACTIVE"
     }
   ],
   "legacy_compatibility": [
@@ -516,5 +535,18 @@
     "MEMORY",
     "HOWTO"
   ],
-  "publishing_lane_policy": "TEST_BRANCH_DEPLOY_CAN_PUBLISH_AFTER_CI_WITHOUT_MAIN_PROMOTION__MAIN_AND_V2_2_FROZEN"
+  "publishing_lane_policy": "TEST_BRANCH_DEPLOY_CAN_PUBLISH_AFTER_CI_WITHOUT_MAIN_PROMOTION__MAIN_AND_V2_2_FROZEN",
+  "contact_view": {
+    "parent_path": "resources/field/index.html",
+    "detail_route": "resources/field/contacts/index.html",
+    "source_params": [
+      "SRC-01",
+      "SRC-02"
+    ],
+    "published_phone_numbers": true,
+    "public_phone_permission": "USER_EXPLICIT_20261021",
+    "notes_published": false,
+    "original_google_sheets_untouched": true,
+    "refresh": "MANUAL_ON_DEMAND"
+  }
 }

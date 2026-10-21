@@ -1,0 +1,248 @@
+{
+  "schema_version": "1.0.0",
+  "projection_id": "A9_PUBLIC_DIRECT_CONTACT_PAGES_20261021",
+  "source_authority": "TWO_ORIGINAL_NATIVE_GOOGLE_SHEETS_WORKSHEET2",
+  "read_date_npt": "2026-10-21",
+  "publication_approval": "USER_DIRECT_REQUEST_PHONE_NUMBERS_PUBLIC_GITHUB_PAGES_20261021",
+  "privacy_warning": "ALL_PHONE_NUMBERS_IN_THIS_FILE_ARE_PUBLIC_ON_GITHUB_PAGES_AND_CAN_BE_INDEXED_AND_SCRAPED",
+  "public_fields": [
+    "name",
+    "phone",
+    "role",
+    "projects",
+    "verification",
+    "source_row"
+  ],
+  "withheld_fields": [
+    "Notes"
+  ],
+  "refresh_mode": "MANUAL_STATIC_SNAPSHOT_NOT_LIVE_SHEET_INTEGRATION",
+  "source_count": 2,
+  "published_records": 26,
+  "directories": [
+    {
+      "source_key": "SRC-01",
+      "company": "Rohini Engineering and Builders",
+      "source_tab": "2_PEOPLE_DIRECTORY",
+      "source_record_count": 7,
+      "records": [
+        {
+          "source_row": 2,
+          "name": "Hari Chaudhary",
+          "phone": "+9779869975522",
+          "role": "Contractor",
+          "projects": "14 Bishal Paija",
+          "verification": "USER_SUPPLIED_PHONE + MASTER_ID"
+        },
+        {
+          "source_row": 3,
+          "name": "Turan Bahadur Gurung",
+          "phone": "+9779820024970",
+          "role": "Cross-company routed member (formal role not specified)",
+          "projects": "Company-level / cross-company routing",
+          "verification": "USER_SUPPLIED_PHONE + SLACK_ID"
+        },
+        {
+          "source_row": 4,
+          "name": "Fabin Gurung",
+          "phone": "+9779814185080",
+          "role": "Cross-company team member",
+          "projects": "Company-level / cross-company routing",
+          "verification": "USER_SUPPLIED_PHONE + SLACK_ID"
+        },
+        {
+          "source_row": 5,
+          "name": "Babu Ram GC",
+          "phone": "+9779846728913",
+          "role": "Electrician / Electrical Contractor",
+          "projects": "14 Bishal Paija",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 6,
+          "name": "Subash Malik",
+          "phone": "+9779708809417",
+          "role": "Plumber",
+          "projects": "14 Bishal Paija",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 7,
+          "name": "Krishna Kumar Gupta",
+          "phone": "+9779815145828",
+          "role": "Shareholder / Project Manager / Engineer",
+          "projects": "14 Bishal Paija",
+          "verification": "USER_SUPPLIED_PHONE + A9/SLACK_ID"
+        },
+        {
+          "source_row": 8,
+          "name": "Arpana Naral",
+          "phone": "+9779826172648",
+          "role": "Site Engineer",
+          "projects": "Company-level (project assignments pending)",
+          "verification": "USER_SUPPLIED_20261009"
+        }
+      ]
+    },
+    {
+      "source_key": "SRC-02",
+      "company": "Fishtail Builders",
+      "source_tab": "2_PEOPLE_DIRECTORY",
+      "source_record_count": 19,
+      "records": [
+        {
+          "source_row": 2,
+          "name": "Bihan Magar",
+          "phone": "+9779765659084",
+          "role": "Contractor",
+          "projects": "30 Sabitri Giri / Dipti Giri",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 3,
+          "name": "Hari Chaudhary",
+          "phone": "+9779869975522",
+          "role": "Contractor",
+          "projects": "15 Narayani Parajuli",
+          "verification": "USER_SUPPLIED_PHONE + MASTER_ID"
+        },
+        {
+          "source_row": 4,
+          "name": "Turan Bahadur Gurung",
+          "phone": "+9779820024970",
+          "role": "Cross-company routed member (formal role not specified)",
+          "projects": "Company-level / cross-company routing",
+          "verification": "USER_SUPPLIED_PHONE + SLACK_ID"
+        },
+        {
+          "source_row": 5,
+          "name": "Fabin Gurung",
+          "phone": "+9779814185080",
+          "role": "Cross-company team member",
+          "projects": "Company-level / cross-company routing",
+          "verification": "USER_SUPPLIED_PHONE + SLACK_ID"
+        },
+        {
+          "source_row": 6,
+          "name": "Babu Ram GC",
+          "phone": "+9779846728913",
+          "role": "Electrician / Electrical Contractor",
+          "projects": "31 Sharada Adhikari",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 7,
+          "name": "Rajan Shrestha",
+          "phone": "+9779848258941",
+          "role": "Electrician / Electrical Contractor",
+          "projects": "30 Sabitri Giri / Dipti Giri, 17 Samir Man Ghubaju, 13 Hari Baral",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 8,
+          "name": "Niraj Bishwokarma",
+          "phone": "+9779803853785",
+          "role": "Plaster Contractor",
+          "projects": "31 Sharada Adhikari",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 9,
+          "name": "Lal Bahadur Gurung",
+          "phone": "+9779814148968",
+          "role": "Plumber",
+          "projects": "13 Hari Baral",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 10,
+          "name": "Subash Malik",
+          "phone": "+9779708809417",
+          "role": "Plumber",
+          "projects": "31 Sharada Adhikari, 30 Sabitri Giri / Dipti Giri, 17 Samir Man Ghubaju, 16 Yamuna Pun Adai",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 11,
+          "name": "Safal Dawadi",
+          "phone": "+9779802392680",
+          "role": "Shareholder",
+          "projects": "Company-level / cross-company routing",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 12,
+          "name": "Paras Pariyar",
+          "phone": "+9779866088794",
+          "role": "Site Engineer",
+          "projects": "Company-level / cross-company routing",
+          "verification": "USER_CONFIRMED"
+        },
+        {
+          "source_row": 13,
+          "name": "Shiv Narayan Chaudhary",
+          "phone": "+9779825703205",
+          "role": "Site Engineer",
+          "projects": "15 Narayani Parajuli",
+          "verification": "USER_SUPPLIED_PHONE + A9/SLACK_ID"
+        },
+        {
+          "source_row": 14,
+          "name": "Boppy",
+          "phone": "+9779716908604",
+          "role": "Tile & Granite Contractor",
+          "projects": "31 Sharada Adhikari",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 15,
+          "name": "Salahaudin Ansari",
+          "phone": "+9779804155971",
+          "role": "Tile & Granite Contractor",
+          "projects": "13 Hari Baral",
+          "verification": "USER_SUPPLIED_PHONE + MASTER_ID"
+        },
+        {
+          "source_row": 16,
+          "name": "Bishnu Kumar Shrestha",
+          "phone": "+9779806536707",
+          "role": "Shuttering Contractor",
+          "projects": "31 Sharada Adhikari",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 17,
+          "name": "Daju Vai Supplier",
+          "phone": "+9779840448221",
+          "role": "Material Supplier",
+          "projects": "31 Sharada Adhikari",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 18,
+          "name": "Suvakamana Hardware",
+          "phone": "+9779856061292",
+          "role": "Material Supplier",
+          "projects": "31 Sharada Adhikari",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 19,
+          "name": "Riyaz Ansari",
+          "phone": "+9779819170540",
+          "role": "Carpenter",
+          "projects": "31 Sharada Adhikari",
+          "verification": "USER_SUPPLIED"
+        },
+        {
+          "source_row": 20,
+          "name": "Chitraw Bahadur Karki",
+          "phone": "+9779856024982",
+          "role": "Dhalan toli very fast",
+          "projects": "",
+          "verification": "USER_SUPPLIED"
+        }
+      ]
+    }
+  ]
+}
