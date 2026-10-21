@@ -15,3 +15,10 @@ The map now renders from `map-config.json → ops/data/map-sheets-public.v1/*.js
 **Rollback:** checkout the immutable v2.2.0 release or previous verified branch commit `8a8474979a233259f27fd2c18ffc61ba78a4a8b8`. Original 14 CSV files remain unchanged in Git. The new Sheets workbook has a stable ID; do not replace it with a copy when updating.
 
 **Permission warning:** The 14 public JSON snapshots are readable in the public GitHub repository just as the prior CSV datasets were. Do not put private phones, identities, sensitive finance, unpublished site evidence or any other confidential data in those public projections. Google Sheets sharing stays restricted.
+
+
+## 2026-10-22 — First operational work links, field-reported only
+
+The private owner-only Google Sheet tab `project_work_items` now links three public field-reported operations to existing JP project IDs and `work_catalog` IDs: P002 slab reinforcement, P005 formwork/ply stage, and P020 shuttering. Provenance is the previously published `ops/data/progress-report-public.v0.2.jsonl` records `FLD-P002-20261009-01`, `FLD-P005-20261009-01`, and `FLD-P020-20261009-01`. These are dated **2026-10-09**; they are **not** live daily work statuses as of 2026-10-22. Public projection omits private source originals, crew details, prices, quantities, unsupported percent complete, and QA acceptance. Values `IN_PROGRESS` mean field-reported activity, not engineer-certified readiness. Do not change the separate Daily Ops authoritative projections on account of these map work links.
+
+The frozen source CSV files remain intact. The reviewed public `project_work_items.json` intentionally diverges from the empty legacy CSV after the verified Sheet edit; never reapply original CSV parity to this published tab.

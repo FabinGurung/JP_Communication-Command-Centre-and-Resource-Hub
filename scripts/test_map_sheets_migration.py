@@ -58,6 +58,20 @@ def main():
     for name in ["project_parties","project_funding","project_components","project_source_links","project_publication_settings"]:
         for item in read_json(f"ops/data/map-sheets-public.v1/{name}.json")["records"]:
             assert item["project_id"] in project_ids,(name,item["project_id"])
+
+    # New operational work joins are admitted only from already-public field reports.
+    work_rows=read_json("ops/data/map-sheets-public.v1/project_work_items.json")["records"]
+    works={r["work_id"] for r in read_json("ops/data/map-sheets-public.v1/work_catalog.json")["records"]}
+    public_events={json.loads(s)["record_id"] for s in (ROOT/"ops/data/progress-report-public.v0.2.jsonl").read_text(encoding="utf-8").splitlines() if s.strip()}
+    for row in work_rows:
+        assert row["project_id"] in project_ids,("project_work_items","project FK",row["project_work_id"])
+        assert row["work_id"] in works,("project_work_items","work FK",row["project_work_id"])
+        assert row["work_status"] in {"NOT_STARTED","IN_PROGRESS","COMPLETED","ON_HOLD","BLOCKED","NOT_APPLICABLE"}
+        assert row["source_reference"].startswith("ops/data/progress-report-public.v0.2.jsonl#")
+        assert row["source_reference"].split("#",1)[1] in public_events,("missing published event",row["project_work_id"])
+        assert row["is_public"]=="TRUE" and row["verification_status"]=="UNVERIFIED"
+        assert row["data_quality_status"]=="WARNING" and row["remarks"]
+        assert all(row[field]=="" for field in ("planned_quantity","completed_quantity","remaining_quantity","rate_npr","amount_npr","progress_percent","actual_finish"))
     print(f"MAP_SHEETS_PROJECTION_PASS: 14 Google Sheets-backed JSON tables, {total} reviewed public rows, PK/FK checks, no runtime CSV fetch; frozen CSV rollback remains.")
 
 if __name__=="__main__":
