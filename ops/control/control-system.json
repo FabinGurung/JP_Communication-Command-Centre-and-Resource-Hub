@@ -4,12 +4,10 @@
   "status": "ACTIVE_COMPULSORY",
   "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
   "mandatory_read_order": [
-    "README.md",
+    "AGENTS.md",
     "ops/control/control-system.json",
     "ops/control/branch-lane-registry.json",
-    "ops/CANONICAL_DATA_AUTHORITY.md",
-    "workspace/edit-routing.json",
-    "lane-specific canonical files"
+    "task-specific owning source"
   ],
   "libraries": {
     "main_library": {
@@ -32,5 +30,12 @@
     "Do not call an archive branch frozen unless its provider SHA matches frozen_sha.",
     "Main promotion requires successful repository validation and branch-registry validation.",
     "Provider-side branch topology changes must be reconciled back into the registry."
-  ]
+  ],
+  "on_demand_reads": {
+    "full_authority_conflicts": "ops/CANONICAL_DATA_AUTHORITY.md",
+    "owner_or_module_routing": "workspace/edit-routing.json",
+    "map_sheets_publication": "docs/operations/MAP_GOOGLE_SHEETS_SOURCE_AND_PUBLICATION_v1.md",
+    "pages_deployment": "ops/control/pages-publication-lane.v0.1.json"
+  },
+  "ai_read_policy": "Read AGENTS.md first; load branch registry before Git writes, then only task-owner source. Avoid long README, unrelated control/history files and 99_VERSION_ARCHIVE as default context."
 }

@@ -1,18 +1,14 @@
-# Global agent/router rule (public-safe)
+# Operations Hub — concise AI entry (current working lane)
 
-Central authoritative cross-provider bootstrap:
-https://github.com/FabinGurung/JP_A7_System_Registry_and_Knowledge_Graph/blob/main/A9_GIT_DRIVE_BOOTSTRAP.json
+**Read this first; do not scan the repository.** Read only the file(s) needed by the current task. Historical backups and retired instructions are not operational authority.
 
-Read that one short machine entrypoint before new cross-repository Git/Google Drive work. Then resolve this repository's A7_MODULE.json if present and read only the relevant local owner control and current state. A7 defines semantic routing; this repository owns its code and fact classes. A Git branch is a complete repository snapshot, not a person's folder.
+- **Working / Pages branch:** `feature/daily-ops-current-work`; **canonical main:** `main`. Before any Git mutation read `ops/control/branch-lane-registry.json` and confirm `allowed_for_work=true`. Do not modify archive/legacy branches, force-push, or promote to main without governed release.
+- **Map master (14 tables):** private [Google Sheets workbook](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit). Website consumes reviewed `ops/data/map-sheets-public.v1/*.json` via `map-config.json` + `assets/js/app.js`; Sheet edits need **manual validated publication**. Root `*.csv` = unchanged rollback only.
+- **Daily Ops:** `ops/data/current-works.json`; historical events `ops/events/daily-ops-events.jsonl`; resources `ops/data/project-resources.json`; PK/FK contract `ops/schema/daily-ops-postgres.sql`.
+- **Ownership questions only:** `ops/CANONICAL_DATA_AUTHORITY.md` or `workspace/edit-routing.json`. **Pages workflow:** `.github/workflows/daily-ops-branch-preview.yml`; `ops/control/pages-publication-lane.v0.1.json`.
+- **Privacy:** this GitHub repo and Pages site are public. Never copy restricted Drive cells, credentials, private evidence, financial/personnel records or raw source files here; validate public projections before committing.
+- **Cross-provider work:** read [A7 bootstrap](https://github.com/FabinGurung/JP_A7_System_Registry_and_Knowledge_Graph/blob/main/A9_GIT_DRIVE_BOOTSTRAP.json) and local `A7_MODULE.json` only when authority/routing requires it. A7 is read-only for Operations; do not change peer modules.
+- **Discord collector:** paused. Do not restart it. Its version-verified notebooks in `ops/discord/99_VERSION_ARCHIVE/` remain needed by tests.
+- **History:** old duplicate PRE snapshots were removed from the working tree for focus, **not from Git history**. Retrieve individual snapshots from commit `7a322a5988f4bd788d7c28aa2c06c946960b95c2` only for specific audits; never ingest the entire history for routine work.
 
-Never treat this public repository as the private A9 Main Library. Keep research originals, private evidence, native Docs/Sheets and compiled PDF/PPTX in their declared provider (usually Google Drive); store code, tests, schemas and version history in Git. Git PRE/POST is commit history; use additional Drive snapshots only for provider-native change safety or local control requirements.
-
-A9 historical private governance remains binding until explicitly reconciled and safely migrated. Do not invent completion, copy private data or tokens into public GitHub, or silently bypass project-specific rules.
-
-This file is an agent instruction pointer; it does not change ChatGPT's account-wide/system instructions or guarantee a particular client auto-loads it.
-
-## A7 catalogue-only / Operations lane guard
-
-**NO A7 MUTATIONS AS A SIDE EFFECT.** A7 is read-only for Operations: an index of module identity, owner, website, release/status/history links and cross-module FK pointers; not a central data or template writer. Never create/update A7 code, policies, domain schemas, AAD/CAD templates, registry records or website content without a **separately explicit A7-scoped user request**. An outdated A7 link is a local pending discrepancy, not an automatic patch. Operations facts remain owned by this repo's `projects.csv`, `ops/data/current-works.json` and other canonical files; CAD/AAD templates by `JP_Computer-Aided-Drawings/governance/aad/`.
-
-The registered `feature/daily-ops-current-work` lane requires independent validation and governed promotion. Do not open a broad PR or modify A7 as a side effect of Operations reconciliation.
+Work on the smallest applicable source, run relevant tests, verify GitHub Actions **deploy** (not only commit), and report actual branch SHA and blockers.

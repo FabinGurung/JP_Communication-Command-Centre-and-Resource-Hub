@@ -1,61 +1,9 @@
-# iPhone Editing Guide
+# Edit the map from a phone
 
-## Routine editing: change only `projects.csv`
+1. Open the [native Google Sheets map master](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit) with your authorized Google account.
+2. Edit the correct worksheet (for project name, status, coordinates and public project details use **projects**). Keep the existing project IDs and column headers unchanged.
+3. For any new or corrected project, request the **reviewed map Sheet refresh**. A Sheet edit alone does **not** change GitHub Pages.
+4. The publisher validates PK/FK links, data fields and public-visibility rules, updates the approved JSON projection on `feature/daily-ops-current-work`, and confirms GitHub Actions validation and Pages deployment.
+5. Open the [live project map](https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/map.html) and check markers, popups, search and mobile layout.
 
-### Small correction in Safari
-
-1. Open the repository.
-2. Open `projects.csv`.
-3. Tap the pencil icon or **Edit file**.
-4. Change the value.
-5. Tap **Commit changes**.
-6. Use a clear message, such as `Correct P004 coordinates`.
-7. For a tiny correction, commit to `main`. For a large update, create a new branch.
-8. Wait for GitHub Actions and GitHub Pages to finish.
-
-### Several changes using Numbers or Excel mobile
-
-1. Download `projects.csv`.
-2. Open it in Apple Numbers or Microsoft Excel.
-3. Edit the rows.
-4. Export as CSV.
-5. Keep the filename exactly `projects.csv`.
-6. Replace the existing file in GitHub.
-7. Commit the replacement.
-
-## Add a project
-
-Add a new row without changing the header row.
-
-Important rules:
-
-- `PK_ID` must be unique.
-- Latitude must be between -90 and 90.
-- Longitude must be between -180 and 180.
-- Status must match `map-config.json`.
-- Progress fields must be blank or between 0 and 100.
-- Use `TRUE` or `FALSE` for `is_public`.
-- Put text containing commas inside double quotes.
-
-## Change title, subtitle or colours
-
-Edit `map-config.json`.
-
-## Large interface changes
-
-Replace or edit `index.html`. Do not delete it first. Commit the replacement in one change.
-
-## Check every update
-
-1. Open **Actions**.
-2. Confirm **Validate project data** has a green check.
-3. Confirm **pages build and deployment** has a green check.
-4. Open the live website.
-5. Test the edited marker, search and filters.
-
-## Useful mobile tools
-
-- Safari for settings and quick edits
-- GitHub mobile app for issues and pull requests
-- Apple Numbers or Microsoft Excel for CSV
-- `github.dev/FabinGurung/jp-ecosystem-project-map` for a browser-based code editor
+**Never edit root CSV files for active map data.** They are frozen historical rollback. Never publish private details or place Google access tokens into public GitHub. Map presentation settings belong to `map-config.json`; engineering source documents remain in permission-gated Drive.
