@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "OPS-0094",
+  "date_npt": "2026-10-21",
+  "scope": "A9_COMPANY_CONTACT_WORKSHEET2_PUBLIC_SAFE_PREVIEW",
+  "source_providers": [
+    "GOOGLE_SHEETS_ROHINI_SRC01",
+    "GOOGLE_SHEETS_FISHTAIL_SRC02"
+  ],
+  "source_authority": "DIRECT_LIVE_NATIVE_SHEETS_READ",
+  "read_from": "2_PEOPLE_DIRECTORY",
+  "rows_read_by_company": {
+    "Rohini": 7,
+    "Fishtail": 19
+  },
+  "published_preview_rows": 26,
+  "allowed_fields": [
+    "Name",
+    "Role",
+    "Project(s)",
+    "Verification"
+  ],
+  "withheld_fields": [
+    "Phone",
+    "Notes"
+  ],
+  "source_ids_unchanged": true,
+  "original_sheets_modified": false,
+  "master_6nf_modified": false,
+  "source_person_identity_reconciliation": "NOT_PERFORMED",
+  "refresh_type": "MANUAL_STATIC_SNAPSHOT_NOT_LIVE_PROVIDER_FETCH",
+  "file": "ops/data/a9-company-contacts-public-preview.v0.1.json",
+  "view": "resources/field/index.html#field-src-01-and-02",
+  "technical_dependencies": {
+    "github": "Previously contained 3 source links and 3 L3 blueprints; new preview reads a public-safe static JSON projection",
+    "google_sheets": "No IMPORTRANGE formulas found in populated company worksheet 2 rows",
+    "drive": "master governance history and snapshots exist; other private runtimes not proven absent",
+    "external_repositories": "Global public code search for exact IDs gave zero hits; does not prove private repo absence"
+  },
+  "theme": "V2_2_BOTANICAL_PRESERVED",
+  "discord": "ON_HOLD",
+  "automatic_schedule_created": false,
+  "status": "STAGED_FOR_WORKING_LANE_QA"
+}

@@ -57,6 +57,22 @@ def test():
     assert link_keys=={x["source_key"] for x in catalog["sources"]}
     assert len({x["url"] for x in source_links["google_sheet_urls"]})==10
     assert all(x["url"].startswith("https://docs.google.com/spreadsheets/d/") and x["url"].endswith("/edit") and x["dashboard_id"]=="A9-FIELD-"+x["source_key"][-2:] for x in source_links["google_sheet_urls"])
+    preview=data("ops/data/a9-company-contacts-public-preview.v0.1.json")
+    assert preview["projection_id"]=="A9_PUBLIC_COMPANY_CONTACT_PREVIEW_20261021"
+    assert preview["freshness"].startswith("MANUAL_")
+    assert preview["number_of_source_workbooks"]==2
+    assert preview["published_records"]==26
+    assert [(x["source_key"],x["row_count"]) for x in preview["source_tables"]]==[("SRC-01",7),("SRC-02",19)]
+    assert all(x["row_count"]==len(x["records"]) for x in preview["source_tables"])
+    assert all(x["withheld_fields"]==["Phone","Notes"] for x in preview["source_tables"])
+    assert all(x["published_fields"]==["Name","Role","Project(s)","Verification"] for x in preview["source_tables"])
+    import re
+    for book in preview["source_tables"]:
+        for item in book["records"]:
+            assert set(item)=={"source_row","name","role","projects","verification"}
+            assert item["name"] and isinstance(item["source_row"],int)
+            assert not re.search(r"\+977\d+|\b\d{10}\b|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",str(item))
+    assert "a9-company-contacts-public-preview.v0.1.json" in read("assets/js/a9-field-resources.js")
     assert "a9-field-source-links-public.v1.0.json" in read("assets/js/a9-field-resources.js")
     assert 'a.target="_blank"' in read("assets/js/a9-field-resources.js")
     assert 'a.rel="noopener noreferrer"' in read("assets/js/a9-field-resources.js")
