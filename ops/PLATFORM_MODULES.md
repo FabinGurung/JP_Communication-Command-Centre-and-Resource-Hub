@@ -1,10 +1,10 @@
-# JP AEC Platform — Module Ownership
+# JP Enterprise Platform — Module Ownership
 
 ## Umbrella
 
-**JP AEC Platform**
+**JP Enterprise Platform**
 
-A family of connected AEC/construction systems. The Operations Hub is the live project-experience layer; specialist repositories own deeper planning, cost, structural, drawing, research and study capabilities.
+A JP enterprise family of connected construction-operations and specialist software modules; separate AEC denotes the thesis hypothesis and research workstream, not the operational owner. The Operations Hub is the live project-experience layer; specialist repositories own deeper planning, cost, structural, drawing, research and study capabilities.
 
 The machine-readable authority for current Workspace module identity is `workspace/modules.json`.
 
@@ -12,7 +12,7 @@ The machine-readable authority for current Workspace module identity is `workspa
 
 | Role | Display name | Canonical repository | Pages |
 | --- | --- | --- | --- |
-| Live field + web experience | **JP AEC Operations Hub** | `FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub` | `https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/` |
+| Live field + web experience | **JP Operations Hub** | `FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub` | `https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/` |
 | Scheduling / work / resources | **JP Scheduling Work and Resources Management** | `FabinGurung/JP_Scheduling_Work_and_Resources_Management` | `https://fabingurung.github.io/JP_Scheduling_Work_and_Resources_Management/` |
 | Cost / estimation | **JP Cost Estimation** | `FabinGurung/JP_Cost_Estimation` | `https://fabingurung.github.io/JP_Cost_Estimation/` |
 | Structural analysis | **JP Structural Analysis** | `FabinGurung/JP_Structural_Analysis` | `https://fabingurung.github.io/JP_Structural_Analysis/` |
@@ -33,7 +33,7 @@ The Operations Hub owns project identity and current field operations. It does n
 
 ## Operations Hub role
 
-The **JP AEC Operations Hub** remains the main human-facing point for real project experience:
+The **JP Operations Hub** remains the main human-facing point for real project experience:
 
 - Slack Daily Ops input and concise field interaction
 - Project Map

@@ -1,9 +1,11 @@
-# Operations Hub — concise AI entry (current working lane)
+# JP Operations Hub — concise AI entry (current working lane)
+
+**Owner boundary: JP is the enterprise operating system; AEC is the separate thesis hypothesis/research namespace. Never route live JP company/project data to AEC merely because a legacy title contains JP_AEC.**
 
 **Read this first; do not scan the repository.** Read only the file(s) needed by the current task. Historical backups and retired instructions are not operational authority.
 
 - **Working / Pages branch:** `feature/daily-ops-current-work`; **canonical main:** `main`. Before any Git mutation read `ops/control/branch-lane-registry.json` and confirm `allowed_for_work=true`. Do not modify archive/legacy branches, force-push, or promote to main without governed release.
-- **Map master (14 tables):** private [Google Sheets workbook](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit). Website consumes reviewed `ops/data/map-sheets-public.v1/*.json` via `map-config.json` + `assets/js/app.js`; Sheet edits need **manual validated publication**. Root `*.csv` = unchanged rollback only.
+- **Map master (14 tables):** private [Google Sheets workbook](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit). Website consumes reviewed `ops/data/map-sheets-public.v1/*.json` via `map-config.json` + `assets/js/app.js`; Sheet edits need **manual validated publication**. Root `*.csv` = unchanged rollback only. Source Drive parent is [JP__ENTERPRISE__PRIVATE](https://drive.google.com/drive/folders/1QHxD74egNFeQAmvDJzvKmDxEQUOH3Kq6); source folder ID remains `1DRECcxUaz68mS_WPWbvReKxujmZ2O58t`.
 - **Daily Ops:** `ops/data/current-works.json`; historical events `ops/events/daily-ops-events.jsonl`; resources `ops/data/project-resources.json`; PK/FK contract `ops/schema/daily-ops-postgres.sql`.
 - **Ownership questions only:** `ops/CANONICAL_DATA_AUTHORITY.md` or `workspace/edit-routing.json`. **Pages workflow:** `.github/workflows/daily-ops-branch-preview.yml`; `ops/control/pages-publication-lane.v0.1.json`.
 - **Privacy:** this GitHub repo and Pages site are public. Never copy restricted Drive cells, credentials, private evidence, financial/personnel records or raw source files here; validate public projections before committing.

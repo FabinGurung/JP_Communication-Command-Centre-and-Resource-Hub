@@ -101,7 +101,7 @@ def verify_shared_shell(page, section):
     host.wait_for(timeout=12000)
     details=host.evaluate("""e => {
       const root=e.shadowRoot;
-      const links=[...root.querySelectorAll('nav[aria-label="JP AEC primary destinations"] a')];
+      const links=[...root.querySelectorAll('nav[aria-label="JP primary destinations"] a')];
       return {
         labels:links.map(a=>a.innerText.trim()),
         active:links.filter(a=>a.getAttribute("aria-current")==="page").map(a=>a.textContent.trim()),

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "title": "JP AEC Operations Workspace",
+  "title": "JP Operations Workspace",
   "updated": "2026-10-11",
   "timezone": "Asia/Kathmandu",
   "note": "Public-safe resource directory. Permission-gated Google resources may still require the user's Google account. No credentials are stored here.",
@@ -52,7 +52,7 @@
       "group": "start",
       "title": "Operations Hub",
       "url": "../",
-      "why": "Open the main JP AEC Operations Hub landing page.",
+      "why": "Open the main JP Operations Hub landing page.",
       "how": "Use this as the starting point before choosing Map, Site Operations, Workspace or Guide.",
       "status": "LIVE",
       "audience": "Owner / Manager / Engineer",
@@ -98,7 +98,7 @@
     {
       "id": "howto",
       "group": "start",
-      "title": "JP AEC Guide",
+      "title": "JP Guide",
       "url": "../guide/",
       "why": "Choose a 1-page, 3-page, 7-page or 15-page operating guide.",
       "how": "Use the 1-page quick start for routine work; use deeper guides for training/reference. Print/Save PDF is built in.",

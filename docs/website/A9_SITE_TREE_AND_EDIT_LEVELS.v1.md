@@ -1,4 +1,4 @@
-# JP AEC website — complete live skeleton and editing levels
+# JP website — complete live skeleton and editing levels
 
 **Registry ID:** `A9_PUBLIC_WEBSITE_PAGE_SECTION_TREE_20261020`  
 **Arc:** Manual Communication, Field Resources, Memory Poster Board (post v2.2.0)  
@@ -10,7 +10,7 @@ This documents **21 active public HTML page routes**, plus three compatibility U
 ## Page hierarchy with stable IDs
 
 ```text
-L0 JP AEC Operations Hub  [ROOT /]
+L0 JP Operations Hub  [ROOT /]
 |
 +-- L1 HOME                 A9-PAGE-HOME              /index.html
 |    +-- L3 Overview, hero, destination navigation, project snapshot

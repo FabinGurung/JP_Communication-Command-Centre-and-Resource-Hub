@@ -6,7 +6,7 @@
   "modules": [
     {
       "module_id": "operations",
-      "display_name": "JP AEC Operations Hub",
+      "display_name": "JP Operations Hub",
       "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
       "repository_url": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
       "pages_url": "https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/",

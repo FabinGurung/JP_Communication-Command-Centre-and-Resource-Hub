@@ -1,6 +1,6 @@
 # Workspace + Guide parity roadmap
 
-Target: bring `JP_Communication-Command-Centre-and-Resource-Hub` to the same owner-facing usability pattern as `Paila-Pilates-SOP/workspace/` and `/guide/`, while preserving the JP AEC system's stronger live Daily Ops, project, Drive-resource, Slack and GitHub governance model.
+Target: bring `JP_Communication-Command-Centre-and-Resource-Hub` to the same owner-facing usability pattern as `Paila-Pilates-SOP/workspace/` and `/guide/`, while preserving the JP enterprise system's stronger live Daily Ops, project, Drive-resource, Slack and GitHub governance model.
 
 ## Phase 1 — Workspace foundation and resource registry
 

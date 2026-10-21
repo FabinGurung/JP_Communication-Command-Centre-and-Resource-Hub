@@ -3,7 +3,9 @@
 > **Map data source migration (2026-10-21):** The 14 map reference tables were imported, cell-by-cell verified and are now owned for human editing by the private [Google Sheets map workbook](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit). The public website renders reviewed JSON projections at `ops/data/map-sheets-public.v1/*.json` instead of fetching the 14 legacy CSV files. This publication is **not** an automatic Google Sheets sync: edited rows need an explicit review and re-projection. The root CSV files remain frozen rollback/baseline inputs, not new-edit authority. This does not change the separate Daily Ops canonical JSON, PK/FK DDL, original engineering files or event history. See `docs/operations/MAP_GOOGLE_SHEETS_SOURCE_AND_PUBLICATION_v1.md`.
 
 
-This repository is the canonical machine-data home for the JP Ecosystem Project Map and Daily Ops system.
+This repository is the canonical machine-data home for the JP enterprise Project Map and Daily Ops system.
+
+**Namespace separation:** JP owns the operational enterprise and real company/project workflow. AEC represents the independent thesis hypothesis, research/experiments and evidence. AEC may cite an approved JP case study but does not own or rewrite live JP operational records. Historical `JP_AEC` identifiers are compatibility aliases, not shared authority.
 
 The goal is simple: **edit a fact once at its owning canonical layer, then derive every presentation/projection from it.**
 

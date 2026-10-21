@@ -1,7 +1,7 @@
 {
   "app_version": "1.2.0-dev",
   "data_schema_version": "2.1.0",
-  "site_title": "JP Ecosystem Operational Project Map",
+  "site_title": "JP Enterprise Operational Project Map",
   "site_subtitle": "Public project locations and approved operational updates in Pokhara, Nepal",
   "public_notice": "Public data only. Files in this public repository are downloadable even when a row is hidden from the interface. Never enter private contacts, detailed internal finance, confidential BOQ rates, supplier balances, or restricted stock information here.",
   "default_center": [
@@ -399,7 +399,7 @@
   },
   "data_provider": {
     "type": "GOOGLE_SHEETS_PRIVATE_SOURCE__REVIEWED_GITHUB_JSON_PROJECTION",
-    "master_workbook_title": "JP_AEC__PROJECT_MAP_14_TABLES__v1.0__LIVE",
+    "master_workbook_title": "JP__PROJECT_MAP__14_TABLES__v1.0__LIVE",
     "projection_root": "ops/data/map-sheets-public.v1/",
     "source_table_count": 14,
     "refresh_mode": "USER_TRIGGERED_VALIDATION_AND_GITHUB_PAGES_DEPLOYMENT",

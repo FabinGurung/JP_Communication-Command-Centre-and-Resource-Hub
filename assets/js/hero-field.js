@@ -1,4 +1,4 @@
-/* JP AEC light construction-field hero: progressive Canvas 2D, no external WebGL dependency. */
+/* JP light construction-field hero: progressive Canvas 2D, no external WebGL dependency. */
 (()=>{"use strict";const c=document.getElementById("field-hero-canvas");if(!c)return;const ctx=c.getContext("2d");if(!ctx)return;
 let width=0,height=0,dpr=1,pointer=0,active=true,frame=0;const reduce=window.matchMedia("(prefers-reduced-motion: reduce)");const colors={green:"#589878",dark:"#24674d",mint:"#b3d6b7",cloud:"#ffffff",gold:"#ddb95b"};
 function resize(){const r=c.getBoundingClientRect();width=Math.max(1,r.width);height=Math.max(1,r.height);dpr=Math.min(window.devicePixelRatio||1,1.6);c.width=Math.round(width*dpr);c.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw(0);}

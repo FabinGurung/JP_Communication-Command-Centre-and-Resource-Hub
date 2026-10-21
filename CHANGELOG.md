@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the JP AEC Operations Hub are recorded here.
+All notable changes to the JP Operations Hub (enterprise-owned; separate from the AEC thesis hypothesis) are recorded here.
 
 ## [v2.2.0] — Botanical workspace and mobile harmonization · 2026-10-20
 

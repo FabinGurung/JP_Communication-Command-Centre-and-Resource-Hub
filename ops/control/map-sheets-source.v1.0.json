@@ -2,10 +2,10 @@
   "schema_version": "1.0.0",
   "authority_id": "JP_AEC_MAP_GOOGLE_SHEETS_SOURCE_20261021",
   "status": "VERIFIED_DEPLOYED__SHEETS_MASTER__MANUAL_PUBLIC_JSON_REFRESH",
-  "owner": "JP AEC Operations Hub",
+  "owner": "JP Operations Hub",
   "master_file_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
   "master_url": "https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit",
-  "master_title": "JP_AEC__PROJECT_MAP_14_TABLES__v1.0__LIVE",
+  "master_title": "JP__PROJECT_MAP__14_TABLES__v1.0__LIVE",
   "drive_folder": "1DRECcxUaz68mS_WPWbvReKxujmZ2O58t",
   "source_commit": "8a8474979a233259f27fd2c18ffc61ba78a4a8b8",
   "tab_count": 14,
@@ -124,5 +124,10 @@
   "initial_migration_deployment_sha": "076185d76bc32d3c650dc5eccb7a5d38508df763",
   "initial_migration_validation_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39584244489",
   "initial_migration_visual_qa_run": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/39584244611",
-  "deployment_proof": "GitHub Actions validate + deploy jobs both completed successfully at initial migration SHA; new Sheet values are not auto-synchronized to Pages"
+  "deployment_proof": "GitHub Actions validate + deploy jobs both completed successfully at initial migration SHA; new Sheet values are not auto-synchronized to Pages",
+  "owner_namespace": "JP_ENTERPRISE_COMPANY_OPERATIONS",
+  "excluded_namespace": "AEC_THESIS_HYPOTHESIS_RESEARCH",
+  "drive_private_parent_folder": "1QHxD74egNFeQAmvDJzvKmDxEQUOH3Kq6",
+  "drive_storage_path": "JP__ENTERPRISE__PRIVATE/JP__PROJECT_MAP__SHEETS_SOURCE",
+  "owner_note": "Legacy authority_id contains JP_AEC for stable compatibility; it is not the ontology. Workbook and folder IDs and private permissions preserved."
 }

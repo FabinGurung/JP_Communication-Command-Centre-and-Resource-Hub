@@ -1,4 +1,4 @@
-/* JP AEC Request 02: seven destinations, scoped contextual tools, preserved project selection.
+/* JP Request 02: seven destinations, scoped contextual tools, preserved project selection.
    Presentation-only. No provider/Drive reads, writes, local checklist updates or progress mutations. */
 (() => {
   "use strict";
@@ -67,8 +67,8 @@
     '<a class="jp-link'+(key===section?' active':'')+'" data-jp-route="'+escapeHTML(href)+'"'+
     (key===section?' aria-current="page"':'')+' href="'+local(href)+'">'+escapeHTML(label)+'</a>').join("");
   shell.innerHTML='<a class="jp-skip" href="#jp-main">Skip to content</a><div class="jp-top" data-menu-open="false"><a class="jp-brand" href="'+base.href+
-    '"><span aria-hidden="true">🏗️</span><span>JP AEC <small>Operations Hub</small></span></a>'+
-    '<button class="jp-menu-toggle" type="button" aria-expanded="false" aria-controls="jp-primary-nav">Menu ☰</button><nav class="jp-nav" id="jp-primary-nav" aria-label="JP AEC primary destinations">'+mainLinks+'</nav>'+
+    '"><span aria-hidden="true">🏗️</span><span>JP <small>Operations Hub</small></span></a>'+
+    '<button class="jp-menu-toggle" type="button" aria-expanded="false" aria-controls="jp-primary-nav">Menu ☰</button><nav class="jp-nav" id="jp-primary-nav" aria-label="JP primary destinations">'+mainLinks+'</nav>'+
     '<div class="jp-more-slot"></div></div>';
   shadow.appendChild(shell);
   const more=shell.querySelector(".jp-more-slot");
