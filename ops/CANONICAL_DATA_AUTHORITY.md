@@ -49,53 +49,47 @@ For engineering-file access, preserve the actual PDF/DWG/ETABS/CAD/source file i
 
 Do not edit HTML to change factual data. Do not edit a downstream Google Sheet merely to make a project-master fact appear correct.
 
-## 4. Input surfaces are different from truth
+## 4. Input surfaces, canonical facts and public projections
 
-Slack, Forms, or designated Google Sheets input cells may originate observations or requests.
-
-Flow:
+The 14 map reference datasets have a single private native Google Sheets master. Do not independently edit their frozen GitHub CSV rollback copies. Daily Ops, resource links and historical events remain owned by their separately governed repository machine records.
 
 ```text
-field input / provider evidence
-        ↓
-validation + admission
-        ↓
-canonical GitHub machine data
-  ├─ projects.csv
-  ├─ current-works.json
-  ├─ project-resources.json
-  ├─ daily-ops-events.jsonl
-  └─ SQL relationship contract
-        ↓
-downstream projections
-  ├─ Project Map / GitHub Pages
-  ├─ Site Operations
-  ├─ Google Sheets
-  └─ concise Slack follow-ups
+Google Sheets map master (private, 14 tabs)
+          ↓ authenticated operator readback
+validated source rows, PK/FK + publication/privacy review
+          ↓
+ops/data/map-sheets-public.v1/*.json (reviewed public JSON, 14 tables)
+          ↓
+map-config.json → assets/js/app.js → GitHub Pages map
+
+Separately:
+admitted Daily Ops evidence → ops/data/current-works.json
+                           → ops/events/daily-ops-events.jsonl
+Drive original files → ops/data/project-resources.json (links only)
+Relational constraint specification → ops/schema/daily-ops-postgres.sql
 ```
 
-An input becomes operational truth only after admission to the canonical machine layer.
+Field inputs, Slack, Forms and other operational Sheets remain unadmitted observations until their designated owning layer validates and admits them. Only the dedicated map-master workbook owns edits to the migrated project reference tables.
 
-## 5. Google Drive rule
+## 5. Google Drive and publication rule
 
-Google Drive/Sheets is a **projection and/or controlled input surface**, not the project-master authority.
-
-Project lifecycle must not be separately maintained in Drive.
-
-Current state:
-
-- GitHub Pages deployment is automatic from the governed GitHub branch through GitHub Actions.
-- Google Sheets projection is governed and downstream, but a fully automatic GitHub → Google Sheets projection adapter is **not yet implemented for every projection**.
-- Until that adapter is implemented, A9/ChatGPT must project canonical changes into any Sheet that still requires a materialized copy, with PRE/readback/POST and no reverse promotion from Sheet to canonical truth.
+- The map-master workbook `17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4` is **private** and authoritative for the 14 map tables. It is not a publicly readable API.
+- The live static map fetches **reviewed JSON projections**, not the private workbook and not CSV.
+- A Sheet edit does **not** automatically refresh the public JSON. An authorized operator must read back the changed cells, validate PK/FK, coordinates, schema, publication controls and restricted fields, then commit reviewed projections to the registered working branch.
+- GitHub Actions validates the branch and deploys to the existing Pages URL only after validation succeeds. The actual deploy SHA must be checked.
+- Existing location registers, contacts, worker records, finance and Drive engineering originals are separate; they are not automatically imported into this map workbook.
+- A UI-only `is_public` filter is not security for material already committed to public JSON. Never include restricted information in any public projection.
+- No OAuth credentials, service-account keys, or private source records outside approved projections belong in this public repository.
 
 ## 6. Conflict rule
 
-If GitHub canonical data and a downstream projection disagree:
+If a map Sheet value and its GitHub reviewed JSON differ:
 
-1. verify the canonical owning file and evidence;
-2. correct the canonical file if needed;
-3. regenerate/reconcile the projection;
-4. never treat the projection as authority merely because it is easier to edit.
+1. Read the native master, its provenance, publication settings and last successful projection commit.
+2. Confirm whether the Sheet edit was approved and eligible for public disclosure.
+3. Repair the **owning Sheet value**, or regenerate the vetted public JSON from approved master cells; do not revise `projects.csv` as a competing authority.
+4. Preserve the previous public JSON commit as rollback, and verify Actions tests plus actual Pages deploy.
+5. For **non-map** Daily Ops or resources, resolve conflict against that dataset's separate canonical JSON/JSONL contract, not against the map workbook.
 
 ## 7. Current lifecycle examples
 
