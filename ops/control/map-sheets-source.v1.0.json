@@ -170,17 +170,22 @@
     ],
     "resolver": "Private Google Sheets master tab _SOURCE_ROUTER (identifiers restricted; not copied into public GitHub)",
     "access_grant_tab": "_AUTHORIZE_IMPORTS",
-    "master_implementation": "ARRAYFORMULA(IFERROR(IMPORTRANGE, HIDDEN_DATED_ROLLBACK_TAB))",
-    "authorization_status": "PENDING_DESKTOP_ALLOW_ACCESS_FOUR_DISTINCT_OWNER_FILES",
+    "master_implementation": "DIRECT_IMPORTRANGE_NO_OLD_DATA_FALLBACK",
+    "authorization_status": "ALL_FOUR_SOURCE_IMPORTS_CONNECTED_AND_READBACK_VERIFIED",
     "safe_fallback_verified": true,
     "base_master_tab_rows_preserved": true,
     "private_people_roster_records": 23,
-    "attendance_mapping": "4_PERSON_ID_MAPPING in existing Chaudhary attendance workbook",
+    "attendance_mapping": "4_PERSON_ID_MAPPING + 5_JP_PEOPLE_IMPORT in existing Chaudhary Attendance workbook",
     "attendance_operational_source_unchanged": true,
-    "people_attendance_auto_sync": "NOT_ENABLED_DUE_PRIVATE_SOURCE_TO_SHARED_DESTINATION_ACCESS_BOUNDARY",
+    "people_attendance_auto_sync": "FORMULA_CONNECTED__PROVIDER_ALLOW_ACCESS_PENDING_IN_SHARED_ATTENDANCE",
     "public_people_projection": "UNCHANGED_EMPTY__NO_PRIVATE_WORKERS_PUBLISHED",
     "owner_direct_edit_only": true,
     "public_map_republication": "SEPARATE_MANUAL_SAFE_JSON_REVIEW_AND_GITHUB_ACTIONS",
-    "immutable_original_public_csv": true
+    "immutable_original_public_csv": true,
+    "safe_fallback_note": "Hidden dated archives remain for recovery only; active master formulas never read them.",
+    "attendance_manifest_range": "1_MANIFEST_INDEX!B19:B41",
+    "attendance_fallback": "Hidden attendance-only name snapshot until Google source access is granted",
+    "attendance_source_access_risk": "Shared editors may import additional People source ranges after workbook-level IMPORTRANGE authorization",
+    "private_people_publication": "NO_CHANGE_TO_PUBLIC_PEOPLE_JSON"
   }
 }

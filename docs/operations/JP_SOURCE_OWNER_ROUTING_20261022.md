@@ -3,10 +3,15 @@
 ## Purpose and privacy
 The JP enterprise map private Google Sheet remains the **read-only consolidation point**. Four private owner spreadsheets contain the editable facts for (1) People, (2) Projects & Locations, (3) Organizations and office locations, and (4) Work Catalog. Open the existing private master and read `_SOURCE_ROUTER` to obtain the actual owner IDs and tab names; do not publish restricted owner file IDs in the public repository. AEC is separate research and not an owner of any of these operational facts.
 
-## How the formulas work
-Master `people`, `projects`, `organizations`, `organization_locations` and `work_catalog` each have a single `ARRAYFORMULA(IFERROR(IMPORTRANGE(...), __ROLLBACK_<category>_20261022!<baseline_range>))` at A1. Historical values were duplicated as date-stamped **hidden native Google Sheets tabs** before edits. All source-table readbacks passed with previous values intact; these fallback copies are **rollback only**, not writable owners. The master tabs also have warning-only protections discouraging edits.
+## Live source routing (verified 2026-10-22)
 
-Google Sheets **requires a one-time Allow access operation for each external owner workbook**. At the time of this run, `_AUTHORIZE_IMPORTS` displays `#REF! Please use a desktop web browser to connect this sheet`. The formula fallbacks work; dynamic source updates will **not** appear until the user grants the four source connections in the Google Sheets UI. No connector action can truthfully represent these as already approved. The fifth import (organization locations) shares the organizations source and typically uses that same source permission.
+All five linked tabs in the **private JP master** (`people`, `projects`, `organizations`, `work_catalog`, `organization_locations`) now use direct `IMPORTRANGE` formulas pointing to the four owner workbooks, **without the old-data fallback**. Source grants are working and the key IDs were re-read successfully. The earlier hidden rollback tabs are inactive recovery history, not consulted by formulas.
+
+The **shared Chaudhary attendance workbook** now has a visible `5_JP_PEOPLE_IMPORT` tab that imports only stable People ID, worker code and display name columns. Every name in `1_MANIFEST_INDEX!B19:B41` is a worker-code-based lookup against that imported source; the daily project sheet headers continue to reference those cells unchanged. Since Google currently shows `#REF! Please use a desktop web browser to connect this sheet` at `5_JP_PEOPLE_IMPORT!A1`, the attendance's hidden historical name backup maintains the original display **until the user grants Allow access**. All 23 name entries and 14 historical recorded man-days were re-verified intact. Once granted, edited People names flow to attendance through those formulas.
+
+**Privacy:** Destination-based Google `IMPORTRANGE` authorization is broader than one requested range. Because Chaudhary attendance is shared with editors, approving access can let them request other People workbook ranges, including future private role data. Approve deliberately; for stricter future separation, insert a dedicated roster-only projection workbook.
+
+GitHub Pages continues using manually reviewed JSON snapshots. No direct master/attendance data or personnel names are automatically sent to public GitHub.
 
 ## Initial authority baselines
 | Owner | Source tab(s) | Initial data | Important rule |
@@ -16,13 +21,12 @@ Google Sheets **requires a one-time Allow access operation for each external own
 | Organizations | `organizations`, `organization_locations` | 9 organizations; 1 recorded office location | Stable `organization_id` and `organization_location_id` |
 | Work Catalog | `work_catalog` | 29 work definitions | Stable `work_id`; project-specific completion is a separate source |
 
-The team roster came from the already-existing `1_MANIFEST_INDEX!A19:C41` in the Chaudhary attendance workbook. That attendance workbook now has an additional `4_PERSON_ID_MAPPING` tab linking W01–W23 to the People owner's new stable person IDs. **No existing manifest names, attendance daily statuses, cross-tab heading formulas or calculations were modified.** The attendance workbook is shared with other editors; unrestricted `IMPORTRANGE` from the private People owner would create a personnel access boundary problem. Do **not** authorize that shared import. A controlled roster-only bridge is needed for full worker-name synchronization.
-
 ## Published website boundary
 GitHub Pages currently consumes reviewed 14-table JSON snapshots in `ops/data/map-sheets-public.v1`; it does not fetch Google Sheets at runtime. This move **does not change the GitHub public dataset**. The published `people.json` remains empty; no private names or roles are made public. All new owner data must pass FK and privacy review before any manual safe projection.
 
-## What to do when operating
-1. Edit only the relevant private owner workbook, not the read-only JP master mirror.
-2. On desktop, open the private JP master `_AUTHORIZE_IMPORTS` and approve the four required Google `IMPORTRANGE` source connections (People is permitted in the private master; **not** shared attendance).
-3. Read back the master imported tabs and check stable PK/FK IDs and privacy flags.
-4. For the public website, separately validate and publish only reviewed safe JSON. Do not infer automatic updates from a Google Sheet edit.
+## Operating instructions
+
+1. Edit the source owner workbook; the private JP master now imports directly.
+2. Open the **Chaudhary attendance** sheet `5_JP_PEOPLE_IMPORT!A1` on desktop and choose **Allow access**. This is the only pending source connection.
+3. Recheck 23 workers and 14 historic man-days; take care before adding sensitive data to an owner shared through imports.
+4. Rebuild and validate public JSON explicitly when required; this is independent of cross-workbook formulas.
