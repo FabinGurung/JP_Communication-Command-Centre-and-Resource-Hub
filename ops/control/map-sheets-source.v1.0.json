@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0.0",
   "authority_id": "JP_AEC_MAP_GOOGLE_SHEETS_SOURCE_20261021",
-  "status": "VERIFIED_DEPLOYED__SHEETS_MASTER__MANUAL_PUBLIC_JSON_REFRESH",
+  "status": "LIVE_V1_1_DIRECT_OWNER_IMPORTS__REVIEWED_GITHUB_JSON_SEPARATE",
   "owner": "JP Operations Hub",
   "master_file_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
   "master_url": "https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit",
-  "master_title": "JP__PROJECT_MAP__14_TABLES__v1.0__LIVE",
+  "master_title": "JP__PROJECT_MAP__14_TABLES__v1.1__LIVE",
   "drive_folder": "1DRECcxUaz68mS_WPWbvReKxujmZ2O58t",
   "source_commit": "8a8474979a233259f27fd2c18ffc61ba78a4a8b8",
   "tab_count": 14,
@@ -169,23 +169,44 @@
       "work_catalog"
     ],
     "resolver": "Private Google Sheets master tab _SOURCE_ROUTER (identifiers restricted; not copied into public GitHub)",
-    "access_grant_tab": "_AUTHORIZE_IMPORTS",
+    "access_grant_tab": null,
     "master_implementation": "DIRECT_IMPORTRANGE_NO_OLD_DATA_FALLBACK",
-    "authorization_status": "ALL_FOUR_SOURCE_IMPORTS_CONNECTED_AND_READBACK_VERIFIED",
+    "authorization_status": "ALL_FOUR_SOURCE_IMPORTS_ACTIVE",
     "safe_fallback_verified": true,
     "base_master_tab_rows_preserved": true,
     "private_people_roster_records": 23,
-    "attendance_mapping": "4_PERSON_ID_MAPPING + 5_JP_PEOPLE_IMPORT in existing Chaudhary Attendance workbook",
+    "attendance_mapping": "CHT_v2.6_MANIFEST_NAMES_BY_WORKER_CODE_DIRECT_PEOPLE_IMPORT",
     "attendance_operational_source_unchanged": true,
-    "people_attendance_auto_sync": "FORMULA_CONNECTED__PROVIDER_ALLOW_ACCESS_PENDING_IN_SHARED_ATTENDANCE",
+    "people_attendance_auto_sync": "LIVE_DIRECT_IMPORT_CONNECTED",
     "public_people_projection": "UNCHANGED_EMPTY__NO_PRIVATE_WORKERS_PUBLISHED",
     "owner_direct_edit_only": true,
     "public_map_republication": "SEPARATE_MANUAL_SAFE_JSON_REVIEW_AND_GITHUB_ACTIONS",
     "immutable_original_public_csv": true,
-    "safe_fallback_note": "Hidden dated archives remain for recovery only; active master formulas never read them.",
+    "safe_fallback_note": "Obsolete backup tabs removed from live after external private archive and direct import verification.",
     "attendance_manifest_range": "1_MANIFEST_INDEX!B19:B41",
-    "attendance_fallback": "Hidden attendance-only name snapshot until Google source access is granted",
-    "attendance_source_access_risk": "Shared editors may import additional People source ranges after workbook-level IMPORTRANGE authorization",
-    "private_people_publication": "NO_CHANGE_TO_PUBLIC_PEOPLE_JSON"
-  }
+    "attendance_fallback": null,
+    "attendance_source_access_risk": "Google IMPORTRANGE authorization permits any editor of shared attendance destination to import other People-owner ranges; avoid adding sensitive worker data to accessible source.",
+    "private_people_publication": "NO_CHANGE_TO_PUBLIC_PEOPLE_JSON",
+    "attendance_provider_approval_pending": false,
+    "attendance_workbook_title": "Chaudhary Team Attendance Workbook__v2.6__LIVE",
+    "attendance_historic_man_days": 14,
+    "archive_personnel_private": true
+  },
+  "archive_folder_id": "1W7ebW5Yn9TFNaEXGoUIK5QHpL-bN62Fw",
+  "archive_date": "2026-10-22",
+  "archive_mode": "SIX_SEPARATE_PRIVATE_NATIVE_GOOGLE_SHEETS_VERSIONS__LIVE_IDS_PRESERVED",
+  "live_tab_count": 16,
+  "live_extra_control_tabs": [
+    "_CONTROL_READ_FIRST",
+    "_SOURCE_ROUTER"
+  ],
+  "deleted_legacy_live_tabs": [
+    "__ROLLBACK_org_locations_20261022",
+    "__ROLLBACK_work_catalog_20261022",
+    "__ROLLBACK_organizations_20261022",
+    "__ROLLBACK_projects_20261022",
+    "__ROLLBACK_people_20261022",
+    "_AUTHORIZE_IMPORTS"
+  ],
+  "last_control_update": "2026-10-22"
 }

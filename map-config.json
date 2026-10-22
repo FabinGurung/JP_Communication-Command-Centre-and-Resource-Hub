@@ -399,7 +399,7 @@
   },
   "data_provider": {
     "type": "GOOGLE_SHEETS_PRIVATE_SOURCE__REVIEWED_GITHUB_JSON_PROJECTION",
-    "master_workbook_title": "JP__PROJECT_MAP__14_TABLES__v1.0__LIVE",
+    "master_workbook_title": "JP__PROJECT_MAP__14_TABLES__v1.1__LIVE",
     "projection_root": "ops/data/map-sheets-public.v1/",
     "source_table_count": 14,
     "refresh_mode": "USER_TRIGGERED_VALIDATION_AND_GITHUB_PAGES_DEPLOYMENT",

@@ -1,32 +1,27 @@
-# JP enterprise source ownership — four-workbook partition (2026-10-22)
+# JP Google Sheets release and source routing — 2026-10-22
 
-## Purpose and privacy
-The JP enterprise map private Google Sheet remains the **read-only consolidation point**. Four private owner spreadsheets contain the editable facts for (1) People, (2) Projects & Locations, (3) Organizations and office locations, and (4) Work Catalog. Open the existing private master and read `_SOURCE_ROUTER` to obtain the actual owner IDs and tab names; do not publish restricted owner file IDs in the public repository. AEC is separate research and not an owner of any of these operational facts.
+## Live architecture
+- **Four owner workbooks** hold editable source facts: People, Projects & Locations, Organizations, Work Catalog. They are each `v1.1__LIVE` on their unchanged Google Drive file IDs. Use the private JP master's `_SOURCE_ROUTER` for the current source links.
+- **JP Project Map Master `v1.1__LIVE`** keeps 14 map data schemas. Its five `people`, `projects`, `organizations`, `organization_locations`, and `work_catalog` tabs are direct `IMPORTRANGE` mirrors; these import connections work. The other nine map tables still live in the JP master and have not been assigned new owner workbooks.
+- **Chaudhary Team Attendance `v2.6__LIVE`** keeps `1_MANIFEST_INDEX` and the two project attendance tabs visible; hidden `4_JP_PEOPLE_IMPORT` pulls only person ID/code/display name from the People owner. The roster names `B19:B41` use worker-code lookup, now resolving without a fallback. Recorded attendance: 14 man-days, 153 project dates, 23 roster identities, two site tabs.
+- Google Sheets import updates are not instantaneous and never auto-publish the private content to the public GitHub Pages JSON snapshots.
 
-## Live source routing (verified 2026-10-22)
+## Completed release and recovery
+On 2026-10-22, six complete previous-version native Google Sheets files were copied into [owner-only JP Sheets release archive](https://drive.google.com/drive/folders/1W7ebW5Yn9TFNaEXGoUIK5QHpL-bN62Fw) **before** live cleanup. The archived JP master five imports and archived attendance People import were frozen to their then-visible historical cell values. Existing live file IDs, sharing, and document links were not changed by the v1.1/v2.6 rename.
 
-All five linked tabs in the **private JP master** (`people`, `projects`, `organizations`, `work_catalog`, `organization_locations`) now use direct `IMPORTRANGE` formulas pointing to the four owner workbooks, **without the old-data fallback**. Source grants are working and the key IDs were re-read successfully. The earlier hidden rollback tabs are inactive recovery history, not consulted by formulas.
+Removed from live: five hidden `__ROLLBACK_*` tabs and redundant `_AUTHORIZE_IMPORTS` in JP master; `4_PERSON_ID_MAPPING` and `_ROSTER_NAMES_ROLLBACK_20261022` in attendance. After checks, the hidden operational People import tab was renamed `4_JP_PEOPLE_IMPORT`. Kept: `_CONTROL_READ_FIRST`, `_SOURCE_ROUTER`, owner `_READ_FIRST`, and all fourteen needed relational schemas. Do not delete a currently blank tab just because there are zero rows: the map schema loads fourteen projections.
 
-The **shared Chaudhary attendance workbook** now has a visible `5_JP_PEOPLE_IMPORT` tab that imports only stable People ID, worker code and display name columns. Every name in `1_MANIFEST_INDEX!B19:B41` is a worker-code-based lookup against that imported source; the daily project sheet headers continue to reference those cells unchanged. Since Google currently shows `#REF! Please use a desktop web browser to connect this sheet` at `5_JP_PEOPLE_IMPORT!A1`, the attendance's hidden historical name backup maintains the original display **until the user grants Allow access**. All 23 name entries and 14 historical recorded man-days were re-verified intact. Once granted, edited People names flow to attendance through those formulas.
+## Outstanding work / roadmap
+1. **Data-integrity and permissions hardening:** audit shared attendance editors' access to private People source before adding payroll, banking, identity, phone or sensitive fields. Google `IMPORTRANGE` permission is source-workbook-wide for any destination editor, not range-limited. If adding restricted fields, introduce a purpose-built roster-only projection instead of keeping them in the imported People source.
+2. **Owner normalization — next stage:** partition remaining relational tables (project parties, funding, per-project work items, materials, inventory, components, source links, opportunities, publication settings) in controlled batches only, preserving current primary/foreign IDs and source evidence.
+3. **Public publication pipeline:** add a provider-backed controlled refresh with PK/FK, source freshness, access flags and privacy review before GitHub JSON deployment; avoid directly exposing private Sheets on Pages.
+4. **Data quality:** verify worker roles and assignments, missing BOQ units and project work quantities, and project/organization coordinates with owner evidence. Never infer engineering approval from field reports.
+5. **Maintenance:** validate the 23 worker names, attendance counts, owner imports and five master mirrors after edits; review and tag a stable Sheets release when materially changed.
 
-**Privacy:** Destination-based Google `IMPORTRANGE` authorization is broader than one requested range. Because Chaudhary attendance is shared with editors, approving access can let them request other People workbook ranges, including future private role data. Approve deliberately; for stricter future separation, insert a dedicated roster-only projection workbook.
-
-GitHub Pages continues using manually reviewed JSON snapshots. No direct master/attendance data or personnel names are automatically sent to public GitHub.
-
-## Initial authority baselines
-| Owner | Source tab(s) | Initial data | Important rule |
-| --- | --- | --- | --- |
-| People | `people`, `person_roles` | 23 team members and 23 role rows | Person IDs `PERSON-CHT-W01…W23`, public flag FALSE; actual trade/role deliberately blank or unverified |
-| Projects & Locations | `projects`, `project_locations` | 28 projects; 28 calculated locations | Change project coordinates only in `projects`; `project_locations` uses native same-book ARRAYFORMULA |
-| Organizations | `organizations`, `organization_locations` | 9 organizations; 1 recorded office location | Stable `organization_id` and `organization_location_id` |
-| Work Catalog | `work_catalog` | 29 work definitions | Stable `work_id`; project-specific completion is a separate source |
-
-## Published website boundary
-GitHub Pages currently consumes reviewed 14-table JSON snapshots in `ops/data/map-sheets-public.v1`; it does not fetch Google Sheets at runtime. This move **does not change the GitHub public dataset**. The published `people.json` remains empty; no private names or roles are made public. All new owner data must pass FK and privacy review before any manual safe projection.
-
-## Operating instructions
-
-1. Edit the source owner workbook; the private JP master now imports directly.
-2. Open the **Chaudhary attendance** sheet `5_JP_PEOPLE_IMPORT!A1` on desktop and choose **Allow access**. This is the only pending source connection.
-3. Recheck 23 workers and 14 historic man-days; take care before adding sensitive data to an owner shared through imports.
-4. Rebuild and validate public JSON explicitly when required; this is independent of cross-workbook formulas.
+## Gemini editing guardrails
+- Only edit the **named owner tab** and requested cell range. Never edit the JP master import spill ranges, or the attendance import helper.
+- Never delete or rename schema tabs, IDs or join columns, or sort one column without sorting whole records.
+- Never fill blank attendance as `ABSENT`; blank means **UNRECORDED**. No bulk human approval or fabricated quantities.
+- `projects` holds editable project coordinates; `project_locations` is derived. `work_catalog` defines names only, not completed quantities. `people` holds identity names; `person_roles` stores verified role assertions separately.
+- Review Gemini's proposed edits and affected range before applying. Use native Sheets version history and the external archive for rollback. Avoid putting private IDs/names in unreviewed public GitHub files.
+- Adding more than 500 source rows may exceed the configured `IMPORTRANGE` capture ranges: extend ranges and revalidate intentionally.
