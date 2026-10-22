@@ -15,6 +15,8 @@ Public [GitHub Pages website](https://fabingurung.github.io/JP_Communication-Com
 
 **P2 normalized, 22 October 2026:** The private JP master v1.2 imports **all 14 source tables** (188 rows in private master) from **four owner workbooks in JP**, not 14 or more independent files. Projects & Locations v1.2 owns project/site-specific relations and inventory; Work Catalog v1.2 owns work and material dictionaries. People and Organizations remain v1.1. The Fishtail and Rohini shared company folders contain reference-only pointer Docs; their original records remain there. The temporary additional Materials workbook was archived, not retained as an owner. The public GitHub Pages JSON snapshot has not been automatically refreshed. [Read exact table routing and roadmap](docs/operations/JP_SOURCE_OWNER_ROUTING_20261022.md).
 
+**Work records & JP hierarchy (2026-10-22):** `work_sheet_registry` in the canonical private Work Catalog indexes **29 individual work-operation Sheets**, all with required Manifest, Work Records and How to Use tabs. They are not new authorities for work definitions and do not yet auto-write to `project_work_items`. In the shared A9 tree, Fishtail and Rohini now sit under the existing `01_JP` folder, retaining folder IDs and permissions; a read-first pointer links to the separately protected private JP authorities. **P1 privacy hardening remains pending**: `IMPORTRANGE` in shared attendance exposes source-wide range access even when the displayed formula reads only names.
+
 ## Read only what you need
 
 | Task | Open |
