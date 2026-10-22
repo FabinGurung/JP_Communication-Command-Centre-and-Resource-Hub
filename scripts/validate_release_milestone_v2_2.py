@@ -38,9 +38,18 @@ def verify():
     assert "Validate branch and lane registry" in release_wf
     assert "contents: write" in release_wf
     assert "workflow_dispatch:" not in release_wf
-    check=subprocess.run(["git","diff","--name-only",IMPL,"HEAD"],cwd=ROOT,text=True,capture_output=True)
+    # Historical v2.2.0 checks are pinned to the published tag, not HEAD.
+    # Later website updates are not retroactive changes to the release.
+    tag=subprocess.run(["git","rev-parse","--verify","refs/tags/v2.2.0^{commit}"],
+                       cwd=ROOT,text=True,capture_output=True)
+    if tag.returncode:
+        raise AssertionError("Published v2.2.0 tag is unavailable: "+tag.stderr)
+    released=tag.stdout.strip()
+    assert released=="25d24ec826f840bddb697bd1a0d433ab5667acd1", "Historical release tag changed"
+    check=subprocess.run(["git","diff","--name-only",IMPL,released],
+                         cwd=ROOT,text=True,capture_output=True)
     if check.returncode:
-        raise AssertionError("Unable to compare release to implementation: "+check.stderr)
+        raise AssertionError("Unable to compare released tag to implementation: "+check.stderr)
     changed={x for x in check.stdout.splitlines() if x}
     allowed=set(p["allowed_housekeeping_paths"])
     assert changed and changed<=allowed,"Release includes unrelated changes: "+repr(sorted(changed-allowed))
