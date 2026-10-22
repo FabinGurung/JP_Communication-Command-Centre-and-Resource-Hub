@@ -1,27 +1,33 @@
-# JP Google Sheets release and source routing — 2026-10-22
+# JP private normalized data sources — P2 completed 2026-10-22
 
-## Live architecture
-- **Four owner workbooks** hold editable source facts: People, Projects & Locations, Organizations, Work Catalog. They are each `v1.1__LIVE` on their unchanged Google Drive file IDs. Use the private JP master's `_SOURCE_ROUTER` for the current source links.
-- **JP Project Map Master `v1.1__LIVE`** keeps 14 map data schemas. Its five `people`, `projects`, `organizations`, `organization_locations`, and `work_catalog` tabs are direct `IMPORTRANGE` mirrors; these import connections work. The other nine map tables still live in the JP master and have not been assigned new owner workbooks.
-- **Chaudhary Team Attendance `v2.6__LIVE`** keeps `1_MANIFEST_INDEX` and the two project attendance tabs visible; hidden `4_JP_PEOPLE_IMPORT` pulls only person ID/code/display name from the People owner. The roster names `B19:B41` use worker-code lookup, now resolving without a fallback. Recorded attendance: 14 man-days, 153 project dates, 23 roster identities, two site tabs.
-- Google Sheets import updates are not instantaneous and never auto-publish the private content to the public GitHub Pages JSON snapshots.
+## Canonical architecture
+Use the private JP Project Map Master v1.2 `_SOURCE_ROUTER` for current source identifiers. All 14 map data tabs are read-only direct `IMPORTRANGE` projections of exactly FOUR private owner workbooks in `JP__ENTERPRISE__PRIVATE/JP__NORMALIZED_AUTHORITIES__PRIVATE`.
 
-## Completed release and recovery
-On 2026-10-22, six complete previous-version native Google Sheets files were copied into [owner-only JP Sheets release archive](https://drive.google.com/drive/folders/1W7ebW5Yn9TFNaEXGoUIK5QHpL-bN62Fw) **before** live cleanup. The archived JP master five imports and archived attendance People import were frozen to their then-visible historical cell values. Existing live file IDs, sharing, and document links were not changed by the v1.1/v2.6 rename.
+| Owner | Version | Editable authoritative tables |
+|---|---|---|
+| People | v1.1 | `people` plus separate private `person_roles` |
+| Projects & Locations | v1.2 | `projects`, `project_parties`, `project_funding`, `project_work_items`, `project_material_inventory`, `project_components`, `project_source_links`, `project_opportunities`, `project_publication_settings`; derived `project_locations` view |
+| Organizations | v1.1 | `organizations`, `organization_locations` |
+| Work Catalog | v1.2 | `work_catalog`, `materials_master` |
 
-Removed from live: five hidden `__ROLLBACK_*` tabs and redundant `_AUTHORIZE_IMPORTS` in JP master; `4_PERSON_ID_MAPPING` and `_ROSTER_NAMES_ROLLBACK_20261022` in attendance. After checks, the hidden operational People import tab was renamed `4_JP_PEOPLE_IMPORT`. Kept: `_CONTROL_READ_FIRST`, `_SOURCE_ROUTER`, owner `_READ_FIRST`, and all fourteen needed relational schemas. Do not delete a currently blank tab just because there are zero rows: the map schema loads fourteen projections.
+The JP master has 14 data sheets, and only `_CONTROL_READ_FIRST` and `_SOURCE_ROUTER` as additional control tabs. There are 188 records in private source tables (including 23 private people identities); the separately reviewed public map JSON has NOT been republished merely by this change.
 
-## Outstanding work / roadmap
-1. **Data-integrity and permissions hardening:** audit shared attendance editors' access to private People source before adding payroll, banking, identity, phone or sensitive fields. Google `IMPORTRANGE` permission is source-workbook-wide for any destination editor, not range-limited. If adding restricted fields, introduce a purpose-built roster-only projection instead of keeping them in the imported People source.
-2. **Owner normalization — next stage:** partition remaining relational tables (project parties, funding, per-project work items, materials, inventory, components, source links, opportunities, publication settings) in controlled batches only, preserving current primary/foreign IDs and source evidence.
-3. **Public publication pipeline:** add a provider-backed controlled refresh with PK/FK, source freshness, access flags and privacy review before GitHub JSON deployment; avoid directly exposing private Sheets on Pages.
-4. **Data quality:** verify worker roles and assignments, missing BOQ units and project work quantities, and project/organization coordinates with owner evidence. Never infer engineering approval from field reports.
-5. **Maintenance:** validate the 23 worker names, attendance counts, owner imports and five master mirrors after edits; review and tag a stable Sheets release when materially changed.
+## QA and archives
+- Nine previously local tables moved to the owning tabs; no nine new workbooks. One temporary Materials workbook was not used, and was moved into the private archive instead.
+- Source cell content vs master imported view: 14 of 14 matched. Primary IDs unique; 10 project/work/material/organization FK constraints verified.
+- Master and Projects v1.1 checkpoint copies were made in the private JP release archive before the move. Live Drive IDs and company project file locations remain unchanged.
+- The company folder `03_Fishtail_Builders` has its own `00_JP_CANONICAL_DATA_POINTER__READ_FIRST__FISHTAIL` Google Doc.
+- The sister folder `04_Rohini_Engineering_and_Builders` has its own `00_JP_CANONICAL_DATA_POINTER__READ_FIRST__ROHINI` Google Doc.
+- Neither pointer duplicates data, grants access to the private master, or moves documents out of company folders. JP is operational authority; AEC thesis is separate research.
 
-## Gemini editing guardrails
-- Only edit the **named owner tab** and requested cell range. Never edit the JP master import spill ranges, or the attendance import helper.
-- Never delete or rename schema tabs, IDs or join columns, or sort one column without sorting whole records.
-- Never fill blank attendance as `ABSENT`; blank means **UNRECORDED**. No bulk human approval or fabricated quantities.
-- `projects` holds editable project coordinates; `project_locations` is derived. `work_catalog` defines names only, not completed quantities. `people` holds identity names; `person_roles` stores verified role assertions separately.
-- Review Gemini's proposed edits and affected range before applying. Use native Sheets version history and the external archive for rollback. Avoid putting private IDs/names in unreviewed public GitHub files.
-- Adding more than 500 source rows may exceed the configured `IMPORTRANGE` capture ranges: extend ranges and revalidate intentionally.
+## P1 People roster-only privacy hardening: pending
+Chaudhary attendance v2.6 currently imports private People columns A:C directly into hidden `4_JP_PEOPLE_IMPORT`; 23 names are linked and 14 recorded man-days remain unchanged. Shared attendance editors may be able to import other People workbook ranges after the destination is granted IMPORTRANGE access. Safer design: maintain a separate roster-only publication source with only worker code, display name and active flag, populated by a scope-limited script/service identity that reads the private People master. Repoint attendance to roster-only, verify the 23 matches and attendance totals, remove direct full-People import from shared attendance, then audit permissions. Merely hiding the roles tab is NOT a security boundary.
+
+## Next roadmap
+1. P1: secure People-to-attendance link via restricted roster projection.
+2. P3: verify roles, unverified amounts/units, site inventory, coordinates and contractor/legal relationships from authorized evidence.
+3. P5: Gemini-safe edit controls, locked schema/PK/FK, validation and audit.
+4. P4: reviewed private-to-public projection and GitHub Pages deployment automation, no private personnel or finance leaks.
+
+## AI editing rules
+Edit only one named owner tab and range. Never modify imported JP master cells, change stable PK/FK IDs, sort a single column separately, infer unrecorded attendance as absent, fill unsupported project quantities, or publish confidential information. Revalidate if any table reaches the current 500-row IMPORTRANGE limit.

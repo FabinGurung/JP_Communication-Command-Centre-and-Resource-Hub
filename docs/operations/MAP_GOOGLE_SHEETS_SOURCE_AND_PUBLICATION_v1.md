@@ -2,7 +2,7 @@
 
 **Native source workbook:** [JP Project Map 14 Tables v1.0 LIVE](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit)
 
-**Drive folder:** https://drive.google.com/drive/folders/1DRECcxUaz68mS_WPWbvReKxujmZ2O58t (renamed `JP__PROJECT_MAP__SHEETS_SOURCE`)\n\n**Restricted JP parent:** https://drive.google.com/drive/folders/1QHxD74egNFeQAmvDJzvKmDxEQUOH3Kq6 (`JP__ENTERPRISE__PRIVATE`). Workbook title: `JP__PROJECT_MAP__14_TABLES__v1.1__LIVE`. Same original file/folder IDs and access restrictions. **JP = enterprise operational owner; AEC = separate hypothesis/thesis research**, not an alternate authority for this map.
+**Drive folder:** https://drive.google.com/drive/folders/1DRECcxUaz68mS_WPWbvReKxujmZ2O58t (renamed `JP__PROJECT_MAP__SHEETS_SOURCE`)\n\n**Restricted JP parent:** https://drive.google.com/drive/folders/1QHxD74egNFeQAmvDJzvKmDxEQUOH3Kq6 (`JP__ENTERPRISE__PRIVATE`). Workbook title: `JP__PROJECT_MAP__14_TABLES__v1.2__LIVE`. Same original file/folder IDs and access restrictions. **JP = enterprise operational owner; AEC = separate hypothesis/thesis research**, not an alternate authority for this map.
 
 This migration preserves all 14 original CSV datasets in the Git repository solely as rollback/history, imports their 162 populated records into one Google Sheet with 14 named worksheets and a `_CONTROL_READ_FIRST` tab, and publishes **reviewed JSON snapshot objects** for GitHub Pages.
 

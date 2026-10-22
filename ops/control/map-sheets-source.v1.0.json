@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0.0",
   "authority_id": "JP_AEC_MAP_GOOGLE_SHEETS_SOURCE_20261021",
-  "status": "LIVE_V1_1_DIRECT_OWNER_IMPORTS__REVIEWED_GITHUB_JSON_SEPARATE",
+  "status": "LIVE_V1_2__ALL_14_DIRECT_OWNER_IMPORTS__SEPARATE_PUBLIC_JSON",
   "owner": "JP Operations Hub",
   "master_file_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
   "master_url": "https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit",
-  "master_title": "JP__PROJECT_MAP__14_TABLES__v1.1__LIVE",
+  "master_title": "JP__PROJECT_MAP__14_TABLES__v1.2__LIVE",
   "drive_folder": "1DRECcxUaz68mS_WPWbvReKxujmZ2O58t",
   "source_commit": "8a8474979a233259f27fd2c18ffc61ba78a4a8b8",
   "tab_count": 14,
@@ -164,14 +164,23 @@
     "linked_master_tabs": [
       "people",
       "projects",
+      "project_parties",
+      "project_funding",
+      "project_work_items",
+      "project_material_inventory",
+      "project_components",
+      "project_source_links",
+      "project_opportunities",
+      "project_publication_settings",
       "organizations",
       "organization_locations",
-      "work_catalog"
+      "work_catalog",
+      "materials_master"
     ],
     "resolver": "Private Google Sheets master tab _SOURCE_ROUTER (identifiers restricted; not copied into public GitHub)",
     "access_grant_tab": null,
-    "master_implementation": "DIRECT_IMPORTRANGE_NO_OLD_DATA_FALLBACK",
-    "authorization_status": "ALL_FOUR_SOURCE_IMPORTS_ACTIVE",
+    "master_implementation": "14_DIRECT_IMPORTRANGE_FORMULAS",
+    "authorization_status": "ALL_14_SOURCE_TABS_CONNECTED_FROM_FOUR_OWNER_BOOKS",
     "safe_fallback_verified": true,
     "base_master_tab_rows_preserved": true,
     "private_people_roster_records": 23,
@@ -208,5 +217,44 @@
     "__ROLLBACK_people_20261022",
     "_AUTHORIZE_IMPORTS"
   ],
-  "last_control_update": "2026-10-22"
+  "last_control_update": "2026-10-22",
+  "private_master_row_count": 188,
+  "private_owner_workbook_count": 4,
+  "private_master_tab_count": 14,
+  "normalized_p2_complete": true,
+  "normalized_p2_source_table_groups": {
+    "PEOPLE": [
+      "people"
+    ],
+    "PROJECTS_AND_LOCATIONS": [
+      "projects",
+      "project_parties",
+      "project_funding",
+      "project_work_items",
+      "project_material_inventory",
+      "project_components",
+      "project_source_links",
+      "project_opportunities",
+      "project_publication_settings"
+    ],
+    "ORGANIZATIONS": [
+      "organizations",
+      "organization_locations"
+    ],
+    "WORK_CATALOG": [
+      "work_catalog",
+      "materials_master"
+    ]
+  },
+  "private_master_validation": {
+    "date": "2026-10-22",
+    "tables": 14,
+    "rows": 188,
+    "source_parity": true,
+    "primary_keys_pass": true,
+    "foreign_key_checks": 10
+  },
+  "private_owner_folder_name": "JP__NORMALIZED_AUTHORITIES__PRIVATE",
+  "p2_pointer_documents_written": 2,
+  "p2_unnecessary_draft_archived": true
 }
