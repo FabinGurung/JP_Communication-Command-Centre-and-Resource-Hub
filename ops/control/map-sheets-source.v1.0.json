@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "authority_id": "JP_AEC_MAP_GOOGLE_SHEETS_SOURCE_20261021",
-  "status": "LIVE_V1_2__ALL_14_DIRECT_OWNER_IMPORTS__SEPARATE_PUBLIC_JSON",
+  "status": "14_PHYSICAL_CATEGORY_WORKBOOKS_STAGED__MASTER_STILL_4_CONNECTED_SOURCES",
   "owner": "JP Operations Hub",
   "master_file_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
   "master_url": "https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit",
@@ -256,5 +256,23 @@
   },
   "private_owner_folder_name": "JP__NORMALIZED_AUTHORITIES__PRIVATE",
   "p2_pointer_documents_written": 2,
-  "p2_unnecessary_draft_archived": true
+  "p2_unnecessary_draft_archived": true,
+  "category_workbook_partition_v0_2": {
+    "as_of": "2026-10-22",
+    "physical_category_files": 14,
+    "existing_connected_source_files": 4,
+    "new_category_files": 10,
+    "verified_new_copies": 10,
+    "manifest_and_howto_per_file": true,
+    "ten_pending_manual_importrange_grants": true,
+    "master_source_router_tab": "_SOURCE_ROUTER",
+    "master_grant_queue_tab": "00_CUTOVER_APPROVALS",
+    "master_import_cutover_complete": false,
+    "master_current_source_file_count": 4,
+    "wrong_29_workbooks_archived": true,
+    "wrong_workbook_registry_removed": true,
+    "wrong_workbooks_soft_trashed": false,
+    "wrong_workbooks_trash_unavailable_in_connector": true,
+    "p1_security_deferred": true
+  }
 }
