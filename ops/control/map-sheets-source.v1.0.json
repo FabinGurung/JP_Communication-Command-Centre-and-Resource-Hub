@@ -217,8 +217,8 @@
     "__ROLLBACK_people_20261022",
     "_AUTHORIZE_IMPORTS"
   ],
-  "last_control_update": "2026-10-22",
-  "private_master_row_count": 188,
+  "last_control_update": "2026-10-23",
+  "private_master_row_count": 193,
   "private_owner_workbook_count": 4,
   "private_master_tab_count": 14,
   "normalized_p2_complete": true,
@@ -247,12 +247,14 @@
     ]
   },
   "private_master_validation": {
-    "date": "2026-10-22",
+    "date": "2026-10-23",
     "tables": 14,
-    "rows": 188,
-    "source_parity": true,
-    "primary_keys_pass": true,
-    "foreign_key_checks": 10
+    "rows": 193,
+    "projects": 30,
+    "project_source_links": 5,
+    "project_publication_settings": 30,
+    "source_parity_checked_for_basanti": true,
+    "previous_migration_checks": 10
   },
   "private_owner_folder_name": "JP__NORMALIZED_AUTHORITIES__PRIVATE",
   "p2_pointer_documents_written": 2,
@@ -274,5 +276,16 @@
     "wrong_workbooks_soft_trashed": false,
     "wrong_workbooks_trash_unavailable_in_connector": true,
     "p1_security_deferred": true
+  },
+  "basanti_private_admission": {
+    "global_project_id": "PRJ-000030",
+    "organization_project_code": "REB-003",
+    "organization_id": "ORG-000002",
+    "original_pdf_drive_id": "1h_aSf5ThFszG2-WLxaQDKmfR2ixC5DIT",
+    "private_project_source_link_id": "PSL-000005",
+    "is_public": false,
+    "engineering_approval": "NOT_VERIFIED",
+    "public_resource_catalog_admission": "HOLD_ISSUE_8",
+    "created_or_verified_on": "2026-10-23"
   }
 }

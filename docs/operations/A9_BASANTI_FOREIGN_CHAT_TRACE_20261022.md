@@ -6,6 +6,17 @@
 **Disposition:** RECEIVED_AND_RECONCILED__ISSUE_8_OPEN__NO_NEW_PROJECT_ID
 **Record type:** provenance and audit handoff ONLY — not a new approval, data-admission, or deployment record
 
+## Current disposition: 2026-10-23 project identity registered; public resource admission HOLD
+The earlier 2026-10-22 notes below are **historical snapshots**, not the current project-ID state.
+
+- User-directed, collision-checked **new global project allocation `PRJ-000030` / Rohini code `REB-003`** is written in live private Drive `CONTINENT_01 / AI_Project_Identity` row 31 and append-only change log row 10. An existing globally assigned `PRJ-000029 / REB-002` remains Ramachandra Devkota.
+- The authoritative [JP Projects owner](https://docs.google.com/spreadsheets/d/1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo/edit) now contains 30 verified-unique project IDs and corresponding unique company codes. The existing [private map master](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit) imports 30 source rows without new permissions.
+- Private canonical source relation: **`PSL-000005` / `PRJ-000030` / original Basanti structural-drawing PDF Drive ID `1h_aSf5ThFszG2-WLxaQDKmfR2ixC5DIT`**, with partial source verification, engineering-approval HOLD, and `is_public=FALSE`. New private `PPS-000029` / `PPS-000030` enforce every publication show-field FALSE; 29 existing project IDs and their documentary history are preserved.
+- The ten newly separated JP category workbook imports remain **Google Allow-access pending**; staged source-link and publication-setting workbooks received the same incremental rows but do not replace currently connected owner tabs.
+- [Existing GitHub Issue #8](https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/issues/8) was updated in place to distinguish identity registration complete from **public reviewed resource-catalog admission outstanding**. Do not close Issue #8 based solely on the ID allocation.
+- Fixed **46-resource** public catalog, frozen 28-row `projects.csv` baseline, reviewed JSON projections, `ops/data/project-resources.json`, Pages markup, the original PDF bytes and both diverged branch histories remain unchanged. Publishing new private project/source relations requires a separate explicit safe-generator/validator revision and privacy review; the static pre-existing PDF card is not engineering approval.
+- Material PRE snapshots are in the private JP release archive; no original project source, historical Radha contract, site code alias or engineering drawing was renamed or altered.
+
 ## Source and permission boundary
 - Rohini Engineering / 14_Basanti Poudel Baral / Pokhara Ward 14 is the project label. The **global project_id is unresolved**. Do not equate a folder prefix (14_) with a global primary key; do not identify it with historic 07_Radha_Roka records.
 - [Original drawing PDF](https://drive.google.com/file/d/1h_aSf5ThFszG2-WLxaQDKmfR2ixC5DIT/view) has the same Drive ID, MIME application/pdf and size **10,046,143 bytes** as the foreign handoff, confirmed live through Google Drive. The file is nested under the project's source-originals and drawing folders; the original document was not copied into this public repository.
