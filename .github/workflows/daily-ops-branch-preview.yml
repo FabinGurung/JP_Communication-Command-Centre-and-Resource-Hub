@@ -32,7 +32,7 @@ jobs:
         run: python scripts/validate_branch_registry.py
 
       - name: Verify multi-chat project contribution scripts compile
-        run: python -m py_compile scripts/validate_project_contributions.py scripts/build_project_contribution_directory.py
+        run: python -m py_compile scripts/validate_project_contributions.py scripts/build_project_contribution_directory.py scripts/build_public_pages_site.py scripts/test_public_pages_site.py
 
       - name: Test Discord CDN byte-fidelity diagnostics
         run: python scripts/test_cwo_media_diagnostics.py
@@ -629,6 +629,9 @@ jobs:
       - name: Phase 5 release QA
         run: python scripts/phase5_release_qa.py
 
+      - name: Negative-test public Pages artifact isolation
+        run: python scripts/test_public_pages_site.py
+
   deploy:
     # Test-first Pages lane: successful feature commits publish to the existing URL.
     # main and immutable v2.2.0 remain untouched by rapid website iterations.
@@ -644,13 +647,16 @@ jobs:
       - name: Build public-safe project submissions directory
         run: python scripts/build_project_contribution_directory.py
 
+      - name: Assemble explicit public Pages artifact
+        run: python scripts/build_public_pages_site.py --output _site
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy validated test branch to GitHub Pages
         id: deployment
