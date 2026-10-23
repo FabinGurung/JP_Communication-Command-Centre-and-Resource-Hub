@@ -1,0 +1,26 @@
+name: Project chat scope and privacy QA
+
+on:
+  pull_request:
+    branches:
+      - feature/daily-ops-current-work
+      - main
+    paths:
+      - 'contributions/**'
+
+permissions:
+  contents: read
+
+jobs:
+  scoped-contribution:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out proposed PR tree and comparison history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify one project branch, isolated paths and public-safe manifest
+        env:
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+        run: python scripts/validate_project_contributions.py

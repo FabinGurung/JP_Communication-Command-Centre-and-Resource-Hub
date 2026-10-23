@@ -31,6 +31,9 @@ jobs:
       - name: Validate compulsory branch/lane registry
         run: python scripts/validate_branch_registry.py
 
+      - name: Verify multi-chat project contribution scripts compile
+        run: python -m py_compile scripts/validate_project_contributions.py scripts/build_project_contribution_directory.py
+
       - name: Test Discord CDN byte-fidelity diagnostics
         run: python scripts/test_cwo_media_diagnostics.py
 
@@ -637,6 +640,9 @@ jobs:
     steps:
       - name: Check out branch
         uses: actions/checkout@v4
+
+      - name: Build public-safe project submissions directory
+        run: python scripts/build_project_contribution_directory.py
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

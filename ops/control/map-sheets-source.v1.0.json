@@ -278,14 +278,19 @@
     "p1_security_deferred": true
   },
   "basanti_private_admission": {
-    "global_project_id": "PRJ-000030",
-    "organization_project_code": "REB-003",
+    "global_project_id": "PRJ-000029",
+    "organization_project_code": "REB-002",
     "organization_id": "ORG-000002",
     "original_pdf_drive_id": "1h_aSf5ThFszG2-WLxaQDKmfR2ixC5DIT",
     "private_project_source_link_id": "PSL-000005",
     "is_public": false,
     "engineering_approval": "NOT_VERIFIED",
     "public_resource_catalog_admission": "HOLD_ISSUE_8",
-    "created_or_verified_on": "2026-10-23"
+    "created_or_verified_on": "2026-10-23",
+    "retired_project_id": "PRJ-000030",
+    "retired_organization_code": "REB-003",
+    "identity_correction_date": "2026-10-23",
+    "coordinates_provenance": "PRIVATE_OWNER_GOOGLE_DRIVE",
+    "identity_disposition": "USER_CONFIRMED_BASANTI__HISTORICAL_LABELS_NOT_OFFICIAL"
   }
 }

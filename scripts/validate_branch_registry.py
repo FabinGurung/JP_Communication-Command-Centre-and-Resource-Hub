@@ -69,7 +69,17 @@ for line in remote_text.splitlines():
         remote[ref[len(prefix):]]=sha
 
 registered=active_refs|archive_refs|alias_refs
-unregistered=set(remote)-registered
+# Ephemeral project contribution branches are governed by an EXACT namespace
+# and separate pull-request path/privacy QA. They are NOT long-lived library branches.
+namespace=registry.get("ephemeral_contribution_namespace",{})
+if namespace.get("status")!="REGISTERED_EPHEMERAL_BRANCH_CLASS" or namespace.get("requires_pull_request") is not True:
+    raise SystemExit("Ephemeral branch policy missing or invalid.")
+exp=namespace.get("regex","")
+if exp != "^contrib/PRJ-[0-9]{6}/[a-z0-9][a-z0-9-]{2,48}$":
+    raise SystemExit("Ephemeral namespace regex drift.")
+unlisted=set(remote)-registered
+ephemeral={branch for branch in unlisted if re.fullmatch(exp,branch)}
+unregistered=unlisted-ephemeral
 missing_remote=registered-set(remote)
 if unregistered:
     raise SystemExit(f"Unregistered provider branch refs: {sorted(unregistered)}")
@@ -86,7 +96,7 @@ for item in aliases:
         raise SystemExit(f"Legacy alias SHA drift: {item['alias_ref']}")
 
 counts=registry.get("counts",{})
-if counts.get("provider_branch_refs") != len(remote):
+if counts.get("provider_branch_refs") != len(remote)-len(ephemeral):
     raise SystemExit(f"Provider branch count drift: registry={counts.get('provider_branch_refs')} live={len(remote)}")
 if counts.get("active_logical_branches") != len(active):
     raise SystemExit("Active branch count mismatch.")
@@ -95,4 +105,4 @@ if counts.get("canonical_archive_refs") != len(archives):
 if counts.get("legacy_alias_refs_pending_delete") != len(aliases):
     raise SystemExit("Legacy alias count mismatch.")
 
-print(f"PASS branch/lane registry: provider={len(remote)} active={len(active)} archives={len(archives)} legacy_aliases={len(aliases)}")
+print(f"PASS branch/lane registry: registered={len(remote)-len(ephemeral)} ephemeral_contributions={len(ephemeral)} active={len(active)} archives={len(archives)} legacy_aliases={len(aliases)}")

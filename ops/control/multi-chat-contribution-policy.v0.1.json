@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.1.0",
+  "kind": "A9_MULTICHAT_CONTRIBUTION_POLICY",
+  "status": "INITIAL_IMPLEMENTATION__PR_FIRST__NO_AUTOMERGE",
+  "date": "2026-10-23",
+  "authority": {
+    "source_private": "LIVE_GOOGLE_DRIVE",
+    "semantic_identity": "A7",
+    "versioned_logic": "GITHUB",
+    "qa": "GITHUB_ACTIONS",
+    "public_view": "GITHUB_PAGES"
+  },
+  "repo": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "submission_branch_regex": "^contrib/PRJ-[0-9]{6}/[a-z0-9][a-z0-9-]{2,48}$",
+  "submission_folder_regex": "^contributions/(PRJ-[0-9]{6})/([a-z0-9][a-z0-9-]{2,48})/",
+  "submission_path_contract": "contributions/{project_id}/{submission_id}/manifest.json",
+  "allowed_extensions": [
+    ".json",
+    ".md",
+    ".txt"
+  ],
+  "publication_states": [
+    "PUBLIC_CANDIDATE",
+    "APPROVED_PUBLIC"
+  ],
+  "required_fields": [
+    "schema_version",
+    "project_id",
+    "submission_id",
+    "title",
+    "workstream",
+    "publication_state",
+    "privacy_review",
+    "engineering_status"
+  ],
+  "forbids": [
+    "RAW_DRIVE_SOURCE_FILES",
+    "PERSONNEL_OR_FINANCE",
+    "UNREVIEWED_DRAWINGS",
+    "SECRETS",
+    "SOURCE_PERMISSION_ESCALATION",
+    "DIRECT_ROOT_PAGE_EDIT",
+    "PRODUCTION_BRANCH_PUSH"
+  ],
+  "merge_lane": "feature/daily-ops-current-work",
+  "preview_lane": "PULL_REQUEST",
+  "publication_lane": "AFTER_MERGE_VALIDATED_GITHUB_PAGES",
+  "github_repo_owner_boundary": "ANY_CHAT_MAY_SUBMIT_SCOPED_PR_IF_AUTHORIZED; SHARED_SYSTEM_FILES_REQUIRE_A_SEPARATE_GOVERNED_SYSTEM_LANE",
+  "branch_lifecycle": "TEMPORARY_PR_BRANCHES_NOT_PART_OF_LONG_LIVED_ACTIVE_BRANCH_REGISTRY; TRACKED_BY_REGEX; DELETE_AFTER_MERGE_WHEN_TOOL_AVAILABLE",
+  "deployment_guarantee": "NO_AUTO_MERGE; PAGES_ONLY_AFTER_USER_OR_AUTHORIZED_AI_MERGES_APPROVED_PR; PRIVATE_SOURCE_NEVER_PUBLIC",
+  "known_debt": [
+    "GITHUB_BRANCH_PROTECTION_REQUIREMENTS_MUST_BE_SET_WITH_ADMIN_ACCESS",
+    "PRIVATE_DRIVE_TO_PUBLIC_SANITIZATION_IS_NOT_AUTOMATED",
+    "FULL_ESTIMATOR_CAD_WEBAPP_MODULES_NEED_VETTED_SPECIALIST_LANES"
+  ],
+  "pages_directory_path": "contributions/index.html",
+  "production_index_source": "ONLY_MERGED_APPROVED_PUBLIC_AND_PUBLIC_SAFE_ATTESTED_MANIFESTS",
+  "ci_workflow": ".github/workflows/project-contribution-qa.yml",
+  "scope_validator": "scripts/validate_project_contributions.py",
+  "pages_builder": "scripts/build_project_contribution_directory.py"
+}

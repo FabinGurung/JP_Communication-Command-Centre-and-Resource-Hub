@@ -1,0 +1,3 @@
+# Project-scoped submissions (public-safe only)
+
+This is a controlled PR intake, NOT a repository of source drawings or private contracts. Each authorized AI thread may create one `contributions/PRJ-NNNNNN/<unique-submission>/` directory with `manifest.json`, using its own `contrib/PRJ-NNNNNN/<submission>` branch and pull request. See [governed protocol](../docs/operations/MULTI_CHAT_PROJECT_CONTRIBUTIONS_V0.1.md). Raw Drive sources, personnel, costs and private geolocation are prohibited. Do not touch other project folders, global HTML, validators, or the production branch in a content PR. Existing website content is unchanged until a separately reviewed publication operation.

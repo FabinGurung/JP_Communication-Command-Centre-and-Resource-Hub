@@ -6,6 +6,10 @@ Public [GitHub Pages website](https://fabingurung.github.io/JP_Communication-Com
 
 **Scope:** JP is the operational company/enterprise system; **AEC is a separate research/thesis hypothesis**. JP operational project facts must not be reclassified as thesis evidence. The unchanged GitHub repository slug is a legacy stable URL, not the product name.
 
+**Project threads can contribute directly without manual inter-chat handoffs:** follow [Multi-chat scoped GitHub contribution protocol](docs/operations/MULTI_CHAT_PROJECT_CONTRIBUTIONS_V0.1.md). Independent PRs from project branches are path-validated and tested before merge to the existing Pages lane; raw/PII/finance/source drawings stay in Google Drive. This is an initial no-auto-merge gate, not unrestricted production write access.
+
+**Basanti identity correction:** `PRJ-000029 / REB-002` is canonical; `PRJ-000030 / REB-003` is a retired mistaken duplicate alias. Both Ramachandra and Radha are historical incorrect project labels. Current private coordinates are stored in Drive; public resource catalog admission [Issue #8](https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/issues/8) remains open.
+
 ## What is live
 
 - **Website:** botanical responsive operations hub, project map, Daily Ops, site/project pages, resources, workspace and multi-depth guide. Current stable release **v2.2.0**, previous frozen **v2.1.0**.

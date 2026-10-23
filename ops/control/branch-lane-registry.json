@@ -557,5 +557,15 @@
       "allowed_for_work": false,
       "note": "Short-lived off-policy website projection branch immediately frozen as registered archive after compulsory registry CI prevented use. Canonical changes must be replayed through main or feature/daily-ops-current-work. Historical ref kept only because the connected GitHub app cannot delete/rename it."
     }
-  ]
+  ],
+  "ephemeral_contribution_namespace": {
+    "status": "REGISTERED_EPHEMERAL_BRANCH_CLASS",
+    "regex": "^contrib/PRJ-[0-9]{6}/[a-z0-9][a-z0-9-]{2,48}$",
+    "requires_pull_request": true,
+    "allowed_scope": "contributions/<PROJECT_ID>/<SUBMISSION_ID>/",
+    "must_pass": "project-contribution-qa",
+    "not_an_active_library_branch": true,
+    "allowed_to_publish_directly": false,
+    "expiration": "provider-delete after merge when possible"
+  }
 }

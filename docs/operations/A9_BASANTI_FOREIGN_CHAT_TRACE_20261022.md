@@ -6,6 +6,11 @@
 **Disposition:** RECEIVED_AND_RECONCILED__ISSUE_8_OPEN__NO_NEW_PROJECT_ID
 **Record type:** provenance and audit handoff ONLY — not a new approval, data-admission, or deployment record
 
+## Current correction — 2026-10-23 (supersedes mistaken two-project interpretation)
+The user explicitly identified **Ramachandra Devkota** and **Radha Roka** as historical incorrect project names; only **14 Basanti Poudel Baral** is current. The older stable **`PRJ-000029 / REB-002`** is the canonical identity; the later **`PRJ-000030 / REB-003`** is now an immutable retired/reserved alias redirect, **not a separate project**. The original Drive projects and Continent 01 identity rows, calculated location view and source link `PSL-000005` were corrected and independently read back. Latest coordinates exist only in private Drive owners and the project Read First audit Doc; avoid including private precise site location in this public record.
+
+The new read-first document is `00_READ_FIRST__BASANTI_CANONICAL_IDENTITY_AND_LOCATION__20261023` under the original project audit folder. Audit events `JP-CHG-20261023-0010/0011` preserve original mislabel, old coordinate and ID correction. Google Drive original PDF and archival contracts unmodified; engineering/legal approval remains unverified. [GitHub Issue #8](https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/issues/8) remains open only for separate public resource-catalog admission. Prior dated sections below remain historical and were not rewritten.
+
 ## Current disposition: 2026-10-23 project identity registered; public resource admission HOLD
 The earlier 2026-10-22 notes below are **historical snapshots**, not the current project-ID state.
 
