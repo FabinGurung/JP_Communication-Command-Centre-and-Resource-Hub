@@ -59,10 +59,21 @@ def changed_files():
         # tree. Test its real output against the exact main parent instead.
         parents=git("rev-list","--parents","-n","1",after).split()
         if len(parents)==3 and parents[1]==before:
-            main_parent=parents[2]
-            require(git("rev-parse","refs/remotes/origin/main")==main_parent,
-                    "merge second parent differs from current production main")
-            base=main_parent
+            second_parent=parents[2]
+            current_main=git("rev-parse","refs/remotes/origin/main")
+            if second_parent==current_main:
+                # Preserve the existing main-to-feature reconciliation policy.
+                base=second_parent
+            else:
+                # A project PR merge is NOT a main reconciliation. Accept only
+                # a single registered public-safe contribution namespace; audit
+                # its actual first-parent delta rather than replacing the base.
+                delta=[p for p in git("diff","--name-only","--no-renames",before,after).splitlines() if p]
+                pattern=re.compile(r"^contributions/(PRJ-[0-9]{6})/([a-z0-9][a-z0-9-]{2,48})/[A-Za-z0-9_.-]+$")
+                pairs=[m.groups() if (m:=pattern.fullmatch(p)) else None for p in delta]
+                require(bool(delta) and len(delta)<=40 and all(pairs) and len(set(pairs))==1,
+                        "merge second parent differs from current production main and is not one scoped contribution")
+                base=before
     else:
         base=git("rev-parse",after+"^")
     return [x for x in git("diff","--name-only","--no-renames",base,after).splitlines() if x]

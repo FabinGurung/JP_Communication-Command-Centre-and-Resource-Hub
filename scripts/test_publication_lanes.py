@@ -64,6 +64,40 @@ class PublicationLaneTests(unittest.TestCase):
                 with self.assertRaisesRegex(lane.GateError,"differs from current production main"):
                     lane.changed_files()
 
+
+    def test_scoped_contribution_merge_uses_first_parent_delta(self):
+        before="a"*40
+        after="c"*40
+        contributed="b"*40
+        main="d"*40
+        changed="contributions/PRJ-000029/cross-chat-contract-test-01/manifest.json"
+        def fake_git(*args):
+            if args==("rev-list","--parents","-n","1",after):
+                return " ".join((after,before,contributed))
+            if args==("rev-parse","refs/remotes/origin/main"):
+                return main
+            if args[:3]==("diff","--name-only","--no-renames"):
+                self.assertEqual(args[3:],(before,after))
+                return changed
+            raise AssertionError(args)
+        env={"GITHUB_SHA":after,"GITHUB_EVENT_BEFORE":before,"GITHUB_EVENT_NAME":"push"}
+        with patch.dict(lane.os.environ,env,clear=True),patch.object(lane,"git",side_effect=fake_git):
+            self.assertEqual(lane.changed_files(),[changed])
+            self.assertEqual(lane.audit_change_lanes([changed]),set())
+
+    def test_unregistered_second_parent_merge_is_rejected(self):
+        before="a"*40
+        after="c"*40
+        def fake_git(*args):
+            if args[0]=="rev-list": return " ".join((after,before,"b"*40))
+            if args[0]=="rev-parse": return "d"*40
+            if args[0]=="diff": return "scripts/unregistered-change.py"
+            raise AssertionError(args)
+        env={"GITHUB_SHA":after,"GITHUB_EVENT_BEFORE":before,"GITHUB_EVENT_NAME":"push"}
+        with patch.dict(lane.os.environ,env,clear=True),patch.object(lane,"git",side_effect=fake_git):
+            with self.assertRaisesRegex(lane.GateError,"not one scoped contribution"):
+                lane.changed_files()
+
     def test_original_binary_or_raw_folder_denied(self):
         for item in (
             "ops/data/raw_jsonl/archive.jsonl",
