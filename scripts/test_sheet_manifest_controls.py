@@ -45,6 +45,14 @@ def main():
     assert len(copies) == len(writes) == 1
     assert any(x['status'] == 'CONTROL_TABS_PRESENT_CONTENT_REVIEW_PENDING' for x in second)
     assert all(x['consumer_status'] == 'UNMAPPED_REQUIRES_OWNER_REVIEW' for x in first)
+    # Readable folder names must not accidentally reactivate archived workbooks.
+    from maintain_sheet_manifests import is_archived
+    renamed = {'id': 'H', 'name': 'Earlier Copies', 'parent_id': 'R'}
+    child = {'id': 'HS', 'name': 'Old workbook', 'parent_id': 'H'}
+    assert is_archived(child, {'H': renamed}, 'A', archive_roots=['H'])
+    assert is_archived({'id': 'P', 'name': 'PRE1__Old workbook'}, {}, 'A')
+    assert is_archived({'id': 'P', 'name': 'POST2__Old workbook'}, {}, 'A')
+    assert is_archived({'id': 'P', 'name': '99 Previous Records'}, {}, 'A')
     print('SHEET_CONTROL_TEST_PASS: archive exclusion, PRE-before-edit, no source-cell writes, idempotent retry, no invented consumers')
 
 if __name__ == '__main__': main()

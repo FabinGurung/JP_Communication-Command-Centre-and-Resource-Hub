@@ -5,10 +5,11 @@ inventory or results belong in this public repository. Archive descendants are
 reported but never edited. This does not infer a consuming repository.
 """
 from datetime import datetime, timezone
+import re
 
 SHEET_MIME = "application/vnd.google-apps.spreadsheet"
 
-def is_archived(item, by_id, archive_root):
+def is_archived(item, by_id, archive_root, archive_roots=()):
     cursor = item
     seen = set()
     while cursor:
@@ -16,16 +17,16 @@ def is_archived(item, by_id, archive_root):
         if key in seen:
             raise ValueError("Inventory parent cycle")
         seen.add(key)
-        if key == archive_root:
+        if key in {archive_root, *archive_roots}:
             return True
         name = cursor.get("name", "").upper()
-        if any(word in name for word in ("ARCHIVE", "SUPERSEDED", "RECYCLE_BIN", "BACKUP", "SNAPSHOT")) or name.startswith(("PRE__", "POST__")):
+        if any(word in name for word in ("ARCHIVE", "SUPERSEDED", "RECYCLE_BIN", "BACKUP", "SNAPSHOT", "PREVIOUS VERSIONS", "PREVIOUS RECORDS")) or re.match(r"^(PRE\d*|POST\d*)__", name):
             return True
         parent = cursor.get("parent_drive_id", cursor.get("parent_id"))
         cursor = by_id.get(parent)
     return False
 
-def ensure_controls(items, sheets, drive, archive_root, snapshot_folder, execute):
+def ensure_controls(items, sheets, drive, archive_root, snapshot_folder, execute, archive_roots=()):
     """Yield one result per workbook; reruns reuse snapshots and existing controls."""
     by_id = {x.get("drive_file_id", x.get("id")): x for x in items}
     for fid, item in sorted(by_id.items()):
@@ -33,7 +34,7 @@ def ensure_controls(items, sheets, drive, archive_root, snapshot_folder, execute
             continue
         result = {"spreadsheet_id": fid, "name": item["name"],
                   "consumer_status": "UNMAPPED_REQUIRES_OWNER_REVIEW"}
-        if is_archived(item, by_id, archive_root):
+        if is_archived(item, by_id, archive_root, archive_roots):
             yield dict(result, status="ARCHIVED_NO_LIVE_CONSUMER_REQUIRED")
             continue
         meta = execute(sheets.spreadsheets().get(spreadsheetId=fid,

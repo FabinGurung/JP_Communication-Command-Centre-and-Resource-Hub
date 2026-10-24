@@ -1,67 +1,46 @@
-# Sheets to Pages and human-readable Drive storage
+# Sheets to Pages, run by GitHub Actions
 
-User direction of 24 October 2026 supersedes the old GitHub-CSV-first map workflow.
+User direction of 25 October 2026: Actions owns the entire publishing run.
 
-## Ownership and publishing
+**Individual source Sheets → Actions assembles one publishing Sheet for this repository → Actions reads it back and validates public JSON → Pages deploys.**
 
-1. Humans and authorized agents edit the individual source workbook for a feature.
-2. One publishing Google workbook per consuming repository assembles those sources.
-   Its data tabs are derived by imports or a validated API synchronizer; they are not
-   a second place to hand-edit the same facts. Multiple tabs in that one workbook are fine.
-3. Read the assembled workbook, validate PK/FK, formulas, source coverage and publication
-   eligibility, then produce one JSON payload for the website.
-4. GitHub Actions validates/builds; GitHub Pages serves that JSON and the interface.
-5. GitHub owns code, SQL relationship definitions, source contracts and approved release
-   artifacts. Drive holds original files and human-readable company/project storage.
+People edit the source Sheets. The publishing workbook is an automatic copy. Colab handles Drive inventory and missing Sheet change histories; it is not required for publishing.
 
-The master is a replica of the source workbooks. The generated JSON is a replica of
-the publishable master values. Neither is an independently edited authority.
-Every active Sheet needs an explicit consumer mapping or an explicit UNUSED/REVIEW
-disposition. Archived versions have historical use and do not need live website wiring.
-Consumer coverage does not mean displaying every private column on a public page.
+## Implementation
 
-## Current verified implementation
+The existing Operations Hub production workflow on feature/daily-ops-current-work now contains the Google refresh step. scripts/sync_sheets_to_pages.py uses ops/control/sheets-actions-publishing.v1.json and the live publishing router.
 
-The Operations map has 14 category workbooks, four currently connected owner files,
-and ten staged category cutovers. Private `_SOURCE_ROUTER` identifies active and
-target sources; staged copies must not silently become owners. The master uses
-`IMPORTRANGE`. The public map previously requested 14 reviewed JSON tables.
+1. Read and validate all 14 individual sources. Initial cutover of the ten staged copies requires exact equality with their previously active tabs. Stale copies stop the run.
+2. Check headers, IDs, references, coordinates and concurrent changes. Source cells are never written.
+3. Archive prior publishing values, router, manifest and history in the existing user-owned previous-versions file. Records are append-only, numbered and hash chained. Conditional upload and exact readback are required. Actions creates no new My Drive files; service accounts cannot own those files. The existing native V000002 PRE copy preserves the original import formulas.
+4. Rebuild the publishing data tabs and router/history in one atomic Sheets batch. Versions advance on changed input, not an unchanged execution.
+5. Read back the assembled workbook and recheck sources. Generate the public payload from this readback.
+6. Validate public IDs, columns, references and visibility. Transfer exactly that public payload to the deploy job. Do not regenerate an older snapshot over it.
 
-The new build generates `ops/data/map-data.v1.json` from those reviewed projections;
-the map requests this single payload. Actions regenerates it before assembling the
-Pages artifact. This changes packaging, not the approved records.
+A configured Google connection that fails blocks deployment. Without a Google connection, code pushes can still publish the reviewed snapshot, explicitly labelled in the Actions warning, summary and live_google_sheets_fetch=false payload. A manual run with require_live_sheets=true fails if Google is unconfigured. Snapshot success is not Google-refresh success.
 
-**Private source refresh remains operator-driven.** Actions currently has no configured
-Google identity/source-read job. Do not claim that a Sheet edit automatically reaches
-Pages. Completing that part requires a configured Google identity authorized to read
-the sources and update the publishing replica, plus source admission/coverage checks.
-Do not replace this with a public anonymous export of private workbooks.
+## One-time Google setup remains open
 
-Other repositories and non-map Daily Ops sources require their own verified consumer
-contracts and Sheet replicas; this map build does not migrate them implicitly.
+The connected ChatGPT Drive account is not an Actions identity. No chat access token is copied or installed in GitHub.
 
-## Version controls for every active workbook
+Preferred: configure repository variables JP_GOOGLE_WORKLOAD_IDENTITY_PROVIDER and JP_GOOGLE_SERVICE_ACCOUNT, with Google federation restricted to this repository and the registered Pages branch. Enable the Sheets and Drive APIs in that Google Cloud project. Alternatively, install a dedicated service-account key JSON in repository secret JP_GOOGLE_CREDENTIALS. Never put credentials in Sheets, source files, issues or chat.
 
-- `00_MANIFEST`: stable workbook ID, purpose, owning source tabs/features, schema/data
-  release, control version, consumer repository, publishing-master ID, JSON destination,
-  connection status, and version-history reference.
-- `01_VERSION_HISTORY`: append version, time, affected feature/tab, exact change, PRE
-  snapshot ID, validation, rollback and data release. Initialize the control sequence
-  at `V000001`; advance for verified material edits, not ordinary executions.
-- Snapshot the current state into the dedicated version archive before material edits.
-  Update the original live ID. Never rewrite historical entries or equate native Drive
-  revision numbers with the governed release sequence.
-- Keep legacy source tabs until their new owners are connected and readback passes.
-- `scripts/maintain_sheet_manifests.py` is the authenticated Colab helper for adding
-  missing controls. It reports unmapped consumers rather than inventing wiring. Its
-  presence is not evidence that all private workbooks have been processed.
+Give that identity reader access to the 14 source workbooks and writer access to only the publishing workbook and its existing previous-versions file. No source write access or public sharing is needed. Temporary gha-creds files are ignored by Git and excluded from the explicit Pages artifact.
 
-## Drive navigation cleanup
+Then run the existing workflow on the Pages branch with require_live_sheets=true. Acceptance requires real fetch, archive/master readback, 14 distinct active source IDs, a live_google_sheets_fetch=true bundle and a successful Pages deployment. Offline tests alone do not establish that connection.
 
-The obsolete navigation guide, superseded v0.1 roadmap and old project-map workspace
-are archived with their original IDs. The old project-map publishing manifest describes
-a completed historical branch promotion; it is not today's source-ingestion engine.
-The command-center design is retained under Useful System References because its
-architecture/routing designs may be reused. It is labelled reference-only, not running.
-The user's additional enterprise writers are their own backup accounts; their presence
-is not a restructuring blocker. No access changes are required by this contract.
+Current triggers: branch pushes and manual runs. A Sheet edit alone does not trigger GitHub. An effective hourly schedule requires a governed workflow on the default branch; no schedule is claimed on this feature branch. Other repositories require their own source assignments, publishing workbook and verified Google access. This implementation covers the Operations map.
+
+## Public data boundary
+
+The private publishing workbook receives the complete source tables. The public bundle uses only already-admitted IDs and explicit refresh_fields. Public names, status, coordinates and catalogue labels can refresh. Visibility revocation removes or masks records.
+
+New records, People details, free-text evidence, money, measured construction progress and previously redacted cells retain their publication-review requirements. Reviewed static fields remain labelled in a live bundle. No private source values or PRE records are written to repository files, runner logs or Actions artifacts. Only the approved public bundle is uploaded.
+
+## Readable Drive navigation
+
+The 01_JP main paths are Colab Notebooks, Useful References, Shared Registers, Fishtail Builders, Rohini Engineering and Builders, Office and Site Records, and Archive Gallery. Shared Registers separates Working Sheets, Website Publishing, Not Connected Yet, System Records and Previous Sheet Versions.
+
+The 15 core workbooks now use names such as People, Projects and Locations, Materials and Site Material Stock, retaining their data-version suffixes and original live IDs. Unconnected copies remain separated until cutover. Technical inventories and older PRE/POST records belong in System Records or the archive. No folder was deleted. JP and AEC remain separate.
+
+Each core workbook retains its manifest/history and verified PRE copy, with a V000002 navigation-control entry; its source data release is unchanged. Colab V000006 refreshes affected Drive folders and continues missing histories for other active Sheets. Explicit archive IDs prevent readable renames from accidentally reactivating historical Sheets. Wider consumer mapping remains unfinished.

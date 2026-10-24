@@ -9,6 +9,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      require_live_sheets:
+        description: Fail if the Google connection is unavailable
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -616,6 +621,7 @@ jobs:
           python scripts/build_map_bundle.py
           python scripts/test_map_bundle.py
           python scripts/test_sheet_manifest_controls.py
+          python scripts/test_sheets_actions_publishing.py
 
       - name: Validate Google Sheets map source and reviewed JSON projections
         run: python scripts/test_map_sheets_migration.py
@@ -638,6 +644,70 @@ jobs:
       - name: Negative-test public Pages artifact isolation
         run: python scripts/test_public_pages_site.py
 
+      - name: Check dedicated Actions Google connection
+        id: google_connection
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/feature/daily-ops-current-work'
+        env:
+          GOOGLE_PROVIDER: ${{ vars.JP_GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
+          GOOGLE_ACCOUNT: ${{ vars.JP_GOOGLE_SERVICE_ACCOUNT }}
+          GOOGLE_KEY: ${{ secrets.JP_GOOGLE_CREDENTIALS }}
+          REQUIRE_LIVE: ${{ inputs.require_live_sheets || false }}
+        shell: python
+        run: |
+          import os
+          configured = bool((os.getenv('GOOGLE_PROVIDER') and os.getenv('GOOGLE_ACCOUNT')) or os.getenv('GOOGLE_KEY'))
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
+              out.write('configured=' + str(configured).lower() + '\n')
+              out.write('use_federation=' + str(bool(os.getenv('GOOGLE_PROVIDER') and os.getenv('GOOGLE_ACCOUNT'))).lower() + '\n')
+          if not configured:
+              message = 'Google connection missing: this deployment uses the reviewed snapshot. Live Sheet refresh did not run.'
+              print('::warning::' + message)
+              with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+                  summary.write('### Sheets refresh: NOT CONNECTED\n' + message + '\n')
+              if os.getenv('REQUIRE_LIVE') == 'true':
+                  raise SystemExit('A live refresh was requested but Google authentication is not configured.')
+
+      - name: Authenticate Google with workload identity
+        if: steps.google_connection.outputs.configured == 'true' && steps.google_connection.outputs.use_federation == 'true'
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ vars.JP_GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.JP_GOOGLE_SERVICE_ACCOUNT }}
+
+      - name: Authenticate Google with dedicated repository secret
+        if: steps.google_connection.outputs.configured == 'true' && steps.google_connection.outputs.use_federation != 'true'
+        uses: google-github-actions/auth@v3
+        with:
+          credentials_json: ${{ secrets.JP_GOOGLE_CREDENTIALS }}
+
+      - name: Install Google client for this runner
+        if: steps.google_connection.outputs.configured == 'true'
+        run: python -m pip install 'google-auth>=2,<3' 'requests>=2,<3'
+
+      - name: Assemble publishing Sheet and read back approved public JSON
+        if: steps.google_connection.outputs.configured == 'true'
+        run: |
+          python scripts/sync_sheets_to_pages.py
+          python scripts/sync_sheets_to_pages.py --validate-bundle
+
+      - name: Record the actual publishing mode
+        shell: python
+        run: |
+          import json, os
+          from pathlib import Path
+          payload = json.loads(Path('ops/data/map-data.v1.json').read_text())
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write('\nPublishing mode: `' + payload['publication_mode'] + '`\n')
+              summary.write('Live Google fetch: `' + str(payload['live_google_sheets_fetch']) + '`\n')
+
+      - name: Preserve exactly the validated public map payload
+        uses: actions/upload-artifact@v4
+        with:
+          name: validated-public-map
+          path: ops/data/map-data.v1.json
+          if-no-files-found: error
+          retention-days: 7
+
   deploy:
     # Test-first Pages lane: successful feature commits publish to the existing URL.
     # main and immutable v2.2.0 remain untouched by rapid website iterations.
@@ -655,6 +725,15 @@ jobs:
 
       - name: Generate single map JSON from reviewed Sheet projections
         run: python scripts/build_map_bundle.py
+
+      - name: Use the exact payload validated by the preceding job
+        uses: actions/download-artifact@v4
+        with:
+          name: validated-public-map
+          path: ops/data
+
+      - name: Recheck public payload before packaging
+        run: python scripts/sync_sheets_to_pages.py --validate-bundle
 
       - name: Assemble explicit public Pages artifact
         run: python scripts/build_public_pages_site.py --output _site

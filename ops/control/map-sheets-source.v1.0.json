@@ -5,7 +5,7 @@
   "owner": "JP Operations Hub",
   "master_file_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
   "master_url": "https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit",
-  "master_title": "JP__PROJECT_MAP__14_TABLES__v1.2__LIVE",
+  "master_title": "Website Publishing \u2014 Automatic Copy \u2014 v1.2",
   "drive_folder": "1DRECcxUaz68mS_WPWbvReKxujmZ2O58t",
   "source_commit": "8a8474979a233259f27fd2c18ffc61ba78a4a8b8",
   "tab_count": 14,
@@ -292,5 +292,7 @@
     "identity_correction_date": "2026-10-23",
     "coordinates_provenance": "PRIVATE_OWNER_GOOGLE_DRIVE",
     "identity_disposition": "USER_CONFIRMED_BASANTI__HISTORICAL_LABELS_NOT_OFFICIAL"
-  }
+  },
+  "actions_refresh_implementation": "scripts/sync_sheets_to_pages.py",
+  "actions_connection_state": "PENDING_GOOGLE_IDENTITY_AND_FIRST_LIVE_RUN"
 }

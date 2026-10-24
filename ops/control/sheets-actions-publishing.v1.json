@@ -1,0 +1,162 @@
+{
+  "version": "V000001",
+  "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "publishing_workbook_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
+  "previous_versions_folder_id": "1DPPAvv0CdnkKKtkY6PjYZep1DyA-lH-H",
+  "execution_owner": "GITHUB_ACTIONS",
+  "connection_state": "PENDING_GOOGLE_IDENTITY_AND_FIRST_LIVE_RUN",
+  "trigger": "REGISTERED_PAGES_BRANCH_PUSH_OR_MANUAL_WORKFLOW_RUN",
+  "schedule_state": "NOT_ENABLED__DEFAULT_BRANCH_WORKFLOW_REQUIRED",
+  "sources": {
+    "projects": {
+      "workbook_id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
+      "legacy_id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
+      "tab": "projects"
+    },
+    "organizations": {
+      "workbook_id": "1cwubE_4nB2SAEdLu6ry80G0HeNjbBdu4X3DA6jrcQ1E",
+      "legacy_id": "1cwubE_4nB2SAEdLu6ry80G0HeNjbBdu4X3DA6jrcQ1E",
+      "tab": "organizations"
+    },
+    "people": {
+      "workbook_id": "1gBYUKwt3_eUy-h9FdDCv4o2-RxxT6dBqqY4yRG2Hws4",
+      "legacy_id": "1gBYUKwt3_eUy-h9FdDCv4o2-RxxT6dBqqY4yRG2Hws4",
+      "tab": "people"
+    },
+    "project_parties": {
+      "workbook_id": "1SC0Iz5IKwUCx5elSVyok0Z0hV0Z5hHiMCzkWWv0Y2uU",
+      "legacy_id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
+      "tab": "project_parties"
+    },
+    "project_funding": {
+      "workbook_id": "1pNXK4JQnYI62V8iZsI64yyVEYiRxB3UZ7Z9R6JxoZUs",
+      "legacy_id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
+      "tab": "project_funding"
+    },
+    "work_catalog": {
+      "workbook_id": "1D4T08NciyhlMxxTgTtik_SJWf-UaIytB56fNRsvuqms",
+      "legacy_id": "1D4T08NciyhlMxxTgTtik_SJWf-UaIytB56fNRsvuqms",
+      "tab": "work_catalog"
+    },
+    "project_work_items": {
+      "workbook_id": "17YPRpaXIdHloH5-lzsjUpNvXLbsDfrIrlsn2jZ-7KKc",
+      "legacy_id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
+      "tab": "project_work_items"
+    },
+    "materials_master": {
+      "workbook_id": "10D96YqZn6NbbSm6X6nsPVw4tG_IELIj957uZ2DmhJZs",
+      "legacy_id": "1D4T08NciyhlMxxTgTtik_SJWf-UaIytB56fNRsvuqms",
+      "tab": "materials_master"
+    },
+    "project_material_inventory": {
+      "workbook_id": "1J0c-usE3jUubT_hCTxxklHzyVBzxoFZaJtCsuG3toWA",
+      "legacy_id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
+      "tab": "project_material_inventory"
+    },
+    "project_components": {
+      "workbook_id": "1kAtyZPQOdSzxDS83AYwIBzrj5OIsvBKE_8orH8ez07U",
+      "legacy_id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
+      "tab": "project_components"
+    },
+    "project_source_links": {
+      "workbook_id": "1uC1IZG440Hrg78hurYlmVA_OJG5Z-04TgKcxs1_TZmU",
+      "legacy_id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
+      "tab": "project_source_links"
+    },
+    "project_opportunities": {
+      "workbook_id": "1dAz0QhEj_UItB-m_BIt7jJZ_qJvjmJ8Ou9rVv2yXqWE",
+      "legacy_id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
+      "tab": "project_opportunities"
+    },
+    "organization_locations": {
+      "workbook_id": "12wGg0UBLbN03u3EhJN-uQV9O2s_FRVwX9V_D2rTDXC8",
+      "legacy_id": "1cwubE_4nB2SAEdLu6ry80G0HeNjbBdu4X3DA6jrcQ1E",
+      "tab": "organization_locations"
+    },
+    "project_publication_settings": {
+      "workbook_id": "1tDpsphzARq-rk1MExU4DXC8mG_clh-0TXJwRr2qljXU",
+      "legacy_id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
+      "tab": "project_publication_settings"
+    }
+  },
+  "refresh_fields": {
+    "projects": [
+      "project_name",
+      "display_name",
+      "location_ward_number",
+      "latitude",
+      "longitude",
+      "status",
+      "last_updated"
+    ],
+    "organizations": [
+      "organization_name",
+      "active"
+    ],
+    "work_catalog": [
+      "work_code",
+      "description",
+      "category",
+      "subcategory",
+      "default_unit",
+      "active"
+    ],
+    "materials_master": [
+      "material_code",
+      "material_name",
+      "material_category",
+      "subcategory",
+      "default_unit",
+      "active"
+    ],
+    "organization_locations": [
+      "location_name",
+      "location_type",
+      "location_ward_number",
+      "latitude",
+      "longitude"
+    ],
+    "project_opportunities": [
+      "opportunity_name",
+      "location_ward_number",
+      "status",
+      "latitude",
+      "longitude"
+    ],
+    "project_components": [
+      "component_type",
+      "component_name",
+      "sequence_no",
+      "latitude",
+      "longitude",
+      "status"
+    ]
+  },
+  "public_admission": "Existing admitted record IDs and explicit refresh fields only; private and newly discovered rows stay out. Free text, money, measured progress, evidence and previously redacted fields retain their reviewed values pending admission.",
+  "project_visibility_fields": {
+    "show_project_name": [
+      "project_name",
+      "display_name"
+    ],
+    "show_coordinates": [
+      "latitude",
+      "longitude"
+    ],
+    "show_status": [
+      "status"
+    ],
+    "show_ward_number": [
+      "location_ward_number"
+    ],
+    "show_project_sector": [
+      "project_sector"
+    ],
+    "show_implementation_method": [
+      "implementation_mechanism"
+    ],
+    "show_legal_contractor": [
+      "executing_company_id"
+    ]
+  },
+  "previous_versions_file_id": "1c7TD0CyXCJE1Z_Ks5KHje35P0y_VDEQF"
+}
