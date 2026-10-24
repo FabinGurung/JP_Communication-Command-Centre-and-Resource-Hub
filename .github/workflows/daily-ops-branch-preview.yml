@@ -611,6 +611,12 @@ jobs:
 
       - name: Validate public source readiness snapshot and safe website disclosure
         run: python scripts/test_source_readiness_public.py
+      - name: Verify consolidated reviewed map bundle
+        run: |
+          python scripts/build_map_bundle.py
+          python scripts/test_map_bundle.py
+          python scripts/test_sheet_manifest_controls.py
+
       - name: Validate Google Sheets map source and reviewed JSON projections
         run: python scripts/test_map_sheets_migration.py
 
@@ -646,6 +652,9 @@ jobs:
 
       - name: Build public-safe project submissions directory
         run: python scripts/build_project_contribution_directory.py
+
+      - name: Generate single map JSON from reviewed Sheet projections
+        run: python scripts/build_map_bundle.py
 
       - name: Assemble explicit public Pages artifact
         run: python scripts/build_public_pages_site.py --output _site

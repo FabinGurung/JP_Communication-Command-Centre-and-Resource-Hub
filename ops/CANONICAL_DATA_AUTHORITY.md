@@ -43,7 +43,7 @@ For a project-master correction such as:
 - company project code
 - public project attributes
 
-edit the **`projects` worksheet** of the linked Google Sheets map master. Before publishing, run source PK/FK, publication and website validation and update its reviewed JSON projection. The old `projects.csv` must not be edited as a new data source.
+edit the **`projects` worksheet in its individual owner workbook** resolved by the private `_SOURCE_ROUTER`. The publishing master is a derived replica, never a second edit location. Before publishing, run source PK/FK, publication and website validation and update its reviewed JSON projection. The old `projects.csv` must not be edited as a new data source.
 
 For Daily Ops current state, edit/admit into **`ops/data/current-works.json`** and append the corresponding event to **`ops/events/daily-ops-events.jsonl`**.
 
@@ -71,7 +71,7 @@ Drive original files → ops/data/project-resources.json (links only)
 Relational constraint specification → ops/schema/daily-ops-postgres.sql
 ```
 
-Field inputs, Slack, Forms and other operational Sheets remain unadmitted observations until their designated owning layer validates and admits them. Only the dedicated map-master workbook owns edits to the migrated project reference tables.
+Field inputs, Slack, Forms and other operational Sheets remain unadmitted observations until their designated owning layer validates and admits them. Individual source workbooks own human edits; the map-master data tabs aggregate them.
 
 ## 5. Google Drive and publication rule
 
@@ -115,3 +115,7 @@ Before any repository mutation, resolve the intended branch through the registry
 ## 9. Slack source archival and company rollups
 
 The existing **private A9 Slack Recovery Archive** is the durable destination for original multilingual Slack message text in JSONL, associated normalized JSON, thread/file manifests and archive readback. The public Operations GitHub repository is the derived, properly classified machine-data/control layer, **not a raw Slack dump**. The A9 Slack Control Registry owns private company/project channel routing. Read both Rohini (REB) and Fishtail (FBL) company discussion channels, and include private project channels not yet in public projects.csv as unresolved coverage gaps, not silently skipped sites. Keep private financial/personnel/engineering data outside GitHub Pages. See `ops/control/DAILY_SLACK_WEB_CYCLE.md` for collection-window, archive, source-admission, publication and output gates.
+
+## 2026-10-24 source and replica clarification
+
+The binding contract is `docs/operations/SHEETS_TO_PAGES_STORAGE_CONTRACT_V1.md`. Source workbook → derived publishing workbook → reviewed JSON → Actions/Pages. The map now fetches one generated bundle, `ops/data/map-data.v1.json`; the 14 reviewed table files remain build inputs and provenance. Actions does not yet perform authenticated live Google source refresh. Additional enterprise writers are user-owned backup accounts; do not impose an access-resolution hold on that basis. Archived Drive project-map guides are historical evidence, not ingestion authorities.

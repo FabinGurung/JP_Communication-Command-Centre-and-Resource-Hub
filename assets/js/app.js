@@ -146,18 +146,24 @@ function directionsURL(item) {
 
 // GitHub Pages serves reviewed JSON projections generated from the private
 // Google Sheets master. It does not request private Sheets or CSV at runtime.
-async function loadMapTable(path, cacheBust) {
+async function loadMapBundle(path, cacheBust) {
   const response = await fetch(`${path}?${cacheBust}`, { cache: "no-store" });
-  if (!response.ok) throw new Error(`Could not load reviewed Sheet projection ${path} (${response.status})`);
-  const payload = await response.json();
-  const expected = path.split("/").pop().slice(0, -5);
-  if (payload.schema_version !== "1.0.0" || payload.table !== expected ||
-      payload.row_count !== payload.records?.length ||
-      !Array.isArray(payload.columns) || !Array.isArray(payload.records) ||
-      payload.origin !== "PRIVATE_GOOGLE_SHEET_MANUAL_REVIEWED_SNAPSHOT") {
-    throw new Error(`Invalid Google Sheets publication contract for ${path}`);
+  if (!response.ok) throw new Error(`Could not load map data (${response.status})`);
+  const bundle = await response.json();
+  if (bundle.schema_version !== "1.0.0" || bundle.bundle_id !== "JP_MAP_REVIEWED_SHEETS_V1" ||
+      bundle.table_count !== 14 || !bundle.tables || Object.keys(bundle.tables).length !== 14) {
+    throw new Error("Invalid consolidated map data");
   }
-  return payload.records;
+  const tables = {};
+  for (const [name, payload] of Object.entries(bundle.tables)) {
+    if (payload.table !== name || payload.row_count !== payload.records?.length ||
+        !Array.isArray(payload.records) || !Array.isArray(payload.columns) ||
+        payload.origin !== "PRIVATE_GOOGLE_SHEET_MANUAL_REVIEWED_SNAPSHOT") {
+      throw new Error(`Invalid reviewed table ${name}`);
+    }
+    tables[name] = payload.records;
+  }
+  return tables;
 }
 
 async function loadWorkingProjectIds(cacheBust) {
@@ -1087,14 +1093,13 @@ async function loadApplication() {
     const configResponse = await fetch(`map-config.json?${cacheBust}`, { cache: "no-store" });
     if (!configResponse.ok) throw new Error(`Could not load map-config.json (${configResponse.status})`);
     state.config = await configResponse.json();
-    const files = state.config.data_files;
-    const [rawProjects, organizations, people, projectParties, projectFunding, workCatalog, rawWorkItems, materialsMaster, rawInventory, rawComponents, sourceLinks, rawOpportunities, rawLocations, rawPublication] = await Promise.all([
-      loadMapTable(files.projects, cacheBust), loadMapTable(files.organizations, cacheBust), loadMapTable(files.people, cacheBust),
-      loadMapTable(files.project_parties, cacheBust), loadMapTable(files.project_funding, cacheBust), loadMapTable(files.work_catalog, cacheBust),
-      loadMapTable(files.project_work_items, cacheBust), loadMapTable(files.materials_master, cacheBust), loadMapTable(files.project_material_inventory, cacheBust),
-      loadMapTable(files.project_components, cacheBust), loadMapTable(files.project_source_links, cacheBust), loadMapTable(files.project_opportunities, cacheBust),
-      loadMapTable(files.organization_locations, cacheBust), loadMapTable(files.project_publication_settings, cacheBust),
-    ]);
+    const tables = await loadMapBundle(state.config.data_bundle, cacheBust);
+    const { projects: rawProjects, organizations, people, project_parties: projectParties,
+      project_funding: projectFunding, work_catalog: workCatalog, project_work_items: rawWorkItems,
+      materials_master: materialsMaster, project_material_inventory: rawInventory,
+      project_components: rawComponents, project_source_links: sourceLinks,
+      project_opportunities: rawOpportunities, organization_locations: rawLocations,
+      project_publication_settings: rawPublication } = tables;
 
     state.organizations = organizations.filter((row) => parseBoolean(row.is_public, true));
     state.people = people.filter((row) => parseBoolean(row.is_public));

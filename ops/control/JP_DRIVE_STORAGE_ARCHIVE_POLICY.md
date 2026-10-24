@@ -21,3 +21,7 @@ This repository is **public**. Do not commit raw Drive inventories, private file
 
 ## Workstream boundary
 A9 / JP company-enterprise operations only. AEC academic thesis work remains separate. Existing resource relationship authority stays in `ops/data/project-resources.json` and `ops/schema/daily-ops-postgres.sql`.
+
+## User direction and executed pilot — 2026-10-24
+
+The three obsolete root navigation/map items are archived with original IDs; Command Center designs are grouped under Useful System References. Extra enterprise writers are confirmed owner backup accounts; no ACL hold applies on that basis. Individual source Sheets own data entry, a derived Google publishing workbook per repository aggregates sources, and reviewed JSON feeds Actions/Pages. See `docs/operations/SHEETS_TO_PAGES_STORAGE_CONTRACT_V1.md`. No full-tree restructuring or all-workbook pipeline completion is claimed.

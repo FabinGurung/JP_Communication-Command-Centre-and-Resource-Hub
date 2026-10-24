@@ -3,3 +3,6 @@ node_modules/
 artifacts/
 __pycache__/
 *.pyc
+
+# Generated from reviewed map tables by the Pages build.
+/ops/data/map-data.v1.json

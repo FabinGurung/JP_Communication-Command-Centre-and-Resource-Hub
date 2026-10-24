@@ -17,7 +17,7 @@ def main():
     assert config["data_provider"]["type"]=="GOOGLE_SHEETS_PRIVATE_SOURCE__REVIEWED_GITHUB_JSON_PROJECTION"
     assert len(config["data_files"])==14
     script=(ROOT/"assets/js/app.js").read_text(encoding="utf-8")
-    assert "loadMapTable(" in script and "loadCSV(" not in script
+    assert "loadMapBundle(" in script and "loadCSV(" not in script
     assert "return parseCSV" not in script
     total=0
     project_ids=set()

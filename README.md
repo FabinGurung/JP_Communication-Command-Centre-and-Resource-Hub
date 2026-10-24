@@ -42,3 +42,9 @@ Registered development/Pages branch: **`feature/daily-ops-current-work`**; canon
 The migration baseline is commit `8a8474979a233259f27fd2c18ffc61ba78a4a8b8`. Immediately before repository cleanup: `7a322a5988f4bd788d7c28aa2c06c946960b95c2`. **175 obsolete in-repository `99_VERSION_ARCHIVE` snapshots** and the outdated `MIGRATION_CHECKLIST.md` were removed from the current tree; their complete bytes and paths remain recoverable from that pre-cleanup Git commit (`git show 7a322a59:<original-path>`). The **16 notebook archive files** required by the Discord version ledger and SHA validation remain tracked, as do all original CSV rollback datasets. No Git history, immutable release tag, private Drive file or canonical data was deleted.
 
 Historical detail stays in `CHANGELOG.md`, `docs/releases/`, and the commit history rather than this everyday readme.
+
+## 24 October 2026 — source Sheets, generated master and single JSON
+
+Humans edit individual source workbooks. The publishing Google workbook aggregates them; it is not a second fact-entry surface. The map loads `ops/data/map-data.v1.json`, generated and checked by Actions from the 14 reviewed projections. Live private Google authentication/source-refresh is still unconfigured; a Sheet edit alone does not trigger fresh public data. [Current storage and version contract](docs/operations/SHEETS_TO_PAGES_STORAGE_CONTRACT_V1.md).
+
+Enterprise storage is inside `01_JP`; additional writers are the owner’s backup accounts. The old project-map Drive workspace is archived.

@@ -404,6 +404,8 @@
     "source_table_count": 14,
     "refresh_mode": "USER_TRIGGERED_VALIDATION_AND_GITHUB_PAGES_DEPLOYMENT",
     "no_live_browser_google_credentials": true,
-    "original_csv_fallback": "Preserved at repository root; map does not load those files"
-  }
+    "original_csv_fallback": "Preserved at repository root; map does not load those files",
+    "bundle_mode": "ACTIONS_GENERATED_FROM_REVIEWED_TABLES"
+  },
+  "data_bundle": "ops/data/map-data.v1.json"
 }
