@@ -1,5 +1,5 @@
 {
-  "version": "V000001",
+  "version": "V000002",
   "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
   "publishing_workbook_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
   "previous_versions_folder_id": "1DPPAvv0CdnkKKtkY6PjYZep1DyA-lH-H",
@@ -130,6 +130,17 @@
       "latitude",
       "longitude",
       "status"
+    ],
+    "project_publication_settings": [
+      "show_project_name",
+      "show_coordinates",
+      "show_status",
+      "show_ward_number",
+      "show_project_sector",
+      "show_implementation_method",
+      "show_legal_contractor",
+      "show_executing_company_role",
+      "show_general_work_summary"
     ]
   },
   "public_admission": "Existing admitted record IDs and explicit refresh fields only; private and newly discovered rows stay out. Free text, money, measured progress, evidence and previously redacted fields retain their reviewed values pending admission.",

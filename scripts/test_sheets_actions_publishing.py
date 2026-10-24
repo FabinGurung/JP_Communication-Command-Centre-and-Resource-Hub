@@ -187,6 +187,22 @@ class PublishingTests(unittest.TestCase):
             sync(self.api, self.root)
         self.assertEqual(self.api.writes, [])
 
+    def test_field_visibility_changes_reach_the_browser_settings(self):
+        sync(self.api, self.root)
+        fid = self.api.config["sources"]["project_publication_settings"]["workbook_id"]
+        rows = self.api.data[fid, "project_publication_settings"]
+        project = rows[1][rows[0].index("project_id")]
+        for flag in ["show_project_name", "show_coordinates", "show_legal_contractor"]:
+            rows[1][rows[0].index(flag)] = "FALSE"
+        sync(self.api, self.root)
+        bundle = json.loads((self.root / OUTPUT).read_text())["tables"]
+        public = next(r for r in bundle["projects"]["records"] if r["project_id"] == project)
+        for key in ["display_name", "project_name", "latitude", "longitude", "executing_company_id"]:
+            self.assertEqual(public[key], "")
+        settings = next(r for r in bundle["project_publication_settings"]["records"] if r["project_id"] == project)
+        self.assertEqual(settings["show_project_name"], "FALSE")
+        self.assertFalse(any(r["project_id"] == project and r["role"] == "CONTRACTOR" for r in bundle["project_parties"]["records"]))
+
     def test_validated_bundle_rejects_private_injection(self):
         sync(self.api, self.root)
         bundle = json.loads((self.root / OUTPUT).read_text())

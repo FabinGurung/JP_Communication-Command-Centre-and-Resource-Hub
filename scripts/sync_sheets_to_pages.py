@@ -141,6 +141,9 @@ def project_public(root, source_tables):
                     if visibility.get(flag, "").upper() != "TRUE":
                         for field in fields:
                             row[field] = ""
+            elif name == "project_components":
+                if settings.get(row["project_id"], {}).get("show_coordinates", "").upper() != "TRUE":
+                    row["latitude"], row["longitude"] = "", ""
             rows.append(row)
         output[name] = {**approved, "records": rows, "row_count": len(rows),
                         "origin": "ACTIONS_GOOGLE_SHEETS_APPROVED_FIELDS",
@@ -155,6 +158,8 @@ def project_public(root, source_tables):
         if name == "project_parties":
             payload["records"] = [r for r in payload["records"] if r["party_id"] in
                                   (orgs if r["party_entity_type"] == "ORGANIZATION" else people)]
+            payload["records"] = [r for r in payload["records"] if r.get("role") != "CONTRACTOR" or
+                                  settings.get(r["project_id"], {}).get("show_legal_contractor", "").upper() == "TRUE"]
         payload["row_count"] = len(payload["records"])
     validate_relations({x["tab"]: (x["pk"], output[x["tab"]]["records"]) for x in registry["tabs"]})
     return output
@@ -426,6 +431,8 @@ def validate_bundle(payload, root=ROOT):
                 raise SyncError("PUBLIC_PROJECT_STATUS_INVALID")
             if "active" in mutable and row.get("active") not in {"TRUE", "FALSE"}:
                 raise SyncError("PUBLIC_ACTIVE_FLAG_INVALID")
+            if name == "project_publication_settings" and any(row.get(f) not in {"TRUE", "FALSE"} for f in mutable):
+                raise SyncError("PUBLIC_VISIBILITY_FLAG_INVALID")
             keys.append(row[pk])
         if len(keys) != len(set(keys)):
             raise SyncError("DUPLICATE_PUBLIC_RECORD")
