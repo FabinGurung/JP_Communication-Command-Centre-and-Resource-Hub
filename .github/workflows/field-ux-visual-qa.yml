@@ -53,6 +53,9 @@ on:
       - 'map.html'
       - 'assets/css/app.css'
       - 'assets/js/app.js'
+      - 'map-config.json'
+      - 'ops/data/map-sheets-public.v1/**'
+      - 'scripts/build_map_bundle.py'
       - 'ops/data/current-works.json'
       - 'ops/data/project-resources.json'
       - 'scripts/qa_field_ux_browser.py'
@@ -79,6 +82,8 @@ jobs:
           python -m pip install playwright==1.55.0
           npm install --no-save --no-package-lock --ignore-scripts axe-core@4.10.3
           command -v google-chrome || command -v google-chrome-stable || command -v chromium
+      - name: Generate reviewed map bundle before browser QA
+        run: python scripts/build_map_bundle.py
       - name: Browser field and map user journey QA
         run: python scripts/qa_field_ux_browser.py
       - name: Botanical theme matrix, keyboard, print and before/after QA
