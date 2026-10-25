@@ -1,0 +1,1 @@
+{"name":"jp-drive-navigator","private":true,"version":"1.0.0","scripts":{"build":"node build.mjs","check":"tsc --noEmit"},"devDependencies":{"esbuild":"0.28.2","typescript":"7.0.2"}}

@@ -641,6 +641,22 @@ jobs:
       - name: Phase 5 release QA
         run: python scripts/phase5_release_qa.py
 
+      - name: Set up Node for the human navigator
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Compile and verify maintained TypeScript source
+        working-directory: tools/drive-navigator
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run check
+          npm run build
+          git diff --exit-code -- ../../files/index.html
+
+      - name: Verify browser-local human file navigator
+        run: python scripts/test_drive_navigator.py
+
       - name: Negative-test public Pages artifact isolation
         run: python scripts/test_public_pages_site.py
 

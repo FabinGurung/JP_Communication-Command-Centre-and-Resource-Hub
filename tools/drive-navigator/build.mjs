@@ -1,0 +1,14 @@
+import {build} from 'esbuild';
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import path from 'node:path';
+const here=path.dirname(fileURLToPath(import.meta.url));
+const output=path.resolve(here,'../../files');
+mkdirSync(output,{recursive:true});
+const bundle=await build({absWorkingDir:here,entryPoints:[path.join(here,'src/app.ts')],bundle:true,write:false,format:'iife',target:'es2022',external:['https://*'],legalComments:'inline'});
+const css=readFileSync(path.join(here,'src/style.css'),'utf8');
+const js=bundle.outputFiles[0].text;
+if(/<\/script/i.test(js))throw Error('Unsafe script closing tag in bundle');
+const template=readFileSync(path.join(here,'src/shell.html'),'utf8');
+writeFileSync(path.join(output,'index.html'),template.replace('/*__CSS__*/',css).replace('/*__JS__*/',js));
+console.log('Built files/index.html. Public shell contains no private Drive inventory.');
