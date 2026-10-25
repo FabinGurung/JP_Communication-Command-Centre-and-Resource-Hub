@@ -8,6 +8,39 @@ from datetime import datetime, timezone
 import re
 
 SHEET_MIME = "application/vnd.google-apps.spreadsheet"
+FOLDER_MIME = "application/vnd.google-apps.folder"
+
+def owner_archive_folder(drive, root, item, execute):
+    """One stable source-workbook folder; friendly name changes do not split history."""
+    fid = item.get("drive_file_id", item.get("id"))
+    suffix = " — " + fid[-8:]
+    files, token = [], None
+    while True:
+        args = dict(q=f"'{root}' in parents and mimeType = '{FOLDER_MIME}' and trashed = false",
+                    fields="nextPageToken,files(id,name,parents,appProperties)",
+                    pageSize=1000, supportsAllDrives=True, includeItemsFromAllDrives=True)
+        if token:
+            args["pageToken"] = token
+        response = execute(drive.files().list(**args))
+        files.extend(response.get("files", []))
+        token = response.get("nextPageToken")
+        if not token:
+            break
+    found = [x for x in files if x.get("appProperties", {}).get("jp_source_file_id") == fid
+             or (x.get("name", "").endswith(suffix)
+                 and x.get("appProperties", {}).get("jp_source_file_id", fid) == fid)]
+    if len(found) > 1:
+        raise RuntimeError("Ambiguous workbook archive folder")
+    title = re.sub(r"[_\s]+", " ", item["name"]).strip()[:110]
+    folder = found[0] if found else execute(drive.files().create(
+        body={"name": title + suffix, "mimeType": FOLDER_MIME, "parents": [root],
+              "appProperties": {"jp_source_file_id": fid}},
+        fields="id,name,parents", supportsAllDrives=True))
+    proof = execute(drive.files().get(fileId=folder["id"], fields="id,parents,mimeType",
+                                     supportsAllDrives=True))
+    if proof.get("mimeType") != FOLDER_MIME or root not in proof.get("parents", []):
+        raise RuntimeError("Workbook archive folder verification failed")
+    return folder["id"]
 
 def is_archived(item, by_id, archive_root, archive_roots=()):
     cursor = item
@@ -19,8 +52,9 @@ def is_archived(item, by_id, archive_root, archive_roots=()):
         seen.add(key)
         if key in {archive_root, *archive_roots}:
             return True
-        name = cursor.get("name", "").upper()
-        if any(word in name for word in ("ARCHIVE", "SUPERSEDED", "RECYCLE_BIN", "BACKUP", "SNAPSHOT", "PREVIOUS VERSIONS", "PREVIOUS RECORDS")) or re.match(r"^(PRE\d*|POST\d*)__", name):
+        raw_name = cursor.get("name", "").upper()
+        name = re.sub(r"[_\s]+", " ", raw_name)
+        if any(word in name for word in ("ARCHIVE", "SUPERSEDED", "RECYCLE BIN", "BACKUP", "SNAPSHOT", "VERSION HISTORY", "PREVIOUS VERSIONS", "PREVIOUS RECORDS")) or re.match(r"^(?:PRE\d*|POST\d*|FINAL_POST\d*)_", raw_name):
             return True
         parent = cursor.get("parent_drive_id", cursor.get("parent_id"))
         cursor = by_id.get(parent)
@@ -46,18 +80,19 @@ def ensure_controls(items, sheets, drive, archive_root, snapshot_folder, execute
             continue
         # An exact-ID key makes snapshot recovery idempotent after interruption.
         name = f"PRE_MANIFEST_V000001__{fid}"
+        owner_folder = owner_archive_folder(drive, snapshot_folder, item, execute)
         found = execute(drive.files().list(
-            q=f"'{snapshot_folder}' in parents and name = '{name}' and trashed = false",
+            q=f"'{owner_folder}' in parents and name = '{name}' and trashed = false",
             fields="files(id,name,parents)", pageSize=100, supportsAllDrives=True,
             includeItemsFromAllDrives=True))["files"]
         if len(found) > 1:
             raise RuntimeError("Ambiguous snapshot; reconcile before retry")
         snapshot = found[0] if found else execute(drive.files().copy(
-            fileId=fid, body={"name": name, "parents": [snapshot_folder]},
+            fileId=fid, body={"name": name, "parents": [owner_folder]},
             fields="id,name,parents", supportsAllDrives=True))
         proof = execute(drive.files().get(fileId=snapshot["id"], fields="id,parents,mimeType",
                                          supportsAllDrives=True))
-        if snapshot_folder not in proof.get("parents", []) or proof["mimeType"] != SHEET_MIME:
+        if owner_folder not in proof.get("parents", []) or proof["mimeType"] != SHEET_MIME:
             raise RuntimeError("PRE snapshot verification failed")
         ids = {t["sheetId"] for t in tabs.values()}
         requests = []

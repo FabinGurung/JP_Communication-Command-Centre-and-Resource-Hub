@@ -39,8 +39,12 @@ New records, People details, free-text evidence, money, measured construction pr
 
 ## Readable Drive navigation
 
-The 01_JP main paths are Colab Notebooks, Useful References, Shared Registers, Fishtail Builders, Rohini Engineering and Builders, Office and Site Records, and Archive Gallery. Shared Registers separates Working Sheets, Website Publishing, Not Connected Yet, System Records and Previous Sheet Versions.
+The 01_JP main paths are Colab Notebooks, Useful References, Shared Registers, Fishtail Builders, Rohini Engineering and Builders, Office and Site Records, and Archive Gallery. Shared Registers separates Working Sheets, Website Publishing, Not Connected Yet and System Records. Previous Sheet Versions are centralized in Archive Gallery.
 
 The 15 core workbooks now use names such as People, Projects and Locations, Materials and Site Material Stock, retaining their data-version suffixes and original live IDs. Unconnected copies remain separated until cutover. Technical inventories and older PRE/POST records belong in System Records or the archive. No folder was deleted. JP and AEC remain separate.
 
-Each core workbook retains its manifest/history and verified PRE copy, with a V000002 navigation-control entry; its source data release is unchanged. Colab V000006 refreshes affected Drive folders and continues missing histories for other active Sheets. Explicit archive IDs prevent readable renames from accidentally reactivating historical Sheets. Wider consumer mapping remains unfinished.
+Each core workbook retains its manifest/history and verified PRE copy, with a V000002 navigation-control entry; its source data release is unchanged. Colab refreshes affected Drive folders and continues missing histories for other active Sheets. Explicit archive IDs prevent readable renames from accidentally reactivating historical Sheets. Wider consumer mapping remains unfinished.
+
+## Whole-site Sheet ownership
+
+The later user direction extends the one-source-Sheet requirement to every displayed fact, editorial content and Excel export. `COMMUNICATION_WEB_SHEET_OWNERSHIP_V1.md` records the full hierarchy and current gaps. The map implementation does not cover every page. Native source workbooks must be identified before additional adapters or copies are created. Historical copies are grouped centrally by source, outside active working folders.
