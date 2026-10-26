@@ -412,10 +412,10 @@
       "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
     },
     {
-      "section_id": "A9-FLD-04",
+      "section_id": "A9-CHK-ISSUES",
       "location": "Resources/Field/Sheet-04",
-      "path": "resources/field/index.html",
-      "anchor": "#field-src-04",
+      "path": "site-operations.html",
+      "anchor": "company-project-site-issues",
       "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
       "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-04",
       "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED"
@@ -482,6 +482,56 @@
       "purpose": "One controlled L3 route with SRC-01/SRC-02 queries and L4 role/name/project filter and public phone cards",
       "data_contract": "ops/data/a9-contact-directories-public-v0.1.json",
       "status": "ACTIVE"
+    },
+    {
+      "section_id": "A9-FLD-11",
+      "location": "Resources/Field/Sheet-05",
+      "path": "resources/field/index.html",
+      "anchor": "field-src-11",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-05",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED",
+      "source_key": "SRC-11"
+    },
+    {
+      "section_id": "A9-FLD-12",
+      "location": "Resources/Field/Sheet-05",
+      "path": "resources/field/index.html",
+      "anchor": "field-src-12",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-05",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED",
+      "source_key": "SRC-12"
+    },
+    {
+      "section_id": "A9-FLD-13",
+      "location": "Resources/Field/Sheet-05",
+      "path": "resources/field/index.html",
+      "anchor": "field-src-13",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-05",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED",
+      "source_key": "SRC-13"
+    },
+    {
+      "section_id": "A9-FLD-14",
+      "location": "Resources/Field/Sheet-05",
+      "path": "resources/field/index.html",
+      "anchor": "field-src-14",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-05",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED",
+      "source_key": "SRC-14"
+    },
+    {
+      "section_id": "A9-FLD-15",
+      "location": "Resources/Field/Sheet-05",
+      "path": "resources/field/index.html",
+      "anchor": "field-src-15",
+      "purpose": "L3 source-specific dashboard blueprint; L4 charts require authorization",
+      "data_contract": "ops/control/a9-field-visualization-plan.v1.0.json#A9-FIELD-05",
+      "status": "BLUEPRINT_READY_PRIVATE_DATA_NOT_EXPOSED",
+      "source_key": "SRC-15"
     }
   ],
   "legacy_compatibility": [

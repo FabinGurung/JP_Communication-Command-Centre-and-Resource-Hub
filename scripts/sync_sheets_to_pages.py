@@ -51,11 +51,16 @@ def normalize(rows):
     return result
 
 
+def canonical_header(value):
+    """Accept readable Sheet headings while keeping stable field keys in code."""
+    return re.sub(r"[^a-z0-9]+", "_", str(value).strip().lower()).strip("_")
+
+
 def records(rows, key):
     rows = normalize(rows)
     if not rows:
         raise SyncError("SOURCE_HEADER_MISSING")
-    headers = [s.lower() for s in rows[0]]
+    headers = [canonical_header(s) for s in rows[0]]
     if key not in headers or not all(headers) or len(headers) != len(set(headers)):
         raise SyncError("SOURCE_HEADER_INVALID")
     result = []
@@ -162,6 +167,28 @@ def project_public(root, source_tables):
                                   settings.get(r["project_id"], {}).get("show_legal_contractor", "").upper() == "TRUE"]
         payload["row_count"] = len(payload["records"])
     validate_relations({x["tab"]: (x["pk"], output[x["tab"]]["records"]) for x in registry["tabs"]})
+    return output
+
+
+def resources_public(root, rows):
+    """Refresh known resource labels/slots; never admit new files or URLs implicitly."""
+    baseline = json.loads((root / "ops/data/resource-catalog-normalized.v0.1.json").read_text())
+    live = {r["resource_id"]: r for r in records(rows, "resource_id")}
+    output = copy.deepcopy(baseline)
+    for site in output["sites"]:
+        files = []
+        for original in site["files"]:
+            row = live.get(original["resource_id"])
+            if row is None or row.get("publish", "").upper() != "TRUE":
+                continue
+            if (row.get("source_drive_file_id") != original["source_drive_file_id"]
+                    or row.get("source_url") != original["source_drive_url"]
+                    or row.get("site_reference") != original["project_id"]):
+                raise SyncError("RESOURCE_SOURCE_CHANGE_REQUIRES_REVIEW")
+            original["normalized_name"] = row["display_name"]
+            original["document_slot"] = row["document_slot"]
+            files.append(original)
+        site["files"] = files
     return output
 
 
@@ -290,6 +317,7 @@ def sync(api, root=ROOT):
     if set(routes) != expected or set(cfg["sources"]) != expected:
         raise SyncError("SOURCE_COVERAGE_INCOMPLETE")
     incoming, before, source_tables = {}, {}, {}
+    source_specs = dict(cfg["sources"])
     for spec in registry["tabs"]:
         name = spec["tab"]
         spec_source = cfg["sources"][name]
@@ -305,13 +333,22 @@ def sync(api, root=ROOT):
                 raise SyncError("STAGED_SOURCE_CHANGED_CUTOVER_REVIEW_REQUIRED")
         incoming[name] = target
         approved_columns = json.loads((root / spec["public_projection"]).read_text())["columns"]
-        if not target or not set(approved_columns) <= {s.lower() for s in target[0]}:
+        if not target or not set(approved_columns) <= {canonical_header(s) for s in target[0]}:
             raise SyncError("REQUIRED_SOURCE_COLUMNS_MISSING")
         source_tables[name] = (spec["pk"], records(target, spec["pk"]))
         before[name] = api.read(master, name, meta)
         # Never silently truncate the publishing replica.
         width = max(map(len, target), default=0)
         if len(target) > tabs[name]["gridProperties"]["rowCount"] or width > tabs[name]["gridProperties"]["columnCount"]:
+            raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
+    if cfg.get("resources_source"):
+        spec = cfg["resources_source"]
+        source_specs["project_resources"] = spec
+        incoming["project_resources"] = api.read(spec["workbook_id"], spec["tab"])
+        resources_public(root, incoming["project_resources"])
+        before["project_resources"] = api.read(master, "project_resources", meta)
+        if (len(incoming["project_resources"]) > tabs["project_resources"]["gridProperties"]["rowCount"]
+                or max(map(len, incoming["project_resources"]), default=0) > tabs["project_resources"]["gridProperties"]["columnCount"]):
             raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
     validate_relations(source_tables)
     project_public(root, source_tables)  # Reject unsafe joins before any write.
@@ -324,7 +361,7 @@ def sync(api, root=ROOT):
         # Re-read the sources immediately before mutation: a concurrent edit must not
         # create a mixed-scan release. Source errors occur before the PRE copy/write.
         for name, rows in incoming.items():
-            if api.read(cfg["sources"][name]["workbook_id"], name) != rows:
+            if api.read(source_specs[name]["workbook_id"], name) != rows:
                 raise SyncError("SOURCE_CHANGED_DURING_READ")
         if api.read(master, "_SOURCE_ROUTER", meta) != router or api.read(master, "00_MANIFEST", meta) != manifest:
             raise SyncError("PUBLISHING_CONTROLS_CHANGED_DURING_READ")
@@ -355,7 +392,7 @@ def sync(api, root=ROOT):
         manifest += [[key, value] for key, value in control_values.items()]
         requests += update_values(tabs["_SOURCE_ROUTER"]["sheetId"], router)
         requests += update_values(tabs["00_MANIFEST"]["sheetId"], manifest)
-        history.append([version, stamp, "Automatic publishing copy", "Rebuilt from 14 individual source Sheets", snap,
+        history.append([version, stamp, "Automatic publishing copy", f"Rebuilt from {len(incoming)} individual source Sheets", snap,
                         "SOURCE_VALIDATED; READBACK_REQUIRED", "Restore PRE content into same publishing ID", fingerprint])
         requests += update_values(tabs["01_VERSION_HISTORY"]["sheetId"], history)
         api.write(master, requests)  # One atomic Sheets batch; no source writes.
@@ -392,6 +429,11 @@ def sync(api, root=ROOT):
                "reviewed_static_fields_retained": True, "table_count": len(public),
                "source_evidence": {name: {"source": "PUBLISHING_SHEET_READBACK", "row_count": item["row_count"],
                                           "sha256": digest(item)} for name, item in public.items()}, "tables": public}
+    if cfg.get("resources_source"):
+        actual = api.read(master, "project_resources")
+        if actual != incoming["project_resources"] or api.read(cfg["resources_source"]["workbook_id"], "project_resources") != actual:
+            raise SyncError("RESOURCE_PUBLISHING_READBACK_MISMATCH")
+        payload["resources"] = resources_public(root, actual)
     validate_bundle(payload, root)
     output = root / OUTPUT
     temporary = output.with_suffix(".tmp")
@@ -405,6 +447,22 @@ def validate_bundle(payload, root=ROOT):
     baseline = json.loads((root / "ops/control/map-sheets-source.v1.0.json").read_text())
     config = json.loads((root / CONFIG).read_text())
     map_config = json.loads((root / "map-config.json").read_text())
+    if "resources" in payload:
+        original = json.loads((root / "ops/data/resource-catalog-normalized.v0.1.json").read_text())
+        known = {f["resource_id"]: f for s in original["sites"] for f in s["files"]}
+        seen = set()
+        allowed_slots = {"Architectural drawings", "Structural drawings", "Architectural and structural drawings", "Analysis model", "3D model", "Estimates and calculations", "Technical reports and supporting files", "Source folder"}
+        for site in payload["resources"]["sites"]:
+            for item in site["files"]:
+                key = item.get("resource_id")
+                if key not in known or key in seen or item.get("document_slot") not in allowed_slots:
+                    raise SyncError("UNADMITTED_PUBLIC_RESOURCE")
+                if item.get("project_id") != site["project_id"]:
+                    raise SyncError("RESOURCE_PROJECT_INVALID")
+                for field, value in item.items():
+                    if field not in {"normalized_name", "document_slot"} and value != known[key].get(field):
+                        raise SyncError("UNAPPROVED_RESOURCE_FIELD_CHANGE")
+                seen.add(key)
     if set(payload["tables"]) != {x["tab"] for x in baseline["tabs"]} or payload["table_count"] != 14:
         raise SyncError("PUBLIC_TABLE_COVERAGE_INVALID")
     tables = {}

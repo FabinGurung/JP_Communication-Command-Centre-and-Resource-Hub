@@ -29,6 +29,15 @@ class FakeGoogle:
                            name, spec["pk"], cfg["workbook_id"], "", "STAGED", ""])
             self.ids[i + 1] = name
         self.ids.update({50: "_SOURCE_ROUTER", 51: "00_MANIFEST", 52: "01_VERSION_HISTORY"})
+        if self.config.get("resources_source"):
+            catalog = json.loads((root / "ops/data/resource-catalog-normalized.v0.1.json").read_text())
+            rows = [["Resource ID", "Site Reference", "Display Name", "Document Slot", "Source Drive File ID", "Source URL", "Publish"]]
+            for site in catalog["sites"]:
+                for item in site["files"]:
+                    rows.append([item["resource_id"], item["project_id"], item["normalized_name"], item["document_slot"], item["source_drive_file_id"], item["source_drive_url"], "TRUE"])
+            self.ids[53] = "project_resources"
+            self.data[self.master, "project_resources"] = copy.deepcopy(rows)
+            self.data[self.config["resources_source"]["workbook_id"], "project_resources"] = copy.deepcopy(rows)
         self.data[self.master, "_SOURCE_ROUTER"] = normalize(router)
         self.data[self.master, "00_MANIFEST"] = [["Field", "Value"], ["CONTROL_VERSION", "V000002"]]
         self.data[self.master, "01_VERSION_HISTORY"] = [["Version", "Time", "Scope", "Change", "PRE", "QA", "Rollback", "Data"],
@@ -83,7 +92,7 @@ class PublishingTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
-        for name in [CONFIG, "ops/control/map-sheets-source.v1.0.json", "map-config.json"]:
+        for name in [CONFIG, "ops/control/map-sheets-source.v1.0.json", "map-config.json", "ops/data/resource-catalog-normalized.v0.1.json"]:
             dest = self.root / name
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes((ROOT / name).read_bytes())
@@ -111,6 +120,37 @@ class PublishingTests(unittest.TestCase):
         self.assertEqual(len(self.api.snapshots), 1)
         self.assertEqual(len(self.api.writes), writes)
         self.assertEqual(bundle, json.loads((self.root / OUTPUT).read_text()))
+
+    def test_readable_headers_with_individual_owners(self):
+        router = self.api.data[self.api.master, "_SOURCE_ROUTER"]
+        for row in router[1:]:
+            spec = self.api.config["sources"][row[0]]
+            row[1] = spec["workbook_id"]
+            row[5] = "CONNECTED_API_INITIAL_ASSEMBLY"
+        for spec in self.api.config["sources"].values():
+            rows = self.api.data[spec["workbook_id"], spec["tab"]]
+            rows[0] = [name.replace("_", " ").title() for name in rows[0]]
+        sync(self.api, self.root)
+        bundle = json.loads((self.root / OUTPUT).read_text())
+        self.assertEqual(bundle["table_count"], 14)
+        self.assertEqual(bundle["tables"]["people"]["records"], [])
+
+    def test_resource_url_change_stops_before_any_write(self):
+        spec = self.api.config["resources_source"]
+        rows = self.api.data[spec["workbook_id"], "project_resources"]
+        rows[1][rows[0].index("Source URL")] = "https://drive.google.com/file/d/unreviewed/view"
+        with self.assertRaisesRegex(SyncError, "RESOURCE_SOURCE_CHANGE_REQUIRES_REVIEW"):
+            sync(self.api, self.root)
+        self.assertEqual(self.api.writes, [])
+
+    def test_resource_slot_refresh_uses_joined_readback(self):
+        spec = self.api.config["resources_source"]
+        rows = self.api.data[spec["workbook_id"], "project_resources"]
+        rows[1][rows[0].index("Document Slot")] = "Architectural and structural drawings"
+        sync(self.api, self.root)
+        bundle = json.loads((self.root / OUTPUT).read_text())
+        self.assertEqual(bundle["resources"]["sites"][0]["files"][0]["document_slot"], "Architectural and structural drawings")
+        self.assertEqual(self.api.data[self.api.master, "project_resources"], rows)
 
     def test_approved_live_field_and_no_new_version_for_unchanged_run(self):
         sync(self.api, self.root)

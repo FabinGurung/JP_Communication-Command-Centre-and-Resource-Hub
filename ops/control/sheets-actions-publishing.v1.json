@@ -1,5 +1,5 @@
 {
-  "version": "V000003",
+  "version": "V000004",
   "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
   "publishing_workbook_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
   "previous_versions_folder_id": "12-eWCCG56jJBFlFfHa_49sxgydZAbRCj",
@@ -169,5 +169,12 @@
       "executing_company_id"
     ]
   },
-  "previous_versions_file_id": "1c7TD0CyXCJE1Z_Ks5KHje35P0y_VDEQF"
+  "previous_versions_file_id": "1c7TD0CyXCJE1Z_Ks5KHje35P0y_VDEQF",
+  "source_ownership_state": "14_DISTINCT_OWNERS__INITIAL_API_ASSEMBLY_VERIFIED",
+  "initial_assembly_date_npt": "2026-10-26",
+  "resources_source": {
+    "workbook_id": "1e019Jac4lDveZ2glXMph4RLHivqPFEachbcNi-R1DZk",
+    "tab": "project_resources",
+    "pk": "resource_id"
+  }
 }

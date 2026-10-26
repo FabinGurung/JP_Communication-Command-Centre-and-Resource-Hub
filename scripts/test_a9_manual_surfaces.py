@@ -21,7 +21,7 @@ def test():
     assert "MEMORY" in routes["primary_destinations"] and len(routes["primary_destinations"])==7
     assert next(x for x in listed if x["page_id"]=="A9-PAGE-CONTROL_MEMORY")["page_role"]=="PRIMARY"
     assert "A9-MEM-01" in {s["section_id"] for s in routes["sections"]}
-    assert len([s for s in routes["sections"] if s["section_id"].startswith("A9-FLD-") and s["section_id"][-2:].isdigit()])==10
+    assert len([s for s in routes["sections"] if s["section_id"].startswith("A9-FLD-") and s["section_id"][-2:].isdigit()])==14
     assert len([s for s in routes["sections"] if s["section_id"]=="A9-FLD-CONTACTS"])==1
     paths={x["path"] for x in listed}
     assert paths==set(arc["active_pages"])|{"resources/field/index.html","resources/field/contacts/index.html"}
@@ -34,10 +34,15 @@ def test():
     assert len({s["section_id"] for s in routes["sections"]})==len(routes["sections"])
     assert all(x["level"] in {"L0","L1","L2","L3","L4","L5"} for x in routes["levels"])
     assert catalog["kind"]=="PUBLIC_SAFE_SOURCE_CATEGORY_INDEX"
-    assert catalog["sheets_count"]==len(catalog["sources"])==10
+    assert catalog["sheets_count"]==len(catalog["sources"])==14
     assert catalog["published_rows"]==0 and catalog["public_source_file_ids_included"] is False
-    assert len({s["source_key"] for s in catalog["sources"]})==10
+    assert len({s["source_key"] for s in catalog["sources"]})==14
     assert all(s["private_sheet_url_included"] is False and s["projection_state"].startswith("AWAITING_") for s in catalog["sources"])
+    assert {x["source_key"] for x in catalog["checklist_sources"]}=={"SRC-04"}
+    assert "SRC-04" not in {x["source_key"] for x in catalog["sources"]}
+    assert "company-project-site-issues" in read("site-operations.html")
+    assert "memory-contents" in read("controls/memory-wall.html")
+    assert "iframe" not in read("workspace/index.html")
     assert checklist["kind"]=="MANUALLY_PUBLISHED_DAILY_CHECKLIST"
     assert checklist["count"]==len(checklist["rows"])==0 and checklist["automatic_polling"] is False
     assert progress["kind"]=="MANUALLY_REVIEWED_PROGRESS_PUBLICATION_QUEUE"
@@ -51,12 +56,12 @@ def test():
     assert plan["worksheet_policy"]["hide_tab_count_this_change"]==0
     source_links=data("ops/data/a9-field-source-links-public.v1.0.json")
     assert source_links["registry_id"]=="A9_FIELD_SOURCE_LINKS_PUBLIC_20261021"
-    assert source_links["source_count"]==len(source_links["google_sheet_urls"])==10
+    assert source_links["source_count"]==len(source_links["google_sheet_urls"])==15
     assert source_links["source_records_copied"]==0 and source_links["sharing_permissions_changed"] is False
     assert source_links["urls_publicly_visible"] is True
     link_keys={x["source_key"] for x in source_links["google_sheet_urls"]}
-    assert link_keys=={x["source_key"] for x in catalog["sources"]}
-    assert len({x["url"] for x in source_links["google_sheet_urls"]})==10
+    assert link_keys=={x["source_key"] for x in catalog["sources"]+catalog["checklist_sources"]}
+    assert len({x["url"] for x in source_links["google_sheet_urls"]})==15
     assert all(x["url"].startswith("https://docs.google.com/spreadsheets/d/") and x["url"].endswith("/edit") and x["dashboard_id"]=="A9-FIELD-"+x["source_key"][-2:] for x in source_links["google_sheet_urls"])
     preview=data("ops/data/a9-company-contacts-public-preview.v0.1.json")
     assert preview["projection_id"]=="A9_PUBLIC_COMPANY_CONTACT_PREVIEW_20261021"
@@ -136,6 +141,6 @@ def test():
     assert "VERBATIM_FIRST_NO_AUTO_DERIVATION" in read("assets/js/a9-manual-progress.js")
     assert "website-level-tree" in read("controls/memory-wall.html")
     assert "🧠 Memory Poster" in read("assets/js/site-shell.js")
-    print("A9_MANUAL_SURFACES_PASS: 22 active routes including dedicated company contacts, 26 public phone contacts by explicit user request, 10 original Sheets, 37 historical events, 46 resources, collector on hold.")
+    print("A9_MANUAL_SURFACES_PASS: 22 active routes including dedicated company contacts, 26 public phone contacts by explicit user request, 14 Field sources plus Checklist issues, 37 historical events, 46 resources, collector on hold.")
 if __name__=="__main__":
     test()

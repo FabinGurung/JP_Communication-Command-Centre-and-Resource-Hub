@@ -64,7 +64,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P001-ARCH-DWG-20261011",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Architectural drawings"
         },
         {
           "resource_id": "RES-P001-STRUCT-DWG-20261011",
@@ -89,7 +90,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P001-STRUCT-DWG-20261011",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Structural drawings"
         },
         {
           "resource_id": "RES-P001-ORIGINAL-CAD-FOLDER-20261011",
@@ -114,7 +116,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P001-ORIGINAL-CAD-FOLDER-20261011",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         },
         {
           "resource_id": "RES-P001-ROOT",
@@ -139,7 +142,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P001-ROOT",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         }
       ]
     },
@@ -171,7 +175,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P002-WORKING-DRAWING-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Architectural drawings"
         },
         {
           "resource_id": "RES-P002-STRUCT-PDF-001",
@@ -196,7 +201,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P002-STRUCT-PDF-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Structural drawings"
         },
         {
           "resource_id": "RES-P002-STRUCT-DWG-001",
@@ -221,7 +227,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P002-STRUCT-DWG-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Structural drawings"
         },
         {
           "resource_id": "RES-P002-ROOT",
@@ -246,7 +253,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P002-ROOT",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         }
       ]
     },
@@ -278,7 +286,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P003-ARCH-PDF-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Architectural drawings"
         },
         {
           "resource_id": "RES-P003-ROOT",
@@ -303,7 +312,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P003-ROOT",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         }
       ]
     },
@@ -335,7 +345,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P004-ARCH-PDF-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Architectural drawings"
         },
         {
           "resource_id": "RES-P004-ARCH-DWG-001",
@@ -360,7 +371,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P004-ARCH-DWG-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Architectural drawings"
         },
         {
           "resource_id": "RES-P004-ROOT",
@@ -385,7 +397,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P004-ROOT",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         }
       ]
     },
@@ -417,7 +430,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P005-ARCH-PDF-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Architectural drawings"
         },
         {
           "resource_id": "RES-P005-STRUCT-PDF-001",
@@ -442,7 +456,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P005-STRUCT-PDF-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Structural drawings"
         },
         {
           "resource_id": "RES-P005-ARCH-DWG-001",
@@ -467,7 +482,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P005-ARCH-DWG-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Architectural drawings"
         },
         {
           "resource_id": "RES-P005-ETABS-E2K-001",
@@ -492,7 +508,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P005-ETABS-E2K-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Analysis model"
         },
         {
           "resource_id": "RES-P005-STRUCT-DWG-001",
@@ -517,7 +534,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P005-STRUCT-DWG-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Structural drawings"
         },
         {
           "resource_id": "RES-P005-COST-ESTIMATE-001",
@@ -542,7 +560,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P005-COST-ESTIMATE-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Estimates and calculations"
         },
         {
           "resource_id": "RES-P005-ROOT",
@@ -567,7 +586,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P005-ROOT",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         }
       ]
     },
@@ -599,7 +619,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P006-ROOT",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         }
       ]
     },
@@ -631,7 +652,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-ARCH-PDF",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Architectural drawings"
         },
         {
           "resource_id": "RES-P007-20261009-SOIL-PDF",
@@ -656,7 +678,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-SOIL-PDF",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Technical reports and supporting files"
         },
         {
           "resource_id": "RES-P007-20261009-SANITARY-PDF",
@@ -681,7 +704,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-SANITARY-PDF",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Technical reports and supporting files"
         },
         {
           "resource_id": "RES-P007-20261009-STRUCT-PDF",
@@ -706,7 +730,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-STRUCT-PDF",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Structural drawings"
         },
         {
           "resource_id": "RES-P007-20261009-SKETCHUP-COMMERCIAL",
@@ -731,7 +756,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-SKETCHUP-COMMERCIAL",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "3D model"
         },
         {
           "resource_id": "RES-P007-20261009-SKETCHUP-FINAL",
@@ -756,7 +782,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-SKETCHUP-FINAL",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "3D model"
         },
         {
           "resource_id": "RES-P007-20261009-ARCH-DWG",
@@ -781,7 +808,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-ARCH-DWG",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Architectural drawings"
         },
         {
           "resource_id": "RES-P007-20261009-ETABS-SLS",
@@ -806,7 +834,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-ETABS-SLS",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Analysis model"
         },
         {
           "resource_id": "RES-P007-20261009-ETABS-ULS",
@@ -831,7 +860,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-ETABS-ULS",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Analysis model"
         },
         {
           "resource_id": "RES-P007-20261009-STRUCT-DWG",
@@ -856,7 +886,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-STRUCT-DWG",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Structural drawings"
         },
         {
           "resource_id": "RES-P007-20261009-MEP-FOLDER",
@@ -881,7 +912,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-MEP-FOLDER",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         },
         {
           "resource_id": "RES-P007-20261009-ARCH-HISTORY",
@@ -906,7 +938,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-ARCH-HISTORY",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         },
         {
           "resource_id": "RES-P007-20261009-CANON-ROOT",
@@ -931,7 +964,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-CANON-ROOT",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         },
         {
           "resource_id": "RES-P007-20261009-ETABS-HISTORY",
@@ -956,7 +990,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-ETABS-HISTORY",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         },
         {
           "resource_id": "RES-P007-20261009-SOURCES",
@@ -981,7 +1016,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-SOURCES",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         },
         {
           "resource_id": "RES-P007-20261009-STRUCT-HISTORY",
@@ -1006,7 +1042,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-20261009-STRUCT-HISTORY",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         },
         {
           "resource_id": "RES-P007-ROOT",
@@ -1031,7 +1068,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P007-ROOT",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         }
       ]
     },
@@ -1063,7 +1101,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P020-ARCH-PDF-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Architectural drawings"
         },
         {
           "resource_id": "RES-P020-MUNICIPAL-001",
@@ -1088,7 +1127,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P020-MUNICIPAL-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Technical reports and supporting files"
         },
         {
           "resource_id": "RES-P020-STRUCT-ANALYSIS-PDF-001",
@@ -1113,7 +1153,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P020-STRUCT-ANALYSIS-PDF-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Structural drawings"
         },
         {
           "resource_id": "RES-P020-STRUCT-PDF-001",
@@ -1138,7 +1179,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P020-STRUCT-PDF-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Structural drawings"
         },
         {
           "resource_id": "RES-P020-ARCH-DWG-001",
@@ -1163,7 +1205,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P020-ARCH-DWG-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Architectural drawings"
         },
         {
           "resource_id": "RES-P020-ETABS-EDB-001",
@@ -1188,7 +1231,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P020-ETABS-EDB-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Analysis model"
         },
         {
           "resource_id": "RES-P020-STRUCT-DETAIL-001",
@@ -1213,7 +1257,8 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P020-STRUCT-DETAIL-001",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Estimates and calculations"
         },
         {
           "resource_id": "RES-P020-ROOT",
@@ -1238,9 +1283,12 @@
             "metadata_source": "LIVE_DRIVE_METADATA",
             "record_id": "RES-P020-ROOT",
             "original_registry_file": "ops/data/project-resources.json"
-          }
+          },
+          "document_slot": "Source folder"
         }
       ]
     }
-  ]
+  ],
+  "data_owner": "Google Sheets: Project Resources",
+  "source_readback_date_npt": "2026-10-26"
 }

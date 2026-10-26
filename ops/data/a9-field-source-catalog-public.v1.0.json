@@ -2,10 +2,10 @@
   "schema_version": "1.0.0",
   "registry_id": "A9-FIELD-RESOURCE-SOURCE-CATALOG-PUBLIC-20261020",
   "kind": "PUBLIC_SAFE_SOURCE_CATEGORY_INDEX",
-  "reviewed_on_npt": "2026-10-20",
-  "authority": "TEN_ORIGINAL_GOOGLE_SHEETS__PRIVATE_URLS_AND_BYTES_RETAINED_IN_SOURCE_PROVIDER",
+  "reviewed_on_npt": "2026-10-26",
+  "authority": "INDIVIDUAL_SUBJECT_SHEETS_AND_EXPLICIT_DERIVED_VIEWS",
   "purpose": "DISCOVERY_ONLY_NOT_A_LIVE_SHEET_MIRROR",
-  "sheets_count": 10,
+  "sheets_count": 14,
   "published_rows": 0,
   "public_source_file_ids_included": false,
   "source_read_mode": "MANUAL_USER_TRIGGERED_NO_BACKGROUND_SCANS",
@@ -18,7 +18,7 @@
       "access": "PRIVATE_DIRECTORY",
       "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
       "private_sheet_url_included": false,
-      "note": "Searchable company-scoped contacts require authenticated viewing; no numbers or person rows in the public site."
+      "note": "Company contact source. Open the searchable directory for the already approved public contacts; edit records in the source Sheet."
     },
     {
       "source_key": "SRC-02",
@@ -28,92 +28,144 @@
       "access": "PRIVATE_DIRECTORY",
       "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
       "private_sheet_url_included": false,
-      "note": "Searchable company-scoped contacts require authenticated viewing."
+      "note": "Company contact source. Open the searchable directory for the already approved public contacts; edit records in the source Sheet."
     },
     {
       "source_key": "SRC-03",
-      "title": "A9 normalized contacts (6NF)",
+      "title": "Company Contacts — Joined View",
       "department": "Contacts",
       "company": "Shared",
       "access": "PRIVATE_MASTER",
       "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
       "private_sheet_url_included": false,
-      "note": "Master tables for person IDs, roles, organizations and project memberships; never mirror full records publicly."
-    },
-    {
-      "source_key": "SRC-04",
-      "title": "Sharada project issue register",
-      "department": "Issues",
-      "company": "Fishtail",
-      "access": "RESTRICTED_ISSUES",
-      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
-      "private_sheet_url_included": false,
-      "note": "Only verified public-safe issue status can be projected; potential backcharges are not approved debt."
+      "note": "Read-only combination of the Rohini and Fishtail contact sources. Edit contacts in their company source Sheet."
     },
     {
       "source_key": "SRC-05",
-      "title": "Narayani team attendance",
+      "title": "Manpower Team Attendance",
       "department": "Attendance",
       "company": "Fishtail",
       "access": "PRIVATE_ATTENDANCE",
       "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
       "private_sheet_url_included": false,
-      "note": "Worker/date details restricted; future aggregate only after separate public-projection authorization."
+      "note": "Attendance across projects and contractors. Chaudhary is one contractor or recorder."
     },
     {
       "source_key": "SRC-06",
-      "title": "Shared cement, materials and site diary",
+      "title": "Fishtail Materials Inventory",
       "department": "Materials",
       "company": "Fishtail",
       "access": "PROJECT_OPERATIONS",
       "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
       "private_sheet_url_included": false,
-      "note": "PPC/OPC, movements, stock and daily progress remain distinct; planned quantities are not receipts."
+      "note": "One movement table for all materials, including preserved legacy consumption entries."
     },
     {
       "source_key": "SRC-07",
-      "title": "Field team A visits and expenses",
+      "title": "Paras Pariyar — Attendance",
       "department": "Visits",
       "company": "Fishtail",
       "access": "PRIVATE_PERSONNEL_FINANCE",
       "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
       "private_sheet_url_included": false,
-      "note": "Individual attendance and expenses require restricted access; no employee rows exposed."
+      "note": "Engineer attendance only. Expenses have their own Sheet. Discord and Slack extraction is deferred."
     },
     {
       "source_key": "SRC-08",
-      "title": "Field team B visits and expenses",
+      "title": "Shiv Narayan Chaudhary — Attendance",
       "department": "Visits",
       "company": "Fishtail",
       "access": "PRIVATE_PERSONNEL_FINANCE",
       "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
       "private_sheet_url_included": false,
-      "note": "Individual attendance and expenses require restricted access; no employee rows exposed."
+      "note": "Engineer attendance only. Expenses have their own Sheet. Discord and Slack extraction is deferred."
     },
     {
       "source_key": "SRC-09",
-      "title": "Fishtail project location register",
+      "title": "Fishtail Project Locations",
       "department": "Locations",
       "company": "Fishtail",
       "access": "PROJECT_GEO",
       "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
       "private_sheet_url_included": false,
-      "note": "Canonical project IDs join existing public map; verify coordinates and publication scope."
+      "note": "Opens a filtered view of shared Projects and Locations; no competing coordinate table."
     },
     {
       "source_key": "SRC-10",
-      "title": "Rohini project location register",
+      "title": "Rohini Project Locations",
       "department": "Locations",
       "company": "Rohini",
       "access": "PROJECT_GEO",
       "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
       "private_sheet_url_included": false,
-      "note": "Canonical project IDs join existing public map; verify coordinates and publication scope."
+      "note": "Opens a filtered view of shared Projects and Locations; no competing coordinate table."
+    },
+    {
+      "source_key": "SRC-11",
+      "title": "Rohini Materials Inventory",
+      "department": "Materials",
+      "company": "Rohini",
+      "access": "RESTRICTED_SOURCE",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Existing inventory reused. Record all material types in one movement table."
+    },
+    {
+      "source_key": "SRC-12",
+      "title": "Paras Pariyar — Expenses",
+      "department": "Expenses",
+      "company": "Fishtail",
+      "access": "RESTRICTED_SOURCE",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Dedicated expense source; existing entries preserved."
+    },
+    {
+      "source_key": "SRC-13",
+      "title": "Shiv Narayan Chaudhary — Expenses",
+      "department": "Expenses",
+      "company": "Fishtail",
+      "access": "RESTRICTED_SOURCE",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Dedicated expense source, separate from attendance."
+    },
+    {
+      "source_key": "SRC-14",
+      "title": "Fishtail Site Operations and Daily Progress",
+      "department": "Daily progress",
+      "company": "Fishtail",
+      "access": "RESTRICTED_SOURCE",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Existing operations hub. Future Discord and Slack extraction is deferred."
+    },
+    {
+      "source_key": "SRC-15",
+      "title": "Rohini Site Operations and Daily Progress",
+      "department": "Daily progress",
+      "company": "Rohini",
+      "access": "RESTRICTED_SOURCE",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Existing operations hub. Future Discord and Slack extraction is deferred."
     }
   ],
   "public_visibility_rule": "ONLY_SEPARATELY_APPROVED_NON_IDENTIFYING_PROJECTIONS",
   "hold": {
     "discord_collector": "ON_HOLD_BY_USER",
     "scheduler": "NOT_CONFIGURED"
-  }
+  },
+  "checklist_sources": [
+    {
+      "source_key": "SRC-04",
+      "title": "Company Project Site Issues",
+      "department": "Issues",
+      "company": "Fishtail",
+      "access": "RESTRICTED_ISSUES",
+      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "private_sheet_url_included": false,
+      "note": "Issues belong to Daily Checklist. Potential backcharges remain unconfirmed until approved."
+    }
+  ]
 }

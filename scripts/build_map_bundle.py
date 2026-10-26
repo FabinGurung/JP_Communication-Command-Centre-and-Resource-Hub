@@ -43,7 +43,8 @@ def build(root=ROOT):
     payload = {"schema_version": "1.0.0", "bundle_id": "JP_MAP_REVIEWED_SHEETS_V1",
                "publication_mode": "REVIEWED_SNAPSHOT_BUILD",
                "live_google_sheets_fetch": False,
-               "table_count": len(tables), "source_evidence": evidence, "tables": tables}
+               "table_count": len(tables), "source_evidence": evidence, "tables": tables,
+               "resources": json.loads((root / "ops/data/resource-catalog-normalized.v0.1.json").read_text())}
     text = json.dumps(payload, ensure_ascii=False, sort_keys=True, indent=2) + "\n"
     target = root / OUTPUT
     target.write_text(text, encoding="utf-8")

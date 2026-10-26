@@ -204,9 +204,9 @@ def run():
                 print("PASS: 1/3/7/15-page guide role guidance and back links")
 
                 page.goto(BASE+"/workspace/",wait_until="domcontentloaded",timeout=20000)
-                page.wait_for_function("() => document.querySelectorAll('#developer-directory .card').length >= 4",timeout=15000)
-                require(page.locator("#developer-directory .card").count()==6,
-                        "Developer Workspace must show six software-only categories")
+                page.wait_for_function("() => document.querySelectorAll('#developer-directory .card').length === 2",timeout=15000)
+                require(page.locator("#developer-directory .card").count()==2,
+                        "Workspace retains active tests and backlog; durable references belong to Memory")
                 require(page.locator(".development-map .dev-step").count()==3,
                         "Developer workflow plan, test, release diagram missing")
                 developer_labels=page.locator("#developer-directory").inner_text()

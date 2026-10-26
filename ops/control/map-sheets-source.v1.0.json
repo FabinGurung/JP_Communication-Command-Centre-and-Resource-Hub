@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0.0",
   "authority_id": "JP_AEC_MAP_GOOGLE_SHEETS_SOURCE_20261021",
-  "status": "14_PHYSICAL_CATEGORY_WORKBOOKS_STAGED__MASTER_STILL_4_CONNECTED_SOURCES",
+  "status": "14_ACTIVE_INDIVIDUAL_OWNERS__INITIAL_API_ASSEMBLY_VERIFIED__ACTIONS_IDENTITY_PENDING",
   "owner": "JP Operations Hub",
   "master_file_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
   "master_url": "https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit",
-  "master_title": "Website Publishing \u2014 Automatic Copy \u2014 v1.2",
+  "master_title": "Website Publishing — Joined Source Sheets — v1.3",
   "drive_folder": "1DRECcxUaz68mS_WPWbvReKxujmZ2O58t",
   "source_commit": "8a8474979a233259f27fd2c18ffc61ba78a4a8b8",
   "tab_count": 14,
   "source_rows": 162,
-  "identical_cell_readback": false,
-  "readback_checked": "2026-10-22",
+  "identical_cell_readback": true,
+  "readback_checked": "2026-10-26",
   "render_runtime": "GITHUB_PAGES_LOCAL_REVIEWED_JSON",
   "refresh_mode": "ON_DEMAND_VIA_APPROVED_SHEETS_READ_AND_GIT_DEPLOY",
   "public_projection_root": "ops/data/map-sheets-public.v1/",
@@ -197,14 +197,14 @@
     "attendance_source_access_risk": "Google IMPORTRANGE authorization permits any editor of shared attendance destination to import other People-owner ranges; avoid adding sensitive worker data to accessible source.",
     "private_people_publication": "NO_CHANGE_TO_PUBLIC_PEOPLE_JSON",
     "attendance_provider_approval_pending": false,
-    "attendance_workbook_title": "Chaudhary Team Attendance Workbook__v2.6__LIVE",
+    "attendance_workbook_title": "Manpower Team Attendance — v2.7",
     "attendance_historic_man_days": 14,
     "archive_personnel_private": true
   },
   "archive_folder_id": "1W7ebW5Yn9TFNaEXGoUIK5QHpL-bN62Fw",
   "archive_date": "2026-10-22",
   "archive_mode": "SIX_SEPARATE_PRIVATE_NATIVE_GOOGLE_SHEETS_VERSIONS__LIVE_IDS_PRESERVED",
-  "live_tab_count": 16,
+  "live_tab_count": 21,
   "live_extra_control_tabs": [
     "_CONTROL_READ_FIRST",
     "_SOURCE_ROUTER"
@@ -217,46 +217,70 @@
     "__ROLLBACK_people_20261022",
     "_AUTHORIZE_IMPORTS"
   ],
-  "last_control_update": "2026-10-23",
+  "last_control_update": "2026-10-26",
   "private_master_row_count": 193,
-  "private_owner_workbook_count": 4,
-  "private_master_tab_count": 14,
+  "private_owner_workbook_count": 14,
+  "private_master_tab_count": 15,
   "normalized_p2_complete": true,
   "normalized_p2_source_table_groups": {
-    "PEOPLE": [
+    "projects": [
+      "projects"
+    ],
+    "organizations": [
+      "organizations"
+    ],
+    "people": [
       "people"
     ],
-    "PROJECTS_AND_LOCATIONS": [
-      "projects",
-      "project_parties",
-      "project_funding",
-      "project_work_items",
-      "project_material_inventory",
-      "project_components",
-      "project_source_links",
-      "project_opportunities",
-      "project_publication_settings"
+    "project_parties": [
+      "project_parties"
     ],
-    "ORGANIZATIONS": [
-      "organizations",
+    "project_funding": [
+      "project_funding"
+    ],
+    "work_catalog": [
+      "work_catalog"
+    ],
+    "project_work_items": [
+      "project_work_items"
+    ],
+    "materials_master": [
+      "materials_master"
+    ],
+    "project_material_inventory": [
+      "project_material_inventory"
+    ],
+    "project_components": [
+      "project_components"
+    ],
+    "project_source_links": [
+      "project_source_links"
+    ],
+    "project_opportunities": [
+      "project_opportunities"
+    ],
+    "organization_locations": [
       "organization_locations"
     ],
-    "WORK_CATALOG": [
-      "work_catalog",
-      "materials_master"
+    "project_publication_settings": [
+      "project_publication_settings"
     ]
   },
   "private_master_validation": {
-    "date": "2026-10-23",
+    "date": "2026-10-26",
     "tables": 14,
     "rows": 193,
     "projects": 30,
     "project_source_links": 5,
     "project_publication_settings": 30,
     "source_parity_checked_for_basanti": true,
-    "previous_migration_checks": 10
+    "previous_migration_checks": 10,
+    "core_tables": 14,
+    "core_rows": 193,
+    "additional_resource_rows": 46,
+    "initial_api_readback": true
   },
-  "private_owner_folder_name": "JP__NORMALIZED_AUTHORITIES__PRIVATE",
+  "private_owner_folder_name": "Working Sheets",
   "p2_pointer_documents_written": 2,
   "p2_unnecessary_draft_archived": true,
   "category_workbook_partition_v0_2": {
@@ -275,7 +299,8 @@
     "wrong_workbook_registry_removed": true,
     "wrong_workbooks_soft_trashed": false,
     "wrong_workbooks_trash_unavailable_in_connector": true,
-    "p1_security_deferred": true
+    "p1_security_deferred": true,
+    "status": "HISTORICAL_CHECKPOINT"
   },
   "basanti_private_admission": {
     "global_project_id": "PRJ-000029",
@@ -294,5 +319,17 @@
     "identity_disposition": "USER_CONFIRMED_BASANTI__HISTORICAL_LABELS_NOT_OFFICIAL"
   },
   "actions_refresh_implementation": "scripts/sync_sheets_to_pages.py",
-  "actions_connection_state": "PENDING_GOOGLE_IDENTITY_AND_FIRST_LIVE_RUN"
+  "actions_connection_state": "PENDING_GOOGLE_IDENTITY_AND_FIRST_LIVE_RUN",
+  "source_rows_scope": "ORIGINAL_MIGRATION_BASELINE__CURRENT_PRIVATE_COUNTS_BELOW",
+  "category_workbook_partition_v0_3": {
+    "as_of": "2026-10-26",
+    "active_core_owners": 14,
+    "source_master_readback": "VERIFIED",
+    "legacy_duplicate_tables_retired": true,
+    "initial_assembly_owner": "CONNECTED_SHEETS_API",
+    "actions_live_run": "NOT_VERIFIED__GOOGLE_IDENTITY_PENDING",
+    "additional_publishing_subject": "project_resources",
+    "additional_publishing_rows": 46,
+    "source_directory_tab": "00_SOURCE_DIRECTORY"
+  }
 }
