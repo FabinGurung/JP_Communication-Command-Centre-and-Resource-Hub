@@ -467,8 +467,13 @@ jobs:
           developer_links = json.loads(Path("workspace/developer-links.v0.1.json").read_text(encoding="utf-8"))
           if developer_links.get("scope") != "WEBSITE_IMPLEMENTATION_NOT_PROJECT_CASE_FILES":
               raise SystemExit("Developer Workspace registry must be developer-only.")
-          if len(developer_links.get("categories", [])) < 4:
-              raise SystemExit("Developer Workspace technical links are incomplete.")
+          if {x["id"] for x in developer_links.get("categories", [])} != {"quality", "backlog"}:
+              raise SystemExit("Developer Workspace must retain active testing and backlog tools.")
+          if {x["id"] for x in developer_links.get("memory_categories", [])} != {"architecture", "controls", "versioning", "pipelines"}:
+              raise SystemExit("Memory reference categories are incomplete.")
+          memory_html = Path("controls/memory-wall.html").read_text(encoding="utf-8")
+          if not all(marker in memory_html for marker in ("memory-contents", "website-reference-library", "memory_categories")):
+              raise SystemExit("Memory Poster Board must expose contents and the relocated reference library.")
           if "developer-links.v0.1.json" not in workspace_html:
               raise SystemExit("Developer Workspace is missing its developer link source.")
           if 'location.replace("workspace/"' not in legacy_workspace_html:
