@@ -44,6 +44,24 @@ def owned_data_lanes(path):
     if p.startswith("ops/discord/") or p.startswith("ops/data/communication-web-daily/"):out.add("provider_capture")
     return out
 
+def registered_system_merge(before, after, second_parent, delta):
+    """Admit only an exact reviewed system PR receipt; keep unknown merges closed."""
+    registry = read_json("ops/control/branch-lane-registry.json")
+    publication = read_json("ops/control/pages-publication-lane.v0.1.json")
+    for lane in registry.get("ephemeral_system_lanes", []):
+        if (lane.get("allowed_for_work") is not True or lane.get("requires_pull_request") is not True
+                or lane.get("direct_pages_deploy") is not False
+                or lane.get("merge_base") != publication["pages_publication_branch"]):
+            continue
+        for receipt in lane.get("reviewed_merges", []):
+            if (receipt.get("base_sha"), receipt.get("head_sha"), receipt.get("merge_sha")) != (before, second_parent, after):
+                continue
+            allowed = receipt.get("allowed_paths", [])
+            return (isinstance(receipt.get("pull_request"), int) and receipt["pull_request"] > 0
+                    and bool(delta) and bool(allowed) and len(allowed) == len(set(allowed))
+                    and set(delta) <= set(allowed))
+    return False
+
 def changed_files():
     override=os.getenv("JP_AEC_CHANGED_PATHS")
     if override is not None:
@@ -71,8 +89,9 @@ def changed_files():
                 delta=[p for p in git("diff","--name-only","--no-renames",before,after).splitlines() if p]
                 pattern=re.compile(r"^contributions/(PRJ-[0-9]{6})/([a-z0-9][a-z0-9-]{2,48})/[A-Za-z0-9_.-]+$")
                 pairs=[m.groups() if (m:=pattern.fullmatch(p)) else None for p in delta]
-                require(bool(delta) and len(delta)<=40 and all(pairs) and len(set(pairs))==1,
-                        "merge second parent differs from current production main and is not one scoped contribution")
+                scoped = bool(delta) and len(delta)<=40 and all(pairs) and len(set(pairs))==1
+                require(scoped or registered_system_merge(before, after, second_parent, delta),
+                        "merge second parent differs from current production main and is not one scoped contribution or exact reviewed system PR")
                 base=before
     else:
         base=git("rev-parse",after+"^")

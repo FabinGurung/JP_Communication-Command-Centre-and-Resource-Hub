@@ -577,7 +577,43 @@
       "requires_pull_request": true,
       "merge_base": "feature/daily-ops-current-work",
       "direct_pages_deploy": false,
-      "purpose": "Source-linked Notification Center; independent of Sheets authentication setup."
+      "purpose": "Source-linked Notification Center; independent of Sheets authentication setup.",
+      "reviewed_merges": [
+        {
+          "pull_request": 10,
+          "base_sha": "734cacd528f83192b7226e9e992b8f8c5e09eb3d",
+          "head_sha": "af6c99c703c2af52856e5d0f79b30ef142b15c08",
+          "merge_sha": "78ff6d34a4af71e6eac12faa939c07744c922ee1",
+          "allowed_paths": [
+            "AGENTS.md",
+            ".github/workflows/notification-center-qa.yml",
+            ".github/workflows/field-ux-visual-qa.yml",
+            "scripts/notification_projection.py",
+            "scripts/test_notification_center.py",
+            "scripts/sync_sheets_to_pages.py",
+            "scripts/build_map_bundle.py",
+            "scripts/test_sheets_actions_publishing.py",
+            "scripts/qa_a9_manual_browser.py",
+            "scripts/qa_field_ux_browser.py",
+            "scripts/test_a9_manual_surfaces.py",
+            "assets/js/notification-center.js",
+            "assets/css/notification-center.css",
+            "assets/js/site-shell.js",
+            "assets/js/app.js",
+            "ops/data/site-notifications-public.v1.json",
+            "ops/control/sheets-actions-publishing.v1.json",
+            "ops/control/pages-public-file-allowlist.v1.json",
+            "ops/control/a9-page-section-registry.v1.0.json",
+            "site-operations.html",
+            "index.html",
+            "resources/index.html",
+            "controls/memory-wall.html",
+            "docs/operations/NOTIFICATION_CENTER_V1.md",
+            "docs/operations/SHEETS_TO_PAGES_STORAGE_CONTRACT_V1.md"
+          ],
+          "validation": "Notification source QA and desktop/mobile visual QA passed before merge."
+        }
+      ]
     }
   ]
 }
