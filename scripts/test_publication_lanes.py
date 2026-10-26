@@ -98,6 +98,17 @@ class PublicationLaneTests(unittest.TestCase):
             with self.assertRaisesRegex(lane.GateError,"not one scoped contribution"):
                 lane.changed_files()
 
+    def test_registered_system_receipt_accepts_exact_merge_only(self):
+        receipt=lane.read_json("ops/control/branch-lane-registry.json")["ephemeral_system_lanes"][0]["reviewed_merges"][0]
+        args=(receipt["base_sha"],receipt["merge_sha"],receipt["head_sha"])
+        self.assertTrue(lane.registered_system_merge(*args,receipt["allowed_paths"]))
+        self.assertFalse(lane.registered_system_merge(args[0],args[1],"f"*40,receipt["allowed_paths"]))
+        self.assertFalse(lane.registered_system_merge(*args,receipt["allowed_paths"]+["unreviewed/root.py"]))
+
+    def test_system_receipt_does_not_bypass_data_owner_lanes(self):
+        with self.assertRaises(lane.GateError):
+            lane.audit_change_lanes(["site-operations.html",lane.REPORT])
+
     def test_original_binary_or_raw_folder_denied(self):
         for item in (
             "ops/data/raw_jsonl/archive.jsonl",

@@ -15,6 +15,10 @@ jobs:
           fetch-depth: 0
       - name: Validate registered parallel lane
         run: python scripts/validate_branch_registry.py
+      - name: Validate publication lanes and exact system merge receipt
+        run: |
+          python scripts/test_publication_lanes.py
+          GITHUB_SHA=78ff6d34a4af71e6eac12faa939c07744c922ee1 GITHUB_EVENT_BEFORE=734cacd528f83192b7226e9e992b8f8c5e09eb3d GITHUB_EVENT_NAME=push python scripts/validate_publication_lanes.py
       - name: Test source preservation and Notification Center projection
         run: |
           python scripts/test_notification_center.py
