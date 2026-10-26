@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - feature/daily-ops-current-work
+      - system/notification-center
     paths:
       - 'VERSION'
       - 'docs/releases/**'
@@ -29,6 +30,9 @@ on:
       - 'guide/3-pages/index.html'
       - 'guide/7-pages/index.html'
       - 'guide/15-pages/index.html'
+      - 'assets/js/notification-center.js'
+      - 'assets/css/notification-center.css'
+      - 'ops/data/site-notifications-public.v1.json'
       - 'site-operations.html'
       - 'site-operations/coordination.html'
       - 'site-operations/history.html'

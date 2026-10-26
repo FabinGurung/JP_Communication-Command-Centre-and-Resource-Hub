@@ -1,0 +1,28 @@
+name: Notification Center source and feature QA
+on:
+  push:
+    branches: [system/notification-center]
+  pull_request:
+    branches: [feature/daily-ops-current-work]
+permissions:
+  contents: read
+jobs:
+  notification-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate registered parallel lane
+        run: python scripts/validate_branch_registry.py
+      - name: Test source preservation and Notification Center projection
+        run: |
+          python scripts/test_notification_center.py
+          python scripts/test_sheets_actions_publishing.py
+          python scripts/build_map_bundle.py
+          python scripts/test_map_bundle.py
+          python scripts/test_a9_manual_surfaces.py
+          python scripts/test_public_pages_site.py
+          node --check assets/js/notification-center.js
+      - name: Validate public feed and privacy
+        run: python scripts/sync_sheets_to_pages.py --validate-bundle

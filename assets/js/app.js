@@ -489,11 +489,11 @@ function reportedWorkHTML(project,compact=false){
     '<small class="map-source-note">Dated field observations'+date+' · not live instructions or engineer-accepted completion.</small>'+
     content+'</div>';
 }
-function mapChecklistSummary(project){const code=project.legacy_project_code,tasks=personalChecklistForMap(code);return '<div class="map-quick-checklist"><strong>☑️ Today’s Site Checklist</strong>'+(tasks.length?'<ul>'+tasks.slice(0,3).map(t=>'<li>'+(t.done?"☑":"☐")+' '+escapeHTML(t.text)+'</li>').join("")+'</ul>'+(tasks.length>3?'<small>+'+(tasks.length-3)+' more reminders</small>':""):'<small>No tasks written on this browser today.</small>')+'</div>';}
+function mapChecklistSummary(project){const code=project.legacy_project_code,tasks=personalChecklistForMap(code);return '<div class="map-quick-checklist"><strong>🔔 Notification Center</strong>'+(tasks.length?'<ul>'+tasks.slice(0,3).map(t=>'<li>'+(t.done?"☑":"☐")+' '+escapeHTML(t.text)+'</li>').join("")+'</ul>'+(tasks.length>3?'<small>+'+(tasks.length-3)+' more reminders</small>':""):'<small>No tasks written on this browser today.</small>')+'</div>';}
 function projectPopupHTML(project){
   const code=project.legacy_project_code,ops=state.siteReadinessByLegacyId.get(code);
   const readiness=ops?.readiness==="HOLD"?"⚠️ Reported HOLD — verify":ops?.readiness==="READY_WITH_CONDITION"?"⚠️ Conditional readiness":"Current readiness not verified";
-  const links=code?'<a href="site-operations.html?project='+encodeURIComponent(code)+'">Checklist ↗</a><a href="resources/?project='+encodeURIComponent(code)+'">📐 Resources ↗</a><a href="site-operations/history.html?project='+encodeURIComponent(code)+'">Progress ↗</a>':"";
+  const links=code?'<a href="site-operations.html?project='+encodeURIComponent(code)+'">Notifications ↗</a><a href="resources/?project='+encodeURIComponent(code)+'">📐 Resources ↗</a><a href="site-operations/history.html?project='+encodeURIComponent(code)+'">Progress ↗</a>':"";
   return '<div class="popup"><h3>'+escapeHTML(project.display_name)+'</h3><div class="popup-status">'+escapeHTML(readiness)+(ops?.as_of?' · updated '+escapeHTML(ops.as_of):'')+'</div>'+mapChecklistSummary(project)+reportedWorkHTML(project,true)+'<div class="popup-actions">'+links+'<button type="button" data-view-project="'+escapeHTML(project.project_id)+'">Site snapshot</button></div></div>';
 }
 
@@ -693,7 +693,7 @@ function renderOverview(project) {
   const directionsLink = canShow(project, "show_coordinates") ? `<a class="detail-link primary" href="${directionsURL(project)}" target="_blank" rel="noopener">Directions</a>` : "";
 
   const code=project.legacy_project_code,ops=state.siteReadinessByLegacyId.get(code);
-  const actionLinks=code?'<a class="detail-link" href="site-operations.html?project='+encodeURIComponent(code)+'">☑️ Today’s Site Checklist</a><a class="detail-link" href="resources/?project='+encodeURIComponent(code)+'">📐 Drawing & Resource Library</a><a class="detail-link" href="site-operations/history.html?project='+encodeURIComponent(code)+'">📊 Progress Report</a><a class="detail-link" href="site-operations/coordination.html?project='+encodeURIComponent(code)+'">⚠️ Site Coordination</a>':'<a class="detail-link" href="resources/">📐 Browse Resources</a>';
+  const actionLinks=code?'<a class="detail-link" href="site-operations.html?project='+encodeURIComponent(code)+'">🔔 Notification Center</a><a class="detail-link" href="resources/?project='+encodeURIComponent(code)+'">📐 Drawing & Resource Library</a><a class="detail-link" href="site-operations/history.html?project='+encodeURIComponent(code)+'">📊 Progress Report</a><a class="detail-link" href="site-operations/coordination.html?project='+encodeURIComponent(code)+'">⚠️ Site Coordination</a>':'<a class="detail-link" href="resources/">📐 Browse Resources</a>';
   const siteReadiness=ops?.readiness==="HOLD"?"Reported HOLD — confirm affected work":ops?.readiness==="READY_WITH_CONDITION"?"Readiness with conditions":"Readiness not confirmed here";
   elements.overviewPanel.innerHTML = `
     <div class="section-card">${mapChecklistSummary(project)}

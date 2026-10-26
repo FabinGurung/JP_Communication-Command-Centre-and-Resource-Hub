@@ -8,7 +8,7 @@
   const base=new URL("index.html",root);
   const pages=[
     ["map","🗺️ Map","map.html"],
-    ["checklist","☑️ Daily Checklist","site-operations.html"],
+    ["checklist","🔔 Notification Center","site-operations.html"],
     ["progress","📊 Progress Report","site-operations/history.html"],
     ["resources","📐 Resources","resources/"],
     ["developer","🛠️ Developer Workspace","workspace/"],
@@ -31,7 +31,7 @@
     "site-operations/questions.html","site-operations/schedule.html","site-operations/project.html","resources/"
   ].includes(href);
   function selectedProject(){
-    const choice=document.getElementById("project");
+    const choice=document.getElementById("notification-project")||document.getElementById("project");
     const ready=choice instanceof HTMLSelectElement&&choice.options.length>1;
     const fromSelect=ready?choice.value:"";
     // Clearing a loaded project filter means All projects; do not revive a stale URL FK.
@@ -163,13 +163,13 @@
     new ResizeObserver(()=>window.dispatchEvent(new Event("resize"))).observe(host);
   }
   syncRoutes();
-  const projectChoice=document.getElementById("project");
+  const projectChoice=document.getElementById("notification-project")||document.getElementById("project");
   if(projectChoice){
     const observer=new MutationObserver(()=>syncRoutes());
     observer.observe(projectChoice,{childList:true,subtree:true});
   }
   document.addEventListener("change",e=>{
-    if(e.target?.id==="project")syncRoutes();
+    if(["project","notification-project"].includes(e.target?.id))syncRoutes();
   },true);
   // Refresh before mouse, touch and keyboard navigation, including deep links
   // when project options were loaded asynchronously after this script.

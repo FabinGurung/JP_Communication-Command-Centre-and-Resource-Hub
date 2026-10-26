@@ -4,6 +4,7 @@ import copy
 import json
 import tempfile
 import unittest
+import hashlib
 from pathlib import Path
 from sync_sheets_to_pages import CONFIG, OUTPUT, ROOT, SyncError, append_snapshot, digest, normalize, records, sync, validate_bundle
 
@@ -38,6 +39,25 @@ class FakeGoogle:
             self.ids[53] = "project_resources"
             self.data[self.master, "project_resources"] = copy.deepcopy(rows)
             self.data[self.config["resources_source"]["workbook_id"], "project_resources"] = copy.deepcopy(rows)
+        if self.config.get("notification_sources"):
+            self.original_text = "Synthetic planner instruction for source-quote tests."
+            sha = hashlib.sha256(self.original_text.encode()).hexdigest()
+            payload = json.loads((root / "ops/data/site-notifications-public.v1.json").read_text())
+            for grant in self.config["notification_policy"]["admitted_sources"].values():
+                grant["sha256"] = sha
+            (root / CONFIG).write_text(json.dumps(self.config))
+            s = payload["sources"][0]
+            i = payload["items"][0]
+            source_rows = [["Project", "Date", "Origin", "Source Message", "Saved Original", "Source ID", "Project ID", "Site Reference", "Company", "Source Version", "Source SHA256"],
+                           [i["project_name"], s["date_npt"], s["provider"], s["source_url"], s["drive_source_url"], s["source_id"], i["project_id"], i["site_reference"], i["company"], s["version"], sha]]
+            headers = ["Notification ID", "Notice ID", "Source ID", "Project", "Project ID", "Site Reference", "Company", "Category", "Instruction", "Quantity", "Unit", "Due Date", "Detail State", "Display Order", "Source Message", "Saved Original", "Source Version", "Source SHA256", "Source Quote", "Review State", "Publish"]
+            rows = [headers]
+            for i in payload["items"]:
+                rows.append([i["notification_id"], i["notice_id"], i["source_id"], i["project_name"], i["project_id"], i["site_reference"], i["company"], i["category"], i["instruction"], i["quantity"], i["unit"], i["due_date"], i["detail_state"], str(i["display_order"]), s["source_url"], s["drive_source_url"], s["version"], sha, self.original_text, "Reviewed", "TRUE"])
+            for sid, name, values in [(54, "message_sources", source_rows), (55, "site_notifications", rows)]:
+                self.ids[sid] = name
+                self.data[self.master, name] = copy.deepcopy(values)
+                self.data[self.config["notification_sources"][name]["workbook_id"], name] = copy.deepcopy(values)
         self.data[self.master, "_SOURCE_ROUTER"] = normalize(router)
         self.data[self.master, "00_MANIFEST"] = [["Field", "Value"], ["CONTROL_VERSION", "V000002"]]
         self.data[self.master, "01_VERSION_HISTORY"] = [["Version", "Time", "Scope", "Change", "PRE", "QA", "Rollback", "Data"],
@@ -52,6 +72,9 @@ class FakeGoogle:
         return {"spreadsheetId": fid, "sheets": [{"properties": {"sheetId": sid, "title": name,
                 "gridProperties": {"rowCount": 1000, "columnCount": 50}}}
                 for sid, name in self.ids.items() if (fid, name) in self.data]}
+
+    def original(self, fid):
+        return self.original_text
 
     def read(self, fid, tab, meta=None):
         if (fid, tab) not in self.data:
@@ -92,7 +115,7 @@ class PublishingTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
-        for name in [CONFIG, "ops/control/map-sheets-source.v1.0.json", "map-config.json", "ops/data/resource-catalog-normalized.v0.1.json"]:
+        for name in [CONFIG, "ops/control/map-sheets-source.v1.0.json", "map-config.json", "ops/data/resource-catalog-normalized.v0.1.json", "ops/data/site-notifications-public.v1.json"]:
             dest = self.root / name
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes((ROOT / name).read_bytes())
