@@ -9,6 +9,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+from notification_projection import validate_public as validate_notifications
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = "ops/data/map-data.v1.json"
@@ -45,6 +46,12 @@ def build(root=ROOT):
                "live_google_sheets_fetch": False,
                "table_count": len(tables), "source_evidence": evidence, "tables": tables,
                "resources": json.loads((root / "ops/data/resource-catalog-normalized.v0.1.json").read_text())}
+    notification_path = root / "ops/data/site-notifications-public.v1.json"
+    if notification_path.exists():
+        notifications = json.loads(notification_path.read_text())
+        policy = json.loads((root / "ops/control/sheets-actions-publishing.v1.json").read_text())["notification_policy"]
+        validate_notifications(notifications, policy)
+        payload["notifications"] = notifications
     text = json.dumps(payload, ensure_ascii=False, sort_keys=True, indent=2) + "\n"
     target = root / OUTPUT
     target.write_text(text, encoding="utf-8")

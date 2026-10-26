@@ -1,5 +1,5 @@
 {
-  "version": "V000004",
+  "version": "V000005",
   "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
   "publishing_workbook_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
   "previous_versions_folder_id": "12-eWCCG56jJBFlFfHa_49sxgydZAbRCj",
@@ -176,5 +176,27 @@
     "workbook_id": "1e019Jac4lDveZ2glXMph4RLHivqPFEachbcNi-R1DZk",
     "tab": "project_resources",
     "pk": "resource_id"
+  },
+  "notification_sources": {
+    "message_sources": {
+      "workbook_id": "1aWHzjEK0doiUcBbqhySiA6DWCp8d-aq2I08McslilAQ",
+      "tab": "message_sources"
+    },
+    "site_notifications": {
+      "workbook_id": "1ZPtTos8t9Cym_qnpiUhiyuTxndSc6sGzzv390ahAw4I",
+      "tab": "site_notifications"
+    }
+  },
+  "notification_policy": {
+    "source_sheet_url": "https://docs.google.com/spreadsheets/d/1ZPtTos8t9Cym_qnpiUhiyuTxndSc6sGzzv390ahAw4I/edit?usp=drivesdk",
+    "admitted_sources": {
+      "MSG-SLACK-C0C2LFV6XLM-1792979252137289": {
+        "version": "V000001",
+        "sha256": "de933cd9dc116707c0e62767c629d2fa119d34209f7c66059fdbfc7b8df3d52c",
+        "source_url": "https://jp09.slack.com/archives/C0C2LFV6XLM/p1792979252137289",
+        "drive_source_url": "https://drive.google.com/file/d/1nMkMVfLI8JW96TH9XZCYqEjr63wxZmI_/view?usp=drivesdk",
+        "project_id": "PRJ-000020"
+      }
+    }
   }
 }

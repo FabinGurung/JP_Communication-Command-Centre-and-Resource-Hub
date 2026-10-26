@@ -16,6 +16,9 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
+from notification_projection import (NotificationError, compile_notifications,
+                                     original_file_id, records as notification_records,
+                                     validate_public as validate_notifications)
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = "ops/control/sheets-actions-publishing.v1.json"
@@ -259,6 +262,28 @@ class Google:
     def write(self, fid, requests):
         self.call("POST", f"https://sheets.googleapis.com/v4/spreadsheets/{fid}:batchUpdate", json={"requests": requests})
 
+    def original(self, fid):
+        raw = self.request("GET", f"https://www.googleapis.com/drive/v3/files/{fid}", params={"alt": "media"}).content
+        if len(raw) > 4 * 1024 * 1024:
+            raise SyncError("NOTIFICATION_ORIGINAL_TOO_LARGE")
+        try:
+            return raw.decode("utf-8")
+        except UnicodeDecodeError:
+            raise SyncError("NOTIFICATION_ORIGINAL_NOT_UTF8") from None
+
+
+def notification_public(api, cfg, incoming, projects, mode):
+    try:
+        sources = notification_records(incoming["message_sources"], "source_id")
+        active = {r["source_id"] for r in notification_records(incoming["site_notifications"], "notification_id")
+                  if r.get("publish", "").upper() == "TRUE" and r.get("review_state") == "Reviewed"}
+        originals = {s["source_id"]: api.original(original_file_id(s["saved_original"])) for s in sources if s["source_id"] in active}
+        return compile_notifications(incoming["message_sources"], incoming["site_notifications"],
+                                     cfg["notification_policy"], originals,
+                                     {r["project_id"] for r in projects}, mode)
+    except NotificationError as exc:
+        raise SyncError(str(exc)) from None
+
 
 def append_snapshot(raw, fid, previous_hash, state):
     """Verify every earlier record and append; never rewrite previous snapshots."""
@@ -350,6 +375,17 @@ def sync(api, root=ROOT):
         if (len(incoming["project_resources"]) > tabs["project_resources"]["gridProperties"]["rowCount"]
                 or max(map(len, incoming["project_resources"]), default=0) > tabs["project_resources"]["gridProperties"]["columnCount"]):
             raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
+    for name, spec in cfg.get("notification_sources", {}).items():
+        if name not in {"message_sources", "site_notifications"} or spec["tab"] != name:
+            raise SyncError("UNREVIEWED_NOTIFICATION_SOURCE")
+        source_specs[name] = spec
+        incoming[name] = api.read(spec["workbook_id"], name)
+        before[name] = api.read(master, name, meta)
+        if (len(incoming[name]) > tabs[name]["gridProperties"]["rowCount"]
+                or max(map(len, incoming[name]), default=0) > tabs[name]["gridProperties"]["columnCount"]):
+            raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
+    if cfg.get("notification_sources"):
+        notification_public(api, cfg, incoming, source_tables["projects"][1], "ACTIONS_SHEET_READBACK")
     validate_relations(source_tables)
     project_public(root, source_tables)  # Reject unsafe joins before any write.
     fingerprint = digest(incoming)
@@ -406,6 +442,13 @@ def sync(api, root=ROOT):
         if api.read(cfg["sources"][name]["workbook_id"], name) != incoming[name]:
             raise SyncError("SOURCE_CHANGED_BEFORE_PUBLICATION")
         readback_tables[name] = (spec["pk"], records(actual, spec["pk"]))
+    auxiliary = {}
+    for name in set(incoming) - expected:
+        actual = api.read(master, name)
+        if actual != incoming[name] or api.read(source_specs[name]["workbook_id"], name) != actual:
+            raise SyncError("AUXILIARY_PUBLISHING_READBACK_MISMATCH")
+        auxiliary[name] = actual
+    notifications = notification_public(api, cfg, auxiliary, readback_tables["projects"][1], "ACTIONS_SHEET_READBACK") if cfg.get("notification_sources") else None
     # Record successful readback in the same history row, including on recovery
     # from an interruption after the first atomic write. This is no new version.
     verified_router = api.read(master, "_SOURCE_ROUTER")
@@ -430,10 +473,9 @@ def sync(api, root=ROOT):
                "source_evidence": {name: {"source": "PUBLISHING_SHEET_READBACK", "row_count": item["row_count"],
                                           "sha256": digest(item)} for name, item in public.items()}, "tables": public}
     if cfg.get("resources_source"):
-        actual = api.read(master, "project_resources")
-        if actual != incoming["project_resources"] or api.read(cfg["resources_source"]["workbook_id"], "project_resources") != actual:
-            raise SyncError("RESOURCE_PUBLISHING_READBACK_MISMATCH")
-        payload["resources"] = resources_public(root, actual)
+        payload["resources"] = resources_public(root, auxiliary["project_resources"])
+    if notifications is not None:
+        payload["notifications"] = notifications
     validate_bundle(payload, root)
     output = root / OUTPUT
     temporary = output.with_suffix(".tmp")
@@ -447,6 +489,11 @@ def validate_bundle(payload, root=ROOT):
     baseline = json.loads((root / "ops/control/map-sheets-source.v1.0.json").read_text())
     config = json.loads((root / CONFIG).read_text())
     map_config = json.loads((root / "map-config.json").read_text())
+    if "notifications" in payload:
+        try:
+            validate_notifications(payload["notifications"], config["notification_policy"])
+        except NotificationError as exc:
+            raise SyncError(str(exc)) from None
     if "resources" in payload:
         original = json.loads((root / "ops/data/resource-catalog-normalized.v0.1.json").read_text())
         known = {f["resource_id"]: f for s in original["sites"] for f in s["files"]}

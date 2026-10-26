@@ -250,7 +250,7 @@ def run():
                 page.goto(BASE+"/site-operations.html",wait_until="domcontentloaded",timeout=20000)
                 page.wait_for_function("() => document.querySelectorAll('#project option').length >= 8",timeout=18000)
                 require(page.locator("#project option").count()==8,"Project selection should contain eight sites")
-                require(page.locator("h1").inner_text()=="Checklist for Today","Daily Checklist title missing")
+                require(page.locator("h1").inner_text()=="Notification Center","Notification Center title missing")
                 require(page.locator("#tasks input[type=checkbox]").count()==0,"User checklist must start empty")
                 require(page.locator("#count").inner_text().startswith("No tasks yet"),"Empty state missing")
                 page.locator("#new-task").fill("Confirm today's site toolbox instructions")

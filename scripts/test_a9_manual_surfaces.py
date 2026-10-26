@@ -109,7 +109,7 @@ def test():
         "resources/index.html":["href=\"field/\"","id=\"desk-resources\""],
         "resources/field/index.html":["field-sources","a9-field-resources.js","a9-ui-extensions.css"],
         "resources/field/contacts/index.html":["contact-query","contact-role","contact-results","a9-company-directory.js"],
-        "site-operations.html":["id=\"a9-published-instructions\"","a9-published-checklist.js","JPAEC:diy-checklist:v1:"],
+        "site-operations.html":["id=\"notifications\"","notification-center.js","JPAEC:diy-checklist:v1:"],
         "site-operations/history.html":["id=\"a9-manual-progress\"","a9-manual-progress.js","progress-report-public.v0.2.jsonl"],
         "workspace/index.html":["id=\"memory-poster-board\"","controls/memory-wall.html","A9_SITE_TREE_AND_EDIT_LEVELS.v1.md"]
     }

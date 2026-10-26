@@ -70,10 +70,11 @@
       "path": "site-operations.html",
       "nav_group": "CHECKLIST",
       "page_role": "PRIMARY",
-      "data_owner": "checklist",
+      "data_owner": "site_notifications",
       "status": "ACTIVE",
       "theme": "V2_2_BOTANICAL",
-      "archive": false
+      "archive": false,
+      "display_name": "Notification Center"
     },
     {
       "page_id": "A9-PAGE-PROGRESS",
@@ -287,16 +288,16 @@
     },
     {
       "section_id": "A9-CHK-01",
-      "location": "Checklist/published",
+      "location": "Notification Center/published",
       "path": "site-operations.html",
-      "anchor": "#a9-published-instructions",
-      "purpose": "Manually published instructions",
-      "data_contract": "ops/data/a9-published-checklist-public.v1.0.json",
+      "anchor": "#notifications",
+      "purpose": "Reviewed source-linked work, materials and supervision bullets",
+      "data_contract": "ops/data/map-data.v1.json#notifications",
       "status": "ACTIVE"
     },
     {
       "section_id": "A9-CHK-02",
-      "location": "Checklist/personal",
+      "location": "Notification Center/personal",
       "path": "site-operations.html",
       "anchor": "section.main",
       "purpose": "Browser-local personal notes",
@@ -380,7 +381,7 @@
       "location": "Memory Poster/level-tree",
       "path": "controls/memory-wall.html",
       "anchor": "#website-level-tree",
-      "purpose": "Colorful visual L0–L5 hierarchy and examples",
+      "purpose": "Colorful visual L0\u2013L5 hierarchy and examples",
       "data_contract": "ops/control/a9-page-section-registry.v1.0.json",
       "status": "ACTIVE"
     },
