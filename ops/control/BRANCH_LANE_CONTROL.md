@@ -32,3 +32,7 @@ GitHub itself supports branch rename/delete, but the currently connected GitHub 
 ## Topology changes
 
 Creating, renaming, deleting, activating, superseding or archiving a branch requires updating the registry in the same governed operation. CI fails closed on unregistered provider refs or archive SHA drift.
+
+## Notification Center feature lane — 26 October 2026
+
+`system/notification-center` is a registered temporary system feature lane. It requires a pull request to `feature/daily-ops-current-work` and cannot deploy Pages directly. It does not change the two long-lived library branches. Website code can progress independently of Sheets authentication. Git branches do not isolate Google Sheets: new notification subjects use dedicated owner files and an additional publishing tab, preserving the 14 core source tables. Merge only the reviewed feature changes; preserve any concurrent authentication configuration.

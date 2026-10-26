@@ -79,7 +79,20 @@ if exp != "^contrib/PRJ-[0-9]{6}/[a-z0-9][a-z0-9-]{2,48}$":
     raise SystemExit("Ephemeral namespace regex drift.")
 unlisted=set(remote)-registered
 ephemeral={branch for branch in unlisted if re.fullmatch(exp,branch)}
-unregistered=unlisted-ephemeral
+system_lanes=registry.get("ephemeral_system_lanes",[])
+system_refs=set()
+for lane in system_lanes:
+    name=lane.get("branch_name","")
+    if (name!="system/notification-center" or lane.get("allowed_for_work") is not True
+            or lane.get("requires_pull_request") is not True
+            or lane.get("merge_base")!="feature/daily-ops-current-work"
+            or lane.get("direct_pages_deploy") is not False):
+        raise SystemExit("Unreviewed temporary system lane")
+    if name in system_refs or name in registered:
+        raise SystemExit("Duplicate system lane")
+    system_refs.add(name)
+ephemeral_system=unlisted & system_refs
+unregistered=unlisted-ephemeral-ephemeral_system
 missing_remote=registered-set(remote)
 if unregistered:
     raise SystemExit(f"Unregistered provider branch refs: {sorted(unregistered)}")
@@ -96,7 +109,7 @@ for item in aliases:
         raise SystemExit(f"Legacy alias SHA drift: {item['alias_ref']}")
 
 counts=registry.get("counts",{})
-if counts.get("provider_branch_refs") != len(remote)-len(ephemeral):
+if counts.get("provider_branch_refs") != len(remote)-len(ephemeral)-len(ephemeral_system):
     raise SystemExit(f"Provider branch count drift: registry={counts.get('provider_branch_refs')} live={len(remote)}")
 if counts.get("active_logical_branches") != len(active):
     raise SystemExit("Active branch count mismatch.")
@@ -105,4 +118,4 @@ if counts.get("canonical_archive_refs") != len(archives):
 if counts.get("legacy_alias_refs_pending_delete") != len(aliases):
     raise SystemExit("Legacy alias count mismatch.")
 
-print(f"PASS branch/lane registry: registered={len(remote)-len(ephemeral)} ephemeral_contributions={len(ephemeral)} active={len(active)} archives={len(archives)} legacy_aliases={len(aliases)}")
+print(f"PASS branch/lane registry: registered={len(remote)-len(ephemeral)-len(ephemeral_system)} ephemeral_contributions={len(ephemeral)} system_features={len(ephemeral_system)} active={len(active)} archives={len(archives)} legacy_aliases={len(aliases)}")

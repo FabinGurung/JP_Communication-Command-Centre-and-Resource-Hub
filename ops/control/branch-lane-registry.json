@@ -567,5 +567,17 @@
     "not_an_active_library_branch": true,
     "allowed_to_publish_directly": false,
     "expiration": "provider-delete after merge when possible"
-  }
+  },
+  "ephemeral_system_lanes": [
+    {
+      "branch_id": "OPS-SYS-NOTIFICATIONS",
+      "branch_name": "system/notification-center",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "feature/daily-ops-current-work",
+      "direct_pages_deploy": false,
+      "purpose": "Source-linked Notification Center; independent of Sheets authentication setup."
+    }
+  ]
 }
