@@ -46,6 +46,12 @@ class NavigatorTests(unittest.TestCase):
             embedded=re.search(r'<script id="navigator-data" type="application/json">(.*?)</script>',out.read_text(),re.S).group(1)
             self.assertNotIn('<script>',embedded)
             self.assertEqual(json.loads(embedded)['entries'][1]['name'],self.rows[1]['name'])
+    def test_website_directory_is_preserved_without_public_snapshot(self):
+        self.spec['websiteDirectory']={'verifiedAt':'27 October 2026','stars':[], 'checklist':[]}
+        result=assemble(self.rows,self.spec)
+        self.assertEqual(result['websiteDirectory'],self.spec['websiteDirectory'])
+        self.assertIn('navigator-data', (ROOT/'files/index.html').read_text())
+        self.assertNotIn('SUBIN_SUPPLIERS', (ROOT/'files/index.html').read_text())
     def test_rename_preserves_file_and_parent_ids(self):
         self.spec['name_overrides']={'child':'Readable folder'}
         e=next(e for e in assemble(self.rows,self.spec)['entries'] if e['id']=='child')

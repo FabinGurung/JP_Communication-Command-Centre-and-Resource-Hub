@@ -4,3 +4,5 @@
 .mark svg{width:22px;height:22px}
 
 .canvas-wrap>svg{display:block;width:100%;height:100%}
+
+.directory-folders{margin:20px 0 30px}.directory-folders h2{font-size:19px}.task-checklist{display:grid;grid-template-columns:1fr 1fr;gap:16px}.task-checklist h2{font-size:20px;margin-top:14px}.sheet h2{font-size:17px;overflow-wrap:anywhere}.sheet h3{overflow-wrap:anywhere}@media(max-width:760px){.task-checklist{grid-template-columns:1fr}.sheet{grid-template-columns:28px minmax(0,1fr)}.sheet>a{grid-column:2}}

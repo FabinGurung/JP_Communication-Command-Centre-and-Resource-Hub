@@ -29,3 +29,9 @@ The two dedicated source Sheets have their own manifests, version history and ce
 The UI and the manually reviewed notification example can be tested and deployed now. The full Sheets automation milestone remains unready until the dedicated Google identity is configured and an Actions run with `require_live_sheets=true` proves the complete source → joined Sheet → validated JSON → Pages path. Remaining historical page-to-Sheet migrations must either be completed or explicitly excluded from a narrower release scope. No new milestone tag is created by this implementation; existing `v2.2.0` remains immutable. Colab V8 inventory execution is separate from publication and authentication.
 
 No background Slack or Discord collector is enabled by this feature. The existing Discord collector remains paused. Intake Staging remains excluded.
+
+## Company filter and owner navigation — 27 October 2026
+
+The Company filter combines with Project, Category and Search. Organization names and each project's executing-company relationship come from the existing reviewed Sheet bundle. Switching companies clears an incompatible project selection. A company with no admitted instructions shows an empty result; it does not borrow another company's messages. The instruction owner link is prominent above the filters.
+
+The two existing owner IDs are renamed Notification Center — Instructions and Notification Center — Message Sources. No new working Sheet was created. Company Operations retains execution/readiness/progress ownership; the notification owner holds reviewed message bullets and source links only. The earlier Operations readiness tabs overlap conceptually and must not become competing completion records.

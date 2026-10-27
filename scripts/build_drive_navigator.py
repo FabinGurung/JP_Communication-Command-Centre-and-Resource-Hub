@@ -50,7 +50,9 @@ def assemble(rows:list[dict],spec:dict)->dict:
         if not url.startswith(('https://drive.google.com/','https://docs.google.com/','https://colab.research.google.com/')):raise ValueError('Invalid original file URL')
         entries.append(dict(id=ident,name=row['name'],parent=row['parent_drive_id'],kind='folder' if row['mime_type']==FOLDER else 'sheet' if row['mime_type']==SHEET else 'file',url=url,historical=bool(ARCHIVE.search(path)),description=spec.get('descriptions',{}).get(ident,'')))
     fields=['root','updated','inventoryAt','inventoryNotice','sheets','stagedCount','master','scope','renameCount','codeUrl','actionsUrl']
-    return dict(format='JP_HUMAN_NAVIGATOR_V1',entries=entries,**{k:spec[k] for k in fields})
+    result=dict(format='JP_HUMAN_NAVIGATOR_V1',entries=entries,**{k:spec[k] for k in fields})
+    if 'websiteDirectory' in spec:result['websiteDirectory']=spec['websiteDirectory']
+    return result
 
 def build(inventory:Path,spec:Path,output:Path,shell:Path=ROOT/'files/index.html'):
     if output.resolve().is_relative_to(ROOT.resolve()):raise ValueError('Private navigator must be written outside the public repository')
