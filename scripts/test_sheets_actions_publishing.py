@@ -107,10 +107,11 @@ class FakeGoogle:
         self.bad_readback = False
         self.change_during_scan = False
         self.source_reads = {}
+        self.grid_overrides = {}
 
     def meta(self, fid):
         return {"spreadsheetId": fid, "sheets": [{"properties": {"sheetId": sid, "title": name,
-                "gridProperties": {"rowCount": 2000, "columnCount": 50}}, "tables": [t for t in getattr(self, "native_tables", []) if t["range"]["sheetId"] == sid]}
+                "gridProperties": self.grid_overrides.get(name, {"rowCount": 2000, "columnCount": 50})}, "tables": [t for t in getattr(self, "native_tables", []) if t["range"]["sheetId"] == sid]}
                 for sid, name in self.ids.items() if (fid, name) in self.data]}
 
     def original(self, fid):
@@ -138,7 +139,11 @@ class FakeGoogle:
         assert fid == self.master, "The synchronizer must never write source cells"
         candidate = copy.deepcopy(self.data)
         for request in requests:
-            if "repeatCell" in request:
+            if "updateSheetProperties" in request:
+                item = request["updateSheetProperties"]["properties"]
+                name = self.ids[item["sheetId"]]
+                self.grid_overrides.setdefault(name, {"rowCount": 2000, "columnCount": 50}).update(item["gridProperties"])
+            elif "repeatCell" in request:
                 item = request["repeatCell"]
                 candidate[fid, self.ids[item["range"]["sheetId"]]] = []
             elif "updateTable" in request:
@@ -225,6 +230,7 @@ class PublishingTests(unittest.TestCase):
         sync(self.api, self.root)
         payload = json.loads((self.root / OUTPUT).read_text())
         payload["live_google_sheets_fetch"] = False
+        payload.pop("publication_receipt")
         with self.assertRaisesRegex(SyncError, "CONTACT_REFRESH_MODE_MISMATCH"):
             validate_bundle(payload, self.root)
 
@@ -256,6 +262,17 @@ class PublishingTests(unittest.TestCase):
                                 bundle["publication_receipt"]["fetched_at_utc"])
         repeated["publication_receipt"]["fetched_at_utc"] = bundle["publication_receipt"]["fetched_at_utc"]
         self.assertEqual(bundle, repeated)
+
+    def test_growing_source_and_full_history_expand_only_publishing_grids(self):
+        self.api.grid_overrides["projects"] = {"rowCount": 2, "columnCount": 2}
+        self.api.grid_overrides["01_VERSION_HISTORY"] = {"rowCount": 2, "columnCount": 8}
+        self.assertTrue(sync(self.api, self.root)["live_google_sheets_fetch"])
+        self.assertGreaterEqual(self.api.grid_overrides["projects"]["rowCount"],
+                                len(self.api.data[self.api.master, "projects"]))
+        self.assertGreaterEqual(self.api.grid_overrides["projects"]["columnCount"],
+                                len(self.api.data[self.api.master, "projects"][0]))
+        self.assertGreaterEqual(self.api.grid_overrides["01_VERSION_HISTORY"]["rowCount"], 3)
+        self.assertEqual(len(self.api.snapshots), 1)
 
     def test_readable_headers_with_individual_owners(self):
         router = self.api.data[self.api.master, "_SOURCE_ROUTER"]

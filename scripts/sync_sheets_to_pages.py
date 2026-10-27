@@ -337,6 +337,27 @@ def update_values(sid, rows, clear_grid=None, keep_header=False):
     return requests
 
 
+def publishing_capacity(tabs, incoming):
+    """Grow derived grids within the same reviewed read bounds; never shrink."""
+    requests = []
+    for name, rows in incoming.items():
+        height, width = max(2, len(rows)), max(map(len, rows), default=1)
+        if height > 10000 or width > 100:
+            raise SyncError("PUBLISHING_EXCEEDS_REVIEWED_READ_BOUND")
+        grid = tabs[name]["gridProperties"]
+        grow_rows, grow_cols = height > grid["rowCount"], width > grid["columnCount"]
+        if grow_rows or grow_cols:
+            changed = {}
+            if grow_rows:
+                changed["rowCount"] = min(10000, ((height + 499) // 500) * 500)
+            if grow_cols:
+                changed["columnCount"] = width
+            requests.append({"updateSheetProperties": {"properties": {
+                "sheetId": tabs[name]["sheetId"], "gridProperties": changed},
+                "fields": ",".join("gridProperties." + k for k in changed)}})
+    return requests
+
+
 def sync(api, root=ROOT):
     cfg = json.loads((root / CONFIG).read_text())
     registry = json.loads((root / "ops/control/map-sheets-source.v1.0.json").read_text())
@@ -373,28 +394,18 @@ def sync(api, root=ROOT):
             raise SyncError("REQUIRED_SOURCE_COLUMNS_MISSING")
         source_tables[name] = (spec["pk"], records(target, spec["pk"]))
         before[name] = api.read(master, name, meta)
-        # Never silently truncate the publishing replica.
-        width = max(map(len, target), default=0)
-        if len(target) > tabs[name]["gridProperties"]["rowCount"] or width > tabs[name]["gridProperties"]["columnCount"]:
-            raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
     if cfg.get("resources_source"):
         spec = cfg["resources_source"]
         source_specs["project_resources"] = spec
         incoming["project_resources"] = api.read(spec["workbook_id"], spec["tab"])
         resources_public(root, incoming["project_resources"])
         before["project_resources"] = api.read(master, "project_resources", meta)
-        if (len(incoming["project_resources"]) > tabs["project_resources"]["gridProperties"]["rowCount"]
-                or max(map(len, incoming["project_resources"]), default=0) > tabs["project_resources"]["gridProperties"]["columnCount"]):
-            raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
     for name, spec in cfg.get("notification_sources", {}).items():
         if name not in {"message_sources", "site_notifications"} or spec["tab"] != name:
             raise SyncError("UNREVIEWED_NOTIFICATION_SOURCE")
         source_specs[name] = spec
         incoming[name] = api.read(spec["workbook_id"], name)
         before[name] = api.read(master, name, meta)
-        if (len(incoming[name]) > tabs[name]["gridProperties"]["rowCount"]
-                or max(map(len, incoming[name]), default=0) > tabs[name]["gridProperties"]["columnCount"]):
-            raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
     if cfg.get("notification_sources"):
         notification_public(api, cfg, incoming, source_tables["projects"][1], "ACTIONS_SHEET_READBACK")
     field_tables, field_snapshots = {}, []
@@ -411,9 +422,7 @@ def sync(api, root=ROOT):
                 raise SyncError("JOINED_FIELD_TAB_MISSING")
             incoming[name] = rows
             before[name] = api.read(master, name, meta)
-            if (len(rows) > tabs[name]["gridProperties"]["rowCount"]
-                    or len(rows[0]) > tabs[name]["gridProperties"]["columnCount"]):
-                raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
+    expansion = publishing_capacity(tabs, incoming)
     validate_relations(source_tables)
     project_public(root, source_tables)  # Reject unsafe joins before any write.
     fingerprint = digest(incoming)
@@ -442,7 +451,7 @@ def sync(api, root=ROOT):
             raise SyncError("PUBLISHING_VERSION_HISTORY_MISSING")
         version = f"V{max(numbers)+1:06d}"
         stamp = datetime.now(timezone.utc).isoformat()
-        requests = []
+        requests = list(expansion)
         for name, rows in incoming.items():
             requests += update_values(tabs[name]["sheetId"], rows, tabs[name]["gridProperties"], keep_header=name in field_tables)
             if name in field_tables:
@@ -466,10 +475,12 @@ def sync(api, root=ROOT):
             if row and row[0] in control_values:
                 row[1:2] = [control_values.pop(row[0])]
         manifest += [[key, value] for key, value in control_values.items()]
-        requests += update_values(tabs["_SOURCE_ROUTER"]["sheetId"], router)
-        requests += update_values(tabs["00_MANIFEST"]["sheetId"], manifest)
         history.append([version, stamp, "Automatic publishing copy", f"Rebuilt {len(incoming)} joined data tables from registered source Sheets", snap,
                         "SOURCE_VALIDATED; READBACK_REQUIRED", "Restore PRE content into same publishing ID", fingerprint])
+        requests += publishing_capacity(tabs, {"_SOURCE_ROUTER": router, "00_MANIFEST": manifest,
+                                               "01_VERSION_HISTORY": history})
+        requests += update_values(tabs["_SOURCE_ROUTER"]["sheetId"], router)
+        requests += update_values(tabs["00_MANIFEST"]["sheetId"], manifest)
         requests += update_values(tabs["01_VERSION_HISTORY"]["sheetId"], history)
         api.write(master, requests)  # One atomic Sheets batch; no source writes.
     # Build from the provider readback of the assembled Sheet, not the input arrays.
@@ -545,7 +556,8 @@ def validate_bundle(payload, root=ROOT):
         raise SyncError("UNAPPROVED_PUBLIC_BUNDLE_SECTION")
     if "publication_receipt" in payload:
         receipt = payload["publication_receipt"]
-        if (not isinstance(receipt, dict)
+        if (payload.get("live_google_sheets_fetch") is not True
+                or not isinstance(receipt, dict)
                 or set(receipt) != {"workflow_run_id", "commit_sha", "fetched_at_utc"}
                 or any(not isinstance(v, str) for v in receipt.values())
                 or (receipt["workflow_run_id"] and not re.fullmatch(r"\d+", receipt["workflow_run_id"]))
