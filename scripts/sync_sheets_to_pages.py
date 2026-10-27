@@ -514,6 +514,11 @@ def sync(api, root=ROOT):
     public = project_public(root, readback_tables)
     payload = {"schema_version": "1.0.0", "bundle_id": "JP_MAP_REVIEWED_SHEETS_V1",
                "publication_mode": "ACTIONS_SHEETS_REFRESH_APPROVED_FIELDS", "live_google_sheets_fetch": True,
+               "publication_receipt": {
+                   "workflow_run_id": os.environ.get("GITHUB_RUN_ID", ""),
+                   "commit_sha": os.environ.get("GITHUB_SHA", ""),
+                   "fetched_at_utc": datetime.now(timezone.utc).isoformat(),
+               },
                "reviewed_static_fields_retained": True, "table_count": len(public),
                "source_evidence": {name: {"source": "PUBLISHING_SHEET_READBACK", "row_count": item["row_count"],
                                           "sha256": digest(item)} for name, item in public.items()}, "tables": public}
@@ -535,9 +540,23 @@ def sync(api, root=ROOT):
 def validate_bundle(payload, root=ROOT):
     allowed = {"schema_version", "bundle_id", "publication_mode", "live_google_sheets_fetch",
                "reviewed_static_fields_retained", "table_count", "source_evidence", "tables",
-               "resources", "notifications", "contacts"}
+               "resources", "notifications", "contacts", "publication_receipt"}
     if set(payload) - allowed:
         raise SyncError("UNAPPROVED_PUBLIC_BUNDLE_SECTION")
+    if "publication_receipt" in payload:
+        receipt = payload["publication_receipt"]
+        if (not isinstance(receipt, dict)
+                or set(receipt) != {"workflow_run_id", "commit_sha", "fetched_at_utc"}
+                or any(not isinstance(v, str) for v in receipt.values())
+                or (receipt["workflow_run_id"] and not re.fullmatch(r"\d+", receipt["workflow_run_id"]))
+                or (receipt["commit_sha"] and not re.fullmatch(r"[0-9a-f]{40}", receipt["commit_sha"]))):
+            raise SyncError("PUBLICATION_RECEIPT_INVALID")
+        try:
+            when = datetime.fromisoformat(receipt["fetched_at_utc"])
+            if when.tzinfo is None:
+                raise ValueError()
+        except ValueError:
+            raise SyncError("PUBLICATION_RECEIPT_INVALID") from None
     baseline = json.loads((root / "ops/control/map-sheets-source.v1.0.json").read_text())
     config = json.loads((root / CONFIG).read_text())
     map_config = json.loads((root / "map-config.json").read_text())

@@ -249,7 +249,13 @@ class PublishingTests(unittest.TestCase):
         self.assertFalse(sync(self.api, self.root)["publishing_copy_changed"])
         self.assertEqual(len(self.api.snapshots), 1)
         self.assertEqual(len(self.api.writes), writes)
-        self.assertEqual(bundle, json.loads((self.root / OUTPUT).read_text()))
+        repeated = json.loads((self.root / OUTPUT).read_text())
+        # An unchanged source causes no additional Sheet/archive writes. Each
+        # actual fetch still receives its own honest observation timestamp.
+        self.assertGreaterEqual(repeated["publication_receipt"]["fetched_at_utc"],
+                                bundle["publication_receipt"]["fetched_at_utc"])
+        repeated["publication_receipt"]["fetched_at_utc"] = bundle["publication_receipt"]["fetched_at_utc"]
+        self.assertEqual(bundle, repeated)
 
     def test_readable_headers_with_individual_owners(self):
         router = self.api.data[self.api.master, "_SOURCE_ROUTER"]
