@@ -221,6 +221,13 @@ class PublishingTests(unittest.TestCase):
             sync(self.api, self.root)
         self.assertEqual(self.api.writes, [])
 
+    def test_contact_status_cannot_claim_live_in_a_snapshot_bundle(self):
+        sync(self.api, self.root)
+        payload = json.loads((self.root / OUTPUT).read_text())
+        payload["live_google_sheets_fetch"] = False
+        with self.assertRaisesRegex(SyncError, "CONTACT_REFRESH_MODE_MISMATCH"):
+            validate_bundle(payload, self.root)
+
     def test_unapproved_private_bundle_section_is_rejected(self):
         sync(self.api, self.root)
         payload = json.loads((self.root / OUTPUT).read_text())

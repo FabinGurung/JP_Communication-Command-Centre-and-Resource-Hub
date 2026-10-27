@@ -544,6 +544,9 @@ def validate_bundle(payload, root=ROOT):
     if config.get("field_sources") and "contacts" not in payload:
         raise SyncError("PUBLIC_CONTACT_SECTION_MISSING")
     if "contacts" in payload:
+        expected_mode = "ACTIONS_JOINED_SHEET_READBACK" if payload.get("live_google_sheets_fetch") else "REVIEWED_SHEET_SNAPSHOT"
+        if payload["contacts"].get("refresh_mode") != expected_mode:
+            raise SyncError("CONTACT_REFRESH_MODE_MISMATCH")
         reviewed = json.loads((root / config["contacts_reviewed_projection"]).read_text())
         field_call(validate_contacts, payload["contacts"], reviewed)
     if "notifications" in payload:
