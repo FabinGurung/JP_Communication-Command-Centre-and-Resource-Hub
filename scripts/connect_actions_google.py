@@ -273,11 +273,11 @@ def ensure_identity(session, project_id, repo, emit=print):
         if found.get("disabled") or found.get("state") != "ACTIVE" or any(
                 found.get(k) != spec["body"][k] for k in ("attributeMapping", "attributeCondition", "oidc")):
             raise ConnectionError("EXISTING_PROVIDER_DIFFERS; review before replacing any trust policy")
-    policy = iam.call("GET", sa_path + ":getIamPolicy", params={"options.requestedPolicyVersion": 3})
+    policy = iam.call("POST", sa_path + ":getIamPolicy", params={"options.requestedPolicyVersion": 3})
     updated = add_identity_binding(policy, spec["member"])
     if updated != policy:
         iam.call("POST", sa_path + ":setIamPolicy", json={"policy": updated})
-    verified = iam.call("GET", sa_path + ":getIamPolicy", params={"options.requestedPolicyVersion": 3})
+    verified = iam.call("POST", sa_path + ":getIamPolicy", params={"options.requestedPolicyVersion": 3})
     if add_identity_binding(verified, spec["member"]) != verified:
         raise ConnectionError("IDENTITY_POLICY_READBACK_FAILED")
     return {"provider": spec["provider"], "service_account": email, "project_number": number}

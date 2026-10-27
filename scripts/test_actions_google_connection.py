@@ -9,7 +9,7 @@ from unittest.mock import Mock, patch
 from connect_actions_google import (
     ACCOUNT_ID, API, BRANCH, ConnectionError, REPOSITORY, access_plan,
     add_identity_binding, configure_variables, dispatch_refresh, federation_spec,
-    find_refresh_run, share_registered_files, verify_public_receipt,
+    ensure_identity, find_refresh_run, share_registered_files, verify_public_receipt,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,6 +48,45 @@ class SetupBoundaries(unittest.TestCase):
         self.assertIn("assertion.repository_owner_id == '888'", condition)
         self.assertIn("assertion.ref == 'refs/heads/" + BRANCH + "'", condition)
         self.assertNotIn("assertion.repository ==", condition)
+
+    def test_existing_cloud_identity_uses_documented_iam_methods_and_preserves_policy(self):
+        repo = {"id": 777, "owner": {"id": 888}, "full_name": REPOSITORY}
+        spec = federation_spec("123456", repo)
+        policy = {"etag": "original", "version": 3, "bindings": [{"role": "roles/viewer", "members": ["user:owner@example.test"]}]}
+
+        def request(method, url, **kwargs):
+            nonlocal policy
+            if url.endswith(":getIamPolicy"):
+                self.assertEqual(method, "POST")
+                self.assertEqual(kwargs["params"], {"options.requestedPolicyVersion": 3})
+                self.assertNotIn("json", kwargs)
+                data = copy.deepcopy(policy)
+            elif url.endswith(":setIamPolicy"):
+                self.assertEqual(method, "POST")
+                policy = kwargs["json"]["policy"]
+                self.assertEqual(policy["etag"], "original")
+                data = policy
+            elif "cloudresourcemanager" in url:
+                data = {"projectNumber": "123456", "lifecycleState": "ACTIVE"}
+            elif url.endswith("services:batchEnable"):
+                self.assertEqual(method, "POST")
+                data = {"done": True}
+            elif url.endswith("/providers/github"):
+                data = {**spec["body"], "state": "ACTIVE"}
+            elif "/workloadIdentityPools/" in url:
+                data = {"state": "ACTIVE"}
+            else:
+                data = {"email": "jp-pages-publisher@jp-test-project.iam.gserviceaccount.com"}
+            response = Mock(status_code=200, content=b"json")
+            response.json.return_value = data
+            return response
+
+        session = Mock()
+        session.request.side_effect = request
+        result = ensure_identity(session, "jp-test-project", repo, lambda _: None)
+        self.assertEqual(result["provider"], spec["provider"])
+        self.assertEqual(policy["bindings"][0]["members"], ["user:owner@example.test"])
+        self.assertEqual(add_identity_binding(policy, spec["member"]), policy)
 
     def test_iam_merge_preserves_conditions_etag_and_is_idempotent(self):
         old = {"version": 3, "etag": "unchanged", "bindings": [{"role": "roles/viewer", "members": ["user:owner@example.test"]},
