@@ -41,6 +41,9 @@ def refresh(data, versions, navigation, shell, output):
             for phase, key in (("PRE", "pre"), ("POST", "postId")):
                 ident = p[key]
                 entries[ident] = dict(id=ident, name=p["newVersion"] + "__" + phase + "__20261027__" + p["baseTitle"], parent=p["archive"], kind="sheet", url=sheet_url(ident), historical=True, description="Native full-workbook version; restore into the original live ID.")
+    for entry in versions.get("navigation_files", []):
+        if entry["parent"] in entries:
+            entries[entry["id"]] = entry
     unused = entries.get("1l58c18s2M6by5ntB_bIVqgsk7-YnzskA")
     if unused:
         unused["name"] = "03 References and Unused Templates"
@@ -70,7 +73,7 @@ def refresh(data, versions, navigation, shell, output):
 def pointer(title, sources, master_url, html_url):
     """Small folder-specific link index; never a duplicate data workbook."""
     esc = html.escape
-    cards = "".join('<article><h2>' + esc(p["baseTitle"]) + '</h2><p>' + esc(p.get("purpose", p["role"])) + '</p><p><a href="' + esc(sheet_url(p["id"])) + '">Open original Sheet</a> · <a href="' + esc(folder_url(p["archive"])) + '">Numbered version history</a></p><small>' + esc(p["newVersion"] + " · " + p["role"].replace("_", " ").lower()) + '</small></article>' for p in sources)
+    cards = "".join('<article><h2>' + esc(p["baseTitle"]) + '</h2><p>' + esc(p.get("purpose", p["role"])) + '</p><p><a href="' + esc(sheet_url(p["id"])) + '">Open original Sheet</a> · <a href="' + esc(folder_url(p["archive"])) + '">Numbered version history</a> · <a href="' + esc(folder_url(p.get("parent", p["archive"]))) + '">Actual folder</a></p><small>' + esc(p["newVersion"] + " · " + p["role"].replace("_", " ").lower()) + '</small></article>' for p in sources)
     return '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(title) + '</title><style>body{font:17px/1.6 system-ui,sans-serif;color:#20382d;background:#f6f8f2;max-width:900px;margin:auto;padding:24px}a{color:#215f49}article{background:white;border:1px solid #d5ddce;border-radius:14px;margin:18px 0;padding:18px}h1{font-size:32px}h2{font-size:21px}small{color:#536554}.lead{padding:18px;background:#e9f0e2;border-radius:14px}</style><main><h1>' + esc(title) + '</h1><p class="lead"><a href="' + esc(master_url) + '"><strong>Open the readable Google Sheets guide →</strong></a></p><p>The original source IDs are retained. Edit facts in their owning Google Sheet. This HTML is a navigation pointer, not another data copy. Existing access-protected owners may remain in their original shared folders; use these links.</p>' + cards + '<p><a href="' + esc(html_url) + '">Full HTML navigator in Google Drive</a></p><p>Drive previews do not execute HTML scripts. On a phone, use the Google Sheets guide above. HTML preserves text, links and figures; its source code is maintained in GitHub.</p><p>Versioned on 27 October 2026. Numbered native PRE/POST copies live in each source’s dedicated history folder. GitHub Actions reads explicitly registered Sheet IDs, so folder renames do not require a full inventory scan.</p></main></html>'
 
 
