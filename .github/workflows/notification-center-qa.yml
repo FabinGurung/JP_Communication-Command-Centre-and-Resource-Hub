@@ -23,6 +23,8 @@ jobs:
         run: |
           python scripts/test_notification_center.py
           python scripts/test_sheets_actions_publishing.py
+          python scripts/test_field_sheet_sources.py
+          node --check assets/js/a9-company-directory.js
           python scripts/build_map_bundle.py
           python scripts/test_map_bundle.py
           python scripts/test_a9_manual_surfaces.py

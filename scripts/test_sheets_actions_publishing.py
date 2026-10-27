@@ -7,6 +7,7 @@ import unittest
 import hashlib
 from pathlib import Path
 from sync_sheets_to_pages import CONFIG, OUTPUT, ROOT, SyncError, append_snapshot, digest, normalize, records, sync, validate_bundle
+from field_sheet_sources import HEADERS, collect
 
 
 class FakeGoogle:
@@ -58,6 +59,45 @@ class FakeGoogle:
                 self.ids[sid] = name
                 self.data[self.master, name] = copy.deepcopy(values)
                 self.data[self.config["notification_sources"][name]["workbook_id"], name] = copy.deepcopy(values)
+        if self.config.get("field_sources"):
+            self.source_reads = {}
+            self.writes = []
+            self.bad_readback = False
+            self.change_during_scan = False
+            admitted = json.loads((root / self.config["contacts_reviewed_projection"]).read_text())
+            for spec in self.config["field_sources"]:
+                kind = spec["adapter"]
+                headers = spec["expected_header"][:]
+                body = []
+                if kind == "contacts":
+                    directory = next(d for d in admitted["directories"] if d["company"] == spec["company"])
+                    body = [[r["name"], r["phone"], r["role"], r["projects"], r["verification"], "PRIVATE_CONTACT_NOTE", r["contact_id"]] for r in directory["records"]]
+                elif kind == "materials":
+                    body = [[spec["company"] + "-MOV1", "2026-10-01", "PRJ-000007", "Site", "Cement", "Consumption", "1", "Bag", "PRIVATE_MATERIAL_NOTE"]]
+                elif kind == "progress":
+                    body = [["2026-10-01", "Site", "Reported", "PRIVATE_WORK_DETAIL", "PRIVATE_PROGRESS_NOTE", spec["company"] + "-PROG1", "PRJ-000007", ""]]
+                elif kind == "readiness":
+                    body = [["2026-10-01", "Site", "W1", "PRIVATE_ACTIVITY"]]
+                elif kind == "attendance_split":
+                    body = [["2026-10-01", "Reported status", "", "2026-10-01", "PRIVATE_SITE", "PRIVATE_ATTENDANCE_NOTE"]]
+                elif kind == "attendance_checkbox":
+                    body = [["2026-10-01", "TRUE"], ["2026-10-02", "FALSE"]]
+                elif kind == "expenses_rich":
+                    body = [["EXP1", "2026-10-01", "PRIVATE_ITEM", "Site", "1", "", "", "PRIVATE_EXPENSE_NOTE"]]
+                elif kind == "expenses_simple":
+                    body = [["2026-10-01", "Site", "1", "PRIVATE_SIMPLE_EXPENSE"]]
+                elif kind == "vendor_summary":
+                    body = [["1", "PRIVATE_VENDOR", "1", "", ""]]
+                elif kind == "supplier_review":
+                    body = [["", "PRIVATE_TRANSCRIPTION", "", "", "", "", "", "Not reviewed", "", "", "", "", "", "", "", "", "file", "PRIVATE_EVIDENCE"]]
+                elif kind == "measurement_review":
+                    body = [["MEAS1", "", "", "", "", "", "PRIVATE_MEASUREMENT_SOURCE", "", "", "", "", ""]]
+                values = ([['Private vendor summary']] if kind == "vendor_summary" else []) + [headers] + body
+                self.data[spec["workbook_id"], spec["tab"]] = normalize(values)
+            joined, _ = collect(self, self.config["field_sources"])
+            for sid, (name, values) in enumerate(joined.items(), 60):
+                self.ids[sid] = name
+                self.data[self.master, name] = copy.deepcopy(values)
         self.data[self.master, "_SOURCE_ROUTER"] = normalize(router)
         self.data[self.master, "00_MANIFEST"] = [["Field", "Value"], ["CONTROL_VERSION", "V000002"]]
         self.data[self.master, "01_VERSION_HISTORY"] = [["Version", "Time", "Scope", "Change", "PRE", "QA", "Rollback", "Data"],
@@ -70,7 +110,7 @@ class FakeGoogle:
 
     def meta(self, fid):
         return {"spreadsheetId": fid, "sheets": [{"properties": {"sheetId": sid, "title": name,
-                "gridProperties": {"rowCount": 1000, "columnCount": 50}}}
+                "gridProperties": {"rowCount": 2000, "columnCount": 50}}, "tables": [t for t in getattr(self, "native_tables", []) if t["range"]["sheetId"] == sid]}
                 for sid, name in self.ids.items() if (fid, name) in self.data]}
 
     def original(self, fid):
@@ -101,6 +141,11 @@ class FakeGoogle:
             if "repeatCell" in request:
                 item = request["repeatCell"]
                 candidate[fid, self.ids[item["range"]["sheetId"]]] = []
+            elif "updateTable" in request:
+                item = request["updateTable"]["table"]
+                for table in self.native_tables:
+                    if table["tableId"] == item["tableId"]:
+                        table["range"] = copy.deepcopy(item["range"])
             else:
                 item = request["updateCells"]
                 name = self.ids[item["start"]["sheetId"]]
@@ -115,7 +160,7 @@ class PublishingTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
-        for name in [CONFIG, "ops/control/map-sheets-source.v1.0.json", "map-config.json", "ops/data/resource-catalog-normalized.v0.1.json", "ops/data/site-notifications-public.v1.json"]:
+        for name in [CONFIG, "ops/control/map-sheets-source.v1.0.json", "map-config.json", "ops/data/resource-catalog-normalized.v0.1.json", "ops/data/site-notifications-public.v1.json", "ops/data/company-contacts-reviewed.v1.json"]:
             dest = self.root / name
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes((ROOT / name).read_bytes())
@@ -128,6 +173,68 @@ class PublishingTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
+    def test_field_tables_keep_private_rows_out_of_public_bundle(self):
+        sync(self.api, self.root)
+        payload = json.loads((self.root / OUTPUT).read_text())
+        self.assertEqual(payload["contacts"]["published_records"], 26)
+        self.assertFalse(any(v in json.dumps(payload) for v in ["PRIVATE_CONTACT_NOTE", "PRIVATE_MATERIAL_NOTE", "PRIVATE_WORK_DETAIL", "PRIVATE_PROGRESS_NOTE", "PRIVATE_ACTIVITY", "PRIVATE_ATTENDANCE_NOTE", "PRIVATE_ITEM", "PRIVATE_EXPENSE_NOTE", "PRIVATE_SIMPLE_EXPENSE", "PRIVATE_VENDOR", "PRIVATE_TRANSCRIPTION", "PRIVATE_EVIDENCE", "PRIVATE_MEASUREMENT_SOURCE"]), "Private field sentinel reached public projection")
+        self.assertEqual(len(self.api.data[self.api.master, "site_attendance"]) - 1, 5)
+        self.assertEqual(payload["contacts"]["refresh_mode"], "ACTIONS_JOINED_SHEET_READBACK")
+
+    def test_contact_refresh_and_new_contact_withheld_with_native_table_growth(self):
+        spec = next(s for s in self.api.config["field_sources"] if s["adapter"] == "contacts")
+        rows = self.api.data[spec["workbook_id"], spec["tab"]]
+        admitted = rows[1][6]
+        rows[1][1] = "+9779800000001"
+        rows.append(["PRIVATE_NEW_PERSON", "+9779800000002", "Role", "Project", "", "PRIVATE_NOTE", "FBL-CON-999999"])
+        sid = next(k for k, v in self.api.ids.items() if v == "company_contacts")
+        self.api.native_tables = [{"tableId": "NATIVE_CONTACTS", "name": "JP_Publishing_company_contacts", "range": {"sheetId": sid, "startRowIndex": 0, "endRowIndex": 27, "startColumnIndex": 0, "endColumnIndex": 10}}]
+        sync(self.api, self.root)
+        payload = json.loads((self.root / OUTPUT).read_text())
+        published = {r["contact_id"]: r for d in payload["contacts"]["directories"] for r in d["records"]}
+        self.assertEqual(published[admitted]["phone"], "+9779800000001")
+        self.assertNotIn("FBL-CON-999999", published)
+        self.assertNotIn("PRIVATE_NEW_PERSON", json.dumps(payload))
+        self.assertEqual(self.api.native_tables[0]["range"]["endRowIndex"], 28)
+
+    def test_withdrawn_contacts_do_not_reappear_from_the_reviewed_snapshot(self):
+        for spec in self.api.config["field_sources"]:
+            if spec["adapter"] == "contacts":
+                self.api.data[spec["workbook_id"], spec["tab"]] = [spec["expected_header"]]
+        sync(self.api, self.root)
+        payload = json.loads((self.root / OUTPUT).read_text())
+        self.assertEqual(payload["contacts"]["published_records"], 0)
+        self.assertTrue(all(d["records"] == [] for d in payload["contacts"]["directories"]))
+
+    def test_contact_identity_reassignment_stops_before_any_write(self):
+        spec = next(s for s in self.api.config["field_sources"] if s["adapter"] == "contacts")
+        self.api.data[spec["workbook_id"], spec["tab"]][1][0] = "PRIVATE_REPLACEMENT_PERSON"
+        with self.assertRaisesRegex(SyncError, "CONTACT_IDENTITY_CHANGE_REQUIRES_REVIEW"):
+            sync(self.api, self.root)
+        self.assertEqual(self.api.writes, [])
+        self.assertEqual(self.api.snapshots, [])
+
+    def test_field_layout_drift_stops_before_any_write(self):
+        spec = self.api.config["field_sources"][0]
+        self.api.data[spec["workbook_id"], spec["tab"]][0][0] = "Unexpected field"
+        with self.assertRaisesRegex(SyncError, "FIELD_SOURCE_LAYOUT_CHANGED"):
+            sync(self.api, self.root)
+        self.assertEqual(self.api.writes, [])
+
+    def test_contact_status_cannot_claim_live_in_a_snapshot_bundle(self):
+        sync(self.api, self.root)
+        payload = json.loads((self.root / OUTPUT).read_text())
+        payload["live_google_sheets_fetch"] = False
+        with self.assertRaisesRegex(SyncError, "CONTACT_REFRESH_MODE_MISMATCH"):
+            validate_bundle(payload, self.root)
+
+    def test_unapproved_private_bundle_section_is_rejected(self):
+        sync(self.api, self.root)
+        payload = json.loads((self.root / OUTPUT).read_text())
+        payload["site_expenses"] = {"private": "PRIVATE_MONEY"}
+        with self.assertRaisesRegex(SyncError, "UNAPPROVED_PUBLIC_BUNDLE_SECTION"):
+            validate_bundle(payload, self.root)
+
     def test_full_chain_and_idempotent_rerun(self):
         result = sync(self.api, self.root)
         self.assertTrue(result["live_google_sheets_fetch"])
@@ -137,7 +244,7 @@ class PublishingTests(unittest.TestCase):
         self.assertEqual(bundle["tables"]["people"]["records"], [])
         router = records(self.api.data[self.api.master, "_SOURCE_ROUTER"], "table")
         self.assertEqual(len({r["source_workbook_id"] for r in router}), 14)
-        self.assertTrue(all(r["connection"] == "API_READBACK_VERIFIED" for r in router))
+        self.assertTrue(all(r["connection"] == ("NOT_CONNECTED_EMPTY_TEMPLATE" if r["table"] == "project_material_inventory" else "API_READBACK_VERIFIED") for r in router))
         writes = len(self.api.writes)
         self.assertFalse(sync(self.api, self.root)["publishing_copy_changed"])
         self.assertEqual(len(self.api.snapshots), 1)

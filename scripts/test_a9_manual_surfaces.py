@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """A9 public-safe additions: no private Sheets rows, no duplicate provider ingestion."""
 import json
+import re
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def read(path): return (ROOT/path).read_text(encoding="utf-8")
@@ -35,9 +36,10 @@ def test():
     assert all(x["level"] in {"L0","L1","L2","L3","L4","L5"} for x in routes["levels"])
     assert catalog["kind"]=="PUBLIC_SAFE_SOURCE_CATEGORY_INDEX"
     assert catalog["sheets_count"]==len(catalog["sources"])==14
+    assert catalog["active_source_count"]==13 and len([s for s in catalog["sources"] if s.get("active") is not False])==13
     assert catalog["published_rows"]==0 and catalog["public_source_file_ids_included"] is False
     assert len({s["source_key"] for s in catalog["sources"]})==14
-    assert all(s["private_sheet_url_included"] is False and s["projection_state"].startswith("AWAITING_") for s in catalog["sources"])
+    assert all(s["private_sheet_url_included"] is False and (s["projection_state"].startswith("AWAITING_") or s.get("active") is False) for s in catalog["sources"])
     assert {x["source_key"] for x in catalog["checklist_sources"]}=={"SRC-04"}
     assert "SRC-04" not in {x["source_key"] for x in catalog["sources"]}
     assert "company-project-site-issues" in read("site-operations.html")
@@ -62,7 +64,7 @@ def test():
     link_keys={x["source_key"] for x in source_links["google_sheet_urls"]}
     assert link_keys=={x["source_key"] for x in catalog["sources"]+catalog["checklist_sources"]}
     assert len({x["url"] for x in source_links["google_sheet_urls"]})==15
-    assert all(x["url"].startswith("https://docs.google.com/spreadsheets/d/") and x["url"].endswith("/edit") and x["dashboard_id"]=="A9-FIELD-"+x["source_key"][-2:] for x in source_links["google_sheet_urls"])
+    assert all(x["url"].startswith("https://docs.google.com/spreadsheets/d/") and re.fullmatch(r"https://docs.google.com/spreadsheets/d/[\w-]+/edit(?:#gid=\d+)?",x["url"]) and x["dashboard_id"]=="A9-FIELD-"+x["source_key"][-2:] for x in source_links["google_sheet_urls"])
     preview=data("ops/data/a9-company-contacts-public-preview.v0.1.json")
     assert preview["projection_id"]=="A9_PUBLIC_COMPANY_CONTACT_PREVIEW_20261021"
     assert preview["freshness"].startswith("MANUAL_")
@@ -72,7 +74,6 @@ def test():
     assert all(x["row_count"]==len(x["records"]) for x in preview["source_tables"])
     assert all(x["withheld_fields"]==["Phone","Notes"] for x in preview["source_tables"])
     assert all(x["published_fields"]==["Name","Role","Project(s)","Verification"] for x in preview["source_tables"])
-    import re
     for book in preview["source_tables"]:
         for item in book["records"]:
             assert set(item)=={"source_row","name","role","projects","verification"}
@@ -86,12 +87,12 @@ def test():
     assert public_data["refresh_mode"]=="MANUAL_STATIC_SNAPSHOT_NOT_LIVE_SHEET_INTEGRATION"
     assert [(x["source_key"],x["source_record_count"]) for x in public_data["directories"]]==[("SRC-01",7),("SRC-02",19)]
     assert all(len(x["records"])==x["source_record_count"] for x in public_data["directories"])
-    import re
     for directory in public_data["directories"]:
         for record in directory["records"]:
             assert set(record)=={"source_row","name","phone","role","projects","verification"}
             assert record["name"] and re.fullmatch(r"\+977[0-9]{10}",record["phone"])
-    assert "a9-contact-directories-public-v0.1.json" in read("assets/js/a9-company-directory.js")
+    assert "map-data.v1.json" in read("assets/js/a9-company-directory.js")
+    assert "bundle.contacts" in read("assets/js/a9-company-directory.js")
     assert "a9-contact-directories-public-v0.1.json" not in read("assets/js/a9-field-resources.js")
     assert "contacts/?source=" in read("assets/js/a9-field-resources.js")
     assert "phone numbers" in read("resources/field/contacts/index.html")

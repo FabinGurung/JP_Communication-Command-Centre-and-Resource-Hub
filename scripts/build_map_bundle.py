@@ -10,6 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 from notification_projection import validate_public as validate_notifications
+from field_sheet_sources import validate_contacts
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = "ops/data/map-data.v1.json"
@@ -52,6 +53,11 @@ def build(root=ROOT):
         policy = json.loads((root / "ops/control/sheets-actions-publishing.v1.json").read_text())["notification_policy"]
         validate_notifications(notifications, policy)
         payload["notifications"] = notifications
+    contact_path = root / "ops/data/company-contacts-reviewed.v1.json"
+    if contact_path.exists():
+        contacts = json.loads(contact_path.read_text())
+        validate_contacts(contacts, contacts)
+        payload["contacts"] = contacts
     text = json.dumps(payload, ensure_ascii=False, sort_keys=True, indent=2) + "\n"
     target = root / OUTPUT
     target.write_text(text, encoding="utf-8")

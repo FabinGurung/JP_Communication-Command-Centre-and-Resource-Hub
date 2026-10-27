@@ -10,7 +10,7 @@ People edit the source Sheets. The publishing workbook is an automatic copy. Col
 
 The existing Operations Hub production workflow on feature/daily-ops-current-work now contains the Google refresh step. scripts/sync_sheets_to_pages.py uses ops/control/sheets-actions-publishing.v1.json and the live publishing router.
 
-1. Read and validate 17 individual source owners: 14 core map subjects, Project Resources, Message Sources and Site Notifications. The fourteen-category cutover has passed exact connected-API source/master readback. Any still-staged route must match its prior active tab before Actions cutover; stale copies stop the run.
+1. Read and validate 28 populated original workbooks: 13 active core subjects, Project Resources, Message Sources, Site Notifications and 12 operational owners. Sixteen operational input tabs assemble eight additional joined tables. The empty stock template is not fetched; its fourteenth core slot remains empty. The fourteen-category cutover has passed exact connected-API source/master readback. Any still-staged route must match its prior active tab before Actions cutover; stale copies stop the run.
 2. Check headers, IDs, references, coordinates and concurrent changes. Source cells are never written.
 3. Archive prior publishing values, router, manifest and history in the existing user-owned previous-versions file. Records are append-only, numbered and hash chained. Conditional upload and exact readback are required. Actions creates no new My Drive files; service accounts cannot own those files. The existing native V000002 PRE copy preserves the original import formulas.
 4. Rebuild the publishing data tabs and router/history in one atomic Sheets batch. Versions advance on changed input, not an unchanged execution.
@@ -25,11 +25,11 @@ The connected ChatGPT Drive account is not an Actions identity. No chat access t
 
 Preferred: configure repository variables JP_GOOGLE_WORKLOAD_IDENTITY_PROVIDER and JP_GOOGLE_SERVICE_ACCOUNT, with Google federation restricted to this repository and the registered Pages branch. Enable the Sheets and Drive APIs in that Google Cloud project. Alternatively, install a dedicated service-account key JSON in repository secret JP_GOOGLE_CREDENTIALS. Never put credentials in Sheets, source files, issues or chat.
 
-Give that identity reader access to all 17 configured source workbooks and the admitted original-message files in Drive. Notification validation downloads each admitted original to check its checksum and source quotes. Give writer access only to the publishing workbook and its existing previous-versions file. No source write access or public sharing is needed. Temporary gha-creds files are ignored by Git and excluded from the explicit Pages artifact.
+Give that identity reader access to all 28 configured populated source workbooks and the admitted original-message files in Drive. Notification validation downloads each admitted original to check its checksum and source quotes. Give writer access only to the publishing workbook and its existing previous-versions file. No source write access or public sharing is needed. Temporary gha-creds files are ignored by Git and excluded from the explicit Pages artifact.
 
-Then run the existing workflow on the Pages branch with require_live_sheets=true. Acceptance requires real fetch, archive/master readback, 14 distinct active core source IDs plus the three auxiliary owners, verified original-message hashes and auxiliary source/master readback, a live_google_sheets_fetch=true bundle and a successful Pages deployment. Offline tests alone do not establish that connection.
+Then run the existing workflow on the Pages branch with require_live_sheets=true. Acceptance requires real fetch, archive/master readback, 13 active core source IDs, the three resource/notification owners and 12 operational owners, verified original-message hashes and auxiliary source/master readback, a live_google_sheets_fetch=true bundle and a successful Pages deployment. Offline tests alone do not establish that connection.
 
-Current triggers: branch pushes and manual runs. A Sheet edit alone does not trigger GitHub. An effective hourly schedule requires a governed workflow on the default branch; no schedule is claimed on this feature branch. Other repositories require their own source assignments, publishing workbook and verified Google access. This implementation covers the Operations map, admitted resource catalogue and source-linked Notification Center. It does not automatically discover or summarize provider messages.
+Current triggers: branch pushes and manual runs. A Sheet edit alone does not trigger GitHub. An effective hourly schedule requires a governed workflow on the default branch; no schedule is claimed on this feature branch. Other repositories require their own source assignments, publishing workbook and verified Google access. This implementation covers the Operations map, admitted resource catalogue, source-linked Notification Center and admitted contact directory. Eight operational subjects are assembled privately; their attendance, financial and unreviewed evidence data is not automatically public. It does not automatically discover or summarize provider messages.
 
 ## Public data boundary
 
@@ -48,3 +48,8 @@ Each core workbook retains its manifest/history and verified PRE copy, with a V0
 ## Whole-site Sheet ownership
 
 The later user direction extends the one-source-Sheet requirement to every displayed fact, editorial content and Excel export. `COMMUNICATION_WEB_SHEET_OWNERSHIP_V1.md` records the full hierarchy and current gaps. The map implementation does not cover every page. Native source workbooks must be identified before additional adapters or copies are created. Historical copies are grouped centrally by source, outside active working folders.
+
+
+## Starred source refresh — 27 October 2026
+
+See [the verified source integration](STARRED_SOURCE_INTEGRATION_20261027.md) for the 18-workbook audit, native numbered archives, fuller-source reconciliation, 25 publishing data tables and current authentication gate. The same publishing workbook now has a native Start Here and starred-Sheet directory.

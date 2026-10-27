@@ -19,6 +19,9 @@ from urllib.parse import quote
 from notification_projection import (NotificationError, compile_notifications,
                                      original_file_id, records as notification_records,
                                      validate_public as validate_notifications)
+from field_sheet_sources import (FieldSourceError, collect as collect_fields,
+                                public_contacts, validate_contacts,
+                                verify_sources as verify_field_sources)
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = "ops/control/sheets-actions-publishing.v1.json"
@@ -29,6 +32,13 @@ ERRORS = {"#REF!", "#N/A", "#VALUE!", "#ERROR!", "#DIV/0!", "#NAME?", "#NUM!"}
 
 class SyncError(RuntimeError):
     """Safe error codes only: no provider response bodies or private values."""
+
+
+def field_call(fn, *args):
+    try:
+        return fn(*args)
+    except FieldSourceError as exc:
+        raise SyncError(str(exc)) from None
 
 
 def digest(value):
@@ -221,7 +231,7 @@ class Google:
 
     def meta(self, fid):
         return self.call("GET", f"https://sheets.googleapis.com/v4/spreadsheets/{fid}",
-                         params={"fields": "spreadsheetId,sheets.properties"})
+                         params={"fields": "spreadsheetId,sheets(properties,tables)"})
 
     def read(self, fid, tab, meta=None):
         meta = meta or self.meta(fid)
@@ -315,10 +325,10 @@ def append_snapshot(raw, fid, previous_hash, state):
     return updated, row["id"]
 
 
-def update_values(sid, rows, clear_grid=None):
+def update_values(sid, rows, clear_grid=None, keep_header=False):
     requests = []
     if clear_grid:
-        requests.append({"repeatCell": {"range": {"sheetId": sid, "startRowIndex": 0,
+        requests.append({"repeatCell": {"range": {"sheetId": sid, "startRowIndex": 1 if keep_header else 0,
             "endRowIndex": clear_grid["rowCount"], "startColumnIndex": 0, "endColumnIndex": clear_grid["columnCount"]},
             "cell": {}, "fields": "userEnteredValue"}})
     requests.append({"updateCells": {"start": {"sheetId": sid, "rowIndex": 0, "columnIndex": 0},
@@ -351,13 +361,14 @@ def sync(api, root=ROOT):
                 or route["source_tab"] != name or route["master_tab"] != name
                 or route["target_workbook_id"] != spec_source["workbook_id"]):
             raise SyncError("UNREVIEWED_SOURCE_ROUTE")
-        target = api.read(spec_source["workbook_id"], name)
-        if route["source_workbook_id"] != spec_source["workbook_id"]:
+        approved_columns = json.loads((root / spec["public_projection"]).read_text())["columns"]
+        inactive = spec_source.get("read_mode") == "EMPTY_TEMPLATE_NOT_CONNECTED"
+        target = [approved_columns] if inactive else api.read(spec_source["workbook_id"], name)
+        if not inactive and route["source_workbook_id"] != spec_source["workbook_id"]:
             legacy = api.read(route["source_workbook_id"], name)
             if normalize(legacy) != normalize(target):
                 raise SyncError("STAGED_SOURCE_CHANGED_CUTOVER_REVIEW_REQUIRED")
         incoming[name] = target
-        approved_columns = json.loads((root / spec["public_projection"]).read_text())["columns"]
         if not target or not set(approved_columns) <= {canonical_header(s) for s in target[0]}:
             raise SyncError("REQUIRED_SOURCE_COLUMNS_MISSING")
         source_tables[name] = (spec["pk"], records(target, spec["pk"]))
@@ -386,19 +397,39 @@ def sync(api, root=ROOT):
             raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
     if cfg.get("notification_sources"):
         notification_public(api, cfg, incoming, source_tables["projects"][1], "ACTIONS_SHEET_READBACK")
+    field_tables, field_snapshots = {}, []
+    contacts_baseline = None
+    if cfg.get("field_sources"):
+        company_names = cfg["field_company_names"]
+        project_companies = {r["project_id"]: company_names[r["executing_company_id"]]
+                             for r in source_tables["projects"][1] if r.get("executing_company_id") in company_names}
+        field_tables, field_snapshots = field_call(collect_fields, api, cfg["field_sources"], project_companies)
+        contacts_baseline = json.loads((root / cfg["contacts_reviewed_projection"]).read_text())
+        field_call(public_contacts, field_tables["company_contacts"], contacts_baseline, "ACTIONS_JOINED_SHEET_READBACK")
+        for name, rows in field_tables.items():
+            if name not in tabs:
+                raise SyncError("JOINED_FIELD_TAB_MISSING")
+            incoming[name] = rows
+            before[name] = api.read(master, name, meta)
+            if (len(rows) > tabs[name]["gridProperties"]["rowCount"]
+                    or len(rows[0]) > tabs[name]["gridProperties"]["columnCount"]):
+                raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
     validate_relations(source_tables)
     project_public(root, source_tables)  # Reject unsafe joins before any write.
     fingerprint = digest(incoming)
     previous = {r[0]: r[1] for r in manifest if len(r) > 1}
     active = all(r["source_workbook_id"] == cfg["sources"][r["table"]]["workbook_id"]
-                 and r["read_mode"] == "GITHUB_ACTIONS_API" for r in route_rows)
+                 and r["read_mode"] == cfg["sources"][r["table"]].get("read_mode", "GITHUB_ACTIONS_API") for r in route_rows)
     changed = before != incoming or previous.get("ACTIONS_SOURCE_DIGEST") != fingerprint or not active
     if changed:
         # Re-read the sources immediately before mutation: a concurrent edit must not
         # create a mixed-scan release. Source errors occur before the PRE copy/write.
         for name, rows in incoming.items():
+            if name in field_tables or source_specs[name].get("read_mode") == "EMPTY_TEMPLATE_NOT_CONNECTED":
+                continue
             if api.read(source_specs[name]["workbook_id"], name) != rows:
                 raise SyncError("SOURCE_CHANGED_DURING_READ")
+        field_call(verify_field_sources, api, field_snapshots)
         if api.read(master, "_SOURCE_ROUTER", meta) != router or api.read(master, "00_MANIFEST", meta) != manifest:
             raise SyncError("PUBLISHING_CONTROLS_CHANGED_DURING_READ")
         for name, rows in before.items():
@@ -413,12 +444,21 @@ def sync(api, root=ROOT):
         stamp = datetime.now(timezone.utc).isoformat()
         requests = []
         for name, rows in incoming.items():
-            requests += update_values(tabs[name]["sheetId"], rows, tabs[name]["gridProperties"])
+            requests += update_values(tabs[name]["sheetId"], rows, tabs[name]["gridProperties"], keep_header=name in field_tables)
+            if name in field_tables:
+                native = [t for sheet in meta["sheets"] for t in sheet.get("tables", [])
+                          if t.get("name") == "JP_Publishing_" + name]
+                if native:
+                    requests.append({"updateTable": {"table": {"tableId": native[0]["tableId"],
+                        "range": {"sheetId": tabs[name]["sheetId"], "startRowIndex": 0, "endRowIndex": max(2, len(rows)),
+                                  "startColumnIndex": 0, "endColumnIndex": len(rows[0])}}, "fields": "range"}})
         for row in router[1:]:
             if row:
                 row += [""] * (len(router[0]) - len(row))
                 spec = cfg["sources"][row[0]]
                 row[1], row[5], row[6], row[11], row[12] = spec["workbook_id"], "GITHUB_ACTIONS_API", "API_READBACK_REQUIRED", "API_OWNER_ACTIVE", "Edit the individual source Sheet; Actions rebuilds this copy"
+                if spec.get("read_mode") == "EMPTY_TEMPLATE_NOT_CONNECTED":
+                    row[5], row[6], row[11], row[12] = "EMPTY_TEMPLATE_NOT_CONNECTED", "NOT_CONNECTED_EMPTY_TEMPLATE", "INACTIVE_EMPTY_TEMPLATE", "Empty template is excluded; populated company material movements are joined separately."
                 row[4] = str(len(source_tables[row[0]][1]))
         control_values = {"CONTROL_VERSION": version, "ACTIONS_SOURCE_DIGEST": fingerprint,
                           "PAGES_CONNECTION": "GITHUB_ACTIONS_API", "PUBLISHING_RULE": "SOURCE SHEETS → ACTIONS → PUBLISHING COPY → VALIDATED JSON → PAGES"}
@@ -428,7 +468,7 @@ def sync(api, root=ROOT):
         manifest += [[key, value] for key, value in control_values.items()]
         requests += update_values(tabs["_SOURCE_ROUTER"]["sheetId"], router)
         requests += update_values(tabs["00_MANIFEST"]["sheetId"], manifest)
-        history.append([version, stamp, "Automatic publishing copy", f"Rebuilt from {len(incoming)} individual source Sheets", snap,
+        history.append([version, stamp, "Automatic publishing copy", f"Rebuilt {len(incoming)} joined data tables from registered source Sheets", snap,
                         "SOURCE_VALIDATED; READBACK_REQUIRED", "Restore PRE content into same publishing ID", fingerprint])
         requests += update_values(tabs["01_VERSION_HISTORY"]["sheetId"], history)
         api.write(master, requests)  # One atomic Sheets batch; no source writes.
@@ -439,15 +479,20 @@ def sync(api, root=ROOT):
         actual = api.read(master, name)
         if actual != incoming[name]:
             raise SyncError("PUBLISHING_READBACK_MISMATCH")
-        if api.read(cfg["sources"][name]["workbook_id"], name) != incoming[name]:
+        if (cfg["sources"][name].get("read_mode") != "EMPTY_TEMPLATE_NOT_CONNECTED"
+                and api.read(cfg["sources"][name]["workbook_id"], name) != incoming[name]):
             raise SyncError("SOURCE_CHANGED_BEFORE_PUBLICATION")
         readback_tables[name] = (spec["pk"], records(actual, spec["pk"]))
     auxiliary = {}
     for name in set(incoming) - expected:
         actual = api.read(master, name)
-        if actual != incoming[name] or api.read(source_specs[name]["workbook_id"], name) != actual:
+        if (actual != incoming[name] or (name not in field_tables
+                and api.read(source_specs[name]["workbook_id"], name) != actual)):
             raise SyncError("AUXILIARY_PUBLISHING_READBACK_MISMATCH")
         auxiliary[name] = actual
+    field_call(verify_field_sources, api, field_snapshots)
+    contacts = field_call(public_contacts, auxiliary["company_contacts"], contacts_baseline,
+                          "ACTIONS_JOINED_SHEET_READBACK") if contacts_baseline is not None else None
     notifications = notification_public(api, cfg, auxiliary, readback_tables["projects"][1], "ACTIONS_SHEET_READBACK") if cfg.get("notification_sources") else None
     # Record successful readback in the same history row, including on recovery
     # from an interruption after the first atomic write. This is no new version.
@@ -455,7 +500,7 @@ def sync(api, root=ROOT):
     verified_history = api.read(master, "01_VERSION_HISTORY")
     receipt_changed = False
     for row in verified_router[1:]:
-        if row and row[6] != "API_READBACK_VERIFIED":
+        if row and row[5] != "EMPTY_TEMPLATE_NOT_CONNECTED" and row[6] != "API_READBACK_VERIFIED":
             row[6] = "API_READBACK_VERIFIED"
             receipt_changed = True
     if verified_history[-1][5] != "SOURCE_AND_MASTER_READBACK_VERIFIED":
@@ -476,6 +521,8 @@ def sync(api, root=ROOT):
         payload["resources"] = resources_public(root, auxiliary["project_resources"])
     if notifications is not None:
         payload["notifications"] = notifications
+    if contacts is not None:
+        payload["contacts"] = contacts
     validate_bundle(payload, root)
     output = root / OUTPUT
     temporary = output.with_suffix(".tmp")
@@ -486,9 +533,22 @@ def sync(api, root=ROOT):
 
 
 def validate_bundle(payload, root=ROOT):
+    allowed = {"schema_version", "bundle_id", "publication_mode", "live_google_sheets_fetch",
+               "reviewed_static_fields_retained", "table_count", "source_evidence", "tables",
+               "resources", "notifications", "contacts"}
+    if set(payload) - allowed:
+        raise SyncError("UNAPPROVED_PUBLIC_BUNDLE_SECTION")
     baseline = json.loads((root / "ops/control/map-sheets-source.v1.0.json").read_text())
     config = json.loads((root / CONFIG).read_text())
     map_config = json.loads((root / "map-config.json").read_text())
+    if config.get("field_sources") and "contacts" not in payload:
+        raise SyncError("PUBLIC_CONTACT_SECTION_MISSING")
+    if "contacts" in payload:
+        expected_mode = "ACTIONS_JOINED_SHEET_READBACK" if payload.get("live_google_sheets_fetch") else "REVIEWED_SHEET_SNAPSHOT"
+        if payload["contacts"].get("refresh_mode") != expected_mode:
+            raise SyncError("CONTACT_REFRESH_MODE_MISMATCH")
+        reviewed = json.loads((root / config["contacts_reviewed_projection"]).read_text())
+        field_call(validate_contacts, payload["contacts"], reviewed)
     if "notifications" in payload:
         try:
             validate_notifications(payload["notifications"], config["notification_policy"])
