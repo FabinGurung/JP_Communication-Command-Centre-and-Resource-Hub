@@ -62,7 +62,7 @@
     },
     {
       "source_key": "SRC-07",
-      "title": "Paras Pariyar — Attendance",
+      "title": "Paras Pariyar — Site Visits and Attendance",
       "department": "Visits",
       "company": "Fishtail",
       "access": "PRIVATE_PERSONNEL_FINANCE",
@@ -72,7 +72,7 @@
     },
     {
       "source_key": "SRC-08",
-      "title": "Shiv Narayan Chaudhary — Attendance",
+      "title": "Shiv Narayan Chaudhary — Site Visits and Attendance",
       "department": "Visits",
       "company": "Fishtail",
       "access": "PRIVATE_PERSONNEL_FINANCE",
@@ -82,23 +82,23 @@
     },
     {
       "source_key": "SRC-09",
-      "title": "Fishtail Project Locations",
+      "title": "Fishtail Project Locations — Reference",
       "department": "Locations",
       "company": "Fishtail",
       "access": "PROJECT_GEO",
       "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
       "private_sheet_url_included": false,
-      "note": "Opens a filtered view of shared Projects and Locations; no competing coordinate table."
+      "note": "Company navigation reference. Projects and Locations owns the shared coordinates; this is not a second map data source."
     },
     {
       "source_key": "SRC-10",
-      "title": "Rohini Project Locations",
+      "title": "Rohini Project Locations — Reference",
       "department": "Locations",
       "company": "Rohini",
       "access": "PROJECT_GEO",
       "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
       "private_sheet_url_included": false,
-      "note": "Opens a filtered view of shared Projects and Locations; no competing coordinate table."
+      "note": "Company navigation reference. Projects and Locations owns the shared coordinates; this is not a second map data source."
     },
     {
       "source_key": "SRC-11",
@@ -126,9 +126,10 @@
       "department": "Expenses",
       "company": "Fishtail",
       "access": "RESTRICTED_SOURCE",
-      "projection_state": "AWAITING_INDIVIDUAL_PUBLIC_SAFE_REVIEW",
+      "projection_state": "INACTIVE_EMPTY_TEMPLATE",
       "private_sheet_url_included": false,
-      "note": "Dedicated expense source, separate from attendance."
+      "note": "This existing expense template contains no entries and is excluded from the active website tools.",
+      "active": false
     },
     {
       "source_key": "SRC-14",
@@ -167,5 +168,6 @@
       "private_sheet_url_included": false,
       "note": "Issues belong to Daily Checklist. Potential backcharges remain unconfirmed until approved."
     }
-  ]
+  ],
+  "active_source_count": 13
 }

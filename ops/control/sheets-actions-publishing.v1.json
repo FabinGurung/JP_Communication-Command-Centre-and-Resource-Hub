@@ -1,5 +1,5 @@
 {
-  "version": "V000005",
+  "version": "V000006",
   "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
   "publishing_workbook_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
   "previous_versions_folder_id": "12-eWCCG56jJBFlFfHa_49sxgydZAbRCj",
@@ -51,7 +51,8 @@
     "project_material_inventory": {
       "workbook_id": "1J0c-usE3jUubT_hCTxxklHzyVBzxoFZaJtCsuG3toWA",
       "legacy_id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
-      "tab": "project_material_inventory"
+      "tab": "project_material_inventory",
+      "read_mode": "EMPTY_TEMPLATE_NOT_CONNECTED"
     },
     "project_components": {
       "workbook_id": "1kAtyZPQOdSzxDS83AYwIBzrj5OIsvBKE_8orH8ez07U",
@@ -198,5 +199,296 @@
         "project_id": "PRJ-000020"
       }
     }
+  },
+  "field_sources": [
+    {
+      "workbook_id": "15szptLz7q3-Rote1SnNuIqdcrxrm0z2m0k7yx9j51c4",
+      "tab": "2_PEOPLE_DIRECTORY",
+      "adapter": "contacts",
+      "table": "company_contacts",
+      "expected_header": [
+        "name",
+        "phone",
+        "role",
+        "project_s",
+        "verification",
+        "notes",
+        "contact_id"
+      ],
+      "company": "Fishtail Builders",
+      "person": ""
+    },
+    {
+      "workbook_id": "1Cyuj0uti-IN7ddDNVdAd1kM0NNpATdTnNabfcY7P1cw",
+      "tab": "2_PEOPLE_DIRECTORY",
+      "adapter": "contacts",
+      "table": "company_contacts",
+      "expected_header": [
+        "name",
+        "phone",
+        "role",
+        "project_s",
+        "verification",
+        "notes",
+        "contact_id"
+      ],
+      "company": "Rohini Engineering and Builders",
+      "person": ""
+    },
+    {
+      "workbook_id": "1YshLrDAJDg3CO8F1jmIr2Eucy0-TKwiviVNF5tiAfT0",
+      "tab": "materials_inventory",
+      "adapter": "materials",
+      "table": "material_movements",
+      "expected_header": [
+        "movement_id",
+        "date",
+        "project_id",
+        "site",
+        "material",
+        "movement",
+        "quantity",
+        "unit",
+        "remarks"
+      ],
+      "company": "Fishtail Builders",
+      "person": ""
+    },
+    {
+      "workbook_id": "1GQQDRg3bDPVIrfs1oVm_ycmyBE5NlpxEKzu1DsAz6tk",
+      "tab": "materials_inventory",
+      "adapter": "materials",
+      "table": "material_movements",
+      "expected_header": [
+        "movement_id",
+        "date",
+        "project_id",
+        "site",
+        "material",
+        "movement",
+        "quantity",
+        "unit",
+        "remarks"
+      ],
+      "company": "Rohini Engineering and Builders",
+      "person": ""
+    },
+    {
+      "workbook_id": "1-pE1d4uxytIZsKF8Tzu3eBDlXL4MLIYiGGvVoKMqo1k",
+      "tab": "2_OPS_DAILY_PROGRESS",
+      "adapter": "progress",
+      "table": "site_progress",
+      "expected_header": [
+        "date",
+        "site",
+        "status",
+        "work_location",
+        "qty_note",
+        "progress_event_id_pk",
+        "project_id_fk",
+        "source_artifact_id"
+      ],
+      "company": "Fishtail Builders",
+      "person": ""
+    },
+    {
+      "workbook_id": "1-pE1d4uxytIZsKF8Tzu3eBDlXL4MLIYiGGvVoKMqo1k",
+      "tab": "3_OPS_DAILY_READINESS",
+      "adapter": "readiness",
+      "table": "site_readiness",
+      "expected_header": [
+        "date",
+        "site",
+        "work_id",
+        "activity",
+        "location",
+        "materials",
+        "manpower",
+        "ppe",
+        "ppe_responsibility",
+        "work_briefing",
+        "tools",
+        "preconditions"
+      ],
+      "company": "Fishtail Builders",
+      "person": ""
+    },
+    {
+      "workbook_id": "1agDIiVfTwicWAxix07HaukX7EemNdO4IyghYcBH_kys",
+      "tab": "2_OPS_DAILY_PROGRESS",
+      "adapter": "progress",
+      "table": "site_progress",
+      "expected_header": [
+        "date",
+        "site",
+        "status",
+        "work_location",
+        "qty_note",
+        "progress_event_id_pk",
+        "project_id_fk",
+        "source_artifact_id"
+      ],
+      "company": "Rohini Engineering and Builders",
+      "person": ""
+    },
+    {
+      "workbook_id": "1agDIiVfTwicWAxix07HaukX7EemNdO4IyghYcBH_kys",
+      "tab": "3_OPS_DAILY_READINESS",
+      "adapter": "readiness",
+      "table": "site_readiness",
+      "expected_header": [
+        "date",
+        "site",
+        "work_id",
+        "activity",
+        "location",
+        "materials",
+        "manpower",
+        "ppe",
+        "ppe_responsibility",
+        "work_briefing",
+        "tools",
+        "preconditions"
+      ],
+      "company": "Rohini Engineering and Builders",
+      "person": ""
+    },
+    {
+      "workbook_id": "1blVxu1qfmZU06J5QNjwpyOBDnqtR9HzC_GEzk5WWFBw",
+      "tab": "Attendance",
+      "adapter": "attendance_split",
+      "table": "site_attendance",
+      "expected_header": [
+        "attendance_date",
+        "status",
+        "",
+        "visit_date",
+        "site_visited",
+        "note"
+      ],
+      "company": "Fishtail Builders",
+      "person": "Paras Pariyar"
+    },
+    {
+      "workbook_id": "16B3tBDNF6YQgt79tptMSygSrsUZXoTWI3yDzUmNnWuc",
+      "tab": "Attendance",
+      "adapter": "attendance_split",
+      "table": "site_attendance",
+      "expected_header": [
+        "attendance_date",
+        "status",
+        "",
+        "visit_date",
+        "site_visited",
+        "note"
+      ],
+      "company": "Fishtail Builders",
+      "person": "Shiv Narayan Chaudhary"
+    },
+    {
+      "workbook_id": "11Dpvqm_joE4ZnySYSkGObMIya-ILHRdZf4GC3ZlRoj0",
+      "tab": "2_Attendance",
+      "adapter": "attendance_checkbox",
+      "table": "site_attendance",
+      "expected_header": [
+        "date",
+        "14_bishal_paija"
+      ],
+      "company": "Rohini Engineering and Builders",
+      "person": "Krishna Kumar Gupta"
+    },
+    {
+      "workbook_id": "1blVxu1qfmZU06J5QNjwpyOBDnqtR9HzC_GEzk5WWFBw",
+      "tab": "Expenses",
+      "adapter": "expenses_rich",
+      "table": "site_expenses",
+      "expected_header": [
+        "id",
+        "date",
+        "item",
+        "project_name",
+        "amount",
+        "hardware",
+        "bill_photo",
+        "remarks"
+      ],
+      "company": "Fishtail Builders",
+      "person": "Paras Pariyar"
+    },
+    {
+      "workbook_id": "11Dpvqm_joE4ZnySYSkGObMIya-ILHRdZf4GC3ZlRoj0",
+      "tab": "3_Expenses",
+      "adapter": "expenses_simple",
+      "table": "site_expenses",
+      "expected_header": [
+        "date",
+        "project",
+        "amount_npr",
+        "remarks"
+      ],
+      "company": "Rohini Engineering and Builders",
+      "person": "Krishna Kumar Gupta"
+    },
+    {
+      "workbook_id": "1S1fkWzo6XGzyD3p92_pTG32zZ9fF3YICAv3HPTomZsE",
+      "tab": "KKG_VENDOR_SUMMARY_AUTO",
+      "adapter": "vendor_summary",
+      "table": "vendor_payments",
+      "expected_header": [
+        "id",
+        "vendor_purpose",
+        "amount_npr",
+        "qr_npr",
+        "discount_npr"
+      ],
+      "company": "Rohini Engineering and Builders",
+      "person": ""
+    },
+    {
+      "workbook_id": "1noepsgHiW3MM8mBKaF2BzbgLK1WsMsbssrVNS5_ucx0",
+      "tab": "01_HUMAN_REVIEW",
+      "adapter": "supplier_review",
+      "table": "source_review_queue",
+      "expected_header": [
+        "photo_file_preview",
+        "human_input_transcription",
+        "document_type",
+        "bill_no",
+        "bill_date",
+        "total_amount",
+        "payment_status",
+        "review_status"
+      ],
+      "company": "Fishtail Builders",
+      "person": ""
+    },
+    {
+      "workbook_id": "1NvvOD7UUDAvWVnGOC33q2MOy3h6ZDoD1Y2es9l3dpiY",
+      "tab": "MEASUREMENT_RECORDS",
+      "adapter": "measurement_review",
+      "table": "source_review_queue",
+      "expected_header": [
+        "record_id",
+        "project_id",
+        "project_name",
+        "work_category",
+        "work_item",
+        "measurement_type",
+        "description",
+        "quantity",
+        "unit",
+        "rate",
+        "amount",
+        "measurement_date"
+      ],
+      "company": "Fishtail Builders",
+      "person": ""
+    }
+  ],
+  "contacts_reviewed_projection": "ops/data/company-contacts-reviewed.v1.json",
+  "field_publication_policy": "Eight derived private joined tables. Only previously admitted contact identities and approved contact fields enter the public bundle. Attendance, expenses, payments, raw messages, evidence and unreviewed measurement quantities remain private.",
+  "field_company_names": {
+    "ORG-000001": "Fishtail Builders",
+    "ORG-000002": "Rohini Engineering and Builders"
   }
 }

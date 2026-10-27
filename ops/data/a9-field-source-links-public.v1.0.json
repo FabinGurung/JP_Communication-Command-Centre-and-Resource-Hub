@@ -54,15 +54,15 @@
     {
       "source_key": "SRC-07",
       "dashboard_id": "A9-FIELD-07",
-      "title": "Paras Pariyar — Attendance",
-      "url": "https://docs.google.com/spreadsheets/d/1HSmklPhqSPo6-N-7tbidOzwsZleJHrHlIyR34h7GgtI/edit",
+      "title": "Paras Pariyar — Site Visits and Attendance",
+      "url": "https://docs.google.com/spreadsheets/d/1blVxu1qfmZU06J5QNjwpyOBDnqtR9HzC_GEzk5WWFBw/edit#gid=2033000002",
       "permission_note": "Google access permissions required; not a public data mirror"
     },
     {
       "source_key": "SRC-08",
       "dashboard_id": "A9-FIELD-08",
-      "title": "Shiv Narayan Chaudhary — Attendance",
-      "url": "https://docs.google.com/spreadsheets/d/11uTBk0DDF_OkpNpmgbee4zXNGhAOQK0DS-ao8Qw0-uc/edit",
+      "title": "Shiv Narayan Chaudhary — Site Visits and Attendance",
+      "url": "https://docs.google.com/spreadsheets/d/16B3tBDNF6YQgt79tptMSygSrsUZXoTWI3yDzUmNnWuc/edit#gid=2032000002",
       "permission_note": "Google access permissions required; not a public data mirror"
     },
     {
@@ -90,15 +90,17 @@
       "source_key": "SRC-12",
       "dashboard_id": "A9-FIELD-12",
       "title": "Paras Pariyar — Expenses",
-      "url": "https://docs.google.com/spreadsheets/d/14Q2hJbswLIqm86jJIj0wX6AduN47dE22bXi8AK-bjzo/edit",
+      "url": "https://docs.google.com/spreadsheets/d/1blVxu1qfmZU06J5QNjwpyOBDnqtR9HzC_GEzk5WWFBw/edit#gid=2055000201",
       "permission_note": "Google access permissions required; not a public data mirror"
     },
     {
       "source_key": "SRC-13",
       "dashboard_id": "A9-FIELD-13",
-      "title": "Shiv Narayan Chaudhary — Expenses",
+      "title": "Shiv Narayan Chaudhary — Empty Expense Template — Not Connected",
       "url": "https://docs.google.com/spreadsheets/d/164BYMXKRQu3mBmSvR3yZO7sLNdBEhiLCGArE5ahciq4/edit",
-      "permission_note": "Google access permissions required; not a public data mirror"
+      "permission_note": "Google access permissions required; not a public data mirror",
+      "active": false,
+      "connection": "INACTIVE_EMPTY_TEMPLATE"
     },
     {
       "source_key": "SRC-14",
@@ -114,5 +116,7 @@
       "url": "https://docs.google.com/spreadsheets/d/1agDIiVfTwicWAxix07HaukX7EemNdO4IyghYcBH_kys/edit",
       "permission_note": "Google access permissions required; not a public data mirror"
     }
-  ]
+  ],
+  "updated_on_npt": "2026-10-27",
+  "active_source_count": 14
 }
