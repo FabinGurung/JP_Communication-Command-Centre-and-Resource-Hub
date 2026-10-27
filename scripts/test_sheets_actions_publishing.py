@@ -251,6 +251,9 @@ class PublishingTests(unittest.TestCase):
         router = records(self.api.data[self.api.master, "_SOURCE_ROUTER"], "table")
         self.assertEqual(len({r["source_workbook_id"] for r in router}), 14)
         self.assertTrue(all(r["connection"] == ("NOT_CONNECTED_EMPTY_TEMPLATE" if r["table"] == "project_material_inventory" else "API_READBACK_VERIFIED") for r in router))
+        manifest = dict(r[:2] for r in self.api.data[self.api.master, "00_MANIFEST"][1:])
+        self.assertEqual(manifest["ACTIONS_CONNECTION"], "LIVE_SOURCE_AND_PUBLISHING_READBACK_VERIFIED")
+        self.assertEqual(manifest["PAGES_CONNECTION"], "CHECK_DEPLOYED_JSON_RUN_RECEIPT")
         writes = len(self.api.writes)
         self.assertFalse(sync(self.api, self.root)["publishing_copy_changed"])
         self.assertEqual(len(self.api.snapshots), 1)
@@ -273,6 +276,13 @@ class PublishingTests(unittest.TestCase):
                                 len(self.api.data[self.api.master, "projects"][0]))
         self.assertGreaterEqual(self.api.grid_overrides["01_VERSION_HISTORY"]["rowCount"], 3)
         self.assertEqual(len(self.api.snapshots), 1)
+
+    def test_duplicate_manifest_fields_stop_before_snapshot_or_write(self):
+        self.api.data[self.api.master, "00_MANIFEST"].append(["CONTROL_VERSION", "stale duplicate"])
+        with self.assertRaisesRegex(SyncError, "SOURCE_PRIMARY_KEY_INVALID"):
+            sync(self.api, self.root)
+        self.assertEqual(self.api.snapshots, [])
+        self.assertEqual(self.api.writes, [])
 
     def test_readable_headers_with_individual_owners(self):
         router = self.api.data[self.api.master, "_SOURCE_ROUTER"]

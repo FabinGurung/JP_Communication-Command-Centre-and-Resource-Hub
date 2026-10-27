@@ -366,6 +366,7 @@ def sync(api, root=ROOT):
     tabs = {x["properties"]["title"]: x["properties"] for x in meta["sheets"]}
     router = api.read(master, "_SOURCE_ROUTER", meta)
     manifest = api.read(master, "00_MANIFEST", meta)
+    records(manifest, "field")  # Duplicate control keys cannot shadow status.
     history = api.read(master, "01_VERSION_HISTORY", meta)
     route_rows = records(router, "table")
     routes = {r["table"]: r for r in route_rows}
@@ -470,7 +471,8 @@ def sync(api, root=ROOT):
                     row[5], row[6], row[11], row[12] = "EMPTY_TEMPLATE_NOT_CONNECTED", "NOT_CONNECTED_EMPTY_TEMPLATE", "INACTIVE_EMPTY_TEMPLATE", "Empty template is excluded; populated company material movements are joined separately."
                 row[4] = str(len(source_tables[row[0]][1]))
         control_values = {"CONTROL_VERSION": version, "ACTIONS_SOURCE_DIGEST": fingerprint,
-                          "PAGES_CONNECTION": "GITHUB_ACTIONS_API", "PUBLISHING_RULE": "SOURCE SHEETS → ACTIONS → PUBLISHING COPY → VALIDATED JSON → PAGES"}
+                          "PAGES_CONNECTION": "CHECK_DEPLOYED_JSON_RUN_RECEIPT",
+                          "PUBLISHING_RULE": "INDIVIDUAL SOURCE SHEETS → JOINED PUBLISHING SHEET → VALIDATED JSON → GITHUB ACTIONS → GITHUB PAGES"}
         for row in manifest:
             if row and row[0] in control_values:
                 row[1:2] = [control_values.pop(row[0])]
@@ -509,6 +511,9 @@ def sync(api, root=ROOT):
     # from an interruption after the first atomic write. This is no new version.
     verified_router = api.read(master, "_SOURCE_ROUTER")
     verified_history = api.read(master, "01_VERSION_HISTORY")
+    verified_manifest = api.read(master, "00_MANIFEST")
+    if verified_manifest != normalize(manifest):
+        raise SyncError("PUBLISHING_CONTROLS_CHANGED_DURING_READBACK")
     receipt_changed = False
     for row in verified_router[1:]:
         if row and row[5] != "EMPTY_TEMPLATE_NOT_CONNECTED" and row[6] != "API_READBACK_VERIFIED":
@@ -517,10 +522,26 @@ def sync(api, root=ROOT):
     if verified_history[-1][5] != "SOURCE_AND_MASTER_READBACK_VERIFIED":
         verified_history[-1][5] = "SOURCE_AND_MASTER_READBACK_VERIFIED"
         receipt_changed = True
+    connection_values = {"ACTIONS_CONNECTION": "LIVE_SOURCE_AND_PUBLISHING_READBACK_VERIFIED",
+                         "AUTO_SOURCE_REFRESH": "CONNECTED__REGISTERED_BRANCH_PUSH_OR_MANUAL",
+                         "PAGES_CONNECTION": "CHECK_DEPLOYED_JSON_RUN_RECEIPT"}
+    for row in verified_manifest:
+        if row and row[0] in connection_values:
+            value = connection_values.pop(row[0])
+            if row[1] != value:
+                row[1] = value
+                receipt_changed = True
+    if connection_values:
+        verified_manifest += [[key, value] for key, value in connection_values.items()]
+        receipt_changed = True
     if receipt_changed:
-        api.write(master, update_values(tabs["_SOURCE_ROUTER"]["sheetId"], verified_router)
-                  + update_values(tabs["01_VERSION_HISTORY"]["sheetId"], verified_history))
-        if api.read(master, "_SOURCE_ROUTER") != verified_router or api.read(master, "01_VERSION_HISTORY") != verified_history:
+        api.write(master, publishing_capacity(tabs, {"00_MANIFEST": verified_manifest})
+                  + update_values(tabs["_SOURCE_ROUTER"]["sheetId"], verified_router)
+                  + update_values(tabs["01_VERSION_HISTORY"]["sheetId"], verified_history)
+                  + update_values(tabs["00_MANIFEST"]["sheetId"], verified_manifest))
+        if (api.read(master, "_SOURCE_ROUTER") != verified_router
+                or api.read(master, "01_VERSION_HISTORY") != verified_history
+                or api.read(master, "00_MANIFEST") != verified_manifest):
             raise SyncError("SUCCESS_RECEIPT_READBACK_MISMATCH")
     public = project_public(root, readback_tables)
     payload = {"schema_version": "1.0.0", "bundle_id": "JP_MAP_REVIEWED_SHEETS_V1",
