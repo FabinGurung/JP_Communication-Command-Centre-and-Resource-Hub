@@ -39,3 +39,11 @@ Only the empty application shell is admitted to the Pages artifact. TypeScript
 is the maintained source; the browser executes its compiled JavaScript and CSS.
 The existing Sheets → publishing Sheet → validated JSON → Actions → Pages
 contract and its pending Google identity setup remain unchanged.
+
+## Website Sheet directory — 27 October 2026
+
+The same private HTML guide is now at the top of 01_JP. The existing Shared Registers folder is renamed Website Sheets and Registers, and Working Sheets is renamed Website Source Sheets — Edit Here. The directory lists 33 registered subject owners/views and all 18 starred Sheets observed in the connected account. Stars are bookmarks, not public-data admission. Private titles and links remain outside this public checkout.
+
+Thirteen existing files were moved by ID, leaving 31 registered owners/views in the source folder. Two Rohini sources retain their company folder because moving them removed an inherited reader. Those trials were reversed and access read back; both original files remain directly linked in the central guide. No working copies or new source Sheets were created. The joined publishing workbook remains in its separate derived-copy subfolder. Native PRE copies and version-history receipts are retained per source in the central archive.
+
+The guide adds dedicated folder links, source summaries, a starred list, the complete task checklist and instructions for human folder management. Its full inventory snapshot remains dated separately from this targeted source-location refresh. New folders do not require an immediate full scan: direct Drive folder links show their contents live, while saved search/diagrams need a refresh of the changed branch. No automatic watcher is enabled. HTML preserves content when conversion is checked; it opens offline if self-contained. Drive is not HTML hosting.

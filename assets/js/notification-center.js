@@ -1,6 +1,8 @@
 (()=>{"use strict";
-const holder=document.getElementById("notification-list"),status=document.getElementById("notification-status"),project=document.getElementById("notification-project"),category=document.getElementById("notification-category"),search=document.getElementById("notification-search");
-let feed=null,sources=new Map();
+const holder=document.getElementById("notification-list"),status=document.getElementById("notification-status"),project=document.getElementById("notification-project"),company=document.getElementById("notification-company"),category=document.getElementById("notification-category"),search=document.getElementById("notification-search");
+let feed=null,sources=new Map(),projectNames=new Map(),projectCompanies=new Map();
+const companyKey=value=>/^fishtail/i.test(value||"")?"Fishtail":/^rohini/i.test(value||"")?"Rohini":"";
+function projectOptions(){const previous=project.value,choices=[...projectNames].filter(([id])=>!company.value||projectCompanies.get(id)===company.value);project.replaceChildren(new Option("All projects",""),...choices.sort((a,b)=>a[1].localeCompare(b[1])).map(([id,name])=>new Option(name,id)));if(choices.some(([id])=>id===previous))project.value=previous;}
 const el=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=String(text);if(cls)e.className=cls;return e;};
 const groups=[["Work","Work to do"],["Materials","Materials to arrange"],["Supervision","Supervision and checks"]];
 const sourceURL=u=>/^https:\/\/(?:[\w-]+\.slack\.com\/archives\/|discord\.com\/channels\/|chatgpt\.com\/c\/)/.test(u||"");
@@ -8,7 +10,7 @@ const driveURL=u=>/^https:\/\/drive\.google\.com\/file\/d\/[\w-]+\/view(?:\?|$)/
 function link(text,url){const a=el("a",text);a.href=url;a.target="_blank";a.rel="noopener noreferrer";return a;}
 function readKey(id,items){let n=2166136261;for(const c of JSON.stringify(items)){n^=c.charCodeAt(0);n=Math.imul(n,16777619);}return"JP:notification-read:v1:"+id+":"+(n>>>0).toString(16);}
 function paint(){if(!feed)return;const q=search.value.trim().toLowerCase(),wanted=new URLSearchParams(location.search).get("notice"),batches=new Map();
-for(const item of feed.items){if(project.value&&project.value!==item.site_reference)continue;if(category.value&&category.value!==item.category)continue;if(q&&![item.project_name,item.instruction,item.category,item.detail_state].join(" ").toLowerCase().includes(q))continue;const a=batches.get(item.notice_id)||[];a.push(item);batches.set(item.notice_id,a);}
+for(const item of feed.items){if(company.value&&company.value!==companyKey(item.company))continue;if(project.value&&project.value!==item.site_reference)continue;if(category.value&&category.value!==item.category)continue;if(q&&![item.project_name,item.instruction,item.category,item.detail_state].join(" ").toLowerCase().includes(q))continue;const a=batches.get(item.notice_id)||[];a.push(item);batches.set(item.notice_id,a);}
 holder.replaceChildren();let count=0;for(const [id,items]of batches){items.sort((a,b)=>a.display_order-b.display_order);count+=items.length;const first=items[0],source=sources.get(first.source_id),article=el("article",undefined,"notification-card");article.id="notice-"+id;
 const top=el("div",undefined,"notification-top"),heading=el("h3",first.project_name),date=el("span",source.date_npt+" · "+first.company,"notification-date");top.append(heading,date);article.append(top);
 article.append(el("p","Planner instructions · quantities and incomplete details remain flagged for confirmation.","notification-meta"));
@@ -20,7 +22,13 @@ status.textContent=batches.size+" message(s) · "+count+" source-linked bullet p
 if(!batches.size)holder.append(el("p","No published notification matches these filters. This does not mean there are no source messages.","notification-empty"));}
 async function load(){try{const r=await fetch("ops/data/map-data.v1.json",{cache:"no-store"});if(!r.ok)throw Error();const bundle=await r.json();feed=bundle.notifications;
 if(feed?.kind!=="SOURCE_LINKED_SITE_NOTIFICATIONS"||feed.count!==feed.items?.length||feed.originals_in_public_bundle!==false||feed.automatic_provider_polling!==false)throw Error();sources=new Map(feed.sources.map(s=>[s.source_id,s]));if(feed.items.some(i=>!sources.has(i.source_id)||!groups.some(g=>g[0]===i.category)))throw Error();
-const names=new Map((bundle.tables.projects.records||[]).filter(p=>p.legacy_project_code).map(p=>[p.legacy_project_code,p.display_name||p.project_name]));for(const i of feed.items)names.set(i.site_reference,i.project_name);project.replaceChildren(new Option("All projects",""),...[...names].sort((a,b)=>a[1].localeCompare(b[1])).map(([id,name])=>new Option(name,id)));
-const query=new URLSearchParams(location.search);if(names.has(query.get("project")))project.value=query.get("project");paint();if(query.get("notice")){const target=document.getElementById("notice-"+query.get("notice"));target?.scrollIntoView({block:"start"});}
+const organizations=new Map((bundle.tables.organizations.records||[]).map(o=>[o.organization_id,o.organization_name]));
+projectNames=new Map((bundle.tables.projects.records||[]).filter(p=>p.legacy_project_code).map(p=>[p.legacy_project_code,p.display_name||p.project_name]));
+projectCompanies=new Map((bundle.tables.projects.records||[]).filter(p=>p.legacy_project_code).map(p=>[p.legacy_project_code,companyKey(organizations.get(p.executing_company_id))]));
+const companies=new Map();for(const name of organizations.values()){const key=companyKey(name);if(key)companies.set(key,name);}
+for(const i of feed.items){projectNames.set(i.site_reference,i.project_name);projectCompanies.set(i.site_reference,companyKey(i.company));}
+company.replaceChildren(new Option("All companies",""),...[...companies].sort().map(([id,name])=>new Option(name,id)));
+const query=new URLSearchParams(location.search);if(companies.has(query.get("company")))company.value=query.get("company");projectOptions();if([...project.options].some(o=>o.value===query.get("project")))project.value=query.get("project");paint();if(query.get("notice")){const target=document.getElementById("notice-"+query.get("notice"));target?.scrollIntoView({block:"start"});}
 }catch{status.textContent="Notification feed unavailable";holder.replaceChildren(el("p","The published instruction feed could not be validated. Open the original source or try again later.","notification-empty"));}}
+company.addEventListener("change",()=>{projectOptions();project.dispatchEvent(new Event("change",{bubbles:true}));});
 for(const e of [project,category])e.addEventListener("change",paint);search.addEventListener("input",paint);load();})();
