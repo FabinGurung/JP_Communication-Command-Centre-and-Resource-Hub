@@ -1,4 +1,5 @@
 name: Operations Hub production
+run-name: ${{ github.event_name == 'workflow_dispatch' && inputs.refresh_request_id != '' && format('Sheets refresh {0}', inputs.refresh_request_id) || 'Operations Hub production' }}
 
 on:
   push:
@@ -14,6 +15,10 @@ on:
         description: Fail if the Google connection is unavailable
         type: boolean
         default: false
+      refresh_request_id:
+        description: Optional request label for verifying this exact Colab refresh
+        type: string
+        default: ''
 
 permissions:
   contents: read

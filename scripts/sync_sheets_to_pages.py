@@ -337,6 +337,27 @@ def update_values(sid, rows, clear_grid=None, keep_header=False):
     return requests
 
 
+def publishing_capacity(tabs, incoming):
+    """Grow derived grids within the same reviewed read bounds; never shrink."""
+    requests = []
+    for name, rows in incoming.items():
+        height, width = max(2, len(rows)), max(map(len, rows), default=1)
+        if height > 10000 or width > 100:
+            raise SyncError("PUBLISHING_EXCEEDS_REVIEWED_READ_BOUND")
+        grid = tabs[name]["gridProperties"]
+        grow_rows, grow_cols = height > grid["rowCount"], width > grid["columnCount"]
+        if grow_rows or grow_cols:
+            changed = {}
+            if grow_rows:
+                changed["rowCount"] = min(10000, ((height + 499) // 500) * 500)
+            if grow_cols:
+                changed["columnCount"] = width
+            requests.append({"updateSheetProperties": {"properties": {
+                "sheetId": tabs[name]["sheetId"], "gridProperties": changed},
+                "fields": ",".join("gridProperties." + k for k in changed)}})
+    return requests
+
+
 def sync(api, root=ROOT):
     cfg = json.loads((root / CONFIG).read_text())
     registry = json.loads((root / "ops/control/map-sheets-source.v1.0.json").read_text())
@@ -345,6 +366,7 @@ def sync(api, root=ROOT):
     tabs = {x["properties"]["title"]: x["properties"] for x in meta["sheets"]}
     router = api.read(master, "_SOURCE_ROUTER", meta)
     manifest = api.read(master, "00_MANIFEST", meta)
+    records(manifest, "field")  # Duplicate control keys cannot shadow status.
     history = api.read(master, "01_VERSION_HISTORY", meta)
     route_rows = records(router, "table")
     routes = {r["table"]: r for r in route_rows}
@@ -373,28 +395,18 @@ def sync(api, root=ROOT):
             raise SyncError("REQUIRED_SOURCE_COLUMNS_MISSING")
         source_tables[name] = (spec["pk"], records(target, spec["pk"]))
         before[name] = api.read(master, name, meta)
-        # Never silently truncate the publishing replica.
-        width = max(map(len, target), default=0)
-        if len(target) > tabs[name]["gridProperties"]["rowCount"] or width > tabs[name]["gridProperties"]["columnCount"]:
-            raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
     if cfg.get("resources_source"):
         spec = cfg["resources_source"]
         source_specs["project_resources"] = spec
         incoming["project_resources"] = api.read(spec["workbook_id"], spec["tab"])
         resources_public(root, incoming["project_resources"])
         before["project_resources"] = api.read(master, "project_resources", meta)
-        if (len(incoming["project_resources"]) > tabs["project_resources"]["gridProperties"]["rowCount"]
-                or max(map(len, incoming["project_resources"]), default=0) > tabs["project_resources"]["gridProperties"]["columnCount"]):
-            raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
     for name, spec in cfg.get("notification_sources", {}).items():
         if name not in {"message_sources", "site_notifications"} or spec["tab"] != name:
             raise SyncError("UNREVIEWED_NOTIFICATION_SOURCE")
         source_specs[name] = spec
         incoming[name] = api.read(spec["workbook_id"], name)
         before[name] = api.read(master, name, meta)
-        if (len(incoming[name]) > tabs[name]["gridProperties"]["rowCount"]
-                or max(map(len, incoming[name]), default=0) > tabs[name]["gridProperties"]["columnCount"]):
-            raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
     if cfg.get("notification_sources"):
         notification_public(api, cfg, incoming, source_tables["projects"][1], "ACTIONS_SHEET_READBACK")
     field_tables, field_snapshots = {}, []
@@ -411,9 +423,7 @@ def sync(api, root=ROOT):
                 raise SyncError("JOINED_FIELD_TAB_MISSING")
             incoming[name] = rows
             before[name] = api.read(master, name, meta)
-            if (len(rows) > tabs[name]["gridProperties"]["rowCount"]
-                    or len(rows[0]) > tabs[name]["gridProperties"]["columnCount"]):
-                raise SyncError("PUBLISHING_GRID_EXPANSION_REQUIRED")
+    expansion = publishing_capacity(tabs, incoming)
     validate_relations(source_tables)
     project_public(root, source_tables)  # Reject unsafe joins before any write.
     fingerprint = digest(incoming)
@@ -442,7 +452,7 @@ def sync(api, root=ROOT):
             raise SyncError("PUBLISHING_VERSION_HISTORY_MISSING")
         version = f"V{max(numbers)+1:06d}"
         stamp = datetime.now(timezone.utc).isoformat()
-        requests = []
+        requests = list(expansion)
         for name, rows in incoming.items():
             requests += update_values(tabs[name]["sheetId"], rows, tabs[name]["gridProperties"], keep_header=name in field_tables)
             if name in field_tables:
@@ -461,15 +471,18 @@ def sync(api, root=ROOT):
                     row[5], row[6], row[11], row[12] = "EMPTY_TEMPLATE_NOT_CONNECTED", "NOT_CONNECTED_EMPTY_TEMPLATE", "INACTIVE_EMPTY_TEMPLATE", "Empty template is excluded; populated company material movements are joined separately."
                 row[4] = str(len(source_tables[row[0]][1]))
         control_values = {"CONTROL_VERSION": version, "ACTIONS_SOURCE_DIGEST": fingerprint,
-                          "PAGES_CONNECTION": "GITHUB_ACTIONS_API", "PUBLISHING_RULE": "SOURCE SHEETS → ACTIONS → PUBLISHING COPY → VALIDATED JSON → PAGES"}
+                          "PAGES_CONNECTION": "CHECK_DEPLOYED_JSON_RUN_RECEIPT",
+                          "PUBLISHING_RULE": "INDIVIDUAL SOURCE SHEETS → JOINED PUBLISHING SHEET → VALIDATED JSON → GITHUB ACTIONS → GITHUB PAGES"}
         for row in manifest:
             if row and row[0] in control_values:
                 row[1:2] = [control_values.pop(row[0])]
         manifest += [[key, value] for key, value in control_values.items()]
-        requests += update_values(tabs["_SOURCE_ROUTER"]["sheetId"], router)
-        requests += update_values(tabs["00_MANIFEST"]["sheetId"], manifest)
         history.append([version, stamp, "Automatic publishing copy", f"Rebuilt {len(incoming)} joined data tables from registered source Sheets", snap,
                         "SOURCE_VALIDATED; READBACK_REQUIRED", "Restore PRE content into same publishing ID", fingerprint])
+        requests += publishing_capacity(tabs, {"_SOURCE_ROUTER": router, "00_MANIFEST": manifest,
+                                               "01_VERSION_HISTORY": history})
+        requests += update_values(tabs["_SOURCE_ROUTER"]["sheetId"], router)
+        requests += update_values(tabs["00_MANIFEST"]["sheetId"], manifest)
         requests += update_values(tabs["01_VERSION_HISTORY"]["sheetId"], history)
         api.write(master, requests)  # One atomic Sheets batch; no source writes.
     # Build from the provider readback of the assembled Sheet, not the input arrays.
@@ -498,6 +511,9 @@ def sync(api, root=ROOT):
     # from an interruption after the first atomic write. This is no new version.
     verified_router = api.read(master, "_SOURCE_ROUTER")
     verified_history = api.read(master, "01_VERSION_HISTORY")
+    verified_manifest = api.read(master, "00_MANIFEST")
+    if verified_manifest != normalize(manifest):
+        raise SyncError("PUBLISHING_CONTROLS_CHANGED_DURING_READBACK")
     receipt_changed = False
     for row in verified_router[1:]:
         if row and row[5] != "EMPTY_TEMPLATE_NOT_CONNECTED" and row[6] != "API_READBACK_VERIFIED":
@@ -506,14 +522,35 @@ def sync(api, root=ROOT):
     if verified_history[-1][5] != "SOURCE_AND_MASTER_READBACK_VERIFIED":
         verified_history[-1][5] = "SOURCE_AND_MASTER_READBACK_VERIFIED"
         receipt_changed = True
+    connection_values = {"ACTIONS_CONNECTION": "LIVE_SOURCE_AND_PUBLISHING_READBACK_VERIFIED",
+                         "AUTO_SOURCE_REFRESH": "CONNECTED__REGISTERED_BRANCH_PUSH_OR_MANUAL",
+                         "PAGES_CONNECTION": "CHECK_DEPLOYED_JSON_RUN_RECEIPT"}
+    for row in verified_manifest:
+        if row and row[0] in connection_values:
+            value = connection_values.pop(row[0])
+            if row[1] != value:
+                row[1] = value
+                receipt_changed = True
+    if connection_values:
+        verified_manifest += [[key, value] for key, value in connection_values.items()]
+        receipt_changed = True
     if receipt_changed:
-        api.write(master, update_values(tabs["_SOURCE_ROUTER"]["sheetId"], verified_router)
-                  + update_values(tabs["01_VERSION_HISTORY"]["sheetId"], verified_history))
-        if api.read(master, "_SOURCE_ROUTER") != verified_router or api.read(master, "01_VERSION_HISTORY") != verified_history:
+        api.write(master, publishing_capacity(tabs, {"00_MANIFEST": verified_manifest})
+                  + update_values(tabs["_SOURCE_ROUTER"]["sheetId"], verified_router)
+                  + update_values(tabs["01_VERSION_HISTORY"]["sheetId"], verified_history)
+                  + update_values(tabs["00_MANIFEST"]["sheetId"], verified_manifest))
+        if (api.read(master, "_SOURCE_ROUTER") != verified_router
+                or api.read(master, "01_VERSION_HISTORY") != verified_history
+                or api.read(master, "00_MANIFEST") != verified_manifest):
             raise SyncError("SUCCESS_RECEIPT_READBACK_MISMATCH")
     public = project_public(root, readback_tables)
     payload = {"schema_version": "1.0.0", "bundle_id": "JP_MAP_REVIEWED_SHEETS_V1",
                "publication_mode": "ACTIONS_SHEETS_REFRESH_APPROVED_FIELDS", "live_google_sheets_fetch": True,
+               "publication_receipt": {
+                   "workflow_run_id": os.environ.get("GITHUB_RUN_ID", ""),
+                   "commit_sha": os.environ.get("GITHUB_SHA", ""),
+                   "fetched_at_utc": datetime.now(timezone.utc).isoformat(),
+               },
                "reviewed_static_fields_retained": True, "table_count": len(public),
                "source_evidence": {name: {"source": "PUBLISHING_SHEET_READBACK", "row_count": item["row_count"],
                                           "sha256": digest(item)} for name, item in public.items()}, "tables": public}
@@ -535,9 +572,24 @@ def sync(api, root=ROOT):
 def validate_bundle(payload, root=ROOT):
     allowed = {"schema_version", "bundle_id", "publication_mode", "live_google_sheets_fetch",
                "reviewed_static_fields_retained", "table_count", "source_evidence", "tables",
-               "resources", "notifications", "contacts"}
+               "resources", "notifications", "contacts", "publication_receipt"}
     if set(payload) - allowed:
         raise SyncError("UNAPPROVED_PUBLIC_BUNDLE_SECTION")
+    if "publication_receipt" in payload:
+        receipt = payload["publication_receipt"]
+        if (payload.get("live_google_sheets_fetch") is not True
+                or not isinstance(receipt, dict)
+                or set(receipt) != {"workflow_run_id", "commit_sha", "fetched_at_utc"}
+                or any(not isinstance(v, str) for v in receipt.values())
+                or (receipt["workflow_run_id"] and not re.fullmatch(r"\d+", receipt["workflow_run_id"]))
+                or (receipt["commit_sha"] and not re.fullmatch(r"[0-9a-f]{40}", receipt["commit_sha"]))):
+            raise SyncError("PUBLICATION_RECEIPT_INVALID")
+        try:
+            when = datetime.fromisoformat(receipt["fetched_at_utc"])
+            if when.tzinfo is None:
+                raise ValueError()
+        except ValueError:
+            raise SyncError("PUBLICATION_RECEIPT_INVALID") from None
     baseline = json.loads((root / "ops/control/map-sheets-source.v1.0.json").read_text())
     config = json.loads((root / CONFIG).read_text())
     map_config = json.loads((root / "map-config.json").read_text())

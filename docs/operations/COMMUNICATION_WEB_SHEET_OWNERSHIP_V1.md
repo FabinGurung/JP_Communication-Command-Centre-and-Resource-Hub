@@ -1,145 +1,105 @@
-# Communication and Web: human-editable source ownership
+# Communication and Web — current source ownership
 
-User direction, 25 October 2026: every displayed business fact and every Excel
-output must have an identifiable Google Sheet owner. Humans edit that source.
-GitHub owns code, validation, rendering and generated outputs. Multiple pages
-reuse one source; do not make another editable workbook for the same facts.
+Updated 28 October 2026. Human edits belong in the existing subject Sheets. Code,
+validation, rendering and public projections belong in GitHub. JSON/CSV and Excel
+are generated views, never alternative editing authorities.
 
-This is a migration contract. The entire website is not yet Sheet-driven.
-The 14-category publishing implementation covers the map, still requires its
-Google identity and its first verified live fetch, and does not automatically
-connect all the other website panels. JSON/CSV remain generated output formats;
-they must not become independent places to edit the facts.
+## Implemented publishing engine
 
-## Current website hierarchy and missing owners
+`ops/control/sheets-actions-publishing.v1.json` is the exact machine source list.
+It registers **28 distinct populated source workbooks / 32 input tabs**, plus one
+admitted original message file for integrity checking. One existing publishing
+workbook holds **25 data tables**: 14 core contract slots (empty stock excluded
+from source fetching), resources, message sources, notifications, and eight
+private operational joins. Navigation/control tabs are not extra data owners.
 
-```text
-Communication and Web
-├── Home
-│   └── Navigation, introductions and destination descriptions
-│       └── Website Content Sheet: owner still needed
-├── Project Map
-│   ├── Projects, company, locations and public display choices
-│   ├── People and company relationships
-│   ├── Work catalogue, funding and assigned work
-│   ├── Materials and site stock
-│   └── Project sections, file links and potential projects
-│       └── 14 existing category workbooks; four current source owners,
-│           ten prepared category copies awaiting verified cutover
-├── Daily Checklist
-│   ├── Published instructions: Published Site Instructions Sheet needed
-│   └── Personal notes: currently browser-local; shared Sheet intake needed
-├── Progress Report
-│   ├── Reviewed messages and source evidence
-│   ├── Historical reported progress
-│   └── Drawing/document issue states
-│       └── Editable Sheet owners and publication adapters still needed
-├── Resources
-│   ├── Desk: drawings, reports, models, estimates and original folders
-│   │   └── Reconcile the existing Project File Links category before
-│   │       creating another resource register; publication adapter needed
-│   └── Field
-│       ├── Rohini and Fishtail contacts: two existing contact workbooks
-│       ├── Shared contact master: existing contact workbook
-│       ├── Sharada issues: existing issue/backcharge register
-│       ├── Chaudhary attendance: existing team attendance workbook
-│       ├── Materials: existing Fishtail materials/inventory workbook
-│       ├── Paras: existing attendance/expenses workbook
-│       ├── Shiv: existing site-visits/expenses workbook
-│       └── Company locations: two existing location workbooks
-│           These source cards are not ten live public data mirrors.
-├── Site Coordination
-│   ├── Project context and current work
-│   ├── Open issues and engineer questions
-│   └── Three-day schedule
-│       └── Coordination owner Sheet needed; resolve schedule ownership
-│           with Scheduling rather than creating a second activity owner
-├── Developer Workspace
-│   ├── Repository and software links
-│   ├── Software backlog and older pending-work view
-│   ├── Integration/readiness status and release receipts
-│   └── Control, storage and archive instructions
-│       └── Website Operations/Content Sheet owners still needed
-├── Memory Poster Board
-│   └── Poster text and operating rules: Website Content owner needed
-├── How-To
-│   └── 1-, 3-, 7- and 15-page guides: Website Content owner needed
-├── Files and Sheets
-│   └── Browser-local navigator: currently Drive inventory-derived;
-│       human-editable Drive directory Sheet still needed
-├── Project submissions directory
-│   └── Generated approved-submission directory; source/admission Sheet
-│       ownership still needed before treating it as Sheet-driven
-└── Older compatibility URLs
-    └── current-works.html, how-to.html and workspace.html
-        Reuse the same domain owners; do not create duplicate sources
-```
+[Open the existing live directory](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit#gid=990001).
+[All exact source links](https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit#gid=700125).
 
-The two company contact directories and two company location workbooks overlap
-with shared enterprise subjects. Existing files must be inspected for formulas,
-row ownership and parity before choosing or changing their editing authority.
-A prepared split copy or a published JSON snapshot does not establish a live
-connection. Do not duplicate entries across those files during reconciliation.
+| Display or export | Existing owner / editing place | Current behavior |
+| --- | --- | --- |
+| Project Map | Thirteen populated single-subject category owners; Projects and Locations owns coordinates | Same validated bundle; admitted public IDs/fields only |
+| Resource cards | Project Resources; File Links retains its distinct link relationships | Same bundle; reviewed file identities retained |
+| Notification Center | Message Sources + Site Notifications | Same bundle; work/material/supervision bullets, original evidence preserved, Company filter |
+| Company contact pages | Existing Fishtail and Rohini contact directories | Same bundle; stable admitted Contact IDs; private Notes excluded |
+| Materials movements | Existing Fishtail and Rohini materials inventories | Joined privately; not silently published as stock balances |
+| Progress and readiness inputs | Existing Fishtail and Rohini Site Operations | 140 progress + 44 readiness rows joined privately; not all are engineer-approved work |
+| Attendance and expenses | Fuller original Paras, Shiv and Gupta workbooks | Existing owners reused; 27 checked visits recovered; no unchecked-as-absence inference |
+| Vendor summaries | Existing Gupta payments workbook | Private vendor-summary projection, not public transaction data |
+| Supplier and measurement evidence | Existing supplier review workbook + measurement source archive | 312 + 1,156 source entries joined into the private review queue; no invented quantities/rates/payments |
+| Excel of a current source or publishing workbook | That same Google Sheet | Google Sheets' authenticated XLSX export; no extra editable workbook needed |
+| File navigation | Existing Drive inventory + the publishing workbook's source directory | Inventory supplies locations; explicit IDs drive Actions; no recursive scan per website refresh |
 
-## Human-visible provenance
+The engine stages reads, validates relations and public admission, checks for
+concurrent edits, preserves a restorable PRE state in the existing append-only
+history file, atomically updates the publishing workbook, reads it back, checks
+sources again, and builds one approved public bundle. A required-live run fails
+if authentication, source validation, archive or readback fails. The previous
+site remains deployed if the new run fails.
 
-Every published panel and Excel export should identify its source Sheet name,
-link, relevant tab, source version/read date and publication status. Raw drawings,
-photos, messages and models remain in their original Drive files; their editable
-labels, associations, issue states and display decisions belong in the owning
-Sheet. Generated figures retain their source record references.
+**Observed connection state:** reviewed-snapshot deployments work. The first
+required live Actions Google fetch is not yet verified. The one-time Colab
+connection helper configures a dedicated keyless service account, 29 individual
+file readers (28 workbooks + original message), and two output writers (publishing
+workbook + its existing restore log). It creates no source workbook and grants
+no folder-wide access. A successful live deployment includes its exact workflow
+run/commit/time receipt; an old success or merely configured variables is not a
+passing receipt.
 
-The current browser-local checklist is not a shared Google Sheet. Preserve
-existing local notes before implementing authenticated submission/readback.
-Do not place Google credentials in public client-side code.
+## Located historical pages — no user file hunt
 
-## Archive placement
+These paths are already in this repository. They are retained history, not
+missing files to be recovered by the user. Current source registrations must not
+be represented as if they automatically replaced these historical projections.
 
-All PRE, POST, superseded and rollback copies belong under `01_JP / 99 Archive
-Gallery`, grouped by company/person/project and source workbook. Keep the live
-file in its working folder. Move existing historical files and folders by ID;
-do not duplicate or delete them. Preserve each original parent and destination
-in the private restore log. The live Sheet version-history tab may link to its
-central archive; it must not create another working copy.
+| Existing data path | Known content | Handling / correct owner boundary |
+| --- | --- | --- |
+| `ops/data/current-works.json` | Eight older site-context snapshots | Resolve business changes through Projects/Locations and the original company Site Operations owners; do not create another project or Scheduling authority |
+| `ops/data/field-three-day-board.json` | Eight old three-day display snapshots | Carry-forward requests are not approved assignments; no dated engineer-authorized schedule is inferred |
+| `ops/data/site-execution-questions.v0.1.json` | Eight site contexts, five reports, 18 open issues, 36 engineer questions | Historical coordination projection; a future editable question intake must reconcile the existing issue register and preserve evidence/IDs |
+| `ops/data/project-document-review-public.v1.0.json` | Three unverified document issue/revision records | Keep unverified; use Project Resources/File Links associations, never certify drawings from a file's existence |
+| `ops/data/progress-report-public.v0.2.jsonl` | 37 retained records: five field-reported observations, 18 previous routine templates, 14 pending communications | Preserve immutable history. The 32 non-observation records are explicitly not measured/completed work. No exact record-ID match to the 140 operational progress rows was found; do not auto-merge them |
+| `ops/data/a9-reviewed-progress-public.v1.0.json` | Empty new reviewed-progress queue | Empty is an honest state; do not fabricate records to populate it |
+| Guide, Memory Wall and software control pages | Editorial instructions and code-control content | Code/documentation control in GitHub; no operational fact ownership inferred from a navigation label |
 
-The control helper now locates one workbook archive folder by stable source ID,
-reusing it after a source-title change. Existing friendly archive folders use a
-stable source-ID suffix. Newly created folders also carry jp_source_file_id.
-Historical VERSION_HISTORY and FINAL_POST records remain archive-classified.
+The existing Company Project Site Issues workbook is
+`1j_866LE1heYTozkUheH3kU55TV8ZXuLzTwTCZzZNbqw`. It contains two real repair/cost
+follow-ups; it is not an empty replacement for the 18 historical coordination
+issues. Its potential backcharges remain unconfirmed. Do not overwrite those
+rows or turn them into final liabilities.
 
-`98_INTAKE_STAGING` is excluded while the owner edits it. These rules do not
-promote data into other repositories or change source sharing/publication scope.
+## What the review queue means
 
-## Existing editable workbook links
+A queue entry is preserved source evidence waiting for interpretation or
+confirmation. It is not proof of an approved bill, payment, measured quantity or
+completed work. The existing source files are already located and registered.
+Their private joined queue works independently of public map/notification
+publishing. Business review can continue without blocking the Google connection
+or asking the user to search for the files again.
 
-Four current shared source owners and ten prepared category copies:
+## Excel rule
 
-- People — v1.1: https://docs.google.com/spreadsheets/d/1gBYUKwt3_eUy-h9FdDCv4o2-RxxT6dBqqY4yRG2Hws4/edit
-- Projects and Locations — v1.2: https://docs.google.com/spreadsheets/d/1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo/edit
-- Companies and Organizations — v1.1: https://docs.google.com/spreadsheets/d/1cwubE_4nB2SAEdLu6ry80G0HeNjbBdu4X3DA6jrcQ1E/edit
-- Work Catalogue — v1.2: https://docs.google.com/spreadsheets/d/1D4T08NciyhlMxxTgTtik_SJWf-UaIytB56fNRsvuqms/edit
-- Project People and Companies — v1.0: https://docs.google.com/spreadsheets/d/1SC0Iz5IKwUCx5elSVyok0Z0hV0Z5hHiMCzkWWv0Y2uU/edit
-- Project Funding — v1.0: https://docs.google.com/spreadsheets/d/1pNXK4JQnYI62V8iZsI64yyVEYiRxB3UZ7Z9R6JxoZUs/edit
-- Project Work — v1.0: https://docs.google.com/spreadsheets/d/17YPRpaXIdHloH5-lzsjUpNvXLbsDfrIrlsn2jZ-7KKc/edit
-- Materials — v1.0: https://docs.google.com/spreadsheets/d/10D96YqZn6NbbSm6X6nsPVw4tG_IELIj957uZ2DmhJZs/edit
-- Site Material Stock — v1.0: https://docs.google.com/spreadsheets/d/1J0c-usE3jUubT_hCTxxklHzyVBzxoFZaJtCsuG3toWA/edit
-- Project Sections — v1.0: https://docs.google.com/spreadsheets/d/1kAtyZPQOdSzxDS83AYwIBzrj5OIsvBKE_8orH8ez07U/edit
-- Project File Links — v1.0: https://docs.google.com/spreadsheets/d/1uC1IZG440Hrg78hurYlmVA_OJG5Z-04TgKcxs1_TZmU/edit
-- Potential Projects — v1.0: https://docs.google.com/spreadsheets/d/1dAz0QhEj_UItB-m_BIt7jJZ_qJvjmJ8Ou9rVv2yXqWE/edit
-- Office Locations — v1.0: https://docs.google.com/spreadsheets/d/12wGg0UBLbN03u3EhJN-uQV9O2s_FRVwX9V_D2rTDXC8/edit
-- Website Display Choices — v1.0: https://docs.google.com/spreadsheets/d/1tDpsphzARq-rk1MExU4DXC8mG_clh-0TXJwRr2qljXU/edit
+The active page/JavaScript dependency audit found no `.xls`/`.xlsx` download
+sources in the current presentation routes. The map's `projects.csv` reference
+is rollback compatibility, not the active edit authority. Do not invent an Excel
+migration requirement from this absence. Private wage/payment Excel originals
+located by the Colab inventory remain private in their recorded business folders;
+they are not website feeds and must not be duplicated or imported merely because
+they have an Excel extension. If a particular export is needed, generate it from
+its same owning Sheet and retain provenance/version information.
 
-Existing field-source workbooks (links verified against Drive metadata):
+## Versions and scope
 
-- Rohini Contact Directory: https://docs.google.com/spreadsheets/d/1Cyuj0uti-IN7ddDNVdAd1kM0NNpATdTnNabfcY7P1cw/edit
-- Fishtail Builders Contact Directory: https://docs.google.com/spreadsheets/d/15szptLz7q3-Rote1SnNuIqdcrxrm0z2m0k7yx9j51c4/edit
-- A9 Master Contact Directory (6NF): https://docs.google.com/spreadsheets/d/10l4F1ZShkPKt7L8HBT1BJ3K0rjkJ6GktXRZdI4k35Bg/edit
-- Sharada 31 Site Issues: https://docs.google.com/spreadsheets/d/1j_866LE1heYTozkUheH3kU55TV8ZXuLzTwTCZzZNbqw/edit
-- Hari Chaudhary Team Attendance: https://docs.google.com/spreadsheets/d/1FuFvccGvDwlszfzGL7_TP4qChBptA8Pil7eq6O5qlPw/edit
-- Fishtail Materials and Daily Progress: https://docs.google.com/spreadsheets/d/1YshLrDAJDg3CO8F1jmIr2Eucy0-TKwiviVNF5tiAfT0/edit
-- Paras Pariyar Attendance and Expenses: https://docs.google.com/spreadsheets/d/1HSmklPhqSPo6-N-7tbidOzwsZleJHrHlIyR34h7GgtI/edit
-- Shiv Narayan Chaudhary Site Visits and Expenses: https://docs.google.com/spreadsheets/d/11uTBk0DDF_OkpNpmgbee4zXNGhAOQK0DS-ao8Qw0-uc/edit
-- Fishtail Project Site Locations: https://docs.google.com/spreadsheets/d/10uW7hxagyvcNCUVDXTmwHopJgUbbqGBOxjjYjogQd_E/edit
-- Rohini Project Site Locations: https://docs.google.com/spreadsheets/d/1wC5KRv45UCmRhSesO2WcwN8fNGdC5gSjvjqlR9USsdM/edit
+Each live source retains its ID and a human Manifest + enumerated Version
+History. Native PRE/POST copies stay in a dedicated source folder under the
+central Archive Gallery. Restore into the same live ID. Generated publishing
+refreshes use the documented existing append-only restore file because the
+service account cannot own new My Drive copies. Keep notebook, Sheet, Git commit
+and milestone version sequences separate.
 
-Archive centralization: 886 existing historical items/folder trees moved; 428 container-parent relationships read back. Stable source IDs and live-file locations retained. The private restore record and navigator hold the exact per-source folder routes. Colab V000008 has been prepared with full freshness scanning and per-workbook backup routing; V000007 remains the last successful runtime.
+V8 is the Drive inventory/history notebook. It is not an Actions connection
+notebook and is not required for each refresh. A self-contained latest inventory
+notebook replaces earlier notebook code; do not run V5 → V6 → V8 in sequence.
+`98_INTAKE_STAGING` stays out of broad scans/cleanup; Discord collection stays
+paused. No full-site Sheet migration, automatic scheduling or completed milestone
+release may be claimed solely from the current source integrations.

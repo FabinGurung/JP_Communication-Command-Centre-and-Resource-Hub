@@ -107,10 +107,11 @@ class FakeGoogle:
         self.bad_readback = False
         self.change_during_scan = False
         self.source_reads = {}
+        self.grid_overrides = {}
 
     def meta(self, fid):
         return {"spreadsheetId": fid, "sheets": [{"properties": {"sheetId": sid, "title": name,
-                "gridProperties": {"rowCount": 2000, "columnCount": 50}}, "tables": [t for t in getattr(self, "native_tables", []) if t["range"]["sheetId"] == sid]}
+                "gridProperties": self.grid_overrides.get(name, {"rowCount": 2000, "columnCount": 50})}, "tables": [t for t in getattr(self, "native_tables", []) if t["range"]["sheetId"] == sid]}
                 for sid, name in self.ids.items() if (fid, name) in self.data]}
 
     def original(self, fid):
@@ -138,7 +139,11 @@ class FakeGoogle:
         assert fid == self.master, "The synchronizer must never write source cells"
         candidate = copy.deepcopy(self.data)
         for request in requests:
-            if "repeatCell" in request:
+            if "updateSheetProperties" in request:
+                item = request["updateSheetProperties"]["properties"]
+                name = self.ids[item["sheetId"]]
+                self.grid_overrides.setdefault(name, {"rowCount": 2000, "columnCount": 50}).update(item["gridProperties"])
+            elif "repeatCell" in request:
                 item = request["repeatCell"]
                 candidate[fid, self.ids[item["range"]["sheetId"]]] = []
             elif "updateTable" in request:
@@ -225,6 +230,7 @@ class PublishingTests(unittest.TestCase):
         sync(self.api, self.root)
         payload = json.loads((self.root / OUTPUT).read_text())
         payload["live_google_sheets_fetch"] = False
+        payload.pop("publication_receipt")
         with self.assertRaisesRegex(SyncError, "CONTACT_REFRESH_MODE_MISMATCH"):
             validate_bundle(payload, self.root)
 
@@ -245,11 +251,38 @@ class PublishingTests(unittest.TestCase):
         router = records(self.api.data[self.api.master, "_SOURCE_ROUTER"], "table")
         self.assertEqual(len({r["source_workbook_id"] for r in router}), 14)
         self.assertTrue(all(r["connection"] == ("NOT_CONNECTED_EMPTY_TEMPLATE" if r["table"] == "project_material_inventory" else "API_READBACK_VERIFIED") for r in router))
+        manifest = dict(r[:2] for r in self.api.data[self.api.master, "00_MANIFEST"][1:])
+        self.assertEqual(manifest["ACTIONS_CONNECTION"], "LIVE_SOURCE_AND_PUBLISHING_READBACK_VERIFIED")
+        self.assertEqual(manifest["PAGES_CONNECTION"], "CHECK_DEPLOYED_JSON_RUN_RECEIPT")
         writes = len(self.api.writes)
         self.assertFalse(sync(self.api, self.root)["publishing_copy_changed"])
         self.assertEqual(len(self.api.snapshots), 1)
         self.assertEqual(len(self.api.writes), writes)
-        self.assertEqual(bundle, json.loads((self.root / OUTPUT).read_text()))
+        repeated = json.loads((self.root / OUTPUT).read_text())
+        # An unchanged source causes no additional Sheet/archive writes. Each
+        # actual fetch still receives its own honest observation timestamp.
+        self.assertGreaterEqual(repeated["publication_receipt"]["fetched_at_utc"],
+                                bundle["publication_receipt"]["fetched_at_utc"])
+        repeated["publication_receipt"]["fetched_at_utc"] = bundle["publication_receipt"]["fetched_at_utc"]
+        self.assertEqual(bundle, repeated)
+
+    def test_growing_source_and_full_history_expand_only_publishing_grids(self):
+        self.api.grid_overrides["projects"] = {"rowCount": 2, "columnCount": 2}
+        self.api.grid_overrides["01_VERSION_HISTORY"] = {"rowCount": 2, "columnCount": 8}
+        self.assertTrue(sync(self.api, self.root)["live_google_sheets_fetch"])
+        self.assertGreaterEqual(self.api.grid_overrides["projects"]["rowCount"],
+                                len(self.api.data[self.api.master, "projects"]))
+        self.assertGreaterEqual(self.api.grid_overrides["projects"]["columnCount"],
+                                len(self.api.data[self.api.master, "projects"][0]))
+        self.assertGreaterEqual(self.api.grid_overrides["01_VERSION_HISTORY"]["rowCount"], 3)
+        self.assertEqual(len(self.api.snapshots), 1)
+
+    def test_duplicate_manifest_fields_stop_before_snapshot_or_write(self):
+        self.api.data[self.api.master, "00_MANIFEST"].append(["CONTROL_VERSION", "stale duplicate"])
+        with self.assertRaisesRegex(SyncError, "SOURCE_PRIMARY_KEY_INVALID"):
+            sync(self.api, self.root)
+        self.assertEqual(self.api.snapshots, [])
+        self.assertEqual(self.api.writes, [])
 
     def test_readable_headers_with_individual_owners(self):
         router = self.api.data[self.api.master, "_SOURCE_ROUTER"]
