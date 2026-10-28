@@ -23,6 +23,7 @@ jobs:
         run: |
           python scripts/test_notification_center.py
           python scripts/test_sheets_actions_publishing.py
+          python scripts/test_sheets_request_limits.py
           python scripts/test_field_sheet_sources.py
           python scripts/test_actions_google_connection.py
           node --check assets/js/a9-company-directory.js
