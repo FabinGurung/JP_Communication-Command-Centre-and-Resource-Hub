@@ -9,7 +9,8 @@ from unittest.mock import Mock, patch
 from connect_actions_google import (
     ACCOUNT_ID, API, BRANCH, ConnectionError, REPOSITORY, access_plan,
     add_identity_binding, configure_variables, dispatch_refresh, federation_spec,
-    ensure_identity, find_refresh_run, share_registered_files, verify_public_receipt,
+    ensure_identity, find_refresh_run, reconcile_provider_mapping,
+    share_registered_files, verify_public_receipt,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,6 +49,43 @@ class SetupBoundaries(unittest.TestCase):
         self.assertIn("assertion.repository_owner_id == '888'", condition)
         self.assertIn("assertion.ref == 'refs/heads/" + BRANCH + "'", condition)
         self.assertNotIn("assertion.repository ==", condition)
+
+    def test_long_github_subject_has_a_bounded_replacement(self):
+        rid = "1312147922"
+        full = ("repo:" + REPOSITORY + ":ref:refs/heads/" + BRANCH
+                + ":job_workflow_ref:" + REPOSITORY + "/.github/workflows/daily-ops-branch-preview.yml")
+        self.assertGreater(len(full.encode()), 127)
+        spec = federation_spec("247425973072", {"id": int(rid), "owner": {"id": 143244575}, "full_name": REPOSITORY})
+        self.assertEqual(spec["body"]["attributeMapping"]["google.subject"], "'repo:' + assertion.repository_id")
+        self.assertLessEqual(len(("repo:" + rid).encode()), 127)
+
+    def test_known_v1_provider_repairs_only_mapping_and_verifies_condition(self):
+        spec = federation_spec("123456", {"id": 777, "owner": {"id": 888}, "full_name": REPOSITORY})
+        found = {**copy.deepcopy(spec["body"]), "state": "ACTIVE"}
+        found["attributeMapping"]["google.subject"] = "assertion.sub"
+        iam = Mock()
+        iam.call.side_effect = [{"done": True}, {**spec["body"], "state": "ACTIVE"}]
+        self.assertTrue(reconcile_provider_mapping(iam, spec, found, lambda _: None))
+        call = iam.call.call_args_list[0]
+        self.assertEqual(call.args[0], "PATCH")
+        self.assertEqual(call.kwargs["params"], {"updateMask": "attributeMapping"})
+        self.assertEqual(set(call.kwargs["json"]), {"attributeMapping"})
+
+    def test_provider_with_different_branch_or_issuer_is_not_patched(self):
+        spec = federation_spec("123456", {"id": 777, "owner": {"id": 888}, "full_name": REPOSITORY})
+        for field, value in [("attributeCondition", "true"), ("oidc", {"issuerUri": "https://other.test"})]:
+            found = {**copy.deepcopy(spec["body"]), "state": "ACTIVE"}
+            found[field] = value
+            iam = Mock()
+            with self.assertRaisesRegex(ConnectionError, "EXISTING_PROVIDER_DIFFERS"):
+                reconcile_provider_mapping(iam, spec, found, lambda _: None)
+            iam.call.assert_not_called()
+
+    def test_already_repaired_provider_causes_no_write(self):
+        spec = federation_spec("123456", {"id": 777, "owner": {"id": 888}, "full_name": REPOSITORY})
+        iam = Mock()
+        self.assertFalse(reconcile_provider_mapping(iam, spec, {**spec["body"], "state": "ACTIVE"}))
+        iam.call.assert_not_called()
 
     def test_existing_cloud_identity_uses_documented_iam_methods_and_preserves_policy(self):
         repo = {"id": 777, "owner": {"id": 888}, "full_name": REPOSITORY}
@@ -167,7 +205,7 @@ class SetupBoundaries(unittest.TestCase):
 
     def test_notebook_contains_reviewed_helper_and_no_saved_outputs(self):
         import hashlib
-        notebook = json.loads((ROOT / "ops/notebooks/JP_Actions_Google_Connection__V000001__LIVE.ipynb").read_text())
+        notebook = json.loads((ROOT / "ops/notebooks/JP_Actions_Google_Connection__V000002__LIVE.ipynb").read_text())
         helper = (ROOT / "scripts/connect_actions_google.py").read_text()
         self.assertEqual("".join(notebook["cells"][3]["source"]), helper)
         self.assertEqual(notebook["metadata"]["jp_release"]["helper_sha256"], hashlib.sha256(helper.encode()).hexdigest())
