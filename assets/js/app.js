@@ -154,11 +154,21 @@ async function loadMapBundle(path, cacheBust) {
       bundle.table_count !== 14 || !bundle.tables || Object.keys(bundle.tables).length !== 14) {
     throw new Error("Invalid consolidated map data");
   }
+  const live = bundle.live_google_sheets_fetch === true;
+  if (live && (bundle.publication_mode !== "ACTIONS_SHEETS_REFRESH_APPROVED_FIELDS" ||
+      !/^\d+$/.test(bundle.publication_receipt?.workflow_run_id || "") ||
+      !/^[0-9a-f]{40}$/.test(bundle.publication_receipt?.commit_sha || "") ||
+      !Number.isFinite(Date.parse(bundle.publication_receipt?.fetched_at_utc)))) {
+    throw new Error("Invalid live publication receipt");
+  }
+  const expectedOrigin = live ? "ACTIONS_GOOGLE_SHEETS_APPROVED_FIELDS" :
+    "PRIVATE_GOOGLE_SHEET_MANUAL_REVIEWED_SNAPSHOT";
   const tables = {};
   for (const [name, payload] of Object.entries(bundle.tables)) {
     if (payload.table !== name || payload.row_count !== payload.records?.length ||
         !Array.isArray(payload.records) || !Array.isArray(payload.columns) ||
-        payload.origin !== "PRIVATE_GOOGLE_SHEET_MANUAL_REVIEWED_SNAPSHOT") {
+        payload.origin !== expectedOrigin ||
+        (live && payload.projection_scope !== "ADMITTED_IDS_AND_APPROVED_FIELDS_ONLY")) {
       throw new Error(`Invalid reviewed table ${name}`);
     }
     tables[name] = payload.records;
