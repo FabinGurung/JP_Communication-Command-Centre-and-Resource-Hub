@@ -87,7 +87,10 @@ def federation_spec(project_number, repo):
         "body": {
             "displayName": "JP Pages GitHub",
             "attributeMapping": {
-                "google.subject": "assertion.sub",
+                # The full GitHub subject includes the long repository + ref
+                # and can exceed Google's 127-byte subject limit. Repository
+                # IDs are immutable; owner/repo/ref restrictions stay below.
+                "google.subject": "'repo:' + assertion.repository_id",
                 "attribute.repository_id": "assertion.repository_id",
                 "attribute.repository_owner_id": "assertion.repository_owner_id",
             },
@@ -232,6 +235,47 @@ def wait_operation(api, operation, emit=print):
     return operation.get("response", {})
 
 
+def reconcile_provider_mapping(iam, spec, found, emit=print):
+    """Only repair the exact V1 mapping; never loosen condition or issuer."""
+    expected = spec["body"]
+    legacy = {**expected["attributeMapping"], "google.subject": "assertion.sub"}
+    if (found.get("disabled") or found.get("state") != "ACTIVE"
+            or found.get("attributeCondition") != expected["attributeCondition"]
+            or found.get("oidc") != expected["oidc"]):
+        raise ConnectionError("EXISTING_PROVIDER_DIFFERS; review before replacing any trust policy")
+    if found.get("attributeMapping") == expected["attributeMapping"]:
+        return False
+    if found.get("attributeMapping") != legacy:
+        raise ConnectionError("EXISTING_PROVIDER_DIFFERS; unrecognized mapping left unchanged")
+    path = "/v1/" + spec["provider"]
+    op = iam.call("PATCH", path, params={"updateMask": "attributeMapping"},
+                  json={"attributeMapping": expected["attributeMapping"]})
+    wait_operation(iam, op, emit)
+    verified = iam.call("GET", path)
+    if any(verified.get(k) != expected[k] for k in ("attributeMapping", "attributeCondition", "oidc")):
+        raise ConnectionError("PROVIDER_MAPPING_READBACK_FAILED")
+    return True
+
+
+def repair_existing_connection(session, project_id, emit=print):
+    """Google-only repair: no GitHub token, identity creation or file sharing."""
+    import requests
+    if not re.fullmatch(r"[a-z][a-z0-9-]{4,28}[a-z0-9]", project_id):
+        raise ConnectionError("ENTER_A_GOOGLE_CLOUD_PROJECT_ID_NOT_ITS_DISPLAY_NAME")
+    public = API(requests.Session(), "https://api.github.com")
+    cfg, repo, sha = load_registered_config(public)
+    project = API(session, "https://cloudresourcemanager.googleapis.com").call("GET", "/v1/projects/" + project_id)
+    spec = federation_spec(project["projectNumber"], repo)
+    iam = API(session, "https://iam.googleapis.com")
+    found = iam.call("GET", "/v1/" + spec["provider"])
+    changed = reconcile_provider_mapping(iam, spec, found, emit)
+    emit("GOOGLE SUBJECT MAPPING VERIFIED: short repository ID; original repo/owner/branch restrictions preserved.")
+    emit("No new service account, source Sheet, sharing permission or GitHub token was created.")
+    emit("PIPELINE VERIFICATION PENDING: return to this chat so the failed Actions job can be retried and checked.")
+    return {"mapping_verified": True, "changed": changed, "commit_sha": sha,
+            "provider": spec["provider"], "pipeline_verified": False}
+
+
 def ensure_identity(session, project_id, repo, emit=print):
     if not re.fullmatch(r"[a-z][a-z0-9-]{4,28}[a-z0-9]", project_id):
         raise ConnectionError("ENTER_A_GOOGLE_CLOUD_PROJECT_ID_NOT_ITS_DISPLAY_NAME")
@@ -269,10 +313,7 @@ def ensure_identity(session, project_id, repo, emit=print):
                       json=spec["body"])
         wait_operation(iam, op, emit)
     else:
-        found = response.json()
-        if found.get("disabled") or found.get("state") != "ACTIVE" or any(
-                found.get(k) != spec["body"][k] for k in ("attributeMapping", "attributeCondition", "oidc")):
-            raise ConnectionError("EXISTING_PROVIDER_DIFFERS; review before replacing any trust policy")
+        reconcile_provider_mapping(iam, spec, response.json(), emit)
     policy = iam.call("POST", sa_path + ":getIamPolicy", params={"options.requestedPolicyVersion": 3})
     updated = add_identity_binding(policy, spec["member"])
     if updated != policy:
