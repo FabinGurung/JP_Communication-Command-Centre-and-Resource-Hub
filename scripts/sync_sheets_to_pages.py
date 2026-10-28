@@ -11,11 +11,12 @@ import copy
 import hashlib
 import json
 import os
+import random
 import re
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit
 from notification_projection import (NotificationError, compile_notifications,
                                      original_file_id, records as notification_records,
                                      validate_public as validate_notifications)
@@ -205,6 +206,33 @@ def resources_public(root, rows):
     return output
 
 
+class SheetsRequestLimiter:
+    """One runner identity: stay below the standard 60 requests/minute quota."""
+    def __init__(self, spacing=1.25, clock=time.monotonic, sleep=time.sleep):
+        self.spacing, self.clock, self.sleep = spacing, clock, sleep
+        self.next_allowed = 0.0
+
+    def wait(self):
+        delay = self.next_allowed - self.clock()
+        if delay > 0:
+            self.sleep(delay)
+        self.next_allowed = self.clock() + self.spacing
+
+
+def safe_quota_details(response):
+    """Log quota identifiers only, never Google response text or cell values."""
+    allowed = {"service", "quota_limit", "quota_limit_value", "quota_metric"}
+    result = {}
+    try:
+        for detail in response.json().get("error", {}).get("details", []):
+            for key, value in detail.get("metadata", {}).items():
+                if key in allowed and re.fullmatch(r"[A-Za-z0-9_./: -]{1,160}", str(value)):
+                    result[key] = str(value)
+    except (ValueError, AttributeError, TypeError):
+        pass
+    return result
+
+
 class Google:
     def __init__(self, snapshot_history_id):
         import google.auth
@@ -212,16 +240,27 @@ class Google:
         credentials, _ = google.auth.default(scopes=SCOPES)
         self.session = AuthorizedSession(credentials)
         self.snapshot_history_id = snapshot_history_id
+        self.limiter = SheetsRequestLimiter()
+        self.sleep = time.sleep
 
     def request(self, method, url, **kwargs):
-        for attempt in range(6):
+        for attempt in range(8):
+            if urlsplit(url).netloc == "sheets.googleapis.com":
+                self.limiter.wait()
             try:
                 response = self.session.request(method, url, timeout=90, **kwargs)
             except Exception:
                 raise SyncError("GOOGLE_TRANSPORT_FAILED") from None
-            if response.status_code not in {429, 500, 502, 503, 504} or attempt == 5:
+            if response.status_code not in {429, 500, 502, 503, 504} or attempt == 7:
                 break
-            time.sleep(min(2 ** (attempt + 1), 32))
+            try:
+                retry_after = min(64, max(0, float(response.headers.get("Retry-After", "0"))))
+            except (ValueError, TypeError):
+                retry_after = 0
+            if response.status_code == 429:
+                print("GOOGLE_QUOTA_RETRY:", json.dumps(safe_quota_details(response), sort_keys=True),
+                      "attempt", attempt + 1, flush=True)
+            self.sleep(max(retry_after, min(2 ** (attempt + 1) + random.random(), 64)))
         if not response.ok:
             raise SyncError(f"GOOGLE_HTTP_{response.status_code}")
         return response
