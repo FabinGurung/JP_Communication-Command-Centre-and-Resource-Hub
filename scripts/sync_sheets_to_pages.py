@@ -285,25 +285,41 @@ class Google:
                            params={"valueRenderOption": "FORMATTED_VALUE"})
         return normalize(result.get("values", []))
 
-    def snapshot(self, fid, folder, previous_hash, state):
-        # A service account cannot own new My Drive files. Append immutable PRE
-        # records to this existing, user-owned archive file instead of files.copy.
+    def archive_state(self, fid, folder):
+        # The runner has a grant on this pinned file, not on its parent folder.
+        # Drive can omit inaccessible parents. A visible conflicting parent is
+        # rejected; a hidden one is never a reason to widen folder access.
         archive_id = self.snapshot_history_id
         url = f"https://www.googleapis.com/drive/v3/files/{archive_id}"
-        metadata = self.call("GET", url, params={"fields": "id,parents,mimeType"})
-        if folder not in metadata.get("parents", []) or metadata.get("mimeType", "").startswith("application/vnd.google-apps."):
+        metadata = self.call("GET", url, params={"fields": "id,parents,mimeType", "supportsAllDrives": "true"})
+        if (metadata.get("id") != archive_id
+                or metadata.get("mimeType") not in {"application/x-ndjson", "application/json", "text/plain", "application/octet-stream"}
+                or (metadata.get("parents") and folder not in metadata["parents"])):
             raise SyncError("PREVIOUS_VERSIONS_DESTINATION_INVALID")
-        response = self.request("GET", url, params={"alt": "media"})
+        response = self.request("GET", url, params={"alt": "media", "supportsAllDrives": "true"})
         raw = response.content
         etag = response.headers.get("ETag")
         if not etag:
             raise SyncError("ARCHIVE_CONDITIONAL_WRITE_TOKEN_MISSING")
+        snapshot_records(raw, fid)  # Exact master-bound header + entire hash chain.
+        return raw, etag
+
+    def preflight_archive(self, fid, folder):
+        self.archive_state(fid, folder)
+        print("ARCHIVE_PREFLIGHT_VERIFIED: pinned archive file, master-bound header, hash chain and conditional-write token", flush=True)
+
+    def snapshot(self, fid, folder, previous_hash, state):
+        # A service account cannot own new My Drive files. Append immutable PRE
+        # records to this existing, user-owned archive file instead of files.copy.
+        archive_id = self.snapshot_history_id
+        raw, etag = self.archive_state(fid, folder)  # Fresh read before mutation.
         updated, record_id = append_snapshot(raw, fid, previous_hash, state)
         if updated != raw:
             self.call("PATCH", f"https://www.googleapis.com/upload/drive/v3/files/{archive_id}",
-                      params={"uploadType": "media", "fields": "id"}, data=updated,
+                      params={"uploadType": "media", "fields": "id", "supportsAllDrives": "true"}, data=updated,
                       headers={"Content-Type": "application/x-ndjson", "If-Match": etag})
-        readback = self.request("GET", url, params={"alt": "media"}).content
+        readback = self.request("GET", f"https://www.googleapis.com/drive/v3/files/{archive_id}",
+                                params={"alt": "media", "supportsAllDrives": "true"}).content
         if readback != updated:
             raise SyncError("PREVIOUS_VERSION_READBACK_FAILED")
         return archive_id + "#" + record_id
@@ -334,8 +350,8 @@ def notification_public(api, cfg, incoming, projects, mode):
         raise SyncError(str(exc)) from None
 
 
-def append_snapshot(raw, fid, previous_hash, state):
-    """Verify every earlier record and append; never rewrite previous snapshots."""
+def snapshot_records(raw, fid):
+    """Validate the existing log without preparing or writing a new record."""
     if len(raw) > 32 * 1024 * 1024:
         raise SyncError("PREVIOUS_VERSIONS_ROTATION_REQUIRED")
     try:
@@ -345,12 +361,19 @@ def append_snapshot(raw, fid, previous_hash, state):
     if not rows or rows[0] != {"type": "header", "format": "JP_PUBLISHING_RESTORE_HISTORY_V1", "publishing_workbook_id": fid}:
         raise SyncError("PREVIOUS_VERSIONS_HEADER_INVALID")
     chain = digest(rows[0])
-    existing = None
     for number, row in enumerate(rows[1:], 1):
         check = {k: v for k, v in row.items() if k != "record_hash"}
         if row.get("id") != f"R{number:06d}" or row.get("previous_hash") != chain or row.get("record_hash") != digest(check):
             raise SyncError("PREVIOUS_VERSIONS_CHAIN_INVALID")
         chain = row["record_hash"]
+    return rows, chain
+
+
+def append_snapshot(raw, fid, previous_hash, state):
+    """Verify every earlier record and append; never rewrite previous snapshots."""
+    rows, chain = snapshot_records(raw, fid)
+    existing = None
+    for row in rows[1:]:
         if row.get("snapshot_key") == previous_hash:
             if row.get("state") != state:
                 raise SyncError("PREVIOUS_VERSION_KEY_COLLISION")
@@ -401,6 +424,8 @@ def sync(api, root=ROOT):
     cfg = json.loads((root / CONFIG).read_text())
     registry = json.loads((root / "ops/control/map-sheets-source.v1.0.json").read_text())
     master = cfg["publishing_workbook_id"]
+    if hasattr(api, "preflight_archive"):
+        api.preflight_archive(master, cfg["previous_versions_folder_id"])
     meta = api.meta(master)
     tabs = {x["properties"]["title"]: x["properties"] for x in meta["sheets"]}
     router = api.read(master, "_SOURCE_ROUTER", meta)
