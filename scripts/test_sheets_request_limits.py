@@ -3,9 +3,10 @@
 import contextlib
 import io
 import json
+import hashlib
 import unittest
 from unittest.mock import Mock, patch
-from sync_sheets_to_pages import Google, SheetsRequestLimiter, SyncError, safe_quota_details
+from sync_sheets_to_pages import Google, SheetsRequestLimiter, SyncError, append_snapshot, digest, safe_quota_details
 
 
 class Clock:
@@ -84,10 +85,14 @@ class RequestLimitTests(unittest.TestCase):
     def archive_client(self, **metadata):
         client = Google.__new__(Google)
         client.snapshot_history_id = "PINNED_ARCHIVE"
-        client.call = Mock(return_value={"id": "PINNED_ARCHIVE", "mimeType": "application/x-ndjson", **metadata})
         response = Mock(content=(json.dumps({"type": "header", "format": "JP_PUBLISHING_RESTORE_HISTORY_V1",
                                              "publishing_workbook_id": "MASTER"}) + "\n").encode(),
-                        headers={"ETag": '"original"'})
+                        headers={})
+        def call(method, url, **kwargs):
+            if "/drive/v2/" in url:
+                return {"id": "PINNED_ARCHIVE", "etag": '"original"', "md5Checksum": hashlib.md5(response.content).hexdigest()}
+            return {"id": "PINNED_ARCHIVE", "mimeType": "application/x-ndjson", **metadata}
+        client.call = Mock(side_effect=call)
         client.request = Mock(return_value=response)
         return client
 
@@ -107,12 +112,40 @@ class RequestLimitTests(unittest.TestCase):
 
     def test_missing_conditional_token_or_wrong_master_stops_archive_preflight(self):
         client = self.archive_client()
-        client.request.return_value.headers = {}
+        original = client.call.side_effect
+        client.call.side_effect = lambda method, url, **kwargs: ({"id": "PINNED_ARCHIVE"} if "/drive/v2/" in url else original(method, url, **kwargs))
         with self.assertRaisesRegex(SyncError, "CONDITIONAL_WRITE_TOKEN_MISSING"):
             client.archive_state("MASTER", "DEDICATED_FOLDER")
         client = self.archive_client()
         with self.assertRaisesRegex(SyncError, "HEADER_INVALID"):
             client.archive_state("DIFFERENT_MASTER", "DEDICATED_FOLDER")
+
+    def test_archive_content_must_match_the_revision_checksum(self):
+        client = self.archive_client()
+        original = client.call.side_effect
+        client.call.side_effect = lambda method, url, **kwargs: ({**original(method, url, **kwargs), "md5Checksum": "changed"})
+        with self.assertRaisesRegex(SyncError, "ARCHIVE_CHANGED_DURING_READ"):
+            client.archive_state("MASTER", "DEDICATED_FOLDER")
+
+    def test_snapshot_uses_matching_v2_etag_and_exact_append_readback(self):
+        client = self.archive_client()
+        raw = client.request.return_value.content
+        state = {"data": {"projects": [["project_id"], ["PUBLIC_TEST_ID"]]}}
+        original = client.call.side_effect
+        def call(method, url, **kwargs):
+            if method == "PUT":
+                client.request.return_value.content = kwargs["data"]
+                return {"id": "PINNED_ARCHIVE"}
+            return original(method, url, **kwargs)
+        client.call.side_effect = call
+        result = client.snapshot("MASTER", "DEDICATED_FOLDER", digest(state), state)
+        self.assertEqual(result, "PINNED_ARCHIVE#R000001")
+        upload = client.call.call_args_list[-1]
+        self.assertEqual(upload.args[:2], ("PUT", "https://www.googleapis.com/upload/drive/v2/files/PINNED_ARCHIVE"))
+        self.assertEqual(upload.kwargs["headers"]["If-Match"], '"original"')
+        updated = upload.kwargs["data"]
+        self.assertTrue(updated.startswith(raw))
+        self.assertEqual(json.loads(updated.splitlines()[-1])["state"], state)
 
 
 if __name__ == "__main__":
