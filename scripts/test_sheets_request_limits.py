@@ -2,6 +2,7 @@
 """Exercise quota timing with a virtual clock; no real waits or Google calls."""
 import contextlib
 import io
+import json
 import unittest
 from unittest.mock import Mock, patch
 from sync_sheets_to_pages import Google, SheetsRequestLimiter, SyncError, safe_quota_details
@@ -79,6 +80,39 @@ class RequestLimitTests(unittest.TestCase):
                 client.request("GET", "https://sheets.googleapis.com/v4/spreadsheets/test")
         self.assertEqual(client.session.request.call_count, 8)
         self.assertLess(clock.time(), 240)
+
+    def archive_client(self, **metadata):
+        client = Google.__new__(Google)
+        client.snapshot_history_id = "PINNED_ARCHIVE"
+        client.call = Mock(return_value={"id": "PINNED_ARCHIVE", "mimeType": "application/x-ndjson", **metadata})
+        response = Mock(content=(json.dumps({"type": "header", "format": "JP_PUBLISHING_RESTORE_HISTORY_V1",
+                                             "publishing_workbook_id": "MASTER"}) + "\n").encode(),
+                        headers={"ETag": '"original"'})
+        client.request = Mock(return_value=response)
+        return client
+
+    def test_file_scoped_archive_accepts_hidden_parent_without_broadening_access(self):
+        client = self.archive_client()
+        raw, etag = client.archive_state("MASTER", "DEDICATED_FOLDER")
+        self.assertEqual(etag, '"original"')
+        self.assertIn(b"MASTER", raw)
+        self.assertTrue(all(c.args[0] == "GET" for c in client.call.call_args_list + client.request.call_args_list))
+
+    def test_visible_wrong_parent_or_wrong_file_id_is_rejected(self):
+        for metadata in [{"parents": ["WRONG_FOLDER"]}, {"id": "DIFFERENT_FILE"}]:
+            client = self.archive_client(**metadata)
+            with self.assertRaisesRegex(SyncError, "DESTINATION_INVALID"):
+                client.archive_state("MASTER", "DEDICATED_FOLDER")
+            client.request.assert_not_called()
+
+    def test_missing_conditional_token_or_wrong_master_stops_archive_preflight(self):
+        client = self.archive_client()
+        client.request.return_value.headers = {}
+        with self.assertRaisesRegex(SyncError, "CONDITIONAL_WRITE_TOKEN_MISSING"):
+            client.archive_state("MASTER", "DEDICATED_FOLDER")
+        client = self.archive_client()
+        with self.assertRaisesRegex(SyncError, "HEADER_INVALID"):
+            client.archive_state("DIFFERENT_MASTER", "DEDICATED_FOLDER")
 
 
 if __name__ == "__main__":
