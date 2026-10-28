@@ -298,9 +298,18 @@ class Google:
             raise SyncError("PREVIOUS_VERSIONS_DESTINATION_INVALID")
         response = self.request("GET", url, params={"alt": "media", "supportsAllDrives": "true"})
         raw = response.content
-        etag = response.headers.get("ETag")
+        # The v3 media response does not reliably expose a conditional token.
+        # Drive v2 has an explicit file.etag; pair it with v2 conditional upload
+        # so we retain server-side conflict rejection instead of blind writes.
+        revision = self.call("GET", f"https://www.googleapis.com/drive/v2/files/{archive_id}",
+                             params={"fields": "id,etag,md5Checksum", "supportsAllDrives": "true"})
+        if revision.get("id") != archive_id:
+            raise SyncError("PREVIOUS_VERSIONS_DESTINATION_INVALID")
+        etag = revision.get("etag")
         if not etag:
             raise SyncError("ARCHIVE_CONDITIONAL_WRITE_TOKEN_MISSING")
+        if revision.get("md5Checksum") != hashlib.md5(raw).hexdigest():
+            raise SyncError("ARCHIVE_CHANGED_DURING_READ")
         snapshot_records(raw, fid)  # Exact master-bound header + entire hash chain.
         return raw, etag
 
@@ -315,8 +324,8 @@ class Google:
         raw, etag = self.archive_state(fid, folder)  # Fresh read before mutation.
         updated, record_id = append_snapshot(raw, fid, previous_hash, state)
         if updated != raw:
-            self.call("PATCH", f"https://www.googleapis.com/upload/drive/v3/files/{archive_id}",
-                      params={"uploadType": "media", "fields": "id", "supportsAllDrives": "true"}, data=updated,
+            self.call("PUT", f"https://www.googleapis.com/upload/drive/v2/files/{archive_id}",
+                      params={"uploadType": "media", "fields": "id", "supportsAllDrives": "true", "newRevision": "true"}, data=updated,
                       headers={"Content-Type": "application/x-ndjson", "If-Match": etag})
         readback = self.request("GET", f"https://www.googleapis.com/drive/v3/files/{archive_id}",
                                 params={"alt": "media", "supportsAllDrives": "true"}).content
