@@ -1,6 +1,6 @@
 # Communication and Web — current source ownership
 
-Updated 28 October 2026. Human edits belong in the existing subject Sheets. Code,
+Updated 29 October 2026. Human edits belong in the existing subject Sheets. Code,
 validation, rendering and public projections belong in GitHub. JSON/CSV and Excel
 are generated views, never alternative editing authorities.
 
@@ -37,14 +37,9 @@ sources again, and builds one approved public bundle. A required-live run fails
 if authentication, source validation, archive or readback fails. The previous
 site remains deployed if the new run fails.
 
-**Observed connection state:** reviewed-snapshot deployments work. The first
-required live Actions Google fetch is not yet verified. The one-time Colab
-connection helper configures a dedicated keyless service account, 29 individual
-file readers (28 workbooks + original message), and two output writers (publishing
-workbook + its existing restore log). It creates no source workbook and grants
-no folder-wide access. A successful live deployment includes its exact workflow
-run/commit/time receipt; an old success or merely configured variables is not a
-passing receipt.
+**Observed connection state:** live Google fetching and Pages deployment are verified. Runs [40704962943](https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/40704962943) and [40784101634](https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/actions/runs/40784101634) passed source/master readback, public JSON validation and deployment. The latter public receipt matches commit `1803ff387140d482720fcce4ec00a85a55ae64b8`; the live map rendered eight working projects, the Rohini filter returned one, and Notification Center displayed 22 source-linked bullets. Its second refresh reported `publishing_copy_changed=false`, confirming no redundant data rewrite. The data assembly is V000008; V000009 and V000010 record human control/navigation updates. The same 29 file readers and two output writers remain; no folder-wide grants or new source workbooks were needed.
+
+Routine publishing needs no new Cloud project, Colab run or personal GitHub token. It runs on the registered Pages branch push or manual workflow dispatch. Editing a Sheet alone does not trigger a deployment. Hourly scheduling remains unimplemented and requires a governed default-branch dispatcher; do not silently promote the working branch to main. The historical migration and business review below remain separate from this completed connection.
 
 ## Located historical pages — no user file hunt
 
