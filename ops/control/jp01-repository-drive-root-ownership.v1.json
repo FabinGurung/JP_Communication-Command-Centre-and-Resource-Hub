@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0.0",
   "control_id": "OPS-JP01-REPOSITORY-DRIVE-ROOT-OWNERSHIP-20261030",
-  "record_version": "R000002",
-  "as_of_npt": "2026-10-30",
-  "status": "VERIFIED_BOTH_REPOSITORY_ROOTS__THREE_INTAKES_RELOCATED_NOT_ADMITTED__LIVE_FINANCE_RETAINED",
+  "record_version": "R000003",
+  "as_of_npt": "2026-10-31",
+  "status": "COST_ROOT_VERIFIED__M000001_SOURCE_FILES_REPARENTED__FINANCE_SOURCE_IDS_PRESERVED",
   "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
   "repo_role": "OPERATIONS_COMMUNICATIONS_RESOURCE_NAVIGATION",
   "drive_workspace": {
@@ -72,8 +72,8 @@
       "destination_status": "VERIFIED_ROOT_RENAMED_IN_PLACE__SAME_ID__20261030",
       "role": "COST_FINANCE_ENGINE_OWNER",
       "communication_role": "LINK_ONLY__NO_SECOND_EDITABLE_FINANCIAL_SOURCE",
-      "krishna_sheet_custody": "CURRENTLY_ROHINI__NO_REPARENT_PERFORMED",
-      "designated_migration_owner": "COST_ESTIMATION_WORKSTREAM__THREE_STAGED_INTAKES_VERIFIED__LIVE_PAYMENT_MOVE_HOLD",
+      "krishna_sheet_custody": "M000001__MOVED_TO_COST_ROOT__ORIGINAL_ID_RETAINED__ORIGINAL_READERS_PRESERVED",
+      "designated_migration_owner": "COST_ESTIMATION_WORKSTREAM__M000001_SOURCE_CUSTODY_COMPLETED__A9_MAIN_ACK_PENDING",
       "previous_unenumerated_name": "JP_Cost_Estimation",
       "destination_url": "https://drive.google.com/drive/folders/1SVN58AJW1ulNbMUTndNrst4yTzht5Gyp",
       "intake_migration": {
@@ -94,10 +94,31 @@
         "pending": "A9_ARTIFACTREGISTRY_ARTIFACTEDGES_LEGACYPATHS_AND_MAIN_ACK"
       },
       "live_authority_exceptions": [
-        "Rohini Krishna Kumar Gupta original LIVE payment Sheet remains under its existing Rohini parent and separate permissions.",
-        "AEC Cost Rate Master remains under the original AEC authority.",
-        "Staged intake is not admitted as payment, wage or rate truth."
-      ]
+        "Krishna Kumar Gupta original LIVE payment Sheet was reparented from the Rohini subject folder to 03_JP_Cost_Estimation/03_PROJECT_PAYMENT_REGISTERS/01_KRISHNA_KUMAR_GUPTA__LIVE_REGISTER; original file ID, 12 worksheet tabs and original six ACL roles preserved; Rohini provenance remains historical.",
+        "AEC Cost Rate Master was reparented from AEC/03_MASTER_DATABASE to 03_JP_Cost_Estimation/04_COST_RATE_REFERENCES/01_AEC_COST_RATE_MASTER__LIVE_REGISTER; original ID, 15 worksheet tabs and original four ACL roles preserved; AEC source attribution retained.",
+        "Prior three intake folders remain STAGED_NOT_ADMITTED; no new transaction or rate figure has been validated merely by these location changes."
+      ],
+      "repository_aligned_migration": {
+        "migration_id": "M000001",
+        "date_npt": "2026-10-31",
+        "scope": "TWO_NATIVE_LIVE_SHEETS__NINE_HISTORICAL_OR_TEST_FILES",
+        "originals_reparented": 11,
+        "live_sheets": 2,
+        "history_or_test_items": 9,
+        "subject_folders_created": 5,
+        "identity_and_names": "PRESERVED",
+        "acl_source_parity": "SIX_ORIGINAL_KKG_ROLES__FOUR_ORIGINAL_AEC_ROLES_PRESERVED",
+        "source_tab_counts": {
+          "KKG": 12,
+          "AEC_rate_master": 15
+        },
+        "pre_post": "VERIFIED_SUBJECT_ARCHIVE_COPIES_AND_BOUNDED_FORMULA_VALUE_MATCH",
+        "original_provider_data_modified": false,
+        "private_lineage": "ID_LEVEL_OLD_NEW_PARENTS_KEPT_IN_PRIVATE_HTML_JS_LEDGER",
+        "cost_repo_public_trace": "custody/README.html",
+        "site_approval": "PENDING_COST_RESEARCH_PR_AND_CI",
+        "a9_main_ack": "PENDING"
+      }
     },
     "A7": "READ_ONLY_INDEX_ONLY",
     "AEC": "INDEPENDENT_THESIS_SCOPE"
@@ -130,9 +151,9 @@
   },
   "release": {
     "branch": "feature/daily-ops-current-work",
-    "pre_commit": "b943b3c5db589089407bf63647b7811b7a9744c9",
+    "pre_commit": "67cca96a489b02495243e835490f0ceacc9c53dd",
     "main_promotion": "NOT_PERFORMED",
-    "pages_success": "POST_COMMIT_ACTIONS_AND_PAGES_READBACK_REQUIRED",
+    "pages_success": "PENDING_POST_COMMIT_ACTIONS",
     "rollback": "NORMAL_GIT_REVERT__DO_NOT_FORCE_PUSH",
     "handoff_issue": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/issues/25",
     "main_ack": "NOT_ISSUED__A9_OWNER_RECONCILIATION_PENDING"

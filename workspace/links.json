@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "title": "JP Operations Workspace",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "timezone": "Asia/Kathmandu",
   "note": "Public-safe resource directory. Permission-gated Google resources may still require the user's Google account. No credentials are stored here.",
   "groups": [
@@ -353,7 +353,7 @@
       "title": "JP Cost Estimation — Google Drive Workspace",
       "url": "https://drive.google.com/drive/folders/1SVN58AJW1ulNbMUTndNrst4yTzht5Gyp",
       "why": "Open the dedicated A9 Cost Estimation Drive workspace, which is separate from the Communication/Operations Drive root.",
-      "how": "Use an authorized Google account. Intake is staged, not approved finance truth; original Rohini payment and AEC rate owners remain unchanged.",
+      "how": "Use an authorized Google account. The LIVE payment and rate workbooks have been moved under subject folders in this Cost workspace with unchanged file IDs and original reader access. Historical intake remains staged, not admitted.",
       "status": "VERIFIED",
       "audience": "Owner / Cost Estimator / Authorized Engineer",
       "type": "Google Drive folder",
