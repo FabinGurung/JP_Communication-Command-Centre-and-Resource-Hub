@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0.0",
+  "control_id": "OPS-JP01-REPOSITORY-DRIVE-ROOT-OWNERSHIP-20261030",
+  "record_version": "R000001",
+  "as_of_npt": "2026-10-30",
+  "status": "VERIFIED_PRIMARY_ROOT__COST_ROOT_MIGRATION_UNRESOLVED",
+  "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+  "repo_role": "OPERATIONS_COMMUNICATIONS_RESOURCE_NAVIGATION",
+  "drive_workspace": {
+    "name": "01_JP",
+    "drive_file_id": "13aseDFRfY_SI_YC6X71K_EZ_XjnAorFp",
+    "parent_drive_file_id": "1yZ4IquFfd-9AmAsM1eaXAYFSBwONpn-c",
+    "role": "STABLE_NAVIGATION_AND_SHARED_ENTERPRISE_WORKSPACE",
+    "does_not_own_all_descendants": true,
+    "rename_or_recreate": false,
+    "live_direct_children": 9,
+    "readback_date_npt": "2026-10-30"
+  },
+  "root_children": [
+    {
+      "name": "00 Colab Notebooks",
+      "class": "REPOSITORY_SUPPORT"
+    },
+    {
+      "name": "01 Useful References",
+      "class": "SHARED_CROSS_ECOSYSTEM_REFERENCES"
+    },
+    {
+      "name": "02 Website Sheets and Registers",
+      "class": "MIXED_SHEET_AUTHORITIES__PUBLISHING_NAVIGATION"
+    },
+    {
+      "name": "03 Fishtail Builders",
+      "class": "FISHTAIL_COMPANY_CUSTODY__LINK_ONLY"
+    },
+    {
+      "name": "04 Rohini Engineering and Builders",
+      "class": "ROHINI_COMPANY_CUSTODY__LINK_ONLY"
+    },
+    {
+      "name": "05 Office and Site Records",
+      "class": "SHARED_SUBJECT_AUTHORITIES__LINK_ONLY"
+    },
+    {
+      "name": "06 Notification Center — Original Messages",
+      "class": "ORIGINAL_PROVIDER_EVIDENCE"
+    },
+    {
+      "name": "99 Archive Gallery",
+      "class": "DEDICATED_VERSION_HISTORY_ARCHIVES"
+    },
+    {
+      "name": "00 START HERE — Website Sheets and Files.html",
+      "class": "HUMAN_NAVIGATION"
+    }
+  ],
+  "canonical_authorities": {
+    "project_master": "EXISTING_REGISTERED_SOURCE_GOOGLE_SHEETS",
+    "current_ops": "ops/data/current-works.json",
+    "ops_history": "ops/events/daily-ops-events.jsonl",
+    "resource_link_index": "ops/data/project-resources.json",
+    "relational_contract": "ops/schema/daily-ops-postgres.sql",
+    "original_file_bytes_and_access": "GOOGLE_DRIVE",
+    "public_pages": "VALIDATED_PUBLIC_SAFE_PROJECTIONS_ONLY"
+  },
+  "external_repository_boundary": {
+    "cost_estimation": {
+      "repository": "FabinGurung/JP_Cost_Estimation",
+      "intended_sibling_name": "JP_Cost_Estimation",
+      "intended_parent_name": "A9_Fabin_Gurung",
+      "destination_drive_file_id": null,
+      "destination_status": "NOT_FOUND_IN_LIVE_A9_PARENT_LISTING_20261030",
+      "role": "COST_FINANCE_ENGINE_OWNER",
+      "communication_role": "LINK_ONLY__NO_SECOND_EDITABLE_FINANCIAL_SOURCE",
+      "krishna_sheet_custody": "CURRENTLY_ROHINI__NO_REPARENT_PERFORMED",
+      "designated_migration_owner": "COST_ESTIMATION_PENDING_SINGLE_OWNER_RECEIPT"
+    },
+    "A7": "READ_ONLY_INDEX_ONLY",
+    "AEC": "INDEPENDENT_THESIS_SCOPE"
+  },
+  "historical_inventory": {
+    "as_of_utc": "2026-10-25T00:20:02.500988+00:00",
+    "recorded_nodes": 5383,
+    "folders": 958,
+    "files": 4425,
+    "snapshot_direct_children": 7,
+    "current_live_direct_children": 9,
+    "full_current_descendant_rescan": "NOT_PERFORMED",
+    "private_inventory": "RETAINED_OUTSIDE_PUBLIC_REPOSITORY"
+  },
+  "migration_requirements": [
+    "SINGLE_DESIGNATED_OWNER",
+    "PRE_SNAPSHOT_AND_PARENT_ACL_EVIDENCE",
+    "UNCHANGED_STABLE_FILE_ID",
+    "POST_PROVIDER_READBACK_AND_ROLLBACK_PARENT",
+    "PERMISSION_AUDIT",
+    "CROSS_REPO_HANDOFF_RECEIPT",
+    "PUBLIC_LINK_VALIDATION_BEFORE_NAVIGATION_CHANGE"
+  ],
+  "mutation_state": {
+    "drive_moves": 0,
+    "drive_renames": 0,
+    "permission_changes": 0,
+    "cross_repository_writes": 0,
+    "financial_content_published": false
+  },
+  "release": {
+    "branch": "feature/daily-ops-current-work",
+    "pre_commit": "4bf0196b27781435fcb8eb6db4ac4f912672ce3b",
+    "main_promotion": "NOT_PERFORMED",
+    "pages_success": "REQUIRES_POST_WRITE_ACTIONS_READBACK",
+    "rollback": "NORMAL_GIT_REVERT__DO_NOT_FORCE_PUSH"
+  }
+}
