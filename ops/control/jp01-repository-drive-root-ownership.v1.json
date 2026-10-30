@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0.0",
   "control_id": "OPS-JP01-REPOSITORY-DRIVE-ROOT-OWNERSHIP-20261030",
-  "record_version": "R000001",
+  "record_version": "R000002",
   "as_of_npt": "2026-10-30",
-  "status": "VERIFIED_PRIMARY_ROOT__COST_ROOT_MIGRATION_UNRESOLVED",
+  "status": "VERIFIED_BOTH_REPOSITORY_ROOTS__THREE_INTAKES_RELOCATED_NOT_ADMITTED__LIVE_FINANCE_RETAINED",
   "repository": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
   "repo_role": "OPERATIONS_COMMUNICATIONS_RESOURCE_NAVIGATION",
   "drive_workspace": {
@@ -66,14 +66,38 @@
   "external_repository_boundary": {
     "cost_estimation": {
       "repository": "FabinGurung/JP_Cost_Estimation",
-      "intended_sibling_name": "JP_Cost_Estimation",
+      "intended_sibling_name": "03_JP_Cost_Estimation",
       "intended_parent_name": "A9_Fabin_Gurung",
-      "destination_drive_file_id": null,
-      "destination_status": "NOT_FOUND_IN_LIVE_A9_PARENT_LISTING_20261030",
+      "destination_drive_file_id": "1SVN58AJW1ulNbMUTndNrst4yTzht5Gyp",
+      "destination_status": "VERIFIED_ROOT_RENAMED_IN_PLACE__SAME_ID__20261030",
       "role": "COST_FINANCE_ENGINE_OWNER",
       "communication_role": "LINK_ONLY__NO_SECOND_EDITABLE_FINANCIAL_SOURCE",
       "krishna_sheet_custody": "CURRENTLY_ROHINI__NO_REPARENT_PERFORMED",
-      "designated_migration_owner": "COST_ESTIMATION_PENDING_SINGLE_OWNER_RECEIPT"
+      "designated_migration_owner": "COST_ESTIMATION_WORKSTREAM__THREE_STAGED_INTAKES_VERIFIED__LIVE_PAYMENT_MOVE_HOLD",
+      "previous_unenumerated_name": "JP_Cost_Estimation",
+      "destination_url": "https://drive.google.com/drive/folders/1SVN58AJW1ulNbMUTndNrst4yTzht5Gyp",
+      "intake_migration": {
+        "status": "THREE_PARENT_UPDATES_VERIFIED__STAGED_NOT_ADMITTED",
+        "original_parent": "A9/98_INTAKE_STAGING",
+        "new_parent": "03_JP_Cost_Estimation/97_STAGED_INTAKE_NOT_ADMITTED",
+        "moved_folder_count": 3,
+        "original_folder_ids_preserved": true,
+        "original_acl_pattern": "FOUR_A9_ACCOUNTS_READBACK",
+        "live_source_records_moved": 0,
+        "a9_movement_receipt_range": "A9-COST-20261030-001..003",
+        "a9_intake_registration_range": "INTAKE-20261030-014..016",
+        "cost_repo_pr": 17,
+        "cost_repo_merge_sha": "18a8800821d2779ac65b7bf9b87ff551b1893274",
+        "cost_repo_ci_run": 41054099999,
+        "cost_repo_pages_run": 41054099954,
+        "version": "V000001_PRE_POST_ARCHIVED",
+        "pending": "A9_ARTIFACTREGISTRY_ARTIFACTEDGES_LEGACYPATHS_AND_MAIN_ACK"
+      },
+      "live_authority_exceptions": [
+        "Rohini Krishna Kumar Gupta original LIVE payment Sheet remains under its existing Rohini parent and separate permissions.",
+        "AEC Cost Rate Master remains under the original AEC authority.",
+        "Staged intake is not admitted as payment, wage or rate truth."
+      ]
     },
     "A7": "READ_ONLY_INDEX_ONLY",
     "AEC": "INDEPENDENT_THESIS_SCOPE"
@@ -85,7 +109,7 @@
     "files": 4425,
     "snapshot_direct_children": 7,
     "current_live_direct_children": 9,
-    "full_current_descendant_rescan": "NOT_PERFORMED",
+    "full_current_descendant_rescan": "NOT_PERFORMED__PREVIOUS_SNAPSHOT_20261025_NOT_REUSED_AS_CURRENT",
     "private_inventory": "RETAINED_OUTSIDE_PUBLIC_REPOSITORY"
   },
   "migration_requirements": [
@@ -106,9 +130,11 @@
   },
   "release": {
     "branch": "feature/daily-ops-current-work",
-    "pre_commit": "4bf0196b27781435fcb8eb6db4ac4f912672ce3b",
+    "pre_commit": "b943b3c5db589089407bf63647b7811b7a9744c9",
     "main_promotion": "NOT_PERFORMED",
-    "pages_success": "REQUIRES_POST_WRITE_ACTIONS_READBACK",
-    "rollback": "NORMAL_GIT_REVERT__DO_NOT_FORCE_PUSH"
+    "pages_success": "POST_COMMIT_ACTIONS_AND_PAGES_READBACK_REQUIRED",
+    "rollback": "NORMAL_GIT_REVERT__DO_NOT_FORCE_PUSH",
+    "handoff_issue": "https://github.com/FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub/issues/25",
+    "main_ack": "NOT_ISSUED__A9_OWNER_RECONCILIATION_PENDING"
   }
 }
