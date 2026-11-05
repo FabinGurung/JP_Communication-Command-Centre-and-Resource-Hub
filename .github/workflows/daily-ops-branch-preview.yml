@@ -44,6 +44,9 @@ jobs:
       - name: Verify multi-chat project contribution scripts compile
         run: python -m py_compile scripts/validate_project_contributions.py scripts/build_project_contribution_directory.py scripts/build_public_pages_site.py scripts/test_public_pages_site.py
 
+      - name: Verify Astam land-feasibility publication privacy and source checks
+        run: python scripts/test_astam_public_feasibility.py
+
       - name: Test Discord CDN byte-fidelity diagnostics
         run: python scripts/test_cwo_media_diagnostics.py
 
