@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "source_kind": "DEDICATED_ASTAM_FEASIBILITY_SINGLE_SUBJECT",
+  "live_workbook_id": "1DOfrHRZBpkRfglQiXN6kgeHHzgSXOwu2mmA-J0CcYCk",
+  "title": "JP Enterprise — Astam Village — Feasibility & Documents — LIVE",
+  "source_parent": "GOOGLE_DRIVE_PROJECT_FOLDER",
+  "source_version": "V000001",
+  "source_history_folder": "15z318p8yHvfSk7oy7crfLxiuYyS4z2Du",
+  "private_source": true,
+  "site_output": "ops/data/land-feasibility/astam-village-public.v1.0.json",
+  "authoritative_live_id_unchanged": true,
+  "derived_fields_allowlisted": true,
+  "access_requirement": "GITHUB_ACTIONS_SERVICE_ACCOUNT_READER_PERMISSION",
+  "trigger": "REGISTERED_PAGES_BRANCH_PUSH_OR_MANUAL_DISPATCH",
+  "no_auto_sheets_polling": true,
+  "gate": "GOOGLE_SHEETS_READBACK_AND_PUBLICATION_VALIDATION"
+}
