@@ -45,7 +45,9 @@ jobs:
         run: python -m py_compile scripts/validate_project_contributions.py scripts/build_project_contribution_directory.py scripts/build_public_pages_site.py scripts/test_public_pages_site.py
 
       - name: Verify Astam land-feasibility publication privacy and source checks
-        run: python scripts/test_astam_public_feasibility.py
+        run: |
+          python scripts/test_astam_public_feasibility.py
+          python scripts/sync_astam_feasibility.py --validate-bundle
 
       - name: Test Discord CDN byte-fidelity diagnostics
         run: python scripts/test_cwo_media_diagnostics.py
@@ -719,6 +721,18 @@ jobs:
           python scripts/sync_sheets_to_pages.py
           python scripts/sync_sheets_to_pages.py --validate-bundle
 
+      - name: Refresh Astam from its permanent Google Sheet
+        if: steps.google_connection.outputs.configured == 'true'
+        env:
+          REQUIRE_LIVE_ASTAM: ${{ inputs.require_live_sheets || false }}
+        shell: bash
+        run: |
+          if [[ "$REQUIRE_LIVE_ASTAM" == "true" ]]; then
+            python scripts/sync_astam_feasibility.py --refresh --require-live
+          else
+            python scripts/sync_astam_feasibility.py --refresh
+          fi
+
       - name: Record the actual publishing mode
         shell: python
         run: |
@@ -734,6 +748,14 @@ jobs:
         with:
           name: validated-public-map
           path: ops/data/map-data.v1.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Preserve checked Astam published data
+        uses: actions/upload-artifact@v4
+        with:
+          name: validated-astam-feasibility
+          path: ops/data/land-feasibility/astam-village-public.v1.0.json
           if-no-files-found: error
           retention-days: 7
 
@@ -761,8 +783,16 @@ jobs:
           name: validated-public-map
           path: ops/data
 
+      - name: Use exactly the validated Astam source projection
+        uses: actions/download-artifact@v4
+        with:
+          name: validated-astam-feasibility
+          path: ops/data/land-feasibility
+
       - name: Recheck public payload before packaging
-        run: python scripts/sync_sheets_to_pages.py --validate-bundle
+        run: |
+          python scripts/sync_sheets_to_pages.py --validate-bundle
+          python scripts/sync_astam_feasibility.py --validate-bundle
 
       - name: Assemble explicit public Pages artifact
         run: python scripts/build_public_pages_site.py --output _site
