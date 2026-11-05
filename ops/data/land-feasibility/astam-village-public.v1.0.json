@@ -1,0 +1,168 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "PUBLIC_SAFE_FEASIBILITY_PROJECTION",
+  "projection_id": "JPENT-ASTAM-VIS-20261105",
+  "as_of": "2026-11-05",
+  "source_owner": "Google Drive — JP_Enterprise project folder",
+  "repo_owner": "JP Operations Hub — read-only public derived presentation",
+  "publication_scope": "PUBLIC_SAFE_ONLY",
+  "project": {
+    "local_reference": "JPENT-ASTAM-2026-01",
+    "globally_registered_project_id": null,
+    "title": "Astam Village — Land Feasibility",
+    "organization": "JP_Enterprise",
+    "location_general": "Astam area, Kaski, Nepal",
+    "exact_coordinates_published": false,
+    "geometry_published": false,
+    "phase": "Pre-acquisition research",
+    "use_concept": "Private villa or cottage; tourism use only exploratory",
+    "decision_status": "NO_PURCHASE_APPROVAL",
+    "legal_status": "UNVERIFIED",
+    "engineering_status": "UNVERIFIED",
+    "notes": "Indicative photographic/satellite context is not a licensed survey, land registration or verified buildable-area record."
+  },
+  "summary": [
+    {
+      "label": "Uploaded original evidence items",
+      "value": 8,
+      "note": "Stored outside GitHub in permission-gated Drive"
+    },
+    {
+      "label": "Decision checks open",
+      "value": 10,
+      "note": "No verified clearance or authorization asserted"
+    },
+    {
+      "label": "Engineering approvals",
+      "value": 0,
+      "note": "No engineering approval issued"
+    }
+  ],
+  "observations": [
+    {
+      "label": "Landscape & setting",
+      "detail": "Uploaded photography shows terraces and a mountain/hillside outlook. Boundary, stability and legal view rights are not established.",
+      "kind": "PHOTO_OBSERVATION"
+    },
+    {
+      "label": "Seasonal water concern",
+      "detail": "Dry-season reliability was raised in preliminary discussion and requires a site-specific supply check.",
+      "kind": "REPORTED_CONCERN"
+    },
+    {
+      "label": "Potential development concept",
+      "detail": "A private cottage/villa has been discussed. Planning, building permission and commercial accommodation use are not confirmed.",
+      "kind": "CONCEPT_ONLY"
+    }
+  ],
+  "checks": [
+    {
+      "id": "title",
+      "label": "Title, seller authority & disputes",
+      "group": "Legal",
+      "status": "PENDING",
+      "evidence": "Certified current ownership and encumbrance checks"
+    },
+    {
+      "id": "boundary",
+      "label": "Cadastral parcel, area & demarcation",
+      "group": "Legal",
+      "status": "PENDING",
+      "evidence": "Licensed field survey and official Survey Office record"
+    },
+    {
+      "id": "landuse",
+      "label": "Jurisdiction, land use & building permission",
+      "group": "Regulatory",
+      "status": "PENDING",
+      "evidence": "Written municipality/ward and planning-office confirmation"
+    },
+    {
+      "id": "road",
+      "label": "Road access & enforceable right-of-way",
+      "group": "Access",
+      "status": "PENDING",
+      "evidence": "Official road/easement confirmation and measured approach"
+    },
+    {
+      "id": "water",
+      "label": "Year-round water & storage",
+      "group": "Utilities",
+      "status": "PENDING",
+      "evidence": "Dry-season source inspection and supply testing"
+    },
+    {
+      "id": "electricity",
+      "label": "Power connection & line clearance",
+      "group": "Utilities",
+      "status": "PENDING",
+      "evidence": "Competent electricity utility confirmation of corridor, voltage and setbacks"
+    },
+    {
+      "id": "slope",
+      "label": "Slope, geotechnics & drainage",
+      "group": "Engineering",
+      "status": "PENDING",
+      "evidence": "Geotechnical/topographical assessment, rainfall and drainage design"
+    },
+    {
+      "id": "views",
+      "label": "Long-term view obstruction risk",
+      "group": "Planning",
+      "status": "PENDING",
+      "evidence": "Neighbor parcel/building-envelope and sightline assessment"
+    },
+    {
+      "id": "cost",
+      "label": "Independent purchase and build-cost appraisal",
+      "group": "Commercial",
+      "status": "PENDING",
+      "evidence": "Qualified comparables and complete costs; figures private"
+    },
+    {
+      "id": "use",
+      "label": "Villa vs. tourism operating feasibility",
+      "group": "Strategy",
+      "status": "PENDING",
+      "evidence": "Permit, access, service and demand validation"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Project evidence & correspondence",
+      "type": "permission_gated_folder",
+      "url": "https://drive.google.com/drive/folders/1ACIrbhlY8oc2C0wTyKiaae2aoQZZG1Vm"
+    },
+    {
+      "label": "Official title and cadastral materials",
+      "type": "permission_gated_folder",
+      "url": "https://drive.google.com/drive/folders/1ZGO7wdWmQdLkGg27RAoFYC9ULCPtk6mO"
+    },
+    {
+      "label": "Maps, exact location and survey inputs",
+      "type": "permission_gated_folder",
+      "url": "https://drive.google.com/drive/folders/1UDmNIttQbw_bD0xbqtyB6y8lLFFJXVzs"
+    },
+    {
+      "label": "Original site photographs",
+      "type": "permission_gated_folder",
+      "url": "https://drive.google.com/drive/folders/1Sic0vNFbJh9oNs0j7hojVCMebQTfitgy"
+    },
+    {
+      "label": "Feasibility working records",
+      "type": "permission_gated_folder",
+      "url": "https://drive.google.com/drive/folders/1L_rOW79TVEZtuO2kBdtT3XwOGho54ck8"
+    },
+    {
+      "label": "Architectural concepts",
+      "type": "permission_gated_folder",
+      "url": "https://drive.google.com/drive/folders/1Ety1ZFK6qsVE5pii2pNqVRMLp61OIgsH"
+    }
+  ],
+  "publication_caveats": [
+    "This public page does not show exact plot location, parcel number, owner records, land document images, private messages or financial terms.",
+    "Google Drive permissions protect source documents; the public page and these link URLs do not grant access.",
+    "Findings are preliminary; no legal, geotechnical, electrical or permitting determination has been made.",
+    "A local working reference is not the permanent global PRJ registry identity."
+  ]
+}
