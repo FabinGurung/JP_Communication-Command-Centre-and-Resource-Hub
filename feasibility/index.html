@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f1f7ee">
+<meta name="description" content="JP Enterprise preliminary land feasibility, public-safe due diligence and permission-controlled original evidence.">
+<title>JP Enterprise · Land Feasibility</title>
+<link rel="stylesheet" href="../assets/css/jp-theme-tokens.css">
+<link rel="stylesheet" href="../assets/css/site-shell.css">
+<link rel="stylesheet" href="../assets/css/jp-botanical.css">
+<style>
+:root{--bg:#f3f8f1;--ink:#183b2d;--green:#1d6849;--paper:#fffef9;--line:#d7e6d8;--mute:#526c5b;--amber:#925d17}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.58 system-ui,-apple-system,sans-serif}
+a{color:var(--green)}a:focus-visible{outline:3px solid #d69b30;outline-offset:3px}
+.wrap{width:min(1100px,100%);margin:auto;padding:18px 18px 72px}
+.top{display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.top .brand{font-weight:850;text-decoration:none}.top .crumb{font-size:13px;color:var(--mute)}
+.hero{margin:24px 0 18px;padding:clamp(22px,4vw,42px);background:linear-gradient(110deg,#dbeedf,#fcf8e8);border:1px solid #cadfca;border-radius:22px}
+.kicker{font-size:12px;letter-spacing:.1em;color:#37744e;font-weight:850;text-transform:uppercase}
+h1{font-size:clamp(31px,5vw,51px);line-height:1.1;letter-spacing:-.045em;margin:10px 0}
+h2{font-size:22px;letter-spacing:-.025em;margin:0 0 8px}h3{font-size:16px;margin:0 0 8px}
+p{margin:0 0 11px}.lead{max-width:760px;color:#456453;font-size:16px}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}
+.pill{display:inline-flex;padding:7px 10px;border:1px solid #c0d8c3;border-radius:999px;background:#ffffffb9;font-size:12px;font-weight:750}
+.status{border-color:#e7ca91;background:#fff5de;color:#885511}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0 26px}
+.metric,.panel,.gate,.notice{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px}
+.metric strong{display:block;font-size:36px;letter-spacing:-.04em;line-height:1.25;font-variant-numeric:tabular-nums}
+.metric span{display:block;font-weight:750}.metric small{color:var(--mute)}
+.section{margin-top:28px}.subtle{color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.gate .tag,.observation .tag{font-size:11px;letter-spacing:.06em;font-weight:850;color:var(--amber);text-transform:uppercase}
+.gate p,.observation p{font-size:13px;color:#4c6b57;margin:0}
+.gate h3{margin:7px 0}.gate{border-left:4px solid #e8be76}
+.observation{border-left:4px solid #97c7a4;background:var(--paper);border-radius:14px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:17px}
+.observation h3{margin-top:6px}
+.resource-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.resource-list a{background:white;border:1px solid #c7ddcb;border-radius:12px;min-height:55px;padding:12px 14px;text-decoration:none;font-size:13px;font-weight:750;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.resource-list a:hover{background:#e8f3e9}.notice{margin-top:18px;background:#fff8e9;border-color:#eadcb8;color:#6e581d;font-size:13px}
+.notice ul{padding-left:21px;margin:7px 0}
+.footer{padding-top:24px;font-size:12px;color:var(--mute)}
+.empty{border:1px dashed #c8d8c5;border-radius:12px;padding:18px;background:white}
+@media(max-width:690px){.metrics,.grid,.resource-list{grid-template-columns:1fr}.wrap{padding:12px 12px 55px}.hero{margin-top:16px}.metric{padding:14px}.metric strong{font-size:30px}}
+</style></head>
+<body data-jp-site="1"><main class="wrap">
+<header class="top"><a class="brand" href="../">🏗️ JP Operations Hub</a><span class="crumb">/ Resources / Land Feasibility</span></header>
+<section class="hero" aria-labelledby="project-title">
+<span class="kicker">JP_Enterprise · Preliminary feasibility</span>
+<h1 id="project-title">Land feasibility</h1>
+<p class="lead" id="project-summary">Loading public-safe project information…</p>
+<div class="pills"><span class="pill" id="location">General area only</span><span class="pill status" id="decision">No purchase approval</span><span class="pill" id="reference">Local working record</span></div>
+</section>
+<section class="metrics" id="metrics" aria-label="Project snapshot"></section>
+<section class="section" aria-labelledby="gate-title"><h2 id="gate-title">Pre-purchase decision checks</h2><p class="subtle">Open checks are NOT approvals. Original supporting evidence remains behind Google Drive permissions.</p><div class="grid" id="gates"><p class="empty">Loading decision checks…</p></div></section>
+<section class="section" aria-labelledby="observations-title"><h2 id="observations-title">What the source material indicates</h2><p class="subtle">Differentiate photo observations, reported concerns and unapproved concepts.</p><div class="grid" id="observations"></div></section>
+<section class="section" aria-labelledby="resources-title"><h2 id="resources-title">Source documents in Google Drive</h2><p class="subtle">These links expose folder locations, not the private content. The Drive owner grants or withholds access to each visitor.</p><div class="resource-list" id="resources"></div></section>
+<section class="notice" aria-labelledby="privacy-title"><strong id="privacy-title">Privacy, source and approval boundary</strong><ul id="caveats"></ul></section>
+<footer class="footer">Public source: <a href="../ops/data/land-feasibility/astam-village-public.v1.0.json">Reviewed feasibility projection (JSON)</a> · <a href="../">Back to Operations Hub</a><p id="updated"></p></footer>
+</main>
+<script>
+(async()=>{
+"use strict";
+const el=id=>document.getElementById(id);
+const mk=(tag,text,cls)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=String(text);if(cls)node.className=cls;return node;};
+const add=(parent,node)=>{parent.appendChild(node);return node;};
+const empty=id=>{const e=el(id);e.replaceChildren();return e;};
+try{
+  const response=await fetch("../ops/data/land-feasibility/astam-village-public.v1.0.json",{cache:"no-store"});
+  if(!response.ok)throw Error("The source projection is unavailable");
+  const d=await response.json();
+  if(d.kind!=="PUBLIC_SAFE_FEASIBILITY_PROJECTION"||d.publication_scope!=="PUBLIC_SAFE_ONLY"||!Array.isArray(d.checks))throw Error("The source projection did not pass its identity check");
+  el("project-title").textContent=d.project.title;
+  el("project-summary").textContent=d.project.use_concept+" — status: "+d.project.phase+". This is research only, not a land title or engineering clearance.";
+  el("location").textContent=d.project.location_general;
+  el("decision").textContent="No purchase approval";
+  el("reference").textContent=d.project.local_reference+" · global ID pending";
+  for(const m of d.summary){const a=add(emptyOnce("metrics"),mk("article",undefined,"metric"));add(a,mk("strong",m.value));add(a,mk("span",m.label));add(a,mk("small",m.note));}
+  const g=empty("gates");for(const item of d.checks){const a=add(g,mk("article",undefined,"gate"));add(a,mk("span",item.group+" · "+item.status,"tag"));add(a,mk("h3",item.label));add(a,mk("p","Evidence required: "+item.evidence));}
+  const o=empty("observations");for(const item of d.observations){const a=add(o,mk("article",undefined,"observation"));add(a,mk("span",item.kind.replaceAll("_"," "),"tag"));add(a,mk("h3",item.label));add(a,mk("p",item.detail));}
+  const resources=empty("resources");
+  for(const item of d.resources){if(item.type!=="permission_gated_folder"||!/^https:\/\/drive\.google\.com\/drive\/folders\/[A-Za-z0-9_-]+$/.test(item.url))continue;
+    const a=add(resources,mk("a",item.label+"  ↗"));a.href=item.url;a.target="_blank";a.rel="noopener noreferrer";a.setAttribute("aria-label",item.label+" (Google Drive permission required)");}
+  const c=empty("caveats");for(const line of d.publication_caveats)add(c,mk("li",line));
+  el("updated").textContent="Projection reviewed: "+d.as_of+" · Original documents remain editable in Drive by authorized users.";
+}catch(e){el("project-summary").textContent="Unable to verify the project’s reviewed data. No private documents are exposed here.";el("gates").replaceChildren(mk("p",e.message,"empty")); }
+function emptyOnce(id){const x=el(id);if(!x.dataset.initialized){x.replaceChildren();x.dataset.initialized="1";}return x;}
+})();
+</script></body></html>
