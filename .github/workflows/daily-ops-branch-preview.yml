@@ -31,6 +31,9 @@ jobs:
       - name: Validate compulsory branch/lane registry
         run: python scripts/validate_branch_registry.py
 
+      - name: Protect Astam client route and source-data privacy
+        run: python scripts/test_astam_production_route.py
+
       - name: Test Discord CDN byte-fidelity diagnostics
         run: python scripts/test_cwo_media_diagnostics.py
 

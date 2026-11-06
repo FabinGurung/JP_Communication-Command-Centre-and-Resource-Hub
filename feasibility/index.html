@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f2f7f2">
+<meta name="description" content="Astam Village project overview, evidence status, due diligence visualizations and permission-controlled project document access — JP Enterprise.">
+<title>Astam Village | JP Enterprise — Project Desk</title>
+<link rel="stylesheet" href="../assets/css/jp-theme-tokens.css">
+<link rel="stylesheet" href="../assets/css/site-shell.css">
+<link rel="stylesheet" href="../assets/css/jp-botanical.css">
+<style>
+:root{--ink:#18382f;--green:#18583e;--forest:#265e45;--sea:#e7f1e8;--bg:#f4f7f2;--muted:#536c5b;--line:#d6e4d7;--warm:#faeed6;--amber:#aa7727;--paper:#fffefb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.52 system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--green)}a:focus-visible,button:focus-visible{outline:3px solid #e9b85b;outline-offset:3px}button{font:inherit}
+.wrap{width:min(1160px,100%);margin:auto;padding:0 22px 72px}
+.top{min-height:70px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.brand{font-weight:850;font-size:15px;text-decoration:none;color:var(--ink)}.brand b{color:var(--green)}
+nav{display:flex;gap:15px;align-items:center;flex-wrap:wrap}nav a{font-weight:750;font-size:12px;text-decoration:none;color:var(--green);padding:12px 1px}
+.hero{display:grid;grid-template-columns:1.08fr .92fr;min-height:385px;margin:28px 0 22px;border:1px solid #cedfce;border-radius:25px;overflow:hidden;background:linear-gradient(112deg,#e4f2e3 0%,#fffcf1 100%);box-shadow:0 14px 48px #38684c0b}
+.hero-copy{padding:clamp(25px,4vw,52px);display:flex;align-items:flex-start;justify-content:center;flex-direction:column}
+.kicker,.eyebrow{font-size:11px;font-weight:870;text-transform:uppercase;letter-spacing:.12em;color:#3c7a53}
+h1{font-size:clamp(35px,5.1vw,58px);line-height:1.09;letter-spacing:-.052em;margin:12px 0 12px;max-width:620px}h2{font-size:clamp(22px,3vw,29px);line-height:1.25;letter-spacing:-.025em;margin:0 0 8px}h3{font-size:16px;line-height:1.35;margin:5px 0 6px}
+p{margin:0 0 12px}.lede{font-size:15px;color:#4f6855;max-width:570px}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin:5px 0 15px}.tag{font-weight:760;font-size:11px;padding:7px 11px;border-radius:30px;background:#ffffffdc;border:1px solid #cedeca;color:#45674d}.tag.hold{background:#fff0d2;border-color:#ecd3a1;color:#8c5d1d}
+.acts{display:flex;gap:8px;flex-wrap:wrap}.btn{background:var(--green);color:white;text-decoration:none;font-size:13px;font-weight:800;padding:11px 16px;min-height:45px;display:inline-flex;align-items:center;border-radius:11px}.btn.alt{color:var(--green);background:white;border:1px solid #bdd7c2}
+.art{position:relative;min-height:250px;overflow:hidden;background:linear-gradient(180deg,#e5f1ed,#c9e5d5 62%,#95bb96);display:flex;align-items:center;justify-content:center}.art svg{width:100%;height:100%;object-fit:cover}
+.art-note{position:absolute;bottom:17px;right:17px;background:#ffffffd9;color:#2b5e45;border:1px solid #dcebdd;border-radius:25px;padding:8px 12px;font-size:10px;font-weight:800;letter-spacing:.04em}
+.section{margin-top:31px}.section-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}.subtitle{color:var(--muted);font-size:13px;max-width:790px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.kpi,.panel,.file,.check,.observation{border:1px solid var(--line);background:var(--paper);border-radius:17px;box-shadow:0 8px 25px #1f4f3005}
+.kpi{padding:18px 20px}.kpi strong{display:block;font-size:30px;line-height:1.1;letter-spacing:-.035em;font-variant-numeric:tabular-nums}.kpi span{display:block;font-weight:750;font-size:12px;margin-top:8px}.kpi small{font-size:11px;color:var(--muted)}.kpi .muted{font-size:20px}
+.plot-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.panel{padding:23px}.panel h3{font-size:18px}.chart-list{margin-top:15px;display:grid;gap:14px}.chart-row{display:grid;grid-template-columns:110px 1fr 24px;gap:10px;align-items:center;font-size:12px}.chart-name{color:#43634f;font-weight:720}.chart-track{height:12px;border-radius:99px;background:#ecf0e9;overflow:hidden}.chart-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#81b38d,#24694a);min-width:3px}.chart-num{font-weight:780;text-align:right}
+.donut-wrap{display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-top:24px}.ring{--pct:0;display:grid;place-items:center;width:162px;height:162px;flex:none;position:relative;border-radius:50%;background:conic-gradient(#2c8554 calc(var(--pct)*1%),#e4e9dd 0)}.ring:before{content:"";position:absolute;inset:16px;background:#fffefb;border-radius:50%}.ring-text{position:relative;text-align:center}.ring-text b{display:block;font-size:30px;line-height:1.05}.ring-text small{font-size:11px;color:#58705d}.legend{display:grid;gap:10px;font-size:13px}.legend span{display:block}.swatch{display:inline-block;width:10px;height:10px;border-radius:4px;margin-right:9px}.legend .help{color:var(--muted);font-size:12px;max-width:220px}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.check{padding:17px 18px;border-left:4px solid #e3b665}.overline{font-size:10px;letter-spacing:.09em;color:#946923;text-transform:uppercase;font-weight:850}.check p{color:#56715b;font-size:12px;margin-bottom:0}.check h3{margin:6px 0}.state{display:inline-block;border-radius:20px;background:#fff3db;color:#94661e;font-size:10px;font-weight:800;padding:3px 8px;letter-spacing:.04em}
+.docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.file{padding:18px;display:flex;min-height:185px;flex-direction:column;gap:5px}.file .glyph{width:44px;height:44px;display:grid;place-items:center;background:#e7f0e7;border:1px solid #d2e5d4;border-radius:12px;font-size:22px}.file p{font-size:12px;color:#698170;margin:0 0 14px}.file .open{margin-top:auto;align-self:flex-start;font-weight:800;font-size:12px;background:#f0f6ef;padding:9px 12px;border-radius:8px;text-decoration:none}.file small{font-size:10px;color:var(--muted)}
+.observations{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.observation{padding:18px}.observation p{font-size:13px;color:#506b58}.observation .overline{color:#397752}
+.notice{padding:18px 21px;margin-top:22px;border:1px solid #e5d5b5;border-radius:14px;background:#fffaed;font-size:12px;color:#785d27}.notice ul{margin:8px 0 0;padding-left:20px}
+.empty{padding:20px;border:1px dashed #d6e2d5;border-radius:12px;background:#fff;font-size:14px;color:#536c5b}.loading{margin:20px 0}
+.foot{padding-top:22px;margin-top:36px;border-top:1px solid var(--line);font-size:11px;color:#627a66}.foot a{font-weight:750}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.art{height:240px}.kpis{grid-template-columns:repeat(2,1fr)}.docs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:660px){.wrap{padding:0 13px 55px}.top{padding:10px 0;min-height:65px}.hero{margin:17px 0 18px}.hero-copy{padding:24px 20px}.art{height:185px;min-height:185px}.plot-layout,.checks,.docs,.observations{grid-template-columns:1fr}.panel{padding:18px}.kpi{padding:15px}.chart-row{grid-template-columns:98px 1fr 20px}.donut-wrap{gap:18px}.ring{width:145px;height:145px}.ring:before{inset:15px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style></head>
+<body data-jp-site="1"><main class="wrap">
+<header class="top"><a class="brand" href="../">🏗️ <b>JP</b> Operations Hub</a><nav aria-label="Project navigation"><a href="#summary">Overview</a><a href="#analysis">Analysis</a><a href="#checks">Due diligence</a><a href="#documents">Files</a><a href="../resources/">All resources</a></nav></header>
+<section class="hero"><div class="hero-copy">
+<span class="kicker">JP Enterprise · Project desk</span>
+<h1 id="project-title">Astam Village</h1>
+<p class="lede" id="hero-description">Preliminary land feasibility, source-linked evidence and a structured decision review.</p>
+<div class="tags"><span class="tag">Astam area · Kaski</span><span class="tag hold">Purchase on hold</span><span class="tag" id="refresh-date">Reviewed 2026-11-05</span></div>
+<div class="acts"><a class="btn" href="#documents">Browse project files</a><a class="btn alt" href="#checks">Explore assessment</a></div>
+</div><div class="art" role="img" aria-label="Decorative stylized terraces and a mountain horizon; not a real site survey or property boundary.">
+<svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d7ebed"/><stop offset="1" stop-color="#f5f5d8"/></linearGradient></defs>
+<rect width="600" height="380" fill="url(#sky)"/>
+<path d="M0 210 80 118 134 165 229 68 314 171 390 103 452 154 526 84 600 168 600 380H0Z" fill="#789d94"/>
+<path d="M0 241 80 166 162 224 263 133 337 225 457 164 534 205 600 161 600 380H0Z" fill="#5c8b7b"/>
+<path d="M0 270Q133 208 242 271T600 243V380H0Z" fill="#b5cd9d"/>
+<path d="M0 286Q135 249 251 293T600 270V380H0Z" fill="#9cbd81"/>
+<path d="M0 309Q144 271 259 318T600 300V380H0Z" fill="#81ac77"/>
+<path d="M0 331Q140 301 263 346T600 328V380H0Z" fill="#699a67"/>
+<path d="M0 353Q175 326 296 368T600 345V380H0Z" fill="#4d8657"/>
+<path d="M0 286Q133 249 251 293T600 270M0 309Q144 271 259 318T600 300M0 331Q140 301 263 346T600 328M0 353Q175 326 296 368T600 345" stroke="#ecedcd" stroke-width="4" fill="none" opacity=".72"/>
+<circle cx="492" cy="63" r="31" fill="#ffe5a2" opacity=".85"/>
+</svg><span class="art-note">CONCEPTUAL LANDSCAPE · NOT A SURVEY</span></div></section>
+<section id="summary" class="section" aria-labelledby="summary-title"><div class="section-heading"><div><span class="eyebrow">Evidence snapshot</span><h2 id="summary-title">At a glance</h2><p class="subtitle">Verified as records received or concerns raised, not as legal or engineering clearances.</p></div></div><div class="kpis" id="kpis" aria-live="polite"><p class="loading">Reading source-backed summary…</p></div></section>
+<section id="analysis" class="section" aria-labelledby="analysis-title"><div class="section-heading"><div><span class="eyebrow">Measured from review rows</span><h2 id="analysis-title">Feasibility visualizations</h2><p class="subtitle">These plots count review questions. They do not represent land area, construction cost, legal safety or probability of approval.</p></div></div><div class="plot-layout">
+<article class="panel"><h3>Review areas</h3><p class="subtitle">Number of unresolved checks by due-diligence domain</p><div class="chart-list" id="domain-chart" role="img" aria-label="Loading checks by domain"></div></article>
+<article class="panel"><h3>Decision-readiness coverage</h3><p class="subtitle">Evidence-backed approval of recorded checklist items</p><div class="donut-wrap"><div class="ring" id="ring" role="img" aria-label="Zero of ten checks verified"><div class="ring-text"><b id="ring-count">0 / 10</b><small>verified</small></div></div><div class="legend"><span><i class="swatch" style="background:#2c8554"></i>Verified with evidence</span><span><i class="swatch" style="background:#e4e9dd"></i>Pending / blocked</span><p class="help">Unverified does not automatically mean a site is unsuitable. It means evidence is still missing.</p></div></div></article>
+</div></section>
+<section id="checks" class="section" aria-labelledby="checks-title"><div class="section-heading"><div><span class="eyebrow">Decision gates</span><h2 id="checks-title">What must be checked before buying?</h2><p class="subtitle">A documented checklist for the property investigation. Technical and legal sign-off are separate.</p></div></div><div id="checks-grid" class="checks"><p class="empty">Loading review checks…</p></div></section>
+<section class="section" aria-labelledby="observations-title"><div class="section-heading"><div><span class="eyebrow">Source interpretation</span><h2 id="observations-title">Site observations and open questions</h2></div></div><div class="observations" id="observations-grid"></div></section>
+<section id="documents" class="section" aria-labelledby="docs-title"><div class="section-heading"><div><span class="eyebrow">Project library</span><h2 id="docs-title">Browse the original project files</h2><p class="subtitle">The website organizes the materials. Files remain original and editable in Google Drive by authorized accounts. Selecting an item opens the controlled original; no public document bytes are reproduced here.</p></div></div><div id="files-grid" class="docs" aria-live="polite"></div></section>
+<aside class="notice" aria-labelledby="notice-title"><strong id="notice-title">Document permissions and engineering limitations</strong><ul id="notices"><li>Google Drive decides who can open each original; viewing this public page does not grant document access.</li><li>The project has not been certified for purchase, planning permission, construction, road access, utility connection or safe slope stability.</li></ul></aside>
+<footer class="foot"><p>JP_Enterprise · Source-backed project desk · <span id="source-status">Reviewed static snapshot</span></p><p><a href="../">Operations Hub</a> · <a href="../resources/">Project Resources</a></p></footer>
+</main>
+<script>
+(async function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const mk=(tag,txt,cls)=>{const n=document.createElement(tag);if(txt!==undefined)n.textContent=String(txt);if(cls)n.className=cls;return n;};
+const add=(parent,el)=>{parent.appendChild(el);return el;};
+const clear=id=>{const e=$(id);e.replaceChildren();return e;};
+const categories={PHOTO:"🌿",DOCUMENT:"📜",MAP:"🗺️",SURVEY:"📐",FEASIBILITY:"📋",DESIGN:"🏠"};
+const validDrive=u=>/^https:\/\/drive\.google\.com\/(?:drive\/folders\/|file\/d\/)[A-Za-z0-9_-]+(?:\/view)?$/.test(u||"");
+try{
+const r=await fetch("../ops/data/land-feasibility/astam-village-public.v1.0.json",{cache:"no-store"});
+if(!r.ok)throw Error("Reviewed public source is not currently available");
+const d=await r.json();
+if(d.kind!=="PUBLIC_SAFE_FEASIBILITY_PROJECTION"||d.publication_scope!=="PUBLIC_SAFE_ONLY"||d.project?.exact_coordinates_published!==false||!Array.isArray(d.checks))throw Error("Review privacy contract is invalid");
+$("project-title").textContent=d.project.title;
+$("hero-description").textContent=d.project.use_concept+" · "+d.project.phase+".";
+$("refresh-date").textContent="Reviewed "+d.as_of;
+$("source-status").textContent=d.source_sync?.mode==="GOOGLE_SHEETS_ACTIONS_READ"?"Read from approved native Sheet in current GitHub Actions publication":"Reviewed snapshot; live refresh pending";
+const checks=d.checks;
+const verified=checks.filter(x=>x.status==="VERIFIED_WITH_EVIDENCE").length;
+const pending=checks.length-verified;
+const k=clear("kpis");
+const metrics=[
+[String(d.summary?.[0]?.value??8),"Original evidence items","Stored under Drive permissions"],
+[String(checks.length),"Due-diligence checks","Evidence-gated review"],
+[String(pending),"Still open","Not approvals or findings"],
+["Not verified","Land area","No reliable surveyed figure"]
+];
+for(const [val,label,note] of metrics){const a=add(k,mk("article",undefined,"kpi"));add(a,mk("strong",val,val==="Not verified"?"muted":""));add(a,mk("span",label));add(a,mk("small",note));}
+const domains={};for(const c of checks)domains[c.group]=(domains[c.group]||0)+1;
+const max=Math.max(1,...Object.values(domains));const chart=clear("domain-chart");const sorted=Object.entries(domains).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
+for(const [name,count] of sorted){const row=add(chart,mk("div",undefined,"chart-row"));add(row,mk("span",name,"chart-name"));const bar=add(row,mk("div",undefined,"chart-track"));const fill=add(bar,mk("div",undefined,"chart-fill"));fill.style.width=(count/max*100)+"%";add(row,mk("span",count,"chart-num"));}
+chart.setAttribute("aria-label",sorted.map(([n,v])=>n+": "+v+" open checks").join("; "));
+$("ring-count").textContent=verified+" / "+checks.length;
+$("ring").style.setProperty("--pct",String(checks.length?verified/checks.length*100:0));
+$("ring").setAttribute("aria-label",verified+" of "+checks.length+" review checks have signed evidence");
+const grid=clear("checks-grid");
+for(const c of checks){const a=add(grid,mk("article",undefined,"check"));add(a,mk("span",c.group,"overline"));add(a,mk("h3",c.label));add(a,mk("span",c.status.replaceAll("_"," "),"state"));add(a,mk("p",c.evidence));}
+const observations=clear("observations-grid");
+for(const o of d.observations||[]){const a=add(observations,mk("article",undefined,"observation"));add(a,mk("span",o.kind.replaceAll("_"," "),"overline"));add(a,mk("h3",o.label));add(a,mk("p",o.detail));}
+const docs=clear("files-grid");
+for(const f of d.resources||[]){if(!validDrive(f.url))continue;const a=add(docs,mk("article",undefined,"file"));add(a,mk("div",categories[f.category]||"🗂️","glyph"));add(a,mk("h3",f.label));add(a,mk("p","Original source · Permission required"));const link=add(a,mk("a","Open protected original ↗","open"));link.href=f.url;link.target="_blank";link.rel="noopener noreferrer";link.setAttribute("aria-label","Open "+f.label+" in Google Drive (access may require an invitation)");add(a,mk("small","Access is checked by the file owner, not by this website"));}
+const notices=clear("notices");for(const n of d.publication_caveats||[])add(notices,mk("li",n));
+}catch(e){$("kpis").replaceChildren(mk("p","The approved project dataset could not be loaded. Please use the project resources page or contact the project manager.","empty"));$("checks-grid").replaceChildren(mk("p",e.message,"empty"));$("files-grid").replaceChildren(mk("p","Original links are unavailable from this page right now.","empty"));}
+})();
+</script></body></html>
