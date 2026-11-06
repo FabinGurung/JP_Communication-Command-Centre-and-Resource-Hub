@@ -1,0 +1,26 @@
+name: Validate client document packets
+on:
+  push:
+    branches: [main, feature/daily-ops-current-work]
+    paths:
+      - "ops/data/client-document-packets.v1.json"
+      - "resources/project-documents.html"
+      - "resources/index.html"
+      - "scripts/validate_client_document_packets.py"
+      - ".github/workflows/validate-client-document-packets.yml"
+  pull_request:
+    paths:
+      - "ops/data/client-document-packets.v1.json"
+      - "resources/project-documents.html"
+      - "resources/index.html"
+      - "scripts/validate_client_document_packets.py"
+      - ".github/workflows/validate-client-document-packets.yml"
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check project-document identities, links and publication boundaries
+        run: python scripts/validate_client_document_packets.py

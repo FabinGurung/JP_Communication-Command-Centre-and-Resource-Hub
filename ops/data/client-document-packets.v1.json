@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0.0",
+  "registry_id": "CWO-CLIENT-DOCUMENT-PACKAGES-001",
+  "record_purpose": "PUBLIC_SAFE_DOCUMENT_POINTERS_ONLY",
+  "source_authority": "GOOGLE_DRIVE_OBJECTS_AND_ACL",
+  "canonical_owner": "RESOURCE_PUBLICATION_INDEX",
+  "verified_on_npt": "2026-11-06",
+  "public_repo_disclosure": "Public labels and document links only; underlying PDFs remain permission-gated by Google Drive. Never infer client access, engineering approval, or signed agreement.",
+  "projects": [
+    {
+      "project_id": "PRJ-000029",
+      "company_project_code": "REB-002",
+      "name": "Basanti Poudel Baral Residence",
+      "locality": "Pokhara, Ward 14",
+      "publication_status": "DOCUMENTS_AVAILABLE_FOR_REVIEW__NOT_SIGNED",
+      "map_master_status": "NOT_ENROLLED_IN_PUBLIC_PROJECT_MASTER",
+      "work_status": "UNKNOWN_NOT_INFERRED",
+      "notes": "English originals and Nepali LaTeX-derived PDFs are provided separately. Original drawings remain unchanged; engineering issue and materials acceptance are unverified."
+    }
+  ],
+  "documents": [
+    {
+      "document_id": "BASANTI-A-EN",
+      "project_id": "PRJ-000029",
+      "role": "A",
+      "language": "en",
+      "title": "Construction Works Agreement",
+      "version": "English v0.4",
+      "pages": 5,
+      "kind": "ORIGINAL_AGREEMENT",
+      "approval": "Unsigned proposal · scope and variations subject to mutual written acceptance",
+      "drive_file_id": "1SuTyTBC__RWfshAB4YcJoGFCkjGRUBTM",
+      "drive_url": "https://drive.google.com/file/d/1SuTyTBC__RWfshAB4YcJoGFCkjGRUBTM/view"
+    },
+    {
+      "document_id": "BASANTI-A-NE",
+      "project_id": "PRJ-000029",
+      "role": "A",
+      "language": "ne",
+      "title": "निर्माण कार्य सम्झौता",
+      "version": "नेपाली LaTeX v1.0 · English A v0.4 equivalent",
+      "pages": 4,
+      "kind": "TRANSLATED_AGREEMENT",
+      "approval": "Unsigned proposal · legal-language review before signing",
+      "drive_file_id": "13REAnIa3LDBQJhbv6nlLBr2Fhjac2LRu",
+      "drive_url": "https://drive.google.com/file/d/13REAnIa3LDBQJhbv6nlLBr2Fhjac2LRu/view"
+    },
+    {
+      "document_id": "BASANTI-B-ORIGINAL",
+      "project_id": "PRJ-000029",
+      "role": "B",
+      "language": "source",
+      "title": "Original architectural, structural and sanitary drawings",
+      "version": "Original v1.0 · unaltered",
+      "pages": 21,
+      "kind": "AS_RECEIVED_DRAWINGS",
+      "approval": "Drawing issue, permit and engineering sign-off not verified",
+      "drive_file_id": "1h_aSf5ThFszG2-WLxaQDKmfR2ixC5DIT",
+      "drive_url": "https://drive.google.com/file/d/1h_aSf5ThFszG2-WLxaQDKmfR2ixC5DIT/view"
+    },
+    {
+      "document_id": "BASANTI-B-NE-REFERENCE",
+      "project_id": "PRJ-000029",
+      "role": "B",
+      "language": "ne",
+      "title": "रेखाचित्रको नेपाली सन्दर्भ सूची (मूल रेखाचित्र होइन)",
+      "version": "Nepali reference v1.0 · 21-sheet guide",
+      "pages": 3,
+      "kind": "TRANSLATED_REFERENCE_ONLY",
+      "approval": "Reference index only; original 21-page drawings govern technical details",
+      "drive_file_id": "18SHXWIOpDGwVQ3H5Ssz1srEJnsrB3E8E",
+      "drive_url": "https://drive.google.com/file/d/18SHXWIOpDGwVQ3H5Ssz1srEJnsrB3E8E/view"
+    },
+    {
+      "document_id": "BASANTI-C-EN",
+      "project_id": "PRJ-000029",
+      "role": "C",
+      "language": "en",
+      "title": "Materials and Workmanship Schedule",
+      "version": "English v0.1",
+      "pages": 3,
+      "kind": "ORIGINAL_MATERIALS_SCHEDULE",
+      "approval": "17 proposed selections; suppliers and equivalent materials require approval",
+      "drive_file_id": "1WlyUifhvjpTAAfYdM3iNfDWDOg3j0Q2X",
+      "drive_url": "https://drive.google.com/file/d/1WlyUifhvjpTAAfYdM3iNfDWDOg3j0Q2X/view"
+    },
+    {
+      "document_id": "BASANTI-C-NE",
+      "project_id": "PRJ-000029",
+      "role": "C",
+      "language": "ne",
+      "title": "सामग्री तथा कार्यगुणस्तर विवरण",
+      "version": "नेपाली LaTeX v1.0 · English C v0.1 equivalent",
+      "pages": 3,
+      "kind": "TRANSLATED_MATERIALS_SCHEDULE",
+      "approval": "Proposed uPVC and 17 material categories; written approval required",
+      "drive_file_id": "1tDBzSIGLOB2wn7Evc4fWrRphSg_LRJQB",
+      "drive_url": "https://drive.google.com/file/d/1tDBzSIGLOB2wn7Evc4fWrRphSg_LRJQB/view"
+    }
+  ],
+  "limitations": [
+    "Drive viewing depends on current provider access permissions",
+    "No signed contract or engineered construction issue inferred",
+    "The project is not yet admitted to the public map/project-master dataset",
+    "This JSON stores pointers and statuses, not source PDF contents, drawings or financial clauses"
+  ]
+}
