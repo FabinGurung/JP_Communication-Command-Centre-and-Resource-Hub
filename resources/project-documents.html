@@ -56,7 +56,7 @@ const registry="../ops/data/client-document-packets.v1.json", $=id=>document.get
 const projectId=new URLSearchParams(location.search).get("project")||"PRJ-000029";let lang="ne",data=null;
 const node=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;};
 function verified(d){return /^https:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+\/view$/.test(d.drive_url)&&d.drive_url.includes("/"+d.drive_file_id+"/");}
-function preview(d){if(!verified(d))return;const frame=$("preview");frame.src=d.drive_url.replace("/view","/preview");frame.title="PDF preview: "+d.title;$("preview-title").textContent=d.title+" · "+d.version;$("open-preview").href=d.drive_url;$("open-preview").hidden=false;frame.scrollIntoView({behavior:"smooth",block:"nearest"});}
+function preview(d,jump=true){if(!verified(d))return;const frame=$("preview");frame.src=d.drive_url.replace("/view","/preview");frame.title="PDF preview: "+d.title;$("preview-title").textContent=d.title+" · "+d.version;$("open-preview").href=d.drive_url;$("open-preview").hidden=false;if(jump)frame.scrollIntoView({behavior:"smooth",block:"nearest"});}
 function list(){const p=data.projects.find(x=>x.project_id===projectId);if(!p){$("document-list").replaceChildren(node("p","empty","No admitted project document register. This does not mean the project or files do not exist."));return;}
 $("project-name").textContent=p.name+" — Documents";$("project-code").textContent=p.project_id+" · "+p.company_project_code;
 $("load-status").textContent="Verified source links · "+data.verified_on_npt;
@@ -67,7 +67,7 @@ for(const role of ["A","B","C"]){const group=node("div","category");const h=node
 const docs=data.documents.filter(d=>d.project_id===projectId&&d.role===role&&(d.language===lang||d.language==="source"));
 for(const d of docs){if(!verified(d))continue;const card=node("article","doc");card.append(node("strong","",d.title));card.append(node("div","meta",d.version+" · PDF · "+d.pages+" pages"));card.append(node("div","status",d.approval));
 const act=node("div","actions");const b=node("button","","Preview here");b.type="button";b.addEventListener("click",()=>preview(d));const a=node("a","","Open PDF");a.href=d.drive_url;a.target="_blank";a.rel="noopener noreferrer";act.append(b,a);card.append(act);group.append(card);}root.append(group);}
-const prefer=data.documents.find(d=>d.project_id===projectId&&d.role==="A"&&d.language===lang);if(prefer)preview(prefer);}
+const prefer=data.documents.find(d=>d.project_id===projectId&&d.role==="A"&&d.language===lang);if(prefer)preview(prefer,false);}
 for(const language of ["ne","en"])$(language).addEventListener("click",()=>{lang=language;if(data)list();});
 fetch(registry,{cache:"no-store"}).then(async r=>{if(!r.ok)throw Error("Document registry unavailable");return r.json();}).then(d=>{if(d.schema_version!=="1.0.0"||!Array.isArray(d.projects)||!Array.isArray(d.documents)||d.documents.some(x=>!verified(x)))throw Error("Document registry failed validation");data=d;list();}).catch(e=>{$("load-status").textContent="Document register unavailable";$("document-list").replaceChildren(node("p","empty",e.message+" — do not infer approval."));});
 })();
