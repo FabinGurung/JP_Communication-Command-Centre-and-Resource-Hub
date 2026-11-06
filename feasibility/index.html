@@ -38,6 +38,50 @@ p{margin:0 0 12px}.lede{font-size:15px;color:#4f6855;max-width:570px}
 @media(max-width:900px){.hero{grid-template-columns:1fr}.art{height:240px}.kpis{grid-template-columns:repeat(2,1fr)}.docs{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:660px){.wrap{padding:0 13px 55px}.top{padding:10px 0;min-height:65px}.hero{margin:17px 0 18px}.hero-copy{padding:24px 20px}.art{height:185px;min-height:185px}.plot-layout,.checks,.docs,.observations{grid-template-columns:1fr}.panel{padding:18px}.kpi{padding:15px}.chart-row{grid-template-columns:98px 1fr 20px}.donut-wrap{gap:18px}.ring{width:145px;height:145px}.ring:before{inset:15px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* Responsive three-rail land acquisition workspace: use wide browser real estate. */
+body[data-jp-site="1"] > main.wrap{width:calc(100% - 20px);max-width:none;padding:0 clamp(12px,1.25vw,28px) 55px;margin:0 auto}
+body[data-jp-site="1"] .hero{margin:19px 0 18px;padding:0;border-radius:20px;min-height:310px}
+body[data-jp-site="1"] .hero h1{font-size:clamp(32px,3vw,57px)}
+.hero-copy{max-width:920px}
+.dashboard-layout{display:grid;grid-template-columns:minmax(190px,225px) minmax(0,1fr) minmax(215px,255px);gap:clamp(14px,1.4vw,25px);align-items:start}
+.dashboard-main{min-width:0}.dashboard-main .section:first-child{margin-top:7px}.dashboard-main .section{margin-top:27px}
+.left-rail,.right-rail{position:sticky;top:15px;max-height:calc(100dvh - 28px);overflow-y:auto;min-width:0;display:grid;gap:13px;scrollbar-width:thin}
+.rail-card{background:#fffefa;border:1px solid #d3e3d4;border-radius:15px;padding:16px;box-shadow:0 7px 18px #1a4a2e08}
+.rail-card h2{font-size:14px;margin:0 0 10px;letter-spacing:0;font-weight:800}
+.rail-card p{font-size:12px;color:#536d60}
+.rail-nav{display:grid;gap:4px}.rail-nav a{display:flex;gap:9px;align-items:center;min-height:39px;text-decoration:none;border-radius:8px;padding:8px;color:#28543d;font-size:12px;font-weight:700}
+.rail-nav a:hover,.rail-nav a:focus-visible{background:#e6f0e7}.rail-nav a span:first-child{width:20px;text-align:center}
+.rail-risk{font-size:12px;color:#576c5d;padding:8px 0;border-bottom:1px solid #e6eee6}
+.rail-risk:last-child{border:0}.rail-risk strong{display:block;color:#71501f;font-size:12px;margin-bottom:2px}
+.rail-mini-link{display:block;padding:9px 11px;background:#eaf3e9;border-radius:9px;font-size:12px;font-weight:800;margin-top:9px;text-decoration:none}
+.guide-stats{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:12px 0}.guide-stats span{padding:5px 10px;background:#eef4ec;border-radius:999px;font-size:12px;font-weight:750}
+.guide-filters{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:14px 0 13px}.guide-filters button{cursor:pointer;border:1px solid #c4d9cb;background:#fff;border-radius:9px;font-size:12px;font-weight:750;color:#2a6145;min-height:38px;padding:8px 12px}
+.guide-filters button[aria-pressed="true"]{background:#23634a;color:white;border-color:#23634a}
+.guide-filters input{flex:1 1 220px;min-width:160px;border:1px solid #c9d9cb;border-radius:9px;padding:10px 12px;font:inherit;min-height:40px}
+.guide-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.guide-item{min-width:0;border:1px solid #d8e6d9;background:#fffefb;border-radius:12px;padding:13px 15px}
+.guide-item summary{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;list-style:none;font-size:13px;font-weight:760;cursor:pointer;line-height:1.43}
+.guide-item summary::-webkit-details-marker{display:none}
+.guide-item .guide-id{display:block;color:#697e6e;font-size:10px;font-weight:750;margin-bottom:4px}
+.guide-priority{flex:none;border-radius:6px;padding:3px 6px;font-size:10px;font-weight:900;background:#fcebd7;color:#8e5522}
+.guide-item[data-priority="REVIEW"] .guide-priority{background:#e9f1e8;color:#3c7451}
+.guide-item[open]{border-color:#93b59c;box-shadow:0 6px 18px #2c69431a}
+.guide-detail{margin-top:10px;padding-top:10px;border-top:1px solid #e4ebe3;font-size:12px;color:#526c59}
+.guide-detail p{margin:0 0 7px}.guide-detail strong{color:#264f38}
+.guide-bottom{margin-top:13px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.guide-bottom .print-button{border:1px solid #2b6b50;background:#eaf4eb;color:#22593c;font-size:12px;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:800}
+.reference-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.reference-links a{display:inline-block;text-decoration:none;border:1px solid #d5e5d7;background:#fffefa;padding:7px 11px;border-radius:9px;font-size:11px;font-weight:700}
+.decision-banner{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:23px;border:1px solid #dfcfa9;background:linear-gradient(108deg,#fff6e4,#f9faed);border-radius:17px}
+.decision-banner h2{font-size:23px;margin:0 0 6px}.decision-banner p{max-width:750px;font-size:13px;color:#6a614c}
+.decision-flag{color:#8c5b1b;font-weight:900;font-size:13px;background:#fff1d5;padding:12px 15px;border-radius:11px}
+.footer-workspace{background:#e6f1e7;border:1px solid #d0dfd0;border-radius:16px;margin-top:19px;padding:21px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-workspace h2{font-size:16px;margin:0 0 6px}.footer-workspace p{font-size:12px;margin:0;color:#4d6b57}
+.footer-workspace a{display:inline-block;background:#1c6548;color:white;padding:11px 14px;border-radius:9px;text-decoration:none;font-size:12px;font-weight:800}
+@media(max-width:1300px){.dashboard-layout{grid-template-columns:minmax(175px,205px) minmax(0,1fr)}.right-rail{position:static;max-height:none;overflow:visible;grid-column:2;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr))}.right-rail .rail-card:last-child{grid-column:1/-1}}
+@media(max-width:950px){.dashboard-layout{grid-template-columns:minmax(0,1fr)}.left-rail{position:static;grid-column:1;max-height:none;overflow:visible}.left-rail .rail-card{padding:10px 14px}.rail-nav{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:7px}.rail-nav a{white-space:nowrap;flex:none;scroll-snap-align:start}.dashboard-main{grid-column:1}.right-rail{grid-column:1;grid-row:auto}.guide-items{grid-template-columns:1fr}}
+@media(max-width:620px){body[data-jp-site="1"] > main.wrap{padding-inline:12px}.hero-copy{padding:22px 17px}.right-rail{grid-template-columns:1fr}.right-rail .rail-card:last-child{grid-column:1}.decision-banner{grid-template-columns:1fr}.plot-layout{grid-template-columns:1fr}.guide-filters button{flex:1}.footer-workspace{display:block}.footer-workspace a{margin-top:12px}}
+@media print{body[data-jp-site="1"] > main.wrap{width:100%;max-width:none}.left-rail,.right-rail,.top nav,.guide-filters,.footer-workspace,.hero .art{display:none!important}.dashboard-layout{display:block}.guide-items{display:block}.guide-item{break-inside:avoid;margin-bottom:6px}.guide-item .guide-detail{display:block}.hero{min-height:0!important}.hero-copy{padding:12px!important}}
 </style></head>
 <body data-jp-site="1"><main class="wrap">
 <header class="top"><a class="brand" href="../">🏗️ <b>JP</b> Operations Hub</a><nav aria-label="Project navigation"><a href="#summary">Overview</a><a href="#analysis">Analysis</a><a href="#checks">Due diligence</a><a href="#documents">Files</a><a href="../resources/">All resources</a></nav></header>
@@ -61,15 +105,56 @@ p{margin:0 0 12px}.lede{font-size:15px;color:#4f6855;max-width:570px}
 <path d="M0 286Q133 249 251 293T600 270M0 309Q144 271 259 318T600 300M0 331Q140 301 263 346T600 328M0 353Q175 326 296 368T600 345" stroke="#ecedcd" stroke-width="4" fill="none" opacity=".72"/>
 <circle cx="492" cy="63" r="31" fill="#ffe5a2" opacity=".85"/>
 </svg><span class="art-note">CONCEPTUAL LANDSCAPE · NOT A SURVEY</span></div></section>
+<div class="dashboard-layout">
+<aside class="left-rail" aria-label="Project chapters"><div class="rail-card"><h2>Project navigation</h2><nav class="rail-nav" aria-label="Sections">
+<a href="#summary"><span>◈</span>Overview</a><a href="#analysis"><span>▤</span>Visual analysis</a>
+<a href="#buyer-guide"><span>☑</span>30-point buyer checklist</a><a href="#checks"><span>⚑</span>Ten decision gates</a>
+<a href="#observations-title"><span>⌁</span>Site observations</a><a href="#documents"><span>▣</span>Project documents</a>
+<a href="#decision"><span>◆</span>Purchase decision</a></nav></div>
+<div class="rail-card"><h2>Document workflow</h2><p>Google Drive controls access to original photos, map records, and property documents. This page displays only reviewed summaries.</p><a class="rail-mini-link" href="#documents">Open document cards ↗</a></div></aside>
+<div class="dashboard-main">
 <section id="summary" class="section" aria-labelledby="summary-title"><div class="section-heading"><div><span class="eyebrow">Evidence snapshot</span><h2 id="summary-title">At a glance</h2><p class="subtitle">Verified as records received or concerns raised, not as legal or engineering clearances.</p></div></div><div class="kpis" id="kpis" aria-live="polite"><p class="loading">Reading source-backed summary…</p></div></section>
 <section id="analysis" class="section" aria-labelledby="analysis-title"><div class="section-heading"><div><span class="eyebrow">Measured from review rows</span><h2 id="analysis-title">Feasibility visualizations</h2><p class="subtitle">These plots count review questions. They do not represent land area, construction cost, legal safety or probability of approval.</p></div></div><div class="plot-layout">
 <article class="panel"><h3>Review areas</h3><p class="subtitle">Number of unresolved checks by due-diligence domain</p><div class="chart-list" id="domain-chart" role="img" aria-label="Loading checks by domain"></div></article>
 <article class="panel"><h3>Decision-readiness coverage</h3><p class="subtitle">Evidence-backed approval of recorded checklist items</p><div class="donut-wrap"><div class="ring" id="ring" role="img" aria-label="Zero of ten checks verified"><div class="ring-text"><b id="ring-count">0 / 10</b><small>verified</small></div></div><div class="legend"><span><i class="swatch" style="background:#2c8554"></i>Verified with evidence</span><span><i class="swatch" style="background:#e4e9dd"></i>Pending / blocked</span><p class="help">Unverified does not automatically mean a site is unsuitable. It means evidence is still missing.</p></div></div></article>
 </div></section>
+<section id="buyer-guide" class="section" aria-labelledby="buyer-title">
+<div class="section-heading"><div><span class="eyebrow">Actionable acquisition review</span><h2 id="buyer-title">Land buyer's 30-point checklist</h2>
+<p class="subtitle">Thirty questions to investigate—not thirty approvals. Parent decision statuses remain authoritative in the separate editable project Sheet. Prioritize legal rights, access, water and slope before paying any token.</p></div></div>
+<div class="guide-stats"><span>30 buyer questions</span><span>20 potential hard stops</span><span>10 further-review questions</span><span>10 project decision gates</span></div>
+<div class="guide-filters" role="group" aria-label="Filter buying checklist">
+<button type="button" data-phase="ALL" aria-pressed="true">All</button>
+<button type="button" data-phase="BEFORE_DEPOSIT" aria-pressed="false">Before advance</button>
+<button type="button" data-phase="SITE_VISIT" aria-pressed="false">Site visits</button>
+<button type="button" data-phase="BEFORE_REGISTRATION" aria-pressed="false">Registration</button>
+<button type="button" data-priority="STOP" aria-pressed="false">Hard stops only</button>
+<input id="guide-search" type="search" aria-label="Search checklist questions" placeholder="Search title, water, road, slope…">
+</div>
+<div id="guide-list" class="guide-items" aria-live="polite"><p class="empty">Loading public buyer questions…</p></div>
+<div class="guide-bottom"><p class="subtitle" id="guide-counter">This guidance does not mark any verification complete.</p>
+<button type="button" id="guide-print" class="print-button">Print this checklist</button></div>
+<div id="guide-references" class="reference-links" aria-label="Official verification references"></div>
+</section>
 <section id="checks" class="section" aria-labelledby="checks-title"><div class="section-heading"><div><span class="eyebrow">Decision gates</span><h2 id="checks-title">What must be checked before buying?</h2><p class="subtitle">A documented checklist for the property investigation. Technical and legal sign-off are separate.</p></div></div><div id="checks-grid" class="checks"><p class="empty">Loading review checks…</p></div></section>
 <section class="section" aria-labelledby="observations-title"><div class="section-heading"><div><span class="eyebrow">Source interpretation</span><h2 id="observations-title">Site observations and open questions</h2></div></div><div class="observations" id="observations-grid"></div></section>
 <section id="documents" class="section" aria-labelledby="docs-title"><div class="section-heading"><div><span class="eyebrow">Project library</span><h2 id="docs-title">Browse the original project files</h2><p class="subtitle">The website organizes the materials. Files remain original and editable in Google Drive by authorized accounts. Selecting an item opens the controlled original; no public document bytes are reproduced here.</p></div></div><div id="files-grid" class="docs" aria-live="polite"></div></section>
 <aside class="notice" aria-labelledby="notice-title"><strong id="notice-title">Document permissions and engineering limitations</strong><ul id="notices"><li>Google Drive decides who can open each original; viewing this public page does not grant document access.</li><li>The project has not been certified for purchase, planning permission, construction, road access, utility connection or safe slope stability.</li></ul></aside>
+<section id="decision" class="section" aria-labelledby="decision-title"><div class="decision-banner"><div>
+<span class="eyebrow">Current preliminary acquisition decision</span><h2 id="decision-title">Do not commit to purchase yet</h2>
+<p>Keep the purchase on HOLD until independent title, field survey, road rights, dry-season water, land use, slope stability, electricity clearance and buildable-area checks are resolved. The plot's attractive view is not proof of feasibility.</p></div><div class="decision-flag">HOLD · 10 OPEN CHECKS</div></div></section>
+</div>
+<aside class="right-rail" aria-label="High-priority acquisition risks">
+<div class="rail-card"><h2>Priority risks · not cleared</h2>
+<div class="rail-risk"><strong>Ownership &amp; disputes</strong>Confirm current Shresta, seller authority, Rokka and Mo​hi records.</div>
+<div class="rail-risk"><strong>Road access</strong>A visible track is not the same as legally enforceable access.</div>
+<div class="rail-risk"><strong>Dry-season water</strong>Check supply when nearby properties experience shortages.</div>
+<div class="rail-risk"><strong>Slope &amp; drainage</strong>Get survey, geotechnics and realistic retaining costs.</div>
+<div class="rail-risk"><strong>Electric power corridor</strong>Ask NEA to identify voltage and legal setbacks; do not assume a generic 2 m distance.</div>
+<div class="rail-risk"><strong>Future mountain views</strong>Check adjoining buildable parcels before paying a view premium.</div>
+<a class="rail-mini-link" href="#buyer-guide">Inspect all 30 questions</a></div>
+<div class="rail-card"><h2>Who verifies what?</h2><p><b>Malpot:</b> title, restrictions, transfer.<br><b>Napi:</b> map, field book and boundaries.<br><b>Palika:</b> land use, road and building permit.<br><b>NEA:</b> electrical clearance.<br><b>Engineer:</b> slope, geotechnics and drainage.</p><a class="rail-mini-link" href="#guide-references">Official source references</a></div>
+</aside></div>
+<div class="footer-workspace"><div><h2>Next step: finish due diligence before paying</h2><p>Survey the property, obtain signed source evidence, and verify restrictions through the appropriate public offices. Current decision remains HOLD.</p></div><a href="#buyer-guide">Review buyer questions</a></div>
 <footer class="foot"><p>JP_Enterprise · Source-backed project desk · <span id="source-status">Reviewed static snapshot</span></p><p><a href="../">Operations Hub</a> · <a href="../resources/">Project Resources</a></p></footer>
 </main>
 <script>
@@ -115,6 +200,46 @@ for(const o of d.observations||[]){const a=add(observations,mk("article",undefin
 const docs=clear("files-grid");
 for(const f of d.resources||[]){if(!validDrive(f.url))continue;const a=add(docs,mk("article",undefined,"file"));add(a,mk("div",categories[f.category]||"🗂️","glyph"));add(a,mk("h3",f.label));add(a,mk("p","Original source · Permission required"));const link=add(a,mk("a","Open protected original ↗","open"));link.href=f.url;link.target="_blank";link.rel="noopener noreferrer";link.setAttribute("aria-label","Open "+f.label+" in Google Drive (access may require an invitation)");add(a,mk("small","Access is checked by the file owner, not by this website"));}
 const notices=clear("notices");for(const n of d.publication_caveats||[])add(notices,mk("li",n));
+const guideContainer=$("guide-list");
+try{
+ const guideFetch=await fetch("../ops/data/land-feasibility/astam-buyer-guide-public.v1.0.json",{cache:"no-store"});
+ if(!guideFetch.ok)throw Error("Reviewed buyer checklist unavailable");
+ const guide=await guideFetch.json();
+ if(guide.kind!=="PUBLIC_GENERAL_BUYER_GUIDE"||guide.items?.length!==30||guide.items.some(x=>x.publication_approved!=="YES"))throw Error("Buyer guide publication contract failed");
+ let phase="ALL",priority="ALL",query="";
+ const phaseButtons=Array.from(document.querySelectorAll("[data-phase]"));
+ const priorityButtons=Array.from(document.querySelectorAll("[data-priority]"));
+ const draw=()=>{
+  const items=guide.items.filter(item=>(phase==="ALL"||item.phase===phase)&&(priority==="ALL"||item.priority===priority)&&(!query||(item.question+" "+item.evidence_required+" "+item.verifying_authority+" "+item.stop_signal).toLowerCase().includes(query)));
+  guideContainer.replaceChildren();
+  for(const item of items){
+   const card=add(guideContainer,mk("details",undefined,"guide-item"));card.dataset.priority=item.priority;
+   const label=add(card,mk("summary"));
+   const heading=add(label,mk("span"));
+   add(heading,mk("span",item.item_id+" · "+item.parent_gate+" · "+(guide.phases[item.phase]||item.phase),"guide-id"));
+   add(heading,mk("span",item.question));
+   add(label,mk("span",item.priority==="STOP"?"HARD STOP":"REVIEW","guide-priority"));
+   const detail=add(card,mk("div",undefined,"guide-detail"));
+   for(const [title,value] of [["Proof to obtain",item.evidence_required],["Verify with",item.verifying_authority],["Warning sign",item.stop_signal]]){
+      const p=add(detail,mk("p"));add(p,mk("strong",title+": "));add(p,mk("span",value));
+   }
+  }
+  if(!items.length)add(guideContainer,mk("p","No questions match those filters.","empty"));
+  $("guide-counter").textContent=items.length+" of 30 guidance questions displayed · none is a formal purchase clearance.";
+ };
+ phaseButtons.forEach(b=>b.addEventListener("click",()=>{phase=b.dataset.phase;phaseButtons.forEach(q=>q.setAttribute("aria-pressed",String(q===b)));draw();}));
+ priorityButtons.forEach(b=>b.addEventListener("click",()=>{priority=priority===b.dataset.priority?"ALL":b.dataset.priority;priorityButtons.forEach(q=>q.setAttribute("aria-pressed",String(q.dataset.priority===priority)));draw();}));
+ $("guide-search").addEventListener("input",e=>{query=e.target.value.trim().toLowerCase();draw();});
+ $("guide-print").addEventListener("click",()=>window.print());
+ const references=$("guide-references");
+ for(const x of guide.references||[]){
+  try{const u=new URL(x.url);if(u.protocol!=="https:"||!["merokitta.dos.gov.np","dos.gov.np","www.lawcommission.gov.np","repository.lawcommission.gov.np"].includes(u.hostname))continue;
+   const a=add(references,mk("a",x.label+" ↗"));a.href=x.url;a.target="_blank";a.rel="noopener noreferrer";a.title=x.use;
+  }catch(_){}
+ }
+ draw();
+}catch(guideError){guideContainer.replaceChildren(mk("p","Buyer checklist could not be loaded; project decision gates and original documents remain available.","empty"));}
+
 }catch(e){$("kpis").replaceChildren(mk("p","The approved project dataset could not be loaded. Please use the project resources page or contact the project manager.","empty"));$("checks-grid").replaceChildren(mk("p",e.message,"empty"));$("files-grid").replaceChildren(mk("p","Original links are unavailable from this page right now.","empty"));}
 })();
 </script></body></html>

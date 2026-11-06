@@ -15,6 +15,13 @@ assert 'href="feasibility/"' in home, "Homepage Astam link missing"
 assert 'href="../feasibility/"' in resources, "Resources Astam link missing"
 assert "../ops/data/land-feasibility/astam-village-public.v1.0.json" in html, "Client data URL missing"
 assert "files-grid" in html and "domain-chart" in html, "Client presentation incomplete"
+assert "buyer-guide" in html and "dashboard-layout" in html and "right-rail" in html
+assert "../ops/data/land-feasibility/astam-buyer-guide-public.v1.0.json" in html
+buyer = json.loads((root / "ops/data/land-feasibility/astam-buyer-guide-public.v1.0.json").read_text(encoding="utf-8"))
+assert buyer["kind"] == "PUBLIC_GENERAL_BUYER_GUIDE"
+assert buyer["source_registry"]["tab"] == "06_BUYER_CHECKLIST"
+assert len(buyer["items"]) == 30 and len({row["item_id"] for row in buyer["items"]}) == 30
+assert all(row["publication_approved"] == "YES" for row in buyer["items"])
 assert "innerHTML" not in html, "Do not inject externally supplied HTML"
 assert public["kind"] == "PUBLIC_SAFE_FEASIBILITY_PROJECTION"
 assert public["publication_scope"] == "PUBLIC_SAFE_ONLY"
