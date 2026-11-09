@@ -1,0 +1,100 @@
+name: Operations from Google Sheets
+on:
+  pull_request:
+    paths:
+      - 'publication/operations/**'
+      - 'scripts/publish_operations.py'
+      - 'scripts/notification_projection.py'
+      - 'scripts/sheets_read.py'
+      - 'scripts/test_ops_publication.py'
+      - '.github/workflows/operations-sheets-pages.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'publication/operations/**'
+      - 'scripts/publish_operations.py'
+      - 'scripts/notification_projection.py'
+      - 'scripts/sheets_read.py'
+      - 'scripts/test_ops_publication.py'
+      - '.github/workflows/operations-sheets-pages.yml'
+  schedule:
+    - cron: '19 * * * *'
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Deploy the verified build to GitHub Pages
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ops-sheets-pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: node --check publication/operations/app.js
+      - run: python -m unittest discover -s scripts -p 'test_ops_publication.py' -v
+
+  project:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && (github.event_name == 'workflow_dispatch' || vars.JP_OPERATIONS_PAGES_MODE == 'SHEETS_V2')
+    needs: test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check Google configuration
+        env:
+          WIF_PROVIDER: ${{ vars.JP_GOOGLE_MAIN_WORKLOAD_IDENTITY_PROVIDER }}
+          SERVICE_ACCOUNT: ${{ vars.JP_GOOGLE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$WIF_PROVIDER" ] || [ -z "$SERVICE_ACCOUNT" ]; then
+            echo "::error::Configure the repository's Google Workload Identity provider and service account variables."
+            exit 1
+          fi
+      - uses: google-github-actions/auth@v3
+        id: auth
+        with:
+          workload_identity_provider: ${{ vars.JP_GOOGLE_MAIN_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.JP_GOOGLE_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/spreadsheets.readonly
+          create_credentials_file: false
+          export_environment_variables: false
+      - name: Read Sheets and build public files
+        env:
+          GOOGLE_ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
+        run: python scripts/publish_operations.py --output _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    if: vars.JP_OPERATIONS_PAGES_MODE == 'SHEETS_V2' && (github.event_name != 'workflow_dispatch' || inputs.publish)
+    needs: project
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment
