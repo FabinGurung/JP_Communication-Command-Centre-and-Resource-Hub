@@ -9,7 +9,9 @@ on:
       - 'scripts/test_ops_publication.py'
       - '.github/workflows/operations-sheets-pages.yml'
   push:
-    branches: [main]
+    branches:
+      - main
+      - feature/daily-ops-current-work
     paths:
       - 'publication/operations/**'
       - 'scripts/publish_operations.py'
@@ -83,7 +85,7 @@ jobs:
           path: _site
 
   deploy:
-    if: vars.JP_OPERATIONS_PAGES_MODE == 'SHEETS_V2' && (github.event_name != 'workflow_dispatch' || inputs.publish)
+    if: github.ref == 'refs/heads/main' && vars.JP_OPERATIONS_PAGES_MODE == 'SHEETS_V2' && (github.event_name != 'workflow_dispatch' || inputs.publish)
     needs: project
     runs-on: ubuntu-24.04
     timeout-minutes: 10
