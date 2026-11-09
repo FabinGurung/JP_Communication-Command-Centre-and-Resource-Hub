@@ -1,4 +1,4 @@
-name: Operations Hub production
+name: Operations Hub legacy validation
 
 on:
   push:
@@ -12,8 +12,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages-production-${{ github.ref }}
@@ -624,24 +622,3 @@ jobs:
       - name: Phase 5 release QA
         run: python scripts/phase5_release_qa.py
 
-  deploy:
-    if: github.ref == 'refs/heads/main'
-    needs: validate
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-    steps:
-      - name: Check out branch
-        uses: actions/checkout@v4
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
-      - name: Deploy main to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
