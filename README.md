@@ -2,6 +2,10 @@
 
 The live project-experience layer of the **JP AEC Platform**, hosted with GitHub Pages. The existing repository slug is retained for URL stability.
 
+## Current public workflow
+
+The [live Operations site](https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/) publishes the Project Map, Notification Center and Progress Report from five owning Google Sheets. Use the [Sheets cutover guide](docs/operations/OPERATIONS_RESOURCE_SPLIT.md) for current publication ownership and the [Resource Library](https://fabingurung.github.io/JP_Field_and_Desk_Resource_Library/) for the catalogue and client document registers. The older operational layers below remain part of the Git history and rollback workflow.
+
 ## Mandatory Operations control read order
 
 Branch/lane governance is now a compulsory repository-local control, not an optional convention.

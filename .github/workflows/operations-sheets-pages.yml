@@ -3,6 +3,12 @@ on:
   pull_request:
     paths:
       - 'publication/operations/**'
+      - 'feasibility/index.html'
+      - 'feasibility/buyer-guide/index.html'
+      - 'feasibility/buyer-guide/guide.json'
+      - 'ops/data/land-feasibility/astam-village-public.v1.0.json'
+      - 'ops/data/land-feasibility/astam-buyer-guide-public.v1.0.json'
+      - 'docs/releases/v2.3.0.md'
       - 'scripts/publish_operations.py'
       - 'scripts/notification_projection.py'
       - 'scripts/sheets_read.py'
@@ -14,6 +20,12 @@ on:
       - feature/daily-ops-current-work
     paths:
       - 'publication/operations/**'
+      - 'feasibility/index.html'
+      - 'feasibility/buyer-guide/index.html'
+      - 'feasibility/buyer-guide/guide.json'
+      - 'ops/data/land-feasibility/astam-village-public.v1.0.json'
+      - 'ops/data/land-feasibility/astam-buyer-guide-public.v1.0.json'
+      - 'docs/releases/v2.3.0.md'
       - 'scripts/publish_operations.py'
       - 'scripts/notification_projection.py'
       - 'scripts/sheets_read.py'
@@ -100,3 +112,38 @@ jobs:
       - uses: actions/configure-pages@v5
       - uses: actions/deploy-pages@v4
         id: deployment
+
+  release-cutover:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify and publish the cutover milestone
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          notes='docs/releases/v2.3.0.md'
+          tag='v2.3.0'
+          if git diff --quiet HEAD^ HEAD -- "$notes"; then
+            exit 0
+          fi
+          pages="https://fabingurung.github.io/${GITHUB_REPOSITORY#*/}"
+          curl -fsS --retry 4 --retry-delay 3 --retry-all-errors "$pages/owner-help.html?release=$GITHUB_SHA" | cmp - 'publication/operations/owner-help.html'
+          curl -fsS --retry 4 --retry-delay 3 --retry-all-errors "$pages/feasibility/buyer-guide/guide.json?release=$GITHUB_SHA" | cmp - 'feasibility/buyer-guide/guide.json'
+          refs="$(git ls-remote origin "refs/tags/$tag" "refs/tags/$tag^{}")"
+          if [ -n "$refs" ]; then
+            test "$(printf '%s\n' "$refs" | tail -n 1 | cut -f1)" = "$GITHUB_SHA"
+          fi
+          if ! gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title 'Operations Sheets Cutover v2.3.0' --notes-file "$notes"
+          fi

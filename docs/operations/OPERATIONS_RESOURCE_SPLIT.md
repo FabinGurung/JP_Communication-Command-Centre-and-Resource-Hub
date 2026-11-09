@@ -4,6 +4,12 @@ Communication & Web owns the Project Map, Notification Center and Progress Repor
 
 The Field & Desk Resource Library owns its catalogue and client packets in the original Project Resources workbook. A resource edit requires only that repository's refresh. Operations retains stable outbound links and compatibility routes, including the prior Basanti URL with its query string. The already-live Astam feasibility URL is preserved as a separately governed compatibility snapshot. Earlier Operations files and resource views remain available in Git at the numbered PRE checkpoint.
 
+## Live operation
+
+The production Pages workflow builds from `main` in `SHEETS_V2` mode. Its five source workbooks and their exact tab names are listed in `scripts/publish_operations.py`. The file `operations.json` is generated during the build. The Git operational files and edit-routing rules used by the older lane remain available for rollback and historical work.
+
+The former Workspace and Quick Start URLs lead to the current operator help page. The Astam landing page and buyer guide are explicitly included in the publication allowlist. The historical workspace sources remain in Git.
+
 ## Cutover order
 
 1. Publish and verify the independent Resource Library before switching the Operations artifact, so old client document links remain usable.
