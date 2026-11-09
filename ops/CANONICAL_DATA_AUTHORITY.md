@@ -1,5 +1,7 @@
 # Canonical Data Authority
 
+For the live `SHEETS_V2` public site, use the [Operations and Resource Library ownership guide](../docs/operations/OPERATIONS_RESOURCE_SPLIT.md). Its source workbooks own the current public projections. This document describes the legacy Git operational data model and its retained controls.
+
 This repository is the canonical machine-data home for the JP Ecosystem Project Map and Daily Ops system.
 
 The goal is simple: **edit a fact once at its owning canonical layer, then derive every presentation/projection from it.**

@@ -20,6 +20,8 @@ LIBRARY = "https://fabingurung.github.io/JP_Field_and_Desk_Resource_Library/"
 # Preserve the already-live Astam client route independently of the migrated catalogue.
 LEGACY_CLIENT_FILES = (
     "feasibility/index.html",
+    "feasibility/buyer-guide/index.html",
+    "feasibility/buyer-guide/guide.json",
     "ops/data/land-feasibility/astam-buyer-guide-public.v1.0.json",
     "ops/data/land-feasibility/astam-village-public.v1.0.json",
     "assets/css/jp-theme-tokens.css",
@@ -97,7 +99,7 @@ def build(tables, out, received_at):
     progress.sort(key=lambda r: (r["date"], r["id"]), reverse=True)
     notices.sort(key=lambda r: (r["date"], -r["display_order"]), reverse=True)
     out.mkdir(parents=True, exist_ok=True)
-    for name in ("index.html", "app.js", "styles.css"):
+    for name in ("index.html", "app.js", "styles.css", "owner-help.html"):
         shutil.copyfile(ROOT / "publication/operations" / name, out / name)
     for name in LEGACY_CLIENT_FILES:
         target = out / name
@@ -111,6 +113,12 @@ def build(tables, out, received_at):
         "map.html": "./#map",
         "site-operations.html": "./#notifications",
         "site-operations/history.html": "../#progress",
+        "workspace.html": "./owner-help.html#workspace",
+        "workspace/index.html": "../owner-help.html#workspace",
+        "guide/index.html": "../owner-help.html#guide",
+        "guide/3-pages/index.html": "../../owner-help.html#guide",
+        "guide/7-pages/index.html": "../../owner-help.html#guide",
+        "guide/15-pages/index.html": "../../owner-help.html#guide",
         "resources/index.html": LIBRARY,
         "resources/project-documents.html": LIBRARY + "resources/project-documents.html",
     }.items():

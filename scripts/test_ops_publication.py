@@ -41,7 +41,22 @@ class OperationsPublicationTest(unittest.TestCase):
             self.assertNotIn("Private", raw)
             self.assertEqual(data["progress"][0]["verification"], "UNVERIFIED")
             self.assertIn("u.search = location.search", (out / "resources/project-documents.html").read_text())
+            for route, target in {
+                "workspace.html": "./owner-help.html#workspace",
+                "workspace/index.html": "../owner-help.html#workspace",
+                "guide/index.html": "../owner-help.html#guide",
+                "guide/3-pages/index.html": "../../owner-help.html#guide",
+                "guide/7-pages/index.html": "../../owner-help.html#guide",
+                "guide/15-pages/index.html": "../../owner-help.html#guide",
+            }.items():
+                self.assertIn(target, (out / route).read_text())
+            self.assertTrue((out / "owner-help.html").is_file())
+            guide = json.loads((out / "feasibility/buyer-guide/guide.json").read_text())
+            self.assertEqual(guide["public_scope"], "EDUCATIONAL_PUBLIC_SAFE")
+            self.assertIs(guide["project"]["coordinates_public"], False)
+            self.assertTrue((out / "feasibility/buyer-guide/index.html").is_file())
             self.assertFalse((out / "document-packets.json").exists())
+            self.assertFalse((out / "ops/data/current-works.json").exists())
 
 
 if __name__ == "__main__":
