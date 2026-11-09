@@ -1,5 +1,6 @@
 """Project reviewed operations Sheets into a small, independent Pages artifact."""
 import argparse
+import csv
 import json
 import re
 import shutil
@@ -39,7 +40,17 @@ def yes(value):
     return value.upper() == "TRUE"
 
 
+def public_organization_names():
+    """Read only the existing explicitly public organization-name catalogue."""
+    with (ROOT / "organizations.csv").open(newline="", encoding="utf-8") as stream:
+        rows = csv.DictReader(stream)
+        return {row["organization_id"]: row["organization_name"] for row in rows
+                if row.get("is_public", "").upper() == "TRUE"
+                and row.get("data_quality_status") == "VALID"}
+
+
 def build(tables, out, received_at):
+    organization_names = public_organization_names()
     choices = {}
     for row in records(tables["choices"], "publication_setting_id", "project_id",
                        "show_project_name", "show_coordinates", "show_ward_number", "show_status"):
@@ -63,6 +74,9 @@ def build(tables, out, received_at):
                    "ward": row["location_ward_number"] if yes(setting["show_ward_number"]) else ""}
         if re.fullmatch(r"P[0-9]{3}", row["legacy_project_code"]):
             project["site"] = row["legacy_project_code"]
+        organization_id = row.get("executing_company_id", "")
+        if organization_id in organization_names:
+            project.update(company_id=organization_id, company=organization_names[organization_id])
         if yes(setting["show_coordinates"]) and row["latitude"] and row["longitude"]:
             lat, lng = float(row["latitude"]), float(row["longitude"])
             if not (-90 <= lat <= 90 and -180 <= lng <= 180):
@@ -107,7 +121,20 @@ def build(tables, out, received_at):
         shutil.copyfile(ROOT / name, target)
     (out / ".nojekyll").touch()
     (out / "operations.json").write_text(json.dumps({"projects": list(projects.values()),
-        "notices": notices, "progress": progress, "refreshed_at_npt": received_at},
+        "notices": notices, "progress": progress, "refreshed_at_npt": received_at,
+        "provenance": {
+            "schema_version": "1.1.0",
+            "kind": "PUBLIC_SAFE_READ_ONLY_SHEETS_PROJECTION",
+            "source_readback_at_npt": received_at,
+            "latest_public_report_date": progress[0]["date"] if progress else None,
+            "source_families": ["Projects and Locations", "Website Display Choices",
+                                "Notification Center - Message Sources",
+                                "Notification Center - Instructions", "Project Work"],
+            "source_authority": "GOOGLE_SHEETS",
+            "direct_slack_collector": "NOT_CONNECTED_TO_THIS_PUBLISHER",
+            "direct_discord_collector": "ON_HOLD",
+            "engineering_completion": "NOT_CERTIFIED_BY_THIS_DASHBOARD"
+        }},
         ensure_ascii=False), encoding="utf-8")
     for path, target in {
         "map.html": "./#map",
