@@ -677,7 +677,7 @@ jobs:
 
       - name: Check dedicated Actions Google connection
         id: google_connection
-        if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/feature/daily-ops-current-work' && vars.JP_OPERATIONS_PAGES_MODE != 'SHEETS_V2'
+        if: github.ref == 'refs/heads/feature/daily-ops-current-work' && github.event_name == 'workflow_dispatch' && vars.JP_OPERATIONS_PAGES_MODE != 'SHEETS_V2'
         env:
           GOOGLE_PROVIDER: ${{ vars.JP_GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
           GOOGLE_ACCOUNT: ${{ vars.JP_GOOGLE_SERVICE_ACCOUNT }}
@@ -762,7 +762,7 @@ jobs:
   deploy:
     # Test-first Pages lane: successful feature commits publish to the existing URL.
     # main and immutable v2.2.0 remain untouched by rapid website iterations.
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/feature/daily-ops-current-work' && vars.JP_OPERATIONS_PAGES_MODE != 'SHEETS_V2'
+    if: github.ref == 'refs/heads/feature/daily-ops-current-work' && github.event_name == 'workflow_dispatch' && vars.JP_OPERATIONS_PAGES_MODE != 'SHEETS_V2'
     needs: validate
     runs-on: ubuntu-latest
     environment:
