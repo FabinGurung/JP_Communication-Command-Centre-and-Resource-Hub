@@ -11,9 +11,9 @@ class OperationsPublicationTest(unittest.TestCase):
         tables = {
             "projects": [
                 ["Project ID", "Is Public", "Display Name", "Data Quality Status",
-                 "Latitude", "Longitude", "Status", "Location Ward Number", "Legacy Project Code"],
-                ["PRJ-000001", True, "Reviewed name", "VALID", "28", "84", "Unknown", "14", "P001"],
-                ["PRJ-000002", False, "Private name", "VALID", "29", "83", "Unknown", "15", "P002"],
+                 "Executing Company ID", "Latitude", "Longitude", "Status", "Location Ward Number", "Legacy Project Code"],
+                ["PRJ-000001", True, "Reviewed name", "VALID", "ORG-000001", "28", "84", "Unknown", "14", "P001"],
+                ["PRJ-000002", False, "Private name", "VALID", "ORG-000002", "29", "83", "Unknown", "15", "P002"],
             ],
             "choices": [
                 ["Publication Setting ID", "Project ID", "Show Project Name", "Show Coordinates", "Show Ward Number", "Show Status"],
@@ -37,9 +37,16 @@ class OperationsPublicationTest(unittest.TestCase):
             raw = (out / "operations.json").read_text()
             data = json.loads(raw)
             self.assertEqual(data["projects"], [{"id": "PRJ-000001", "name": "Reviewed name",
-                                                "status": "", "ward": "", "site": "P001"}])
+                                                "status": "", "ward": "", "site": "P001",
+                                                 "company_id": "ORG-000001", "company": "Fishtail Builders Pvt Ltd"}])
             self.assertNotIn("Private", raw)
             self.assertEqual(data["progress"][0]["verification"], "UNVERIFIED")
+            self.assertEqual(data["provenance"]["kind"], "PUBLIC_SAFE_READ_ONLY_SHEETS_PROJECTION")
+            self.assertEqual(data["provenance"]["latest_public_report_date"], "2026-11-09")
+            self.assertEqual(data["provenance"]["direct_discord_collector"], "ON_HOLD")
+            self.assertNotIn("Private rate", raw)
+            self.assertNotIn("ORG-000002", raw)
+            self.assertIn("source_readback_at_npt", data["provenance"])
             self.assertIn("u.search = location.search", (out / "resources/project-documents.html").read_text())
             for route, target in {
                 "workspace.html": "./owner-help.html#workspace",
