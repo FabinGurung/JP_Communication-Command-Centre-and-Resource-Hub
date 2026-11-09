@@ -32,9 +32,9 @@
     "consequence": "Archive refs were created at exact historical SHAs. Original historical aliases remain provider-side until a rename/delete-capable interface is used."
   },
   "counts": {
-    "provider_branch_refs": 46,
+    "provider_branch_refs": 47,
     "active_logical_branches": 2,
-    "canonical_archive_refs": 23,
+    "canonical_archive_refs": 24,
     "legacy_alias_refs_pending_delete": 21
   },
   "active_branches": [
@@ -334,6 +334,18 @@
       "allowed_for_work": false,
       "frozen_sha": "4eb68c004fbe8d19b83bf3b17327c853debef58a",
       "archived_from": "main",
+      "legacy_alias_present": false
+    },
+    {
+      "branch_id": "OPS-BR-000026",
+      "branch_name": "archive/snapshot/000009_POST_operations_resource_split_20261109",
+      "git_ref": "refs/heads/archive/snapshot/000009_POST_operations_resource_split_20261109",
+      "role": "LANE_LIBRARY_ARCHIVE",
+      "status": "ARCHIVED_FROZEN",
+      "mutable": false,
+      "allowed_for_work": false,
+      "frozen_sha": "4712922e5e2dd14569450535daef62112362c048",
+      "archived_from": "system/operations-resource-split",
       "legacy_alias_present": false
     }
   ],
