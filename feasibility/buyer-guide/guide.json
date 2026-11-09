@@ -6,7 +6,7 @@
   "project": {
     "organization": "JP_Enterprise",
     "municipality": "Machhapuchhre Rural Municipality",
-    "ward": "6 — provisional until Kitta authority confirmation",
+    "ward": "6 — geographic context, parcel-level municipality proof pending",
     "area": "Astam area, Kaski",
     "decision": "HOLD",
     "parcel_certified": false,
@@ -379,7 +379,7 @@
       "authority": "Nepal Law Commission",
       "date": "2050 BS; amendments listed",
       "kind": "NATIONAL_ELECTRICITY_REGULATIONS",
-      "url": "https://repository.lawcommission.gov.np/np/category/documents/prevailing-law/rules-and-regulations/%E0%A4%B5%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%AF%E0%A5%81%E0%A4%A4-%E0%A4%A8%E0%A4%BF%E0%A4%AF%E0%A4%AE%E0%A4%BE%E0%A4%B2%E0%A5%80-%E0%A5%A8%E0%A5%A6%E0%A5%AB%E0%A5%A6/",
+      "url": "https://repository.lawcommission.gov.np/np/category/documents/prevailing-law/rules-and-regulations/%E0%A4%B5%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%AF%E0%A5%81%E0%A4%A4-%E0%A4%A8%E0%A4%BF%E0%A4%AF%E0%A4%AE%E0%A4%BE%E0%A4%B5%E0%A4%B2%E0%A5%80-%E0%A5%A8%E0%A5%A6%E0%A5%AB%E0%A5%A6/",
       "note": "Voltage-dependent wire clearances and prohibited structures under lines. Confirm latest application with NEA."
     },
     {
@@ -407,7 +407,7 @@
       "date": "2026-09-02",
       "kind": "RECENT_REPORT_NOT_PROJECT_APPROVAL",
       "url": "https://risingnepaldaily.com/news/73240",
-      "note": "Reports 66/132 kV 18 m, 220 kV 30 m, 400 kV 46 m ROW. Confirm with NEA's precise alignment and approved corridor."
+      "note": "Reports 66/132 kV 18 m, 220 kV 30 m, 400 kV 46 m ROW. Confirm with NEA's precise alignment and approved corridor. A different older NEA project example shows 66 kV 12 m; resolve with the responsible project."
     },
     {
       "id": "S_400KV",
@@ -471,8 +471,8 @@
       "ask": "Malpot / Land Revenue Office",
       "warning": "Seller not the recorded owner or share cannot be conveyed",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LOCAL_GOV",
+        "S_NAPI"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -486,8 +486,8 @@
       "ask": "Malpot / Land Reform / independent lawyer",
       "warning": "Unreleased hold, contested ownership or undisclosed tenure",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LOCAL_GOV",
+        "S_NAPI"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -501,8 +501,8 @@
       "ask": "Land lawyer and Land Revenue Office",
       "warning": "Agent alone offers land without proved power to transfer",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LOCAL_GOV",
+        "S_NAPI"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -516,8 +516,8 @@
       "ask": "Ward office / Malpot / lawyer",
       "warning": "Large payment demanded before official registration",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LOCAL_GOV",
+        "S_NAPI"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -531,8 +531,8 @@
       "ask": "Napi / Survey Office",
       "warning": "Plot on map differs from Lalpurja or seller's outlined land",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_NAPI",
+        "S_ROAD"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -546,8 +546,8 @@
       "ask": "Licensed surveyor / Napi Office",
       "warning": "Physical overlap, encroachment or unexplained shortage",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_NAPI",
+        "S_ROAD"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -561,8 +561,8 @@
       "ask": "Surveyor / lawyer",
       "warning": "Unresolved area mismatch or only a hand-drawn Google outline",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_NAPI",
+        "S_ROAD"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -577,7 +577,8 @@
       "warning": "Agricultural/restricted land proposed as freely buildable",
       "source_ids": [
         "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LAND_USE",
+        "S_MODEL"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -592,7 +593,8 @@
       "warning": "Building cannot legally fit after setbacks or risk exclusions",
       "source_ids": [
         "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LAND_USE",
+        "S_MODEL"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -607,7 +609,8 @@
       "warning": "Unapproved plotting or planned acquisition consumes buildable parcel",
       "source_ids": [
         "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LAND_USE",
+        "S_MODEL"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -621,8 +624,8 @@
       "ask": "Ward / Survey Office / land lawyer",
       "warning": "Access crosses private land without enforceable right",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_ROAD",
+        "S_LOCAL_PERMIT"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -636,8 +639,8 @@
       "ask": "Surveyor / road engineer",
       "warning": "Emergency vehicle or construction delivery cannot reach site",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_ROAD",
+        "S_LOCAL_PERMIT"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -651,8 +654,8 @@
       "ask": "Local residents / road authority",
       "warning": "Only dry-weather motorbike access despite villa/visitor plan",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_ROAD",
+        "S_LOCAL_PERMIT"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -666,8 +669,8 @@
       "ask": "Water users committee / source owner",
       "warning": "Water currently available only in rainy season",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_MODEL",
+        "S_ENPHO"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -681,8 +684,8 @@
       "ask": "Water supplier / local authority",
       "warning": "No lawful year-round water allocation",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_MODEL",
+        "S_ENPHO"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -696,8 +699,8 @@
       "ask": "Nearby residents",
       "warning": "Supplier story conflicts with repeated local shortage reports",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_MODEL",
+        "S_ENPHO"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -711,8 +714,9 @@
       "ask": "Nepal Electricity Authority / authorized engineer",
       "warning": "Building footprint or safe access conflicts with line corridor",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_ELECTRIC_LAW",
+        "S_ELECTRIC_EN",
+        "S_NEA_IEE"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -726,8 +730,9 @@
       "ask": "NEA distribution center",
       "warning": "Connection depends on unapproved pole relocation",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_ELECTRIC_LAW",
+        "S_ELECTRIC_EN",
+        "S_NEA_IEE"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -741,8 +746,8 @@
       "ask": "Licensed surveyor / geotechnical engineer",
       "warning": "Severe slope or insufficient buildable area",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LAND_USE",
+        "S_ENPHO"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -756,8 +761,8 @@
       "ask": "Geotechnical engineer / local disaster office",
       "warning": "Active cracks, fresh slips or unstable fills",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LAND_USE",
+        "S_ENPHO"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -771,8 +776,8 @@
       "ask": "Civil engineer / neighbors",
       "warning": "Runoff from uphill land concentrated toward building site",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LAND_USE",
+        "S_ENPHO"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -786,8 +791,8 @@
       "ask": "Civil engineer / cost estimator",
       "warning": "Earthwork and drainage destroy expected savings",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LAND_USE",
+        "S_ENPHO"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -801,7 +806,7 @@
       "ask": "Ward planning / surveyor",
       "warning": "Neighbor could block the view and no protection exists",
       "source_ids": [
-        "S_LOCAL_PERMIT",
+        "S_MODEL",
         "S_LAND_USE"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
@@ -816,7 +821,7 @@
       "ask": "Surveyor / architect",
       "warning": "Expensive view premium based on an unprotected current view",
       "source_ids": [
-        "S_LOCAL_PERMIT",
+        "S_MODEL",
         "S_LAND_USE"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
@@ -831,8 +836,8 @@
       "ask": "Independent valuer / multiple local owners",
       "warning": "Broker's rate far exceeds comparable documented transactions",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LOCAL_GOV",
+        "S_ROAD"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -846,8 +851,8 @@
       "ask": "Cost estimator / lawyer",
       "warning": "Total spend exceeds budget after unavoidable site works",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LOCAL_GOV",
+        "S_ROAD"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -861,8 +866,8 @@
       "ask": "Lawyer / bank / Malpot",
       "warning": "Non-refundable advance before title, survey and permit checks",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LOCAL_GOV",
+        "S_ROAD"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -876,8 +881,8 @@
       "ask": "Buyer / rural municipality",
       "warning": "Assuming Airbnb operation automatically permitted",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LAND_USE",
+        "S_LOCAL_PERMIT"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -891,8 +896,8 @@
       "ask": "Municipality / tourism authorities",
       "warning": "Tourism assumptions unsupported by permits/services",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LAND_USE",
+        "S_LOCAL_PERMIT"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
@@ -906,8 +911,8 @@
       "ask": "On-site inspection and independent market research",
       "warning": "Remote scenic site cannot support desired use",
       "source_ids": [
-        "S_LOCAL_PERMIT",
-        "S_LAND_USE"
+        "S_LAND_USE",
+        "S_LOCAL_PERMIT"
       ],
       "origin": "EXISTING_GOVERNED_CHECKLIST"
     },
