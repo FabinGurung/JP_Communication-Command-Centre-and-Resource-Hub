@@ -81,11 +81,12 @@ unlisted=set(remote)-registered
 ephemeral={branch for branch in unlisted if re.fullmatch(exp,branch)}
 system_lanes=registry.get("ephemeral_system_lanes",[])
 system_refs=set()
+system_bases={"system/notification-center": "feature/daily-ops-current-work", "system/operations-resource-split": "main"}
 for lane in system_lanes:
     name=lane.get("branch_name","")
-    if (name!="system/notification-center" or lane.get("allowed_for_work") is not True
+    if (name not in system_bases or lane.get("allowed_for_work") is not True
             or lane.get("requires_pull_request") is not True
-            or lane.get("merge_base")!="feature/daily-ops-current-work"
+            or lane.get("merge_base")!=system_bases[name]
             or lane.get("direct_pages_deploy") is not False):
         raise SystemExit("Unreviewed temporary system lane")
     if name in system_refs or name in registered:

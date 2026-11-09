@@ -32,9 +32,9 @@
     "consequence": "Archive refs were created at exact historical SHAs. Original historical aliases remain provider-side until a rename/delete-capable interface is used."
   },
   "counts": {
-    "provider_branch_refs": 45,
+    "provider_branch_refs": 47,
     "active_logical_branches": 2,
-    "canonical_archive_refs": 22,
+    "canonical_archive_refs": 24,
     "legacy_alias_refs_pending_delete": 21
   },
   "active_branches": [
@@ -323,6 +323,30 @@
       "frozen_sha": "41681de57531ccb314afde5b5ab99adb2ad47794",
       "archived_from": "fix/cwo-20261009-website-projection-readback",
       "legacy_alias_present": true
+    },
+    {
+      "branch_id": "OPS-BR-000025",
+      "branch_name": "archive/snapshot/000009_PRE_operations_resource_split_20261109",
+      "git_ref": "refs/heads/archive/snapshot/000009_PRE_operations_resource_split_20261109",
+      "role": "LANE_LIBRARY_ARCHIVE",
+      "status": "ARCHIVED_FROZEN",
+      "mutable": false,
+      "allowed_for_work": false,
+      "frozen_sha": "4eb68c004fbe8d19b83bf3b17327c853debef58a",
+      "archived_from": "main",
+      "legacy_alias_present": false
+    },
+    {
+      "branch_id": "OPS-BR-000026",
+      "branch_name": "archive/snapshot/000009_POST_operations_resource_split_20261109",
+      "git_ref": "refs/heads/archive/snapshot/000009_POST_operations_resource_split_20261109",
+      "role": "LANE_LIBRARY_ARCHIVE",
+      "status": "ARCHIVED_FROZEN",
+      "mutable": false,
+      "allowed_for_work": false,
+      "frozen_sha": "4712922e5e2dd14569450535daef62112362c048",
+      "archived_from": "system/operations-resource-split",
+      "legacy_alias_present": false
     }
   ],
   "legacy_aliases": [
@@ -614,6 +638,16 @@
           "validation": "Notification source QA and desktop/mobile visual QA passed before merge."
         }
       ]
+    },
+    {
+      "branch_id": "OPS-SYS-RESOURCE-SPLIT",
+      "branch_name": "system/operations-resource-split",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "Split the independently built Operations and Resource Library production artifacts."
     }
   ]
 }
