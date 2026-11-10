@@ -10,6 +10,8 @@ on:
       - 'ops/data/land-feasibility/astam-buyer-guide-public.v1.0.json'
       - 'docs/releases/v2.3.0.md'
       - 'docs/releases/v2.4.0.md'
+      - 'docs/releases/v2.5.0.md'
+      - 'docs/operations/LIVE_PROJECT_IDENTITY_AND_SOURCE_DATES.md'
       - 'scripts/publish_operations.py'
       - 'scripts/notification_projection.py'
       - 'scripts/sheets_read.py'
@@ -28,6 +30,8 @@ on:
       - 'ops/data/land-feasibility/astam-buyer-guide-public.v1.0.json'
       - 'docs/releases/v2.3.0.md'
       - 'docs/releases/v2.4.0.md'
+      - 'docs/releases/v2.5.0.md'
+      - 'docs/operations/LIVE_PROJECT_IDENTITY_AND_SOURCE_DATES.md'
       - 'scripts/publish_operations.py'
       - 'scripts/notification_projection.py'
       - 'scripts/sheets_read.py'
@@ -187,4 +191,43 @@ jobs:
           else
             gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
               --title 'Project Maps and Progress Dashboard v2.4.0' --notes-file "$notes"
+          fi
+
+  release-maps-v2-5:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Check source dates, identity and exact published commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          notes='docs/releases/v2.5.0.md'
+          tag='v2.5.0'
+          if git diff --quiet HEAD^ HEAD -- "$notes"; then
+            echo "No new v2.5.0 release note in this push"
+            exit 0
+          fi
+          pages="https://fabingurung.github.io/${GITHUB_REPOSITORY#*/}"
+          for file in app.js styles.css index.html; do
+            curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/$file?commit=$GITHUB_SHA" \
+              | cmp - "publication/operations/$file"
+          done
+          curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/operations.json?commit=$GITHUB_SHA" \
+            | python -c 'import json,sys; x=json.load(sys.stdin); p=x["provenance"]; i=x["identity"]; assert p["schema_version"] == "1.2.0"; assert p["kind"] == "PUBLIC_SAFE_READ_ONLY_SHEETS_PROJECTION"; assert p["provider_modified_at"] is None; assert set(p["source_dates"]) == {"projects","notifications","progress"}; assert i["current_authority"] == "LIVE_GOOGLE_SHEETS_APPROVED_PUBLIC_ROWS"; assert i["public_project_count"] == len(x["projects"]); assert i["nonpublic_or_retired_rows_excluded"] is True; assert set(i["public_ids_added_since_historical_index"]).issubset({p["id"] for p in x["projects"]}); print("LIVE_SOURCE_DATES_AND_IDENTITY_PASS", i["public_project_count"])'
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Existing milestone must not be retargeted"
+            test "$(git ls-remote origin "refs/tags/$tag" | cut -f1)" = "$GITHUB_SHA"
+          else
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title 'Project Maps Source Integrity v2.5.0' --notes-file "$notes"
           fi
