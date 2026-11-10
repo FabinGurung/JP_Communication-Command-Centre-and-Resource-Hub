@@ -47,6 +47,12 @@ class OperationsPublicationTest(unittest.TestCase):
             self.assertNotIn("Private rate", raw)
             self.assertNotIn("ORG-000002", raw)
             self.assertIn("source_readback_at_npt", data["provenance"])
+            self.assertEqual(data["provenance"]["schema_version"], "1.2.0")
+            self.assertEqual(data["provenance"]["source_dates"]["progress"]["latest_public_record_date"], "2026-11-09")
+            self.assertIsNone(data["provenance"]["source_dates"]["projects"]["latest_public_record_date"])
+            self.assertIsNone(data["provenance"]["provider_modified_at"])
+            self.assertEqual(data["identity"]["public_project_count"], 1)
+            self.assertTrue(data["identity"]["nonpublic_or_retired_rows_excluded"])
             self.assertIn("u.search = location.search", (out / "resources/project-documents.html").read_text())
             for route, target in {
                 "workspace.html": "./owner-help.html#workspace",
@@ -64,6 +70,48 @@ class OperationsPublicationTest(unittest.TestCase):
             self.assertTrue((out / "feasibility/buyer-guide/index.html").is_file())
             self.assertFalse((out / "document-packets.json").exists())
             self.assertFalse((out / "ops/data/current-works.json").exists())
+
+
+    def test_public_warning_identity_and_retired_alias_do_not_leak(self):
+        # Synthetic fixture: real nonpublic source IDs and source references
+        # must never be copied into a public repository or website.
+        tables = {
+            "projects": [
+                ["Project ID", "Is Public", "Display Name", "Data Quality Status", "Last Updated",
+                 "Executing Company ID", "Latitude", "Longitude", "Status", "Location Ward Number", "Legacy Project Code",
+                 "Source Reference"],
+                ["PRJ-999998", True, "Public project awaiting review", "WARNING", "2026-11-10",
+                 "ORG-000002", "", "", "In progress", "14", "", ""],
+                ["PRJ-999999", False, "SECRET RETIRED ALIAS", "RETIRED_ALIAS_ONLY", "2026-11-10",
+                 "ORG-000001", "28", "84", "", "14", "", "PRIVATE_SOURCE_TOKEN"],
+            ],
+            "choices": [
+                ["Publication Setting ID", "Project ID", "Show Project Name", "Show Coordinates",
+                 "Show Ward Number", "Show Status"],
+                ["PPS-999998", "PRJ-999998", True, True, True, True],
+                ["PPS-999999", "PRJ-999999", True, True, True, True],
+            ],
+            "messages": [["Source ID"]],
+            "notices": [["Notification ID", "Project ID"]],
+            "progress": [
+                ["Project Work ID", "Project ID", "Is Public", "Description Override",
+                 "Last Updated", "Work Status", "Verification Status"],
+            ],
+        }
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp)
+            self.assertEqual(build(tables, out, "2026-11-10T14:00+05:45"), (1, 0, 0))
+            raw = (out / "operations.json").read_text()
+            data = json.loads(raw)
+            self.assertEqual(data["identity"]["public_project_count"], 1)
+            self.assertEqual(data["identity"]["public_ids_added_since_historical_index"], ["PRJ-999998"])
+            self.assertEqual(data["projects"][0]["quality"], "WARNING")
+            self.assertEqual(data["provenance"]["source_dates"]["projects"]["latest_public_record_date"],
+                             "2026-11-10")
+            self.assertIsNone(data["provenance"]["source_dates"]["progress"]["latest_public_record_date"])
+            self.assertNotIn("PRJ-999999", raw)
+            self.assertNotIn("SECRET RETIRED ALIAS", raw)
+            self.assertNotIn("PRIVATE_SOURCE_TOKEN", raw)
 
 
 if __name__ == "__main__":

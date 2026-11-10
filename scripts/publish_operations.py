@@ -51,6 +51,11 @@ def public_organization_names():
 
 def build(tables, out, received_at):
     organization_names = public_organization_names()
+    # The historical Git project index is derived from projects.csv. The five
+    # LIVE Operations Sheets now own current public listing decisions.
+    legacy = json.loads((ROOT / "ops/data/project-identity-index.v0.1.json").read_text(encoding="utf-8"))
+    legacy_ids = {record["project_id"] for record in legacy["records"]}
+    project_record_dates = []
     choices = {}
     for row in records(tables["choices"], "publication_setting_id", "project_id",
                        "show_project_name", "show_coordinates", "show_ward_number", "show_status"):
@@ -74,6 +79,14 @@ def build(tables, out, received_at):
                    "ward": row["location_ward_number"] if yes(setting["show_ward_number"]) else ""}
         if re.fullmatch(r"P[0-9]{3}", row["legacy_project_code"]):
             project["site"] = row["legacy_project_code"]
+        # A public project identity can still carry unresolved quality warnings.
+        # Do not imply that the project name, owner or works are certified.
+        quality = row["data_quality_status"]
+        if quality != "VALID":
+            project["quality"] = quality or "UNVERIFIED"
+        if row.get("last_updated"):
+            date.fromisoformat(row["last_updated"])
+            project_record_dates.append(row["last_updated"])
         organization_id = row.get("executing_company_id", "")
         if organization_id in organization_names:
             project.update(company_id=organization_id, company=organization_names[organization_id])
@@ -120,13 +133,46 @@ def build(tables, out, received_at):
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / name, target)
     (out / ".nojekyll").touch()
-    (out / "operations.json").write_text(json.dumps({"projects": list(projects.values()),
-        "notices": notices, "progress": progress, "refreshed_at_npt": received_at,
+    public_ids = set(projects)
+    source_dates = {
+        "projects": {
+            "latest_public_record_date": max(project_record_dates, default=None),
+            "date_field": "Projects and Locations / Last Updated",
+            "meaning": "SOURCE_ROW_DATE_NOT_WORKBOOK_MODIFIED_TIME"
+        },
+        "notifications": {
+            "latest_public_record_date": max((n["date"] for n in notices if n["date"]), default=None),
+            "date_field": "Message Sources / Date NPT",
+            "meaning": "REVIEWED_SOURCE_MESSAGE_DATE"
+        },
+        "progress": {
+            "latest_public_record_date": progress[0]["date"] if progress else None,
+            "date_field": "Project Work / Last Updated",
+            "meaning": "REPORTED_WORK_ROW_DATE_NOT_CERTIFIED_COMPLETION"
+        }
+    }
+    result = {
+        "projects": list(projects.values()),
+        "notices": notices,
+        "progress": progress,
+        "refreshed_at_npt": received_at,
+        "identity": {
+            "schema_version": "1.0.0",
+            "current_authority": "LIVE_GOOGLE_SHEETS_APPROVED_PUBLIC_ROWS",
+            "historical_git_index_role": "LEGACY_PROJECTS_CSV_DERIVATIVE_NOT_LIVE_AUTHORITY",
+            "historical_git_index_count": len(legacy_ids),
+            "public_project_count": len(projects),
+            "public_ids_added_since_historical_index": sorted(public_ids - legacy_ids),
+            "nonpublic_or_retired_rows_excluded": True,
+        },
         "provenance": {
-            "schema_version": "1.1.0",
+            "schema_version": "1.2.0",
             "kind": "PUBLIC_SAFE_READ_ONLY_SHEETS_PROJECTION",
             "source_readback_at_npt": received_at,
-            "latest_public_report_date": progress[0]["date"] if progress else None,
+            "source_dates": source_dates,
+            "provider_modified_at": None,
+            "provider_modified_at_status": "NOT_AVAILABLE_WITH_CURRENT_SHEETS_READONLY_SCOPE",
+            "latest_public_report_date": source_dates["progress"]["latest_public_record_date"],
             "source_families": ["Projects and Locations", "Website Display Choices",
                                 "Notification Center - Message Sources",
                                 "Notification Center - Instructions", "Project Work"],
@@ -134,8 +180,9 @@ def build(tables, out, received_at):
             "direct_slack_collector": "NOT_CONNECTED_TO_THIS_PUBLISHER",
             "direct_discord_collector": "ON_HOLD",
             "engineering_completion": "NOT_CERTIFIED_BY_THIS_DASHBOARD"
-        }},
-        ensure_ascii=False), encoding="utf-8")
+        }
+    }
+    (out / "operations.json").write_text(json.dumps(result, ensure_ascii=False), encoding="utf-8")
     for path, target in {
         "map.html": "./#map",
         "site-operations.html": "./#notifications",

@@ -79,7 +79,7 @@ function updateProjectIndex(projects) {
     button.setAttribute("aria-pressed", selectedProject() === p.id ? "true" : "false");
     if (selectedProject() === p.id) button.classList.add("active");
     withChildren(button, make("strong", p.name),
-      make("span", [p.id, p.ward ? "Ward " + p.ward : "", hasPin(p) ? "Map pin" : "No public pin"].filter(Boolean).join(" · ")));
+      make("span", [p.id, p.ward ? "Ward " + p.ward : "", hasPin(p) ? "Map pin" : "No public pin", p.quality ? "Quality: " + readable(p.quality) : ""].filter(Boolean).join(" · ")));
     button.addEventListener("click", () => chooseProject(p.id, true));
     return button;
   });
@@ -103,6 +103,7 @@ function updateContext(overrideId) {
     ["Executing organization", p.company || "Not public"],
     ["Location", p.ward ? "Ward " + p.ward : "Not published"],
     ["Map pin", hasPin(p) ? "Approved" : "Not published"],
+    ["Source quality", p.quality ? readable(p.quality) + " · review pending" : "No published warning"],
     ["Reported work entries", String(reports.length)],
     ["Reviewed instructions", String(notices.length)],
     ["Latest report", reports.length ? reports[0].date : "No public report"]
@@ -187,6 +188,30 @@ function load(payload) {
     (provenance.source_readback_at_npt || payload.refreshed_at_npt || "unknown") +
     ". Latest published work report: " + (provenance.latest_public_report_date || "none") +
     ". Slack is not collected directly by this publisher; Discord collection is on hold. No billing or engineering certification is inferred.";
+  const sourceDates = provenance.source_dates || {};
+  const dates = [
+    ["Projects / latest row date", sourceDates.projects?.latest_public_record_date],
+    ["Instructions / latest message date", sourceDates.notifications?.latest_public_record_date],
+    ["Progress / latest reported work date", sourceDates.progress?.latest_public_record_date],
+    ["Sheets readback (NPT)", provenance.source_readback_at_npt || payload.refreshed_at_npt]
+  ];
+  const dateList = make("dl", "", "source-date-grid");
+  for (const [label, value] of dates) withChildren(dateList,
+    make("dt", label), make("dd", value || "No published date"));
+  const identity = payload.identity || {};
+  const idSummary = make("p", "", "identity-note");
+  idSummary.textContent = identity.public_project_count === undefined
+    ? "Project identity reconciliation not provided."
+    : "Current public Sheets identity: " + identity.public_project_count +
+      " listings; historical Git identity index: " + identity.historical_git_index_count +
+      ". New public identifiers since the legacy snapshot: " +
+      (identity.public_ids_added_since_historical_index?.join(", ") || "none") +
+      ". Nonpublic and retired entries remain excluded.";
+  const caveat = make("p",
+    "Dates above describe source rows, not verified workbook modification timestamps. " +
+    "The existing read-only Sheets workflow cannot attest to provider-level modified times.",
+    "source-caveat");
+  byId("source-dates").replaceChildren(dateList, idSummary, caveat);
   render();
 }
 for (const id of ["project-filter", "company-filter", "report-date"])
