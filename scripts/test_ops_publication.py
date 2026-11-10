@@ -53,7 +53,16 @@ class OperationsPublicationTest(unittest.TestCase):
             self.assertIsNone(data["provenance"]["provider_modified_at"])
             self.assertEqual(data["identity"]["public_project_count"], 1)
             self.assertTrue(data["identity"]["nonpublic_or_retired_rows_excluded"])
-            self.assertIn("u.search = location.search", (out / "resources/project-documents.html").read_text())
+            library = "https://fabingurung.github.io/jp-field-desk-library/"
+            for path in ("index.html", "owner-help.html", "resources/index.html"):
+                with self.subTest(path=path):
+                    html = (out / path).read_text()
+                    self.assertIn(f'href="{library}"', html)
+                    self.assertNotIn("https://fabingurung.github.io/JP_Field_and_Desk_Resource_Library/", html)
+            redirect = (out / "resources/project-documents.html").read_text()
+            self.assertIn(f'href="{library}resources/project-documents.html"', redirect)
+            self.assertIn("u.search = location.search", redirect)
+            self.assertNotIn("https://fabingurung.github.io/JP_Field_and_Desk_Resource_Library/", redirect)
             for route, target in {
                 "workspace.html": "./owner-help.html#workspace",
                 "workspace/index.html": "../owner-help.html#workspace",

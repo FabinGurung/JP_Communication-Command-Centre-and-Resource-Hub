@@ -1,10 +1,10 @@
 # JP AEC Operations Hub
 
-The live project-experience layer of the **JP AEC Platform**, hosted with GitHub Pages. The existing repository slug is retained for URL stability.
+The live project-experience layer of the **JP AEC Platform**, hosted with GitHub Pages. The public dashboard is published under the `jp-site-operations` repository slug.
 
 ## Current public workflow
 
-The [live Operations site](https://fabingurung.github.io/JP_Communication-Command-Centre-and-Resource-Hub/) publishes the Project Map, Notification Center and Progress Report from five owning Google Sheets. Use the [Sheets cutover guide](docs/operations/OPERATIONS_RESOURCE_SPLIT.md) for current publication ownership and the [Resource Library](https://fabingurung.github.io/JP_Field_and_Desk_Resource_Library/) for the catalogue and client document registers. The older operational layers below remain part of the Git history and rollback workflow.
+The [live Operations site](https://fabingurung.github.io/jp-site-operations/) publishes the Project Map, Notification Center and Progress Report from five owning Google Sheets. Use the [Sheets cutover guide](docs/operations/OPERATIONS_RESOURCE_SPLIT.md) for current publication ownership and the [Resource Library](https://fabingurung.github.io/jp-field-desk-library/) for the catalogue and client document registers. The older operational layers below remain part of the Git history and rollback workflow.
 
 ## Mandatory Operations control read order
 
@@ -20,15 +20,15 @@ Before ChatGPT, automation or a human starts a repository mutation:
 
 The registry maps the **Main Library** to `main`, the **Local Library** to `feature/daily-ops-current-work`, and the **Lane Library** to the branch registry itself. Archive refs under `archive/*` are frozen. Historical non-archive aliases are marked **DO_NOT_USE** and resolve to their archive equivalents.
 
-## Current interface development arc
+## Historical interface development arc
 
 The botanical workspace theme ships as **v2.2.0** after release-commit validation, sharing tokens, navigation and responsive rules across all 20 active pages. See the [design-system specification](docs/design/botanical-workspace-v1.md) for SVG ownership, mobile/print rules and repeatable visual QA. Immutable **v2.1.0** remains the previous-release rollback baseline.
 
-## Current stable version
+## Historical v2.2.0 baseline
 
 **v2.2.0 — JP AEC Operations Hub · Botanical UI & Mobile Harmonization**
 
-The v2.2.0 release freezes the tested botanical theme across 20 active routes, the shared navigation/mobile behavior, five local botanical SVG assets and the documented browser QA. Project engineer approvals are shown in Progress only. The Discord collector remains on hold. See the [v2.2.0 release notes](docs/releases/v2.2.0.md).
+The v2.2.0 release freezes the tested botanical theme across 20 active routes, the shared navigation/mobile behavior, five local botanical SVG assets and the documented browser QA. Project engineer approvals are shown in Progress only. The Discord collector remains on hold. See the [v2.2.0 release notes](docs/releases/v2.2.0.md). The current Sheets dashboard releases are listed on the [Releases page](https://github.com/FabinGurung/jp-site-operations/releases).
 
 **Previous stable release:** **v2.1.0 — JP AEC Operations Hub · Governed Platform Baseline**
 
@@ -65,7 +65,7 @@ The repository contains a PostgreSQL-compatible schema at `ops/schema/daily-ops-
 A hosted PostgreSQL service such as Neon becomes useful later if the system requires secure authenticated write-back, many simultaneous users, server-side querying, transactions, row-level permissions or a real API/backend.
 
 
-## Live architecture
+## Legacy Git-fed architecture
 
 ```text
 index.html
@@ -90,7 +90,7 @@ Edit the canonical file that owns the fact. Do **not** manually maintain the sam
 | Relationships, PK/FK structure and data contract | `ops/schema/daily-ops-postgres.sql` |
 | Allowed map statuses / visual configuration | `map-config.json` |
 
-GitHub Pages reads these canonical files and is a downstream presentation layer. Google Sheets is also a downstream projection; it is not where project-master truth should be edited.
+The legacy Git-fed site used these files. The current public dashboard instead follows the owning Sheets and publication rules described in the [Sheets cutover guide](docs/operations/OPERATIONS_RESOURCE_SPLIT.md).
 
 The working lane `feature/daily-ops-current-work` remains available for governed validation, but production GitHub Pages deployment is owned by `main` only. Feature-lane runs validate and skip deployment; production changes reach Pages only after an explicit fast-forward release to `main`.
 

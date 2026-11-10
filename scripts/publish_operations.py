@@ -17,7 +17,7 @@ SOURCES = {
     "notices": ("1ZPtTos8t9Cym_qnpiUhiyuTxndSc6sGzzv390ahAw4I", "site_notifications"),
     "progress": ("17YPRpaXIdHloH5-lzsjUpNvXLbsDfrIrlsn2jZ-7KKc", "project_work_items"),
 }
-LIBRARY = "https://fabingurung.github.io/JP_Field_and_Desk_Resource_Library/"
+LIBRARY = "https://fabingurung.github.io/jp-field-desk-library/"
 # Preserve the already-live Astam client route independently of the migrated catalogue.
 LEGACY_CLIENT_FILES = (
     "feasibility/index.html",
