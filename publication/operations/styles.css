@@ -12,3 +12,12 @@
 @media(max-width:900px){.north{position:relative;align-items:flex-start;flex-direction:column;gap:8px}.north nav{width:100%}.north nav a{padding:8px}.workbench{grid-template-columns:1fr}.west,.east{border:0;border-bottom:1px solid #dce6df;padding:16px}.west{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}.west>.eyebrow,.west>h2,.west>.side-divider,.west>.side-heading,.west>.project-list,.west>.help:last-child{grid-column:1/-1}.west label{margin-top:6px}.west #project-filter{grid-row:auto}.west .project-list{display:flex;overflow:auto;max-height:130px}.project-entry{min-width:172px}.west button{align-self:end}.centre{padding:14px}.east{grid-template-columns:repeat(2,minmax(0,1fr))}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.south-inner{flex-direction:column}.source-links{justify-content:flex-start;max-width:none}}
 @media(max-width:570px){.brand strong{font-size:16px}.welcome{display:block}.build-receipt{margin-top:15px;max-width:none}.metrics{gap:7px}.metrics article{padding:11px}.metrics article strong{font-size:24px}.west{display:block}.west .project-list{display:flex;max-height:none}.east{display:block}.surface{padding:12px}.section-head>p{text-align:left}.trend-row{grid-template-columns:74px minmax(0,1fr) 22px}#map-canvas{height:330px}.south{padding:20px 15px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Public evidence dates are source-row timestamps, not inferred provider freshness. */
+.source-dates{max-width:650px;background:#245146;border:1px solid #587c69;border-radius:12px;padding:12px 15px;margin-top:15px}
+.source-date-grid{display:grid;grid-template-columns:minmax(145px,1fr) auto;gap:7px 17px;margin:0}
+.source-date-grid dt{color:#b5d4c2;font-size:11px}
+.source-date-grid dd{margin:0;color:#fff9e8;font-size:11px;font-weight:760;font-variant-numeric:tabular-nums;text-align:right}
+.source-dates .identity-note{margin:14px 0 4px;color:#e0eee4;font-size:11px}
+.source-dates .source-caveat{font-size:10px;color:#cadacc;margin:5px 0 0}
+@media(max-width:570px){.source-date-grid{grid-template-columns:1fr;gap:2px}.source-date-grid dd{text-align:left;margin-bottom:7px}}
