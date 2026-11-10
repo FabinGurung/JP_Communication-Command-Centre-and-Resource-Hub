@@ -669,6 +669,27 @@
         "ops/control/branch-lane-registry.json",
         "scripts/validate_branch_registry.py"
       ]
+    },
+    {
+      "branch_id": "OPS-SYS-MAPS-FRESHNESS-R2",
+      "branch_name": "feature/maps-source-freshness-r2-20261110",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "Issue #30 governed v2.5.0 public project identity reconciliation and explicit dated source freshness; retire lane after promotion.",
+      "allowed_paths": [
+        "ops/control/branch-lane-registry.json",
+        "scripts/validate_branch_registry.py",
+        "scripts/publish_operations.py",
+        "scripts/test_ops_publication.py",
+        "publication/operations/index.html",
+        "publication/operations/app.js",
+        ".github/workflows/operations-sheets-pages.yml",
+        "docs/releases/v2.5.0.md",
+        "docs/operations/LIVE_PROJECT_IDENTITY_AND_SOURCE_DATES.md"
+      ]
     }
   ]
 }
