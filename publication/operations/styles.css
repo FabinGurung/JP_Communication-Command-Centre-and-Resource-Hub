@@ -58,3 +58,23 @@
   .map-section{padding:15px}
   .coverage-details .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+/* v2.7.0 — sheet-sourced project status controls, responsive by input modality */
+.mobile-status-filter{display:none}
+.desktop-status-control{display:block}
+#status-source-hint{margin:4px 0 12px;color:#668074}
+.status-chip-scroll button:focus-visible{outline:3px solid #c59534;outline-offset:2px}
+@media(max-width:760px){
+  .desktop-status-label,.desktop-status-control,#status-source-hint{display:none!important}
+  .mobile-status-filter{display:block;padding:12px 0 10px;margin:12px 0 5px;border-top:1px solid #dce7de;border-bottom:1px solid #dce7de}
+  .mobile-filter-heading{display:flex;gap:6px;justify-content:space-between;align-items:baseline;flex-wrap:wrap;margin-bottom:9px}
+  .mobile-filter-heading strong{font-size:13px;color:#244f3b}
+  .mobile-filter-heading span{font-size:10px;color:#5b7965}
+  .status-chip-scroll{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;overflow-y:hidden;padding:3px 2px 9px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:thin}
+  .status-chip-scroll button{white-space:nowrap;flex:0 0 auto;min-height:46px;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 13px;border:1px solid #bfd5c7;background:#f6faf5;border-radius:11px;color:#234f3b;font-size:12px;font-weight:770;scroll-snap-align:start}
+  .status-chip-scroll button span{display:inline-block;min-width:23px;padding:3px 5px;font-size:11px;border-radius:8px;background:#e3eee6}
+  .status-chip-scroll button[aria-pressed="true"]{background:#1a624c;color:white;border-color:#1a624c;box-shadow:0 2px 9px #153e2b22}
+  .status-chip-scroll button[aria-pressed="true"] span{background:#fff2;color:white}
+  .status-filter-summary{font-size:11px;line-height:1.45;color:#597164;margin:3px 1px 4px}
+}
+@media(prefers-reduced-motion:reduce){.status-chip-scroll{scroll-behavior:auto}}

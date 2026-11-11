@@ -1,0 +1,105 @@
+/* Playwright synthetic mobile+desktop QA of Sheets-V2 project-status controls. */
+"use strict";
+const assert = require("node:assert/strict");
+const {chromium} = require("playwright");
+const ORIGIN = process.env.QA_BASE || "http://127.0.0.1:8766";
+const seen = [];
+function check(msg){seen.push(msg);console.log("PASS "+msg)}
+const stubLeaflet = () => {
+  window.__qaMarkerCount = 0;
+  window.L = {
+    map(){return {setView(){return this},getZoom(){return 12},fitBounds(){return this},invalidateSize(){return this}}},
+    tileLayer(){return {addTo(){return this}}},
+    featureGroup(){return {
+      addTo(){return this},clearLayers(){window.__qaMarkerCount=0;return this},
+      getLayers(){return Array.from({length:window.__qaMarkerCount},()=>({}))},
+      getBounds(){return [[28.2,83.9],[28.4,84.1]]}
+    }},
+    divIcon(x){return x},
+    marker(){return {bindPopup(){return this},on(){return this},
+      addTo(){window.__qaMarkerCount++;return this}}}
+  };
+};
+async function ready(page){
+  await page.addInitScript(stubLeaflet);
+  await page.route("https://unpkg.com/**",r=>r.abort());
+  await page.goto(ORIGIN+"/", {waitUntil:"domcontentloaded"});
+  await page.waitForFunction(()=>document.querySelector("#project-count")?.textContent==="5");
+}
+async function statusInfo(page){
+  return await page.evaluate(()=>({
+    projectCount:document.querySelector("#project-count").textContent,
+    cards:document.querySelectorAll("#project-list button.project-entry").length,
+    pins:window.__qaMarkerCount,
+    filter:document.querySelector("#status-filter").value,
+    active:[...document.querySelectorAll("[data-project-status][aria-pressed=true]")].map(e=>e.dataset.projectStatus),
+    summary:document.querySelector("#status-filter-summary").textContent,
+  }));
+}
+(async()=>{
+  const browser = await chromium.launch({headless:true,args:["--no-sandbox"]});
+  try {
+    const mobile = await browser.newPage({viewport:{width:390,height:844},isMobile:true,deviceScaleFactor:1,hasTouch:true});
+    await ready(mobile);
+    assert.equal(await mobile.locator(".mobile-status-filter").isVisible(),true);
+    assert.equal(await mobile.locator("#status-filter").isVisible(),false);
+    assert.equal(await mobile.locator("[data-project-status]").count(),6);
+    assert.deepEqual((await statusInfo(mobile)).active,["all"]);
+    assert.equal((await statusInfo(mobile)).pins,5);
+    const counts = await mobile.locator("[data-status-count]").allTextContents();
+    assert.deepEqual(counts,["5","1","1","1","1","1"]);
+    check("390px phone shows six accessible source-counted buttons, five approved pins and hidden desktop select");
+
+    for(const [status,count] of [["Completed",1],["Approval",1],["Construction",1],["Maintenance",1],["unpublished",1],["all",5]]){
+      await mobile.locator('[data-project-status="'+status+'"]').click();
+      const info=await statusInfo(mobile);
+      assert.equal(info.projectCount,String(count),status);
+      assert.equal(info.cards,count,status);
+      assert.equal(info.pins,count,status);
+      assert.equal(info.filter,status,status);
+      assert.deepEqual(info.active,[status],status);
+      assert.ok(info.summary.includes(status==="unpublished"?"Not stated":status==="all"?"All public":status==="Construction"?"Under construction":status));
+      const button = mobile.locator('[data-project-status="'+status+'"]');
+      assert.ok((await button.boundingBox()).height>=44,"Touch target below 44px");
+    }
+    check("touch controls switch actual map marker counts and project lists; show/not-stated preserved");
+
+    await mobile.locator('[data-project-status="Approval"]').focus();
+    await mobile.keyboard.press("Enter");
+    assert.equal((await statusInfo(mobile)).filter,"Approval");
+    await mobile.locator('[data-map-mode="work"]').click();
+    assert.equal((await statusInfo(mobile)).projectCount,"1");
+    check("keyboard activation and map-layer switching preserve status");
+
+    await mobile.locator("#reset-filters").click();
+    assert.equal((await statusInfo(mobile)).projectCount,"5");
+    assert.equal((await statusInfo(mobile)).filter,"all");
+    assert.ok(await mobile.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth+2));
+    check("clear filters resets both controls; no horizontal page overflow");
+
+    const remote = await mobile.request.get(ORIGIN+"/operations.json");
+    const raw=await remote.text();
+    assert.ok(!raw.includes("HIDDEN_RAW_STATUS_DO_NOT_PUBLISH"));
+    assert.ok(!raw.includes("PRIVATE DEMO MUST NEVER PUBLISH"));
+    check("private row and unapproved lifecycle status excluded in publication fixture");
+
+    const desk=await browser.newPage({viewport:{width:1280,height:800}});
+    await ready(desk);
+    assert.equal(await desk.locator("#status-filter").isVisible(),true);
+    assert.equal(await desk.locator(".mobile-status-filter").isVisible(),false);
+    await desk.locator("#status-filter").selectOption("Completed");
+    assert.equal((await statusInfo(desk)).projectCount,"1");
+    assert.equal((await statusInfo(desk)).pins,1);
+    await desk.locator("#status-filter").selectOption("unpublished");
+    assert.equal((await statusInfo(desk)).projectCount,"1");
+    await desk.locator("#project-filter").selectOption("PRJ-999901");
+    assert.equal((await statusInfo(desk)).filter,"all");
+    assert.equal((await statusInfo(desk)).projectCount,"1");
+    check("1280px desktop select matches mobile categories; direct project selection clears conflicting status");
+
+    assert.equal(await desk.request.get(ORIGIN+"/memory-wall.html").then(r=>r.status()),200);
+    check("published Memory Wall route available in static QA artifact");
+    await mobile.close();await desk.close();
+    console.log("STATUS_BROWSER_QA_PASS checks="+seen.length);
+  } finally {await browser.close()}
+})().catch(error=>{console.error(error.stack||error);process.exit(1)});

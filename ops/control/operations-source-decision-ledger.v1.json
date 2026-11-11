@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0.0",
+  "title": "A9 Operations — source ownership and decision memory ledger",
+  "authority": "ROUTING_AND_RELEASE_EVIDENCE_ONLY__NOT_A_DOMAIN_FACT_DATABASE",
+  "verified_readback_date_npt": "2026-11-12",
+  "source_directory": {
+    "workspace_folder": "https://drive.google.com/drive/folders/1QHxD74egNFeQAmvDJzvKmDxEQUOH3Kq6",
+    "owning_sources_folder": "https://drive.google.com/drive/folders/1u4Rg1J3KSZRPnkjlAHOVxpWoq2skRICn",
+    "published_navigation_sheet_id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
+    "navigation_role": "AGGREGATED_VIEW__DO_NOT_EDIT_AS_FACT_AUTHORITY"
+  },
+  "source_books": {
+    "projects": {
+      "id": "1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo",
+      "tab": "projects",
+      "owner": "Projects and Locations",
+      "fields": [
+        "project_id",
+        "status",
+        "is_public",
+        "data_quality_status",
+        "display_name",
+        "last_updated"
+      ]
+    },
+    "choices": {
+      "id": "1tDpsphzARq-rk1MExU4DXC8mG_clh-0TXJwRr2qljXU",
+      "tab": "project_publication_settings",
+      "owner": "Website Display Choices",
+      "fields": [
+        "project_id",
+        "show_status",
+        "show_project_name",
+        "show_coordinates"
+      ]
+    },
+    "progress": {
+      "id": "17YPRpaXIdHloH5-lzsjUpNvXLbsDfrIrlsn2jZ-7KKc",
+      "tab": "project_work_items",
+      "owner": "Project Work",
+      "fields": [
+        "project_work_id",
+        "project_id",
+        "work_status",
+        "verification_status",
+        "last_updated",
+        "is_public"
+      ]
+    },
+    "messages": {
+      "id": "1aWHzjEK0doiUcBbqhySiA6DWCp8d-aq2I08McslilAQ",
+      "tab": "message_sources",
+      "owner": "Notification Center Message Sources",
+      "fields": [
+        "source_id",
+        "source_version",
+        "source_sha256"
+      ]
+    },
+    "notices": {
+      "id": "1ZPtTos8t9Cym_qnpiUhiyuTxndSc6sGzzv390ahAw4I",
+      "tab": "site_notifications",
+      "owner": "Notification Center Instructions",
+      "fields": [
+        "notification_id",
+        "project_id",
+        "source_id"
+      ]
+    }
+  },
+  "source_observation": {
+    "date_npt": "2026-11-12",
+    "source_book_key": "projects",
+    "visibility_book_key": "choices",
+    "public_rows": 29,
+    "excluded_retired_alias_ids": [
+      "PRJ-000030"
+    ],
+    "public_status_published_count": 28,
+    "listed_status_counts": {
+      "Construction": 7,
+      "Completed": 19,
+      "Approval": 1,
+      "Maintenance": 1,
+      "unpublished": 1
+    },
+    "note": "Point-in-time readback from connected Google Drive of active Sheets, not a permanent counter. One public project has show_status false; no implied classification. Completed is a listed status, not certified engineering acceptance."
+  },
+  "decisions": [
+    {
+      "id": "OPS-DEC-20261111-ASTAM",
+      "date_npt": "2026-11-11",
+      "decision": "Astam buyer and land-feasibility resources owned by Field & Desk Library; Operations provides query-preserving redirects.",
+      "fact_sources": [
+        "Resource Library v1.4.0 published public-safe files"
+      ],
+      "code_owner": "GITHUB_LIBRARY_AND_OPERATIONS",
+      "artifacts": [
+        "scripts/publish_operations.py",
+        "docs/operations/ENGINEER_FIRST_MAP_AND_RESOURCE_BOUNDARY.md"
+      ],
+      "evidence_url": "https://github.com/FabinGurung/jp-site-operations/releases/tag/v2.6.0",
+      "result": "RELEASED"
+    },
+    {
+      "id": "OPS-DEC-20261112-STATUS-UI",
+      "date_npt": "2026-11-12",
+      "decision": "Mobile single-row clickable status chips; desktop status dropdown; one shared source-backed filter applies to map, site list, progress and instructions.",
+      "fact_sources": [
+        "projects",
+        "choices"
+      ],
+      "code_owner": "GIT_OPERATIONS",
+      "artifacts": [
+        "publication/operations/index.html",
+        "publication/operations/app.js",
+        "publication/operations/styles.css",
+        "scripts/test_ops_publication.py",
+        "scripts/status_filter_browser_qa.cjs"
+      ],
+      "evidence_url": "https://github.com/FabinGurung/jp-site-operations/pull/35",
+      "result": "PR_QA_PASSED__PRODUCTION_RELEASE_PENDING",
+      "qa_run": "https://github.com/FabinGurung/jp-site-operations/actions/runs/43118856852"
+    },
+    {
+      "id": "OPS-DEC-20261112-SOURCE-MEMORY",
+      "date_npt": "2026-11-12",
+      "decision": "Each future Operations derivation or UX/release decision must record owning source, visibility policy, changed path, PR, QA and actual release, with open holds.",
+      "fact_sources": [
+        "projects",
+        "choices",
+        "progress",
+        "messages",
+        "notices"
+      ],
+      "code_owner": "GIT_OPERATIONS",
+      "artifacts": [
+        "AGENTS.md",
+        "publication/operations/memory-wall.html",
+        "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md",
+        "ops/control/operations-source-decision-ledger.v1.json"
+      ],
+      "evidence_url": "https://github.com/FabinGurung/jp-site-operations/pull/35",
+      "result": "PR_QA_PASSED__PRODUCTION_RELEASE_PENDING",
+      "qa_run": "https://github.com/FabinGurung/jp-site-operations/actions/runs/43118856852"
+    }
+  ]
+}

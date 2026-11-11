@@ -87,6 +87,16 @@ class OperationsPublicationTest(unittest.TestCase):
             for key in ("projects", "work", "resources", "manpower", "activities"):
                 self.assertIn('data-map-mode="' + key + '"', ops_html)
             self.assertIn("field-pulse", ops_html)
+            self.assertIn('data-project-status="Completed"', ops_html)
+            self.assertIn('data-project-status="Construction"', ops_html)
+            self.assertIn('data-project-status="Approval"', ops_html)
+            self.assertIn('data-project-status="unpublished"', ops_html)
+            self.assertIn('id="status-filter"', ops_html)
+            wall = (out / "memory-wall.html").read_text()
+            self.assertIn("Projects and Locations", wall)
+            self.assertIn("01 Website Source Sheets", wall)
+            self.assertIn("02 Website Sheets and Registers", wall)
+            self.assertIn('href="./memory-wall.html"', ops_html)
             app = (out / "app.js").read_text()
             self.assertIn("demand not connected", app)
             self.assertIn("remaining-task backlog", app)
@@ -134,6 +144,41 @@ class OperationsPublicationTest(unittest.TestCase):
             self.assertNotIn("PRJ-999999", raw)
             self.assertNotIn("SECRET RETIRED ALIAS", raw)
             self.assertNotIn("PRIVATE_SOURCE_TOKEN", raw)
+
+
+    def test_project_status_visible_only_with_source_and_display_grants(self):
+        tables = {
+            "projects": [
+                ["Project ID","Is Public","Display Name","Data Quality Status","Executing Company ID",
+                 "Latitude","Longitude","Status","Location Ward Number","Legacy Project Code"],
+                ["PRJ-990001",True,"Public completed","VALID","ORG-000001","28.2","83.98","Completed","1",""],
+                ["PRJ-990002",True,"Public but status hidden","WARNING","ORG-000001","28.3","83.99",
+                 "SECRET_STATUS_DO_NOT_PUBLISH","2",""],
+                ["PRJ-990003",False,"Private site","VALID","ORG-000001","28.4","84.0","Approval","3",""],
+            ],
+            "choices":[
+                ["Publication Setting ID","Project ID","Show Project Name","Show Coordinates",
+                 "Show Ward Number","Show Status"],
+                ["Q-1","PRJ-990001",True,True,True,True],
+                ["Q-2","PRJ-990002",True,True,True,False],
+                ["Q-3","PRJ-990003",True,True,True,True],
+            ],
+            "messages":[["Source ID"]],
+            "notices":[["Notification ID","Project ID"]],
+            "progress":[["Project Work ID","Project ID","Is Public","Description Override",
+                         "Last Updated","Work Status","Verification Status"]]
+        }
+        with tempfile.TemporaryDirectory() as temp:
+            out=Path(temp)
+            self.assertEqual(build(tables,out,"source-filter-fixture"),(2,0,0))
+            raw=(out/"operations.json").read_text()
+            rows=json.loads(raw)["projects"]
+            self.assertEqual([p["status"] for p in rows],["Completed",""])
+            self.assertEqual(rows[1]["quality"],"WARNING")
+            self.assertNotIn("SECRET_STATUS_DO_NOT_PUBLISH",raw)
+            self.assertNotIn("Private site",raw)
+            self.assertNotIn("PRJ-990003",raw)
+            self.assertEqual(len(rows),2)
 
 
 if __name__ == "__main__":
