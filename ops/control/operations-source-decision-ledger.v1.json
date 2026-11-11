@@ -118,8 +118,9 @@
         "scripts/test_ops_publication.py",
         "scripts/status_filter_browser_qa.cjs"
       ],
-      "evidence_url": null,
-      "result": "PR_QA_PENDING"
+      "evidence_url": "https://github.com/FabinGurung/jp-site-operations/pull/35",
+      "result": "PR_QA_PASSED__PRODUCTION_RELEASE_PENDING",
+      "qa_run": "https://github.com/FabinGurung/jp-site-operations/actions/runs/43118856852"
     },
     {
       "id": "OPS-DEC-20261112-SOURCE-MEMORY",
@@ -139,8 +140,9 @@
         "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md",
         "ops/control/operations-source-decision-ledger.v1.json"
       ],
-      "evidence_url": null,
-      "result": "PR_QA_PENDING"
+      "evidence_url": "https://github.com/FabinGurung/jp-site-operations/pull/35",
+      "result": "PR_QA_PASSED__PRODUCTION_RELEASE_PENDING",
+      "qa_run": "https://github.com/FabinGurung/jp-site-operations/actions/runs/43118856852"
     }
   ]
 }
