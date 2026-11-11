@@ -18,22 +18,9 @@ SOURCES = {
     "progress": ("17YPRpaXIdHloH5-lzsjUpNvXLbsDfrIrlsn2jZ-7KKc", "project_work_items"),
 }
 LIBRARY = "https://fabingurung.github.io/jp-field-desk-library/"
-# Preserve the already-live Astam client route independently of the migrated catalogue.
-LEGACY_CLIENT_FILES = (
-    "feasibility/index.html",
-    "feasibility/buyer-guide/index.html",
-    "feasibility/buyer-guide/guide.json",
-    "ops/data/land-feasibility/astam-buyer-guide-public.v1.0.json",
-    "ops/data/land-feasibility/astam-village-public.v1.0.json",
-    "assets/css/jp-theme-tokens.css",
-    "assets/css/site-shell.css",
-    "assets/css/jp-botanical.css",
-    "assets/botanical/garden-left.svg",
-    "assets/botanical/garden-right.svg",
-    "assets/botanical/corner-sprig.svg",
-    "assets/botanical/empty-garden.svg",
-    "assets/botanical/tree-silhouette.svg",
-)
+# Astam land-feasibility content now belongs to the Field & Desk Resource
+# Library. Operations emits backward-compatible client redirects only.
+ASTAM_LIBRARY = LIBRARY + "feasibility/"
 
 
 def yes(value):
@@ -128,10 +115,6 @@ def build(tables, out, received_at):
     out.mkdir(parents=True, exist_ok=True)
     for name in ("index.html", "app.js", "styles.css", "owner-help.html"):
         shutil.copyfile(ROOT / "publication/operations" / name, out / name)
-    for name in LEGACY_CLIENT_FILES:
-        target = out / name
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(ROOT / name, target)
     (out / ".nojekyll").touch()
     public_ids = set(projects)
     source_dates = {
@@ -195,6 +178,8 @@ def build(tables, out, received_at):
         "guide/15-pages/index.html": "../../owner-help.html#guide",
         "resources/index.html": LIBRARY,
         "resources/project-documents.html": LIBRARY + "resources/project-documents.html",
+        "feasibility/index.html": ASTAM_LIBRARY,
+        "feasibility/buyer-guide/index.html": ASTAM_LIBRARY + "buyer-guide/",
     }.items():
         file = out / path
         file.parent.mkdir(parents=True, exist_ok=True)
