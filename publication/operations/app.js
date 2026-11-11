@@ -17,6 +17,28 @@ const safeList = (target, elements, empty) => {
 let dataset = null;
 let map = null;
 let markerLayer = null;
+let mapMode = "projects";
+const modeNotes = {
+  projects: "Location and source-record status. An approved map pin does not certify completed work.",
+  work: "Numbers count published work-report entries only. No approved complete remaining-task backlog is connected.",
+  resources: "Material and equipment shortage requests are NOT YET CONNECTED. “?” is unknown, never zero.",
+  manpower: "Approved site crew-demand figures are NOT YET CONNECTED. Individual worker records are not published.",
+  activities: "Numbers count reviewed instructions, not confirmed outstanding tasks. Open/closed status is not in this view."
+};
+const projectRecords = pid => ({
+  work: dataset.progress.filter(r => r.project_id === pid),
+  notices: dataset.notices.filter(r => r.project_id === pid),
+});
+const mapReading = p => {
+  const r = projectRecords(p.id);
+  if (mapMode === "work") return {badge: r.work.length ? String(r.work.length) : "–",
+    note: r.work.length + " published work reports · remaining work unknown", kind: "report"};
+  if (mapMode === "activities") return {badge: r.notices.length ? String(r.notices.length) : "–",
+    note: r.notices.length + " reviewed instructions · unresolved status unknown", kind: "review"};
+  if (mapMode === "resources") return {badge:"?", note:"Material/equipment demand not connected", kind:"unknown"};
+  if (mapMode === "manpower") return {badge:"?", note:"Crew-demand source not connected", kind:"unknown"};
+  return {badge:"•", note:p.status || "Published project listing · no public status", kind:"location"};
+};
 const hasPin = p => Number.isFinite(p.lat) && Number.isFinite(p.lng);
 const readable = value => String(value || "").replaceAll("_", " ").trim();
 const projectName = id => (dataset.projects.find(p => p.id === id) || {}).name || id;
@@ -54,9 +76,17 @@ function drawMap(projects) {
   }
   markerLayer.clearLayers();
   for (const p of projects.filter(hasPin)) {
-    const marker = L.marker([p.lat, p.lng], {title: p.name});
-    const popup = make("div");
-    withChildren(popup, make("strong", p.name), make("p", p.id));
+    const info = mapReading(p);
+    const badge = make("span", info.badge, "site-map-badge " + info.kind);
+    const marker = L.marker([p.lat, p.lng], {
+      title: p.name + " — " + info.note,
+      alt: p.name + " — " + info.note,
+      icon: L.divIcon({html: badge.outerHTML, className: "site-map-pin", iconSize: [39, 44], iconAnchor:[19, 40]})
+    });
+    const popup = make("div", "", "site-map-popup");
+    withChildren(popup, make("strong", p.name), make("p", p.id + " · " + info.note));
+    const entries = projectRecords(p.id);
+    popup.append(make("p", entries.work.length + " public reports · " + entries.notices.length + " reviewed instructions"));
     const select = make("button", "View project", "quiet");
     select.type = "button";
     select.addEventListener("click", () => chooseProject(p.id));
@@ -79,7 +109,8 @@ function updateProjectIndex(projects) {
     button.setAttribute("aria-pressed", selectedProject() === p.id ? "true" : "false");
     if (selectedProject() === p.id) button.classList.add("active");
     withChildren(button, make("strong", p.name),
-      make("span", [p.id, p.ward ? "Ward " + p.ward : "", hasPin(p) ? "Map pin" : "No public pin", p.quality ? "Quality: " + readable(p.quality) : ""].filter(Boolean).join(" · ")));
+      make("span", [p.id, p.ward ? "Ward " + p.ward : "", hasPin(p) ? "Mapped" : "No approved location",
+        mapReading(p).note, p.quality ? "Quality: " + readable(p.quality) : ""].filter(Boolean).join(" · ")));
     button.addEventListener("click", () => chooseProject(p.id, true));
     return button;
   });
@@ -106,7 +137,10 @@ function updateContext(overrideId) {
     ["Source quality", p.quality ? readable(p.quality) + " · review pending" : "No published warning"],
     ["Reported work entries", String(reports.length)],
     ["Reviewed instructions", String(notices.length)],
-    ["Latest report", reports.length ? reports[0].date : "No public report"]
+    ["Latest report", reports.length ? reports[0].date : "No public report"],
+    ["Material / equipment demand", "No verified demand feed connected"],
+    ["Additional crew needed", "No verified manpower demand feed connected"],
+    ["Remaining work", "Complete task register not connected"]
   ];
   for (const [label, value] of pairs) withChildren(detail, make("dt", label), make("dd", value));
   root.replaceChildren(make("h3", p.name), make("p", p.status ? "Listed status: " + p.status : "No public status"),
@@ -167,6 +201,19 @@ function render() {
   safeList("notice-list", notices.map(noticeCard), "No reviewed instructions for this selection.");
   byId("latest-date").textContent = "Latest report: " +
     (progress.length ? progress[0].date : "No published report");
+  const reviewedSites = new Set(progress.map(r => r.project_id)).size;
+  const instructionSites = new Set(notices.map(r => r.project_id)).size;
+  const pulse = mapMode === "work"
+    ? reviewedSites + " sites have published work reports · complete remaining-task counts unavailable"
+    : mapMode === "activities"
+      ? instructionSites + " sites have reviewed instructions · open/closed confirmation unavailable"
+      : mapMode === "resources"
+        ? "Material and equipment shortage feed not connected · request confirmation in the owning resource register"
+        : mapMode === "manpower"
+          ? "Crew-demand register not connected · private attendance and payroll remain outside this map"
+          : projects.filter(hasPin).length + " approved locations · " + reviewedSites + " sites have public work reports";
+  byId("field-pulse").textContent = pulse;
+  byId("map-mode-description").textContent = modeNotes[mapMode];
 }
 
 function load(payload) {
@@ -213,6 +260,14 @@ function load(payload) {
     "source-caveat");
   byId("source-dates").replaceChildren(dateList, idSummary, caveat);
   render();
+}
+for (const control of document.querySelectorAll("[data-map-mode]")) {
+  control.addEventListener("click", () => {
+    mapMode = control.dataset.mapMode;
+    for (const button of document.querySelectorAll("[data-map-mode]"))
+      button.setAttribute("aria-pressed", button === control ? "true" : "false");
+    render();
+  });
 }
 for (const id of ["project-filter", "company-filter", "report-date"])
   byId(id).addEventListener("change", render);
