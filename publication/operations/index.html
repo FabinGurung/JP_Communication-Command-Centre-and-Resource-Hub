@@ -15,7 +15,7 @@
 <a class="skip" href="#main">Skip to dashboard</a>
 <header class="north">
   <div class="brand"><span class="brand-icon" aria-hidden="true">▦</span><div><span class="eyebrow">A9 · Field intelligence</span><strong>Project Maps <span>&amp; Progress</span></strong></div></div>
-  <nav aria-label="Global navigation"><a href="#map">Map</a><a href="#progress">Daily progress</a><a href="#notifications">Instructions</a><a href="#sources">Sources</a><a href="https://fabingurung.github.io/jp-field-desk-library/">Resource library ↗</a></nav>
+  <nav aria-label="Global navigation"><a href="#map">Map</a><a href="#progress">Daily progress</a><a href="#notifications">Instructions</a><a href="#sources">Sources</a><a href="./memory-wall.html">Source decisions</a><a href="https://fabingurung.github.io/jp-field-desk-library/">Resource library ↗</a></nav>
 </header>
 <div class="workbench">
 <aside class="west" aria-labelledby="navigation-label">
@@ -23,6 +23,16 @@
   <h2>Find a work site</h2>
   <label for="project-filter">Site / project</label>
   <select id="project-filter"><option value="">All public projects</option></select>
+  <label class="desktop-status-label" for="status-filter">Project status (as listed in Google Sheets)</label>
+  <select id="status-filter" class="desktop-status-control" aria-describedby="status-source-hint">
+    <option value="all">All listed statuses</option>
+    <option value="Construction">Under construction</option>
+    <option value="Completed">Completed</option>
+    <option value="Approval">Approval</option>
+    <option value="Maintenance">Maintenance</option>
+    <option value="unpublished">Not stated / other</option>
+  </select>
+  <p id="status-source-hint" class="help">Project status is a source register value, not engineer acceptance.</p>
   <label for="company-filter">Executing organization</label>
   <select id="company-filter"><option value="">All organizations</option></select>
   <label for="report-date">Reporting date</label>
@@ -48,6 +58,18 @@
       <button type="button" data-map-mode="resources" aria-pressed="false">Materials &amp; plant</button>
       <button type="button" data-map-mode="manpower" aria-pressed="false">Manpower</button>
       <button type="button" data-map-mode="activities" aria-pressed="false">Instructions</button>
+    </div>
+    <div class="mobile-status-filter" aria-label="Filter sites by recorded project status">
+      <div class="mobile-filter-heading"><strong>Show sites by status</strong><span>From Projects and Locations Sheet</span></div>
+      <div class="status-chip-scroll" role="group" aria-label="Project status filter">
+        <button type="button" data-project-status="all" aria-pressed="true">All <span data-status-count="all">—</span></button>
+        <button type="button" data-project-status="Construction" aria-pressed="false">Construction <span data-status-count="Construction">—</span></button>
+        <button type="button" data-project-status="Completed" aria-pressed="false">Completed <span data-status-count="Completed">—</span></button>
+        <button type="button" data-project-status="Approval" aria-pressed="false">Approval <span data-status-count="Approval">—</span></button>
+        <button type="button" data-project-status="Maintenance" aria-pressed="false">Maintenance <span data-status-count="Maintenance">—</span></button>
+        <button type="button" data-project-status="unpublished" aria-pressed="false">Not stated <span data-status-count="unpublished">—</span></button>
+      </div>
+      <p id="status-filter-summary" class="status-filter-summary" role="status" aria-live="polite">Reading approved project status values…</p>
     </div>
     <div id="map-mode-description" class="map-mode-description" role="status" aria-live="polite">Sites and approved coordinates · Choose a pin for its evidence.</div>
     <div id="field-pulse" class="field-pulse" role="status" aria-live="polite">Loading reviewed site records…</div>
