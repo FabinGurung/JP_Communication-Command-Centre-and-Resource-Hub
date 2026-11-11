@@ -4,7 +4,7 @@
   "repository": {
     "repository_id": "REPO-000007",
     "provider_repository_id": "1312147922",
-    "full_name": "FabinGurung/JP_Communication-Command-Centre-and-Resource-Hub",
+    "full_name": "FabinGurung/jp-site-operations",
     "default_branch": "main"
   },
   "observed_at": "2026-10-09T11:49:12.215+05:45",
@@ -689,6 +689,29 @@
         ".github/workflows/operations-sheets-pages.yml",
         "docs/releases/v2.5.0.md",
         "docs/operations/LIVE_PROJECT_IDENTITY_AND_SOURCE_DATES.md"
+      ]
+    },
+    {
+      "branch_id": "OPS-SYS-FIELD-MAPS-R3",
+      "branch_name": "feature/field-operations-multimap-r3-20261111",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "11 Nov 2026: engineer-first layered project map, read-only demand states, Astam cross-site legacy redirects, canonical rename metadata; PR-only promotion.",
+      "allowed_paths": [
+        "A7_MODULE.json",
+        "ops/control/branch-lane-registry.json",
+        "scripts/validate_branch_registry.py",
+        "scripts/publish_operations.py",
+        "scripts/test_ops_publication.py",
+        "publication/operations/index.html",
+        "publication/operations/styles.css",
+        "publication/operations/app.js",
+        ".github/workflows/operations-sheets-pages.yml",
+        "docs/releases/v2.6.0.md",
+        "docs/operations/ENGINEER_FIRST_MAP_AND_RESOURCE_BOUNDARY.md"
       ]
     }
   ]

@@ -12,6 +12,10 @@ on:
       - 'docs/releases/v2.4.0.md'
       - 'docs/releases/v2.5.0.md'
       - 'docs/releases/v2.5.1.md'
+      - 'docs/releases/v2.6.0.md'
+      - 'docs/operations/ENGINEER_FIRST_MAP_AND_RESOURCE_BOUNDARY.md'
+      - 'A7_MODULE.json'
+      - 'ops/control/branch-lane-registry.json'
       - 'docs/operations/LIVE_PROJECT_IDENTITY_AND_SOURCE_DATES.md'
       - 'scripts/publish_operations.py'
       - 'scripts/notification_projection.py'
@@ -33,6 +37,10 @@ on:
       - 'docs/releases/v2.4.0.md'
       - 'docs/releases/v2.5.0.md'
       - 'docs/releases/v2.5.1.md'
+      - 'docs/releases/v2.6.0.md'
+      - 'docs/operations/ENGINEER_FIRST_MAP_AND_RESOURCE_BOUNDARY.md'
+      - 'A7_MODULE.json'
+      - 'ops/control/branch-lane-registry.json'
       - 'docs/operations/LIVE_PROJECT_IDENTITY_AND_SOURCE_DATES.md'
       - 'scripts/publish_operations.py'
       - 'scripts/notification_projection.py'
@@ -238,4 +246,50 @@ jobs:
           else
             gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
               --title 'Operations v2.5.1 — Canonical Pages Links' --notes-file "$notes"
+          fi
+
+  release-field-map-v2-6:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify live field map and Astam redirects before tagging
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          notes='docs/releases/v2.6.0.md'
+          tag='v2.6.0'
+          if git diff --quiet HEAD^ HEAD -- "$notes"; then
+            echo "No new v2.6.0 notes in this main push"
+            exit 0
+          fi
+          pages="https://fabingurung.github.io/${GITHUB_REPOSITORY#*/}"
+          for file in index.html app.js styles.css owner-help.html; do
+            curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/$file?commit=$GITHUB_SHA" \
+              | cmp - "publication/operations/$file"
+          done
+          for entry in feasibility/index.html feasibility/buyer-guide/index.html; do
+            body=$(curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/$entry?commit=$GITHUB_SHA")
+            grep -Fq 'https://fabingurung.github.io/jp-field-desk-library/feasibility/' <<< "$body"
+            grep -Fq 'u.search = location.search' <<< "$body"
+          done
+          packet=$(curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/resources/project-documents.html?commit=$GITHUB_SHA")
+          grep -Fq 'https://fabingurung.github.io/jp-field-desk-library/resources/project-documents.html' <<< "$packet"
+          grep -Fq 'u.search = location.search' <<< "$packet"
+          curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/operations.json?commit=$GITHUB_SHA" \
+            | python -c 'import json,sys; j=json.load(sys.stdin); assert j["provenance"]["schema_version"]=="1.2.0"; assert j["identity"]["public_project_count"]==len(j["projects"]); assert j["provenance"]["engineering_completion"]=="NOT_CERTIFIED_BY_THIS_DASHBOARD"; print("FIELD_MAP_PUBLIC_PROJECTION_PASS",len(j["projects"]),len(j["notices"]),len(j["progress"]))'
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            test "$(git ls-remote origin "refs/tags/$tag" | cut -f1)" = "$GITHUB_SHA"
+          else
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title 'Site Operations Engineer Map v2.6.0' --notes-file "$notes"
           fi

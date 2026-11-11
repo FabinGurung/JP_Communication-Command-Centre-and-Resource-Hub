@@ -20,7 +20,7 @@
 <div class="workbench">
 <aside class="west" aria-labelledby="navigation-label">
   <p class="eyebrow" id="navigation-label">WEST · Locate &amp; filter</p>
-  <h2>Project navigator</h2>
+  <h2>Find a work site</h2>
   <label for="project-filter">Site / project</label>
   <select id="project-filter"><option value="">All public projects</option></select>
   <label for="company-filter">Executing organization</label>
@@ -30,26 +30,39 @@
   <p id="report-date-help" class="help">Filters reported work only, not map locations.</p>
   <button type="button" id="reset-filters" class="quiet">Clear filters</button>
   <div class="side-divider"></div>
-  <div class="side-heading"><h3>Public project index</h3><span id="project-count" class="count">—</span></div>
+  <div class="side-heading"><h3>Site directory</h3><span id="project-count" class="count">—</span></div>
   <div id="project-list" class="project-list" aria-live="polite"><p>Loading approved project listings…</p></div>
   <p class="help">Projects without approved public coordinates remain listed without a map pin.</p>
 </aside>
 <main id="main" class="centre">
-  <section class="welcome" aria-labelledby="dashboard-title">
-    <div><p class="eyebrow">PROJECT OPERATIONS · READ-ONLY</p><h1 id="dashboard-title">See the site.<br><em>Understand the work.</em></h1><p>Map locations, review field-reported activity and follow approved instructions. Original Sheets and messages keep their authority.</p></div>
-    <div class="build-receipt"><span class="small-title">Publication readback</span><strong id="receipt" role="status">Loading snapshot…</strong><small>Read time is not a field-report date.</small></div>
-  </section>
-  <section class="metrics" aria-label="Public snapshot overview">
-    <article><span>Visible projects</span><strong id="metric-projects">—</strong><small>Approved listings</small></article>
-    <article><span>Map pins</span><strong id="metric-pins">—</strong><small>Approved locations</small></article>
-    <article><span>Reported work</span><strong id="metric-progress">—</strong><small>Not certified completion</small></article>
-    <article><span>Instructions</span><strong id="metric-notices">—</strong><small>Source-reviewed notices</small></article>
+  <section class="field-intro" aria-labelledby="dashboard-title">
+    <div><p class="eyebrow">A9 · DAILY SITE CONTROL</p><h1 id="dashboard-title">Which site needs attention?</h1>
+    <p>Find a site, review reported work and check approved instructions. Unreported shortages and unverified tasks are never treated as confirmed.</p></div>
+    <details class="publication-details"><summary>Source and update time</summary><strong id="receipt" role="status">Loading source readback…</strong><small>Readback does not certify site progress.</small></details>
   </section>
   <section id="map" class="surface map-section" aria-labelledby="map-title">
-    <div class="section-head"><div><span class="eyebrow">01 · LOCATION VIEW</span><h2 id="map-title">Project map</h2></div><p>Only sites with explicit public-coordinate approval show pins.</p></div>
+    <div class="section-head"><div><span class="eyebrow">SITE CONTROL · FILTER BY NEED</span><h2 id="map-title">Site situation map</h2></div><p>Select a layer; open a site for its latest reviewed records.</p></div>
+    <div class="map-modes" role="group" aria-label="Choose site information layer">
+      <button type="button" data-map-mode="projects" aria-pressed="true">Sites</button>
+      <button type="button" data-map-mode="work" aria-pressed="false">Work</button>
+      <button type="button" data-map-mode="resources" aria-pressed="false">Materials &amp; plant</button>
+      <button type="button" data-map-mode="manpower" aria-pressed="false">Manpower</button>
+      <button type="button" data-map-mode="activities" aria-pressed="false">Instructions</button>
+    </div>
+    <div id="map-mode-description" class="map-mode-description" role="status" aria-live="polite">Sites and approved coordinates · Choose a pin for its evidence.</div>
+    <div id="field-pulse" class="field-pulse" role="status" aria-live="polite">Loading reviewed site records…</div>
     <div id="map-canvas" role="region" aria-label="Interactive project location map" tabindex="0"></div>
     <p id="map-fallback" class="help" hidden>Map tiles are not available. Use the project navigator to browse all approved listings.</p>
+    <p class="map-note">A numbered pin shows <strong>published records</strong> in the selected layer, not all remaining construction work. “?” means no reviewed demand data. Sites without approved map coordinates remain in the project list.</p>
   </section>
+  <details class="coverage-details"><summary>Publication details &amp; dataset coverage</summary>
+    <div class="metrics" aria-label="Approved source coverage">
+      <article><span>Public project listings</span><strong id="metric-projects">—</strong><small>Not the full construction portfolio</small></article>
+      <article><span>Approved map locations</span><strong id="metric-pins">—</strong><small>Geographic permission required</small></article>
+      <article><span>Published work records</span><strong id="metric-progress">—</strong><small>Not a complete task backlog</small></article>
+      <article><span>Reviewed instructions</span><strong id="metric-notices">—</strong><small>Not proof of unresolved actions</small></article>
+    </div>
+  </details>
   <section id="progress" class="surface" aria-labelledby="progress-title">
     <div class="section-head"><div><span class="eyebrow">02 · FIELD REPORTS</span><h2 id="progress-title">Daily reported progress</h2></div><div class="meta-stack"><span id="latest-date">Latest report: —</span><span class="caution">Reported ≠ engineer-certified</span></div></div>
     <p class="section-description">Activities recorded in the public Project Work projection. Status and source-sheet verification are shown separately; neither represents approved quantities or billing.</p>

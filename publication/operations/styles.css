@@ -21,3 +21,40 @@
 .source-dates .identity-note{margin:14px 0 4px;color:#e0eee4;font-size:11px}
 .source-dates .source-caveat{font-size:10px;color:#cadacc;margin:5px 0 0}
 @media(max-width:570px){.source-date-grid{grid-template-columns:1fr;gap:2px}.source-date-grid dd{text-align:left;margin-bottom:7px}}
+
+/* v2.6.0 — engineer-first map priority: actions before developer/publication metrics */
+.field-intro{display:flex;gap:16px;justify-content:space-between;align-items:start;flex-wrap:wrap;background:linear-gradient(105deg,#e4f2e8,#fffdf3);border:1px solid #d6e6db;border-radius:15px;padding:19px 22px}
+.field-intro h1{margin:0;font-size:clamp(24px,3vw,36px);line-height:1.12;letter-spacing:-.045em;color:#173f32}
+.field-intro p:not(.eyebrow){margin:8px 0 0;font-size:13px;color:#536f60;max-width:720px}
+.publication-details{font-size:11px;max-width:245px;color:#496356}
+.publication-details summary,.coverage-details summary{cursor:pointer;font-weight:800;color:#245b45;text-decoration:underline;text-underline-offset:3px}
+.publication-details strong,.publication-details small{display:block;margin-top:7px;overflow-wrap:anywhere}
+.map-modes{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap;margin:12px 0 10px}
+.map-modes button{display:inline-flex;justify-content:center;align-items:center;min-height:43px;font-weight:780;font-size:12px;padding:10px 13px;border:1px solid #c8dbd0;border-radius:10px;background:#f5f8f3;color:#264e3c}
+.map-modes button:hover{background:#e4f1e6}
+.map-modes button[aria-pressed=true]{color:#fff;background:#1a624c;border-color:#1a624c;box-shadow:0 2px 10px #1b4d3422}
+.map-mode-description{font-size:12px;line-height:1.5;color:#335a46;margin:7px 0 8px}
+.field-pulse{padding:11px 14px;margin:0 0 11px;border-radius:9px;background:#edf4eb;color:#234f3b;font-size:12px;font-weight:780}
+.map-note{font-size:11px;color:#5e7767;margin:10px 0 0}
+.site-map-pin{background:transparent!important;border:0!important}
+.site-map-badge{width:39px;height:39px;display:flex;align-items:center;justify-content:center;background:#246b9a;border:3px solid #fff;color:#fff;font-size:15px;font-weight:850;box-shadow:0 3px 8px #102a2755;border-radius:17px 17px 17px 3px;transform:rotate(-12deg)}
+.site-map-badge.report{background:#b76e24}
+.site-map-badge.review{background:#7a5eb4}
+.site-map-badge.unknown{background:#667775}
+.site-map-badge.location{background:#246b9a}
+.site-map-popup p{font-size:12px;margin:7px 0}
+.coverage-details{border:1px solid #dbe4db;border-radius:11px;padding:10px 15px;background:#f9fbf8}
+.coverage-details .metrics{margin:12px 0 0}
+.coverage-details .metrics article{min-height:100px}
+@media(max-width:760px){
+  .field-intro{padding:15px 17px;gap:8px}
+  .field-intro h1{font-size:25px}
+  .field-intro p:not(.eyebrow){font-size:12px}
+  .publication-details{max-width:100%}
+  .map-modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .map-modes button{font-size:12px;padding:8px 7px;line-height:1.25;min-height:44px}
+  .map-modes button:last-child{grid-column:span 2}
+  #map-canvas{min-height:350px;height:48dvh;max-height:530px}
+  .map-section{padding:15px}
+  .coverage-details .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
