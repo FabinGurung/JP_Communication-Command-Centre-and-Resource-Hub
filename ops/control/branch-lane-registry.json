@@ -713,6 +713,34 @@
         "docs/releases/v2.6.0.md",
         "docs/operations/ENGINEER_FIRST_MAP_AND_RESOURCE_BOUNDARY.md"
       ]
+    },
+    {
+      "branch_id": "OPS-SYS-STATUS-MOBILE-R4",
+      "branch_name": "feature/mobile-site-status-from-sheets-20261112",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "12 Nov 2026: source-verified project status mobile tap filters, desktop select, Operations memory wall, headless UX QA; PR-only promotion.",
+      "allowed_paths": [
+        "ops/control/branch-lane-registry.json",
+        "scripts/validate_branch_registry.py",
+        "publication/operations/index.html",
+        "publication/operations/app.js",
+        "publication/operations/styles.css",
+        "publication/operations/owner-help.html",
+        "publication/operations/memory-wall.html",
+        "scripts/publish_operations.py",
+        "scripts/test_ops_publication.py",
+        "scripts/build_status_filter_fixture.py",
+        "scripts/status_filter_browser_qa.cjs",
+        "scripts/validate_ops_source_memory.py",
+        "ops/control/operations-source-decision-ledger.v1.json",
+        "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md",
+        "docs/releases/v2.7.0.md",
+        ".github/workflows/operations-sheets-pages.yml"
+      ]
     }
   ]
 }
