@@ -18,6 +18,29 @@ let dataset = null;
 let map = null;
 let markerLayer = null;
 let mapMode = "projects";
+let statusFilter = "all";
+// Exact public Sheets Status values. No completion inference from work reports.
+const statusKeys = ["Construction", "Completed", "Approval", "Maintenance"];
+const publishedStatus = p => statusKeys.includes(p.status) ? p.status : "unpublished";
+const statusLabel = key => ({
+  all:"All public sites", Construction:"Under construction",
+  Completed:"Completed", Approval:"Approval", Maintenance:"Maintenance",
+  unpublished:"Not stated / other"
+})[key] || "Not stated / other";
+const matchesStatus = p => statusFilter === "all" || publishedStatus(p) === statusFilter;
+function syncStatusControls() {
+  byId("status-filter").value = statusFilter;
+  for (const b of document.querySelectorAll("[data-project-status]"))
+    b.setAttribute("aria-pressed", b.dataset.projectStatus === statusFilter ? "true" : "false");
+}
+function setStatusFilter(value) {
+  statusFilter = value;
+  // Avoid contradictory site + status selections and a misleading empty map.
+  byId("project-filter").value = "";
+  syncStatusControls();
+  render();
+}
+
 const modeNotes = {
   projects: "Location and source-record status. An approved map pin does not certify completed work.",
   work: "Numbers count published work-report entries only. No approved complete remaining-task backlog is connected.",
@@ -46,7 +69,7 @@ const selectedProject = () => byId("project-filter").value;
 const selectedCompany = () => byId("company-filter").value;
 const filteredProjects = () => dataset.projects.filter(p =>
   (!selectedProject() || p.id === selectedProject()) &&
-  (!selectedCompany() || p.company_id === selectedCompany()));
+  (!selectedCompany() || p.company_id === selectedCompany()) && matchesStatus(p));
 const filterByProject = r => filteredProjects().some(p => p.id === r.project_id);
 const filteredProgress = () => dataset.progress.filter(r =>
   filterByProject(r) && (!byId("report-date").value || r.date === byId("report-date").value));
@@ -189,6 +212,20 @@ function render() {
   const projects = filteredProjects();
   const progress = filteredProgress();
   const notices = filteredNotices();
+  const eligible = dataset.projects.filter(p => !selectedCompany() || p.company_id === selectedCompany());
+  const tally = {"all":eligible.length,"Construction":0,"Completed":0,"Approval":0,"Maintenance":0,"unpublished":0};
+  for (const p of eligible) tally[publishedStatus(p)] += 1;
+  for (const e of document.querySelectorAll("[data-status-count]"))
+    e.textContent = String(tally[e.dataset.statusCount] ?? 0);
+  for (const option of byId("status-filter").options) {
+    if (option.value === "all") option.textContent = "All statuses (" + tally.all + ")";
+    else option.textContent = statusLabel(option.value) + " (" + (tally[option.value] || 0) + ")";
+  }
+  byId("status-filter-summary").textContent =
+    statusLabel(statusFilter) + " · " + projects.length + " public projects shown" +
+    (selectedCompany() ? " for selected organization" : "") +
+    " · status is a Sheet listing, not certified completion.";
+
   byId("metric-projects").textContent = String(projects.length);
   byId("metric-pins").textContent = String(projects.filter(hasPin).length);
   byId("metric-progress").textContent = String(progress.length);
@@ -269,12 +306,23 @@ for (const control of document.querySelectorAll("[data-map-mode]")) {
     render();
   });
 }
-for (const id of ["project-filter", "company-filter", "report-date"])
+for (const button of document.querySelectorAll("[data-project-status]"))
+  button.addEventListener("click", () => setStatusFilter(button.dataset.projectStatus));
+byId("status-filter").addEventListener("change", () => setStatusFilter(byId("status-filter").value));
+byId("project-filter").addEventListener("change", () => {
+  // A direct project choice takes precedence over the previous group filter.
+  statusFilter = "all";
+  syncStatusControls();
+  render();
+});
+for (const id of ["company-filter", "report-date"])
   byId(id).addEventListener("change", render);
 byId("reset-filters").addEventListener("click", () => {
   byId("project-filter").value = "";
   byId("company-filter").value = "";
   byId("report-date").value = "";
+  statusFilter = "all";
+  syncStatusControls();
   render();
 });
 fetch("./operations.json", {cache: "no-cache"})
