@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="JP Site Operations source-owned facts, publication decisions, change history and verification rules.">
+<title>Operations Source &amp; Decision Memory Wall</title>
+<link rel="stylesheet" href="./styles.css">
+<style>
+body{background:#f3f6f0;color:#1b4434;line-height:1.55;font-family:Inter,system-ui,sans-serif}
+.mw-header{background:#153f33;color:white;padding:13px clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.mw-header a{color:white;font-weight:750;text-decoration:none;padding:8px}
+.mw-wrap{max-width:1000px;margin:0 auto;padding:24px 17px 70px}
+.mw-hero{padding:23px;background:linear-gradient(120deg,#e3f1e4,#fffcf1);border:1px solid #c7dacb;border-radius:15px}
+.mw-hero h1{font-size:clamp(25px,4vw,40px);letter-spacing:-.04em;margin:4px 0 10px}
+.mw-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:16px 0}
+.mw-card{background:#fff;border:1px solid #d5e2d7;border-radius:13px;padding:18px;min-width:0}
+.mw-card h2{font-size:19px;margin:0 0 9px}.mw-card p{font-size:13px;color:#4e6a5a}
+.mw-card a{font-weight:760;overflow-wrap:anywhere}
+.mw-card small{display:block;color:#557164;margin-top:5px}
+.mw-wide{grid-column:1/-1}
+.mw-steps{padding-left:22px;font-size:14px}
+.mw-steps li{margin:9px 0}
+.mw-table{width:100%;border-collapse:collapse;font-size:13px}
+.mw-table td,.mw-table th{text-align:left;border-bottom:1px solid #d7e4db;padding:10px;vertical-align:top}
+.mw-table th{font-weight:800}
+.mw-note{background:#fdf4de;padding:12px 14px;border-left:4px solid #c48b27;border-radius:6px;font-size:13px}
+@media(max-width:700px){.mw-grid{grid-template-columns:1fr}.mw-card{padding:15px}.mw-wide{grid-column:auto}.mw-table{font-size:12px}.mw-table td,.mw-table th{padding:8px}}
+</style></head><body>
+<a class="skip" href="#main">Skip to sources</a>
+<header class="mw-header"><strong>JP Site Operations · Source Memory Wall</strong><nav aria-label="Return navigation"><a href="./#map">Site map</a><a href="./owner-help.html">Owner guide</a><a href="https://fabingurung.github.io/jp-field-desk-library/">Resource Library</a></nav></header>
+<main id="main" class="mw-wrap">
+<section class="mw-hero"><span class="eyebrow">PUBLIC-SAFE SOURCE CONTROL</span><h1>Where do our facts come from?</h1><p>The original Google Sheets own project and operational facts. GitHub owns code, testing and decisions. This wall records how public views were derived; it does not replace editable source registers.</p>
+<p><a href="https://drive.google.com/drive/folders/1QHxD74egNFeQAmvDJzvKmDxEQUOH3Kq6">02 Website Sheets and Registers</a> → <a href="https://drive.google.com/drive/folders/1u4Rg1J3KSZRPnkjlAHOVxpWoq2skRICn">01 Website Source Sheets — Edit Here</a></p></section>
+<div class="mw-grid">
+<section class="mw-card"><h2>Project identity and status</h2><p>Project ID, listed status and permitted coordinates come from Projects and Locations.</p><a href="https://docs.google.com/spreadsheets/d/1JqzjBNBCT_AAIBkuGsIR5VBOJ3_HyifdPDc7K_jF5Bo/edit">Open original project register</a><small>Tab: projects · use exact project IDs</small></section>
+<section class="mw-card"><h2>Permission to publish</h2><p>Each project's allowed name, status and coordinates are controlled independently. Hidden status stays hidden even inside filters.</p><a href="https://docs.google.com/spreadsheets/d/1tDpsphzARq-rk1MExU4DXC8mG_clh-0TXJwRr2qljXU/edit">Open publication controls</a><small>Tab: project_publication_settings</small></section>
+<section class="mw-card"><h2>Reported work</h2><p>Approved public work reports, their recorded states and verification. Not an exhaustive backlog or engineering sign-off.</p><a href="https://docs.google.com/spreadsheets/d/17YPRpaXIdHloH5-lzsjUpNvXLbsDfrIrlsn2jZ-7KKc/edit">Open original Project Work</a><small>Tab: project_work_items</small></section>
+<section class="mw-card"><h2>Reviewed instructions</h2><p>Notification instructions are linked to reviewed source-message records and their versions.</p><a href="https://docs.google.com/spreadsheets/d/1ZPtTos8t9Cym_qnpiUhiyuTxndSc6sGzzv390ahAw4I/edit">Notification Instructions</a>
+<p><a href="https://docs.google.com/spreadsheets/d/1aWHzjEK0doiUcBbqhySiA6DWCp8d-aq2I08McslilAQ/edit">Message Source Register</a></p></section>
+<section class="mw-card mw-wide"><h2>Decisions and derived files</h2><div style="overflow-x:auto"><table class="mw-table"><thead><tr><th>Decision</th><th>Source owner and affected output</th><th>Evidence</th></tr></thead><tbody>
+<tr><td><strong>2026-11-11</strong> Astam land resources moved to Library</td><td>Resource owner, Operations redirects; publisher code and previous URL paths</td><td><a href="https://github.com/FabinGurung/jp-site-operations/releases/tag/v2.6.0">Operations v2.6.0</a></td></tr>
+<tr><td><strong>2026-11-12</strong> Mobile status buttons and desktop select</td><td>Projects and Locations + Website Display Choices → public operations.json → map and site list</td><td><a href="https://github.com/FabinGurung/jp-site-operations/blob/main/docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md">Source + QA policy</a></td></tr>
+<tr><td><strong>2026-11-12</strong> Source decision memory wall</td><td>Five owning Sheets; versioned code, tests and decision ledger in Git</td><td><a href="https://github.com/FabinGurung/jp-site-operations/blob/main/ops/control/operations-source-decision-ledger.v1.json">Machine-readable record</a></td></tr>
+</tbody></table></div></section>
+<section class="mw-card mw-wide"><h2>For every future change</h2><ol class="mw-steps">
+<li>Identify the owner Sheet and its exact tab, permanent row ID and permission controls; do a fresh authorized read.</li>
+<li>Record the decision, affected code/data output, source revision or row date and the remaining unknowns in the versioned ledger.</li>
+<li>Change only the authorized source or Git code; do not create another editable master.</li>
+<li>Validate public data and the mobile/desktop interactions using safe fixtures, then verify real Google Sheets production publication.</li>
+<li>Record PR/commit, successful Actions run, served website readback and any open holds before calling the work released.</li>
+</ol><p class="mw-note"><strong>Important:</strong> `Completed` in a project register is a listed lifecycle status, not independent proof of engineer-certified completion. A hidden status cannot be derived from work reports. Materials, equipment and manpower-shortage maps still lack authorized live demand feeds.</p></section>
+<section class="mw-card mw-wide"><h2>Current limitations and corrections</h2><p>The Website Publishing and Source Directory is a joined navigation workbook, not an original editable fact authority. Source dates and publisher timestamps have different meanings. Revisions, deleted rows and corrected reports must be handled by the owning source and documented.</p><a href="https://docs.google.com/spreadsheets/d/17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4/edit">Publishing directory (derived)</a> · <a href="https://github.com/FabinGurung/jp-site-operations/issues/30">Correction/revision issue</a> · <a href="https://github.com/FabinGurung/jp-site-operations/issues/34">Task &amp; resource feeds</a>
+<p><a href="https://github.com/FabinGurung/jp-site-operations/actions/workflows/operations-sheets-pages.yml">Check latest Google Sheets publication and Pages Actions</a></p></section>
+</div></main></body></html>
