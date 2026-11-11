@@ -113,7 +113,7 @@ def build(tables, out, received_at):
     progress.sort(key=lambda r: (r["date"], r["id"]), reverse=True)
     notices.sort(key=lambda r: (r["date"], -r["display_order"]), reverse=True)
     out.mkdir(parents=True, exist_ok=True)
-    for name in ("index.html", "app.js", "styles.css", "owner-help.html"):
+    for name in ("index.html", "app.js", "styles.css", "owner-help.html", "memory-wall.html"):
         shutil.copyfile(ROOT / "publication/operations" / name, out / name)
     (out / ".nojekyll").touch()
     public_ids = set(projects)
