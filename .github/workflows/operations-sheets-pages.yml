@@ -86,6 +86,7 @@ jobs:
         with:
           persist-credentials: false
       - run: node --check publication/operations/app.js
+      - run: node --check scripts/status_filter_browser_qa.cjs
       - run: python -m unittest discover -s scripts -p 'test_ops_publication.py' -v
       - run: python scripts/validate_ops_source_memory.py
 
@@ -120,7 +121,13 @@ jobs:
           node scripts/status_filter_browser_qa.cjs
 
   project:
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && (github.event_name == 'workflow_dispatch' || vars.JP_OPERATIONS_PAGES_MODE == 'SHEETS_V2') && (github.event_name == 'schedule' || needs['browser-status-qa'].result == 'success')
+    if: >-
+      always() &&
+      github.ref == 'refs/heads/main' &&
+      github.event_name != 'pull_request' &&
+      needs.test.result == 'success' &&
+      (github.event_name == 'workflow_dispatch' || vars.JP_OPERATIONS_PAGES_MODE == 'SHEETS_V2') &&
+      (github.event_name == 'schedule' || needs['browser-status-qa'].result == 'success')
     needs: [test, browser-status-qa]
     runs-on: ubuntu-24.04
     timeout-minutes: 10
