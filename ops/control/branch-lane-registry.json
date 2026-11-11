@@ -739,7 +739,8 @@
         "ops/control/operations-source-decision-ledger.v1.json",
         "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md",
         "docs/releases/v2.7.0.md",
-        ".github/workflows/operations-sheets-pages.yml"
+        ".github/workflows/operations-sheets-pages.yml",
+        "AGENTS.md"
       ]
     }
   ]
