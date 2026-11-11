@@ -83,7 +83,8 @@ system_lanes=registry.get("ephemeral_system_lanes",[])
 system_refs=set()
 system_bases={"system/notification-center": "feature/daily-ops-current-work", "system/operations-resource-split": "main",
               "feature/maps-progress-dashboard-r1-20261109": "main",
-              "feature/maps-source-freshness-r2-20261110": "main"}
+              "feature/maps-source-freshness-r2-20261110": "main",
+              "feature/field-operations-multimap-r3-20261111": "main"}
 for lane in system_lanes:
     name=lane.get("branch_name","")
     if (name not in system_bases or lane.get("allowed_for_work") is not True
