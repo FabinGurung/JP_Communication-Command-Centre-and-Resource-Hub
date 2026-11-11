@@ -34,7 +34,7 @@ assert "memory-wall.html" in owner
 assert "01 Website Source Sheets" in page
 assert "02 Website Sheets and Registers" in page
 assert "source-decision-ledger" in page
-assert "Original Google Sheets" in doc
+assert "original Google Sheets" in doc
 assert "Projects and Locations" in doc
 assert "OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md" in policy
 assert "SHEETS_V2" in policy
