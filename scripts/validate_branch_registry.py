@@ -21,6 +21,9 @@ if registry.get("schema_version")!="1.0.0" or registry.get("registry_id")!="OPS-
     raise SystemExit("Unexpected branch registry identity/version.")
 if registry.get("required_before_mutation") is not True:
     raise SystemExit("Branch registry must be compulsory before mutation.")
+if (registry.get("repository",{}).get("full_name")!="FabinGurung/jp-site-operations"
+        or registry["repository"].get("provider_repository_id")!="1312147922"):
+    raise SystemExit("Renamed Operations repo identity must match the stable provider ID.")
 if control.get("status")!="ACTIVE_COMPULSORY":
     raise SystemExit("Operations control system is not ACTIVE_COMPULSORY.")
 
