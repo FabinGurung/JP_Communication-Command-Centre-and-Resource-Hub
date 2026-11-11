@@ -27,7 +27,7 @@ The **canonical published home** is:
 - https://fabingurung.github.io/jp-field-desk-library/feasibility/
 - https://fabingurung.github.io/jp-field-desk-library/feasibility/buyer-guide/
 
-Library v1.4.0 release was built and verified from previously public-safe Operations assets. The old Operations project page, guide, guide.json and two public derived source files were deleted from Operations **Git HEAD** after that release. Their exact historical bytes remain recoverable at immutable Operations revision `066beb324c46884ae74eed129b01d064b3ba1854` via Git history. Original private Drive authorities were neither moved nor modified.
+Library v1.4.0 release was built and verified from previously public-safe Operations assets. The old Operations project and guide **content** and their three public JSON copies were removed from Operations **Git HEAD** after that release. Only small legacy-link HTML stubs remain at the former project and guide paths for existing route validators; the live Pages publisher generates its own canonical cross-site redirects. Their exact historical bytes remain recoverable at immutable Operations revision `066beb324c46884ae74eed129b01d064b3ba1854` via Git history. Original private Drive authorities were neither moved nor modified.
 
 Operations now publishes only old-route compatibility redirects at `/feasibility/` and `/feasibility/buyer-guide/`, forwarding original query parameters. Static JSON subpaths are no longer duplicated at Operations Pages; future consumers must use canonical Library resource URLs. Shared historical CSS and botanical assets may remain in Git as pre-existing general-purpose site assets but are not re-published by this Sheets-only dashboard.
 
