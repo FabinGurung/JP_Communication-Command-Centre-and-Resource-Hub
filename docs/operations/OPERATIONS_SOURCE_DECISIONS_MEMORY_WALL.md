@@ -35,8 +35,8 @@ Connected live source readback (the above two original Sheets, not a Git fixture
 | Date | Decision and affected files | Evidence / status |
 | --- | --- | --- |
 | 2026-11-11 | Astam land buyer resources migrated from Operations to Library; Operations routes redirect. `scripts/publish_operations.py`, cross-site URLs. | [Operations v2.6.0](https://github.com/FabinGurung/jp-site-operations/releases/tag/v2.6.0), [Library v1.4.0](https://github.com/FabinGurung/jp-field-desk-library/releases/tag/v1.4.0) |
-| 2026-11-12 | Small mobile status chips vs desktop dropdown, source-approved values, status-hidden fallback, filter sync. `publication/operations/index.html`, `app.js`, `styles.css`, test/QA files. | Under PR QA until production verified |
-| 2026-11-12 | Formal source decision memory wall, linked live HTML, machine ledger and local operator rules. `AGENTS.md`, this document, `ops/control/operations-source-decision-ledger.v1.json`. | Under PR QA until production verified |
+| 2026-11-12 | Small mobile status chips vs desktop dropdown, source-approved values, status-hidden fallback, filter sync. `publication/operations/index.html`, `app.js`, `styles.css`, test/QA files. | [PR #35: Chromium QA passed](https://github.com/FabinGurung/jp-site-operations/actions/runs/43118856852); production release verification pending |
+| 2026-11-12 | Formal source decision memory wall, linked live HTML, machine ledger and local operator rules. `AGENTS.md`, this document, `ops/control/operations-source-decision-ledger.v1.json`. | [PR #35: Chromium QA passed](https://github.com/FabinGurung/jp-site-operations/actions/runs/43118856852); production release verification pending |
 
 ## 5. Future update template
 For *every* new Operations decision or derived data artifact, append one dated ledger entry (without creating a new source authority) recording:
