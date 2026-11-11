@@ -13,6 +13,13 @@ on:
       - 'docs/releases/v2.5.0.md'
       - 'docs/releases/v2.5.1.md'
       - 'docs/releases/v2.6.0.md'
+      - 'docs/releases/v2.7.0.md'
+      - 'docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md'
+      - 'ops/control/operations-source-decision-ledger.v1.json'
+      - 'scripts/build_status_filter_fixture.py'
+      - 'scripts/status_filter_browser_qa.cjs'
+      - 'scripts/validate_ops_source_memory.py'
+      - 'AGENTS.md'
       - 'docs/operations/ENGINEER_FIRST_MAP_AND_RESOURCE_BOUNDARY.md'
       - 'A7_MODULE.json'
       - 'ops/control/branch-lane-registry.json'
@@ -38,6 +45,13 @@ on:
       - 'docs/releases/v2.5.0.md'
       - 'docs/releases/v2.5.1.md'
       - 'docs/releases/v2.6.0.md'
+      - 'docs/releases/v2.7.0.md'
+      - 'docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md'
+      - 'ops/control/operations-source-decision-ledger.v1.json'
+      - 'scripts/build_status_filter_fixture.py'
+      - 'scripts/status_filter_browser_qa.cjs'
+      - 'scripts/validate_ops_source_memory.py'
+      - 'AGENTS.md'
       - 'docs/operations/ENGINEER_FIRST_MAP_AND_RESOURCE_BOUNDARY.md'
       - 'A7_MODULE.json'
       - 'ops/control/branch-lane-registry.json'
@@ -73,10 +87,41 @@ jobs:
           persist-credentials: false
       - run: node --check publication/operations/app.js
       - run: python -m unittest discover -s scripts -p 'test_ops_publication.py' -v
+      - run: python scripts/validate_ops_source_memory.py
+
+  browser-status-qa:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - run: python scripts/build_status_filter_fixture.py _status_preview
+      - name: Exercise mobile and desktop status source controls in Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m http.server 8766 --directory _status_preview >/tmp/ops-status-qa.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" || true' EXIT
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:8766/operations.json -o /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/status_filter_browser_qa.cjs
 
   project:
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && (github.event_name == 'workflow_dispatch' || vars.JP_OPERATIONS_PAGES_MODE == 'SHEETS_V2')
-    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && (github.event_name == 'workflow_dispatch' || vars.JP_OPERATIONS_PAGES_MODE == 'SHEETS_V2') && (github.event_name == 'schedule' || needs['browser-status-qa'].result == 'success')
+    needs: [test, browser-status-qa]
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -292,4 +337,47 @@ jobs:
           else
             gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
               --title 'Site Operations Engineer Map v2.6.0' --notes-file "$notes"
+          fi
+
+  release-status-v2-7:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify production status UI and memory wall before tagging
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          notes='docs/releases/v2.7.0.md'
+          tag='v2.7.0'
+          if git diff --quiet HEAD^ HEAD -- "$notes"; then
+            echo "No v2.7.0 release notes changed in this commit"
+            exit 0
+          fi
+          pages="https://fabingurung.github.io/${GITHUB_REPOSITORY#*/}"
+          for file in index.html app.js styles.css owner-help.html memory-wall.html; do
+            curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/$file?commit=$GITHUB_SHA" \
+              | cmp - "publication/operations/$file"
+          done
+          for entry in feasibility/index.html feasibility/buyer-guide/index.html; do
+            body=$(curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/$entry?commit=$GITHUB_SHA")
+            grep -Fq 'https://fabingurung.github.io/jp-field-desk-library/feasibility/' <<< "$body"
+            grep -Fq 'u.search = location.search' <<< "$body"
+          done
+          curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/operations.json?commit=$GITHUB_SHA" \
+            | python -c 'import json,sys; j=json.load(sys.stdin); p=j["projects"]; assert len(p)==j["identity"]["public_project_count"]; assert len({x["id"] for x in p})==len(p); assert j["provenance"]["source_authority"]=="GOOGLE_SHEETS"; assert j["provenance"]["engineering_completion"]=="NOT_CERTIFIED_BY_THIS_DASHBOARD"; assert all(isinstance(x.get("status"),str) for x in p); assert "PRJ-000030" not in {x["id"] for x in p}; print("STATUS_SHEETS_V2_PUBLIC_PASS",len(p))'
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            test "$(git ls-remote origin "refs/tags/$tag" | cut -f1)" = "$GITHUB_SHA"
+          else
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title 'Site Operations Source-backed Mobile Filters v2.7.0' --notes-file "$notes"
           fi
