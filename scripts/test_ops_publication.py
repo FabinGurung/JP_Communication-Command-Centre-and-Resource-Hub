@@ -73,10 +73,23 @@ class OperationsPublicationTest(unittest.TestCase):
             }.items():
                 self.assertIn(target, (out / route).read_text())
             self.assertTrue((out / "owner-help.html").is_file())
-            guide = json.loads((out / "feasibility/buyer-guide/guide.json").read_text())
-            self.assertEqual(guide["public_scope"], "EDUCATIONAL_PUBLIC_SAFE")
-            self.assertIs(guide["project"]["coordinates_public"], False)
-            self.assertTrue((out / "feasibility/buyer-guide/index.html").is_file())
+            # Library-owned Astam content is no longer duplicated by Operations.
+            astam_home = (out / "feasibility/index.html").read_text()
+            astam_guide = (out / "feasibility/buyer-guide/index.html").read_text()
+            self.assertIn("https://fabingurung.github.io/jp-field-desk-library/feasibility/", astam_home)
+            self.assertIn("https://fabingurung.github.io/jp-field-desk-library/feasibility/buyer-guide/", astam_guide)
+            self.assertIn("u.search = location.search", astam_home)
+            self.assertIn("u.search = location.search", astam_guide)
+            self.assertFalse((out / "feasibility/buyer-guide/guide.json").exists())
+            self.assertFalse((out / "ops/data/land-feasibility/astam-village-public.v1.0.json").exists())
+            self.assertFalse((out / "ops/data/land-feasibility/astam-buyer-guide-public.v1.0.json").exists())
+            ops_html = (out / "index.html").read_text()
+            for key in ("projects", "work", "resources", "manpower", "activities"):
+                self.assertIn('data-map-mode="' + key + '"', ops_html)
+            self.assertIn("field-pulse", ops_html)
+            app = (out / "app.js").read_text()
+            self.assertIn("demand not connected", app)
+            self.assertIn("remaining-task backlog", app)
             self.assertFalse((out / "document-packets.json").exists())
             self.assertFalse((out / "ops/data/current-works.json").exists())
 
