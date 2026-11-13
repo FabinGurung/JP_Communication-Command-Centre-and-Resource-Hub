@@ -1,5 +1,9 @@
 "use strict";
 /* Public read-only projection: never merge raw provider messages into this page. */
+if (location.hash === "#progress")
+  location.replace("./progress.html" + location.search);
+if (location.hash === "#sources")
+  location.replace("./sources.html" + location.search);
 const byId = id => document.getElementById(id);
 const make = (tag, content = "", className = "") => {
   const e = document.createElement(tag);
