@@ -112,16 +112,21 @@ class OperationsPublicationTest(unittest.TestCase):
             wall = (out / "memory-wall.html").read_text()
             self.assertIn("Projects and Locations", wall)
             self.assertIn("01 Website Source Sheets", wall)
+            self.assertIn("Companies and Organizations", wall)
+            self.assertIn("Website Publishing Source Directory", wall)
             self.assertIn("02 Website Sheets and Registers", wall)
             self.assertIn('href="./memory-wall.html"', ops_html)
             # Hybrid navigation: notifications first, map second. Reports and
             # source provenance have their own internal pages on the same site.
-            self.assertLess(ops_html.index('id="notifications"'), ops_html.index('id="map"'))
+            self.assertLess(ops_html.index('id="map"'), ops_html.index('id="notifications"'))
+            self.assertIn('id="notifications" class="surface notification-centre" hidden', ops_html)
+            self.assertIn('id="back-to-sites"', ops_html)
+            self.assertIn('id="directory-toggle"', ops_html)
             self.assertNotIn('id="progress"', ops_html)
             self.assertNotIn('id="sources"', ops_html)
             self.assertIn('href="./progress.html"', ops_html)
             self.assertIn('href="./sources.html"', ops_html)
-            self.assertIn('aria-current="page">Notifications</a>', ops_html)
+            self.assertIn('aria-current="page">Project map</a>', ops_html)
             self.assertIn('id="notice-site"', ops_html)
             for key in ("all", "Work", "Materials", "Supervision"):
                 self.assertIn('data-notice-category="' + key + '"', ops_html)
