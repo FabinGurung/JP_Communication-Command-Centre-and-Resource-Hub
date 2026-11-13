@@ -168,9 +168,11 @@
         "scripts/test_ops_publication.py",
         "scripts/status_filter_browser_qa.cjs"
       ],
-      "evidence_url": null,
-      "result": "PR_QA_PENDING",
-      "limitations": "Source-reviewed notifications lack independently approved resolved/open state in public projection. UI category filters cannot be used to infer outstanding work."
+      "evidence_url": "https://github.com/FabinGurung/jp-site-operations/pull/37",
+      "result": "PR_QA_PASSED__PRODUCTION_DEPLOY_PENDING",
+      "limitations": "Source-reviewed notifications lack independently approved resolved/open state in public projection. UI category filters cannot be used to infer outstanding work.",
+      "qa_run": "https://github.com/FabinGurung/jp-site-operations/actions/runs/43418291748",
+      "planned_release": "v2.8.0"
     }
   ]
 }
