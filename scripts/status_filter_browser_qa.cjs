@@ -7,17 +7,21 @@ const seen = [];
 function check(msg){seen.push(msg);console.log("PASS "+msg)}
 const stubLeaflet = () => {
   window.__qaMarkerCount = 0;
+  window.__qaMarkers = [];
   window.L = {
     map(){return {setView(){return this},getZoom(){return 12},fitBounds(){return this},invalidateSize(){return this}}},
     tileLayer(){return {addTo(){return this}}},
     featureGroup(){return {
-      addTo(){return this},clearLayers(){window.__qaMarkerCount=0;return this},
+      addTo(){return this},clearLayers(){window.__qaMarkerCount=0;window.__qaMarkers=[];return this},
       getLayers(){return Array.from({length:window.__qaMarkerCount},()=>({}))},
       getBounds(){return [[28.2,83.9],[28.4,84.1]]}
     }},
     divIcon(x){return x},
-    marker(){return {bindPopup(){return this},on(){return this},
-      addTo(){window.__qaMarkerCount++;return this}}}
+    marker(coords, options){return {bindPopup(){return this},on(type, fn){
+      if (type==="click") this.handler = fn; return this;
+    },addTo(){window.__qaMarkerCount++; window.__qaMarkers.push({
+      title:options.title, click:this.handler
+    });return this}}}
   };
 };
 async function ready(page){
@@ -96,6 +100,56 @@ async function statusInfo(page){
     assert.equal((await statusInfo(desk)).filter,"all");
     assert.equal((await statusInfo(desk)).projectCount,"1");
     check("1280px desktop select matches mobile categories; direct project selection clears conflicting status");
+
+    await mobile.locator("#reset-filters").click();
+    assert.equal(await mobile.locator("#notice-total").textContent(),"3");
+    assert.ok(await mobile.locator("#notifications").evaluate(el => el.compareDocumentPosition(document.querySelector("#map")) & Node.DOCUMENT_POSITION_FOLLOWING));
+    assert.equal(await mobile.locator("#notice-list .notice-item").count(),3);
+    assert.deepEqual(await mobile.locator("[data-notice-count]").allTextContents(),["3","1","1","1"]);
+    check("Notification Center appears before map with three synthetic reviewed notice cards");
+
+    await mobile.locator('[data-notice-category="Materials"]').click();
+    assert.equal(await mobile.locator("#notice-list .notice-item").count(),1);
+    assert.ok((await mobile.locator("#notice-list").textContent()).includes("Synthetic materials instruction"));
+    await mobile.locator('[data-notice-category="all"]').click();
+    await mobile.locator("#notice-site").selectOption("PRJ-999901");
+    assert.equal((await statusInfo(mobile)).pins,1);
+    assert.equal(await mobile.locator("#notice-list .notice-item").count(),2);
+    assert.equal(await mobile.locator("#notice-focus-title").textContent(),"Demo construction");
+    await mobile.locator('[data-notice-category="Work"]').click();
+    assert.equal(await mobile.locator("#notice-list .notice-item").count(),1);
+    check("site selection and category filtering show only reviewed notifications for that site");
+
+    await mobile.locator('[data-notice-category="all"]').click();
+    await mobile.locator("#reset-filters").click();
+    await mobile.evaluate(() => {
+      const pin = window.__qaMarkers.find(x => x.title.includes("Demo approval"));
+      if (!pin || typeof pin.click !== "function") throw Error("Map marker test hook missing");
+      pin.click();
+    });
+    assert.equal(await mobile.locator("#project-filter").inputValue(),"PRJ-999903");
+    assert.equal(await mobile.locator("#notice-site").inputValue(),"PRJ-999903");
+    assert.equal(await mobile.locator("#notice-list .notice-item").count(),1);
+    assert.ok((await mobile.locator("#notice-list").textContent()).includes("Synthetic materials instruction"));
+    check("clicking a project map marker selects that site's notification desk");
+
+    const progResponse = await mobile.request.get(ORIGIN+"/progress.html");
+    const srcResponse = await mobile.request.get(ORIGIN+"/sources.html");
+    assert.equal(progResponse.status(),200);
+    assert.equal(srcResponse.status(),200);
+    const prog=await browser.newPage({viewport:{width:390,height:844},isMobile:true});
+    await prog.goto(ORIGIN+"/progress.html?project=PRJ-999901",{waitUntil:"domcontentloaded"});
+    await prog.waitForFunction(()=>document.querySelector("#report-count")?.textContent==="1");
+    assert.equal(await prog.locator("#progress-project").inputValue(),"PRJ-999901");
+    assert.equal(await prog.locator("#progress-list .card").count(),1);
+    assert.equal(await prog.locator('#progress').count(),1);
+    check("Daily Progress opens on a separate internal page with project query preservation");
+    await prog.locator('nav a[href="./sources.html"]').click();
+    await prog.waitForFunction(()=>document.querySelector("#source-project-count")?.textContent==="5");
+    assert.ok((await prog.locator("#source-notice-count").textContent()).includes("3 reviewed notifications"));
+    assert.equal(await prog.locator("nav a[aria-current=page]").textContent(),"Sources & history");
+    check("Sources & History is a separate internal page with sourced counts and page navigation");
+    await prog.close();
 
     assert.equal(await desk.request.get(ORIGIN+"/memory-wall.html").then(r=>r.status()),200);
     check("published Memory Wall route available in static QA artifact");
