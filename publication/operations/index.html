@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#173c34">
-<meta name="description" content="Public-safe A9 construction project maps, daily reported progress, instructions and source provenance.">
-<title>Project Maps &amp; Progress · A9</title>
+<meta name="description" content="Reviewed site notifications first, project map second. Daily progress and sources have dedicated pages.">
+<title>Notifications &amp; Project Map · A9 Operations</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link rel="stylesheet" href="./styles.css">
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -14,8 +14,8 @@
 <body>
 <a class="skip" href="#main">Skip to dashboard</a>
 <header class="north">
-  <div class="brand"><span class="brand-icon" aria-hidden="true">▦</span><div><span class="eyebrow">A9 · Field intelligence</span><strong>Project Maps <span>&amp; Progress</span></strong></div></div>
-  <nav aria-label="Global navigation"><a href="#map">Map</a><a href="#progress">Daily progress</a><a href="#notifications">Instructions</a><a href="#sources">Sources</a><a href="./memory-wall.html">Source decisions</a><a href="https://fabingurung.github.io/jp-field-desk-library/">Resource library ↗</a></nav>
+  <div class="brand"><span class="brand-icon" aria-hidden="true">▦</span><div><span class="eyebrow">A9 · Field intelligence</span><strong>JP Site <span>Operations</span></strong></div></div>
+  <nav aria-label="Global navigation"><a href="./#notifications" aria-current="page">Notifications</a><a href="./#map">Project map</a><a href="./progress.html">Daily progress</a><a href="./sources.html">Sources &amp; history</a><a href="./owner-help.html">Owner guide</a><a href="https://fabingurung.github.io/jp-field-desk-library/">Resource library ↗</a></nav>
 </header>
 <div class="workbench">
 <aside class="west" aria-labelledby="navigation-label">
@@ -35,9 +35,6 @@
   <p id="status-source-hint" class="help">Project status is a source register value, not engineer acceptance.</p>
   <label for="company-filter">Executing organization</label>
   <select id="company-filter"><option value="">All organizations</option></select>
-  <label for="report-date">Reporting date</label>
-  <input id="report-date" type="date" aria-describedby="report-date-help">
-  <p id="report-date-help" class="help">Filters reported work only, not map locations.</p>
   <button type="button" id="reset-filters" class="quiet">Clear filters</button>
   <div class="side-divider"></div>
   <div class="side-heading"><h3>Site directory</h3><span id="project-count" class="count">—</span></div>
@@ -46,12 +43,32 @@
 </aside>
 <main id="main" class="centre">
   <section class="field-intro" aria-labelledby="dashboard-title">
-    <div><p class="eyebrow">A9 · DAILY SITE CONTROL</p><h1 id="dashboard-title">Which site needs attention?</h1>
-    <p>Find a site, review reported work and check approved instructions. Unreported shortages and unverified tasks are never treated as confirmed.</p></div>
+    <div><p class="eyebrow">A9 · SITE COMMUNICATION</p><h1 id="dashboard-title">Notifications and site situation</h1>
+    <p>Review source-checked notifications for a site, then explore the project map. Work reporting and source history have their own pages.</p></div>
     <details class="publication-details"><summary>Source and update time</summary><strong id="receipt" role="status">Loading source readback…</strong><small>Readback does not certify site progress.</small></details>
   </section>
+  <section id="notifications" class="surface notification-centre" aria-labelledby="notifications-title">
+    <div class="section-head"><div><span class="eyebrow">01 · SITE COMMUNICATION</span><h2 id="notifications-title" tabindex="-1">Notification Center</h2></div><span class="source-tag">Reviewed source records</span></div>
+    <p class="section-description">Only reviewed instructions explicitly permitted for public display. These are recorded notifications, <strong>not a verified list of unresolved tasks</strong>.</p>
+    <div class="notice-dashboard">
+      <div class="notice-dashboard-top">
+        <div><span class="eyebrow">NOTIFICATION DESK</span><h3 id="notice-focus-title">All approved sites</h3><p id="notice-focus-detail">Choose a site here, in the site directory, or on the map to view its notifications.</p></div>
+        <div class="notice-summary" aria-live="polite"><strong id="notice-total">—</strong><span>reviewed notifications shown</span></div>
+      </div>
+      <label for="notice-site" class="notice-label">Show notifications for</label>
+      <select id="notice-site" aria-describedby="notice-focus-detail"><option value="">All public sites</option></select>
+      <div class="notice-category-tabs" role="group" aria-label="Filter notifications by recorded category">
+        <button type="button" data-notice-category="all" aria-pressed="true">All <span data-notice-count="all">—</span></button>
+        <button type="button" data-notice-category="Work" aria-pressed="false">Work <span data-notice-count="Work">—</span></button>
+        <button type="button" data-notice-category="Materials" aria-pressed="false">Materials <span data-notice-count="Materials">—</span></button>
+        <button type="button" data-notice-category="Supervision" aria-pressed="false">Supervision <span data-notice-count="Supervision">—</span></button>
+      </div>
+      <div id="notice-list" class="cards notice-list" aria-live="polite"><p>Loading reviewed notifications…</p></div>
+      <p class="notice-disclaimer">The source contains published instructions, categories, dates and optional due dates. It does not establish whether a notice has been closed. No new instructions can be issued from this public page.</p>
+    </div>
+  </section>
   <section id="map" class="surface map-section" aria-labelledby="map-title">
-    <div class="section-head"><div><span class="eyebrow">SITE CONTROL · FILTER BY NEED</span><h2 id="map-title">Site situation map</h2></div><p>Select a layer; open a site for its latest reviewed records.</p></div>
+    <div class="section-head"><div><span class="eyebrow">02 · SITE LOCATION</span><h2 id="map-title">Site situation map</h2></div><p>Select a layer; open a site for its latest reviewed records.</p></div>
     <div class="map-modes" role="group" aria-label="Choose site information layer">
       <button type="button" data-map-mode="projects" aria-pressed="true">Sites</button>
       <button type="button" data-map-mode="work" aria-pressed="false">Work</button>
@@ -85,17 +102,8 @@
       <article><span>Reviewed instructions</span><strong id="metric-notices">—</strong><small>Not proof of unresolved actions</small></article>
     </div>
   </details>
-  <section id="progress" class="surface" aria-labelledby="progress-title">
-    <div class="section-head"><div><span class="eyebrow">02 · FIELD REPORTS</span><h2 id="progress-title">Daily reported progress</h2></div><div class="meta-stack"><span id="latest-date">Latest report: —</span><span class="caution">Reported ≠ engineer-certified</span></div></div>
-    <p class="section-description">Activities recorded in the public Project Work projection. Status and source-sheet verification are shown separately; neither represents approved quantities or billing.</p>
-    <div class="trend-block"><div class="side-heading"><h3>Reporting activity</h3><span class="help">Last seven dates with public reports</span></div><div id="report-trend" class="trend" aria-label="Reports by date"></div></div>
-    <div id="progress-list" class="cards" aria-live="polite"><p>Loading reports…</p></div>
-  </section>
-  <section id="notifications" class="surface" aria-labelledby="notifications-title">
-    <div class="section-head"><div><span class="eyebrow">03 · COMMUNICATION</span><h2 id="notifications-title">Instructions &amp; outstanding notices</h2></div><span class="source-tag">Source-checked projection</span></div>
-    <p class="section-description">Reviewed Notification Center instructions only. A message is not automatically an accepted instruction or completed activity.</p>
-    <div id="notice-list" class="cards" aria-live="polite"><p>Loading instructions…</p></div>
-  </section>
+
+
 </main>
 <aside class="east" aria-labelledby="context-label">
   <p class="eyebrow" id="context-label">EAST · Selected context</p>
@@ -111,18 +119,6 @@
   <a class="quiet-link" href="./owner-help.html#guide">How to correct the original sources ↗</a>
 </aside>
 </div>
-<footer class="south" id="sources" aria-labelledby="sources-title">
-  <div class="south-inner">
-    <div><p class="eyebrow">SOUTH · PROVENANCE &amp; HISTORY</p><h2 id="sources-title">Source history and audit trail</h2><p id="source-summary">The public snapshot is compiled from governed sources, without publishing private messages or payroll records.</p><div id="source-dates" class="source-dates" aria-label="Source row dates and identity reconciliation"><p>Loading latest dated source records…</p></div></div>
-    <div class="source-links">
-      <a href="https://github.com/FabinGurung/jp-site-operations/actions/workflows/operations-sheets-pages.yml">Publication runs ↗</a>
-      <a href="https://github.com/FabinGurung/jp-site-operations/blob/main/docs/operations/OPERATIONS_RESOURCE_SPLIT.md">Ownership rules ↗</a>
-      <a href="https://github.com/FabinGurung/jp-site-operations/blob/4eb68c004fbe8d19b83bf3b17327c853debef58a/ops/data/progress-report-public.v0.2.jsonl">Frozen history ↗</a>
-      <a href="./owner-help.html#workspace">Operator workspace ↗</a>
-      <a href="https://fabingurung.github.io/jp-field-desk-library/">Field &amp; desk ↗</a>
-    </div>
-  </div>
-  <p class="footer-warning">This public dashboard never certifies construction completion, engineering approval, cost quantities or payroll. Source access remains permission-controlled.</p>
-</footer>
+<footer class="south"><div class="south-inner"><div><strong>JP Site Operations</strong><p>Reviewed notices and approved site locations only. Engineering completion and outstanding work are not certified here.</p></div><div class="source-links"><a href="./progress.html">Daily progress</a><a href="./sources.html">Sources &amp; history</a><a href="./memory-wall.html">Decision Memory Wall</a><a href="./owner-help.html">Owner guide</a></div></div></footer>
 <noscript><p class="nojs">JavaScript is needed for the map and filtered reports. See the <a href="./owner-help.html">operator help page</a>.</p></noscript>
 </body></html>
