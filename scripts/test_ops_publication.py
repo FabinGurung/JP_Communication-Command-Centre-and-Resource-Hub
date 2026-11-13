@@ -113,7 +113,7 @@ class OperationsPublicationTest(unittest.TestCase):
             self.assertIn("Projects and Locations", wall)
             self.assertIn("01 Website Source Sheets", wall)
             self.assertIn("Companies and Organizations", wall)
-            self.assertIn("Website Publishing Source Directory", wall)
+            self.assertIn("Publishing Source Directory", wall)
             self.assertIn("02 Website Sheets and Registers", wall)
             self.assertIn('href="./memory-wall.html"', ops_html)
             # Hybrid navigation: notifications first, map second. Reports and
