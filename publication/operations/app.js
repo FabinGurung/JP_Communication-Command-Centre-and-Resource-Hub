@@ -1,5 +1,9 @@
 "use strict";
 /* Public read-only projection: never merge raw provider messages into this page. */
+if (location.hash === "#progress")
+  location.replace("./progress.html" + location.search);
+if (location.hash === "#sources")
+  location.replace("./sources.html" + location.search);
 const byId = id => document.getElementById(id);
 const make = (tag, content = "", className = "") => {
   const e = document.createElement(tag);
@@ -19,6 +23,7 @@ let map = null;
 let markerLayer = null;
 let mapMode = "projects";
 let statusFilter = "all";
+let noticeCategory = "all";
 // Exact public Sheets Status values. No completion inference from work reports.
 const statusKeys = ["Construction", "Completed", "Approval", "Maintenance"];
 const publishedStatus = p => statusKeys.includes(p.status) ? p.status : "unpublished";
@@ -71,18 +76,21 @@ const filteredProjects = () => dataset.projects.filter(p =>
   (!selectedProject() || p.id === selectedProject()) &&
   (!selectedCompany() || p.company_id === selectedCompany()) && matchesStatus(p));
 const filterByProject = r => filteredProjects().some(p => p.id === r.project_id);
-const filteredProgress = () => dataset.progress.filter(r =>
-  filterByProject(r) && (!byId("report-date").value || r.date === byId("report-date").value));
+const filteredProgress = () => dataset.progress.filter(filterByProject);
 const filteredNotices = () => dataset.notices.filter(filterByProject);
 
 function chooseProject(id, focusMap = false) {
+  statusFilter = "all";
   byId("project-filter").value = id;
+  byId("notice-site").value = id;
+  syncStatusControls();
   render();
   const p = dataset.projects.find(project => project.id === id);
-  if (focusMap && p && hasPin(p) && map) {
+  if (focusMap && p && hasPin(p) && map)
     map.setView([p.lat, p.lng], Math.max(map.getZoom(), 15));
-    byId("map").scrollIntoView({behavior: "smooth", block: "start"});
-  }
+  // Selecting a project should reveal its reviewed notification desk, not
+  // leave the user lost between a map and a long-scrolling dashboard.
+  byId("notifications").scrollIntoView({behavior: "smooth", block: "start"});
 }
 
 function drawMap(projects) {
@@ -110,12 +118,15 @@ function drawMap(projects) {
     withChildren(popup, make("strong", p.name), make("p", p.id + " · " + info.note));
     const entries = projectRecords(p.id);
     popup.append(make("p", entries.work.length + " public reports · " + entries.notices.length + " reviewed instructions"));
-    const select = make("button", "View project", "quiet");
+    const select = make("button", "View notifications", "quiet");
     select.type = "button";
     select.addEventListener("click", () => chooseProject(p.id));
     popup.append(select);
     marker.bindPopup(popup);
-    marker.on("click", () => updateContext(p.id));
+    marker.on("click", () => {
+      // Keep the map usable while making the related notices immediately available.
+      chooseProject(p.id);
+    });
     marker.addTo(markerLayer);
   }
   if (markerLayer.getLayers().length) {
@@ -166,45 +177,48 @@ function updateContext(overrideId) {
     ["Remaining work", "Complete task register not connected"]
   ];
   for (const [label, value] of pairs) withChildren(detail, make("dt", label), make("dd", value));
+  const progressLink = make("a", "Open daily progress for this site", "quiet-link");
+  progressLink.href = "./progress.html?project=" + encodeURIComponent(p.id);
   root.replaceChildren(make("h3", p.name), make("p", p.status ? "Listed status: " + p.status : "No public status"),
-    detail, make("p", "Listed status and reporting records do not certify completed work.", "help"));
-}
-
-function renderTrend(rows) {
-  const tally = new Map();
-  for (const r of rows) tally.set(r.date, (tally.get(r.date) || 0) + 1);
-  const dates = [...tally.keys()].sort().reverse().slice(0, 7).reverse();
-  const max = Math.max(1, ...dates.map(d => tally.get(d)));
-  const items = dates.map(date => {
-    const row = make("div", "", "trend-row");
-    const track = make("div", "", "trend-track");
-    const bar = make("div", "", "trend-fill");
-    bar.style.width = (tally.get(date) / max * 100).toFixed(1) + "%";
-    track.setAttribute("aria-label", tally.get(date) + " reports on " + date);
-    track.append(bar);
-    return withChildren(row, make("span", date.slice(5)), track, make("strong", String(tally.get(date))));
-  });
-  safeList("report-trend", items, "No public reports for this selection.");
-}
-
-function reportCard(r) {
-  const wrapper = make("article", "", "card");
-  const meta = make("p", [projectName(r.project_id), r.date].filter(Boolean).join(" · "), "card-meta");
-  const tags = make("div", "", "card-tags");
-  const verified = r.verification === "VERIFIED";
-  withChildren(tags, make("span", readable(r.status) || "Not stated", "tag"),
-    make("span", "Sheet verification: " + readable(r.verification || "UNVERIFIED"),
-      "tag " + (verified ? "verified" : "pending")));
-  return withChildren(wrapper, make("h3", r.work || "Work description not provided"), meta, tags,
-    make("p", "Reported activity only · No engineer acceptance or certified quantity is implied."));
+    detail, make("p", "Listed status and reporting records do not certify completed work.", "help"),
+    progressLink);
 }
 
 function noticeCard(n) {
-  const wrapper = make("article", "", "card");
-  const p = make("p", [projectName(n.project_id), n.category, n.date].filter(Boolean).join(" · "), "card-meta");
-  withChildren(wrapper, make("h3", n.instruction || "Instruction not published"), p);
-  if (n.due_date) wrapper.append(make("p", "Due: " + n.due_date));
-  return wrapper;
+  const wrapper = make("article", "", "card notice-item");
+  const head = make("div", "", "notice-item-head");
+  const badge = make("span", readable(n.category || "Other"), "notice-type " + String(n.category || "").toLowerCase());
+  const sourceLabel = make("span", "Reviewed source · " + (n.date || "Date not published"), "notice-source");
+  head.append(badge, sourceLabel);
+  const title = make("h3", n.instruction || "Public instruction not provided");
+  const project = make("p", projectName(n.project_id) + " · " + n.project_id, "card-meta");
+  const bottom = make("div", "", "notice-item-bottom");
+  if (n.due_date) bottom.append(make("span", "Source due date: " + n.due_date, "notice-due"));
+  bottom.append(make("span", "Resolution not recorded in this public view", "notice-resolution"));
+  const link = make("a", "Project's daily progress", "notice-related");
+  link.href = "./progress.html?project=" + encodeURIComponent(n.project_id);
+  return withChildren(wrapper, head, title, project, bottom, link);
+}
+
+function renderNotifications() {
+  const eligible = filteredNotices();
+  const counts = {all:eligible.length, Work:0, Materials:0, Supervision:0};
+  for (const n of eligible) if (Object.hasOwn(counts, n.category)) counts[n.category] += 1;
+  for (const badge of document.querySelectorAll("[data-notice-count]"))
+    badge.textContent = String(counts[badge.dataset.noticeCount] ?? 0);
+  for (const button of document.querySelectorAll("[data-notice-category]"))
+    button.setAttribute("aria-pressed", button.dataset.noticeCategory === noticeCategory ? "true" : "false");
+  const items = eligible.filter(n => noticeCategory === "all" || n.category === noticeCategory);
+  byId("notice-total").textContent = String(items.length);
+  const site = dataset.projects.find(p => p.id === selectedProject());
+  byId("notice-focus-title").textContent = site ? site.name : "All approved sites";
+  byId("notice-focus-detail").textContent = site
+    ? site.id + " · " + eligible.length + " reviewed notifications · Status: " +
+      (site.status || "Not publicly stated")
+    : "Select a site here, in the directory, or on the map. No notice is assumed unresolved.";
+  byId("notice-site").value = selectedProject();
+  safeList("notice-list", items.map(noticeCard),
+    site ? "No approved notifications for this site and category." : "No approved notifications match these filters.");
 }
 
 function render() {
@@ -233,11 +247,7 @@ function render() {
   updateProjectIndex(projects);
   drawMap(projects);
   updateContext();
-  renderTrend(progress);
-  safeList("progress-list", progress.map(reportCard), "No public work reports for this selection.");
-  safeList("notice-list", notices.map(noticeCard), "No reviewed instructions for this selection.");
-  byId("latest-date").textContent = "Latest report: " +
-    (progress.length ? progress[0].date : "No published report");
+  renderNotifications();
   const reviewedSites = new Set(progress.map(r => r.project_id)).size;
   const instructionSites = new Set(notices.map(r => r.project_id)).size;
   const pulse = mapMode === "work"
@@ -261,41 +271,17 @@ function load(payload) {
   for (const p of dataset.projects) if (p.company_id && p.company) companyLabels.set(p.company_id, p.company);
   for (const [id, name] of [...companyLabels].sort((a, b) => a[1].localeCompare(b[1])))
     byId("company-filter").append(new Option(name, id));
-  for (const p of dataset.projects) byId("project-filter").append(new Option(p.name + " · " + p.id, p.id));
+  for (const p of dataset.projects) {
+    byId("project-filter").append(new Option(p.name + " · " + p.id, p.id));
+    byId("notice-site").append(new Option(p.name + " · " + p.id, p.id));
+  }
   const requested = new URLSearchParams(location.search).get("project");
   const p = dataset.projects.find(item => item.id === requested || item.site === requested);
-  if (p) byId("project-filter").value = p.id;
+  if (p) {
+    byId("project-filter").value = p.id;
+    byId("notice-site").value = p.id;
+  }
   byId("receipt").textContent = payload.refreshed_at_npt || "Read time not supplied";
-  const provenance = payload.provenance || {};
-  byId("source-summary").textContent =
-    "Five governed Google Sheets feed this read-only public snapshot. Last source read: " +
-    (provenance.source_readback_at_npt || payload.refreshed_at_npt || "unknown") +
-    ". Latest published work report: " + (provenance.latest_public_report_date || "none") +
-    ". Slack is not collected directly by this publisher; Discord collection is on hold. No billing or engineering certification is inferred.";
-  const sourceDates = provenance.source_dates || {};
-  const dates = [
-    ["Projects / latest row date", sourceDates.projects?.latest_public_record_date],
-    ["Instructions / latest message date", sourceDates.notifications?.latest_public_record_date],
-    ["Progress / latest reported work date", sourceDates.progress?.latest_public_record_date],
-    ["Sheets readback (NPT)", provenance.source_readback_at_npt || payload.refreshed_at_npt]
-  ];
-  const dateList = make("dl", "", "source-date-grid");
-  for (const [label, value] of dates) withChildren(dateList,
-    make("dt", label), make("dd", value || "No published date"));
-  const identity = payload.identity || {};
-  const idSummary = make("p", "", "identity-note");
-  idSummary.textContent = identity.public_project_count === undefined
-    ? "Project identity reconciliation not provided."
-    : "Current public Sheets identity: " + identity.public_project_count +
-      " listings; historical Git identity index: " + identity.historical_git_index_count +
-      ". New public identifiers since the legacy snapshot: " +
-      (identity.public_ids_added_since_historical_index?.join(", ") || "none") +
-      ". Nonpublic and retired entries remain excluded.";
-  const caveat = make("p",
-    "Dates above describe source rows, not verified workbook modification timestamps. " +
-    "The existing read-only Sheets workflow cannot attest to provider-level modified times.",
-    "source-caveat");
-  byId("source-dates").replaceChildren(dateList, idSummary, caveat);
   render();
 }
 for (const control of document.querySelectorAll("[data-map-mode]")) {
@@ -313,14 +299,27 @@ byId("project-filter").addEventListener("change", () => {
   // A direct project choice takes precedence over the previous group filter.
   statusFilter = "all";
   syncStatusControls();
+  byId("notice-site").value = byId("project-filter").value;
   render();
 });
-for (const id of ["company-filter", "report-date"])
-  byId(id).addEventListener("change", render);
+byId("notice-site").addEventListener("change", () => {
+  const id = byId("notice-site").value;
+  statusFilter = "all";
+  byId("project-filter").value = id;
+  syncStatusControls();
+  render();
+});
+for (const button of document.querySelectorAll("[data-notice-category]"))
+  button.addEventListener("click", () => {
+    noticeCategory = button.dataset.noticeCategory;
+    render();
+  });
+byId("company-filter").addEventListener("change", render);
 byId("reset-filters").addEventListener("click", () => {
   byId("project-filter").value = "";
   byId("company-filter").value = "";
-  byId("report-date").value = "";
+  byId("notice-site").value = "";
+  noticeCategory = "all";
   statusFilter = "all";
   syncStatusControls();
   render();
@@ -331,7 +330,6 @@ fetch("./operations.json", {cache: "no-cache"})
   .catch(() => {
     byId("receipt").textContent = "Snapshot unavailable";
     byId("project-list").textContent = "The source-backed public projection could not be loaded.";
-    byId("progress-list").textContent = "Progress unavailable until the next successful source readback.";
-    byId("notice-list").textContent = "Instructions unavailable until the next successful source readback.";
+    byId("notice-list").textContent = "Reviewed notifications unavailable until the next successful source readback.";
     byId("map-fallback").hidden = false;
   });

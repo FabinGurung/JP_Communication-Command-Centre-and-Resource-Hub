@@ -143,6 +143,36 @@
       "evidence_url": "https://github.com/FabinGurung/jp-site-operations/pull/35",
       "result": "PR_QA_PASSED__PRODUCTION_RELEASE_PENDING",
       "qa_run": "https://github.com/FabinGurung/jp-site-operations/actions/runs/43118856852"
+    },
+    {
+      "id": "OPS-DEC-20261113-HYBRID-NAV",
+      "date_npt": "2026-11-13",
+      "decision": "Use hybrid site navigation: Notification Center before Map on home; Daily Progress and Sources & History on separate same-site HTML routes. Selecting a site by map marker, directory or notification selector filters reviewed notifications. Hide unverified outstanding/closed claims. Preserve old anchors and existing Library redirects.",
+      "fact_sources": [
+        "projects",
+        "choices",
+        "messages",
+        "notices",
+        "progress"
+      ],
+      "code_owner": "GIT_OPERATIONS",
+      "artifacts": [
+        "publication/operations/index.html",
+        "publication/operations/app.js",
+        "publication/operations/styles.css",
+        "publication/operations/progress.html",
+        "publication/operations/progress.js",
+        "publication/operations/sources.html",
+        "publication/operations/sources.js",
+        "scripts/publish_operations.py",
+        "scripts/test_ops_publication.py",
+        "scripts/status_filter_browser_qa.cjs"
+      ],
+      "evidence_url": "https://github.com/FabinGurung/jp-site-operations/pull/37",
+      "result": "PR_QA_PASSED__PRODUCTION_DEPLOY_PENDING",
+      "limitations": "Source-reviewed notifications lack independently approved resolved/open state in public projection. UI category filters cannot be used to infer outstanding work.",
+      "qa_run": "https://github.com/FabinGurung/jp-site-operations/actions/runs/43418291748",
+      "planned_release": "v2.8.0"
     }
   ]
 }

@@ -51,3 +51,26 @@ For *every* new Operations decision or derived data artifact, append one dated l
 - Material/equipment/crew demand maps await approved aggregation contracts under [issue #34](https://github.com/FabinGurung/jp-site-operations/issues/34).
 - Corrections, revision supersession, retractions and provider-modified-time handling remain [issue #30](https://github.com/FabinGurung/jp-site-operations/issues/30).
 - No site on the mobile UI should silently disappear because its public status is withheld.
+
+## 7. Navigation and Notification Center decision — 13 November 2026
+
+User requested a **hybrid multi-page website** in place of one long scrolling dashboard: two related panels may coexist on the home page, while other subjects have internal, dedicated routes. This is different from external navigation to the independent Field & Desk Library.
+
+| Navigation item | Route | What it owns |
+| --- | --- | --- |
+| Notification Center | `/#notifications` (home, first panel) | Reviewed instruction cards, source date, recorded due date, category and site filter |
+| Project Map | `/#map` (same home page, second panel) | Approved site pins, status filters and map layers; pin selects site notification desk |
+| Daily Progress | `/progress.html` | Independently routed public Project Work reports, date/site filters and seven-date trend |
+| Sources & History | `/sources.html` | Independent route for Google source dates, fact authority, privacy and release history |
+| Owner Guide | `/owner-help.html` | Operator instructions |
+| Resource Library | Separate `jp-field-desk-library` website | Client documents, Astam feasibility, resources |
+
+**Authoritative source input**: already approved `Projects and Locations` + `Website Display Choices` provide public project selection; `Notification Message Sources` + `Notification Instructions` provide approved cards; `Project Work` provides report cards. `scripts/publish_operations.py` continues to double-read the five owning Sheets via read-only WIF and generate one public `operations.json`. No new source master or raw message ingestion is introduced.
+
+Notifications are **reviewed** public instructions in `Work`, `Materials`, or `Supervision` categories. The current public projection includes no source-certified active/resolved field. Therefore the UI cannot label them “outstanding,” “overdue,” “completed,” or “closed” based on date or silence. The site-level notification count is a count of *published reviewed rows*, not verified actionable tasks. Changes to their content, due dates or resolution require the owning approved source.
+
+`#progress` and `#sources` historical bookmarks on the old home page are mapped to the new internal routes; the older `site-operations/history.html` compatibility route is also moved to `progress.html`. Astam and Field & Desk URLs remain external redirects, not duplicates.
+
+**Versioned code paths:** `publication/operations/{index.html,app.js,styles.css,progress.html,progress.js,sources.html,sources.js}`, `scripts/{publish_operations.py,test_ops_publication.py,status_filter_browser_qa.cjs}`, release `docs/releases/v2.8.0.md`.
+
+**QA and evidence:** guarded PR lane `feature/notification-first-routes-r5-20261113`; synthetic source-safe desktop/mobile browser QA plus exact authenticated Pages deployment parity required. Status: pending QA at decision time; commit and release receipts will be provided after publication.
