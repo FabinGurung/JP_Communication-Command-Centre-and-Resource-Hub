@@ -773,6 +773,35 @@
         "docs/releases/v2.8.0.md",
         ".github/workflows/operations-sheets-pages.yml"
       ]
+    },
+    {
+      "branch_id": "OPS-SYS-MAP-FIRST-R6",
+      "branch_name": "feature/map-first-field-shell-r6-20261113",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "13 November 2026: engineer-first compact map, sticky desktop navigation, site details on demand/back, public seven-sheet source readback, memory wall custody and browser QA.",
+      "allowed_paths": [
+        "ops/control/branch-lane-registry.json",
+        "scripts/validate_branch_registry.py",
+        "publication/operations/index.html",
+        "publication/operations/app.js",
+        "publication/operations/styles.css",
+        "publication/operations/memory-wall.html",
+        "publication/operations/sources.html",
+        "publication/operations/owner-help.html",
+        "scripts/publish_operations.py",
+        "scripts/test_ops_publication.py",
+        "scripts/build_status_filter_fixture.py",
+        "scripts/status_filter_browser_qa.cjs",
+        "scripts/validate_ops_source_memory.py",
+        "ops/control/operations-source-decision-ledger.v1.json",
+        "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md",
+        "docs/releases/v2.9.0.md",
+        ".github/workflows/operations-sheets-pages.yml"
+      ]
     }
   ]
 }
