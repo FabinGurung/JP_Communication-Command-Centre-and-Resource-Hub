@@ -2,7 +2,23 @@
 """Synthetic, public-safe mobile/desktop QA fixture. Never reads private Sheets."""
 from pathlib import Path
 import sys
-from publish_operations import build
+from publish_operations import build, SOURCES
+
+def add_live_source_fixtures(tables):
+    """Synthetic seven-source layout; production always reads Google Sheets."""
+    tables["organizations"] = [
+        ["Organization ID", "Organization Name", "Is Public", "Active", "Data Quality Status"],
+        ["ORG-000001", "Fishtail Builders Pvt Ltd", True, True, "VALID"],
+        ["ORG-000002", "PRIVATE ORGANIZATION NAME", False, True, "VALID"],
+    ]
+    tables["directory"] = [
+        ["Subject", "Google Sheet", "Data or View"],
+        *[("QA " + name, "https://docs.google.com/spreadsheets/d/" + book + "/edit", tab)
+          for name, (book, tab) in SOURCES.items() if name != "directory"]
+    ]
+    return tables
+
+
 
 out = Path(sys.argv[1] if len(sys.argv) > 1 else "_status_preview")
 projects = [
@@ -39,7 +55,7 @@ tables = {
          "IN_PROGRESS", "UNVERIFIED"],
     ]
 }
-assert build(tables, out, "Synthetic QA — not a source read") == (5, 0, 1)
+assert build(add_live_source_fixtures(tables), out, "Synthetic QA — not a source read") == (5, 0, 1)
 # Additional synthetic notices exercise site/category UX. These do not originate
 # from providers and must never be used outside the test-only preview output.
 import json

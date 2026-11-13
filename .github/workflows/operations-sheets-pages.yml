@@ -15,6 +15,7 @@ on:
       - 'docs/releases/v2.6.0.md'
       - 'docs/releases/v2.7.0.md'
       - 'docs/releases/v2.8.0.md'
+      - 'docs/releases/v2.9.0.md'
       - 'docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md'
       - 'ops/control/operations-source-decision-ledger.v1.json'
       - 'scripts/build_status_filter_fixture.py'
@@ -48,6 +49,7 @@ on:
       - 'docs/releases/v2.6.0.md'
       - 'docs/releases/v2.7.0.md'
       - 'docs/releases/v2.8.0.md'
+      - 'docs/releases/v2.9.0.md'
       - 'docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md'
       - 'ops/control/operations-source-decision-ledger.v1.json'
       - 'scripts/build_status_filter_fixture.py'
@@ -437,4 +439,46 @@ jobs:
           else
             gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
               --title 'Operations Notification-first Hybrid Pages v2.8.0' --notes-file "$notes"
+          fi
+
+  release-map-first-v2-9:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify seven original Sheets and deployed map-first field UI
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          notes='docs/releases/v2.9.0.md'
+          tag='v2.9.0'
+          if git diff --quiet HEAD^ HEAD -- "$notes"; then
+            echo 'No new v2.9.0 notes in this push'
+            exit 0
+          fi
+          pages="https://fabingurung.github.io/${GITHUB_REPOSITORY#*/}"
+          for file in index.html app.js styles.css progress.html progress.js sources.html sources.js owner-help.html memory-wall.html; do
+            curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/$file?commit=$GITHUB_SHA" | cmp - "publication/operations/$file"
+          done
+          curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/operations.json?commit=$GITHUB_SHA" \
+            | python -c 'import json,sys; d=json.load(sys.stdin); p=d["provenance"]; i=d["identity"]; assert p["source_authority"]=="GOOGLE_SHEETS"; assert p["live_workbook_count"]==7; assert p["directory_role"]=="READ_ONLY_SOURCE_POINTER_VALIDATION"; assert set(p["directory_verified_inputs"])=={"projects","choices","messages","notices","progress","organizations"}; assert i["public_project_count"]==len(d["projects"]); assert i["live_project_ids_from"]=="Projects and Locations / projects"; assert i["historical_git_index_count"] is None; assert p["engineering_completion"]=="NOT_CERTIFIED_BY_THIS_DASHBOARD"; assert "PRJ-000030" not in {x["id"] for x in d["projects"]}; print("MAP_FIRST_SEVEN_SHEETS_PUBLIC_PASS",len(d["projects"]),len(d["notices"]),len(d["progress"]))'
+          for entry in feasibility/index.html feasibility/buyer-guide/index.html; do
+            body=$(curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/$entry?commit=$GITHUB_SHA")
+            grep -Fq 'https://fabingurung.github.io/jp-field-desk-library/feasibility/' <<< "$body"
+            grep -Fq 'u.search = location.search' <<< "$body"
+          done
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            test "$(git ls-remote origin "refs/tags/$tag" | cut -f1)" = "$GITHUB_SHA"
+          else
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title 'Site Operations Map-first Field Workspace v2.9.0' --notes-file "$notes"
           fi

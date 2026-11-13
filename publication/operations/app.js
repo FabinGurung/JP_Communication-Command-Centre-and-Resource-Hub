@@ -24,6 +24,9 @@ let markerLayer = null;
 let mapMode = "projects";
 let statusFilter = "all";
 let noticeCategory = "all";
+let activeSiteId = "";
+let showAllNotices = false;
+let lastMapSignature = "";
 // Exact public Sheets Status values. No completion inference from work reports.
 const statusKeys = ["Construction", "Completed", "Approval", "Maintenance"];
 const publishedStatus = p => statusKeys.includes(p.status) ? p.status : "unpublished";
@@ -41,7 +44,10 @@ function syncStatusControls() {
 function setStatusFilter(value) {
   statusFilter = value;
   // Avoid contradictory site + status selections and a misleading empty map.
+  activeSiteId = "";
+  showAllNotices = false;
   byId("project-filter").value = "";
+  byId("notice-site").value = "";
   syncStatusControls();
   render();
 }
@@ -70,27 +76,45 @@ const mapReading = p => {
 const hasPin = p => Number.isFinite(p.lat) && Number.isFinite(p.lng);
 const readable = value => String(value || "").replaceAll("_", " ").trim();
 const projectName = id => (dataset.projects.find(p => p.id === id) || {}).name || id;
-const selectedProject = () => byId("project-filter").value;
+const selectedProject = () => activeSiteId || byId("project-filter").value;
 const selectedCompany = () => byId("company-filter").value;
 const filteredProjects = () => dataset.projects.filter(p =>
-  (!selectedProject() || p.id === selectedProject()) &&
+  (!byId("project-filter").value || p.id === byId("project-filter").value) &&
   (!selectedCompany() || p.company_id === selectedCompany()) && matchesStatus(p));
 const filterByProject = r => filteredProjects().some(p => p.id === r.project_id);
 const filteredProgress = () => dataset.progress.filter(filterByProject);
-const filteredNotices = () => dataset.notices.filter(filterByProject);
+const filteredNotices = () => dataset.notices.filter(r =>
+  filterByProject(r) && (!activeSiteId || r.project_id === activeSiteId));
 
-function chooseProject(id, focusMap = false) {
+function chooseProject(id, focusMap = false, fromMap = false) {
+  activeSiteId = id;
+  showAllNotices = false;
   statusFilter = "all";
-  byId("project-filter").value = id;
+  // Marker interaction retains all pins and the map camera.
+  if (!fromMap) byId("project-filter").value = id;
   byId("notice-site").value = id;
+  noticeCategory = "all";
   syncStatusControls();
   render();
   const p = dataset.projects.find(project => project.id === id);
   if (focusMap && p && hasPin(p) && map)
-    map.setView([p.lat, p.lng], Math.max(map.getZoom(), 15));
-  // Selecting a project should reveal its reviewed notification desk, not
-  // leave the user lost between a map and a long-scrolling dashboard.
-  byId("notifications").scrollIntoView({behavior: "smooth", block: "start"});
+    map.setView([p.lat, p.lng], Math.max(map.getZoom(), 14));
+  byId("notifications").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function clearSiteSelection(goToMap = true, allSites = false) {
+  activeSiteId = "";
+  showAllNotices = false;
+  noticeCategory = "all";
+  byId("project-filter").value = "";
+  byId("notice-site").value = "";
+  if (allSites) {
+    statusFilter = "all";
+    byId("company-filter").value = "";
+  }
+  syncStatusControls();
+  render();
+  if (goToMap) byId("map").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 function drawMap(projects) {
@@ -104,7 +128,11 @@ function drawMap(projects) {
       maxZoom: 19, attribution: "&copy; OpenStreetMap contributors"
     }).addTo(map);
     markerLayer = L.featureGroup().addTo(map);
+    map.on("click", () => {
+      if (activeSiteId || showAllNotices) clearSiteSelection(false);
+    });
   }
+  const signature = mapMode + ":" + projects.map(p => p.id).join(",");
   markerLayer.clearLayers();
   for (const p of projects.filter(hasPin)) {
     const info = mapReading(p);
@@ -112,7 +140,7 @@ function drawMap(projects) {
     const marker = L.marker([p.lat, p.lng], {
       title: p.name + " — " + info.note,
       alt: p.name + " — " + info.note,
-      icon: L.divIcon({html: badge.outerHTML, className: "site-map-pin", iconSize: [39, 44], iconAnchor:[19, 40]})
+      icon: L.divIcon({html: badge.outerHTML, className: "site-map-pin", iconSize: [48, 48], iconAnchor:[24, 46]})
     });
     const popup = make("div", "", "site-map-popup");
     withChildren(popup, make("strong", p.name), make("p", p.id + " · " + info.note));
@@ -125,13 +153,13 @@ function drawMap(projects) {
     marker.bindPopup(popup);
     marker.on("click", () => {
       // Keep the map usable while making the related notices immediately available.
-      chooseProject(p.id);
+      chooseProject(p.id, false, true);
     });
     marker.addTo(markerLayer);
   }
-  if (markerLayer.getLayers().length) {
-    map.fitBounds(markerLayer.getBounds(), {padding: [32, 32], maxZoom: 15});
-  }
+  if (markerLayer.getLayers().length && signature !== lastMapSignature)
+    map.fitBounds(markerLayer.getBounds(), {padding:[35,35],maxZoom:15});
+  lastMapSignature = signature;
   map.invalidateSize();
 }
 
@@ -169,12 +197,8 @@ function updateContext(overrideId) {
     ["Location", p.ward ? "Ward " + p.ward : "Not published"],
     ["Map pin", hasPin(p) ? "Approved" : "Not published"],
     ["Source quality", p.quality ? readable(p.quality) + " · review pending" : "No published warning"],
-    ["Reported work entries", String(reports.length)],
-    ["Reviewed instructions", String(notices.length)],
-    ["Latest report", reports.length ? reports[0].date : "No public report"],
-    ["Material / equipment demand", "No verified demand feed connected"],
-    ["Additional crew needed", "No verified manpower demand feed connected"],
-    ["Remaining work", "Complete task register not connected"]
+    ["Reviewed notifications", String(notices.length)],
+    ["Last published work report", reports.length ? reports[0].date : "No public report"]
   ];
   for (const [label, value] of pairs) withChildren(detail, make("dt", label), make("dd", value));
   const progressLink = make("a", "Open daily progress for this site", "quiet-link");
@@ -217,6 +241,14 @@ function renderNotifications() {
       (site.status || "Not publicly stated")
     : "Select a site here, in the directory, or on the map. No notice is assumed unresolved.";
   byId("notice-site").value = selectedProject();
+  const details = byId("notifications");
+  details.hidden = !activeSiteId && !showAllNotices;
+  byId("clear-map-selection").hidden = !activeSiteId;
+  byId("map-selection-hint").textContent = activeSiteId
+    ? "Selected: " + (site?.name || activeSiteId) + " · Tap empty map or Back to all sites"
+    : "Tap a site marker to view its notifications";
+  byId("site-progress-link").href = site
+    ? "./progress.html?project=" + encodeURIComponent(site.id) : "./progress.html";
   safeList("notice-list", items.map(noticeCard),
     site ? "No approved notifications for this site and category." : "No approved notifications match these filters.");
 }
@@ -240,10 +272,6 @@ function render() {
     (selectedCompany() ? " for selected organization" : "") +
     " · status is a Sheet listing, not certified completion.";
 
-  byId("metric-projects").textContent = String(projects.length);
-  byId("metric-pins").textContent = String(projects.filter(hasPin).length);
-  byId("metric-progress").textContent = String(progress.length);
-  byId("metric-notices").textContent = String(notices.length);
   updateProjectIndex(projects);
   drawMap(projects);
   updateContext();
@@ -282,6 +310,8 @@ function load(payload) {
     byId("notice-site").value = p.id;
   }
   byId("receipt").textContent = payload.refreshed_at_npt || "Read time not supplied";
+  activeSiteId = p?.id || "";
+  showAllNotices = location.hash === "#notifications" && !activeSiteId;
   render();
 }
 for (const control of document.querySelectorAll("[data-map-mode]")) {
@@ -296,16 +326,18 @@ for (const button of document.querySelectorAll("[data-project-status]"))
   button.addEventListener("click", () => setStatusFilter(button.dataset.projectStatus));
 byId("status-filter").addEventListener("change", () => setStatusFilter(byId("status-filter").value));
 byId("project-filter").addEventListener("change", () => {
-  // A direct project choice takes precedence over the previous group filter.
   statusFilter = "all";
+  activeSiteId = byId("project-filter").value;
+  showAllNotices = false;
   syncStatusControls();
-  byId("notice-site").value = byId("project-filter").value;
+  byId("notice-site").value = activeSiteId;
   render();
 });
 byId("notice-site").addEventListener("change", () => {
-  const id = byId("notice-site").value;
+  activeSiteId = byId("notice-site").value;
   statusFilter = "all";
-  byId("project-filter").value = id;
+  showAllNotices = !activeSiteId;
+  byId("project-filter").value = activeSiteId;
   syncStatusControls();
   render();
 });
@@ -314,11 +346,32 @@ for (const button of document.querySelectorAll("[data-notice-category]"))
     noticeCategory = button.dataset.noticeCategory;
     render();
   });
-byId("company-filter").addEventListener("change", render);
+byId("company-filter").addEventListener("change", () => {
+  activeSiteId = "";
+  showAllNotices = false;
+  render();
+});
+byId("back-to-sites").addEventListener("click", () => clearSiteSelection(true,true));
+byId("clear-map-selection").addEventListener("click", () => clearSiteSelection(false,true));
+byId("directory-toggle").addEventListener("click", () => {
+  const open = byId("navigation-panel").classList.toggle("directory-open");
+  byId("directory-toggle").setAttribute("aria-expanded",String(open));
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && (activeSiteId || showAllNotices)) clearSiteSelection();
+});
+document.querySelector('a[href="./#notifications"]').addEventListener("click", () => {
+  showAllNotices = !activeSiteId;
+  render();
+  requestAnimationFrame(() => byId("notifications").scrollIntoView({block:"start"}));
+});
+
 byId("reset-filters").addEventListener("click", () => {
   byId("project-filter").value = "";
   byId("company-filter").value = "";
   byId("notice-site").value = "";
+  activeSiteId = "";
+  showAllNotices = false;
   noticeCategory = "all";
   statusFilter = "all";
   syncStatusControls();

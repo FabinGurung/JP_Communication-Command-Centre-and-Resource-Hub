@@ -8,8 +8,10 @@ function check(msg){seen.push(msg);console.log("PASS "+msg)}
 const stubLeaflet = () => {
   window.__qaMarkerCount = 0;
   window.__qaMarkers = [];
+  window.__qaMapHandlers = {};
+  window.__qaFitBoundsCalls = 0;
   window.L = {
-    map(){return {setView(){return this},getZoom(){return 12},fitBounds(){return this},invalidateSize(){return this}}},
+    map(){return {setView(){return this},getZoom(){return 12},fitBounds(){window.__qaFitBoundsCalls++;return this},invalidateSize(){return this},on(name,handler){window.__qaMapHandlers[name]=handler;return this}}},
     tileLayer(){return {addTo(){return this}}},
     featureGroup(){return {
       addTo(){return this},clearLayers(){window.__qaMarkerCount=0;window.__qaMarkers=[];return this},
@@ -71,6 +73,7 @@ async function statusInfo(page){
     await mobile.locator('[data-project-status="Approval"]').focus();
     await mobile.keyboard.press("Enter");
     assert.equal((await statusInfo(mobile)).filter,"Approval");
+    await mobile.locator(".advanced-map-settings summary").click();
     await mobile.locator('[data-map-mode="work"]').click();
     assert.equal((await statusInfo(mobile)).projectCount,"1");
     check("keyboard activation and map-layer switching preserve status");
@@ -79,6 +82,11 @@ async function statusInfo(page){
     assert.equal((await statusInfo(mobile)).projectCount,"5");
     assert.equal((await statusInfo(mobile)).filter,"all");
     assert.ok(await mobile.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth+2));
+    assert.equal(await mobile.locator("#project-list").isVisible(),false);
+    await mobile.locator("#directory-toggle").click();
+    assert.equal(await mobile.locator("#project-list").isVisible(),true);
+    await mobile.locator("#directory-toggle").click();
+    assert.equal(await mobile.locator("#project-list").isVisible(),false);
     check("clear filters resets both controls; no horizontal page overflow");
 
     const remote = await mobile.request.get(ORIGIN+"/operations.json");
@@ -90,6 +98,9 @@ async function statusInfo(page){
     const desk=await browser.newPage({viewport:{width:1280,height:800}});
     await ready(desk);
     assert.equal(await desk.locator("#status-filter").isVisible(),true);
+    assert.equal(await desk.locator("#navigation-panel").evaluate(el=>getComputedStyle(el).position),"sticky");
+    check("desktop site navigator stays sticky while content scrolls");
+
     assert.equal(await desk.locator(".mobile-status-filter").isVisible(),false);
     await desk.locator("#status-filter").selectOption("Completed");
     assert.equal((await statusInfo(desk)).projectCount,"1");
@@ -103,11 +114,14 @@ async function statusInfo(page){
 
     await mobile.locator("#reset-filters").click();
     assert.equal(await mobile.locator("#notice-total").textContent(),"3");
-    assert.ok(await mobile.locator("#notifications").evaluate(el => el.compareDocumentPosition(document.querySelector("#map")) & Node.DOCUMENT_POSITION_FOLLOWING));
+    assert.ok(await mobile.locator("#map").evaluate(el => el.compareDocumentPosition(document.querySelector("#notifications")) & Node.DOCUMENT_POSITION_FOLLOWING));
+    assert.equal(await mobile.locator("#notifications").isVisible(),false);
     assert.equal(await mobile.locator("#notice-list .notice-item").count(),3);
     assert.deepEqual(await mobile.locator("[data-notice-count]").allTextContents(),["3","1","1","1"]);
-    check("Notification Center appears before map with three synthetic reviewed notice cards");
+    check("Map is first, source notice detail hidden until site selection");
 
+    await mobile.locator('nav a[href="./#notifications"]').click();
+    assert.equal(await mobile.locator("#notifications").isVisible(),true);
     await mobile.locator('[data-notice-category="Materials"]').click();
     assert.equal(await mobile.locator("#notice-list .notice-item").count(),1);
     assert.ok((await mobile.locator("#notice-list").textContent()).includes("Synthetic materials instruction"));
@@ -127,11 +141,28 @@ async function statusInfo(page){
       if (!pin || typeof pin.click !== "function") throw Error("Map marker test hook missing");
       pin.click();
     });
-    assert.equal(await mobile.locator("#project-filter").inputValue(),"PRJ-999903");
+    assert.equal(await mobile.locator("#project-filter").inputValue(),"");
+    assert.equal((await statusInfo(mobile)).pins,5);
     assert.equal(await mobile.locator("#notice-site").inputValue(),"PRJ-999903");
     assert.equal(await mobile.locator("#notice-list .notice-item").count(),1);
     assert.ok((await mobile.locator("#notice-list").textContent()).includes("Synthetic materials instruction"));
-    check("clicking a project map marker selects that site's notification desk");
+    check("clicking map marker opens site notice desk without removing adjacent pins");
+    assert.equal(await mobile.locator("#notifications").isVisible(),true);
+    const fitsBefore=await mobile.evaluate(()=>window.__qaFitBoundsCalls);
+    await mobile.evaluate(()=>window.__qaMapHandlers.click());
+    assert.equal(await mobile.locator("#notifications").isVisible(),false);
+    assert.equal((await statusInfo(mobile)).pins,5);
+    assert.equal(await mobile.evaluate(()=>window.__qaFitBoundsCalls),fitsBefore);
+    check("tapping blank map dismisses detail without recentering the camera");
+    await mobile.evaluate(() => window.__qaMarkers.find(x=>x.title.includes("Demo approval")).click());
+    await mobile.keyboard.press("Escape");
+    assert.equal(await mobile.locator("#notifications").isVisible(),false);
+    check("Escape closes selected details and preserves all map markers");
+    await mobile.evaluate(() => window.__qaMarkers.find(x=>x.title.includes("Demo approval")).click());
+    await mobile.locator("#back-to-sites").click();
+    assert.equal(await mobile.locator("#notifications").isVisible(),false);
+    assert.equal((await statusInfo(mobile)).pins,5);
+    check("explicit Back to all sites returns to map");
 
     const progResponse = await mobile.request.get(ORIGIN+"/progress.html");
     const srcResponse = await mobile.request.get(ORIGIN+"/sources.html");

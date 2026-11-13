@@ -66,6 +66,30 @@
         "project_id",
         "source_id"
       ]
+    },
+    "organizations": {
+      "id": "1cwubE_4nB2SAEdLu6ry80G0HeNjbBdu4X3DA6jrcQ1E",
+      "tab": "organizations",
+      "owner": "Companies and Organizations — v1.2",
+      "fields": [
+        "organization_id",
+        "organization_name",
+        "is_public",
+        "active",
+        "data_quality_status"
+      ],
+      "role": "PUBLISH_ONLY_PUBLIC_VALID_ACTIVE_LABELS"
+    },
+    "directory": {
+      "id": "17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4",
+      "tab": "00_SOURCE_DIRECTORY",
+      "owner": "Website Publishing and Source Directory — LIVE",
+      "fields": [
+        "subject",
+        "google_sheet",
+        "data_or_view"
+      ],
+      "role": "READ_ONLY_SIX_SOURCE_POINTER_CHECK__NO_JOINED_TABS_PUBLISHED"
     }
   },
   "source_observation": {
@@ -173,6 +197,34 @@
       "limitations": "Source-reviewed notifications lack independently approved resolved/open state in public projection. UI category filters cannot be used to infer outstanding work.",
       "qa_run": "https://github.com/FabinGurung/jp-site-operations/actions/runs/43418291748",
       "planned_release": "v2.8.0"
+    },
+    {
+      "id": "OPS-DEC-20261113-MAP-FIRST-SEVEN-SHEETS",
+      "date_npt": "2026-11-13",
+      "decision": "Clean site map above hidden-until-selection notification panel. Sticky independently scrolling desktop navigator; compact mobile site directory. Pin selects details without resetting map or hiding adjacent pins; explicit return, Escape, blank-map tap clear selection, pan/zoom retained. Integrate approved existing Companies and Organizations Sheet as public organization label authority and Website Publishing Source Directory as source pointer validator. Projects and Locations replaces historical Git identity as live source; do not publish private joined workbook tabs.",
+      "fact_sources": [
+        "projects",
+        "choices",
+        "progress",
+        "messages",
+        "notices",
+        "organizations",
+        "directory"
+      ],
+      "code_owner": "GIT_OPERATIONS",
+      "artifacts": [
+        "publication/operations/index.html",
+        "publication/operations/app.js",
+        "publication/operations/styles.css",
+        "scripts/publish_operations.py",
+        "scripts/test_ops_publication.py",
+        "scripts/status_filter_browser_qa.cjs",
+        "ops/control/operations-source-decision-ledger.v1.json",
+        "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md"
+      ],
+      "evidence_url": null,
+      "result": "PR_QA_PENDING",
+      "note": "Data publication controlled by original Is Public, active VALID and Website Display Choices. No new editable Google Sheets created. Original private people/finances/source rows excluded."
     }
   ]
 }
