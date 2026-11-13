@@ -140,7 +140,7 @@ function drawMap(projects) {
     const marker = L.marker([p.lat, p.lng], {
       title: p.name + " — " + info.note,
       alt: p.name + " — " + info.note,
-      icon: L.divIcon({html: badge.outerHTML, className: "site-map-pin", iconSize: [39, 44], iconAnchor:[19, 40]})
+      icon: L.divIcon({html: badge.outerHTML, className: "site-map-pin", iconSize: [48, 48], iconAnchor:[24, 46]})
     });
     const popup = make("div", "", "site-map-popup");
     withChildren(popup, make("strong", p.name), make("p", p.id + " · " + info.note));
@@ -197,12 +197,8 @@ function updateContext(overrideId) {
     ["Location", p.ward ? "Ward " + p.ward : "Not published"],
     ["Map pin", hasPin(p) ? "Approved" : "Not published"],
     ["Source quality", p.quality ? readable(p.quality) + " · review pending" : "No published warning"],
-    ["Reported work entries", String(reports.length)],
-    ["Reviewed instructions", String(notices.length)],
-    ["Latest report", reports.length ? reports[0].date : "No public report"],
-    ["Material / equipment demand", "No verified demand feed connected"],
-    ["Additional crew needed", "No verified manpower demand feed connected"],
-    ["Remaining work", "Complete task register not connected"]
+    ["Reviewed notifications", String(notices.length)],
+    ["Last published work report", reports.length ? reports[0].date : "No public report"]
   ];
   for (const [label, value] of pairs) withChildren(detail, make("dt", label), make("dd", value));
   const progressLink = make("a", "Open daily progress for this site", "quiet-link");
