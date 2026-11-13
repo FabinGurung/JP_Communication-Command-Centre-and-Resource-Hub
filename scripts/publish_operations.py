@@ -113,7 +113,8 @@ def build(tables, out, received_at):
     progress.sort(key=lambda r: (r["date"], r["id"]), reverse=True)
     notices.sort(key=lambda r: (r["date"], -r["display_order"]), reverse=True)
     out.mkdir(parents=True, exist_ok=True)
-    for name in ("index.html", "app.js", "styles.css", "owner-help.html", "memory-wall.html"):
+    for name in ("index.html", "app.js", "styles.css", "owner-help.html", "memory-wall.html",
+                 "progress.html", "progress.js", "sources.html", "sources.js"):
         shutil.copyfile(ROOT / "publication/operations" / name, out / name)
     (out / ".nojekyll").touch()
     public_ids = set(projects)
@@ -169,7 +170,7 @@ def build(tables, out, received_at):
     for path, target in {
         "map.html": "./#map",
         "site-operations.html": "./#notifications",
-        "site-operations/history.html": "../#progress",
+        "site-operations/history.html": "../progress.html",
         "workspace.html": "./owner-help.html#workspace",
         "workspace/index.html": "../owner-help.html#workspace",
         "guide/index.html": "../owner-help.html#guide",
