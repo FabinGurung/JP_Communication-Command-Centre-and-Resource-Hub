@@ -16,6 +16,8 @@ SOURCES = {
     "messages": ("1aWHzjEK0doiUcBbqhySiA6DWCp8d-aq2I08McslilAQ", "message_sources"),
     "notices": ("1ZPtTos8t9Cym_qnpiUhiyuTxndSc6sGzzv390ahAw4I", "site_notifications"),
     "progress": ("17YPRpaXIdHloH5-lzsjUpNvXLbsDfrIrlsn2jZ-7KKc", "project_work_items"),
+    "organizations": ("1cwubE_4nB2SAEdLu6ry80G0HeNjbBdu4X3DA6jrcQ1E", "organizations"),
+    "directory": ("17y3ki0SLSG_Hmz8AipfWhhffnKastcjHvRqIdepJMu4", "00_SOURCE_DIRECTORY"),
 }
 LIBRARY = "https://fabingurung.github.io/jp-field-desk-library/"
 # Astam land-feasibility content now belongs to the Field & Desk Resource
@@ -27,21 +29,48 @@ def yes(value):
     return value.upper() == "TRUE"
 
 
-def public_organization_names():
-    """Read only the existing explicitly public organization-name catalogue."""
-    with (ROOT / "organizations.csv").open(newline="", encoding="utf-8") as stream:
-        rows = csv.DictReader(stream)
-        return {row["organization_id"]: row["organization_name"] for row in rows
-                if row.get("is_public", "").upper() == "TRUE"
-                and row.get("data_quality_status") == "VALID"}
+def verify_directory(tables):
+    """Fail closed if the live published directory no longer points to the owning Sheets.
+
+    The directory is a pointer-only dependency, NEVER a public data master.
+    No joined site data, payments, workforce, coordinates or source messages
+    from its other 35 tabs are fetched or projected.
+    """
+    directory = {}
+    for row in records(tables["directory"], "subject", "google_sheet", "data_or_view"):
+        tab = row["data_or_view"]
+        # Directory includes many other private/review-only sources. Ignore them.
+        for key, (sheet_id, wanted_tab) in SOURCES.items():
+            if key == "directory" or tab != wanted_tab:
+                continue
+            if key in directory:
+                raise ValueError("Duplicate source directory mapping: " + key)
+            uri = row["google_sheet"].split("/d/")
+            if len(uri) != 2 or uri[1].split("/", 1)[0] != sheet_id:
+                raise ValueError("Source directory ID mismatch: " + key)
+            directory[key] = sheet_id
+    expected = set(SOURCES) - {"directory"}
+    if set(directory) != expected:
+        raise ValueError("Source directory missing original sources: " + ",".join(sorted(expected - set(directory))))
+    return directory
+
+
+def public_organization_names(tables):
+    """Only vetted public organization names from owning live Google Sheet."""
+    labels = {}
+    for row in records(tables["organizations"], "organization_id", "organization_name",
+                       "is_public", "data_quality_status", "active"):
+        if (yes(row["is_public"]) and yes(row["active"])
+                and row["data_quality_status"] == "VALID"):
+            labels[row["organization_id"]] = row["organization_name"]
+    return labels
 
 
 def build(tables, out, received_at):
-    organization_names = public_organization_names()
-    # The historical Git project index is derived from projects.csv. The five
-    # LIVE Operations Sheets now own current public listing decisions.
-    legacy = json.loads((ROOT / "ops/data/project-identity-index.v0.1.json").read_text(encoding="utf-8"))
-    legacy_ids = {record["project_id"] for record in legacy["records"]}
+    directory = verify_directory(tables)
+    organization_names = public_organization_names(tables)
+    # Live public identities come exclusively from the Projects and Locations
+    # Sheet. Historical Git snapshots are archival comparisons, not inputs.
     project_record_dates = []
     choices = {}
     for row in records(tables["choices"], "publication_setting_id", "project_id",
@@ -117,7 +146,6 @@ def build(tables, out, received_at):
                  "progress.html", "progress.js", "sources.html", "sources.js"):
         shutil.copyfile(ROOT / "publication/operations" / name, out / name)
     (out / ".nojekyll").touch()
-    public_ids = set(projects)
     source_dates = {
         "projects": {
             "latest_public_record_date": max(project_record_dates, default=None),
@@ -143,10 +171,11 @@ def build(tables, out, received_at):
         "identity": {
             "schema_version": "1.0.0",
             "current_authority": "LIVE_GOOGLE_SHEETS_APPROVED_PUBLIC_ROWS",
-            "historical_git_index_role": "LEGACY_PROJECTS_CSV_DERIVATIVE_NOT_LIVE_AUTHORITY",
-            "historical_git_index_count": len(legacy_ids),
+            "historical_git_index_role": "ARCHIVED_HISTORICAL_RELEASE_NOT_LIVE_INPUT",
+            "historical_git_index_count": None,
             "public_project_count": len(projects),
-            "public_ids_added_since_historical_index": sorted(public_ids - legacy_ids),
+            "public_ids_added_since_historical_index": [],
+            "live_project_ids_from": "Projects and Locations / projects",
             "nonpublic_or_retired_rows_excluded": True,
         },
         "provenance": {
@@ -159,7 +188,12 @@ def build(tables, out, received_at):
             "latest_public_report_date": source_dates["progress"]["latest_public_record_date"],
             "source_families": ["Projects and Locations", "Website Display Choices",
                                 "Notification Center - Message Sources",
-                                "Notification Center - Instructions", "Project Work"],
+                                "Notification Center - Instructions", "Project Work",
+                                "Companies and Organizations", "Website Publishing and Source Directory"],
+            "live_workbook_count": len(SOURCES),
+            "organization_authority": "Companies and Organizations / organizations",
+            "directory_role": "READ_ONLY_SOURCE_POINTER_VALIDATION",
+            "directory_verified_inputs": sorted(directory),
             "source_authority": "GOOGLE_SHEETS",
             "direct_slack_collector": "NOT_CONNECTED_TO_THIS_PUBLISHER",
             "direct_discord_collector": "ON_HOLD",
