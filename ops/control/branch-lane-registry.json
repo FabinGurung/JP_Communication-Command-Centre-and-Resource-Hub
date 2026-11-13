@@ -742,6 +742,37 @@
         ".github/workflows/operations-sheets-pages.yml",
         "AGENTS.md"
       ]
+    },
+    {
+      "branch_id": "OPS-SYS-NOTIFICATION-ROUTES-R5",
+      "branch_name": "feature/notification-first-routes-r5-20261113",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "13 November 2026: move notifications ahead of map on Operations home; separate progress and sources internal routes; source-safe site notification panel, browser QA, governance and controlled v2.8.0 release.",
+      "allowed_paths": [
+        "ops/control/branch-lane-registry.json",
+        "scripts/validate_branch_registry.py",
+        "publication/operations/index.html",
+        "publication/operations/app.js",
+        "publication/operations/styles.css",
+        "publication/operations/progress.html",
+        "publication/operations/progress.js",
+        "publication/operations/sources.html",
+        "publication/operations/sources.js",
+        "publication/operations/owner-help.html",
+        "publication/operations/memory-wall.html",
+        "scripts/publish_operations.py",
+        "scripts/test_ops_publication.py",
+        "scripts/build_status_filter_fixture.py",
+        "scripts/status_filter_browser_qa.cjs",
+        "ops/control/operations-source-decision-ledger.v1.json",
+        "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md",
+        "docs/releases/v2.8.0.md",
+        ".github/workflows/operations-sheets-pages.yml"
+      ]
     }
   ]
 }
