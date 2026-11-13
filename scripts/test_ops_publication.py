@@ -97,6 +97,33 @@ class OperationsPublicationTest(unittest.TestCase):
             self.assertIn("01 Website Source Sheets", wall)
             self.assertIn("02 Website Sheets and Registers", wall)
             self.assertIn('href="./memory-wall.html"', ops_html)
+            # Hybrid navigation: notifications first, map second. Reports and
+            # source provenance have their own internal pages on the same site.
+            self.assertLess(ops_html.index('id="notifications"'), ops_html.index('id="map"'))
+            self.assertNotIn('id="progress"', ops_html)
+            self.assertNotIn('id="sources"', ops_html)
+            self.assertIn('href="./progress.html"', ops_html)
+            self.assertIn('href="./sources.html"', ops_html)
+            self.assertIn('aria-current="page">Notifications</a>', ops_html)
+            self.assertIn('id="notice-site"', ops_html)
+            for key in ("all", "Work", "Materials", "Supervision"):
+                self.assertIn('data-notice-category="' + key + '"', ops_html)
+            report = (out / "progress.html").read_text()
+            sources = (out / "sources.html").read_text()
+            self.assertIn('id="progress-list"', report)
+            self.assertIn('id="report-trend"', report)
+            self.assertIn('id="source-dates"', sources)
+            self.assertIn('href="./#notifications"', report)
+            self.assertIn('href="./#notifications"', sources)
+            self.assertIn('aria-current="page">Daily progress</a>', report)
+            self.assertIn('aria-current="page">Sources &amp; history</a>', sources)
+            self.assertTrue((out / "progress.js").is_file())
+            self.assertTrue((out / "sources.js").is_file())
+            # Legacy anchors are preserved by a client-side same-site redirect.
+            self.assertIn('location.hash === "#progress"', (out / "app.js").read_text())
+            self.assertIn('location.hash === "#sources"', (out / "app.js").read_text())
+            self.assertIn("../progress.html", (out / "site-operations/history.html").read_text())
+
             app = (out / "app.js").read_text()
             self.assertIn("demand not connected", app)
             self.assertIn("remaining-task backlog", app)
