@@ -17,7 +17,7 @@ fetch("./operations.json", {cache:"no-cache"})
     byId("source-notice-count").textContent = data.notices.length + " reviewed notifications";
     byId("source-work-count").textContent = data.progress.length + " work reports";
     byId("source-summary").textContent =
-      "Five authorized Google Sheets are read into this public projection. Latest publisher readback (NPT): " +
+      "Seven registered Google workbooks are read into this public projection. Latest publisher readback (NPT): " +
       (p.source_readback_at_npt || data.refreshed_at_npt || "Not supplied") +
       ". The published dates below describe source rows, not Google Drive workbook modifications.";
     const labels = [
