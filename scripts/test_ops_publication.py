@@ -3,7 +3,24 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from publish_operations import SOURCES, build
+from publish_operations import SOURCES, build as original_build
+
+def add_live_source_fixtures(tables):
+    """Synthetic seven-source layout; production always reads Google Sheets."""
+    tables["organizations"] = [
+        ["Organization ID", "Organization Name", "Is Public", "Active", "Data Quality Status"],
+        ["ORG-000001", "Fishtail Builders Pvt Ltd", True, True, "VALID"],
+        ["ORG-000002", "PRIVATE ORGANIZATION NAME", False, True, "VALID"],
+    ]
+    tables["directory"] = [
+        ["Subject", "Google Sheet", "Data or View"],
+        *[("QA " + name, "https://docs.google.com/spreadsheets/d/" + book + "/edit", tab)
+          for name, (book, tab) in SOURCES.items() if name != "directory"]
+    ]
+    return tables
+
+def build(tables, out, timestamp):
+    return original_build(add_live_source_fixtures(tables), out, timestamp)
 
 
 class OperationsPublicationTest(unittest.TestCase):
@@ -30,7 +47,7 @@ class OperationsPublicationTest(unittest.TestCase):
                  "IN_PROGRESS", "UNVERIFIED", "Private rate"],
             ],
         }
-        self.assertEqual(set(SOURCES), set(tables))
+        self.assertEqual(set(SOURCES), set(add_live_source_fixtures(tables)))
         with tempfile.TemporaryDirectory() as temp:
             out = Path(temp)
             self.assertEqual(build(tables, out, "test"), (1, 0, 1))
@@ -163,7 +180,9 @@ class OperationsPublicationTest(unittest.TestCase):
             raw = (out / "operations.json").read_text()
             data = json.loads(raw)
             self.assertEqual(data["identity"]["public_project_count"], 1)
-            self.assertEqual(data["identity"]["public_ids_added_since_historical_index"], ["PRJ-999998"])
+            self.assertEqual(data["identity"]["public_ids_added_since_historical_index"], [])
+            self.assertEqual(data["provenance"]["live_workbook_count"], 7)
+            self.assertEqual(data["provenance"]["directory_role"], "READ_ONLY_SOURCE_POINTER_VALIDATION")
             self.assertEqual(data["projects"][0]["quality"], "WARNING")
             self.assertEqual(data["provenance"]["source_dates"]["projects"]["latest_public_record_date"],
                              "2026-11-10")
