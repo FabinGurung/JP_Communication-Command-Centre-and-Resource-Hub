@@ -40,6 +40,23 @@ tables = {
     ]
 }
 assert build(tables, out, "Synthetic QA — not a source read") == (5, 0, 1)
+# Additional synthetic notices exercise site/category UX. These do not originate
+# from providers and must never be used outside the test-only preview output.
+import json
+output = out / "operations.json"
+preview = json.loads(output.read_text(encoding="utf-8"))
+preview["notices"] = [
+    {"notification_id":"QAN-001","project_id":"PRJ-999901","category":"Work",
+     "instruction":"Synthetic worksite safety instruction","due_date":"2026-11-15",
+     "display_order":1,"date":"2026-11-12"},
+    {"notification_id":"QAN-002","project_id":"PRJ-999901","category":"Supervision",
+     "instruction":"Synthetic site-supervision note","due_date":"",
+     "display_order":2,"date":"2026-11-11"},
+    {"notification_id":"QAN-003","project_id":"PRJ-999903","category":"Materials",
+     "instruction":"Synthetic materials instruction","due_date":"",
+     "display_order":1,"date":"2026-11-12"},
+]
+output.write_text(json.dumps(preview), encoding="utf-8")
 body = (out / "operations.json").read_text(encoding="utf-8")
 assert "HIDDEN_RAW_STATUS_DO_NOT_PUBLISH" not in body
 assert "PRIVATE DEMO MUST NEVER PUBLISH" not in body
