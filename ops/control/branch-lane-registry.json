@@ -802,6 +802,40 @@
         "docs/releases/v2.9.0.md",
         ".github/workflows/operations-sheets-pages.yml"
       ]
+    },
+    {
+      "branch_id": "OPS-SYS-FIELD-EXTRACT-R7",
+      "branch_name": "feature/field-extraction-mobile-r7-20261114",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "14 Nov 2026: repair mobile Sources overflow/navigation and publish four-lane public-source extraction status board with bounded first baseline batch and links to governed Sheets.",
+      "allowed_paths": [
+        "ops/control/branch-lane-registry.json",
+        "scripts/validate_branch_registry.py",
+        "publication/operations/index.html",
+        "publication/operations/styles.css",
+        "publication/operations/navigation.js",
+        "publication/operations/progress.html",
+        "publication/operations/sources.html",
+        "publication/operations/sources.js",
+        "publication/operations/owner-help.html",
+        "publication/operations/extraction.html",
+        "publication/operations/extraction.js",
+        "publication/operations/memory-wall.html",
+        "scripts/publish_operations.py",
+        "scripts/test_ops_publication.py",
+        "scripts/status_filter_browser_qa.cjs",
+        "scripts/validate_ops_source_memory.py",
+        "ops/control/operations-source-decision-ledger.v1.json",
+        "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md",
+        "docs/operations/FOUR_LANE_EXTRACTION_RUN001.md",
+        "docs/releases/v3.0.0.md",
+        ".github/workflows/operations-sheets-pages.yml",
+        "AGENTS.md"
+      ]
     }
   ]
 }
