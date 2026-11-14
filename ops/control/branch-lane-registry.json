@@ -836,6 +836,17 @@
         ".github/workflows/operations-sheets-pages.yml",
         "AGENTS.md"
       ]
+    },
+    {
+      "branch_id": "OPS-SYS-PARALLEL-MOBILE-NAV-R7",
+      "branch_name": "feature/mobile-nav-extraction-r7-20261114",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "Independent parallel mobile navigation and extraction branch observed in GitHub on 14 Nov; PR-only, not merged or altered in this lane.",
+      "allowed_paths": []
     }
   ]
 }
