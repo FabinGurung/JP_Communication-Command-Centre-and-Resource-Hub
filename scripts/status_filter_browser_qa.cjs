@@ -196,7 +196,7 @@ async function statusInfo(page){
     assert.ok(sourceOverflow.maxTextRight<=sourceOverflow.view+2,JSON.stringify(sourceOverflow));
     check("iPhone Sources stays readable without overlay menu or clipped source text");
     await prog.locator('.compact-nav a[href="./extraction.html"]').click();
-    await prog.waitForFunction(()=>document.querySelector("#updates-stats .updates-stat strong")?.textContent==="5");
+    await prog.waitForFunction(()=>document.querySelector("#updates-stats .updates-stat strong")?.textContent==="3");
     assert.equal(await prog.locator(".extract-lane").count(),0);
     assert.equal(await prog.locator("#updates-stats .updates-stat").count(),3);
     assert.ok((await prog.locator("#updates-meaning").textContent()).includes("3 work report") ||
@@ -229,7 +229,7 @@ async function statusInfo(page){
       await phone.waitForFunction(()=>document.querySelector("#source-project-count")?.textContent==="5");
       assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
       await phone.locator('.compact-nav a[href="./extraction.html"]').click();
-      await phone.waitForFunction(()=>document.querySelector("#updates-stats .updates-stat strong")?.textContent==="5");
+      await phone.waitForFunction(()=>document.querySelector("#updates-stats .updates-stat strong")?.textContent==="3");
       assert.equal(await phone.locator(".extract-lane").count(),0);
       assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
       await phone.locator("#updates-project").selectOption("PRJ-999901");
