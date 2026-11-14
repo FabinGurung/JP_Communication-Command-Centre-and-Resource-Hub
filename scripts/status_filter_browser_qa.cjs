@@ -128,7 +128,8 @@ async function statusInfo(page){
     assert.deepEqual(await mobile.locator("[data-notice-count]").allTextContents(),["3","1","1","1"]);
     check("Map is first, source notice detail hidden until site selection");
 
-    await mobile.locator('nav a[href="./#notifications"]').click();
+    await mobile.locator(".phone-menu summary").click();
+    await mobile.locator('.phone-menu nav a[href="./#notifications"]').click();
     assert.equal(await mobile.locator("#notifications").isVisible(),true);
     await mobile.locator('[data-notice-category="Materials"]').click();
     assert.equal(await mobile.locator("#notice-list .notice-item").count(),1);
