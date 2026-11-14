@@ -225,6 +225,33 @@
       "evidence_url": null,
       "result": "PR_QA_PENDING",
       "note": "Data publication controlled by original Is Public, active VALID and Website Display Choices. No new editable Google Sheets created. Original private people/finances/source rows excluded."
+    },
+    {
+      "id": "OPS-DEC-20261114-FOUR-LANE-EXTRACT",
+      "date_npt": "2026-11-14",
+      "decision": "Keep user-facing map and reviewed notices primary; fix mobile Sources overflow and unreachable header via compact sticky menu; introduce four-lane generated extraction page with bounded OPS-B001 source-manifest/ID/FK readback from seven original Google Sheets, not raw provider ingestion. Preserve standalone Daily Progress and Sources as historical reference routes.",
+      "fact_sources": [
+        "projects",
+        "choices",
+        "progress",
+        "messages",
+        "notices",
+        "organizations",
+        "directory"
+      ],
+      "code_owner": "GIT_OPERATIONS",
+      "artifacts": [
+        "publication/operations/navigation.js",
+        "publication/operations/styles.css",
+        "publication/operations/extraction.html",
+        "publication/operations/extraction.js",
+        "scripts/publish_operations.py",
+        "docs/operations/FOUR_LANE_EXTRACTION_RUN001.md",
+        "publication/operations/sources.js"
+      ],
+      "evidence_url": null,
+      "result": "PR_QA_PENDING",
+      "limitations": "No authorized production Slack/Discord/Telegram collector; source reports historical; domain completeness and independent bytes hashes unverified. No original Sheet record changes in first batch."
     }
   ]
 }
