@@ -58,7 +58,9 @@ function render() {
     stats.append(line("Reviewed instructions", all.reviewed_notice_count),
                  line("Recorded work reports", all.published_work_report_count),
                  line("Unverified work reports", all.unverified_work_report_count));
+    const cats = Object.entries(all.notice_categories || {}).filter(([k,v])=>v>0).map(([k,v])=>k + ": " + v).join(" · ");
     meaning.append(advice(all.registered_message_source_count + " original message source record(s) underpin the reviewed notification register. Different instructions are not necessarily separate chat messages."),
+                   advice(cats ? "Reviewed instruction categories: " + cats + ". These are topics, not confirmed shortages or completed tasks." : "No reviewed instruction categories published."),
                    advice(all.unverified_work_report_count + " work report(s) lack verified completion. These are historical reports, not confirmed construction progress.","caution"),
                    advice("Latest reviewed message: " + dateLabel(all.latest_notice_date) +
                      ". Latest reported work: " + dateLabel(all.latest_work_date) + ". No newer public site record is established by this snapshot."));
