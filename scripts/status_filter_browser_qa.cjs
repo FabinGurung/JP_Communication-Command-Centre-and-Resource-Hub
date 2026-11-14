@@ -1,7 +1,7 @@
 /* Playwright synthetic mobile+desktop QA of Sheets-V2 project-status controls. */
 "use strict";
 const assert = require("node:assert/strict");
-const {chromium} = require("playwright");
+const {chromium, webkit} = require("playwright");
 const ORIGIN = process.env.QA_BASE || "http://127.0.0.1:8766";
 const seen = [];
 function check(msg){seen.push(msg);console.log("PASS "+msg)}
@@ -182,6 +182,61 @@ async function statusInfo(page){
     check("Sources & History is a separate internal page with sourced counts and page navigation");
     await prog.close();
 
+    // Regression: the source status was an unbroken machine token. It used to
+    // expand the page width and force iOS Safari into tiny apparent text.
+    const sourcePage=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+    await sourcePage.goto(ORIGIN+"/sources.html",{waitUntil:"domcontentloaded"});
+    await sourcePage.waitForFunction(()=>document.querySelector("#source-project-count")?.textContent==="5");
+    const noOverflow=()=>sourcePage.evaluate(()=>({
+      viewport:window.innerWidth,content:document.documentElement.scrollWidth,
+      source:document.querySelector(".source-page-dates").getBoundingClientRect().width
+    }));
+    let bounds=await noOverflow();
+    assert.ok(bounds.content<=bounds.viewport+2,"Mobile Sources page horizontally overflows: "+JSON.stringify(bounds));
+    assert.ok(bounds.source<=bounds.viewport+2);
+    assert.equal(await sourcePage.locator(".nav-toggle").isVisible(),true);
+    assert.equal(await sourcePage.locator("nav[data-global-nav]").isVisible(),false);
+    await sourcePage.locator(".nav-toggle").click();
+    assert.equal(await sourcePage.locator("nav[data-global-nav]").isVisible(),true);
+    const menuRect=await sourcePage.locator("nav[data-global-nav]").boundingBox();
+    assert.ok(menuRect.width<=390);
+    check("390px Sources page wraps provider status, uses toggle navigation and has no horizontal overflow");
+    await sourcePage.locator("nav a[href='./extraction.html']").click();
+    await sourcePage.waitForFunction(()=>document.querySelector("#intake-count")?.textContent==="7");
+    assert.equal(await sourcePage.locator("#public-site-count").textContent(),"5");
+    assert.equal(await sourcePage.locator("#lane-work-count").textContent(),"1");
+    assert.equal(await sourcePage.locator("#extract-sources tr").count(),7);
+    assert.equal(await sourcePage.locator(".nav-toggle").isVisible(),true);
+    check("Four-lane Extraction Desk loads all seven existing Sheet-source counts without raw provider records");
+    await sourcePage.setViewportSize({width:320,height:710});
+    bounds=await noOverflow();
+    assert.ok(bounds.content<=bounds.viewport+2,"320px extraction page horizontal overflow: "+JSON.stringify(bounds));
+    await sourcePage.goto(ORIGIN+"/sources.html");
+    await sourcePage.waitForFunction(()=>document.querySelector("#source-project-count")?.textContent==="5");
+    bounds=await noOverflow();
+    assert.ok(bounds.content<=bounds.viewport+2,"320px Sources page horizontal overflow: "+JSON.stringify(bounds));
+    await sourcePage.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
+    await sourcePage.evaluate(()=>window.scrollTo(0,0));
+    assert.equal(await sourcePage.locator(".nav-toggle").isVisible(),true);
+    check("320px phone keeps source cards within viewport and site navigation reachable after vertical scrolling");
+    await sourcePage.close();
+
+    // WebKit is a Safari-engine regression check, not a physical iPhone signoff.
+    const safari=await webkit.launch({headless:true});
+    try {
+      const ios=await safari.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+      await ios.goto(ORIGIN+"/sources.html",{waitUntil:"domcontentloaded"});
+      await ios.waitForFunction(()=>document.querySelector("#source-project-count")?.textContent==="5");
+      const size=await ios.evaluate(()=>({viewport:window.innerWidth,content:document.documentElement.scrollWidth}));
+      assert.ok(size.content<=size.viewport+2,"WebKit source content wider than viewport "+JSON.stringify(size));
+      await ios.locator(".nav-toggle").click();
+      assert.equal(await ios.locator("nav[data-global-nav]").isVisible(),true);
+      await ios.locator("nav a[href='./extraction.html']").click();
+      await ios.waitForFunction(()=>document.querySelector("#intake-count")?.textContent==="7");
+      assert.ok(await ios.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2));
+      check("WebKit mobile Safari engine: Sources menu and Extraction Desk remain accessible without zoom");
+      await ios.close();
+    } finally {await safari.close();}
     assert.equal(await desk.request.get(ORIGIN+"/memory-wall.html").then(r=>r.status()),200);
     check("published Memory Wall route available in static QA artifact");
     await mobile.close();await desk.close();
