@@ -47,6 +47,14 @@ async function statusInfo(page){
   try {
     const mobile = await browser.newPage({viewport:{width:390,height:844},isMobile:true,deviceScaleFactor:1,hasTouch:true});
     await ready(mobile);
+    assert.equal(await mobile.locator(".phone-menu summary").isVisible(),true);
+    assert.equal(await mobile.locator(".desktop-nav").isVisible(),false);
+    assert.ok(await mobile.locator(".phone-menu summary").evaluate(el=>el.getBoundingClientRect().right<=window.innerWidth));
+    assert.ok(Number.parseFloat(await mobile.locator("#project-filter").evaluate(el=>getComputedStyle(el).fontSize))>=16);
+    await mobile.locator(".phone-menu summary").click();
+    assert.equal(await mobile.locator('.phone-menu nav a[href="./extraction.html"]').isVisible(),true);
+    await mobile.locator(".phone-menu summary").click();
+    check("mobile sticky Menu fits viewport; iOS select has 16px font to avoid focus zoom");
     assert.equal(await mobile.locator(".mobile-status-filter").isVisible(),true);
     assert.equal(await mobile.locator("#status-filter").isVisible(),false);
     assert.equal(await mobile.locator("[data-project-status]").count(),6);
@@ -175,11 +183,28 @@ async function statusInfo(page){
     assert.equal(await prog.locator("#progress-list .card").count(),1);
     assert.equal(await prog.locator('#progress').count(),1);
     check("Daily Progress opens on a separate internal page with project query preservation");
-    await prog.locator('nav a[href="./sources.html"]').click();
+    await prog.locator(".phone-menu summary").click();
+    await prog.locator('.phone-menu nav a[href="./sources.html"]').click();
     await prog.waitForFunction(()=>document.querySelector("#source-project-count")?.textContent==="5");
     assert.ok((await prog.locator("#source-notice-count").textContent()).includes("3 reviewed notifications"));
-    assert.equal(await prog.locator("nav a[aria-current=page]").textContent(),"Sources & history");
-    check("Sources & History is a separate internal page with sourced counts and page navigation");
+    assert.equal(await prog.locator("h1").textContent(),"Sources & history");
+    assert.ok(!(await prog.locator("#source-dates").textContent()).includes("NOT_AVAILABLE_WITH_CURRENT_SHEETS_READONLY_SCOPE"));
+    const sourceOverflow = await prog.evaluate(() => ({
+      doc:document.documentElement.scrollWidth, view:innerWidth,
+      maxTextRight:Math.max(...[...document.querySelectorAll(".source-date-grid dd")].map(e=>e.getBoundingClientRect().right))
+    }));
+    assert.ok(sourceOverflow.doc <= sourceOverflow.view+2,JSON.stringify(sourceOverflow));
+    assert.ok(sourceOverflow.maxTextRight<=sourceOverflow.view+2,JSON.stringify(sourceOverflow));
+    check("iPhone Sources has usable Menu and no clipped source strings or horizontal overflow");
+    await prog.locator(".phone-menu summary").click();
+    await prog.locator('.phone-menu nav a[href="./extraction.html"]').click();
+    await prog.waitForFunction(()=>document.querySelector("#publish-sheets")?.textContent==="7");
+    assert.equal(await prog.locator(".extract-lane").count(),4);
+    assert.equal(await prog.locator("#review-projects").textContent(),"5");
+    assert.equal(await prog.locator("#review-notices").textContent(),"0");
+    assert.equal(await prog.locator("#intake-count").textContent(),"0");
+    assert.ok(await prog.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+    check("four-lane Extraction opens via phone Menu, reads seven-source synthetic checkpoint without phantom provider messages");
     await prog.close();
 
     assert.equal(await desk.request.get(ORIGIN+"/memory-wall.html").then(r=>r.status()),200);
