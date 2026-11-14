@@ -29,6 +29,44 @@ def yes(value):
     return value.upper() == "TRUE"
 
 
+CLOSURE_DECISIONS = {
+    "COMPLETED": "Completed",
+    "NOT_REQUIRED": "No longer required",
+    "CANCELLED": "Cancelled",
+    "SUPERSEDED": "Superseded",
+}
+
+
+def reviewed_closure(row, record_id):
+    """Only source-approved, reviewer/evidence-backed decisions can leave the active view.
+
+    Closure fields are OPTIONAL on the existing Sheet: legacy data remains
+    active until the owner adds them in the exact original workbook. This
+    function never interprets Detail State, age, due date, or project status
+    as a closure. Private reviewer, reason and evidence are never published.
+    """
+    decision = str(row.get("closure_decision", "")).strip().upper().replace(" ", "_")
+    if not decision or decision in {"ACTIVE", "OPEN", "REOPENED"}:
+        return None
+    if decision not in CLOSURE_DECISIONS:
+        raise ValueError("Unknown closure decision for " + record_id)
+    if not yes(str(row.get("closure_approved", "")).strip()):
+        return None
+    required = ("closure_date", "closure_reason", "closure_reviewer")
+    if any(not str(row.get(k, "")).strip() for k in required):
+        raise ValueError("Approved closure missing reviewer/date/reason: " + record_id)
+    try:
+        date.fromisoformat(str(row["closure_date"]).strip())
+    except ValueError:
+        raise ValueError("Invalid approved closure date: " + record_id) from None
+    if decision == "COMPLETED" and not str(row.get("closure_evidence", "")).strip():
+        raise ValueError("Completion requires evidence reference: " + record_id)
+    if decision == "SUPERSEDED" and not str(row.get("superseded_by", "")).strip():
+        raise ValueError("Supersession requires replacement reference: " + record_id)
+    return {"decision": decision, "label": CLOSURE_DECISIONS[decision],
+            "date": str(row["closure_date"]).strip()}
+
+
 def verify_directory(tables):
     """Fail closed if the live published directory no longer points to the owning Sheets.
 
@@ -128,23 +166,52 @@ def build(tables, out, received_at):
         project_ids=set(projects), mode="ACTIONS_SHEETS_REFRESH")
     source_dates = {s["source_id"]: s["date_npt"] for s in compiled["sources"]}
     notice_keys = ("notification_id", "project_id", "category", "instruction", "due_date", "display_order")
-    notices = [{**{k: item[k] for k in notice_keys}, "date": source_dates[item["source_id"]]}
-               for item in compiled["items"]]
+    approved_notice_rows = {row["notification_id"]: row
+                            for row in notification_records(notice_rows, "notification_id")}
+    archived = []
+    notices = []
+    for item in compiled["items"]:
+        candidate = {**{k: item[k] for k in notice_keys}, "date": source_dates[item["source_id"]]}
+        reviewed = reviewed_closure(approved_notice_rows[item["notification_id"]], item["notification_id"])
+        if reviewed:
+            archived.append({
+                "id": item["notification_id"], "kind": "Instruction",
+                "project_id": item["project_id"], "project_name": projects[item["project_id"]]["name"],
+                "summary": item["instruction"], "category": item["category"],
+                "source_date": candidate["date"], "closed_on": reviewed["date"],
+                "decision": reviewed["decision"], "decision_label": reviewed["label"]
+            })
+        else:
+            notices.append(candidate)
     progress = []
     for row in records(tables["progress"], "project_work_id", "project_id", "is_public",
                        "description_override", "last_updated", "work_status", "verification_status"):
         if row["project_id"] not in projects or not yes(row["is_public"]):
             continue
         date.fromisoformat(row["last_updated"])
-        progress.append({"id": row["project_work_id"], "project_id": row["project_id"],
+        work = {"id": row["project_work_id"], "project_id": row["project_id"],
             "work": row["description_override"], "status": row["work_status"],
-            "date": row["last_updated"], "verification": row["verification_status"]})
+            "date": row["last_updated"], "verification": row["verification_status"]}
+        reviewed = reviewed_closure(row, row["project_work_id"])
+        if reviewed:
+            if reviewed["decision"] == "COMPLETED" and row["verification_status"] != "VERIFIED":
+                raise ValueError("Completed work requires separate VERIFIED status: " + row["project_work_id"])
+            archived.append({
+                "id": row["project_work_id"], "kind": "Work report",
+                "project_id": row["project_id"], "project_name": projects[row["project_id"]]["name"],
+                "summary": row["description_override"], "category": "Work",
+                "source_date": row["last_updated"], "closed_on": reviewed["date"],
+                "decision": reviewed["decision"], "decision_label": reviewed["label"]
+            })
+        else:
+            progress.append(work)
     progress.sort(key=lambda r: (r["date"], r["id"]), reverse=True)
+    archived.sort(key=lambda r: (r["closed_on"], r["id"]), reverse=True)
     notices.sort(key=lambda r: (r["date"], -r["display_order"]), reverse=True)
     out.mkdir(parents=True, exist_ok=True)
     for name in ("index.html", "app.js", "styles.css", "owner-help.html", "memory-wall.html",
                  "progress.html", "progress.js", "sources.html", "sources.js",
-                 "extraction.html", "extraction.js"):
+                 "extraction.html", "extraction.js", "closed-work.html", "closed-work.js"):
         shutil.copyfile(ROOT / "publication/operations" / name, out / name)
     (out / ".nojekyll").touch()
     source_dates = {
@@ -202,6 +269,29 @@ def build(tables, out, received_at):
         }
     }
     (out / "operations.json").write_text(json.dumps(result, ensure_ascii=False), encoding="utf-8")
+    archive = {
+        "schema_version": "1.0.0",
+        "kind": "SOURCE_REVIEWED_CLOSED_WORK",
+        "readback_at_npt": received_at,
+        "source_authority": "EXISTING_NOTIFICATION_INSTRUCTIONS_AND_PROJECT_WORK_SHEETS",
+        "total": len(archived),
+        "decisions": {decision: sum(r["decision"] == decision for r in archived)
+                      for decision in CLOSURE_DECISIONS},
+        "records": archived,
+        "closure_contract": {
+            "source_fields": ["Closure Decision", "Closure Approved", "Closure Date",
+                              "Closure Reviewer", "Closure Reason", "Closure Evidence",
+                              "Superseded By"],
+            "required_for_approved_closure": ["decision", "approved", "date", "reviewer", "reason"],
+            "completion_additionally_requires_evidence": True,
+            "work_completion_requires_verified_status": True,
+            "private_reviewer_reason_evidence_excluded": True,
+            "absence_does_not_imply_completed": True
+        }
+    }
+    (out / "closed-work.json").write_text(
+        json.dumps(archive, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+
 
     # Human-readable interpretations are calculated from the SAME admitted
     # public project/notice/work rows as the map. They do not turn a notice
