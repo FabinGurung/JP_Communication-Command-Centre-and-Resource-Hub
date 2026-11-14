@@ -883,6 +883,34 @@
         "AGENTS.md",
         "scripts/build_status_filter_fixture.py"
       ]
+    },
+    {
+      "branch_id": "OPS-SYS-CLOSED-WORK-R9",
+      "branch_name": "feature/closed-work-register-r9-20261114",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "2026-11-14 reviewed Completed/Not required/Cancelled/Superseded work archive as separate secondary page; source-authorized closures only; no active map or Notices contamination.",
+      "allowed_paths": [
+        "ops/control/branch-lane-registry.json",
+        "scripts/validate_branch_registry.py",
+        "scripts/publish_operations.py",
+        "publication/operations/closed-work.html",
+        "publication/operations/closed-work.js",
+        "publication/operations/extraction.html",
+        "publication/operations/extraction.js",
+        "publication/operations/styles.css",
+        "scripts/test_ops_publication.py",
+        "scripts/status_filter_browser_qa.cjs",
+        "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md",
+        "docs/releases/v3.2.0.md",
+        "ops/control/operations-source-decision-ledger.v1.json",
+        ".github/workflows/operations-sheets-pages.yml",
+        "AGENTS.md",
+        "scripts/build_status_filter_fixture.py"
+      ]
     }
   ]
 }

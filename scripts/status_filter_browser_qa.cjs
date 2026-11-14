@@ -210,6 +210,18 @@ async function statusInfo(page){
     await prog.setViewportSize({width:320,height:710});
     assert.ok(await prog.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
     check("320px phone uses three compact tabs and site update cards without horizontal scrolling");
+    await prog.locator('a[href="./closed-work.html"]').first().click();
+    await prog.waitForFunction(()=>document.querySelector("#closed-total")?.textContent==="1");
+    assert.equal(await prog.locator("#closed-completed").textContent(),"1");
+    assert.equal(await prog.locator("#closed-unneeded").textContent(),"0");
+    assert.equal(await prog.locator(".closure-item").count(),1);
+    assert.ok((await prog.locator(".closure-item").textContent()).includes("Synthetic verified completed report"));
+    assert.ok(await prog.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+    await prog.locator("#closed-decision").selectOption("NOT_REQUIRED");
+    assert.equal(await prog.locator(".closure-item").count(),0);
+    await prog.locator("#closed-decision").selectOption("COMPLETED");
+    assert.equal(await prog.locator(".closure-item").count(),1);
+    check("320px dedicated closed-work archive shows only reviewed synthetic completions and filters correctly");
     await prog.close();
 
     assert.equal(await desk.request.get(ORIGIN+"/memory-wall.html").then(r=>r.status()),200);
@@ -234,6 +246,10 @@ async function statusInfo(page){
       assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
       await phone.locator("#updates-project").selectOption("PRJ-999901");
       assert.equal(await phone.locator("#updates-stats .updates-stat").nth(0).locator("strong").textContent(),"2");
+      await phone.goto(ORIGIN+"/closed-work.html");
+      await phone.waitForFunction(()=>document.querySelector("#closed-total")?.textContent==="1");
+      assert.equal(await phone.locator(".closure-item").count(),1);
+      assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
       await phone.close();
       check("WebKit mobile engine: simple tabs, notifications, source wrapping and site-derived updates usable");
     } finally { await safari.close(); }
