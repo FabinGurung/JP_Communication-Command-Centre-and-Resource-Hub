@@ -802,6 +802,58 @@
         "docs/releases/v2.9.0.md",
         ".github/workflows/operations-sheets-pages.yml"
       ]
+    },
+    {
+      "branch_id": "OPS-SYS-EXTRACTION-MOBILE-R7",
+      "branch_name": "feature/mobile-nav-extraction-r7-20261114",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "14 Nov 2026: correct phone navigation/scroll/overflow and add first-batch four-lane source extraction readback with source ID QA; retain archive routes and seven-Sheet publisher governance.",
+      "allowed_paths": [
+        "ops/control/branch-lane-registry.json",
+        "scripts/validate_branch_registry.py",
+        "publication/operations/index.html",
+        "publication/operations/progress.html",
+        "publication/operations/sources.html",
+        "publication/operations/owner-help.html",
+        "publication/operations/styles.css",
+        "publication/operations/sources.js",
+        "publication/operations/extraction.html",
+        "publication/operations/extraction.js",
+        "publication/operations/memory-wall.html",
+        "scripts/publish_operations.py",
+        "scripts/test_ops_publication.py",
+        "scripts/status_filter_browser_qa.cjs",
+        "scripts/validate_ops_source_memory.py",
+        "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md",
+        "ops/control/operations-source-decision-ledger.v1.json",
+        "docs/releases/v3.0.0.md",
+        "docs/operations/EXTRACTION_WORKFLOW_RUN01.md",
+        ".github/workflows/operations-sheets-pages.yml",
+        "AGENTS.md"
+      ]
+    },
+    {
+      "branch_id": "OPS-SYS-FIELD-EXTRACTION-PARALLEL-R7",
+      "branch_name": "feature/field-extraction-mobile-r7-20261114",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "Independent parallel field-extraction code branch found 2026-11-14; registered for PR-only validation; NOT merged, edited, tagged or used as production source in this change.",
+      "allowed_paths": [
+        "ops/control/branch-lane-registry.json",
+        "scripts/validate_branch_registry.py",
+        "publication/operations/",
+        "scripts/",
+        "docs/",
+        "AGENTS.md",
+        ".github/workflows/operations-sheets-pages.yml"
+      ]
     }
   ]
 }

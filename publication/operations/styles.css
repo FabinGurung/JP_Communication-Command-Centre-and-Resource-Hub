@@ -195,3 +195,91 @@
  .site-map-badge{width:43px;height:43px}
  .map-field-actions button,#back-to-sites{min-height:48px}
 }
+
+
+/* v3.0.0 — stop Safari auto-zoom, mobile header trapping and source text overflow.
+ * The primary phone control is a real <details> menu with three simple routes.
+ * The older reference pages remain discoverable inside that menu / Extraction. */
+html{max-width:100%;scroll-padding-top:76px}
+body{min-width:0;max-width:100%;overflow-x:clip}
+.north{max-width:100%;min-width:0}
+.north .brand{min-width:0}
+.north .brand>div{min-width:0}
+.north .brand strong{overflow-wrap:anywhere}
+.north .desktop-nav{display:flex}
+.phone-menu{display:none}
+.source-page-dates,.standalone-page,.standalone-page>.surface{min-width:0;max-width:100%}
+.source-date-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.source-date-grid dt,.source-date-grid dd,.source-dates .identity-note{
+  min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;word-break:normal
+}
+.source-page-dates .source-date-grid dd{font-size:13px}
+.source-page-dates .source-date-grid dt{font-size:12px}
+.source-book-grid a,.source-book-grid a small,.standalone-page a{overflow-wrap:anywhere}
+.standalone-page .section-head{min-width:0;flex-wrap:wrap}
+.standalone-page .section-head>*{min-width:0}
+.source-tag{white-space:normal;max-width:100%}
+.extraction-intro{background:linear-gradient(130deg,#e7f2e8,#fdfbf1)}
+.extract-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.extract-toolbar a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border:1px solid #b5d0bd;border-radius:11px;padding:10px 13px;text-decoration:none;font-weight:800;font-size:12px}
+.extract-toolbar a.primary{background:#1b674f;border-color:#1b674f;color:#fff}
+.extraction-board{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.extract-lane{min-width:0;padding:18px;background:#fff;border:1px solid #d7e5d8;border-radius:15px;display:grid;align-content:start;gap:10px}
+.extract-lane h2{font-size:clamp(18px,2vw,24px);margin:0;color:#1b4a39;line-height:1.18}
+.extract-lane .lane-kicker{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:850;color:#4b8065}
+.extract-lane .lane-number{display:inline-flex;align-items:center;justify-content:center;width:35px;height:35px;background:#e0eee3;color:#226043;font-weight:900;border-radius:12px}
+.extract-lane p{font-size:13px;color:#516e5d;margin:0;line-height:1.55}
+.extract-lane .lane-value{display:block;font-size:24px;font-weight:850;color:#1b5a44;font-variant-numeric:tabular-nums}
+.extract-lane .lane-hint{font-size:11px;color:#647b6b}
+.extract-lane dl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;margin:5px 0;font-size:12px}
+.extract-lane dt{color:#607868}
+.extract-lane dd{margin:0;color:#1a4b38;text-align:right;font-weight:760;overflow-wrap:anywhere}
+.extract-lane a{font-size:12px;font-weight:760;overflow-wrap:anywhere}
+.extract-lane .lane-hold{padding:10px 12px;border-radius:9px;background:#fff7e5;color:#795e32;font-size:11px}
+.extract-lane .lane-ok{padding:10px 12px;border-radius:9px;background:#eef6ec;color:#35614b;font-size:11px}
+.extract-status{display:inline-flex;align-items:center;min-height:29px;max-width:100%;padding:4px 10px;border-radius:40px;background:#e9f1eb;color:#315941;font-size:11px;font-weight:820;overflow-wrap:anywhere}
+.extract-status.hold{background:#fff2d8;color:#866328}
+.extract-dates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.extract-dates article{padding:15px;background:#f6f9f4;border-radius:12px;min-width:0}
+.extract-dates strong{display:block;font-size:16px;margin-top:5px;color:#235b43;overflow-wrap:anywhere}
+.extract-dates span{font-size:12px;color:#607b68}
+.extraction-board,.extract-dates,.extract-lane{max-width:100%}
+@media(max-width:900px){
+  .north{position:sticky!important;top:0!important;z-index:1200;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;
+    gap:8px!important;padding:7px 12px!important;min-height:60px!important;background:#193e35}
+  .north .brand{min-width:0;gap:9px}
+  .north .brand-icon{width:36px;height:36px;flex:0 0 36px;font-size:20px}
+  .north .brand .eyebrow{font-size:9px;letter-spacing:.055em;margin:0 0 2px}
+  .north .brand strong{font-size:15px;line-height:1.1;white-space:nowrap}
+  .north .desktop-nav{display:none!important}
+  .phone-menu{display:block;position:relative;flex:0 0 auto;z-index:1210;margin-left:auto}
+  .phone-menu>summary{list-style:none;display:flex;align-items:center;justify-content:center;min-height:46px;min-width:76px;
+    background:#356b58;color:#fff;border:1px solid #83a996;border-radius:11px;padding:9px 13px;font-size:14px;font-weight:830;cursor:pointer}
+  .phone-menu>summary::-webkit-details-marker{display:none}
+  .phone-menu[open]>summary{background:#f0f5e9;color:#1b4c39}
+  .phone-menu>nav{display:grid!important;position:absolute;top:calc(100% + 8px);right:0;width:min(82vw,310px);max-height:calc(100dvh - 95px);
+    overflow-y:auto;overscroll-behavior:contain;border-radius:14px;background:#fff;box-shadow:0 10px 30px #102c2890;
+    padding:9px;border:1px solid #cedcd1;align-items:stretch;gap:3px;z-index:1250}
+  .phone-menu nav a{display:flex!important;align-items:center!important;min-height:48px!important;
+    white-space:normal!important;padding:10px 12px!important;border-radius:9px;color:#21533e!important;
+    background:transparent;font-size:15px!important;line-height:1.2;text-decoration:none}
+  .phone-menu nav a[aria-current="page"]{background:#e5f2e5!important;color:#174d36!important}
+  .phone-menu nav a:focus-visible,.phone-menu>summary:focus-visible{outline:3px solid #dba338;outline-offset:2px}
+  .standalone-page{width:100%;max-width:100%;margin:0;padding:12px;gap:11px}
+  .standalone-page .surface{padding:15px;min-width:0}
+  .source-page-dates .source-date-grid{grid-template-columns:minmax(0,1fr)}
+  .source-page-dates .source-date-grid dd{text-align:left;margin:2px 0 12px}
+  .source-page-dates{padding:14px}
+  .extraction-board{grid-template-columns:1fr;gap:10px}
+  .extract-dates{grid-template-columns:1fr}
+  .extract-lane{padding:15px}
+  .standalone-page input,.standalone-page select,.west input,.west select{font-size:16px!important}
+  #map{scroll-margin-top:70px}
+  #notifications{scroll-margin-top:70px}
+}
+@media(max-width:380px){
+  .north .brand strong{font-size:13px}
+  .north .brand .eyebrow{font-size:8px}
+  .phone-menu>summary{min-width:66px;padding:8px 10px}
+  .standalone-page{padding:9px}
+}

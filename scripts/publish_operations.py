@@ -143,7 +143,8 @@ def build(tables, out, received_at):
     notices.sort(key=lambda r: (r["date"], -r["display_order"]), reverse=True)
     out.mkdir(parents=True, exist_ok=True)
     for name in ("index.html", "app.js", "styles.css", "owner-help.html", "memory-wall.html",
-                 "progress.html", "progress.js", "sources.html", "sources.js"):
+                 "progress.html", "progress.js", "sources.html", "sources.js",
+                 "extraction.html", "extraction.js"):
         shutil.copyfile(ROOT / "publication/operations" / name, out / name)
     (out / ".nojekyll").touch()
     source_dates = {
@@ -201,6 +202,52 @@ def build(tables, out, received_at):
         }
     }
     (out / "operations.json").write_text(json.dumps(result, ensure_ascii=False), encoding="utf-8")
+    # The public extraction checkpoint is an inspectable summary of exactly
+    # the same read-only, double-read Sheets snapshot as operations.json.
+    # It contains only aggregates, public source dates and provider holds:
+    # no raw messages, source URLs, people, payments or private project rows.
+    extraction = {
+        "schema_version": "1.0.0",
+        "batch_id": "OPS-EXTRACT-R01-20261114",
+        "batch_scope": "EXISTING_SHEETS_RECONCILIATION_NOT_NEW_PROVIDER_INGEST",
+        "readback_at_npt": received_at,
+        "source_counts": {
+            "workbooks": len(SOURCES),
+            "project_rows": len(list(records(tables["projects"], "project_id"))),
+            "publication_settings": len(list(records(tables["choices"], "publication_setting_id"))),
+            "message_sources": len(list(records(tables["messages"], "source_id"))),
+            "organizations": len(list(records(tables["organizations"], "organization_id"))),
+        },
+        "public_counts": {
+            "projects": len(projects),
+            "reviewed_notices": len(notices),
+            "work_reports": len(progress),
+            "unverified_work_reports": sum(1 for x in progress
+                if x["verification"] != "VERIFIED"),
+        },
+        "source_dates": {
+            "projects": source_dates["projects"]["latest_public_record_date"],
+            "notifications": source_dates["notifications"]["latest_public_record_date"],
+            "progress": source_dates["progress"]["latest_public_record_date"],
+        },
+        "provider_collection": {
+            "slack": "NO_DIRECT_COLLECTOR",
+            "discord": "NOT_CONNECTED",
+            "telegram": "NOT_CONNECTED",
+            "source_register_only": True,
+        },
+        "evidence_bytes_reverified_in_this_publisher": False,
+        "quality_boundaries": {
+            "identity": "PUBLIC_PROJECTS_AND_PERMISSION_GRANTS_ONLY",
+            "completion": "NOT_ENGINEER_CERTIFIED",
+            "source_freshness": "SOURCE_ROW_DATE_NOT_PUBLISHER_READ_TIME",
+            "unresolved_notices": "NOT_DETERMINED_FROM_REVIEWED_NOTICES",
+        },
+    }
+    (out / "extraction-status.json").write_text(
+        json.dumps(extraction, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8")
+
     for path, target in {
         "map.html": "./#map",
         "site-operations.html": "./#notifications",

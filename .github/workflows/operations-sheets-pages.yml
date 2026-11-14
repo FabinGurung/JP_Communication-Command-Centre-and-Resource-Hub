@@ -16,6 +16,8 @@ on:
       - 'docs/releases/v2.7.0.md'
       - 'docs/releases/v2.8.0.md'
       - 'docs/releases/v2.9.0.md'
+      - 'docs/releases/v3.0.0.md'
+      - 'docs/operations/EXTRACTION_WORKFLOW_RUN01.md'
       - 'docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md'
       - 'ops/control/operations-source-decision-ledger.v1.json'
       - 'scripts/build_status_filter_fixture.py'
@@ -50,6 +52,8 @@ on:
       - 'docs/releases/v2.7.0.md'
       - 'docs/releases/v2.8.0.md'
       - 'docs/releases/v2.9.0.md'
+      - 'docs/releases/v3.0.0.md'
+      - 'docs/operations/EXTRACTION_WORKFLOW_RUN01.md'
       - 'docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md'
       - 'ops/control/operations-source-decision-ledger.v1.json'
       - 'scripts/build_status_filter_fixture.py'
@@ -92,6 +96,7 @@ jobs:
       - run: node --check publication/operations/app.js
       - run: node --check publication/operations/progress.js
       - run: node --check publication/operations/sources.js
+      - run: node --check publication/operations/extraction.js
       - run: node --check scripts/status_filter_browser_qa.cjs
       - run: python -m unittest discover -s scripts -p 'test_ops_publication.py' -v
       - run: python scripts/validate_ops_source_memory.py
@@ -111,7 +116,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit
       - run: python scripts/build_status_filter_fixture.py _status_preview
       - name: Exercise mobile and desktop status source controls in Chromium
         shell: bash
@@ -481,4 +486,47 @@ jobs:
           else
             gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
               --title 'Site Operations Map-first Field Workspace v2.9.0' --notes-file "$notes"
+          fi
+
+  release-extraction-v3-0:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify live mobile routes, seven-Sheet extraction and tag exact Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          notes='docs/releases/v3.0.0.md'
+          tag='v3.0.0'
+          if git diff --quiet HEAD^ HEAD -- "$notes"; then
+            echo 'v3.0 release note unchanged; skip milestone'
+            exit 0
+          fi
+          pages="https://fabingurung.github.io/${GITHUB_REPOSITORY#*/}"
+          for file in index.html app.js styles.css progress.html progress.js sources.html sources.js extraction.html extraction.js owner-help.html memory-wall.html; do
+            curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/$file?commit=$GITHUB_SHA" | cmp - "publication/operations/$file"
+          done
+          curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/extraction-status.json?commit=$GITHUB_SHA" \
+            | python -c 'import json,sys; d=json.load(sys.stdin); assert d["schema_version"]=="1.0.0"; assert d["source_counts"]["workbooks"]==7; assert d["batch_id"]=="OPS-EXTRACT-R01-20261114"; assert d["public_counts"]["projects"]>=1; assert d["public_counts"]["unverified_work_reports"]>=0; assert d["provider_collection"]["slack"]=="NO_DIRECT_COLLECTOR"; assert d["evidence_bytes_reverified_in_this_publisher"] is False; assert "source_dates" in d; print("EXTRACTION_STATUS_LIVE_PASS",d["source_counts"]["workbooks"],d["source_counts"]["message_sources"],d["public_counts"]["reviewed_notices"])'
+          curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/operations.json?commit=$GITHUB_SHA" \
+            | python -c 'import json,sys; d=json.load(sys.stdin); assert d["identity"]["public_project_count"]==len(d["projects"]); assert d["provenance"]["live_workbook_count"]==7; assert d["provenance"]["directory_role"]=="READ_ONLY_SOURCE_POINTER_VALIDATION"; assert d["provenance"]["engineering_completion"]=="NOT_CERTIFIED_BY_THIS_DASHBOARD"; print("EXTRACTION_OPERATIONS_PROJECTION_PASS")'
+          for file in resources/project-documents.html feasibility/index.html feasibility/buyer-guide/index.html; do
+            curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/$file?commit=$GITHUB_SHA" \
+              | grep -Fq 'u.search = location.search'
+          done
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            test "$(git ls-remote origin "refs/tags/$tag" | cut -f1)" = "$GITHUB_SHA"
+          else
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title 'JP Site Operations v3.0 — Mobile Navigation and Source Extraction' --notes-file "$notes"
           fi

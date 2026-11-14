@@ -360,11 +360,14 @@ byId("directory-toggle").addEventListener("click", () => {
 document.addEventListener("keydown", e => {
   if (e.key === "Escape" && (activeSiteId || showAllNotices)) clearSiteSelection();
 });
-document.querySelector('a[href="./#notifications"]').addEventListener("click", () => {
-  showAllNotices = !activeSiteId;
-  render();
-  requestAnimationFrame(() => byId("notifications").scrollIntoView({block:"start"}));
-});
+for (const link of document.querySelectorAll('a[href="./#notifications"]'))
+  link.addEventListener("click", () => {
+    showAllNotices = !activeSiteId;
+    render();
+    const menu = link.closest(".phone-menu");
+    if (menu) menu.removeAttribute("open");
+    requestAnimationFrame(() => byId("notifications").scrollIntoView({block:"start"}));
+  });
 
 byId("reset-filters").addEventListener("click", () => {
   byId("project-filter").value = "";
