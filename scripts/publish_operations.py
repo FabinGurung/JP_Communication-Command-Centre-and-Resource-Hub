@@ -218,7 +218,7 @@ def build(tables, out, received_at):
     foreign_key_warnings = (
         sum(r["project_id"] not in project_ids for r in records(tables["choices"], "publication_setting_id", "project_id"))
         + sum(r["project_id"] not in project_ids for r in records(tables["notices"], "notification_id", "project_id"))
-        + sum(r["source_id"] not in message_ids for r in records(tables["notices"], "notification_id", "source_id"))
+        + sum(r.get("source_id", "") not in message_ids for r in records(tables["notices"], "notification_id"))
         + sum(r["project_id"] not in project_ids for r in records(tables["progress"], "project_work_id", "project_id"))
         + sum(bool(r["executing_company_id"]) and r["executing_company_id"] not in organization_ids
               for r in all_project_rows)
