@@ -7,7 +7,7 @@
 <meta name="description" content="Map-first field workspace with on-demand reviewed project notifications; internal Daily Progress and Sources.">
 <title>Project Map · A9 Site Operations</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./styles.css"><script defer src="./navigation.js"></script>
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script defer src="./app.js"></script>
 </head>
@@ -15,7 +15,7 @@
 <a class="skip" href="#main">Skip to dashboard</a>
 <header class="north">
   <div class="brand"><span class="brand-icon" aria-hidden="true">▦</span><div><span class="eyebrow">A9 · Field intelligence</span><strong>JP Site <span>Operations</span></strong></div></div>
-  <nav aria-label="Global navigation"><a href="./#map" aria-current="page">Project map</a><a href="./#notifications">Site notifications</a><a href="./progress.html">Daily progress</a><a href="./sources.html">Sources &amp; history</a><a href="./owner-help.html">Owner guide</a><a href="https://fabingurung.github.io/jp-field-desk-library/">Resource library ↗</a></nav>
+  <button type="button" class="nav-toggle" data-nav-toggle aria-controls="site-navigation" aria-expanded="false" aria-label="Open site navigation"><span aria-hidden="true">☰</span> Menu</button><nav id="site-navigation" data-global-nav aria-label="Global navigation"><a href="./#map" aria-current="page">Project map</a><a href="./#notifications">Notifications</a><a href="./extraction.html">Extraction desk</a><a href="./progress.html">Daily progress</a><a href="./sources.html">Sources & history</a><a href="./owner-help.html">Owner guide</a><a href="https://fabingurung.github.io/jp-field-desk-library/">Resource library</a></nav>
 </header>
 <div class="workbench">
 <aside class="west" id="navigation-panel" aria-labelledby="navigation-label">
