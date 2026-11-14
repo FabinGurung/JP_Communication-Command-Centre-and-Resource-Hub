@@ -32,3 +32,10 @@ The registered `feature/daily-ops-current-work` lane requires independent valida
 - Pin click selects site without dropping neighbor pins, changing camera or promoting reported work to completed tasks. Explicit clear button, Back control, empty map tap and Escape dismiss; pan/zoom do not dismiss unexpectedly.
 - Original Google Sheets: Companies and Organizations (only active, public, valid names) replaces local Git CSV for live labels; Projects and Locations replaces historical Git JSON as the current project identity authority. Website Publishing and Source Directory / 00_SOURCE_DIRECTORY is read solely to assert six original workbook pointers, NEVER to publish its private joined tabs. The original five fact Sheets remain governed.
 - See current docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md and scripts/publish_operations.py for all seven exact workbook IDs and tab names.
+
+## 14 November 2026 — mobile navigation and extraction governance
+
+- Primary field routes are Project Map and Notifications; the new four-lane Extraction page is for human source reconciliation and publication review. Previous Progress and Sources HTML routes remain accessible reference views, not independently authoritative datasets.
+- Render the phone navigation as a compact Menu with 48px touch options. Avoid unreadable technical enums, horizontally overflowing source data, and iOS Safari input zoom (16px minimum).
+- First-batch extraction only reads original seven Google Sheets via read-only WIF. Do not claim a live Slack/Discord/Telegram collector or publish unreviewed chat evidence. `extraction-status.json` contains source counts, source dates and limitations; no raw message content.
+- The user-provided Run 51 example inspires bounded batch/source occurrence/evidence/checkpoint separation. See `docs/operations/EXTRACTION_WORKFLOW_RUN01.md` and the existing A7 branch lane registry.
