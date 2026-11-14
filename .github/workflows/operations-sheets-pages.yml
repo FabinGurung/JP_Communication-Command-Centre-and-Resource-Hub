@@ -18,6 +18,7 @@ on:
       - 'docs/releases/v2.9.0.md'
       - 'docs/releases/v3.0.0.md'
       - 'docs/releases/v3.1.0.md'
+      - 'docs/releases/v3.2.0.md'
       - 'docs/operations/EXTRACTION_WORKFLOW_RUN01.md'
       - 'docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md'
       - 'ops/control/operations-source-decision-ledger.v1.json'
@@ -55,6 +56,7 @@ on:
       - 'docs/releases/v2.9.0.md'
       - 'docs/releases/v3.0.0.md'
       - 'docs/releases/v3.1.0.md'
+      - 'docs/releases/v3.2.0.md'
       - 'docs/operations/EXTRACTION_WORKFLOW_RUN01.md'
       - 'docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md'
       - 'ops/control/operations-source-decision-ledger.v1.json'
@@ -99,6 +101,7 @@ jobs:
       - run: node --check publication/operations/progress.js
       - run: node --check publication/operations/sources.js
       - run: node --check publication/operations/extraction.js
+      - run: node --check publication/operations/closed-work.js
       - run: node --check scripts/status_filter_browser_qa.cjs
       - run: python -m unittest discover -s scripts -p 'test_ops_publication.py' -v
       - run: python scripts/validate_ops_source_memory.py
@@ -194,7 +197,7 @@ jobs:
       - uses: actions/deploy-pages@v4
         id: deployment
 
-  release-site-updates:
+  release-reviewed-closures-v3-2:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: deploy
     runs-on: ubuntu-24.04
@@ -206,26 +209,26 @@ jobs:
         with:
           fetch-depth: 2
           persist-credentials: false
-      - name: Validate published Site updates and tag v3.1.0
+      - name: Verify separate closure page, original Sheets, and tag v3.2.0
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          notes='docs/releases/v3.1.0.md'
-          tag='v3.1.0'
+          notes='docs/releases/v3.2.0.md'
+          tag='v3.2.0'
           if git diff --quiet HEAD^ HEAD -- "$notes"; then
-            echo "No new v3.1.0 release notes; skip tag"
+            echo 'v3.2 release notes not changed; skip tag'
             exit 0
           fi
           pages="https://fabingurung.github.io/${GITHUB_REPOSITORY#*/}"
-          for file in index.html app.js styles.css extraction.html extraction.js progress.html progress.js sources.html sources.js memory-wall.html owner-help.html; do
+          for file in index.html app.js styles.css extraction.html extraction.js closed-work.html closed-work.js progress.html progress.js sources.html sources.js memory-wall.html owner-help.html; do
             curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/$file?commit=$GITHUB_SHA" | cmp - "publication/operations/$file"
           done
-          curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/site-updates.json?commit=$GITHUB_SHA" \
-          | python -c 'import json,sys; u=json.load(sys.stdin); a=u["summary"]; s=u["site_summaries"]; assert u["kind"]=="DERIVED_PUBLIC_SITE_INTERPRETATION"; assert u["source_authority"]=="SAME_SEVEN_ORIGINAL_GOOGLE_SHEETS"; assert len(s)==a["public_site_count"]; assert sum(x["reviewed_notice_count"] for x in s)==a["reviewed_notice_count"]; assert sum(x["published_report_count"] for x in s)==a["published_work_report_count"]; assert sum(x["unverified_report_count"] for x in s)==a["unverified_work_report_count"]; assert u["interpretation"]["new_provider_ingestion"] is False; assert "PRJ-000030" not in {x["project_id"] for x in s}; print("SITE_UPDATES_DERIVATION_PASS",a["public_site_count"],a["reviewed_notice_count"],a["published_work_report_count"])'
+          curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/closed-work.json?commit=$GITHUB_SHA" \
+          | python -c 'import json,sys; d=json.load(sys.stdin); r=d["records"]; assert d["kind"]=="SOURCE_REVIEWED_CLOSED_WORK"; assert len(r)==d["total"]; assert sum(d["decisions"].values())==d["total"]; assert all(x["decision"] in {"COMPLETED","NOT_REQUIRED","CANCELLED","SUPERSEDED"} for x in r); assert len({x["kind"]+":"+x["id"] for x in r})==len(r); assert all("closure_reason" not in x and "closure_reviewer" not in x and "closure_evidence" not in x for x in r); assert "PRJ-000030" not in {x["project_id"] for x in r}; print("CLOSED_WORK_REVIEWED_PUBLIC_PASS",d["total"])'
           curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/operations.json?commit=$GITHUB_SHA" \
-          | python -c 'import json,sys; d=json.load(sys.stdin); p=d["provenance"]; assert p["live_workbook_count"]==7; assert p["source_authority"]=="GOOGLE_SHEETS"; assert p["engineering_completion"]=="NOT_CERTIFIED_BY_THIS_DASHBOARD"; assert "PRJ-000030" not in {x["id"] for x in d["projects"]}; print("SOURCE_PRIVACY_PASS",len(d["projects"]),len(d["notices"]),len(d["progress"]))'
+          | python -c 'import json,sys; d=json.load(sys.stdin); assert d["provenance"]["live_workbook_count"]==7; assert d["provenance"]["source_authority"]=="GOOGLE_SHEETS"; assert len(d["projects"])==d["identity"]["public_project_count"]; assert "PRJ-000030" not in {x["id"] for x in d["projects"]}; print("SEVEN_SHEETS_PROJECTS_PRESERVED",len(d["projects"]),len(d["notices"]),len(d["progress"]))'
           for entry in resources/project-documents.html feasibility/index.html feasibility/buyer-guide/index.html; do
             body=$(curl -fsS --retry 6 --retry-delay 4 --retry-all-errors "$pages/$entry?commit=$GITHUB_SHA")
             grep -Fq 'u.search = location.search' <<< "$body"
@@ -234,5 +237,5 @@ jobs:
             test "$(git ls-remote origin "refs/tags/$tag" | cut -f1)" = "$GITHUB_SHA"
           else
             gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
-              --title 'JP Site Operations — Clear Site Updates v3.1.0' --notes-file "$notes"
+              --title 'JP Site Operations — Reviewed Closed Work v3.2.0' --notes-file "$notes"
           fi
