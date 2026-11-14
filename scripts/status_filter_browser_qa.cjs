@@ -176,6 +176,7 @@ async function statusInfo(page){
     assert.equal(await prog.locator("#progress-list .card").count(),1);
     assert.equal(await prog.locator('#progress').count(),1);
     check("Daily Progress opens on a separate internal page with project query preservation");
+    await prog.locator(".nav-toggle").click();
     await prog.locator('nav a[href="./sources.html"]').click();
     await prog.waitForFunction(()=>document.querySelector("#source-project-count")?.textContent==="5");
     assert.ok((await prog.locator("#source-notice-count").textContent()).includes("3 reviewed notifications"));
