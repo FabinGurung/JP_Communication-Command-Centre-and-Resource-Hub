@@ -73,6 +73,37 @@ preview["notices"] = [
      "display_order":1,"date":"2026-11-12"},
 ]
 output.write_text(json.dumps(preview), encoding="utf-8")
+
+# Match the derived, PUBLIC-SAFE site-updates projection to the same
+# synthetic notice rows. Production computes both together before saving.
+update_path = out / "site-updates.json"
+update = json.loads(update_path.read_text(encoding="utf-8"))
+update["summary"]["reviewed_notice_count"] = len(preview["notices"])
+update["summary"]["notice_categories"] = {
+    cat: sum(n["category"] == cat for n in preview["notices"])
+    for cat in ("Work", "Materials", "Supervision")
+}
+update["summary"]["latest_notice_date"] = max(n["date"] for n in preview["notices"])
+for site in update["site_summaries"]:
+    ns = [n for n in preview["notices"] if n["project_id"] == site["project_id"]]
+    site["reviewed_notice_count"] = len(ns)
+    site["last_notice_date"] = max((n["date"] for n in ns), default=None)
+    site["notice_categories"] = {
+        cat: sum(n["category"] == cat for n in ns)
+        for cat in ("Work", "Materials", "Supervision")
+    }
+    cat_summary = ", ".join(
+        f"{cat}: {count}" for cat, count in site["notice_categories"].items() if count)
+    site["notice_meaning"] = (
+        f"{len(ns)} reviewed instruction(s) recorded ({cat_summary}). Closure is not confirmed."
+        if ns else "No reviewed public instructions linked; this does not prove there are none."
+    )
+update["site_summaries"].sort(key=lambda item: (
+    max(item["last_notice_date"] or "", item["last_report_date"] or ""),
+    item["reviewed_notice_count"] + item["published_report_count"],
+    item["project_id"]), reverse=True)
+update_path.write_text(json.dumps(update, indent=2), encoding="utf-8")
+
 body = (out / "operations.json").read_text(encoding="utf-8")
 assert "HIDDEN_RAW_STATUS_DO_NOT_PUBLISH" not in body
 assert "PRIVATE DEMO MUST NEVER PUBLISH" not in body
