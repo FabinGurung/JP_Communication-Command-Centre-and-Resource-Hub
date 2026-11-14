@@ -32,3 +32,11 @@ The registered `feature/daily-ops-current-work` lane requires independent valida
 - Pin click selects site without dropping neighbor pins, changing camera or promoting reported work to completed tasks. Explicit clear button, Back control, empty map tap and Escape dismiss; pan/zoom do not dismiss unexpectedly.
 - Original Google Sheets: Companies and Organizations (only active, public, valid names) replaces local Git CSV for live labels; Projects and Locations replaces historical Git JSON as the current project identity authority. Website Publishing and Source Directory / 00_SOURCE_DIRECTORY is read solely to assert six original workbook pointers, NEVER to publish its private joined tabs. The original five fact Sheets remain governed.
 - See current docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md and scripts/publish_operations.py for all seven exact workbook IDs and tab names.
+
+## 14 Nov 2026 — Field extraction and iOS navigation gates
+
+- Restore compact sticky accessible mobile header on the three source and map pages; never use unbroken source-status tokens or horizontal-scroll nav as the only way to reach critical pages. Test 320px and 390px, browser back, scroll-to-top, and Escape.
+- Field Extraction Desk is a read-only 4-lane provenance/publication checkpoint, rebuilt from original Sheets by Actions. Its inputs are the 7 existing, exact SOURCE workbook IDs and tabs in scripts/publish_operations.py. Never collect providers from public web pages or pretend Slack/Discord/Telegram are connected in production.
+- Verify unique workbook source keys, reviewed row visibility, source directory, and foreign-key warning counts. Private provider messages/attachments stay in the owning restricted Drive; no public raw content.
+- Keep Daily Progress and Sources & History routes for backward compatibility. Rebuild source-safe views, not a second editable fact store; archived v2.9.0 tag retains the PRE publication baseline.
+- Use same live Google Sheet ID for eventual corrections, with governed PRE/POST copies, evidence log, original hashes/row dates and readback; an old report must not be silently refreshed.
