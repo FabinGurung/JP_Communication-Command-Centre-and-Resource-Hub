@@ -50,9 +50,15 @@ tables = {
     "notices": [["Notification ID", "Project ID"]],
     "progress": [
         ["Project Work ID", "Project ID", "Is Public", "Description Override",
-         "Last Updated", "Work Status", "Verification Status"],
+         "Last Updated", "Work Status", "Verification Status", "Closure Decision",
+         "Closure Approved", "Closure Date", "Closure Reason", "Closure Reviewer",
+         "Closure Evidence", "Superseded By"],
         ["PWI-QA-001", "PRJ-999901", True, "Synthetic work report", "2026-11-12",
-         "IN_PROGRESS", "UNVERIFIED"],
+         "IN_PROGRESS", "UNVERIFIED", "", "", "", "", "", "", ""],
+        ["PWI-QA-ARCHIVED", "PRJ-999901", True, "Synthetic verified completed report",
+         "2026-11-12", "COMPLETED", "VERIFIED", "COMPLETED", "TRUE",
+         "2026-11-13", "Synthetic completed", "Synthetic QA reviewer",
+         "SYNTHETIC-EVIDENCE-ID", ""],
     ]
 }
 assert build(add_live_source_fixtures(tables), out, "Synthetic QA — not a source read") == (5, 0, 1)
