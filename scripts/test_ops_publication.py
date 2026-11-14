@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from publish_operations import SOURCES, build as original_build
+from publish_operations import SOURCES, build as original_build, reviewed_closure
 
 def add_live_source_fixtures(tables):
     """Synthetic seven-source layout; production always reads Google Sheets."""
@@ -154,6 +154,16 @@ class OperationsPublicationTest(unittest.TestCase):
             self.assertEqual(extraction["public_counts"]["unverified_work_reports"], 1)
             self.assertEqual(extraction["provider_collection"]["slack"], "NO_DIRECT_COLLECTOR")
             self.assertNotIn("Private rate", (out / "extraction-status.json").read_text())
+            closed = json.loads((out / "closed-work.json").read_text())
+            self.assertEqual(closed["kind"], "SOURCE_REVIEWED_CLOSED_WORK")
+            self.assertEqual(closed["total"], 0)
+            self.assertEqual(closed["records"], [])
+            self.assertTrue(closed["closure_contract"]["private_reviewer_reason_evidence_excluded"])
+            self.assertTrue((out / "closed-work.html").is_file())
+            self.assertTrue((out / "closed-work.js").is_file())
+            self.assertIn('href="./closed-work.html"', (out / "extraction.html").read_text())
+            self.assertNotIn('href="./closed-work.html"', ops_html.split('<nav class="desktop-nav compact-nav"')[1].split('</nav>')[0])
+
             self.assertIn('class="desktop-nav compact-nav"', ops_html)
             self.assertIn('class="desktop-nav compact-nav"', sources)
             self.assertIn('class="desktop-nav compact-nav"', report)
@@ -189,6 +199,82 @@ class OperationsPublicationTest(unittest.TestCase):
             self.assertFalse((out / "document-packets.json").exists())
             self.assertFalse((out / "ops/data/current-works.json").exists())
 
+
+
+    def test_reviewed_closure_requires_provenance_and_never_leaks_private_details(self):
+        base = {
+            "closure_decision": "COMPLETED",
+            "closure_approved": "TRUE",
+            "closure_date": "2026-11-14",
+            "closure_reason": "PRIVATE_REASON",
+            "closure_reviewer": "PRIVATE_REVIEWER",
+            "closure_evidence": "PRIVATE_EVIDENCE",
+            "superseded_by": ""
+        }
+        self.assertEqual(reviewed_closure(base, "W-001")["decision"], "COMPLETED")
+        self.assertIsNone(reviewed_closure({**base, "closure_approved": "FALSE"}, "W-001"))
+        self.assertIsNone(reviewed_closure({**base, "closure_decision": ""}, "W-001"))
+        with self.assertRaises(ValueError):
+            reviewed_closure({**base, "closure_evidence": ""}, "W-001")
+        with self.assertRaises(ValueError):
+            reviewed_closure({**base, "closure_date": "not-a-date"}, "W-001")
+        with self.assertRaises(ValueError):
+            reviewed_closure({**base, "closure_decision": "SUPERSEDED"}, "W-001")
+
+        tables = {
+            "projects": [
+                ["Project ID", "Is Public", "Display Name", "Data Quality Status",
+                 "Executing Company ID", "Latitude", "Longitude", "Status",
+                 "Location Ward Number", "Legacy Project Code"],
+                ["PRJ-000001", True, "Approved location", "VALID", "ORG-000001",
+                 "28.20", "83.98", "Construction", "14", "P001"],
+            ],
+            "choices": [
+                ["Publication Setting ID", "Project ID", "Show Project Name",
+                 "Show Coordinates", "Show Ward Number", "Show Status"],
+                ["PPS-001", "PRJ-000001", True, True, True, True],
+            ],
+            "messages": [["Source ID"]],
+            "notices": [["Notification ID", "Project ID"]],
+            "progress": [
+                ["Project Work ID", "Project ID", "Is Public", "Description Override",
+                 "Last Updated", "Work Status", "Verification Status", "Closure Decision",
+                 "Closure Approved", "Closure Date", "Closure Reason", "Closure Reviewer",
+                 "Closure Evidence", "Superseded By", "Rate NPR"],
+                ["W-01", "PRJ-000001", True, "Reviewed finished works", "2026-11-13",
+                 "COMPLETED", "VERIFIED", "COMPLETED", "TRUE", "2026-11-14",
+                 "PRIVATE_REASON", "PRIVATE_REVIEWER", "PRIVATE_EVIDENCE", "", "PRIVATE_RATE"],
+                ["W-02", "PRJ-000001", True, "Discarded work plan", "2026-11-13",
+                 "NOT_REQUIRED", "UNVERIFIED", "NOT_REQUIRED", "TRUE", "2026-11-14",
+                 "Out of scope", "PRIVATE_REVIEWER", "", "", "PRIVATE_RATE"],
+                ["W-03", "PRJ-000001", True, "Unreviewed closure proposal", "2026-11-13",
+                 "IN_PROGRESS", "UNVERIFIED", "NOT_REQUIRED", "FALSE", "2026-11-14",
+                 "PRIVATE_REASON", "PRIVATE_REVIEWER", "", "", "PRIVATE_RATE"]
+            ],
+        }
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp)
+            self.assertEqual(build(tables, out, "fixture-readback"), (1, 0, 1))
+            archived = json.loads((out / "closed-work.json").read_text())
+            active = json.loads((out / "operations.json").read_text())
+            self.assertEqual(archived["total"], 2)
+            self.assertEqual({r["decision"] for r in archived["records"]},
+                             {"COMPLETED", "NOT_REQUIRED"})
+            self.assertEqual({r["id"] for r in archived["records"]}, {"W-01", "W-02"})
+            self.assertEqual([r["id"] for r in active["progress"]], ["W-03"])
+            self.assertEqual(len(active["projects"]), 1)
+            raw = (out / "closed-work.json").read_text()
+            for secret in ("PRIVATE_REASON", "PRIVATE_REVIEWER", "PRIVATE_EVIDENCE", "PRIVATE_RATE"):
+                self.assertNotIn(secret, raw)
+            updates = json.loads((out / "site-updates.json").read_text())
+            self.assertEqual(updates["summary"]["published_work_report_count"], 1)
+
+        # Work marked completed without an independent verified status
+        # must never be silently archived.
+        tables["progress"][1][6] = "UNVERIFIED"
+        with tempfile.TemporaryDirectory() as temp:
+            with self.assertRaisesRegex(ValueError, "requires separate VERIFIED"):
+                build(tables, Path(temp), "fixture-readback")
 
     def test_public_warning_identity_and_retired_alias_do_not_leak(self):
         # Synthetic fixture: real nonpublic source IDs and source references
