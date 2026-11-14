@@ -32,7 +32,7 @@
     <summary>How to close or remove a task from the active view</summary>
     <ol>
       <li>Locate its stable Notification ID or Project Work ID in the <strong>original owning Google Sheet</strong>. Do not delete or move the original row.</li>
-      <li>Record <strong>Closure Decision</strong> as <code>COMPLETED</code>, <code>NOT_REQUIRED</code>, <code>CANCELLED</code>, or <code>SUPERSEDED</code>. A reason, date and reviewer are required. Completion also requires an evidence reference and verified work status; supersession requires the replacement ID.</li>
+      <li>Record <strong>Closure Decision</strong> as <code>COMPLETED</code>, <code>NOT_REQUIRED</code>, <code>CANCELLED</code>, or <code>SUPERSEDED</code>. A reason, date and reviewer are required. A completed item requires an evidence reference; a completed Project Work item additionally requires <code>Verification Status = VERIFIED</code>. Supersession requires the replacement ID.</li>
       <li>After source review, set <strong>Closure Approved = TRUE</strong>. An unapproved or incomplete decision stays visible in the active source view. Only an approved closure moves here after the next successful Actions publication.</li>
       <li>To correct or reopen a closure, preserve an audit receipt and source revision; do not silently erase the earlier decision. Keep original evidence restricted.</li>
     </ol>
