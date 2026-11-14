@@ -290,7 +290,7 @@ def build(tables, out, received_at):
         }
     }
     (out / "closed-work.json").write_text(
-        json.dumps(archive, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        json.dumps(archive, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
     # Human-readable interpretations are calculated from the SAME admitted
