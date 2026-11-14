@@ -101,8 +101,10 @@ class OperationsPublicationTest(unittest.TestCase):
             self.assertFalse((out / "ops/data/land-feasibility/astam-village-public.v1.0.json").exists())
             self.assertFalse((out / "ops/data/land-feasibility/astam-buyer-guide-public.v1.0.json").exists())
             ops_html = (out / "index.html").read_text()
-            for key in ("projects", "work", "resources", "manpower", "activities"):
+            for key in ("projects", "work", "activities"):
                 self.assertIn('data-map-mode="' + key + '"', ops_html)
+            for key in ("resources", "manpower"):
+                self.assertNotIn('data-map-mode="' + key + '"', ops_html)
             self.assertIn("field-pulse", ops_html)
             self.assertIn('data-project-status="Completed"', ops_html)
             self.assertIn('data-project-status="Construction"', ops_html)
