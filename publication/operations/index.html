@@ -15,8 +15,11 @@
 <a class="skip" href="#main">Skip to dashboard</a>
 <header class="north">
   <div class="brand"><span class="brand-icon" aria-hidden="true">▦</span><div><span class="eyebrow">A9 · Site operations</span><strong>JP Site <span>Operations</span></strong></div></div>
-  <nav class="desktop-nav" aria-label="Main navigation"><a href="./#map" aria-current="page">Project map</a><a href="./#notifications">Notifications</a><a href="./extraction.html">Extraction</a></nav>
-  <details class="phone-menu"><summary aria-label="Open site navigation">Menu</summary><nav aria-label="Phone navigation"><a href="./#map" aria-current="page">Project map</a><a href="./#notifications">Notifications</a><a href="./extraction.html">Extraction</a><a href="./progress.html">Archived daily reports</a><a href="./sources.html">Sources &amp; history</a><a href="./owner-help.html">Owner guide</a><a href="https://fabingurung.github.io/jp-field-desk-library/">Resource library</a></nav></details>
+  <nav class="desktop-nav compact-nav" aria-label="Site navigation">
+<a href="./#map" aria-current="page">Map</a>
+<a href="./#notifications">Notifications</a>
+<a href="./extraction.html">Site updates</a>
+</nav>
 </header>
 <div class="workbench">
 <aside class="west" id="navigation-panel" aria-labelledby="navigation-label">
@@ -74,7 +77,7 @@
   </section>
   <section id="notifications" class="surface notification-centre" hidden aria-labelledby="notifications-title">
     <div class="section-head"><div><span class="eyebrow">PROJECT DETAILS · REVIEWED NOTIFICATIONS</span><h2 id="notifications-title" tabindex="-1">Notification Center</h2></div><span class="source-tag">Reviewed source records</span></div>
-    <div class="detail-actions"><button type="button" id="back-to-sites" aria-label="Back to all sites">← Back to all sites</button><a href="./progress.html" id="site-progress-link">Daily progress</a></div>
+    <div class="detail-actions"><button type="button" id="back-to-sites" aria-label="Back to all sites">← Back to all sites</button><a href="./extraction.html" id="site-progress-link">Site updates</a></div>
     <div id="context-card" class="context-card" aria-live="polite"></div>
     <div class="notice-dashboard">
       <div class="notice-dashboard-top">
@@ -99,6 +102,6 @@
 </main>
 
 </div>
-<footer class="south"><div class="south-inner"><div><strong>JP Site Operations</strong><p>Project map and selected-site notifications are drawn from approved public Google Sheets fields.</p></div><div class="source-links"><a href="./progress.html">Daily progress</a><a href="./sources.html">Sources &amp; history</a><a href="./memory-wall.html">Decision Memory Wall</a><a href="./owner-help.html">Owner guide</a></div></div></footer>
+<footer class="south"><div class="south-inner"><div><strong>JP Site Operations</strong><p>Project map and selected-site notifications are drawn from approved public Google Sheets fields.</p></div><div class="source-links"><a href="./sources.html">Data sources</a><a href="./progress.html">Older reports</a><a href="./memory-wall.html">Version history</a><a href="https://fabingurung.github.io/jp-field-desk-library/">Resource library</a></div></div></footer>
 <noscript><p class="nojs">JavaScript is needed for the map and filtered reports. See the <a href="./owner-help.html">operator help page</a>.</p></noscript>
 </body></html>
