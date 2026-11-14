@@ -25,16 +25,15 @@ fetch("./operations.json", {cache:"no-cache"})
       ["Reviewed notifications / message date", times.notifications?.latest_public_record_date],
       ["Reported work / latest row date", times.progress?.latest_public_record_date],
       ["Sheets double-read completed (NPT)", p.source_readback_at_npt || data.refreshed_at_npt],
-      ["Drive modified-time metadata", p.provider_modified_at_status || "Not available"]
+      ["Drive modified-time metadata", "Not provided by current Sheets-only connection"]
     ];
     const dl = node("dl", "", "source-date-grid");
     for (const [label, value] of labels) dl.append(node("dt", label), node("dd", value || "Not published"));
     const identityText = node("p", "", "identity-note");
-    identityText.textContent = "Current public projects: " + data.projects.length +
-      ". Historical Git identity index: " + (identity.historical_git_index_count ?? "unknown") +
-      ". Added public IDs since historical index: " +
-      (identity.public_ids_added_since_historical_index?.join(", ") || "none") +
-      ". Nonpublic and retired rows excluded.";
+    identityText.textContent = "Current approved public projects: " + data.projects.length +
+      ". The current Projects and Locations Google Sheet is authoritative. " +
+      "Retired aliases and rows without publication permission are excluded. " +
+      "Source row dates may predate the most recent website build.";
     byId("source-dates").replaceChildren(dl, identityText);
   })
   .catch(() => {byId("source-summary").textContent = "Source readback unavailable. Consult the publication workflow for the latest result.";});
