@@ -142,8 +142,9 @@ def build(tables, out, received_at):
     progress.sort(key=lambda r: (r["date"], r["id"]), reverse=True)
     notices.sort(key=lambda r: (r["date"], -r["display_order"]), reverse=True)
     out.mkdir(parents=True, exist_ok=True)
-    for name in ("index.html", "app.js", "styles.css", "owner-help.html", "memory-wall.html",
-                 "progress.html", "progress.js", "sources.html", "sources.js"):
+    for name in ("index.html", "app.js", "styles.css", "navigation.js", "owner-help.html", "memory-wall.html",
+                 "progress.html", "progress.js", "sources.html", "sources.js",
+                 "extraction.html", "extraction.js"):
         shutil.copyfile(ROOT / "publication/operations" / name, out / name)
     (out / ".nojekyll").touch()
     source_dates = {
@@ -200,6 +201,73 @@ def build(tables, out, received_at):
             "engineering_completion": "NOT_CERTIFIED_BY_THIS_DASHBOARD"
         }
     }
+    # A bounded public extraction receipt is a generated view only, never a
+    # second editable master or a raw provider message archive.
+    source_key_columns = {
+        "projects": "project_id", "choices": "publication_setting_id",
+        "messages": "source_id", "notices": "notification_id",
+        "progress": "project_work_id", "organizations": "organization_id",
+        "directory": "subject"
+    }
+    counts = {key: len(list(records(tables[key], source_key_columns[key])))
+              for key in SOURCES}
+    all_project_rows = list(records(tables["projects"], "project_id"))
+    project_ids = {r["project_id"] for r in all_project_rows}
+    organization_ids = {r["organization_id"] for r in records(tables["organizations"], "organization_id")}
+    message_ids = {r["source_id"] for r in records(tables["messages"], "source_id")}
+    foreign_key_warnings = (
+        sum(r["project_id"] not in project_ids for r in records(tables["choices"], "publication_setting_id", "project_id"))
+        + sum(r["project_id"] not in project_ids for r in records(tables["notices"], "notification_id", "project_id"))
+        + sum(r["source_id"] not in message_ids for r in records(tables["notices"], "notification_id", "source_id"))
+        + sum(r["project_id"] not in project_ids for r in records(tables["progress"], "project_work_id", "project_id"))
+        + sum(bool(r["executing_company_id"]) and r["executing_company_id"] not in organization_ids
+              for r in all_project_rows)
+    )
+    title_roles = {
+        "projects": ("Projects and Locations", "Owner"),
+        "choices": ("Website Display Choices", "Permissions"),
+        "messages": ("Notification Message Sources", "Provenance"),
+        "notices": ("Notification Instructions", "Review"),
+        "progress": ("Project Work", "Field reports"),
+        "organizations": ("Companies and Organizations", "Labels"),
+        "directory": ("Website Publishing and Source Directory", "Pointer check"),
+    }
+    source_books = [{"key": key, "title": title_roles[key][0], "tab": tab,
+                     "role": title_roles[key][1],
+                     "url": "https://docs.google.com/spreadsheets/d/" + book + "/edit",
+                     "row_count": counts[key]}
+                    for key, (book, tab) in SOURCES.items()]
+    status = {
+        "schema_version": "1.0.0",
+        "kind": "PUBLIC_AGGREGATE_SHEETS_EXTRACTION_RECEIPT",
+        "batch_id": "OPS-B001",
+        "checkpoint": "OPS-CP000001",
+        "readback_at_npt": received_at,
+        "source_books": source_books,
+        "counts": counts,
+        "source_dates": source_dates,
+        "public_project_count": len(projects),
+        "reviewed_notice_count": len(notices),
+        "published_work_count": len(progress),
+        "validation": {"directory_verified": True,
+                       "foreign_key_warnings": foreign_key_warnings,
+                       "keys_unique_per_registered_source": True,
+                       "double_read": True,
+                       "historical_work_is_not_certified": True},
+        "lanes": {
+            "01_messages": {"status": "SHEETS_PROVENANCE_ONLY", "rows": counts["messages"],
+                            "slack_collector": "NOT_CONNECTED_TO_ACTIONS",
+                            "discord_collector": "NOT_CONNECTED",
+                            "telegram_collector": "NOT_CONNECTED"},
+            "02_notifications": {"status": "REVIEWED_PUBLIC_ROWS", "rows": len(notices)},
+            "03_work": {"status": "HISTORICAL_REPORTED_ROWS", "rows": len(progress)},
+            "04_demands": {"status": "SOURCE_NOT_CONNECTED", "material": None,
+                           "equipment": None, "manpower": None},
+        },
+        "stop_point": "Seven existing original source Sheets read and cross-referenced; no new provider messages ingested.",
+        "next_batch": "One approved site channel, up to three messages, after evidence/permission verification and PRE snapshot."
+    }
+    (out / "extraction-status.json").write_text(json.dumps(status, ensure_ascii=False, indent=2), encoding="utf-8")
     (out / "operations.json").write_text(json.dumps(result, ensure_ascii=False), encoding="utf-8")
     for path, target in {
         "map.html": "./#map",
