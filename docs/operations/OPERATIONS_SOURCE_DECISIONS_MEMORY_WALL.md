@@ -1,6 +1,6 @@
 # Operations Source & Decision Memory Wall
 
-**Updated 12 November 2026 (Asia/Kathmandu).** This is the Operations source/decision protocol. It does not duplicate an editable project, progress or workforce database. See the [machine ledger](../../ops/control/operations-source-decision-ledger.v1.json).
+**Updated 14 November 2026 (Asia/Kathmandu).** This is the Operations source/decision protocol. It does not duplicate an editable project, progress or workforce database. See the [machine ledger](../../ops/control/operations-source-decision-ledger.v1.json).
 
 ## 1. Canonical provider route — current SHEETS_V2 authority
 Original files are located under [02 Website Sheets and Registers](https://drive.google.com/drive/folders/1QHxD74egNFeQAmvDJzvKmDxEQUOH3Kq6) → [01 Website Source Sheets — Edit Here](https://drive.google.com/drive/folders/1u4Rg1J3KSZRPnkjlAHOVxpWoq2skRICn).
@@ -88,3 +88,19 @@ Notifications are **reviewed** public instructions in `Work`, `Materials`, or `S
 **Standards referenced for design:** [Google Android touch target guidance](https://support.google.com/accessibility/android/answer/7101858?hl=en-GB), [Mapbox map tap vs empty-map deselection](https://docs.mapbox.com/android/maps/examples/android-view/add-interaction-to-custom-featuresets/), [Material bottom-sheet dismiss patterns](https://m1.material.io/components/bottom-sheets.html), and [NN/g Mobile Usability](https://www.nngroup.com/reports/mobile-website-and-application-usability/).
 
 **Release process:** scoped map-first branch → synthetic phone/desktop browser QA → unchanged original Sheets double-read → GitHub Pages exact-file and public-projection verification → release note and matching tag. No source records or Drive permissions rewritten.
+
+## 9. Four-lane field extraction and mobile header correction — 14 November 2026
+
+The user's device captures on iOS show that long unbroken internal source status strings can expand the Sources page beyond the phone viewport, shrinking its apparent content. The previous horizontal nav was difficult to touch and reach. **Decision:** CSS must wrap all source status strings; three primary pages share a compact sticky mobile Menu with no scroll locking, Escape dismissal, keyboard/focus access and 48px targets. Preserve desktop navigation.
+
+**New preferred operational page:** [Four-lane Extraction Desk](https://fabingurung.github.io/jp-site-operations/extraction.html). The four workstreams are 01 source messages/evidence, 02 reviewed instructions, 03 source-dated work reports, and 04 material/plant/manpower demand. It displays a **generated source-safe checkpoint** from `extraction-status.json`, written on every successful `operations-sheets-pages.yml` run. It is not a browser-side provider crawler.
+
+**First bounded batch OPS-B001:** the seven original Sheet tabs (30 project rows, 30 publication decisions, 3 work rows, 1 message-source row, 22 notices, 9 organizations, 34 source-directory entries as observed 14 Nov); check unique IDs, six source pointers and project/source/organization links; preserve original/source dates. `source_families`, `operations.json`, `extraction-status.json`, Memory Wall and release receipt constitute the public readback. No new field source or current report was fabricated.
+
+**Source freshness:** [Project Work](https://docs.google.com/spreadsheets/d/17YPRpaXIdHloH5-lzsjUpNvXLbsDfrIrlsn2jZ-7KKc/edit) published source-date 2026-10-09; [Message Sources](https://docs.google.com/spreadsheets/d/1aWHzjEK0doiUcBbqhySiA6DWCp8d-aq2I08McslilAQ/edit) source-date 2026-10-26. These are distinct from 14 November publisher/readback dates. Source sheet modification dates were inspected through authorized Drive metadata, **not** inferred from GitHub Actions.
+
+**Archived views:** [Daily Progress](https://fabingurung.github.io/jp-site-operations/progress.html) and [Sources & History](https://fabingurung.github.io/jp-site-operations/sources.html) are retained as supporting reference views. No original records, source Sheets or routes have been deleted or duplicated. GitHub release v2.9.0 remains the immutable PRE publication milestone; new releases preserve its evidence.
+
+**Provider boundary:** Slack is searchable through an authorized connected app, but there is no Actions Slack collector or reviewed project-channel contract; Discord and Telegram are not connected. The existing `message_sources` is not an active ingestion feed. Do not claim zero work or closed notices based on old rows. Future extraction needs explicit provider channel/site mapping, stable message occurrence IDs, byte/attachment verification, A7 PRE/POST snapshots for same-live-ID Sheet writes, review before publication and a separate closeout.
+
+Detailed plan/first checkpoint: [Run OPS-B001](FOUR_LANE_EXTRACTION_RUN001.md). Source facts remain in the seven linked original Google Sheets above.
