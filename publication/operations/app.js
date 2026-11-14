@@ -248,7 +248,7 @@ function renderNotifications() {
     ? "Selected: " + (site?.name || activeSiteId) + " · Tap empty map or Back to all sites"
     : "Tap a site marker to view its notifications";
   byId("site-progress-link").href = site
-    ? "./progress.html?project=" + encodeURIComponent(site.id) : "./progress.html";
+    ? "./extraction.html?project=" + encodeURIComponent(site.id) : "./extraction.html";
   safeList("notice-list", items.map(noticeCard),
     site ? "No approved notifications for this site and category." : "No approved notifications match these filters.");
 }

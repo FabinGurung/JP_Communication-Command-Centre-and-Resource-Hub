@@ -92,7 +92,8 @@ system_bases={"system/notification-center": "feature/daily-ops-current-work", "s
               "feature/notification-first-routes-r5-20261113": "main",
               "feature/map-first-field-shell-r6-20261113": "main",
               "feature/mobile-nav-extraction-r7-20261114": "main",
-              "feature/field-extraction-mobile-r7-20261114": "main"}
+              "feature/field-extraction-mobile-r7-20261114": "main",
+              "feature/site-updates-simplify-r8-20261114": "main"}
 for lane in system_lanes:
     name=lane.get("branch_name","")
     if (name not in system_bases or lane.get("allowed_for_work") is not True

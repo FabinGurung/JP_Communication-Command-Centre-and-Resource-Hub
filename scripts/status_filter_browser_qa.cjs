@@ -47,14 +47,14 @@ async function statusInfo(page){
   try {
     const mobile = await browser.newPage({viewport:{width:390,height:844},isMobile:true,deviceScaleFactor:1,hasTouch:true});
     await ready(mobile);
-    assert.equal(await mobile.locator(".phone-menu summary").isVisible(),true);
-    assert.equal(await mobile.locator(".desktop-nav").isVisible(),false);
-    assert.ok(await mobile.locator(".phone-menu summary").evaluate(el=>el.getBoundingClientRect().right<=window.innerWidth));
+    assert.equal(await mobile.locator(".phone-menu").count(),0);
+    assert.equal(await mobile.locator(".compact-nav a").count(),3);
+    assert.equal(await mobile.locator(".compact-nav a[href='./extraction.html']").isVisible(),true);
+    assert.ok(await mobile.locator(".compact-nav").evaluate(el=>el.getBoundingClientRect().right<=window.innerWidth));
     assert.ok(Number.parseFloat(await mobile.locator("#project-filter").evaluate(el=>getComputedStyle(el).fontSize))>=16);
-    await mobile.locator(".phone-menu summary").click();
-    assert.equal(await mobile.locator('.phone-menu nav a[href="./extraction.html"]').isVisible(),true);
-    await mobile.locator(".phone-menu summary").click();
-    check("mobile sticky Menu fits viewport; iOS select has 16px font to avoid focus zoom");
+    for (const link of await mobile.locator(".compact-nav a").all())
+      assert.ok((await link.boundingBox()).height>=44);
+    check("mobile header has exactly three touch-friendly tabs, no overlay Menu, and 16px iOS inputs");
     assert.equal(await mobile.locator(".mobile-status-filter").isVisible(),true);
     assert.equal(await mobile.locator("#status-filter").isVisible(),false);
     assert.equal(await mobile.locator("[data-project-status]").count(),6);
@@ -128,8 +128,7 @@ async function statusInfo(page){
     assert.deepEqual(await mobile.locator("[data-notice-count]").allTextContents(),["3","1","1","1"]);
     check("Map is first, source notice detail hidden until site selection");
 
-    await mobile.locator(".phone-menu summary").click();
-    await mobile.locator('.phone-menu nav a[href="./#notifications"]').click();
+    await mobile.locator('.compact-nav a[href="./#notifications"]').click();
     assert.equal(await mobile.locator("#notifications").isVisible(),true);
     await mobile.locator('[data-notice-category="Materials"]').click();
     assert.equal(await mobile.locator("#notice-list .notice-item").count(),1);
@@ -184,8 +183,7 @@ async function statusInfo(page){
     assert.equal(await prog.locator("#progress-list .card").count(),1);
     assert.equal(await prog.locator('#progress').count(),1);
     check("Daily Progress opens on a separate internal page with project query preservation");
-    await prog.locator(".phone-menu summary").click();
-    await prog.locator('.phone-menu nav a[href="./sources.html"]').click();
+    await prog.goto(ORIGIN+"/sources.html",{waitUntil:"domcontentloaded"});
     await prog.waitForFunction(()=>document.querySelector("#source-project-count")?.textContent==="5");
     assert.ok((await prog.locator("#source-notice-count").textContent()).includes("3 reviewed notifications"));
     assert.equal(await prog.locator("h1").textContent(),"Sources & history");
@@ -196,16 +194,22 @@ async function statusInfo(page){
     }));
     assert.ok(sourceOverflow.doc <= sourceOverflow.view+2,JSON.stringify(sourceOverflow));
     assert.ok(sourceOverflow.maxTextRight<=sourceOverflow.view+2,JSON.stringify(sourceOverflow));
-    check("iPhone Sources has usable Menu and no clipped source strings or horizontal overflow");
-    await prog.locator(".phone-menu summary").click();
-    await prog.locator('.phone-menu nav a[href="./extraction.html"]').click();
-    await prog.waitForFunction(()=>document.querySelector("#publish-sheets")?.textContent==="7");
-    assert.equal(await prog.locator(".extract-lane").count(),4);
-    assert.equal(await prog.locator("#review-projects").textContent(),"5");
-    assert.equal(await prog.locator("#review-notices").textContent(),"0");
-    assert.equal(await prog.locator("#intake-count").textContent(),"0");
+    check("iPhone Sources stays readable without overlay menu or clipped source text");
+    await prog.locator('.compact-nav a[href="./extraction.html"]').click();
+    await prog.waitForFunction(()=>document.querySelector("#updates-stats .updates-stat strong")?.textContent==="3");
+    assert.equal(await prog.locator(".extract-lane").count(),0);
+    assert.equal(await prog.locator("#updates-stats .updates-stat").count(),3);
+    assert.ok((await prog.locator("#updates-meaning").textContent()).includes("3 work report") ||
+              (await prog.locator("#updates-meaning").textContent()).includes("1 work report"));
+    assert.equal(await prog.locator("#updates-sites .updates-site").count()>0,true);
+    await prog.locator("#updates-project").selectOption("PRJ-999901");
+    assert.equal(await prog.locator("#updates-stats .updates-stat").nth(0).locator("strong").textContent(),"2");
+    assert.ok((await prog.locator("#updates-meaning").textContent()).includes("Closure is not confirmed"));
     assert.ok(await prog.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
-    check("four-lane Extraction opens via phone Menu, reads seven-source synthetic checkpoint without phantom provider messages");
+    check("Site updates derives site-by-site reviewed instructions, verification limits and source dates");
+    await prog.setViewportSize({width:320,height:710});
+    assert.ok(await prog.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+    check("320px phone uses three compact tabs and site update cards without horizontal scrolling");
     await prog.close();
 
     assert.equal(await desk.request.get(ORIGIN+"/memory-wall.html").then(r=>r.status()),200);
@@ -216,21 +220,22 @@ async function statusInfo(page){
     try {
       const phone = await safari.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:2});
       await ready(phone);
-      assert.equal(await phone.locator(".phone-menu summary").isVisible(),true);
+      assert.equal(await phone.locator(".phone-menu").count(),0);
+      assert.equal(await phone.locator(".compact-nav a").count(),3);
       assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
-      await phone.locator(".phone-menu summary").click();
-      await phone.locator('.phone-menu nav a[href="./#notifications"]').click();
+      await phone.locator('.compact-nav a[href="./#notifications"]').click();
       assert.equal(await phone.locator("#notifications").isVisible(),true);
       await phone.goto(ORIGIN+"/sources.html",{waitUntil:"domcontentloaded"});
       await phone.waitForFunction(()=>document.querySelector("#source-project-count")?.textContent==="5");
       assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
-      await phone.locator(".phone-menu summary").click();
-      await phone.locator('.phone-menu nav a[href="./extraction.html"]').click();
-      await phone.waitForFunction(()=>document.querySelector("#publish-sheets")?.textContent==="7");
-      assert.equal(await phone.locator(".extract-lane").count(),4);
+      await phone.locator('.compact-nav a[href="./extraction.html"]').click();
+      await phone.waitForFunction(()=>document.querySelector("#updates-stats .updates-stat strong")?.textContent==="3");
+      assert.equal(await phone.locator(".extract-lane").count(),0);
       assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+      await phone.locator("#updates-project").selectOption("PRJ-999901");
+      assert.equal(await phone.locator("#updates-stats .updates-stat").nth(0).locator("strong").textContent(),"2");
       await phone.close();
-      check("WebKit mobile engine: 390px menu, notifications, source wrapping, extraction all usable");
+      check("WebKit mobile engine: simple tabs, notifications, source wrapping and site-derived updates usable");
     } finally { await safari.close(); }
     console.log("STATUS_BROWSER_QA_PASS checks="+seen.length);
   } finally {await browser.close()}

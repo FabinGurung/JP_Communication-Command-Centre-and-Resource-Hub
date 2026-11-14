@@ -39,3 +39,7 @@ The registered `feature/daily-ops-current-work` lane requires independent valida
 - Render the phone navigation as a compact Menu with 48px touch options. Avoid unreadable technical enums, horizontally overflowing source data, and iOS Safari input zoom (16px minimum).
 - First-batch extraction only reads original seven Google Sheets via read-only WIF. Do not claim a live Slack/Discord/Telegram collector or publish unreviewed chat evidence. `extraction-status.json` contains source counts, source dates and limitations; no raw message content.
 - The user-provided Run 51 example inspires bounded batch/source occurrence/evidence/checkpoint separation. See `docs/operations/EXTRACTION_WORKFLOW_RUN01.md` and the existing A7 branch lane registry.
+
+## 14 Nov v3.1 — Visible extraction is user-centered, not a methods diagram
+
+The Run 51 extraction **process** belongs in tests, source/evidence/version registers, publisher and QA receipts, not as four visual dashboard lanes. Primary public UI: Map, Notifications, Site updates (same legacy extraction.html route). Present only derived meaning grounded in approved original Google Sheets, identify the specific source record date and review/verification state, and never infer a task is overdue or complete from a chat instruction. Preserve other routes as quiet archives; do not delete releases. The existing read-only seven-Sheet publisher must generate site-updates.json with public project-level category distributions, report verification counts, source dates and no private data. Direct chat collectors are not implied.

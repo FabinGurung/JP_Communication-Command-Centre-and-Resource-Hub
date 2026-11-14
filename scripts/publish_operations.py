@@ -202,6 +202,75 @@ def build(tables, out, received_at):
         }
     }
     (out / "operations.json").write_text(json.dumps(result, ensure_ascii=False), encoding="utf-8")
+
+    # Human-readable interpretations are calculated from the SAME admitted
+    # public project/notice/work rows as the map. They do not turn a notice
+    # into an unresolved instruction or a report into certified completion.
+    summaries = []
+    for site in projects.values():
+        pid = site["id"]
+        site_notices = [n for n in notices if n["project_id"] == pid]
+        site_reports = [r for r in progress if r["project_id"] == pid]
+        unverified = sum(r["verification"] != "VERIFIED" for r in site_reports)
+        category_counts = {
+            category: sum(n["category"] == category for n in site_notices)
+            for category in ("Work", "Materials", "Supervision")
+        }
+        category_summary = ", ".join(f"{key}: {count}" for key,count in category_counts.items() if count)
+        summaries.append({
+            "project_id": pid, "name": site["name"], "status": site["status"],
+            "reviewed_notice_count": len(site_notices),
+            "notice_categories": category_counts,
+            "published_report_count": len(site_reports),
+            "unverified_report_count": unverified,
+            "last_notice_date": max((n["date"] for n in site_notices if n["date"]), default=None),
+            "last_report_date": max((r["date"] for r in site_reports if r["date"]), default=None),
+            "notice_meaning": (
+                f"{len(site_notices)} reviewed instruction(s) recorded ({category_summary}). Closure is not confirmed."
+                if site_notices else "No reviewed public instructions linked; this does not prove there are none."
+            ),
+            "work_meaning": (
+                f"{len(site_reports)} recorded work report(s); {unverified} lack confirmed verification."
+                if site_reports else "No published work report linked; field activity is unknown."
+            )
+        })
+    summaries.sort(key=lambda item: (
+        max(item["last_notice_date"] or "", item["last_report_date"] or ""),
+        item["reviewed_notice_count"] + item["published_report_count"],
+        item["project_id"]), reverse=True)
+    site_updates = {
+        "schema_version": "1.0.0",
+        "kind": "DERIVED_PUBLIC_SITE_INTERPRETATION",
+        "source_authority": "SAME_SEVEN_ORIGINAL_GOOGLE_SHEETS",
+        "readback_at_npt": received_at,
+        "summary": {
+            "public_site_count": len(projects),
+            "reviewed_notice_count": len(notices),
+            "registered_message_source_count": len(sources),
+            "published_work_report_count": len(progress),
+            "unverified_work_report_count": sum(r["verification"] != "VERIFIED" for r in progress),
+            "sites_with_notices": sum(bool(x["reviewed_notice_count"]) for x in summaries),
+            "sites_with_reports": sum(bool(x["published_report_count"]) for x in summaries),
+            "latest_notice_date": source_dates["notifications"]["latest_public_record_date"],
+            "notice_categories": {
+                category: sum(n["category"] == category for n in notices)
+                for category in ("Work", "Materials", "Supervision")
+            },
+            "latest_work_date": source_dates["progress"]["latest_public_record_date"]
+        },
+        "interpretation": {
+            "notice": "Reviewed source instructions; open/closed status is not established.",
+            "work": "Historical reported activities; unverified rows are not construction certificates.",
+            "coverage": "Missing public reports do not establish inactivity.",
+            "new_provider_ingestion": False,
+            "chat_providers": "Slack, Discord and WhatsApp are not automatically ingested by this publisher.",
+            "materials_and_crews": "No verified live demand feed connected."
+        },
+        "site_summaries": summaries
+    }
+    (out / "site-updates.json").write_text(
+        json.dumps(site_updates, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
     # The public extraction checkpoint is an inspectable summary of exactly
     # the same read-only, double-read Sheets snapshot as operations.json.
     # It contains only aggregates, public source dates and provider holds:
