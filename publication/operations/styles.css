@@ -262,3 +262,10 @@
   .standalone-page .surface{padding:13px}
   .source-page-dates{padding:11px}
 }
+
+/* iOS Safari focuses editable form fields by zooming when effective text size
+   is below 16px. Keep field controls >=16px at phone/tablet widths. */
+@media(max-width:900px){
+ input,select,textarea{font-size:16px!important;min-height:44px}
+ #notice-site,.report-controls input,.report-controls select,.west select{font-size:16px!important}
+}
