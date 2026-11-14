@@ -880,7 +880,8 @@
         "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md",
         "docs/releases/v3.1.0.md",
         ".github/workflows/operations-sheets-pages.yml",
-        "AGENTS.md"
+        "AGENTS.md",
+        "scripts/build_status_filter_fixture.py"
       ]
     }
   ]
