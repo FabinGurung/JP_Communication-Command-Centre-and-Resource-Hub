@@ -1,7 +1,7 @@
 /* Playwright synthetic mobile+desktop QA of Sheets-V2 project-status controls. */
 "use strict";
 const assert = require("node:assert/strict");
-const {chromium} = require("playwright");
+const {chromium, webkit} = require("playwright");
 const ORIGIN = process.env.QA_BASE || "http://127.0.0.1:8766";
 const seen = [];
 function check(msg){seen.push(msg);console.log("PASS "+msg)}
@@ -211,6 +211,27 @@ async function statusInfo(page){
     assert.equal(await desk.request.get(ORIGIN+"/memory-wall.html").then(r=>r.status()),200);
     check("published Memory Wall route available in static QA artifact");
     await mobile.close();await desk.close();
+    // iPhone-like WebKit engine smoke: this is not a claim of physical-device QA.
+    const safari = await webkit.launch({headless:true});
+    try {
+      const phone = await safari.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:2});
+      await ready(phone);
+      assert.equal(await phone.locator(".phone-menu summary").isVisible(),true);
+      assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+      await phone.locator(".phone-menu summary").click();
+      await phone.locator('.phone-menu nav a[href="./#notifications"]').click();
+      assert.equal(await phone.locator("#notifications").isVisible(),true);
+      await phone.goto(ORIGIN+"/sources.html",{waitUntil:"domcontentloaded"});
+      await phone.waitForFunction(()=>document.querySelector("#source-project-count")?.textContent==="5");
+      assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+      await phone.locator(".phone-menu summary").click();
+      await phone.locator('.phone-menu nav a[href="./extraction.html"]').click();
+      await phone.waitForFunction(()=>document.querySelector("#publish-sheets")?.textContent==="7");
+      assert.equal(await phone.locator(".extract-lane").count(),4);
+      assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+      await phone.close();
+      check("WebKit mobile engine: 390px menu, notifications, source wrapping, extraction all usable");
+    } finally { await safari.close(); }
     console.log("STATUS_BROWSER_QA_PASS checks="+seen.length);
   } finally {await browser.close()}
 })().catch(error=>{console.error(error.stack||error);process.exit(1)});
