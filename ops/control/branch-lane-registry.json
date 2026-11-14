@@ -854,6 +854,34 @@
         "AGENTS.md",
         ".github/workflows/operations-sheets-pages.yml"
       ]
+    },
+    {
+      "branch_id": "OPS-SYS-SOURCE-BRIEF-R8",
+      "branch_name": "feature/site-updates-simplify-r8-20261114",
+      "status": "ACTIVE_FEATURE_LANE",
+      "allowed_for_work": true,
+      "requires_pull_request": true,
+      "merge_base": "main",
+      "direct_pages_deploy": false,
+      "purpose": "2026-11-14: remove mistaken four-lane extraction UI, simplify primary navigation to Map/Notifications/Site updates, publish human-readable derived site findings from seven original Sheets, consolidate release Actions.",
+      "allowed_paths": [
+        "ops/control/branch-lane-registry.json",
+        "scripts/validate_branch_registry.py",
+        "publication/operations/index.html",
+        "publication/operations/extraction.html",
+        "publication/operations/extraction.js",
+        "publication/operations/progress.html",
+        "publication/operations/sources.html",
+        "publication/operations/styles.css",
+        "scripts/publish_operations.py",
+        "scripts/test_ops_publication.py",
+        "scripts/status_filter_browser_qa.cjs",
+        "ops/control/operations-source-decision-ledger.v1.json",
+        "docs/operations/OPERATIONS_SOURCE_DECISIONS_MEMORY_WALL.md",
+        "docs/releases/v3.1.0.md",
+        ".github/workflows/operations-sheets-pages.yml",
+        "AGENTS.md"
+      ]
     }
   ]
 }
