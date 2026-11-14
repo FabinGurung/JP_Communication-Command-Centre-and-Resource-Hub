@@ -284,6 +284,31 @@
       "evidence_url": null,
       "result": "PR_QA_PENDING",
       "limitations": "No direct Slack, Discord or WhatsApp Actions collector. A reviewed instruction is not proof of open backlog, and work reports are not signed engineer completion."
+    },
+    {
+      "id": "OPS-DEC-20261114-REVIEWED-CLOSED-WORK",
+      "date_npt": "2026-11-14",
+      "decision": "Separate approved Completed/Not required/Cancelled/Superseded notices and Project Work into read-only Closed & Archived Work page, preserving all public project map pins and original source rows. No unverified, unapproved or inferred closure may leave active feed. No original Sheet edits in this release.",
+      "fact_sources": [
+        "notices",
+        "progress",
+        "projects",
+        "choices",
+        "messages",
+        "organizations",
+        "directory"
+      ],
+      "code_owner": "GIT_OPERATIONS",
+      "artifacts": [
+        "publication/operations/closed-work.html",
+        "publication/operations/closed-work.js",
+        "publication/operations/extraction.html",
+        "scripts/publish_operations.py",
+        "docs/releases/v3.2.0.md"
+      ],
+      "evidence_url": null,
+      "result": "PR_QA_PENDING",
+      "limitations": "Original Google Sheets lack Closure Decision/Approved/Date/Reviewer/Reason/Evidence fields; live archive therefore legitimately starts at zero. Source editors must add fields and append-only decision history with A7 PRE/POST process."
     }
   ]
 }
