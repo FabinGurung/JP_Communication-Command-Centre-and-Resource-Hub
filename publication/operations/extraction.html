@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#193e35"><meta name="description" content="Four-lane, source-backed Operations extraction receipts and open connector holds.">
+<title>Field Extraction Desk · JP Site Operations</title>
+<link rel="stylesheet" href="./styles.css"><script defer src="./navigation.js"></script><script defer src="./extraction.js"></script></head>
+<body>
+<a class="skip" href="#main">Skip to extraction status</a>
+<header class="north">
+ <div class="brand"><span class="brand-icon" aria-hidden="true">▦</span><div><span class="eyebrow">A9 · Field intelligence</span><strong>JP Site <span>Operations</span></strong></div></div>
+ <button type="button" class="nav-toggle" data-nav-toggle aria-controls="site-navigation" aria-expanded="false" aria-label="Open site navigation"><span aria-hidden="true">☰</span> Menu</button>
+ <nav id="site-navigation" data-global-nav aria-label="Global navigation">
+   <a href="./#map">Project map</a><a href="./#notifications">Notifications</a><a href="./extraction.html" aria-current="page">Extraction desk</a><a href="./progress.html">Daily progress</a><a href="./sources.html">Sources &amp; history</a><a href="./owner-help.html">Owner guide</a><a href="https://fabingurung.github.io/jp-field-desk-library/">Resource library</a>
+ </nav>
+</header>
+<main id="main" class="standalone-page">
+ <section class="field-intro extraction-hero">
+   <div><p class="eyebrow">FOUR-LANE FIELD EVIDENCE · SOURCE-BACKED</p><h1 class="site-extract-title">Field extraction desk</h1>
+   <p>One place to track incoming records, reviewed instructions, work reports, and resource needs. The page shows what has actually been verified—not an inferred site situation.</p></div>
+   <a class="subpage-back" href="./#map">Open project map</a>
+ </section>
+ <section class="surface" aria-labelledby="run-title">
+   <div class="section-head"><div><span class="eyebrow">CHECKPOINT · RUN OPS-B001</span><h2 id="run-title">Latest source reconciliation</h2></div><span class="source-tag">Original Sheets · read only</span></div>
+   <p class="section-description">A repeatable baseline is rebuilt from the same seven authorized Google workbooks by GitHub Actions. It is not a live Slack, Discord, or Telegram collector.</p>
+   <div class="run-receipt" aria-live="polite">
+     <div><strong id="intake-count">—</strong><span>linked workbooks read</span></div>
+     <div><strong id="public-site-count">—</strong><span>approved public projects</span></div>
+     <div><strong id="reviewed-notice-count">—</strong><span>reviewed notifications</span></div>
+   </div>
+   <p id="extract-readback" class="extract-footnote" role="status">Loading verified source checkpoint…</p>
+   <p class="extract-footnote">A successful publication timestamp is not the date a field engineer reported work. Source dates are preserved separately below.</p>
+ </section>
+ <section aria-labelledby="lanes-title">
+  <div class="section-head"><div><span class="eyebrow">ONE DASHBOARD · FOUR SOURCE STREAMS</span><h2 id="lanes-title">Extraction workstreams</h2></div></div>
+  <div class="lane-grid">
+    <article class="lane-card"><span class="eyebrow">01 · SOURCE INVENTORY</span><h2>Messages &amp; evidence</h2><p>Identify the owning message, project, original record, version, and stored evidence before extraction.</p>
+      <dl><dt>Message sources in Sheets</dt><dd id="lane-message-count">—</dd><dt>Original message date</dt><dd id="lane-message-date">—</dd><dt>Provider collectors</dt><dd>Not connected</dd></dl>
+      <footer><span class="lane-state" id="lane-intake-state">Sheets checked</span><a href="./sources.html">Source register</a></footer></article>
+    <article class="lane-card"><span class="eyebrow">02 · REVIEWED INSTRUCTIONS</span><h2>Notification register</h2><p>Read reviewed instructions linked to original source versions. A notice is not automatically open or due.</p>
+      <dl><dt>Public reviewed notices</dt><dd id="lane-notices-count">—</dd><dt>Latest source message date</dt><dd id="lane-notices-date">—</dd><dt>Verified resolved state</dt><dd>Not supplied</dd></dl>
+      <footer><span class="lane-state" id="lane-notice-state">Reviewed projection</span><a href="./#notifications">Notification Center</a></footer></article>
+    <article class="lane-card"><span class="eyebrow">03 · REPORTED WORK</span><h2>Progress &amp; activities</h2><p>Match activities to registered project IDs and preserve the original reported status, date, and verification limits.</p>
+      <dl><dt>Published work records</dt><dd id="lane-work-count">—</dd><dt>Latest report date</dt><dd id="lane-work-date">—</dd><dt>Certified completion</dt><dd>Not established</dd></dl>
+      <footer><span class="lane-state" id="lane-work-state">Historical field reports</span><a href="./progress.html">Reports archive</a></footer></article>
+    <article class="lane-card"><span class="eyebrow">04 · DEMAND &amp; READINESS</span><h2>Materials, plant &amp; crews</h2><p>Reserved for approved requirements and shortages. Demand remains unknown until a reviewed field feed is connected.</p>
+      <dl><dt>Material/equipment requests</dt><dd>Not connected</dd><dt>Additional crew demand</dt><dd>Not connected</dd><dt>Confirmed remaining tasks</dt><dd>Not connected</dd></dl>
+      <footer><span class="lane-state awaiting">Awaiting verified register</span><a href="./sources.html">Source ownership</a></footer></article>
+  </div>
+ </section>
+ <section class="surface" aria-labelledby="source-table-title">
+  <div class="section-head"><div><span class="eyebrow">ORIGINALS · NO SECOND EDITABLE MASTER</span><h2 id="source-table-title">Live source manifest</h2></div></div>
+  <p class="section-description">Registered source workbook IDs, tabs and the number of rows observed in the latest publisher read. These links open the owning Google Sheets for authorized editors.</p>
+  <div class="extract-table-wrap"><table class="extract-table"><thead><tr><th style="width:33%">Owning workbook</th><th style="width:30%">Tab</th><th style="width:17%">Source rows</th><th style="width:20%">Role</th></tr></thead><tbody id="extract-sources"><tr><td colspan="4">Loading source manifest…</td></tr></tbody></table></div>
+ </section>
+ <section class="surface" aria-labelledby="batch-title">
+   <div class="section-head"><div><span class="eyebrow">CONTROLLED STOPPING POINT</span><h2 id="batch-title">Batch B001 and the next handoff</h2></div></div>
+   <p id="batch-conclusion">Reading checkpoint evidence…</p>
+   <div class="extraction-summary">
+     <span>PRE: v2.9.0 released source contract</span>
+     <span>Current: original Sheets double-read</span>
+     <span>POST: public, generated checkpoint</span>
+   </div>
+   <p class="extract-footnote"><strong>Next limited batch:</strong> map one authorized project channel/source to a stable project ID; verify up to three source messages, attachment/edited-message state, reviewed category and source permissions; reconcile into the existing original Sheet(s) after an A7 PRE snapshot. Do not write unreviewed messages to public Pages.</p>
+   <p class="extract-footnote"><strong>Collectors:</strong> Google Sheets publisher is connected. Slack can be searched manually with an authorized app, but is not a GitHub Actions ingestion worker. Discord and Telegram are not connected to this publisher. No automatic provider extraction is claimed.</p>
+   <p class="extract-footnote">The existing <a href="./progress.html">Daily Progress</a> and <a href="./sources.html">Sources &amp; History</a> pages remain available as reference views; none has been deleted or moved to another system.</p>
+ </section>
+</main>
+<noscript><p class="nojs">This page requires JavaScript for live readback. See the <a href="./sources.html">original source directory</a>.</p></noscript>
+</body></html>
