@@ -116,7 +116,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit
       - run: python scripts/build_status_filter_fixture.py _status_preview
       - name: Exercise mobile and desktop status source controls in Chromium
         shell: bash
