@@ -212,15 +212,21 @@ def build(tables, out, received_at):
         site_notices = [n for n in notices if n["project_id"] == pid]
         site_reports = [r for r in progress if r["project_id"] == pid]
         unverified = sum(r["verification"] != "VERIFIED" for r in site_reports)
+        category_counts = {
+            category: sum(n["category"] == category for n in site_notices)
+            for category in ("Work", "Materials", "Supervision")
+        }
+        category_summary = ", ".join(f"{key}: {count}" for key,count in category_counts.items() if count)
         summaries.append({
             "project_id": pid, "name": site["name"], "status": site["status"],
             "reviewed_notice_count": len(site_notices),
+            "notice_categories": category_counts,
             "published_report_count": len(site_reports),
             "unverified_report_count": unverified,
             "last_notice_date": max((n["date"] for n in site_notices if n["date"]), default=None),
             "last_report_date": max((r["date"] for r in site_reports if r["date"]), default=None),
             "notice_meaning": (
-                f"{len(site_notices)} reviewed instruction(s) recorded. Closure is not confirmed."
+                f"{len(site_notices)} reviewed instruction(s) recorded ({category_summary}). Closure is not confirmed."
                 if site_notices else "No reviewed public instructions linked; this does not prove there are none."
             ),
             "work_meaning": (
@@ -246,6 +252,10 @@ def build(tables, out, received_at):
             "sites_with_notices": sum(bool(x["reviewed_notice_count"]) for x in summaries),
             "sites_with_reports": sum(bool(x["published_report_count"]) for x in summaries),
             "latest_notice_date": source_dates["notifications"]["latest_public_record_date"],
+            "notice_categories": {
+                category: sum(n["category"] == category for n in notices)
+                for category in ("Work", "Materials", "Supervision")
+            },
             "latest_work_date": source_dates["progress"]["latest_public_record_date"]
         },
         "interpretation": {
