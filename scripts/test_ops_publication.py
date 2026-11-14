@@ -138,7 +138,7 @@ class OperationsPublicationTest(unittest.TestCase):
             self.assertIn('href="./#notifications"', report)
             self.assertIn('href="./#notifications"', sources)
             self.assertIn('aria-current="page">Daily progress</a>', report)
-            self.assertIn('aria-current="page">Sources &amp; history</a>', sources)
+            self.assertIn('aria-current="page">Sources & history</a>', sources)
             self.assertTrue((out / "progress.js").is_file())
             self.assertTrue((out / "sources.js").is_file())
             self.assertIn('data-nav-toggle', ops_html)
